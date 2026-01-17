@@ -820,9 +820,10 @@ def process_uploaded_file(file_path: Path, artifact_id: str, original_filename: 
         # Spawn intelligence agent registry entry
         agent_entry = spawn_intelligence_agent(artifact_id, str(file_path), file_path.suffix.upper())
         
-        # EXECUTE ACTUAL AGENT LOGIC
-        print(f"🤖 Spawning Intelligence Agent Process for {artifact_id}...")
+        # Try to execute agent logic
+        output_path = None
         try:
+            print(f"🤖 Spawning Intelligence Agent Process for {artifact_id}...")
             agent = GenericIntelligenceAgent(workflow_id=artifact_id, artifact_path=str(file_path))
             output_path = agent.main()
             
@@ -831,36 +832,53 @@ def process_uploaded_file(file_path: Path, artifact_id: str, original_filename: 
                 
                 # Update agent status in registry
                 registry_path = REGISTRY_DIR / "agent-registry.json"
-                registry = load_json(registry_path)
-                for a in registry["agents"]:
-                    if a["agent_id"] == agent_entry["agent_id"]:
-                        a["status"] = "IDLE"
-                        a["current_task"] = "Analysis complete"
-                        a["outputs"].append(str(output_path))
-                        break
-                save_json(registry_path, registry)
-                
-                # Update review item with analysis summary
-                analysis_output = load_json(output_path)
-                summary = analysis_output.get("data", {}).get("summary", "Analysis complete")
-                
-                # Note: In a real system we'd update the specific review item, 
-                # but for now we trust the queue matches
-                
+                if registry_path.exists():
+                    registry = load_json(registry_path)
+                    for a in registry.get("agents", []):
+                        if a.get("agent_id") == agent_entry["agent_id"]:
+                            a["status"] = "IDLE"
+                            a["current_task"] = "Analysis complete"
+                            a["outputs"] = a.get("outputs", []) + [str(output_path)]
+                            break
+                    save_json(registry_path, registry)
+
         except Exception as e:
-            print(f"❌ Agent execution failed: {e}")
+            print(f"❌ Error executing intelligence agent: {e}")
+            
+        # ALWAYS create a review item, even if analysis fails
+        summary = "Pending analysis"
         
-        # Create review item
+        try:
+            if output_path:
+                analysis_output = load_json(output_path)
+                data = analysis_output.get("data", {})
+                summary = data.get("summary", summary)
+                if not isinstance(summary, str):
+                    summary = str(summary)
+        except Exception as e:
+            print(f"⚠️ Error parsing analysis summary: {e}")
+            
+        print(f"📝 Creating review item for {artifact_id}...")
         create_review_item(
             artifact_id=artifact_id,
             artifact_name=original_filename,
-            artifact_type="UPLOADED_DOCUMENT",
-            artifact_path=str(file_path),
-            document_summary=document_text[:500] if document_text else "Binary file - no text preview"
+            artifact_type=file_path.suffix.upper().strip("."),
+            artifact_path=str(file_path.relative_to(BASE_DIR)),
+            document_summary=summary
         )
-        
-        # Update execution status
-        update_execution_status(artifact_id, "intelligence")
+            
+        # Update final execution status
+        execution_path = EXECUTION_DIR / "execution-status.json"
+        if execution_path.exists():
+            exec_status = load_json(execution_path)
+            exec_status["phases"]["intelligence"]["status"] = "COMPLETE"
+            exec_status["phases"]["human_review"]["status"] = "RUNNING"
+            exec_status["phases"]["human_review"]["waiting_since"] = now_iso()
+            exec_status["next_action"] = f"Review required for {original_filename}"
+            save_json(execution_path, exec_status)
+    
+    except Exception as e:
+        print(f"🔥 CRITICAL ERROR in process_uploaded_file: {e}")
         
         print(f"✅ Processed: {original_filename} -> {artifact_id}")
         
