@@ -441,6 +441,10 @@ function UploadSection() {
     return types[ext] || '📁'
   }
 
+  const removeFile = (index) => {
+    setUploadedFiles(prev => prev.filter((_, i) => i !== index))
+  }
+
   return (
     <section className="section">
       <h3>📤 Upload Documents</h3>
@@ -538,7 +542,16 @@ function UploadSection() {
                 <div className="file-name">{file.name}</div>
                 <div className="file-size">{file.size}</div>
               </div>
-              <span className="file-status">{file.status === 'success' ? '✅' : '❌'}</span>
+              <div className="file-actions">
+                <span className="file-status">{file.status === 'success' ? '✅' : '❌'}</span>
+                <button
+                  className="btn-remove-file"
+                  onClick={() => removeFile(i)}
+                  title="Remove from list"
+                >
+                  ✕
+                </button>
+              </div>
             </div>
           ))}
         </div>
