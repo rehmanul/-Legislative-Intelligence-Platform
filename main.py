@@ -220,7 +220,7 @@ async def root():
         <div class="endpoint post"><strong>POST</strong> <code>/api/v1/state/transition</code></div>
         
         <p><a href="/docs">📚 Interactive API Documentation (Swagger)</a></p>
-        <p><a href="http://localhost:5173">🖥️ Dashboard UI</a></p>
+        <p><a href="https://orchestrator-dashboard.onrender.com">🖥️ Dashboard UI</a></p>
     </body>
     </html>
     """
