@@ -1,17 +1,26 @@
+# Core FastAPI Stack
 fastapi==0.109.0
 uvicorn[standard]==0.27.0
-gunicorn==21.2.0
 pydantic==2.6.0
 python-multipart==0.0.9
-requests==2.31.0
-pandas==2.2.0
-numpy==1.26.3
 python-dotenv==1.0.1
+
+# HTTP Client
+requests==2.31.0
+
+# PDF Processing (optional - will fallback gracefully if not available)
 pymupdf==1.23.26
-# Optional: LLM integrations (comment out if not using)
-openai>=1.12.0
-anthropic>=0.18.0
-tenacity>=8.2.3
+
+# Template Engine
 jinja2>=3.1.3
 pyyaml>=6.0.1
 
+# Retry Logic
+tenacity>=8.2.3
+
+# Optional: LLM integrations (uncomment to enable)
+# openai>=1.12.0
+# anthropic>=0.18.0
+
+# NOTE: pandas/numpy removed - not required for core API functionality
+# If needed for specific agents, install separately
