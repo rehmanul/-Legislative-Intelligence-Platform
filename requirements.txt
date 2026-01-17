@@ -1,4 +1,4 @@
-# Core FastAPI Stack
+# Core FastAPI Stack (Render-compatible - no native compilation required)
 fastapi==0.109.0
 uvicorn[standard]==0.27.0
 pydantic==2.6.0
@@ -8,9 +8,6 @@ python-dotenv==1.0.1
 # HTTP Client
 requests==2.31.0
 
-# PDF Processing (optional - will fallback gracefully if not available)
-pymupdf==1.23.26
-
 # Template Engine
 jinja2>=3.1.3
 pyyaml>=6.0.1
@@ -18,9 +15,10 @@ pyyaml>=6.0.1
 # Retry Logic
 tenacity>=8.2.3
 
+# NOTE: pymupdf removed - requires C++ compilation not available on Render free tier
+# PDF text extraction will return placeholder text. For full PDF support, use a 
+# paid instance with build tools or switch to pdfminer.six (pure Python alternative)
+
 # Optional: LLM integrations (uncomment to enable)
 # openai>=1.12.0
 # anthropic>=0.18.0
-
-# NOTE: pandas/numpy removed - not required for core API functionality
-# If needed for specific agents, install separately
