@@ -10,7 +10,6 @@ services:
     runtime: python
     plan: free
     region: oregon
-    # Pin to Python 3.11 - has pre-built wheels for all dependencies
     pythonVersion: "3.11"
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
@@ -23,7 +22,7 @@ services:
     autoDeploy: true
 
   # ═══════════════════════════════════════════════════════════════════════════
-  # Frontend Dashboard (Node.js for dev/preview, builds static assets)
+  # Frontend Dashboard (Node.js serves static Vite build)
   # ═══════════════════════════════════════════════════════════════════════════
   - type: web
     name: orchestrator-dashboard
@@ -34,6 +33,7 @@ services:
     buildCommand: npm install && npm run build
     startCommand: npx serve dist -l $PORT
     envVars:
+      # IMPORTANT: This must be set at BUILD TIME for Vite to inject it
       - key: VITE_API_URL
         value: https://orchestrator-api.onrender.com
     autoDeploy: true
