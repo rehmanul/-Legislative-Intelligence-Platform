@@ -10,10 +10,11 @@ services:
     runtime: python
     plan: free
     region: oregon
-    pythonVersion: "3.11"
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.0"
       - key: PYTHONUNBUFFERED
         value: "1"
       - key: ENVIRONMENT
@@ -33,10 +34,7 @@ services:
     buildCommand: npm install && npm run build
     startCommand: npx serve dist -l $PORT
     envVars:
-      # Use dynamic linking to get the actual assigned URL
+      # Hardcoded to ensure exact match with the deployed service
       - key: VITE_API_URL
-        fromService:
-          name: orchestrator-api
-          type: web
-          property: url
+        value: https://orchestrator-api-w7ow.onrender.com
     autoDeploy: true

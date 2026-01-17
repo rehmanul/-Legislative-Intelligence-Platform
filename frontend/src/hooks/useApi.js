@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 
 // Use env var for production, fallback to localhost for dev
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8001'
+console.log('🔌 Configured API URL:', API_BASE)
 
 /**
  * Hook for fetching and caching API data with polling
