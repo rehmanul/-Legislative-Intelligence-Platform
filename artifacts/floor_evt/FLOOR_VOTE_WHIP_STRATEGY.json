@@ -1,0 +1,62 @@
+{
+  "_meta": {
+    "agent_id": "execution_whip_floor_evt",
+    "generated_at": "2026-01-07T20:14:27.421726+00:00",
+    "artifact_type": "FLOOR_VOTE_WHIP_STRATEGY",
+    "artifact_name": "Timing & Vote Whip Strategy",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": "HR_MSG",
+    "guidance_status": "SIGNED",
+    "schema_version": "1.0.0",
+    "phase": "FLOOR_EVT",
+    "optional": true
+  },
+  "title": "Vote Whip Strategy - Wireless Power Amendment",
+  "summary": "Tactical vote counting and member engagement strategy for floor consideration.",
+  "vote_targets": {
+    "required_votes": "Simple majority",
+    "current_estimate": {
+      "firm_yes": 0,
+      "leaning_yes": 0,
+      "undecided": 0,
+      "leaning_no": 0,
+      "firm_no": 0
+    },
+    "note": "Vote counts to be populated during active whip operation"
+  },
+  "priority_targets": [
+    {
+      "category": "Committee Members",
+      "rationale": "Already familiar with amendment from markup",
+      "approach": "Confirm continued support"
+    },
+    {
+      "category": "Defense Appropriators",
+      "rationale": "Interest in defense technology investments",
+      "approach": "Emphasize cost-effectiveness and ROI"
+    },
+    {
+      "category": "Energy/Environment Caucus",
+      "rationale": "Interest in energy efficiency",
+      "approach": "Highlight energy savings potential"
+    }
+  ],
+  "timing_considerations": [
+    "Monitor floor schedule for optimal amendment consideration timing",
+    "Coordinate with leadership on amendment order",
+    "Prepare for potential procedural challenges"
+  ],
+  "contingencies": [
+    {
+      "scenario": "Opposition amendment offered",
+      "response": "Prepare substitute or second-degree amendment"
+    },
+    {
+      "scenario": "Procedural objection",
+      "response": "Coordinate with floor manager for ruling"
+    }
+  ],
+  "disclaimer": "This vote whip strategy is SPECULATIVE and requires human review via HR_MSG before any external use."
+}

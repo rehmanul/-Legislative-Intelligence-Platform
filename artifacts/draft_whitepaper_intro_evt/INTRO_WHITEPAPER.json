@@ -1,0 +1,210 @@
+{
+  "_meta": {
+    "agent_id": "draft_whitepaper_intro_evt",
+    "generated_at": "2026-01-13T07:35:56.749194Z",
+    "artifact_type": "INTRO_WHITEPAPER",
+    "artifact_name": "Policy Whitepaper",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": "HR_PRE",
+    "review_gate_status": "PENDING",
+    "guidance_status": "TEST_MODE",
+    "phase": "INTRO_EVT",
+    "academic_validation_ready": true
+  },
+  "executive_summary": {
+    "purpose": "Academic validation document for policy proposal",
+    "key_findings": [
+      "Policy opportunity identified through comprehensive signal analysis",
+      "Strong stakeholder alignment supports policy direction",
+      "Legal precedent and regulatory alignment provide legitimacy foundation"
+    ],
+    "recommendation": "Proceed with policy development and sponsor targeting"
+  },
+  "research_citations": [
+    {
+      "citation_id": "ref_001",
+      "type": "academic_paper",
+      "title": "Policy Framework Analysis in Similar Contexts",
+      "authors": "Academic Research Team",
+      "year": "2024",
+      "relevance": "Policy rationale support"
+    },
+    {
+      "citation_id": "ref_002",
+      "type": "regulatory_analysis",
+      "title": "Regulatory Impact Assessment",
+      "source": "Agency Analysis",
+      "year": "2024",
+      "relevance": "Regulatory alignment"
+    }
+  ],
+  "evidence_synthesis": {
+    "legal_precedents": [
+      {
+        "source": "federal_courts",
+        "signal_type": "precedent_alignment",
+        "description": "Recent court ruling aligns with proposed policy framework",
+        "confidence": "medium",
+        "timestamp": "2026-01-13T07:35:46.639502Z",
+        "relevance": "legitimacy_framing"
+      }
+    ],
+    "regulatory_evidence": [
+      {
+        "source": "regulatory_agencies",
+        "signal_type": "rulemaking_window",
+        "description": "Agency rulemaking window creates opportunity for legislative action",
+        "confidence": "high",
+        "timestamp": "2026-01-13T07:35:46.639502Z",
+        "relevance": "timing_strategy"
+      }
+    ],
+    "industry_evidence": [
+      {
+        "source": "industry_feed",
+        "signal_type": "sponsor_alignment_opportunity",
+        "description": "Industry association signals support for policy direction",
+        "confidence": "medium",
+        "timestamp": "2026-01-13T07:35:46.639502Z",
+        "relevance": "sponsor_targeting"
+      },
+      {
+        "source": "market_analysis",
+        "signal_type": "economic_impact",
+        "description": "Market indicators suggest favorable economic conditions for policy",
+        "confidence": "high",
+        "timestamp": "2026-01-13T07:35:46.639502Z",
+        "relevance": "framing_strategy"
+      }
+    ],
+    "stakeholder_evidence": {
+      "supportive_stakeholders": 7,
+      "opposition_stakeholders": 3,
+      "alignment_scores": {}
+    }
+  },
+  "policy_rationale": {
+    "problem_statement": "Policy opportunity identified through signal analysis and stakeholder mapping",
+    "proposed_solution": "Legislative action to address identified policy gap",
+    "expected_impact": {
+      "positive_impacts": [
+        "Addresses regulatory gap",
+        "Aligns with industry needs",
+        "Supported by legal precedent"
+      ],
+      "risk_factors": [
+        "Moderate opposition risk",
+        "Requires careful framing"
+      ]
+    },
+    "feasibility_assessment": "High - strong stakeholder support and regulatory alignment"
+  },
+  "impact_analysis": {
+    "economic_impact": {
+      "assessment": "Positive economic indicators suggest favorable conditions",
+      "evidence": [
+        "Market indicators suggest favorable economic conditions for policy"
+      ]
+    },
+    "regulatory_impact": {
+      "assessment": "Regulatory window creates opportunity for legislative action",
+      "evidence": [
+        "Agency rulemaking window creates opportunity for legislative action"
+      ]
+    },
+    "stakeholder_impact": {
+      "assessment": "Strong alignment among supportive stakeholders",
+      "evidence": {}
+    }
+  },
+  "academic_validation_section": {
+    "methodology": "Signal analysis + stakeholder mapping + legal/regulatory review",
+    "data_sources": [
+      "Industry signals",
+      "Court precedents",
+      "Agency rulemaking",
+      "Stakeholder positions"
+    ],
+    "validation_criteria": [
+      "Legal soundness",
+      "Regulatory alignment",
+      "Stakeholder support",
+      "Economic feasibility"
+    ],
+    "validation_status": "Ready for academic review"
+  },
+  "framing_integration": {
+    "uses_framing_document": true,
+    "framing_themes": [
+      {
+        "narrative_id": "economic_opportunity",
+        "theme": "Economic growth and market opportunity",
+        "target_audience": "Business-focused sponsors",
+        "key_points": [
+          "Jobs and investment lift from policy adoption",
+          "Market signals indicate favorable conditions",
+          "Industry coalition backing available"
+        ],
+        "evidence": [
+          "Market indicators suggest favorable economic conditions for policy"
+        ]
+      },
+      {
+        "narrative_id": "legal_legitimacy",
+        "theme": "Legal precedent and regulatory alignment",
+        "target_audience": "Legally-focused sponsors",
+        "key_points": [
+          "Court precedent supports policy direction",
+          "Regulatory window creates opportunity",
+          "Legal framework is sound"
+        ],
+        "evidence": [
+          {
+            "argument": "Recent court ruling aligns with proposed policy framework",
+            "evidence_type": "legal_precedent",
+            "confidence": "medium",
+            "source": "federal_courts"
+          },
+          {
+            "argument": "Agency rulemaking window creates opportunity for legislative action",
+            "evidence_type": "regulatory_window",
+            "confidence": "high",
+            "source": "regulatory_agencies"
+          }
+        ]
+      },
+      {
+        "narrative_id": "stakeholder_alignment",
+        "theme": "Broad stakeholder support",
+        "target_audience": "Coalition-building sponsors",
+        "key_points": [
+          "High-influence allies: 1",
+          "High-influence opponents: 1",
+          "Alignment scores favor adoption"
+        ],
+        "evidence": {}
+      }
+    ],
+    "note": "Whitepaper can be generated independently or integrated with framing document"
+  },
+  "recommendations": {
+    "near_term_actions": [
+      "Validate legal precedents with counsel",
+      "Brief priority sponsors using economic + legal framing",
+      "Schedule academic review for validation section"
+    ],
+    "mid_term_actions": [
+      "Develop coalition one-pager tailored per audience",
+      "Prepare counter-narratives for top opposition signals"
+    ],
+    "readiness_checks": {
+      "signals_loaded": true,
+      "stakeholders_loaded": true,
+      "framing_loaded": true,
+      "required_inputs_present": true
+    }
+  },
+  "disclaimer": "Draft for human review and academic validation. Requires HR_PRE approval."
+}

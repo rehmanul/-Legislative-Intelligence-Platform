@@ -1,0 +1,67 @@
+---
+config:
+  layout: dagre
+  theme: default
+---
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+flowchart TB
+
+subgraph CONGRESS["Congressional Stakeholders"]
+  direction TB
+  HASC["House Armed Services<br/>Committee"]
+  SASC["Senate Armed Services<br/>Committee"]
+  HAC["House Appropriations<br/>Committee"]
+  SAC["Senate Appropriations<br/>Committee"]
+end
+
+subgraph DOD["Department of Defense"]
+  direction TB
+  OSD["Office of Secretary<br/>of Defense"]
+  USD_AS["USD Acquisition<br/>& Sustainment"]
+  ASD_EIE["ASD Energy, Installations<br/>& Environment"]
+  DLA["DLA Energy"]
+end
+
+subgraph SERVICES["Service Components"]
+  direction LR
+  ARMY["Army<br/>IMCOM, ASA IE&E"]
+  NAVY["Navy<br/>NAVFAC, ASN EI&E"]
+  AIRFORCE["Air Force<br/>AFCEC, ASAF EI&E"]
+end
+
+subgraph IMPLEMENT["Implementing Offices"]
+  direction TB
+  BASE["Base-Level<br/>Facility Managers"]
+  PROG["Program Offices<br/>MILCON, ERCIP"]
+end
+
+subgraph PATHS["Three Execution Paths"]
+  direction TB
+  PATH1["Path 1: Defense Facility<br/>Infrastructure Modernization"]
+  PATH2["Path 2: R&D Programs"]
+  PATH3["Path 3: Energy Efficiency"]
+end
+
+CONGRESS --> DOD
+DOD --> SERVICES
+SERVICES --> IMPLEMENT
+PATH1 --> CONGRESS
+PATH1 --> DOD
+PATH1 --> SERVICES
+PATH2 --> DOD
+PATH2 --> SERVICES
+PATH3 --> DOD
+PATH3 --> SERVICES
+
+classDef congress fill:#E0F2FE,stroke:#0369A1,stroke-width:2px
+classDef dod fill:#DBEAFE,stroke:#1E40AF,stroke-width:2px
+classDef service fill:#D1FAE5,stroke:#065F46,stroke-width:2px
+classDef implement fill:#FEF3C7,stroke:#92400E,stroke-width:2px
+classDef path fill:#F3F4F6,stroke:#6B7280,stroke-width:3px
+
+class HASC,HAC,SASC,SAC congress
+class OSD,USD_AS,ASD_EIE,DLA dod
+class ARMY,NAVY,AIRFORCE service
+class BASE,PROG implement
+class PATH1,PATH2,PATH3 path

@@ -1,0 +1,35 @@
+{
+  "_meta": {
+    "report_type": "STRATEGIC_KPIS",
+    "generated_at": "2026-01-08T09:16:17.638147+00:00Z",
+    "calculation_version": "1.0.0",
+    "source_versions": {
+      "artifact_schema_version": "1.0.0",
+      "decision_log_schema_version": "1.0.0",
+      "phase_state_schema_version": "1.0.0"
+    }
+  },
+  "strategic_outcomes": {
+    "policy_movement": {
+      "signal_to_bill_conversion_rate": 100.0,
+      "committee_penetration_rate": 100.0,
+      "amendment_adoption_rate": 0.0,
+      "state_progression_rate": 300.0
+    },
+    "access_gained": {
+      "stakeholder_meeting_requests": 5.0,
+      "coalition_building_activity": 3.0,
+      "meeting_completion_rate": 70.0
+    },
+    "risk_reduced": {
+      "opposition_identification_rate": 100.0,
+      "narrative_risk_score": 0.25,
+      "opposition_neutralization_rate": 50.0
+    },
+    "narrative_alignment": {
+      "message_coherence_score": 0.75,
+      "media_coverage_alignment": 0.0,
+      "narrative_stability": 0.0
+    }
+  }
+}

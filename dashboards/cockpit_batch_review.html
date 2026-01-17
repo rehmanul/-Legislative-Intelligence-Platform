@@ -1,0 +1,3355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Batch Review Interface - All Review Gates</title>
+  <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-family-sans), Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--color-text-primary);
+      background: var(--color-bg-secondary);
+      padding: var(--spacing-xl);
+    }
+    
+    .container {
+      max-width: var(--container-max-width);
+      margin: 0 auto;
+    }
+    
+    header {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+      box-shadow: var(--shadow-2);
+    }
+    
+    h1 {
+      font-size: var(--font-size-2xl);
+      margin-bottom: var(--spacing-md);
+      color: var(--color-text-primary);
+    }
+    
+    .subtitle {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .controls {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      padding: var(--spacing-md) 20px;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      transition: background var(--transition-base) var(--transition-ease);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+      color: var(--color-bg-primary);
+      box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+    }
+    
+    .btn-primary:hover:not(:disabled) {
+      background: linear-gradient(135deg, var(--color-primary-hover) 0%, var(--color-primary) 100%);
+      box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+    }
+    
+    .btn-success {
+      background: var(--color-success);
+      color: var(--color-bg-primary);
+    }
+    
+    .btn-success:hover {
+      background: var(--color-success-hover);
+    }
+    
+    .btn-danger {
+      background: var(--color-error);
+      color: var(--color-bg-primary);
+    }
+    
+    .btn-danger:hover {
+      background: var(--color-error-hover);
+    }
+    
+    .btn-secondary {
+      background: var(--color-gray-500);
+      color: var(--color-bg-primary);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--color-gray-600);
+    }
+    
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    
+    .btn.loading {
+      color: transparent;
+      position: relative;
+    }
+    
+    .btn.loading::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 50%;
+      left: 50%;
+      margin-left: -8px;
+      margin-top: -8px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 0.6s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .file-input-wrapper {
+      position: relative;
+    }
+    
+    .file-input-wrapper label {
+      display: inline-block;
+      padding: var(--spacing-md) 20px;
+      background: var(--color-primary);
+      color: var(--color-bg-primary);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: var(--font-size-sm);
+    }
+    
+    .file-input-wrapper input[type="file"] {
+      display: none;
+    }
+    
+    .stats-bar {
+      background: linear-gradient(135deg, var(--color-bg-primary) 0%, #f9fafb 100%);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+      box-shadow: var(--shadow-3);
+      border: 1px solid var(--color-border);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: var(--spacing-xl);
+      flex-wrap: wrap;
+    }
+    
+    .stat {
+      display: flex;
+      flex-direction: column;
+      padding: var(--spacing-md);
+      background: var(--color-bg-primary);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border-light);
+      transition: all var(--transition-base) var(--transition-ease);
+    }
+    
+    .stat:hover {
+      box-shadow: var(--shadow-2);
+      transform: translateY(-2px);
+      border-color: var(--color-primary);
+    }
+    
+    .stat-label {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--spacing-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: var(--font-weight-medium);
+    }
+    
+    .stat-value {
+      font-size: var(--font-size-3xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-primary);
+      line-height: 1.2;
+    }
+    
+    .stat-value.highlight {
+      color: var(--color-error);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    
+    .filters {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-lg) 20px;
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+      box-shadow: var(--shadow-2);
+      display: flex;
+      gap: var(--spacing-lg);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
+    .filter-group {
+      display: flex;
+      gap: var(--spacing-md);
+      align-items: center;
+    }
+    
+    .filter-group label {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+    }
+    
+    .filter-group select {
+      padding: var(--spacing-sm) 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+    }
+    
+    .filter-group input[type="text"] {
+      padding: var(--spacing-sm) 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      min-width: 200px;
+    }
+    
+    .batch-actions {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-lg) 20px;
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+      box-shadow: var(--shadow-2);
+      display: flex;
+      gap: var(--spacing-md);
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .batch-actions-left {
+      display: flex;
+      gap: var(--spacing-md);
+      align-items: center;
+    }
+    
+    .batch-actions-right {
+      display: flex;
+      gap: var(--spacing-md);
+    }
+    
+    .select-all-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .select-all-wrapper input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+    
+    .select-all-wrapper label {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      cursor: pointer;
+    }
+    
+    .reviews-table {
+      background: var(--color-bg-primary);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-3);
+      overflow-x: auto;
+      border: 1px solid var(--color-border);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    thead {
+      background: var(--color-gray-100);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    
+    th {
+      padding: 12px 15px;
+      text-align: left;
+      font-weight: var(--font-weight-semibold);
+      font-size: 13px;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      border-bottom: 2px solid var(--color-border);
+    }
+    
+    th.checkbox-col {
+      width: 40px;
+      text-align: center;
+    }
+    
+    td {
+      padding: 12px 15px;
+      border-bottom: 1px solid var(--color-border-light);
+      font-size: var(--font-size-sm);
+    }
+    
+    tbody tr {
+      transition: background var(--transition-base) var(--transition-ease);
+    }
+    
+    tbody tr:hover {
+      background: var(--color-gray-100);
+    }
+    
+    tbody tr.selected {
+      background: #e7f3ff;
+    }
+    
+    td input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+    
+    .gate-badge {
+      display: inline-block;
+      padding: var(--spacing-xs) 10px;
+      border-radius: var(--radius-xl);
+      font-size: 11px;
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+    }
+    
+    .gate-badge.hr-pre {
+      background: #fff3cd;
+      color: #856404;
+    }
+    
+    .gate-badge.hr-lang {
+      background: #cfe2ff;
+      color: #084298;
+    }
+    
+    .gate-badge.hr-msg {
+      background: #d1e7dd;
+      color: #0f5132;
+    }
+    
+    .gate-badge.hr-release {
+      background: #f8d7da;
+      color: #842029;
+    }
+    
+    .risk-badge {
+      display: inline-block;
+      padding: var(--spacing-xs) 10px;
+      border-radius: var(--radius-xl);
+      font-size: 11px;
+      font-weight: var(--font-weight-semibold);
+    }
+    
+    .risk-badge.low {
+      background: #d1e7dd;
+      color: #0f5132;
+    }
+    
+    .risk-badge.medium {
+      background: #fff3cd;
+      color: #856404;
+    }
+    
+    .risk-badge.high {
+      background: #f8d7da;
+      color: #842029;
+    }
+    
+    .artifact-name {
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-primary);
+    }
+    
+    .artifact-type {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+      margin-top: 2px;
+    }
+    
+    .age-badge {
+      display: inline-block;
+      padding: var(--spacing-xs) 8px;
+      border-radius: var(--radius-lg);
+      font-size: var(--font-size-xs);
+      background: var(--color-border-light);
+      color: #495057;
+    }
+    
+    .artifact-path {
+      font-family: monospace;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+      max-width: 300px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      background: var(--color-gray-100);
+      border-radius: var(--radius-sm);
+      display: inline-block;
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--color-text-secondary);
+    }
+    
+    .empty-state-icon {
+      font-size: 48px;
+      margin-bottom: var(--spacing-lg);
+      opacity: 0.3;
+    }
+    
+    .empty-state p {
+      font-size: var(--font-size-base);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .empty-state .hint {
+      font-size: 13px;
+      color: #999;
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--color-text-secondary);
+    }
+    
+    .loading-spinner {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid var(--color-primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .manifest-output {
+      background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      margin-top: var(--spacing-xl);
+      box-shadow: var(--shadow-4);
+      border: 2px solid var(--color-primary);
+      display: none;
+      animation: slideUp 0.3s ease-out;
+    }
+    
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .manifest-output.active {
+      display: block;
+    }
+    
+    .manifest-output h3 {
+      margin-bottom: var(--spacing-lg);
+      font-size: var(--font-size-lg);
+    }
+    
+    .manifest-output textarea {
+      width: 100%;
+      min-height: 200px;
+      padding: 12px;
+      font-family: var(--font-family-mono);
+      font-size: var(--font-size-xs);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      resize: vertical;
+    }
+    
+    .manifest-output .actions {
+      margin-top: var(--spacing-lg);
+      display: flex;
+      gap: var(--spacing-md);
+    }
+    
+    .alert {
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+      display: none;
+      border-left: 4px solid;
+      box-shadow: var(--shadow-2);
+      animation: slideDown 0.3s ease-out;
+    }
+    
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .alert.active {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+    
+    .alert-success {
+      background: linear-gradient(135deg, #d1e7dd 0%, #b8e0c4 100%);
+      color: #0f5132;
+      border-left-color: var(--color-success);
+    }
+    
+    .alert-error {
+      background: linear-gradient(135deg, #f8d7da 0%, #f5c2c7 100%);
+      color: #842029;
+      border-left-color: var(--color-error);
+    }
+    
+    .alert-info {
+      background: linear-gradient(135deg, #cfe2ff 0%, #b6d4fe 100%);
+      color: #084298;
+      border-left-color: var(--color-info);
+    }
+    
+    .alert-warning {
+      background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+      color: #856404;
+      border-left-color: var(--color-warning);
+    }
+    
+    .context-dropdown-wrapper {
+      display: flex;
+      gap: var(--spacing-md);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .context-dropdown-wrapper label {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-primary);
+    }
+    
+    .context-dropdown-wrapper select {
+      padding: var(--spacing-sm) 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      background: var(--color-bg-primary);
+      min-width: 250px;
+      cursor: pointer;
+    }
+    
+    /* Vibe Check Modal Styles */
+    .vibe-check-section {
+      padding: var(--spacing-xl);
+      background: #fff9e6;
+      border: 2px solid #ffc107;
+      border-radius: var(--radius-lg);
+    }
+    
+    .vibe-check-section h2, .vibe-check-section h3 {
+      color: #856404;
+    }
+    
+    .vibe-check-section details summary {
+      cursor: pointer;
+      font-weight: var(--font-weight-semibold);
+      color: #856404;
+      padding: var(--spacing-sm);
+      background: var(--color-bg-primary);
+      border-radius: var(--radius-sm);
+      transition: background var(--transition-base) var(--transition-ease);
+    }
+    
+    .vibe-check-section details summary:hover {
+      background: #fffbf0;
+    }
+    
+    .ai-interpretation {
+      margin-top: var(--spacing-lg);
+      padding: var(--spacing-lg);
+      background: #e7f3ff;
+      border-left: 4px solid var(--color-primary);
+      border-radius: var(--radius-sm);
+    }
+    
+    /* ============================================
+       ENHANCED TABLE INTERACTIONS
+       ============================================ */
+    
+    tbody tr {
+      cursor: pointer;
+      transition: all var(--transition-base) var(--transition-ease);
+      position: relative;
+    }
+    
+    tbody tr:hover {
+      background: var(--color-gray-100);
+      box-shadow: var(--shadow-1);
+      transform: translateY(-1px);
+    }
+    
+    tbody tr.selected {
+      background: #e7f3ff;
+      border-left: 3px solid var(--color-primary);
+    }
+    
+    tbody tr.expanded {
+      background: #f0f9ff;
+    }
+    
+    tbody tr.expanded-row {
+      background: #f8fafc;
+    }
+    
+    tbody tr.current-row {
+      background: #e0f2fe;
+      border-left: 3px solid var(--color-primary);
+      box-shadow: var(--shadow-2);
+    }
+    
+    .row-expansion {
+      display: none;
+      padding: var(--spacing-lg);
+      background: var(--color-bg-primary);
+      border-top: 1px solid var(--color-border);
+    }
+    
+    .row-expansion.active {
+      display: table-cell;
+      animation: expandRow 0.3s ease-out;
+    }
+    
+    @keyframes expandRow {
+      from {
+        opacity: 0;
+        max-height: 0;
+      }
+      to {
+        opacity: 1;
+        max-height: 500px;
+      }
+    }
+    
+    .row-expansion-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+      padding: var(--spacing-lg);
+    }
+    
+    .row-expansion-section {
+      padding: var(--spacing-md);
+      background: var(--color-gray-50);
+      border-radius: var(--radius-sm);
+    }
+    
+    .row-expansion-section h4 {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      margin-bottom: var(--spacing-sm);
+      color: var(--color-text-primary);
+    }
+    
+    .row-expansion-section p {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+      margin: var(--spacing-xs) 0;
+    }
+    
+    /* Individual Row Actions */
+    .row-actions {
+      display: flex;
+      gap: var(--spacing-xs);
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
+    
+    tbody tr:hover .row-actions {
+      opacity: 1;
+    }
+    
+    .btn-row {
+      padding: var(--spacing-xs) var(--spacing-sm);
+      font-size: var(--font-size-xs);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      border: none;
+      transition: all var(--transition-base);
+    }
+    
+    .btn-row-approve {
+      background: var(--color-success);
+      color: white;
+    }
+    
+    .btn-row-approve:hover {
+      background: var(--color-success-hover);
+      transform: scale(1.05);
+    }
+    
+    .btn-row-reject {
+      background: var(--color-error);
+      color: white;
+    }
+    
+    .btn-row-reject:hover {
+      background: var(--color-error-hover);
+      transform: scale(1.05);
+    }
+    
+    .btn-row-preview {
+      background: var(--color-info);
+      color: white;
+    }
+    
+    .btn-row-preview:hover {
+      background: var(--color-info-hover);
+      transform: scale(1.05);
+    }
+    
+    /* Column Sorting */
+    th.sortable {
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      padding-right: 25px;
+    }
+    
+    th.sortable:hover {
+      background: var(--color-gray-200);
+    }
+    
+    .sort-indicator {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: var(--font-size-xs);
+      opacity: 0.5;
+    }
+    
+    th.sortable.sorted-asc .sort-indicator::after {
+      content: '▲';
+      opacity: 1;
+      color: var(--color-primary);
+    }
+    
+    th.sortable.sorted-desc .sort-indicator::after {
+      content: '▼';
+      opacity: 1;
+      color: var(--color-primary);
+    }
+    
+    /* Toast Notifications */
+    .toast-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+      max-width: 400px;
+    }
+    
+    .toast {
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-4);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      animation: slideInRight 0.3s ease-out;
+      min-width: 300px;
+    }
+    
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    .toast-success {
+      background: var(--color-success-light);
+      color: var(--color-success-dark);
+      border-left: 4px solid var(--color-success);
+    }
+    
+    .toast-error {
+      background: var(--color-error-light);
+      color: var(--color-error-dark);
+      border-left: 4px solid var(--color-error);
+    }
+    
+    .toast-info {
+      background: var(--color-info-light);
+      color: var(--color-info-dark);
+      border-left: 4px solid var(--color-info);
+    }
+    
+    .toast-warning {
+      background: var(--color-warning-light);
+      color: var(--color-warning-dark);
+      border-left: 4px solid var(--color-warning);
+    }
+    
+    /* Skeleton Loader */
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: var(--radius-sm);
+    }
+    
+    @keyframes loading {
+      0% {
+        background-position: 200% 0;
+      }
+      100% {
+        background-position: -200% 0;
+      }
+    }
+    
+    .skeleton-row {
+      height: 48px;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    /* Artifact Preview Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+      animation: fadeIn 0.2s;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .modal-content {
+      background-color: var(--color-bg-primary);
+      margin: 5% auto;
+      padding: 0;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-5);
+      max-width: 90%;
+      max-height: 85vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      animation: slideDown 0.3s ease-out;
+    }
+    
+    .modal-header {
+      padding: var(--spacing-lg);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--color-gray-50);
+    }
+    
+    .modal-title {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-primary);
+    }
+    
+    .close {
+      color: var(--color-text-secondary);
+      font-size: 28px;
+      font-weight: var(--font-weight-bold);
+      cursor: pointer;
+      line-height: 1;
+    }
+    
+    .close:hover {
+      color: var(--color-text-primary);
+    }
+    
+    .modal-body {
+      padding: var(--spacing-xl);
+      overflow-y: auto;
+      flex: 1;
+    }
+    
+    .modal-tabs {
+      display: flex;
+      gap: var(--spacing-sm);
+      border-bottom: 2px solid var(--color-border);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .modal-tab {
+      padding: var(--spacing-sm) var(--spacing-lg);
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all var(--transition-base);
+    }
+    
+    .modal-tab.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-primary);
+      font-weight: var(--font-weight-semibold);
+    }
+    
+    .modal-tab:hover {
+      color: var(--color-text-primary);
+    }
+    
+    .modal-tab-content {
+      display: none;
+    }
+    
+    .modal-tab-content.active {
+      display: block;
+    }
+    
+    /* Filter Presets */
+    .filter-presets {
+      display: flex;
+      gap: var(--spacing-sm);
+      flex-wrap: wrap;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .filter-preset-btn {
+      padding: var(--spacing-xs) var(--spacing-md);
+      font-size: var(--font-size-xs);
+      border: 1px solid var(--color-border);
+      background: var(--color-bg-primary);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+    
+    .filter-preset-btn:hover {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+    }
+    
+    .filter-preset-btn.active {
+      background: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+    }
+    
+    /* Progress Indicators */
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--color-gray-200);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin: var(--spacing-sm) 0;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-primary-hover));
+      transition: width 0.3s ease;
+      border-radius: var(--radius-full);
+    }
+    
+    /* Age Urgency Indicators */
+    .age-badge.urgent {
+      background: #fee2e2;
+      color: #991b1b;
+      font-weight: var(--font-weight-semibold);
+    }
+    
+    .age-badge.warning {
+      background: #fef3c7;
+      color: #92400e;
+    }
+    
+    .age-badge.normal {
+      background: var(--color-gray-200);
+      color: var(--color-text-secondary);
+    }
+    
+    /* Keyboard Shortcut Indicator */
+    .keyboard-hint {
+      display: inline-block;
+      padding: 2px 6px;
+      background: var(--color-gray-200);
+      border-radius: 3px;
+      font-size: var(--font-size-xs);
+      font-family: monospace;
+      margin-left: var(--spacing-xs);
+      color: var(--color-text-secondary);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .reviews-table {
+        overflow-x: auto;
+      }
+      
+      table {
+        min-width: 800px;
+      }
+      
+      .batch-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .batch-actions-right {
+        flex-direction: column;
+      }
+      
+      .filters {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .filter-group {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .modal-content {
+        margin: 10% auto;
+        max-width: 95%;
+      }
+    }
+    
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-lg);
+      background: var(--color-bg-primary);
+      border-top: 1px solid var(--color-border);
+    }
+    
+    .pagination button {
+      padding: var(--spacing-xs) var(--spacing-md);
+      border: 1px solid var(--color-border);
+      background: var(--color-bg-primary);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: var(--font-size-sm);
+    }
+    
+    .pagination button:hover:not(:disabled) {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+    }
+    
+    .pagination button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .pagination .page-info {
+      padding: 0 var(--spacing-md);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+  </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+  
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="container">
+    <header>
+      <h1>📋 Batch Review Interface</h1>
+      <p class="subtitle">Review and approve/reject artifacts across all review gates (HR_PRE, HR_LANG, HR_MSG, HR_RELEASE)</p>
+      
+      <div class="file-locations" style="background: #e7f3ff; padding: var(--spacing-lg); border-radius: var(--radius-md); margin: var(--spacing-lg) 0; font-size: 13px;">
+        <strong>📂 Queue Files Location:</strong>
+        <div style="margin-top: 8px; font-family: monospace; color: #084298;">
+          <div><strong>agent-orchestrator/review/HR_PRE_queue.json</strong></div>
+          <div><strong>agent-orchestrator/review/HR_LANG_queue.json</strong></div>
+          <div><strong>agent-orchestrator/review/HR_MSG_queue.json</strong></div>
+          <div><strong>agent-orchestrator/review/HR_RELEASE_queue.json</strong></div>
+        </div>
+      </div>
+      
+      <div class="context-dropdown-wrapper" style="background: var(--color-bg-primary); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-lg) 0; box-shadow: var(--shadow-2);">
+        <label for="quickLoadDropdown">📋 Quick Load Individual Queue:</label>
+        <select id="quickLoadDropdown" onchange="loadSingleQueueFromDropdown(this.value)">
+          <option value="">Select queue file...</option>
+          <optgroup label="Review Queues">
+            <option value="HR_PRE">HR_PRE_queue.json</option>
+            <option value="HR_LANG">HR_LANG_queue.json</option>
+            <option value="HR_MSG">HR_MSG_queue.json</option>
+            <option value="HR_RELEASE">HR_RELEASE_queue.json</option>
+          </optgroup>
+        </select>
+        <button class="btn btn-secondary" onclick="refreshQuickLoadDropdown()">🔄 Refresh</button>
+      </div>
+      
+      <div class="controls" style="display: flex; flex-direction: column; gap: var(--spacing-lg);">
+        <div style="display: flex; align-items: center; gap: var(--spacing-md); flex-wrap: wrap;">
+          <button class="btn btn-primary" onclick="refreshFromIndex()" id="btnRefreshIndex" style="font-size: var(--font-size-base); padding: var(--spacing-md) var(--spacing-xl); font-weight: var(--font-weight-semibold); box-shadow: var(--shadow-2); display: flex; align-items: center; gap: var(--spacing-sm);">
+            <span id="refreshIcon">🔄</span>
+            <span>Refresh from Index</span>
+          </button>
+          <button class="btn btn-secondary" onclick="tryAutoLoad()" id="btnAutoLoad" style="padding: var(--spacing-md) var(--spacing-lg);">🚀 Auto-Load All Queues</button>
+          <button class="btn btn-secondary" onclick="showFilePicker()" style="padding: var(--spacing-md) var(--spacing-lg);">📁 Manual Selection</button>
+          <input type="file" id="loadFiles" multiple accept=".json,application/json" style="display: none;" onchange="handleFileSelection(this.files)" />
+          <button class="btn btn-secondary" onclick="clearSelection()" style="padding: var(--spacing-md) var(--spacing-lg);">🗑️ Clear</button>
+        </div>
+      </div>
+      
+      <div id="loadStatus" style="margin-top: var(--spacing-lg); padding: var(--spacing-md); border-radius: var(--radius-sm); display: none;"></div>
+    </header>
+    
+    <div id="alert" class="alert"></div>
+    
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+    
+    <div id="statsBar" class="stats-bar" style="display: none;">
+      <div class="stat">
+        <span class="stat-label">Total Pending</span>
+        <span class="stat-value" id="statTotal">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Selected</span>
+        <span class="stat-value" id="statSelected">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">HR_PRE</span>
+        <span class="stat-value" id="statHR_PRE">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">HR_LANG</span>
+        <span class="stat-value" id="statHR_LANG">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">HR_MSG</span>
+        <span class="stat-value" id="statHR_MSG">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">HR_RELEASE</span>
+        <span class="stat-value" id="statHR_RELEASE">0</span>
+      </div>
+    </div>
+    
+    <div id="filters" class="filters" style="display: none;">
+      <div class="filter-group">
+        <label>Filter by Gate:</label>
+        <select id="filterGate" onchange="applyFilters()">
+          <option value="">All Gates</option>
+          <option value="HR_PRE">HR_PRE</option>
+          <option value="HR_LANG">HR_LANG</option>
+          <option value="HR_MSG">HR_MSG</option>
+          <option value="HR_RELEASE">HR_RELEASE</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Filter by Risk:</label>
+        <select id="filterRisk" onchange="applyFilters()">
+          <option value="">All Risk Levels</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Search:</label>
+        <input type="text" id="searchInput" placeholder="Search artifact name or type..." oninput="applyFilters()" />
+      </div>
+    </div>
+    
+    <div id="batchActions" class="batch-actions" style="display: none;">
+      <div class="batch-actions-left">
+        <div class="select-all-wrapper">
+          <input type="checkbox" id="selectAll" onchange="toggleSelectAll()" />
+          <label for="selectAll">Select All Visible</label>
+        </div>
+        <span id="selectedCount" style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">0 selected</span>
+        <button class="btn btn-secondary" onclick="invertSelection()" style="padding: var(--spacing-xs) var(--spacing-md); font-size: var(--font-size-xs);">🔄 Invert</button>
+        <button class="btn btn-secondary" onclick="selectByFilter('high-risk')" style="padding: var(--spacing-xs) var(--spacing-md); font-size: var(--font-size-xs);">Select High Risk</button>
+      </div>
+      <div class="batch-actions-right">
+        <button class="btn btn-success" onclick="batchApprove()" id="btnBatchApprove" disabled>✅ Approve Selected</button>
+        <button class="btn btn-danger" onclick="batchReject()" id="btnBatchReject" disabled>❌ Reject Selected</button>
+        <button class="btn btn-secondary" onclick="exportManifest()" id="btnExport" disabled>📤 Export Manifest</button>
+        <button class="btn btn-secondary" onclick="exportToCSV()" id="btnExportCSV" disabled>📊 Export CSV</button>
+      </div>
+    </div>
+    
+    <div id="reviewsTable" class="reviews-table" style="display: none;">
+      <table>
+        <thead>
+          <tr>
+            <th class="checkbox-col"><input type="checkbox" id="headerCheckbox" onchange="toggleSelectAll()" /></th>
+            <th>Review Gate</th>
+            <th>Artifact</th>
+            <th>Type</th>
+            <th>Risk</th>
+            <th>Effort</th>
+            <th>Age</th>
+            <th>Submitted By</th>
+            <th>Artifact Path</th>
+          </tr>
+        </thead>
+        <tbody id="reviewsTableBody">
+        </tbody>
+      </table>
+      <div id="pagination" class="pagination" style="display: none;">
+        <button onclick="changePage(-1)" id="btnPrevPage" disabled>← Previous</button>
+        <span class="page-info" id="pageInfo">Page 1 of 1</span>
+        <button onclick="changePage(1)" id="btnNextPage" disabled>Next →</button>
+        <select id="pageSizeSelect" onchange="changePageSize()" style="margin-left: var(--spacing-lg); padding: var(--spacing-xs) var(--spacing-sm);">
+          <option value="10">10 per page</option>
+          <option value="25" selected>25 per page</option>
+          <option value="50">50 per page</option>
+          <option value="100">100 per page</option>
+        </select>
+      </div>
+    </div>
+    
+    <div id="emptyState" class="empty-state">
+      <div class="empty-state-icon">📋</div>
+      <p>No review queue files loaded</p>
+      <p class="hint">Click <strong>"Auto-Load Queue Files"</strong> to automatically find and load the queue files</p>
+      <p class="hint" style="margin-top: var(--spacing-md);">Queue files are located at:</p>
+      <div style="margin-top: var(--spacing-md); font-family: monospace; font-size: var(--font-size-xs); background: var(--color-gray-100); padding: var(--spacing-md); border-radius: var(--radius-sm); text-align: left; display: inline-block;">
+        <div>📁 agent-orchestrator/review/HR_PRE_queue.json</div>
+        <div>📁 agent-orchestrator/review/HR_LANG_queue.json</div>
+        <div>📁 agent-orchestrator/review/HR_MSG_queue.json</div>
+        <div>📁 agent-orchestrator/review/HR_RELEASE_queue.json</div>
+      </div>
+    </div>
+    
+    <div id="loadingState" class="loading" style="display: none;">
+      <div class="loading-spinner"></div>
+      <p style="margin-top: var(--spacing-lg);">Loading review queues...</p>
+    </div>
+    
+    <!-- Artifact Preview Modal -->
+    <div id="artifactPreviewModal" class="modal" style="display: none;">
+      <div class="modal-content" style="max-width: 1000px;">
+        <div class="modal-header">
+          <div class="modal-title" id="previewModalTitle">Artifact Preview</div>
+          <span class="close" onclick="closeArtifactPreview()">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div class="modal-tabs">
+            <button class="modal-tab active" onclick="switchPreviewTab('overview')">Overview</button>
+            <button class="modal-tab" onclick="switchPreviewTab('requirements')">Requirements</button>
+            <button class="modal-tab" onclick="switchPreviewTab('metadata')">Metadata</button>
+            <button class="modal-tab" onclick="switchPreviewTab('json')">Raw JSON</button>
+          </div>
+          <div id="previewOverview" class="modal-tab-content active">
+            <div id="previewOverviewContent"></div>
+          </div>
+          <div id="previewRequirements" class="modal-tab-content">
+            <div id="previewRequirementsContent"></div>
+          </div>
+          <div id="previewMetadata" class="modal-tab-content">
+            <div id="previewMetadataContent"></div>
+          </div>
+          <div id="previewJson" class="modal-tab-content">
+            <pre id="previewJsonContent" style="background: var(--color-gray-100); padding: var(--spacing-lg); border-radius: var(--radius-sm); overflow-x: auto; font-size: var(--font-size-xs);"></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Keyboard Shortcuts Help Modal -->
+    <div id="keyboardHelpModal" class="modal" style="display: none;">
+      <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-header">
+          <div class="modal-title">⌨️ Keyboard Shortcuts</div>
+          <span class="close" onclick="closeKeyboardHelp()">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div style="display: grid; gap: var(--spacing-md);">
+            <div>
+              <strong>Navigation:</strong>
+              <ul style="margin-top: var(--spacing-sm); padding-left: 20px;">
+                <li><kbd>j</kbd> / <kbd>k</kbd> - Navigate up/down rows</li>
+                <li><kbd>Enter</kbd> - Expand/collapse selected row</li>
+                <li><kbd>f</kbd> - Focus search input</li>
+              </ul>
+            </div>
+            <div>
+              <strong>Actions:</strong>
+              <ul style="margin-top: var(--spacing-sm); padding-left: 20px;">
+                <li><kbd>a</kbd> - Approve selected row(s)</li>
+                <li><kbd>r</kbd> - Reject selected row(s)</li>
+                <li><kbd>s</kbd> - Select/deselect current row</li>
+                <li><kbd>Ctrl+A</kbd> - Select all visible</li>
+                <li><kbd>Esc</kbd> - Clear selection / Close modals</li>
+              </ul>
+            </div>
+            <div>
+              <strong>Help:</strong>
+              <ul style="margin-top: var(--spacing-sm); padding-left: 20px;">
+                <li><kbd>?</kbd> - Show this help</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Vibe Check Modal -->
+    <div id="vibeCheckModal" class="modal" style="display: none;">
+      <div class="modal-content" style="max-width: 800px;">
+        <div class="modal-header">
+          <div class="modal-title" id="vibeModalTitle">🧭 Vibe Check: Human Judgment Zone</div>
+          <span class="close" onclick="closeVibeCheckModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div style="padding: var(--spacing-xl); background: #fff9e6; border: 2px solid #ffc107; border-radius: var(--radius-lg);">
+            <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">
+              This section exists for subjective discomfort. You do not need to be precise.
+              If something feels off, flag it here.
+            </p>
+            
+            <details style="margin-top: var(--spacing-lg);" open>
+              <summary style="cursor: pointer; font-weight: var(--font-weight-semibold); color: #856404; padding: var(--spacing-sm); background: var(--color-bg-primary); border-radius: var(--radius-sm);">
+                ⚠️ Something feels off in this section
+              </summary>
+              
+              <div style="margin-top: var(--spacing-lg); padding: var(--spacing-lg); background: var(--color-bg-primary); border-radius: var(--radius-sm);">
+                <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">
+                  You don't need to explain technically. A short note or even a fragment is enough.
+                </p>
+                
+                <textarea
+                  id="vibeInputBatch"
+                  placeholder="e.g. This conclusion feels rushed, or I don't trust this assumption…"
+                  style="width:100%;height:80px;padding: var(--spacing-md);border:1px solid var(--color-border);border-radius: var(--radius-sm);font-family:inherit;font-size:13px;resize:vertical;"
+                ></textarea>
+                
+                <h4 style="margin-top: var(--spacing-lg); font-size: var(--font-size-sm); color: var(--color-text-primary);">Send this vibe to AI for clarification</h4>
+                <pre style="background: var(--color-gray-100); padding: 12px; border-radius: var(--radius-sm); font-size: var(--font-size-xs); overflow-x: auto; margin-top: 8px; border: 1px solid var(--color-border);">ASK:
+The user feels discomfort about the highlighted section.
+Their concern is subjective and may be imprecise.
+
+Tasks:
+- Restate the concern clearly and charitably
+- Identify what might be causing the discomfort
+- Suggest whether this warrants revision or is acceptable
+
+Do NOT propose code.
+Do NOT defend the artifact.
+Focus on sense-making.</pre>
+              </div>
+            </details>
+            
+            <div id="aiInterpretationBatch" style="display: none; margin-top: var(--spacing-lg); padding: var(--spacing-lg); background: #e7f3ff; border-left: 4px solid var(--color-primary); border-radius: var(--radius-sm);">
+              <h3 style="font-size: var(--font-size-base); margin-bottom: var(--spacing-md); color: #084298;">🤖 AI Interpretation of User Concern</h3>
+              <pre id="aiInterpretationTextBatch" style="background: var(--color-bg-primary); padding: 12px; border-radius: var(--radius-sm); font-size: var(--font-size-xs); var(--color-bg-primary)-space: pre-wrap; margin: 0;"></pre>
+              
+              <h3 style="font-size: var(--font-size-sm); margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md); color: var(--color-text-primary);">Resolve This Concern</h3>
+              
+              <div style="margin-top: var(--spacing-md); display: grid; gap: var(--spacing-md);">
+                <div style="padding: 12px; background: #d4edda; border: 1px solid var(--color-success); border-radius: var(--radius-sm);">
+                  <h4 style="font-size: 13px; margin-bottom: 8px; color: #155724;">✅ Yes, that's right — revise</h4>
+                  <pre id="reviseDecisionBatch" style="background: var(--color-bg-primary); padding: var(--spacing-sm); border-radius: var(--radius-sm); font-size: 11px; margin: 0; overflow-x: auto;"></pre>
+                </div>
+                
+                <div style="padding: 12px; background: #d1ecf1; border: 1px solid #17a2b8; border-radius: var(--radius-sm);">
+                  <h4 style="font-size: 13px; margin-bottom: 8px; color: #0c5460;">➡️ No, this is fine — proceed</h4>
+                  <pre id="approveDecisionBatch" style="background: var(--color-bg-primary); padding: var(--spacing-sm); border-radius: var(--radius-sm); font-size: 11px; margin: 0; overflow-x: auto;"></pre>
+                </div>
+                
+                <div style="padding: 12px; background: #f8d7da; border: 1px solid var(--color-error); border-radius: var(--radius-sm);">
+                  <h4 style="font-size: 13px; margin-bottom: 8px; color: #721c24;">🗑️ This undermines the artifact — discard</h4>
+                  <pre id="discardDecisionBatch" style="background: var(--color-bg-primary); padding: var(--spacing-sm); border-radius: var(--radius-sm); font-size: 11px; margin: 0; overflow-x: auto;"></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="manifestOutput" class="manifest-output">
+      <h3>Approval Manifest JSON</h3>
+      <p style="margin-bottom: var(--spacing-lg); color: var(--color-text-secondary); font-size: var(--font-size-sm);">
+        This manifest contains the approval/rejection decisions. To apply them:
+      </p>
+      <ol style="margin-bottom: var(--spacing-lg); color: var(--color-text-secondary); font-size: var(--font-size-sm); padding-left: 20px;">
+        <li>Download or copy the manifest JSON below</li>
+        <li>Save it to a file (e.g., <code>approval_manifest.json</code>)</li>
+        <li>Run: <code>python scripts/cockpit__write_approval.py --manifest-file approval_manifest.json</code></li>
+        <li>Or pipe from stdin: <code>python scripts/cockpit__write_approval.py &lt; approval_manifest.json</code></li>
+      </ol>
+      <textarea id="manifestTextarea" readonly></textarea>
+      <div class="actions">
+        <button class="btn btn-secondary" onclick="copyManifest()">📋 Copy Manifest</button>
+        <button class="btn btn-secondary" onclick="downloadManifest()">💾 Download Manifest</button>
+        <button class="btn btn-secondary" onclick="closeManifest()">✖️ Close</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    let allReviews = [];
+    let filteredReviews = [];
+    let selectedReviews = new Set();
+    let artifactIndex = null;
+    let artifactPathMap = {};
+    
+    // Enhanced state management
+    let sortColumn = null;
+    let sortDirection = 'asc';
+    let expandedRows = new Set();
+    let currentRowIndex = -1;
+    let keyboardShortcutsEnabled = true;
+    let currentPage = 1;
+    let pageSize = 25;
+    let artifactCache = {};
+    
+    // ============================================
+    // ARTIFACT INDEX RESOLVER
+    // ============================================
+    
+    async function loadArtifactIndex() {
+      try {
+        const response = await fetch('artifacts/ARTIFACT_INDEX.json?t=' + Date.now());
+        if (response.ok) {
+          artifactIndex = await response.json();
+          
+          // Build lookup maps
+          artifactPathMap = {};
+          Object.values(artifactIndex.artifacts || {}).flat().forEach(artifact => {
+            if (artifact.name) {
+              artifactPathMap[artifact.name] = artifact.path;
+            }
+            if (artifact.meta?.agent_id) {
+              artifactPathMap[artifact.meta.agent_id] = artifact.path;
+            }
+            if (artifact.meta?.artifact_type) {
+              artifactPathMap[artifact.meta.artifact_type] = artifact.path;
+            }
+            if (artifact.path) {
+              artifactPathMap[artifact.path] = artifact.path;
+              const fileName = artifact.path.split('/').pop();
+              if (fileName) {
+                artifactPathMap[fileName] = artifact.path;
+              }
+            }
+          });
+          
+          localStorage.setItem('artifactIndex', JSON.stringify(artifactIndex));
+          localStorage.setItem('artifactPathMap', JSON.stringify(artifactPathMap));
+          return true;
+        }
+      } catch (e) {
+        console.warn('Could not load artifact index:', e);
+        const cached = localStorage.getItem('artifactIndex');
+        if (cached) {
+          artifactIndex = JSON.parse(cached);
+          artifactPathMap = JSON.parse(localStorage.getItem('artifactPathMap') || '{}');
+          return true;
+        }
+      }
+      return false;
+    }
+    
+    function resolveArtifactPath(artifactName, artifactType, agentId, providedPath) {
+      if (providedPath) {
+        const normalizedPath = providedPath.replace(/\\/g, '/');
+        if (artifactPathMap[normalizedPath]) {
+          return artifactPathMap[normalizedPath];
+        }
+        const fileName = normalizedPath.split('/').pop();
+        if (fileName && artifactPathMap[fileName]) {
+          return artifactPathMap[fileName];
+        }
+        return normalizedPath;
+      }
+      return artifactPathMap[artifactName] ||
+             artifactPathMap[artifactType] ||
+             artifactPathMap[agentId] ||
+             null;
+    }
+    
+    // Try to auto-load queue files (improved reliability)
+    async function tryAutoLoad() {
+      showLoading(true);
+      const statusDiv = document.getElementById('loadStatus');
+      statusDiv.style.display = 'block';
+      statusDiv.innerHTML = '<div style="color: #084298;">🔄 Attempting to auto-load queue files...</div>';
+      
+      // Check localStorage for last successful base path
+      const lastBasePath = localStorage.getItem('lastSuccessfulBatchPath');
+      const possiblePaths = lastBasePath ? [lastBasePath] : [
+        'review/',
+        '../review/',
+        '../../review/',
+        './review/',
+        'agent-orchestrator/review/',
+        '../agent-orchestrator/review/'
+      ];
+      
+      const queueFiles = ['HR_PRE_queue.json', 'HR_LANG_queue.json', 'HR_MSG_queue.json', 'HR_RELEASE_queue.json'];
+      const loadedData = [];
+      let foundPaths = [];
+      let successfulBasePath = null;
+      
+      // Try fetching from various locations
+      for (const baseDir of possiblePaths) {
+        const promises = queueFiles.map(file => {
+          const fullPath = baseDir + file;
+          return fetch(fullPath)
+            .then(res => {
+              if (res.ok) {
+                return res.json().then(data => {
+                  // Validate it's a queue file
+                  if (data._meta && data._meta.review_gate) {
+                    return { success: true, data, path: fullPath };
+                  }
+                  return { success: false };
+                });
+              }
+              return { success: false };
+            })
+            .catch(() => ({ success: false }));
+        });
+        
+        const results = await Promise.all(promises);
+        const successCount = results.filter(r => r.success).length;
+        
+        if (successCount === queueFiles.length) {
+          // All files loaded from this path!
+          loadedData.push(...results.filter(r => r.success).map(r => r.data));
+          foundPaths = results.filter(r => r.success).map(r => r.path);
+          successfulBasePath = baseDir;
+          break;
+        } else if (successCount > 0) {
+          // Partial success - add what we found
+          results.filter(r => r.success).forEach(r => {
+            if (!loadedData.find(d => d._meta?.review_gate === r.data._meta?.review_gate)) {
+              loadedData.push(r.data);
+              foundPaths.push(r.path);
+            }
+          });
+          if (!successfulBasePath) {
+            successfulBasePath = baseDir;
+          }
+        }
+      }
+      
+      if (loadedData.length > 0) {
+        // Store successful path
+        if (successfulBasePath) {
+          localStorage.setItem('lastSuccessfulBatchPath', successfulBasePath);
+        }
+        
+        processQueueData(loadedData);
+        showLoading(false);
+        statusDiv.innerHTML = `<div style="color: #0f5132;">✅ Successfully loaded ${loadedData.length} queue file(s) from:</div><div style="margin-top: 8px; font-family: monospace; font-size: var(--font-size-xs);">${foundPaths.join('<br>')}</div>`;
+        statusDiv.style.background = '#d1e7dd';
+        statusDiv.style.color = '#0f5132';
+        showAlert(`Loaded ${loadedData.length} review queue file(s)`, 'success');
+      } else {
+        showLoading(false);
+        statusDiv.innerHTML = `
+          <div style="color: #842029;">❌ Could not auto-load queue files.</div>
+          <div style="margin-top: var(--spacing-md); color: var(--color-text-secondary);">
+            <strong>To load files manually:</strong>
+            <ol style="margin: var(--spacing-md) 0 0 20px; padding-left: 10px;">
+              <li>Click "Select Queue Files Manually" button below</li>
+              <li>Navigate to: <code style="background: var(--color-gray-100); padding: 2px 6px; border-radius: 3px;">agent-orchestrator/review/</code></li>
+              <li>Select all 4 queue files (HR_PRE_queue.json, HR_LANG_queue.json, HR_MSG_queue.json, HR_RELEASE_queue.json)</li>
+              <li>Hold Ctrl (Cmd on Mac) to select multiple files at once</li>
+            </ol>
+            <div style="margin-top: var(--spacing-md); padding: var(--spacing-md); background: #fff3cd; border-radius: var(--radius-sm);">
+              <strong>💡 Tip:</strong> If running via local server (<code>python -m http.server</code>), make sure you're accessing the HTML file through the server URL (e.g., <code>http://localhost:8000/dashboards/cockpit_batch_review.html</code>)
+            </div>
+          </div>
+        `;
+        statusDiv.style.background = '#f8d7da';
+        statusDiv.style.color = '#842029';
+        showAlert('Could not auto-load queue files. Please select files manually.', 'error');
+      }
+    }
+    
+    // Load single queue from dropdown
+    async function loadSingleQueueFromDropdown(gate) {
+      if (!gate) return;
+      
+      showLoading(true);
+      const statusDiv = document.getElementById('loadStatus');
+      statusDiv.style.display = 'block';
+      statusDiv.innerHTML = '<div style="color: #084298;">🔄 Loading ' + gate + '_queue.json...</div>';
+      
+      const lastBasePath = localStorage.getItem('lastSuccessfulBatchPath') || 'review/';
+      const possiblePaths = [
+        lastBasePath + gate + '_queue.json',
+        'review/' + gate + '_queue.json',
+        '../review/' + gate + '_queue.json',
+        '../../review/' + gate + '_queue.json'
+      ];
+      
+      for (const path of possiblePaths) {
+        try {
+          const response = await fetch(path);
+          if (response.ok) {
+            const data = await response.json();
+            if (data._meta && data._meta.review_gate) {
+              // Add to existing data or create new array
+              if (allReviews.length === 0) {
+                processQueueData([data]);
+              } else {
+                // Check if this gate already loaded
+                const existingGate = allReviews.find(r => r._gateId === gate);
+                if (!existingGate) {
+                  const gateId = data._meta.review_gate;
+                  const gateName = data._meta.review_gate_name || gateId;
+                  const pending = data.pending_reviews || [];
+                  pending.forEach(review => {
+                    review._gateId = gateId;
+                    review._gateName = gateName;
+                    review._reviewKey = `${gateId}_${review.review_id}`;
+                    allReviews.push(review);
+                  });
+                  filteredReviews = [...allReviews];
+                  updateStats();
+                  renderTable();
+                  updateBatchActions();
+                }
+              }
+              
+              showLoading(false);
+              statusDiv.innerHTML = `<div style="color: #0f5132;">✅ Loaded ${gate}_queue.json</div>`;
+              statusDiv.style.background = '#d1e7dd';
+              statusDiv.style.color = '#0f5132';
+              showAlert('Loaded ' + gate + '_queue.json', 'success');
+              return;
+            }
+          }
+        } catch (e) {
+          continue;
+        }
+      }
+      
+      showLoading(false);
+      statusDiv.innerHTML = `<div style="color: #842029;">❌ Could not load ${gate}_queue.json</div>`;
+      statusDiv.style.background = '#f8d7da';
+      statusDiv.style.color = '#842029';
+      showAlert('Could not load ' + gate + '_queue.json', 'error');
+    }
+    
+    // Refresh quick load dropdown
+    function refreshQuickLoadDropdown() {
+      showAlert('Dropdown refreshed', 'info');
+    }
+    
+    // Show file picker
+    function showFilePicker() {
+      const fileInput = document.getElementById('loadFiles');
+      fileInput.click();
+      
+      // Show helpful message after file picker is shown
+      const statusDiv = document.getElementById('loadStatus');
+      statusDiv.style.display = 'block';
+      statusDiv.innerHTML = `
+        <div style="color: #084298;">📁 File picker opened</div>
+        <div style="margin-top: var(--spacing-md); color: var(--color-text-secondary); font-size: 13px;">
+          <strong>Select these 4 files (hold Ctrl/Cmd to select multiple):</strong>
+          <ul style="margin: 8px 0 0 20px; padding-left: 10px;">
+            <li>HR_PRE_queue.json</li>
+            <li>HR_LANG_queue.json</li>
+            <li>HR_MSG_queue.json</li>
+            <li>HR_RELEASE_queue.json</li>
+          </ul>
+          <div style="margin-top: 8px; padding: var(--spacing-sm); background: #e7f3ff; border-radius: var(--radius-sm); font-size: var(--font-size-xs);">
+            💡 <strong>Tip:</strong> Navigate to: <code>agent-orchestrator/review/</code> folder, then select all 4 files at once
+          </div>
+        </div>
+      `;
+      statusDiv.style.background = '#cfe2ff';
+      statusDiv.style.color = '#084298';
+    }
+    
+    // Handle file selection
+    function handleFileSelection(files) {
+      if (!files || files.length === 0) return;
+      
+      // Filter to only queue files
+      const queueFiles = Array.from(files).filter(file => {
+        const name = file.name.toLowerCase();
+        return name.includes('_queue.json') || 
+               name.includes('hr_pre') || 
+               name.includes('hr_lang') || 
+               name.includes('hr_msg') || 
+               name.includes('hr_release');
+      });
+      
+      if (queueFiles.length === 0) {
+        showAlert('Please select queue files (files containing "_queue.json" or "HR_" in the name)', 'error');
+        return;
+      }
+      
+      loadQueueFiles(queueFiles);
+    }
+    
+    // Load queue files from file picker
+    function loadQueueFiles(files) {
+      if (files.length === 0) return;
+      
+      showLoading(true);
+      const statusDiv = document.getElementById('loadStatus');
+      statusDiv.style.display = 'block';
+      statusDiv.innerHTML = `<div style="color: #084298;">🔄 Loading ${files.length} file(s)...</div>`;
+      statusDiv.style.background = '#cfe2ff';
+      statusDiv.style.color = '#084298';
+      
+      const readers = Array.from(files).map(file => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = e => {
+            try {
+              const data = JSON.parse(e.target.result);
+              // Validate it's a queue file
+              if (!data._meta || !data._meta.review_gate) {
+                reject(new Error(`${file.name} does not appear to be a valid queue file (missing _meta.review_gate)`));
+                return;
+              }
+              resolve({ data, fileName: file.name });
+            } catch (err) {
+              reject(new Error(`${file.name}: ${err.message}`));
+            }
+          };
+          reader.onerror = () => reject(new Error(`${file.name}: Failed to read file`));
+          reader.readAsText(file);
+        });
+      });
+      
+      Promise.all(readers)
+        .then(results => {
+          const loadedData = results.map(r => r.data);
+          const loadedFiles = results.map(r => r.fileName);
+          
+          processQueueData(loadedData);
+          showLoading(false);
+          
+          statusDiv.innerHTML = `
+            <div style="color: #0f5132;">✅ Successfully loaded ${loadedData.length} queue file(s):</div>
+            <div style="margin-top: 8px; font-family: monospace; font-size: var(--font-size-xs);">${loadedFiles.join('<br>')}</div>
+          `;
+          statusDiv.style.background = '#d1e7dd';
+          statusDiv.style.color = '#0f5132';
+          
+          showAlert(`Loaded ${loadedData.length} review queue file(s)`, 'success');
+        })
+        .catch(error => {
+          showLoading(false);
+          statusDiv.innerHTML = `<div style="color: #842029;">❌ Error: ${error.message}</div>`;
+          statusDiv.style.background = '#f8d7da';
+          statusDiv.style.color = '#842029';
+          showAlert('Error loading files: ' + error.message, 'error');
+        });
+    }
+    
+    // Refresh from Index - reloads index + queues + updates UI
+    async function refreshFromIndex() {
+      const btn = document.getElementById('btnRefreshIndex');
+      const icon = document.getElementById('refreshIcon');
+      const statusDiv = document.getElementById('loadStatus');
+      
+      // Show loading state
+      btn.disabled = true;
+      btn.classList.add('loading');
+      icon.textContent = '⏳';
+      showLoading(true);
+      statusDiv.style.display = 'block';
+      statusDiv.innerHTML = '<div style="color: #084298; display: flex; align-items: center; gap: var(--spacing-sm);">⏳ Refreshing from index...</div>';
+      statusDiv.style.background = '#cfe2ff';
+      
+      try {
+        // 1. Load ARTIFACT_INDEX.json
+        const indexLoaded = await loadArtifactIndex();
+        
+        // 2. Reload all review queues
+        const queues = ['HR_PRE', 'HR_LANG', 'HR_MSG', 'HR_RELEASE'];
+        const queueData = [];
+        const loadedGates = [];
+        
+        const lastBasePath = localStorage.getItem('lastSuccessfulBatchPath') || 'review/';
+        const possibleBasePaths = [lastBasePath, 'review/', '../review/', '../../review/'];
+        
+        for (const gate of queues) {
+          for (const basePath of possibleBasePaths) {
+            const path = basePath + gate + '_queue.json';
+            try {
+              const response = await fetch(path + '?t=' + Date.now());
+              if (response.ok) {
+                const data = await response.json();
+                if (data._meta && data._meta.review_gate) {
+                  queueData.push(data);
+                  loadedGates.push(gate);
+                  localStorage.setItem('lastSuccessfulBatchPath', basePath);
+                  break;
+                }
+              }
+            } catch (e) {
+              continue;
+            }
+          }
+        }
+        
+        // 3. Update UI if queues loaded
+        if (queueData.length > 0) {
+          processQueueData(queueData);
+          showLoading(false);
+          statusDiv.innerHTML = `<div style="color: #0f5132; display: flex; align-items: center; gap: var(--spacing-sm);">✅ Refreshed: ${indexLoaded ? 'Index' : 'Cached index'} + ${loadedGates.length} queue(s)</div>`;
+          statusDiv.style.background = '#d1e7dd';
+          statusDiv.style.borderLeft = '4px solid var(--color-success)';
+          showAlert(`Refreshed from index: ${loadedGates.length} queue(s) loaded`, 'success');
+          
+          // Success animation
+          icon.textContent = '✓';
+          setTimeout(() => {
+            icon.textContent = '🔄';
+          }, 1500);
+        } else {
+          showLoading(false);
+          statusDiv.innerHTML = `<div style="color: #856404; display: flex; align-items: center; gap: var(--spacing-sm);">⚠️ Refreshed index${indexLoaded ? ' (new)' : ' (cached)'} but no queues loaded</div>`;
+          statusDiv.style.background = '#fff3cd';
+          statusDiv.style.borderLeft = '4px solid var(--color-warning)';
+          showAlert('Refreshed index but no queues loaded', 'warning');
+          icon.textContent = '⚠️';
+          setTimeout(() => {
+            icon.textContent = '🔄';
+          }, 2000);
+        }
+      } catch (error) {
+        showLoading(false);
+        statusDiv.innerHTML = `<div style="color: #842029; display: flex; align-items: center; gap: var(--spacing-sm);">❌ Error: ${error.message}</div>`;
+        statusDiv.style.background = '#f8d7da';
+        statusDiv.style.borderLeft = '4px solid var(--color-error)';
+        showAlert('Error refreshing from index: ' + error.message, 'error');
+        icon.textContent = '❌';
+        setTimeout(() => {
+          icon.textContent = '🔄';
+        }, 2000);
+      } finally {
+        btn.disabled = false;
+        btn.classList.remove('loading');
+      }
+    }
+    
+    // Try to auto-load on page load (if possible)
+    window.addEventListener('DOMContentLoaded', function() {
+      // Load filter state
+      loadFilterState();
+      
+      // Load artifact index first
+      loadArtifactIndex().then(success => {
+        if (success) {
+          console.log('Artifact index loaded successfully');
+        }
+      });
+      
+      // Only auto-try if we're likely running via a server (not file:// protocol)
+      if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+        // Small delay to let page render first
+        setTimeout(() => {
+          tryAutoLoad();
+        }, 500);
+      } else {
+        // Show helpful message for file:// protocol
+        const statusDiv = document.getElementById('loadStatus');
+        statusDiv.style.display = 'block';
+        statusDiv.innerHTML = `
+          <div style="color: #856404;">ℹ️ You're viewing this file directly (file:// protocol).</div>
+          <div style="margin-top: var(--spacing-md); color: var(--color-text-secondary);">
+            <strong>To auto-load files:</strong> Run a local server:<br>
+            <code style="background: var(--color-gray-100); padding: var(--spacing-xs) 8px; border-radius: 3px; display: inline-block; margin-top: 5px;">
+              cd agent-orchestrator && python -m http.server 9000
+            </code><br>
+            Then open: <code style="background: var(--color-gray-100); padding: var(--spacing-xs) 8px; border-radius: 3px;">http://localhost:9000/dashboards/cockpit_batch_review.html</code>
+          </div>
+          <div style="margin-top: var(--spacing-md); color: var(--color-text-secondary);">
+            <strong>Or:</strong> Click "Select Queue Files Manually" and navigate to: <code style="background: var(--color-gray-100); padding: 2px 6px; border-radius: 3px;">agent-orchestrator/review/</code>
+          </div>
+        `;
+        statusDiv.style.background = '#fff3cd';
+        statusDiv.style.color = '#856404';
+      }
+    });
+    
+    // Process queue data and build review list
+    function processQueueData(queueDataArray) {
+      allReviews = [];
+      selectedReviews.clear();
+      
+      queueDataArray.forEach(queueData => {
+        const gateId = queueData._meta?.review_gate || 'UNKNOWN';
+        const gateName = queueData._meta?.review_gate_name || gateId;
+        
+        const pending = queueData.pending_reviews || [];
+        pending.forEach(review => {
+          review._gateId = gateId;
+          review._gateName = gateName;
+          review._reviewKey = `${gateId}_${review.review_id}`;
+          allReviews.push(review);
+        });
+      });
+      
+      filteredReviews = [...allReviews];
+      updateStats();
+      renderTable();
+      updateBatchActions();
+    }
+    
+    // Calculate age from timestamp
+    function calculateAge(timestamp) {
+      if (!timestamp) return 'Unknown';
+      
+      try {
+        const ts = timestamp.replace('Z', '+00:00');
+        const date = new Date(ts);
+        const now = new Date();
+        const diffMs = now - date;
+        const diffMins = Math.floor(diffMs / 60000);
+        const diffHours = Math.floor(diffMs / 3600000);
+        const diffDays = Math.floor(diffMs / 86400000);
+        
+        if (diffMins < 60) return `${diffMins}m`;
+        if (diffHours < 24) return `${diffHours}h`;
+        return `${diffDays}d`;
+      } catch (e) {
+        return 'Unknown';
+      }
+    }
+    
+    // Get gate badge class
+    function getGateBadgeClass(gateId) {
+      const map = {
+        'HR_PRE': 'hr-pre',
+        'HR_LANG': 'hr-lang',
+        'HR_MSG': 'hr-msg',
+        'HR_RELEASE': 'hr-release'
+      };
+      return map[gateId] || '';
+    }
+    
+    // Get risk badge class
+    function getRiskBadgeClass(risk) {
+      if (!risk) return 'low';
+      const r = risk.toLowerCase();
+      if (r.includes('high')) return 'high';
+      if (r.includes('medium')) return 'medium';
+      return 'low';
+    }
+    
+    // Render table (anti-flash)
+    function renderTable() {
+      const tbody = document.getElementById('reviewsTableBody');
+      const table = document.getElementById('reviewsTable');
+      const emptyState = document.getElementById('emptyState');
+      
+      // Anti-flash: hide during update
+      if (table) {
+        table.style.visibility = 'hidden';
+        table.style.opacity = '0';
+        table.style.transition = 'opacity 0.2s';
+      }
+      
+      tbody.innerHTML = '';
+      
+      if (filteredReviews.length === 0) {
+        requestAnimationFrame(() => {
+          if (table) table.style.display = 'none';
+          if (emptyState) {
+            emptyState.style.display = 'block';
+            emptyState.innerHTML = `
+              <div class="empty-state-icon">🔍</div>
+              <p>No reviews match the current filters</p>
+              <p class="hint">Try adjusting your filters or clearing the search</p>
+            `;
+          }
+        });
+        updatePagination();
+        return;
+      }
+      
+      // Apply pagination
+      let reviewsToRender = filteredReviews;
+      if (filteredReviews.length > pageSize) {
+        const startIndex = (currentPage - 1) * pageSize;
+        const endIndex = startIndex + pageSize;
+        reviewsToRender = filteredReviews.slice(startIndex, endIndex);
+      }
+      
+      // Build table content
+      
+      filteredReviews.forEach((review, index) => {
+        const row = document.createElement('tr');
+        const isSelected = selectedReviews.has(review._reviewKey);
+        const isExpanded = expandedRows.has(review._reviewKey);
+        const age = calculateAge(review.submitted_at);
+        const ageClass = getAgeUrgencyClass(age);
+        
+        if (isSelected) row.classList.add('selected');
+        if (isExpanded) row.classList.add('expanded');
+        if (index === currentRowIndex) row.classList.add('current-row');
+        
+        row.setAttribute('data-review-key', review._reviewKey);
+        row.setAttribute('data-index', actualIndex);
+        row.onclick = (e) => {
+          if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'BUTTON' && !e.target.closest('.row-actions')) {
+            toggleRowExpansion(review._reviewKey);
+          }
+        };
+        
+        row.innerHTML = `
+          <td>
+            <input type="checkbox" 
+                   data-review-key="${review._reviewKey}"
+                   ${isSelected ? 'checked' : ''}
+                   onchange="toggleReviewSelection('${review._reviewKey}'); event.stopPropagation();" />
+          </td>
+          <td>
+            <span class="gate-badge ${getGateBadgeClass(review._gateId)}">${review._gateId}</span>
+            <div style="font-size: 11px; color: var(--color-text-secondary); margin-top: 2px;">${review._gateName}</div>
+          </td>
+          <td>
+            <div class="artifact-name" style="cursor: pointer;" onclick="showArtifactPreview('${review._reviewKey}'); event.stopPropagation();">${escapeHtml(review.artifact_name || 'Unknown')}</div>
+            ${review.review_requirements && review.review_requirements.length > 0 ? 
+              `<div class="artifact-type">${review.review_requirements.length} requirement(s)</div>` : ''}
+          </td>
+          <td>
+            <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary);">${escapeHtml(review.artifact_type || 'Unknown')}</div>
+          </td>
+          <td>
+            <span class="risk-badge ${getRiskBadgeClass(review.risk_level)}">${escapeHtml(review.risk_level || 'Unknown')}</span>
+          </td>
+          <td>${escapeHtml(review.review_effort_estimate || 'Unknown')}</td>
+          <td>
+            <span class="age-badge ${ageClass}">${age}</span>
+          </td>
+          <td>
+            <div style="font-size: var(--font-size-xs); font-family: monospace; color: var(--color-text-secondary);">${escapeHtml(review.submitted_by || 'Unknown')}</div>
+          </td>
+          <td>
+            <div class="row-actions" onclick="event.stopPropagation();">
+              <button class="btn-row btn-row-approve" onclick="approveRow('${review._reviewKey}'); event.stopPropagation();" title="Approve">✅</button>
+              <button class="btn-row btn-row-reject" onclick="rejectRow('${review._reviewKey}'); event.stopPropagation();" title="Reject">❌</button>
+              <button class="btn-row btn-row-preview" onclick="showArtifactPreview('${review._reviewKey}'); event.stopPropagation();" title="Preview">👁️</button>
+              <button class="btn btn-secondary btn-small" onclick="showVibeCheck('${review._reviewKey}', '${escapeHtml(review.artifact_name || 'Unknown')}', '${review._gateId}', '${escapeHtml(review.risk_level || 'Unknown')}'); event.stopPropagation();" style="padding: var(--spacing-xs) 8px; font-size: 11px;" title="Vibe Check">🧭</button>
+            </div>
+          </td>
+        `;
+        
+        tbody.appendChild(row);
+        
+        // Add expansion row if expanded
+        if (isExpanded) {
+          const expansionRow = document.createElement('tr');
+          expansionRow.className = 'expanded-row';
+          expansionRow.setAttribute('data-expansion-for', review._reviewKey);
+          expansionRow.innerHTML = `
+            <td colspan="9">
+              <div class="row-expansion active">
+                <div class="row-expansion-content">
+                  <div class="row-expansion-section">
+                    <h4>Artifact Path</h4>
+                    <p style="font-family: monospace; font-size: var(--font-size-xs); word-break: break-all;">${escapeHtml(review.artifact_path || 'Unknown')}</p>
+                  </div>
+                  <div class="row-expansion-section">
+                    <h4>Review Requirements</h4>
+                    ${review.review_requirements && review.review_requirements.length > 0 ? 
+                      review.review_requirements.map(req => `<p>• ${escapeHtml(req)}</p>`).join('') : 
+                      '<p>No requirements specified</p>'}
+                  </div>
+                  <div class="row-expansion-section">
+                    <h4>Metadata</h4>
+                    <p><strong>Review ID:</strong> ${escapeHtml(review.review_id || 'Unknown')}</p>
+                    <p><strong>Submitted At:</strong> ${escapeHtml(review.submitted_at || 'Unknown')}</p>
+                    <p><strong>Submitted By:</strong> ${escapeHtml(review.submitted_by || 'Unknown')}</p>
+                    <p><strong>Risk Level:</strong> ${escapeHtml(review.risk_level || 'Unknown')}</p>
+                    <p><strong>Effort Estimate:</strong> ${escapeHtml(review.review_effort_estimate || 'Unknown')}</p>
+                  </div>
+                </div>
+              </div>
+            </td>
+          `;
+          tbody.appendChild(expansionRow);
+        }
+      });
+      
+      // Show table smoothly
+      requestAnimationFrame(() => {
+        if (table) {
+          table.style.display = 'block';
+          table.style.visibility = 'visible';
+          table.style.opacity = '1';
+        }
+        if (emptyState) {
+          emptyState.style.display = 'none';
+        }
+      });
+      
+      // Update pagination
+      updatePagination();
+    }
+    
+    // Escape HTML
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    // Update statistics
+    function updateStats() {
+      const stats = {
+        total: allReviews.length,
+        selected: selectedReviews.size,
+        hr_pre: allReviews.filter(r => r._gateId === 'HR_PRE').length,
+        hr_lang: allReviews.filter(r => r._gateId === 'HR_LANG').length,
+        hr_msg: allReviews.filter(r => r._gateId === 'HR_MSG').length,
+        hr_release: allReviews.filter(r => r._gateId === 'HR_RELEASE').length
+      };
+      
+      document.getElementById('statTotal').textContent = stats.total;
+      document.getElementById('statSelected').textContent = stats.selected;
+      document.getElementById('statHR_PRE').textContent = stats.hr_pre;
+      document.getElementById('statHR_LANG').textContent = stats.hr_lang;
+      document.getElementById('statHR_MSG').textContent = stats.hr_msg;
+      document.getElementById('statHR_RELEASE').textContent = stats.hr_release;
+      
+      // Update progress bar (assuming reviews with decisions are "complete")
+      // This is a simplified calculation - in reality, you'd check decision status
+      const progressPercent = stats.total > 0 ? Math.round((stats.selected / stats.total) * 100) : 0;
+      document.getElementById('progressFill').style.width = progressPercent + '%';
+      document.getElementById('progressText').textContent = `${progressPercent}% selected (${stats.selected} of ${stats.total})`;
+      
+      if (stats.total > 0) {
+        document.getElementById('statsBar').style.display = 'grid';
+        document.getElementById('filters').style.display = 'flex';
+        document.getElementById('batchActions').style.display = 'flex';
+      } else {
+        document.getElementById('statsBar').style.display = 'none';
+        document.getElementById('filters').style.display = 'none';
+        document.getElementById('batchActions').style.display = 'none';
+      }
+    }
+    
+    // Apply filters
+    function applyFilters() {
+      const gateFilter = document.getElementById('filterGate').value;
+      const riskFilter = document.getElementById('filterRisk').value;
+      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+      
+      filteredReviews = allReviews.filter(review => {
+        if (gateFilter && review._gateId !== gateFilter) return false;
+        if (riskFilter && !review.risk_level?.toLowerCase().includes(riskFilter.toLowerCase())) return false;
+        if (searchQuery) {
+          const name = (review.artifact_name || '').toLowerCase();
+          const type = (review.artifact_type || '').toLowerCase();
+          if (!name.includes(searchQuery) && !type.includes(searchQuery)) return false;
+        }
+        return true;
+      });
+      
+      renderTable();
+      updateBatchActions();
+    }
+    
+    // Toggle review selection
+    function toggleReviewSelection(reviewKey) {
+      if (selectedReviews.has(reviewKey)) {
+        selectedReviews.delete(reviewKey);
+      } else {
+        selectedReviews.add(reviewKey);
+      }
+      updateStats();
+      renderTable();
+      updateBatchActions();
+    }
+    
+    // Toggle select all
+    function toggleSelectAll() {
+      const checkbox = document.getElementById('selectAll');
+      const headerCheckbox = document.getElementById('headerCheckbox');
+      const selectAll = checkbox.checked || headerCheckbox.checked;
+      
+      checkbox.checked = selectAll;
+      headerCheckbox.checked = selectAll;
+      
+      if (selectAll) {
+        filteredReviews.forEach(review => {
+          selectedReviews.add(review._reviewKey);
+        });
+      } else {
+        filteredReviews.forEach(review => {
+          selectedReviews.delete(review._reviewKey);
+        });
+      }
+      
+      updateStats();
+      renderTable();
+      updateBatchActions();
+    }
+    
+    // Clear selection
+    function clearSelection() {
+      selectedReviews.clear();
+      document.getElementById('selectAll').checked = false;
+      document.getElementById('headerCheckbox').checked = false;
+      updateStats();
+      renderTable();
+      updateBatchActions();
+    }
+    
+    // Update batch actions state
+    function updateBatchActions() {
+      const count = selectedReviews.size;
+      document.getElementById('selectedCount').textContent = `${count} selected`;
+      document.getElementById('btnBatchApprove').disabled = count === 0;
+      document.getElementById('btnBatchReject').disabled = count === 0;
+      document.getElementById('btnExport').disabled = count === 0;
+    }
+    
+    // Batch approve
+    function batchApprove() {
+      if (selectedReviews.size === 0) return;
+      
+      const selected = allReviews.filter(r => selectedReviews.has(r._reviewKey));
+      
+      // Confirmation for large batches
+      if (selected.length > 10) {
+        if (!confirm(`Are you sure you want to approve ${selected.length} artifacts?`)) {
+          return;
+        }
+      }
+      
+      const decisions = selected.map(review => ({
+        review_id: review.review_id,
+        gate_id: review._gateId,
+        artifact_path: review.artifact_path || '',
+        artifact_name: review.artifact_name || '',
+        decision: 'APPROVE',
+        rationale: 'Batch approved via batch review interface',
+        decision_at: new Date().toISOString(),
+        decision_by: 'human:reviewer'
+      }));
+      
+      generateManifest(decisions);
+      showToast(`Approved ${selected.length} artifact(s)`, 'success');
+    }
+    
+    // Batch reject
+    function batchReject() {
+      if (selectedReviews.size === 0) return;
+      
+      const selected = allReviews.filter(r => selectedReviews.has(r._reviewKey));
+      
+      // Confirmation for large batches
+      if (selected.length > 10) {
+        if (!confirm(`Are you sure you want to reject ${selected.length} artifacts?`)) {
+          return;
+        }
+      }
+      
+      const decisions = selected.map(review => ({
+        review_id: review.review_id,
+        gate_id: review._gateId,
+        artifact_path: review.artifact_path || '',
+        artifact_name: review.artifact_name || '',
+        decision: 'REJECT',
+        rationale: 'Batch rejected via batch review interface',
+        decision_at: new Date().toISOString(),
+        decision_by: 'human:reviewer'
+      }));
+      
+      generateManifest(decisions);
+      showToast(`Rejected ${selected.length} artifact(s)`, 'error');
+    }
+    
+    // Generate approval manifest
+    function generateManifest(decisions) {
+      const manifest = {
+        _meta: {
+          generated_at: new Date().toISOString(),
+          generated_by: 'batch_review_interface',
+          total_decisions: decisions.length
+        },
+        decisions: decisions
+      };
+      
+      document.getElementById('manifestTextarea').value = JSON.stringify(manifest, null, 2);
+      
+      // Generate command
+      if (decisions.length === 1) {
+        // Single decision - show single command
+        const decision = decisions[0];
+        const cmd = `python scripts/cockpit__approve_artifact.py --gate-id ${decision.gate_id} --artifact-id ${decision.review_id} --decision ${decision.decision}` + 
+                    (decision.rationale ? ` --rationale "${decision.rationale.replace(/"/g, '\\"')}"` : '');
+        document.getElementById('commandText').textContent = cmd;
+      } else {
+        // Multiple decisions - show batch command
+        document.getElementById('commandText').textContent = 
+          `python scripts/cockpit__write_approval.py --manifest-file approval_manifest.json\n\n` +
+          `# First download/save the manifest JSON above, then run the command above`;
+      }
+      
+      document.getElementById('manifestOutput').classList.add('active');
+      document.getElementById('manifestOutput').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function copyCommand() {
+      const commandText = document.getElementById('commandText').textContent;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(commandText).then(() => {
+          showAlert('Command copied to clipboard!', 'success');
+        }).catch(() => {
+          // Fallback
+          const textarea = document.createElement('textarea');
+          textarea.value = commandText;
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          showAlert('Command copied to clipboard!', 'success');
+        });
+      } else {
+        // Fallback
+        const textarea = document.createElement('textarea');
+        textarea.value = commandText;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showAlert('Command copied to clipboard!', 'success');
+      }
+    }
+    
+    // Export manifest
+    function exportManifest() {
+      const selected = allReviews.filter(r => selectedReviews.has(r._reviewKey));
+      if (selected.length === 0) return;
+      
+      const decisions = selected.map(review => ({
+        review_id: review.review_id,
+        gate_id: review._gateId,
+        artifact_path: review.artifact_path || '',
+        artifact_name: review.artifact_name || '',
+        decision: 'APPROVE',
+        rationale: 'Batch approved via batch review interface',
+        decision_at: new Date().toISOString(),
+        decision_by: 'human:reviewer'
+      }));
+      
+      generateManifest(decisions);
+    }
+    
+    // Copy manifest
+    function copyManifest() {
+      const textarea = document.getElementById('manifestTextarea');
+      textarea.select();
+      document.execCommand('copy');
+      showAlert('Manifest copied to clipboard!', 'success');
+    }
+    
+    // Download manifest
+    function downloadManifest() {
+      const manifest = document.getElementById('manifestTextarea').value;
+      const blob = new Blob([manifest], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `approval_manifest_${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showAlert('Manifest downloaded!', 'success');
+    }
+    
+    // Close manifest
+    function closeManifest() {
+      document.getElementById('manifestOutput').classList.remove('active');
+    }
+    
+    // Show alert
+    function showAlert(message, type = 'info') {
+      const alert = document.getElementById('alert');
+      alert.className = `alert alert-${type} active`;
+      // Add icon based on type
+      const icons = {
+        'success': '✅',
+        'error': '❌',
+        'warning': '⚠️',
+        'info': 'ℹ️'
+      };
+      alert.innerHTML = `<span style="font-size: var(--font-size-lg);">${icons[type] || 'ℹ️'}</span><span>${message}</span>`;
+      setTimeout(() => {
+        alert.classList.remove('active');
+      }, 5000);
+    }
+    
+    // Show loading
+    function showLoading(show) {
+      document.getElementById('loadingState').style.display = show ? 'block' : 'none';
+      document.getElementById('reviewsTable').style.display = show ? 'none' : (filteredReviews.length > 0 ? 'block' : 'none');
+      document.getElementById('emptyState').style.display = show ? 'none' : (filteredReviews.length === 0 && !show ? 'block' : 'none');
+    }
+    
+    // Show vibe check modal
+    function showVibeCheck(reviewKey, artifactName, gateId, riskLevel) {
+      const review = allReviews.find(r => r._reviewKey === reviewKey);
+      if (!review) return;
+      
+      document.getElementById('vibeModalTitle').textContent = `🧭 Vibe Check: ${artifactName}`;
+      document.getElementById('vibeCheckModal').style.display = 'block';
+      
+      // Update decision blocks with review info
+      const reviewId = review.review_id || reviewKey;
+      document.getElementById('reviseDecisionBatch').textContent = `DECISION:
+Artifact ID: ${reviewId}
+Decision: REVISE
+Reason: AI-reflected concern accepted
+Route Back to Execution: TRUE`;
+      
+      document.getElementById('approveDecisionBatch').textContent = `DECISION:
+Artifact ID: ${reviewId}
+Decision: APPROVED
+Note: Concern acknowledged but accepted`;
+      
+      document.getElementById('discardDecisionBatch').textContent = `DECISION:
+Artifact ID: ${reviewId}
+Decision: DISCARD
+Reason: Core assumption not trusted`;
+    }
+    
+    // Close vibe check modal
+    function closeVibeCheckModal() {
+      document.getElementById('vibeCheckModal').style.display = 'none';
+      document.getElementById('vibeInputBatch').value = '';
+      document.getElementById('aiInterpretationBatch').style.display = 'none';
+    }
+    
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('vibeCheckModal');
+      if (event.target === modal) {
+        closeVibeCheckModal();
+      }
+      const previewModal = document.getElementById('artifactPreviewModal');
+      if (event.target === previewModal) {
+        closeArtifactPreview();
+      }
+      const helpModal = document.getElementById('keyboardHelpModal');
+      if (event.target === helpModal) {
+        closeKeyboardHelp();
+      }
+    }
+    
+    // ============================================
+    // ENHANCED TABLE INTERACTIONS
+    // ============================================
+    
+    // Toggle row expansion
+    function toggleRowExpansion(reviewKey) {
+      if (expandedRows.has(reviewKey)) {
+        expandedRows.delete(reviewKey);
+      } else {
+        expandedRows.add(reviewKey);
+      }
+      renderTable();
+    }
+    
+    // Get age urgency class
+    function getAgeUrgencyClass(age) {
+      if (!age || age === 'Unknown') return 'normal';
+      const days = parseInt(age.replace('d', ''));
+      if (!isNaN(days)) {
+        if (days >= 5) return 'urgent';
+        if (days >= 3) return 'warning';
+      }
+      return 'normal';
+    }
+    
+    // ============================================
+    // INDIVIDUAL ROW ACTIONS
+    // ============================================
+    
+    // Approve single row
+    function approveRow(reviewKey) {
+      const review = allReviews.find(r => r._reviewKey === reviewKey);
+      if (!review) return;
+      
+      selectedReviews.add(reviewKey);
+      const decisions = [{
+        review_id: review.review_id,
+        gate_id: review._gateId,
+        artifact_path: review.artifact_path || '',
+        artifact_name: review.artifact_name || '',
+        decision: 'APPROVE',
+        rationale: 'Approved via batch review interface',
+        decision_at: new Date().toISOString(),
+        decision_by: 'human:reviewer'
+      }];
+      
+      generateManifest(decisions);
+      showToast('Artifact approved', 'success');
+      updateStats();
+      renderTable();
+    }
+    
+    // Reject single row
+    function rejectRow(reviewKey) {
+      const review = allReviews.find(r => r._reviewKey === reviewKey);
+      if (!review) return;
+      
+      selectedReviews.add(reviewKey);
+      const decisions = [{
+        review_id: review.review_id,
+        gate_id: review._gateId,
+        artifact_path: review.artifact_path || '',
+        artifact_name: review.artifact_name || '',
+        decision: 'REJECT',
+        rationale: 'Rejected via batch review interface',
+        decision_at: new Date().toISOString(),
+        decision_by: 'human:reviewer'
+      }];
+      
+      generateManifest(decisions);
+      showToast('Artifact rejected', 'error');
+      updateStats();
+      renderTable();
+    }
+    
+    // ============================================
+    // COLUMN SORTING
+    // ============================================
+    
+    function sortTable(column) {
+      // Toggle direction if same column
+      if (sortColumn === column) {
+        sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortColumn = column;
+        sortDirection = 'asc';
+      }
+      
+      // Update header indicators
+      document.querySelectorAll('th.sortable').forEach(th => {
+        th.classList.remove('sorted-asc', 'sorted-desc');
+      });
+      
+      const header = event.target.closest('th');
+      if (header) {
+        header.classList.add(sortDirection === 'asc' ? 'sorted-asc' : 'sorted-desc');
+      }
+      
+      // Sort filtered reviews
+      filteredReviews.sort((a, b) => {
+        let aVal, bVal;
+        
+        switch(column) {
+          case 'gate':
+            aVal = a._gateId || '';
+            bVal = b._gateId || '';
+            break;
+          case 'artifact':
+            aVal = (a.artifact_name || '').toLowerCase();
+            bVal = (b.artifact_name || '').toLowerCase();
+            break;
+          case 'type':
+            aVal = (a.artifact_type || '').toLowerCase();
+            bVal = (b.artifact_type || '').toLowerCase();
+            break;
+          case 'risk':
+            const riskOrder = { 'high': 3, 'medium': 2, 'low': 1 };
+            aVal = riskOrder[getRiskBadgeClass(a.risk_level)] || 0;
+            bVal = riskOrder[getRiskBadgeClass(b.risk_level)] || 0;
+            break;
+          case 'effort':
+            aVal = a.review_effort_estimate || '';
+            bVal = b.review_effort_estimate || '';
+            break;
+          case 'age':
+            const aAge = calculateAge(a.submitted_at);
+            const bAge = calculateAge(b.submitted_at);
+            aVal = parseInt(aAge.replace(/[^0-9]/g, '')) || 0;
+            bVal = parseInt(bAge.replace(/[^0-9]/g, '')) || 0;
+            break;
+          case 'submitted':
+            aVal = (a.submitted_by || '').toLowerCase();
+            bVal = (b.submitted_by || '').toLowerCase();
+            break;
+          default:
+            return 0;
+        }
+        
+        if (typeof aVal === 'string') {
+          return sortDirection === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+        } else {
+          return sortDirection === 'asc' ? aVal - bVal : bVal - aVal;
+        }
+      });
+      
+      renderTable();
+    }
+    
+    // ============================================
+    // KEYBOARD SHORTCUTS
+    // ============================================
+    
+    document.addEventListener('keydown', function(e) {
+      if (!keyboardShortcutsEnabled) return;
+      
+      // Don't trigger shortcuts when typing in inputs
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+        if (e.key === 'f' && e.ctrlKey) {
+          e.preventDefault();
+          document.getElementById('searchInput').focus();
+        }
+        return;
+      }
+      
+      switch(e.key) {
+        case 'j':
+          e.preventDefault();
+          navigateRows(1);
+          break;
+        case 'k':
+          e.preventDefault();
+          navigateRows(-1);
+          break;
+        case 'Enter':
+          e.preventDefault();
+          if (currentRowIndex >= 0 && currentRowIndex < filteredReviews.length) {
+            const review = filteredReviews[currentRowIndex];
+            toggleRowExpansion(review._reviewKey);
+          }
+          break;
+        case 'a':
+          e.preventDefault();
+          if (currentRowIndex >= 0 && currentRowIndex < filteredReviews.length) {
+            const review = filteredReviews[currentRowIndex];
+            approveRow(review._reviewKey);
+          }
+          break;
+        case 'r':
+          e.preventDefault();
+          if (currentRowIndex >= 0 && currentRowIndex < filteredReviews.length) {
+            const review = filteredReviews[currentRowIndex];
+            rejectRow(review._reviewKey);
+          }
+          break;
+        case 's':
+          e.preventDefault();
+          if (currentRowIndex >= 0 && currentRowIndex < filteredReviews.length) {
+            const review = filteredReviews[currentRowIndex];
+            toggleReviewSelection(review._reviewKey);
+          }
+          break;
+        case 'f':
+          e.preventDefault();
+          document.getElementById('searchInput').focus();
+          break;
+        case '?':
+          e.preventDefault();
+          showKeyboardHelp();
+          break;
+        case 'Escape':
+          e.preventDefault();
+          clearSelection();
+          closeVibeCheckModal();
+          closeArtifactPreview();
+          closeKeyboardHelp();
+          break;
+      }
+      
+      // Ctrl+A to select all
+      if (e.ctrlKey && e.key === 'a') {
+        e.preventDefault();
+        toggleSelectAll();
+      }
+    });
+    
+    function navigateRows(direction) {
+      if (filteredReviews.length === 0) return;
+      
+      currentRowIndex += direction;
+      if (currentRowIndex < 0) currentRowIndex = 0;
+      if (currentRowIndex >= filteredReviews.length) currentRowIndex = filteredReviews.length - 1;
+      
+      renderTable();
+      
+      // Scroll to current row
+      const rows = document.querySelectorAll('tbody tr[data-index]');
+      if (rows[currentRowIndex]) {
+        rows[currentRowIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+    
+    function showKeyboardHelp() {
+      document.getElementById('keyboardHelpModal').style.display = 'block';
+    }
+    
+    function closeKeyboardHelp() {
+      document.getElementById('keyboardHelpModal').style.display = 'none';
+    }
+    
+    // ============================================
+    // TOAST NOTIFICATIONS
+    // ============================================
+    
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      
+      const icons = {
+        'success': '✅',
+        'error': '❌',
+        'warning': '⚠️',
+        'info': 'ℹ️'
+      };
+      
+      toast.innerHTML = `
+        <span style="font-size: var(--font-size-lg);">${icons[type] || 'ℹ️'}</span>
+        <span>${message}</span>
+      `;
+      
+      container.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.animation = 'slideInRight 0.3s ease-out reverse';
+        setTimeout(() => {
+          container.removeChild(toast);
+        }, 300);
+      }, 3000);
+    }
+    
+    // ============================================
+    // ARTIFACT PREVIEW
+    // ============================================
+    
+    async function showArtifactPreview(reviewKey) {
+      const review = allReviews.find(r => r._reviewKey === reviewKey);
+      if (!review) return;
+      
+      document.getElementById('previewModalTitle').textContent = `Preview: ${review.artifact_name || 'Unknown'}`;
+      document.getElementById('artifactPreviewModal').style.display = 'block';
+      
+      // Show loading
+      document.getElementById('previewOverviewContent').innerHTML = '<div class="loading-spinner"></div><p>Loading artifact...</p>';
+      
+      // Try to load artifact
+      const artifactPath = resolveArtifactPath(
+        review.artifact_name,
+        review.artifact_type,
+        review.submitted_by,
+        review.artifact_path
+      );
+      
+      if (artifactPath && !artifactCache[artifactPath]) {
+        try {
+          const possiblePaths = [
+            artifactPath,
+            `artifacts/${artifactPath.split('/').pop()}`,
+            `../${artifactPath}`,
+            `../../${artifactPath}`,
+            review.artifact_path?.replace(/\\/g, '/'),
+            `artifacts/${review.artifact_path?.split(/[/\\]/).pop()}`
+          ];
+          
+          for (const path of possiblePaths) {
+            try {
+              const response = await fetch(path);
+              if (response.ok) {
+                const data = await response.json();
+                artifactCache[artifactPath] = data;
+                displayArtifactPreview(data, review);
+                return;
+              }
+            } catch (e) {
+              continue;
+            }
+          }
+        } catch (e) {
+          console.error('Error loading artifact:', e);
+        }
+      } else if (artifactCache[artifactPath]) {
+        displayArtifactPreview(artifactCache[artifactPath], review);
+        return;
+      }
+      
+      // Fallback: show what we have
+      displayArtifactPreview(null, review);
+    }
+    
+    function displayArtifactPreview(artifact, review) {
+      // Overview tab
+      let overviewHtml = `
+        <div class="row-expansion-content">
+          <div class="row-expansion-section">
+            <h4>Artifact Information</h4>
+            <p><strong>Name:</strong> ${escapeHtml(review.artifact_name || 'Unknown')}</p>
+            <p><strong>Type:</strong> ${escapeHtml(review.artifact_type || 'Unknown')}</p>
+            <p><strong>Review Gate:</strong> ${escapeHtml(review._gateId || 'Unknown')}</p>
+            <p><strong>Risk Level:</strong> ${escapeHtml(review.risk_level || 'Unknown')}</p>
+            <p><strong>Effort Estimate:</strong> ${escapeHtml(review.review_effort_estimate || 'Unknown')}</p>
+          </div>
+      `;
+      
+      if (artifact && artifact._meta) {
+        overviewHtml += `
+          <div class="row-expansion-section">
+            <h4>Metadata</h4>
+            <p><strong>Agent ID:</strong> ${escapeHtml(artifact._meta.agent_id || 'Unknown')}</p>
+            <p><strong>Generated At:</strong> ${escapeHtml(artifact._meta.generated_at || 'Unknown')}</p>
+            <p><strong>Status:</strong> ${escapeHtml(artifact._meta.status || 'Unknown')}</p>
+            <p><strong>Confidence:</strong> ${escapeHtml(artifact._meta.confidence || 'Unknown')}</p>
+          </div>
+        `;
+      }
+      
+      overviewHtml += '</div>';
+      document.getElementById('previewOverviewContent').innerHTML = overviewHtml;
+      
+      // Requirements tab
+      let requirementsHtml = '<ul style="list-style: none; padding: 0;">';
+      if (review.review_requirements && review.review_requirements.length > 0) {
+        review.review_requirements.forEach(req => {
+          requirementsHtml += `<li style="padding: var(--spacing-sm); margin-bottom: var(--spacing-xs); background: var(--color-gray-100); border-radius: var(--radius-sm);">• ${escapeHtml(req)}</li>`;
+        });
+      } else {
+        requirementsHtml += '<li>No requirements specified</li>';
+      }
+      requirementsHtml += '</ul>';
+      document.getElementById('previewRequirementsContent').innerHTML = requirementsHtml;
+      
+      // Metadata tab
+      let metadataHtml = '<div style="font-family: monospace; font-size: var(--font-size-xs);">';
+      metadataHtml += `<p><strong>Review ID:</strong> ${escapeHtml(review.review_id || 'Unknown')}</p>`;
+      metadataHtml += `<p><strong>Submitted At:</strong> ${escapeHtml(review.submitted_at || 'Unknown')}</p>`;
+      metadataHtml += `<p><strong>Submitted By:</strong> ${escapeHtml(review.submitted_by || 'Unknown')}</p>`;
+      metadataHtml += `<p><strong>Artifact Path:</strong> ${escapeHtml(review.artifact_path || 'Unknown')}</p>`;
+      if (artifact && artifact._meta) {
+        metadataHtml += `<pre style="background: var(--color-gray-100); padding: var(--spacing-md); border-radius: var(--radius-sm); overflow-x: auto;">${escapeHtml(JSON.stringify(artifact._meta, null, 2))}</pre>`;
+      }
+      metadataHtml += '</div>';
+      document.getElementById('previewMetadataContent').innerHTML = metadataHtml;
+      
+      // JSON tab
+      if (artifact) {
+        document.getElementById('previewJsonContent').textContent = JSON.stringify(artifact, null, 2);
+      } else {
+        document.getElementById('previewJsonContent').textContent = JSON.stringify(review, null, 2);
+      }
+    }
+    
+    function switchPreviewTab(tab) {
+      document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.modal-tab-content').forEach(c => c.classList.remove('active'));
+      
+      event.target.classList.add('active');
+      document.getElementById(`preview${tab.charAt(0).toUpperCase() + tab.slice(1)}`).classList.add('active');
+    }
+    
+    function closeArtifactPreview() {
+      document.getElementById('artifactPreviewModal').style.display = 'none';
+    }
+    
+    // ============================================
+    // FILTER PRESETS
+    // ============================================
+    
+    function applyPreset(preset) {
+      document.querySelectorAll('.filter-preset-btn').forEach(btn => btn.classList.remove('active'));
+      
+      switch(preset) {
+        case 'high-risk':
+          document.getElementById('filterRisk').value = 'High';
+          event.target.classList.add('active');
+          break;
+        case 'oldest':
+          sortColumn = 'age';
+          sortDirection = 'desc';
+          event.target.classList.add('active');
+          break;
+        case 'hr-pre':
+          document.getElementById('filterGate').value = 'HR_PRE';
+          event.target.classList.add('active');
+          break;
+        case 'clear':
+          document.getElementById('filterGate').value = '';
+          document.getElementById('filterRisk').value = '';
+          document.getElementById('searchInput').value = '';
+          sortColumn = null;
+          sortDirection = 'asc';
+          break;
+      }
+      
+      applyFilters();
+      if (preset === 'oldest') {
+        renderTable();
+      }
+    }
+    
+    // ============================================
+    // ENHANCED BATCH ACTIONS
+    // ============================================
+    
+    function invertSelection() {
+      filteredReviews.forEach(review => {
+        if (selectedReviews.has(review._reviewKey)) {
+          selectedReviews.delete(review._reviewKey);
+        } else {
+          selectedReviews.add(review._reviewKey);
+        }
+      });
+      updateStats();
+      renderTable();
+      updateBatchActions();
+    }
+    
+    function selectByFilter(filterType) {
+      filteredReviews.forEach(review => {
+        let shouldSelect = false;
+        switch(filterType) {
+          case 'high-risk':
+            shouldSelect = review.risk_level?.toLowerCase().includes('high');
+            break;
+          case 'hr-pre':
+            shouldSelect = review._gateId === 'HR_PRE';
+            break;
+        }
+        if (shouldSelect) {
+          selectedReviews.add(review._reviewKey);
+        }
+      });
+      updateStats();
+      renderTable();
+      updateBatchActions();
+    }
+    
+    // ============================================
+    // EXPORT ENHANCEMENTS
+    // ============================================
+    
+    function exportToCSV() {
+      const selected = allReviews.filter(r => selectedReviews.has(r._reviewKey));
+      if (selected.length === 0) {
+        showToast('No items selected', 'warning');
+        return;
+      }
+      
+      // CSV header
+      const headers = ['Review ID', 'Gate', 'Artifact Name', 'Type', 'Risk', 'Effort', 'Age', 'Submitted By', 'Artifact Path'];
+      const rows = selected.map(review => [
+        review.review_id || '',
+        review._gateId || '',
+        review.artifact_name || '',
+        review.artifact_type || '',
+        review.risk_level || '',
+        review.review_effort_estimate || '',
+        calculateAge(review.submitted_at),
+        review.submitted_by || '',
+        review.artifact_path || ''
+      ]);
+      
+      // Escape CSV values
+      const escapeCSV = (val) => {
+        if (val === null || val === undefined) return '';
+        const str = String(val);
+        if (str.includes(',') || str.includes('"') || str.includes('\n')) {
+          return `"${str.replace(/"/g, '""')}"`;
+        }
+        return str;
+      };
+      
+      const csvContent = [
+        headers.map(escapeCSV).join(','),
+        ...rows.map(row => row.map(escapeCSV).join(','))
+      ].join('\n');
+      
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `batch_review_export_${new Date().toISOString().split('T')[0]}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+      
+      showToast('CSV exported successfully', 'success');
+    }
+    
+    // ============================================
+    // PAGINATION
+    // ============================================
+    
+    function changePage(direction) {
+      const totalPages = Math.ceil(filteredReviews.length / pageSize);
+      currentPage += direction;
+      if (currentPage < 1) currentPage = 1;
+      if (currentPage > totalPages) currentPage = totalPages;
+      
+      renderTable();
+      updatePagination();
+    }
+    
+    function changePageSize() {
+      pageSize = parseInt(document.getElementById('pageSizeSelect').value);
+      currentPage = 1;
+      renderTable();
+      updatePagination();
+    }
+    
+    function updatePagination() {
+      const totalPages = Math.ceil(filteredReviews.length / pageSize);
+      const pagination = document.getElementById('pagination');
+      
+      if (filteredReviews.length > pageSize) {
+        pagination.style.display = 'flex';
+        document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${totalPages}`;
+        document.getElementById('btnPrevPage').disabled = currentPage === 1;
+        document.getElementById('btnNextPage').disabled = currentPage === totalPages;
+      } else {
+        pagination.style.display = 'none';
+      }
+    }
+    
+    // Store original renderTable
+    const originalRenderTableFunction = renderTable;
+    
+    // Override renderTable to add pagination
+    renderTable = function() {
+      // Get paginated reviews if pagination enabled
+      let reviewsToRender = filteredReviews;
+      if (filteredReviews.length > pageSize) {
+        const startIndex = (currentPage - 1) * pageSize;
+        const endIndex = startIndex + pageSize;
+        reviewsToRender = filteredReviews.slice(startIndex, endIndex);
+      }
+      
+      // Temporarily replace filteredReviews
+      const originalFiltered = filteredReviews;
+      filteredReviews = reviewsToRender;
+      
+      // Call original function
+      originalRenderTableFunction();
+      
+      // Restore
+      filteredReviews = originalFiltered;
+      
+      // Update pagination UI
+      updatePagination();
+    };
+    
+    // ============================================
+    // ENHANCED LOADING STATES
+    // ============================================
+    
+    function showSkeletonLoader() {
+      const tbody = document.getElementById('reviewsTableBody');
+      tbody.innerHTML = '';
+      for (let i = 0; i < 5; i++) {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><div class="skeleton" style="width: 18px; height: 18px;"></div></td>
+          <td><div class="skeleton skeleton-row"></div></td>
+          <td><div class="skeleton skeleton-row"></div></td>
+          <td><div class="skeleton skeleton-row"></div></td>
+          <td><div class="skeleton skeleton-row"></div></td>
+          <td><div class="skeleton skeleton-row"></div></td>
+          <td><div class="skeleton skeleton-row"></div></td>
+          <td><div class="skeleton skeleton-row"></div></td>
+          <td><div class="skeleton skeleton-row"></div></td>
+        `;
+        tbody.appendChild(row);
+      }
+    }
+    
+    // Update showLoading to use skeleton
+    const originalShowLoading = showLoading;
+    showLoading = function(show) {
+      if (show) {
+        showSkeletonLoader();
+        document.getElementById('reviewsTable').style.display = 'block';
+      }
+      originalShowLoading(show);
+    };
+  </script>
+</body>
+</html>

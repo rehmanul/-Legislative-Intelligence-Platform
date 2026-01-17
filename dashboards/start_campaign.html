@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start New Campaign - Lobbying System</title>
+    <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-family-sans), Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: var(--spacing-xl);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: var(--color-bg-primary);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 36px;
+            margin-bottom: var(--spacing-md);
+            color: #667eea;
+        }
+        
+        header .subtitle {
+            font-size: var(--font-size-lg);
+            color: var(--color-text-secondary);
+        }
+        
+        .card {
+            background: var(--color-bg-primary);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .card h2 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--spacing-xl);
+            color: var(--color-text-primary);
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .form-group input[type="text"],
+        .form-group input[type="file"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-group .help-text {
+            font-size: var(--font-size-xs);
+            color: #999;
+            margin-top: 5px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            transition: all var(--transition-base) var(--transition-ease);
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--color-bg-primary);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: var(--color-bg-secondary);
+            color: var(--color-text-primary);
+            margin-top: var(--spacing-md);
+        }
+        
+        .btn-secondary:hover {
+            background: #e9e9e9;
+        }
+        
+        .api-config {
+            background: var(--color-gray-100);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-xl);
+            border-left: 4px solid #667eea;
+        }
+        
+        .api-config h3 {
+            font-size: var(--font-size-base);
+            margin-bottom: var(--spacing-md);
+            color: var(--color-text-primary);
+        }
+        
+        .api-config input {
+            width: 100%;
+            padding: var(--spacing-sm);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-sm);
+            font-family: var(--font-family-mono);
+        }
+        
+        .status-message {
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-xl);
+            display: none;
+        }
+        
+        .status-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        
+        .status-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        
+        .status-message.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+            display: block;
+        }
+        
+        .workflow-preview {
+            background: var(--color-gray-100);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-md);
+            margin-top: var(--spacing-xl);
+            display: none;
+        }
+        
+        .workflow-preview.active {
+            display: block;
+        }
+        
+        .workflow-preview h3 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-lg);
+            color: var(--color-text-primary);
+        }
+        
+        .workflow-preview .preview-item {
+            padding: var(--spacing-md);
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--spacing-md);
+            border-left: 3px solid #667eea;
+        }
+        
+        .workflow-preview .preview-item strong {
+            color: #667eea;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: var(--spacing-xl);
+        }
+        
+        .loading.active {
+            display: block;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .tabs {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            border-bottom: 2px solid var(--color-border);
+        }
+        
+        .tab {
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-secondary);
+            border-bottom: 3px solid transparent;
+            transition: all var(--transition-base) var(--transition-ease);
+        }
+        
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+    
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="container">
+        <header>
+            <h1>🚀 Start New Campaign</h1>
+            <p class="subtitle">Unified entry point for government advocacy campaigns</p>
+        </header>
+        
+        <div class="card">
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('manual')">Manual Entry</button>
+                <button class="tab" onclick="switchTab('document')">Document Upload</button>
+                <button class="tab" onclick="switchTab('api')">API Integration</button>
+            </div>
+            
+            <!-- Manual Entry Tab -->
+            <div id="tab-manual" class="tab-content active">
+                <h2>Create Campaign Manually</h2>
+                <form id="campaignForm">
+                    <div class="form-group">
+                        <label for="campaignName">Campaign Name *</label>
+                        <input type="text" id="campaignName" name="campaignName" required 
+                               placeholder="e.g., Renewable Energy Policy 2026">
+                        <div class="help-text">A descriptive name for your campaign</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="situationDescription">Situation Description *</label>
+                        <textarea id="situationDescription" name="situationDescription" required
+                                  placeholder="Describe the policy opportunity, legislative situation, or advocacy need..."></textarea>
+                        <div class="help-text">Provide context about the policy opportunity or legislative situation</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="initialState">Initial Legislative State</label>
+                        <select id="initialState" name="initialState">
+                            <option value="PRE_EVT" selected>PRE_EVT - Policy Opportunity Detected</option>
+                            <option value="INTRO_EVT">INTRO_EVT - Bill Vehicle Identified</option>
+                            <option value="COMM_EVT">COMM_EVT - Committee Referral</option>
+                            <option value="FLOOR_EVT">FLOOR_EVT - Floor Scheduled</option>
+                            <option value="FINAL_EVT">FINAL_EVT - Vote Imminent</option>
+                        </select>
+                        <div class="help-text">Most campaigns start at PRE_EVT. Only select a later state if you're continuing an existing campaign.</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="priority">Priority Level</label>
+                        <select id="priority" name="priority">
+                            <option value="high">High</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                    
+                    <div class="api-config">
+                        <h3>API Configuration (Optional)</h3>
+                        <label for="apiUrl">Orchestrator API URL</label>
+                        <input type="text" id="apiUrl" name="apiUrl" 
+                               placeholder="http://localhost:8000" 
+                               value="http://localhost:8000">
+                        <div class="help-text">Leave default for local development. Change for production.</div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        Create Campaign
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="previewWorkflow()">
+                        Preview Workflow
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Document Upload Tab -->
+            <div id="tab-document" class="tab-content">
+                <h2>Upload Document to Start Campaign</h2>
+                <form id="documentForm">
+                    <div class="form-group">
+                        <label for="documentFile">Select Document *</label>
+                        <input type="file" id="documentFile" name="documentFile" accept=".txt,.pdf,.doc,.docx" required>
+                        <div class="help-text">Upload a document describing the policy situation or opportunity</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="docCampaignName">Campaign Name *</label>
+                        <input type="text" id="docCampaignName" name="docCampaignName" required 
+                               placeholder="e.g., Healthcare Policy Campaign">
+                    </div>
+                    
+                    <div class="api-config">
+                        <h3>API Configuration (Optional)</h3>
+                        <label for="docApiUrl">Orchestrator API URL</label>
+                        <input type="text" id="docApiUrl" name="docApiUrl" 
+                               placeholder="http://localhost:8000" 
+                               value="http://localhost:8000">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" id="submitDocBtn">
+                        Upload & Create Campaign
+                    </button>
+                </form>
+            </div>
+            
+            <!-- API Integration Tab -->
+            <div id="tab-api" class="tab-content">
+                <h2>API Integration Guide</h2>
+                <div class="api-config">
+                    <h3>Create Workflow via API</h3>
+                    <p>Use the following endpoint to create a workflow programmatically:</p>
+                    <pre style="background: #1e1e1e; color: #d4d4d4; padding: var(--spacing-lg); border-radius: var(--radius-md); overflow-x: auto; margin-top: var(--spacing-md);"><code>POST /api/v1/workflows
+Content-Type: application/json
+
+{
+  "initial_state": "PRE_EVT",
+  "metadata": {
+    "description": "Your campaign description",
+    "priority": "high"
+  }
+}</code></pre>
+                </div>
+                
+                <div class="api-config">
+                    <h3>Example: Create Campaign via JavaScript</h3>
+                    <pre style="background: #1e1e1e; color: #d4d4d4; padding: var(--spacing-lg); border-radius: var(--radius-md); overflow-x: auto; margin-top: var(--spacing-md);"><code>const response = await fetch('http://localhost:8000/api/v1/workflows', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    initial_state: 'PRE_EVT',
+    metadata: {
+      description: 'Renewable Energy Policy Campaign',
+      priority: 'high'
+    }
+  })
+});
+
+const workflow = await response.json();
+console.log('Workflow ID:', workflow.workflow_id);</code></pre>
+                </div>
+            </div>
+            
+            <div id="statusMessage" class="status-message"></div>
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Creating campaign...</p>
+            </div>
+            <div id="workflowPreview" class="workflow-preview"></div>
+        </div>
+        
+        <div class="card">
+            <h2>📋 What Happens Next?</h2>
+            <ol style="padding-left: 20px; line-height: 2;">
+                <li><strong>Campaign Created:</strong> A new workflow is created in PRE_EVT state</li>
+                <li><strong>Intelligence Agents Spawn:</strong> Signal scan and stakeholder mapping agents start automatically</li>
+                <li><strong>Concept Memo Generated:</strong> Drafting agent creates concept memo for review</li>
+                <li><strong>HR_PRE Review:</strong> Concept memo enters review queue (see <a href="cockpit_review.html">Review Dashboard</a>)</li>
+                <li><strong>State Advancement:</strong> After approval, workflow advances to INTRO_EVT</li>
+            </ol>
+            <p style="margin-top: var(--spacing-lg); color: var(--color-text-secondary);">
+                <strong>View your campaign:</strong> 
+                <a href="y_charge_workflow_dashboard.html">Workflow Dashboard</a> | 
+                <a href="lobbying_dashboard.html">Lobbying Dashboard</a> |
+                <a href="dashboard_index.html">All Dashboards</a>
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE_URL = 'http://localhost:8000';
+        
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Show selected tab
+            event.target.classList.add('active');
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+        }
+        
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('statusMessage');
+            statusEl.textContent = message;
+            statusEl.className = `status-message ${type}`;
+            setTimeout(() => {
+                statusEl.className = 'status-message';
+            }, 5000);
+        }
+        
+        function showLoading(show) {
+            document.getElementById('loading').classList.toggle('active', show);
+        }
+        
+        function previewWorkflow() {
+            const campaignName = document.getElementById('campaignName').value;
+            const initialState = document.getElementById('initialState').value;
+            const priority = document.getElementById('priority').value;
+            
+            if (!campaignName) {
+                showStatus('Please enter a campaign name first', 'error');
+                return;
+            }
+            
+            const preview = document.getElementById('workflowPreview');
+            preview.innerHTML = `
+                <h3>Workflow Preview</h3>
+                <div class="preview-item">
+                    <strong>Campaign Name:</strong> ${campaignName}
+                </div>
+                <div class="preview-item">
+                    <strong>Initial State:</strong> ${initialState}
+                </div>
+                <div class="preview-item">
+                    <strong>Priority:</strong> ${priority}
+                </div>
+                <div class="preview-item">
+                    <strong>Next Steps:</strong> Intelligence agents will scan for signals and map stakeholders
+                </div>
+            `;
+            preview.classList.add('active');
+        }
+        
+        document.getElementById('campaignForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const apiUrl = document.getElementById('apiUrl').value || API_BASE_URL;
+            const campaignName = document.getElementById('campaignName').value;
+            const situationDescription = document.getElementById('situationDescription').value;
+            const initialState = document.getElementById('initialState').value;
+            const priority = document.getElementById('priority').value;
+            
+            showLoading(true);
+            document.getElementById('submitBtn').disabled = true;
+            
+            try {
+                const response = await fetch(`${apiUrl}/api/v1/workflows`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        initial_state: initialState,
+                        metadata: {
+                            description: situationDescription,
+                            priority: priority,
+                            campaign_name: campaignName
+                        }
+                    })
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json().catch(() => ({ error: { message: response.statusText } }));
+                    throw new Error(error.error?.message || `HTTP ${response.status}`);
+                }
+                
+                const workflow = await response.json();
+                
+                showStatus(
+                    `✅ Campaign "${campaignName}" created successfully! Workflow ID: ${workflow.workflow_id}`,
+                    'success'
+                );
+                
+                // Show workflow details
+                const preview = document.getElementById('workflowPreview');
+                preview.innerHTML = `
+                    <h3>Campaign Created Successfully</h3>
+                    <div class="preview-item">
+                        <strong>Workflow ID:</strong> ${workflow.workflow_id}
+                    </div>
+                    <div class="preview-item">
+                        <strong>Legislative State:</strong> ${workflow.legislative_state}
+                    </div>
+                    <div class="preview-item">
+                        <strong>Created At:</strong> ${new Date(workflow.created_at).toLocaleString()}
+                    </div>
+                    <div class="preview-item">
+                        <strong>Next:</strong> <a href="y_charge_workflow_dashboard.html?workflow=${workflow.workflow_id}">View Workflow Dashboard</a>
+                    </div>
+                `;
+                preview.classList.add('active');
+                
+                // Reset form
+                document.getElementById('campaignForm').reset();
+                
+            } catch (error) {
+                console.error('Error creating campaign:', error);
+                showStatus(
+                    `❌ Failed to create campaign: ${error.message}. Make sure the orchestrator API is running at ${apiUrl}`,
+                    'error'
+                );
+            } finally {
+                showLoading(false);
+                document.getElementById('submitBtn').disabled = false;
+            }
+        });
+        
+        document.getElementById('documentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const apiUrl = document.getElementById('docApiUrl').value || API_BASE_URL;
+            const fileInput = document.getElementById('documentFile');
+            const campaignName = document.getElementById('docCampaignName').value;
+            
+            if (!fileInput.files || fileInput.files.length === 0) {
+                showStatus('Please select a document file', 'error');
+                return;
+            }
+            
+            showLoading(true);
+            document.getElementById('submitDocBtn').disabled = true;
+            
+            try {
+                // Read file as text
+                const file = fileInput.files[0];
+                const fileText = await file.text();
+                
+                // Create workflow with document content
+                const response = await fetch(`${apiUrl}/api/v1/workflows`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        initial_state: 'PRE_EVT',
+                        metadata: {
+                            description: fileText.substring(0, 500), // First 500 chars
+                            priority: 'medium',
+                            campaign_name: campaignName,
+                            source_document: file.name
+                        }
+                    })
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json().catch(() => ({ error: { message: response.statusText } }));
+                    throw new Error(error.error?.message || `HTTP ${response.status}`);
+                }
+                
+                const workflow = await response.json();
+                
+                showStatus(
+                    `✅ Campaign "${campaignName}" created from document! Workflow ID: ${workflow.workflow_id}`,
+                    'success'
+                );
+                
+                // Show workflow details
+                const preview = document.getElementById('workflowPreview');
+                preview.innerHTML = `
+                    <h3>Campaign Created from Document</h3>
+                    <div class="preview-item">
+                        <strong>Workflow ID:</strong> ${workflow.workflow_id}
+                    </div>
+                    <div class="preview-item">
+                        <strong>Source Document:</strong> ${file.name}
+                    </div>
+                    <div class="preview-item">
+                        <strong>Next:</strong> <a href="y_charge_workflow_dashboard.html?workflow=${workflow.workflow_id}">View Workflow Dashboard</a>
+                    </div>
+                `;
+                preview.classList.add('active');
+                
+                // Reset form
+                document.getElementById('documentForm').reset();
+                
+            } catch (error) {
+                console.error('Error creating campaign from document:', error);
+                showStatus(
+                    `❌ Failed to create campaign: ${error.message}. Make sure the orchestrator API is running at ${apiUrl}`,
+                    'error'
+                );
+            } finally {
+                showLoading(false);
+                document.getElementById('submitDocBtn').disabled = false;
+            }
+        });
+        
+        // Check API health on load
+        window.addEventListener('load', async () => {
+            const apiUrl = document.getElementById('apiUrl').value || API_BASE_URL;
+            try {
+                const response = await fetch(`${apiUrl}/api/v1/health`);
+                if (response.ok) {
+                    const health = await response.json();
+                    if (health.status === 'healthy') {
+                        showStatus('✅ Connected to orchestrator API', 'info');
+                    }
+                }
+            } catch (error) {
+                showStatus('⚠️ Cannot connect to orchestrator API. Campaign creation will use file-based mode.', 'info');
+            }
+        });
+    </script>
+</body>
+</html>

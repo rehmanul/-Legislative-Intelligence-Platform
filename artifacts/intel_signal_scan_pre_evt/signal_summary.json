@@ -1,0 +1,49 @@
+{
+  "_meta": {
+    "agent_id": "intel_signal_scan_pre_evt",
+    "generated_at": "2026-01-13T07:35:00.835030Z",
+    "artifact_type": "signal_summary"
+  },
+  "signals": {
+    "industry_signals": [
+      {
+        "source": "mock_industry_feed",
+        "signal_type": "market_opportunity",
+        "description": "Industry trend indicates policy opportunity in renewable energy sector",
+        "confidence": "medium",
+        "timestamp": "2026-01-13T07:35:00.835030Z"
+      },
+      {
+        "source": "mock_industry_feed",
+        "signal_type": "regulatory_gap",
+        "description": "Gap identified in current regulatory framework",
+        "confidence": "high",
+        "timestamp": "2026-01-13T07:35:00.835030Z"
+      }
+    ],
+    "court_signals": [
+      {
+        "source": "mock_federal_courts",
+        "signal_type": "precedent_setting",
+        "description": "Recent court ruling may create precedent for policy direction",
+        "confidence": "medium",
+        "timestamp": "2026-01-13T07:35:00.835030Z"
+      }
+    ],
+    "agency_signals": [
+      {
+        "source": "mock_regulatory_agencies",
+        "signal_type": "rulemaking_announcement",
+        "description": "Agency announced upcoming rulemaking process",
+        "confidence": "high",
+        "timestamp": "2026-01-13T07:35:00.835030Z"
+      }
+    ]
+  },
+  "summary": {
+    "total_signals": 4,
+    "industry_signals": 2,
+    "court_signals": 1,
+    "agency_signals": 1
+  }
+}

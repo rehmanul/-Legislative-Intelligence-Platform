@@ -1,0 +1,108 @@
+{
+  "_meta": {
+    "agent_id": "intel_signal_scan_intro_evt",
+    "generated_at": "2026-01-13T14:17:03.588384Z",
+    "artifact_type": "signal_summary",
+    "phase": "INTRO_EVT",
+    "purpose": "Sponsor targeting and framing strategy support"
+  },
+  "signals": {
+    "industry_signals": [
+      {
+        "source": "industry_feed",
+        "signal_type": "sponsor_alignment_opportunity",
+        "description": "Industry association signals support for policy direction",
+        "confidence": "medium",
+        "timestamp": "2026-01-13T14:17:03.588384Z",
+        "relevance": "sponsor_targeting"
+      },
+      {
+        "source": "market_analysis",
+        "signal_type": "economic_impact",
+        "description": "Market indicators suggest favorable economic conditions for policy",
+        "confidence": "high",
+        "timestamp": "2026-01-13T14:17:03.588384Z",
+        "relevance": "framing_strategy"
+      }
+    ],
+    "court_signals": [
+      {
+        "source": "federal_courts",
+        "signal_type": "precedent_alignment",
+        "description": "Recent court ruling aligns with proposed policy framework",
+        "confidence": "medium",
+        "timestamp": "2026-01-13T14:17:03.588384Z",
+        "relevance": "legitimacy_framing"
+      }
+    ],
+    "agency_signals": [
+      {
+        "source": "regulatory_agencies",
+        "signal_type": "rulemaking_window",
+        "description": "Agency rulemaking window creates opportunity for legislative action",
+        "confidence": "high",
+        "timestamp": "2026-01-13T14:17:03.588384Z",
+        "relevance": "timing_strategy"
+      }
+    ],
+    "media_signals": [
+      {
+        "source": "media_monitor",
+        "signal_type": "narrative_emergence",
+        "description": "Media coverage beginning to frame policy area",
+        "confidence": "medium",
+        "timestamp": "2026-01-13T14:17:03.588384Z",
+        "relevance": "messaging_prep"
+      }
+    ]
+  },
+  "summary": {
+    "total_signals": 5,
+    "industry_signals": 2,
+    "court_signals": 1,
+    "agency_signals": 1,
+    "media_signals": 1
+  },
+  "relevance_analysis": {
+    "sponsor_targeting": [
+      {
+        "source": "industry_feed",
+        "signal_type": "sponsor_alignment_opportunity",
+        "description": "Industry association signals support for policy direction",
+        "confidence": "medium",
+        "timestamp": "2026-01-13T14:17:03.588384Z",
+        "relevance": "sponsor_targeting"
+      }
+    ],
+    "framing_strategy": [
+      {
+        "source": "market_analysis",
+        "signal_type": "economic_impact",
+        "description": "Market indicators suggest favorable economic conditions for policy",
+        "confidence": "high",
+        "timestamp": "2026-01-13T14:17:03.588384Z",
+        "relevance": "framing_strategy"
+      }
+    ],
+    "legitimacy_framing": [
+      {
+        "source": "federal_courts",
+        "signal_type": "precedent_alignment",
+        "description": "Recent court ruling aligns with proposed policy framework",
+        "confidence": "medium",
+        "timestamp": "2026-01-13T14:17:03.588384Z",
+        "relevance": "legitimacy_framing"
+      }
+    ],
+    "timing_strategy": [
+      {
+        "source": "regulatory_agencies",
+        "signal_type": "rulemaking_window",
+        "description": "Agency rulemaking window creates opportunity for legislative action",
+        "confidence": "high",
+        "timestamp": "2026-01-13T14:17:03.588384Z",
+        "relevance": "timing_strategy"
+      }
+    ]
+  }
+}

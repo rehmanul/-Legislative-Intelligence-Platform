@@ -1,0 +1,151 @@
+%% Operator Modes System Architecture Diagram
+%% Frontend Perspective with Color Semantics
+%% Version: 2.0.0
+%% Last Updated: 2026-01-20
+
+%%{init: {
+  'theme':'base',
+  'themeVariables': {
+    'primaryColor':'#e8f5e9',
+    'primaryTextColor':'#2e7d32',
+    'primaryBorderColor':'#4caf50',
+    'lineColor':'#81c784',
+    'secondaryColor':'#fff3e0',
+    'tertiaryColor':'#e3f2fd',
+    'errorBkgColor':'#ffebee',
+    'errorTextColor':'#c62828',
+    'warningBkgColor':'#fff9c4',
+    'warningTextColor':'#f57f17'
+  }
+}}%%
+
+flowchart TB
+    subgraph Operator_UI["🎛️ Operator Dashboard - Control Interface"]
+        direction TB
+        
+        StatusBanner["SystemStatusBanner<br/>🟡 YELLOW Status<br/>📝 2 pending reviews<br/>⏰ Last update: 2m ago<br/>📍 State: INTRO_EVT"]
+        
+        ModeNav["OperatorModeNav<br/>📊 Overview | 🔥 Heat Map | ✈️ Cockpit ⚠️ | ⚡ Velocity | 📐 Diagram"]
+        
+        subgraph Overview_Mode["📊 Overview Mode (Read-Only 🟢)"]
+            Overview_Content["Summary Cards<br/>• System Status: YELLOW<br/>• Pending: 2 reviews<br/>• Active Agents: 3<br/>• Last Update: 2m ago"]
+        end
+        
+        subgraph HeatMap_Mode["🔥 Heat Map Mode (Read-Only 🟢)"]
+            HeatMap_Viz["HeatMapVisualization<br/>📊 Agent Status Distribution<br/>📋 Review Gate Status<br/>🚫 Blocking Conditions<br/>✅ State Advancement Readiness"]
+        end
+        
+        subgraph Cockpit_Mode["✈️ Cockpit Mode (Write-Enabled 🔴) ⚠️"]
+            Cockpit_Actions["CockpitActionPanel<br/>📝 Pending Approvals: 2<br/>🚀 State Advancement<br/>🔓 Execution Authorization<br/>⚠️ All actions require confirmation"]
+            Action_Modal["ActionConfirmationModal<br/>⚠️ Confirmation Required<br/>📋 Audit Trail Preview<br/>🔒 Irreversible Warning<br/>✅ Confirm | ❌ Cancel"]
+        end
+        
+        subgraph Velocity_Mode["⚡ Velocity Mode (Read-Only 🟢)"]
+            Velocity_Metrics["VelocityMetricsPanel<br/>📈 Throughput: 5 artifacts/hr<br/>⏱️ Review Cycle: 2.5h avg<br/>⚠️ Bottleneck: HR_PRE<br/>📊 Trend: ↑ Improving"]
+        end
+        
+        subgraph Diagram_Mode["📐 System Diagram Mode (Read-Only 🟢)"]
+            Arch_Graph["ArchitectureGraph<br/>🎨 Color-Coded Nodes<br/>🟢 Green: Read-Only<br/>🟠 Orange: Display<br/>🔴 Red: Actions<br/>🟡 Yellow: Status"]
+            Node_Inspector["NodeInspectorPanel<br/>📋 Node Details<br/>🔗 View in Cockpit Link<br/>📊 Metrics Display"]
+        end
+    end
+    
+    subgraph Monitoring["🟢 Read-Only Monitoring (Green Zone)"]
+        direction TB
+        MetricsStore["Metrics Store<br/>📊 Agent State<br/>📈 System Metrics<br/>⏰ Timestamped"]
+        Logs["Logs Viewer<br/>📝 Audit Log<br/>📋 Event Stream<br/>🔍 Searchable"]
+        AgentState["Agent State Display<br/>📋 Registry Data<br/>📊 Status Distribution<br/>🔄 Auto-refresh"]
+    end
+    
+    subgraph Display["🟠 Display Scripts (Orange Zone)"]
+        direction TB
+        QueueViewer["Queue Viewer<br/>📋 Pending Reviews<br/>🚪 Review Gates<br/>📊 Queue Status"]
+        ReviewTable["Review Table<br/>✅ Approval History<br/>📝 Decision Log<br/>⏰ Timestamps"]
+        Timeline["Timeline<br/>📅 State History<br/>📋 Event Timeline<br/>🔍 Filterable"]
+    end
+    
+    subgraph Actions["🔴 Action Scripts (Red Zone) ⚠️"]
+        direction TB
+        Approvals["Approvals<br/>✅ APPROVE<br/>❌ REJECT<br/>🔄 Reversible"]
+        StateAdvance["State Advancement<br/>🚀 ADVANCE STATE<br/>⚠️ IRREVERSIBLE<br/>🔒 High Risk"]
+        KillSwitch["Kill Switch<br/>🛑 EMERGENCY STOP<br/>⚠️ CRITICAL<br/>🚨 Immediate"]
+        ExecAuth["Execution Auth<br/>🔓 AUTHORIZE<br/>⚠️ HIGH RISK<br/>📋 Plan Required"]
+    end
+    
+    subgraph Status["🟡 System Status (Yellow Zone)"]
+        direction TB
+        HealthCheck["Health Check<br/>💚 System Health<br/>📊 Status Aggregation<br/>🔄 Continuous"]
+        AlertEngine["Alert Engine<br/>🚨 Alert Aggregation<br/>📈 Escalation<br/>⏰ Real-time"]
+    end
+    
+    subgraph Data_Sources["📂 Canonical Data Sources"]
+        direction TB
+        Registry["agent-registry.json<br/>🤖 12 agents<br/>🟢 1 RUNNING<br/>🟡 1 WAITING_REVIEW<br/>🔴 1 BLOCKED"]
+        State["legislative-state.json<br/>📍 Current: INTRO_EVT<br/>➡️ Next: COMM_EVT<br/>⏱️ Time: 8h 58m"]
+        Reviews["review/*_queue.json<br/>🔍 HR_PRE: 2 pending<br/>✅ HR_LANG: 0<br/>✅ HR_MSG: 0"]
+        Audit["audit-log.jsonl<br/>📝 All actions logged<br/>🔍 Event tracking<br/>⏰ Timestamped"]
+    end
+    
+    %% Data Flow (Read-Only)
+    Data_Sources -.->|"Read"| Monitoring
+    Data_Sources -.->|"Read"| Display
+    Data_Sources -.->|"Read"| Status
+    
+    %% UI Connections
+    StatusBanner --> ModeNav
+    ModeNav --> Overview_Mode
+    ModeNav --> HeatMap_Mode
+    ModeNav --> Cockpit_Mode
+    ModeNav --> Velocity_Mode
+    ModeNav --> Diagram_Mode
+    
+    %% Monitoring to UI (Read-Only)
+    Monitoring -.->|"Display"| Overview_Mode
+    Monitoring -.->|"Display"| HeatMap_Mode
+    Monitoring -.->|"Display"| Velocity_Mode
+    Monitoring -.->|"Display"| Diagram_Mode
+    
+    %% Display to UI (Read-Only, Actionable Links)
+    Display -.->|"Display"| HeatMap_Mode
+    Display -.->|"Link to Cockpit"| Cockpit_Mode
+    Display -.->|"Display"| Diagram_Mode
+    
+    %% Actions to Cockpit (Write Flow)
+    Cockpit_Mode -->|"Triggers"| Action_Modal
+    Action_Modal -->|"Confirms"| Actions
+    Actions -->|"Writes"| Data_Sources
+    
+    %% Status to UI
+    Status -->|"Updates"| StatusBanner
+    Status -->|"Displays"| Overview_Mode
+    
+    %% Diagram Interactions (Read-Only)
+    Arch_Graph -->|"Click"| Node_Inspector
+    Node_Inspector -.->|"Navigate"| Cockpit_Mode
+    
+    %% Trust Boundaries
+    Monitoring -.->|"🟢 Read-Only"| Overview_Mode
+    Monitoring -.->|"🟢 Read-Only"| HeatMap_Mode
+    Monitoring -.->|"🟢 Read-Only"| Velocity_Mode
+    Monitoring -.->|"🟢 Read-Only"| Diagram_Mode
+    
+    Display -.->|"🟠 Display Only"| HeatMap_Mode
+    Display -.->|"🟠 Link to Action"| Cockpit_Mode
+    
+    Actions -->|"🔴 Write-Enabled"| Cockpit_Mode
+    Cockpit_Mode -->|"🔴 Requires Confirmation"| Action_Modal
+    
+    %% Styling
+    classDef readOnly fill:#e8f5e9,stroke:#4caf50,stroke-width:2px,color:#2e7d32
+    classDef display fill:#fff3e0,stroke:#ff9800,stroke-width:2px,color:#e65100
+    classDef action fill:#ffebee,stroke:#c62828,stroke-width:3px,color:#b71c1c
+    classDef status fill:#fff9c4,stroke:#f57f17,stroke-width:2px,color:#e65100
+    classDef data fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef ui fill:#f5f5f5,stroke:#9e9e9e,stroke-width:2px,color:#424242
+    
+    class Monitoring,MetricsStore,Logs,AgentState,Overview_Mode,HeatMap_Mode,Velocity_Mode,Diagram_Mode,Arch_Graph,Node_Inspector,HeatMap_Viz,Velocity_Metrics,Overview_Content readOnly
+    class Display,QueueViewer,ReviewTable,Timeline display
+    class Actions,Approvals,StateAdvance,KillSwitch,ExecAuth,Cockpit_Mode,Cockpit_Actions,Action_Modal action
+    class Status,HealthCheck,AlertEngine,StatusBanner status
+    class Data_Sources,Registry,State,Reviews,Audit data
+    class Operator_UI,ModeNav ui

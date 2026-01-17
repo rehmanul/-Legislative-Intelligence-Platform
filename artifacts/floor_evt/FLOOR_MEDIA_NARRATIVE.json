@@ -1,0 +1,66 @@
+{
+  "_meta": {
+    "agent_id": "draft_media_floor_evt",
+    "generated_at": "2026-01-07T20:14:27.416712+00:00",
+    "artifact_type": "FLOOR_MEDIA_NARRATIVE",
+    "artifact_name": "Press & Media Narrative",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": "HR_MSG",
+    "guidance_status": "SIGNED",
+    "schema_version": "1.0.0",
+    "phase": "FLOOR_EVT"
+  },
+  "title": "Media Narrative - Defense Wireless Power Initiative",
+  "summary": "Press narrative and media strategy for public communication about the wireless power amendment.",
+  "headline_options": [
+    "Congress Advances American Wireless Power Technology for Defense",
+    "NDAA Amendment Brings Wireless Power to Military Facilities",
+    "Bipartisan Support for Defense Infrastructure Modernization"
+  ],
+  "press_release_draft": {
+    "headline": "Congress Advances Wireless Power Technology for Defense Modernization",
+    "subhead": "Bipartisan amendment to NDAA FY2026 establishes demonstration program",
+    "lead_paragraph": "Washington, D.C. - Congress is advancing legislation to evaluate wireless power transmission technology for defense applications, building on bipartisan support for military infrastructure modernization.",
+    "body_points": [
+      "The amendment establishes a demonstration program to assess wireless power technology in defense facilities.",
+      "The program aligns with DoD priorities for energy efficiency and infrastructure modernization.",
+      "Bipartisan cosponsors emphasize the technology's potential for cost savings and operational improvements."
+    ],
+    "quote_placeholder": "[SPONSOR QUOTE - To be finalized after sponsor confirmation]",
+    "boilerplate": "The National Defense Authorization Act is the annual legislation that authorizes funding and sets policies for the Department of Defense."
+  },
+  "media_targets": [
+    {
+      "outlet_type": "Defense Trade Press",
+      "examples": [
+        "Defense News",
+        "Breaking Defense",
+        "Defense One"
+      ],
+      "angle": "Technology innovation and modernization"
+    },
+    {
+      "outlet_type": "Energy/Tech Press",
+      "examples": [
+        "Utility Dive",
+        "GreenTech Media"
+      ],
+      "angle": "Energy efficiency and emerging technology"
+    },
+    {
+      "outlet_type": "Local/Regional",
+      "examples": [
+        "Sponsor district outlets"
+      ],
+      "angle": "Local economic impact and jobs"
+    }
+  ],
+  "social_media_messages": [
+    "Bipartisan support for American wireless power technology in defense. #NDAA #DefenseModernization",
+    "Congress advances energy-efficient infrastructure for our military. #AmericanInnovation",
+    "Wireless power technology: the future of defense facilities. #TechForDefense"
+  ],
+  "disclaimer": "This media narrative is SPECULATIVE and requires human review via HR_MSG before any external use."
+}

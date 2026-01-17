@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent & Opportunity Dashboard</title>
+    <style>
+        /* Design System Variables */
+        :root {
+            /* Color System - Semantic Colors */
+            --color-primary: #2563eb;
+            --color-primary-hover: #1d4ed8;
+            --color-primary-active: #1e40af;
+            --color-secondary: #64748b;
+            --color-success: #059669;
+            --color-success-bg: #d1fae5;
+            --color-warning: #d97706;
+            --color-warning-bg: #fef3c7;
+            --color-error: #dc2626;
+            --color-error-bg: #fee2e2;
+            --color-neutral: #f1f5f9;
+            --color-neutral-dark: #64748b;
+            
+            /* Text Colors with Opacity Hierarchy */
+            --text-primary: rgba(15, 23, 42, 0.9);
+            --text-secondary: rgba(15, 23, 42, 0.6);
+            --text-disabled: rgba(15, 23, 42, 0.4);
+            --text-inverse: rgba(255, 255, 255, 0.95);
+            
+            /* Spacing Scale (8px base) */
+            --space-1: 0.5rem;   /* 8px */
+            --space-2: 1rem;     /* 16px */
+            --space-3: 1.5rem;   /* 24px */
+            --space-4: 2rem;     /* 32px */
+            --space-5: 3rem;     /* 48px */
+            --space-6: 4rem;     /* 64px */
+            
+            /* Typography Scale */
+            --font-xs: 0.75rem;    /* 12px */
+            --font-sm: 0.875rem;   /* 14px */
+            --font-base: 1rem;     /* 16px */
+            --font-lg: 1.25rem;    /* 20px */
+            --font-xl: 1.5rem;     /* 24px */
+            --font-2xl: 2rem;      /* 32px */
+            --font-3xl: 2.5rem;    /* 40px */
+            
+            /* Shadows - Elevation System */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+            
+            /* Border Radius */
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            
+            /* Transitions */
+            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-family-sans), Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f8fafc;
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: var(--space-4);
+            font-size: var(--font-base);
+        }
+        
+        /* Typography Hierarchy */
+        h1 {
+            font-size: var(--font-3xl);
+            font-weight: var(--font-weight-bold);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+        
+        h2 {
+            font-size: var(--font-2xl);
+            font-weight: var(--font-weight-semibold);
+            line-height: 1.3;
+            color: var(--text-primary);
+            margin-bottom: var(--space-3);
+            margin-top: var(--space-5);
+        }
+        
+        h3 {
+            font-size: var(--font-xl);
+            font-weight: var(--font-weight-semibold);
+            line-height: 1.4;
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+        
+        h4 {
+            font-size: var(--font-lg);
+            font-weight: var(--font-weight-semibold);
+            line-height: 1.5;
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+        
+        p {
+            font-size: var(--font-base);
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+        
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, var(--color-primary-active) 0%, var(--color-primary) 100%);
+            color: var(--text-inverse);
+            padding: var(--space-5);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-5);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .header h1 {
+            color: var(--text-inverse);
+            margin-bottom: var(--space-2);
+        }
+        
+        .header .subtitle {
+            opacity: 0.9;
+            font-size: var(--font-lg);
+            color: var(--text-inverse);
+            margin-bottom: var(--space-1);
+        }
+        
+        .header .meta {
+            opacity: 0.8;
+            font-size: var(--font-sm);
+            color: var(--text-inverse);
+            margin-top: var(--space-2);
+        }
+        
+        .workflow-state-banner {
+            background: rgba(255, 255, 255, 0.15);
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-sm);
+            margin-top: var(--space-2);
+            font-size: var(--font-sm);
+            font-weight: var(--font-weight-semibold);
+        }
+        
+        /* Status Grouping */
+        .status-group {
+            margin-bottom: var(--space-5);
+        }
+        
+        .status-group-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            margin-bottom: var(--space-3);
+            padding-bottom: var(--space-2);
+            border-bottom: 2px solid var(--color-neutral);
+        }
+        
+        .status-group-icon {
+            font-size: var(--font-xl);
+        }
+        
+        .status-group-title {
+            font-size: var(--font-xl);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+        }
+        
+        .status-group-count {
+            background: var(--color-neutral);
+            padding: var(--spacing-xs) 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: var(--font-sm);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-secondary);
+        }
+        
+        /* Grid Container */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-5);
+        }
+        
+        /* Card Styles */
+        .card {
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-md);
+            padding: var(--space-4);
+            box-shadow: var(--shadow-md);
+            transition: transform var(--transition-base), box-shadow var(--transition-base);
+            border-left: 4px solid transparent;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .card.agent-card {
+            border-left-color: var(--color-primary);
+        }
+        
+        .card.opportunity-card {
+            border-left-color: var(--color-warning);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-3);
+            gap: var(--space-2);
+        }
+        
+        .card-title {
+            font-size: var(--font-lg);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            flex: 1;
+        }
+        
+        /* Status Badges */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.375rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-xs);
+            letter-spacing: 0.025em;
+            var(--color-bg-primary)-space: nowrap;
+        }
+        
+        .status-badge.running {
+            background: var(--color-success);
+            color: var(--color-bg-primary);
+        }
+        
+        .status-badge.idle {
+            background: var(--color-neutral-dark);
+            color: var(--color-bg-primary);
+        }
+        
+        .status-badge.waiting {
+            background: var(--color-warning);
+            color: var(--color-bg-primary);
+        }
+        
+        .status-badge.blocked {
+            background: var(--color-error);
+            color: var(--color-bg-primary);
+        }
+        
+        .status-description {
+            font-size: var(--font-xs);
+            color: var(--text-secondary);
+            margin-top: var(--space-1);
+            font-style: italic;
+        }
+        
+        .action-required {
+            background: var(--color-warning-bg);
+            border-left: 3px solid var(--color-warning);
+            padding: var(--space-2);
+            border-radius: var(--radius-sm);
+            margin-top: var(--space-2);
+        }
+        
+        .action-required-title {
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-xs);
+            color: var(--color-warning);
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .action-required-text {
+            font-size: var(--font-xs);
+            color: var(--text-primary);
+        }
+        
+        .action-command {
+            background: var(--color-neutral);
+            border: 1px solid var(--color-neutral-dark);
+            border-radius: var(--radius-sm);
+            padding: var(--space-2);
+            margin-top: var(--space-2);
+            font-family: var(--font-family-mono);
+            font-size: var(--font-xs);
+            color: var(--text-primary);
+            position: relative;
+            overflow-x: auto;
+        }
+        
+        .action-command pre {
+            margin: 0;
+            padding-right: 3.5rem;
+            var(--color-bg-primary)-space: pre-wrap;
+            word-break: break-all;
+        }
+        
+        .copy-button {
+            position: absolute;
+            top: var(--space-1);
+            right: var(--space-1);
+            background: var(--color-primary);
+            color: var(--color-bg-primary);
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: var(--spacing-xs) 0.5rem;
+            font-size: var(--font-xs);
+            cursor: pointer;
+            font-weight: var(--font-weight-medium);
+        }
+        
+        .copy-button:hover {
+            background: var(--color-primary-hover);
+        }
+        
+        .copy-button.copied {
+            background: var(--color-success);
+        }
+        
+        .review-gate-info {
+            display: inline-block;
+            background: var(--color-primary);
+            color: var(--color-bg-primary);
+            padding: var(--spacing-xs) 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: var(--font-xs);
+            font-weight: var(--font-weight-semibold);
+            margin-top: var(--space-1);
+        }
+        
+        .action-commands {
+            margin-top: var(--space-2);
+            padding-top: var(--space-2);
+            border-top: 1px solid var(--color-neutral);
+        }
+        
+        .command-item {
+            margin-bottom: var(--space-2);
+        }
+        
+        .command-label {
+            font-size: var(--font-xs);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .command-box {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            background: var(--color-neutral-light);
+            padding: var(--space-2);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-family-mono);
+            font-size: var(--font-xs);
+            word-break: break-all;
+        }
+        
+        .command-text {
+            flex: 1;
+            color: var(--text-primary);
+        }
+        
+        .copy-button {
+            background: var(--color-primary);
+            color: var(--color-bg-primary);
+            border: none;
+            padding: 0.375rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: var(--font-xs);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            var(--color-bg-primary)-space: nowrap;
+            transition: background var(--transition-base) var(--transition-ease);
+        }
+        
+        .copy-button:hover {
+            background: var(--color-primary-hover);
+        }
+        
+        .copy-button:active {
+            background: var(--color-primary-active);
+        }
+        
+        .copy-button.copied {
+            background: var(--color-success);
+        }
+        
+        .action-instructions {
+            font-size: var(--font-xs);
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: var(--space-1);
+        }
+        
+        .artifact-view-section {
+            margin-top: var(--space-2);
+            padding-top: var(--space-2);
+            border-top: 1px solid var(--color-neutral);
+        }
+        
+        .artifact-view-button {
+            background: var(--color-primary);
+            color: var(--color-bg-primary);
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 0.375rem 0.75rem;
+            font-size: var(--font-xs);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            margin-top: var(--space-1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .artifact-view-button:hover {
+            background: var(--color-primary-hover);
+        }
+        
+        .artifact-path {
+            font-family: var(--font-family-mono);
+            font-size: var(--font-xs);
+            color: var(--text-secondary);
+            background: var(--color-neutral-light);
+            padding: var(--spacing-xs) 0.5rem;
+            border-radius: var(--radius-sm);
+            margin-top: var(--space-1);
+            word-break: break-all;
+        }
+        
+        .artifact-file-input {
+            display: none;
+        }
+        
+        .artifact-file-label {
+            display: inline-block;
+            background: var(--color-secondary);
+            color: var(--color-bg-primary);
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 0.375rem 0.75rem;
+            font-size: var(--font-xs);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            margin-left: var(--space-1);
+        }
+        
+        .artifact-file-label:hover {
+            background: var(--color-secondary);
+            opacity: 0.9;
+        }
+        
+        .artifact-content {
+            margin-top: var(--space-2);
+            padding: var(--space-2);
+            background: var(--color-neutral-light);
+            border-radius: var(--radius-sm);
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        .artifact-content.visible {
+            display: block;
+        }
+        
+        .artifact-content pre {
+            margin: 0;
+            font-size: var(--font-xs);
+            var(--color-bg-primary)-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        /* Type Badges */
+        .type-badge {
+            display: inline-block;
+            padding: var(--spacing-xs) 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: var(--font-xs);
+            font-weight: var(--font-weight-medium);
+            margin-top: var(--space-1);
+        }
+        
+        .type-badge.intelligence {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+        
+        .type-badge.drafting {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .type-badge.execution {
+            background: #fce7f3;
+            color: #831843;
+        }
+        
+        /* Risk Level Indicators */
+        .risk-level {
+            display: inline-block;
+            padding: var(--spacing-xs) 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: var(--font-xs);
+            font-weight: var(--font-weight-medium);
+            margin-top: var(--space-1);
+        }
+        
+        .risk-level.low {
+            background: var(--color-success-bg);
+            color: var(--color-success);
+        }
+        
+        .risk-level.medium {
+            background: var(--color-warning-bg);
+            color: var(--color-warning);
+        }
+        
+        .risk-level.high {
+            background: var(--color-error-bg);
+            color: var(--color-error);
+        }
+        
+        .agent-purpose {
+            font-size: var(--font-xs);
+            color: var(--text-secondary);
+            margin-top: var(--space-1);
+            font-style: italic;
+        }
+        
+        .legislative-state-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .state-description {
+            font-size: var(--font-xs);
+            color: var(--text-secondary);
+            margin-left: 0.25rem;
+        }
+        
+        /* Relevance Stars */
+        .relevance-stars {
+            color: #fbbf24;
+            font-size: var(--font-lg);
+            letter-spacing: 0.1rem;
+        }
+        
+        /* Card Content */
+        .card-content {
+            margin-top: var(--space-2);
+        }
+        
+        .card-content p {
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-2);
+        }
+        
+        .card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            margin-top: var(--space-3);
+            padding-top: var(--space-2);
+            border-top: 1px solid var(--color-neutral);
+        }
+        
+        .card-meta-item {
+            font-size: var(--font-xs);
+            color: var(--text-secondary);
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: var(--space-6);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--color-neutral);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: var(--font-sm);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            
+            body {
+                padding: var(--space-2);
+            }
+            
+            .header {
+                padding: var(--space-3);
+            }
+            
+            h1 {
+                font-size: var(--font-2xl);
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1025px) {
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <h1>🤖 Agent & Opportunity Dashboard</h1>
+        <div class="subtitle">8 Agents · 8 Opportunities</div>
+        <div class="workflow-state-banner">
+            📊 Current Workflow State: <strong>IMPL_EVT</strong> (Implementation & Monitoring - Terminal)
+        </div>
+        <div class="meta">🕐 Last updated: <span id="last-updated">2026-01-20</span></div>
+    </div>
+    
+    <!-- Agents Requiring Attention -->
+    <div class="status-group">
+        <div class="status-group-header">
+            <span class="status-group-icon">⚠️</span>
+            <span class="status-group-title">Agents Requiring Attention</span>
+            <span class="status-group-count">3</span>
+        </div>
+        <div class="grid-container" id="agents-requiring-attention">
+        <!-- Agent Card 3 -->
+        <div class="card agent-card">
+            <div class="card-header">
+                <div class="card-title">📝 Concept Memo Agent</div>
+                <span class="status-badge waiting">⏳ WAITING_REVIEW</span>
+            </div>
+            <div class="card-content">
+                <p>📄 Generates PRE_CONCEPT artifact for policy direction alignment</p>
+                <div class="status-description">📋 Status: Output pending human approval</div>
+                <span class="review-gate-info">🚪 HR_PRE Gate</span>
+                <div class="action-required">
+                    <div class="action-required-title">⚡ Action Required</div>
+                    <div class="action-required-text">👀 Review artifact in HR_PRE queue. Approval required for PRE_EVT → INTRO_EVT transition.</div>
+                    <div class="action-commands">
+                        <div class="command-item">
+                            <div class="command-label">✅ To Approve:</div>
+                            <div class="command-box">
+                                <span class="command-text" id="cmd-approve-concept">python scripts/cockpit__approve_artifact.py HR_PRE draft_concept_memo_pre_evt APPROVE</span>
+                                <button class="copy-button" onclick="copyCommand('cmd-approve-concept', this)">📋 Copy</button>
+                            </div>
+                        </div>
+                        <div class="command-item">
+                            <div class="command-label">❌ To Reject:</div>
+                            <div class="command-box">
+                                <span class="command-text" id="cmd-reject-concept">python scripts/cockpit__approve_artifact.py HR_PRE draft_concept_memo_pre_evt REJECT</span>
+                                <button class="copy-button" onclick="copyCommand('cmd-reject-concept', this)">📋 Copy</button>
+                            </div>
+                        </div>
+                        <div class="action-instructions">💻 Run command from agent-orchestrator directory. Review queue: review/HR_PRE_queue.json</div>
+                    </div>
+                </div>
+                <div class="type-badge drafting">✍️ Drafting</div>
+                <div class="risk-level medium">⚠️ MEDIUM Risk (Operational)</div>
+            </div>
+            <div class="card-meta">
+                <span class="card-meta-item legislative-state-label">PRE_EVT<span class="state-description">(Policy Opportunity)</span></span>
+                <span class="card-meta-item">draft_concept_memo_pre_evt</span>
+            </div>
+        </div>
+        
+        <!-- Agent Card 4 -->
+        <div class="card agent-card">
+            <div class="card-header">
+                <div class="card-title">🎯 Policy Framing Agent</div>
+                <span class="status-badge waiting">⏳ WAITING_REVIEW</span>
+            </div>
+            <div class="card-content">
+                <p>📄 Generates INTRO_FRAME artifact for narrative foundation</p>
+                <div class="status-description">📋 Status: Output pending human approval</div>
+                <span class="review-gate-info">🚪 HR_PRE Gate</span>
+                <div class="action-required">
+                    <div class="action-required-title">⚡ Action Required</div>
+                    <div class="action-required-text">👀 Review artifact in HR_PRE queue. Approval required for INTRO_EVT → COMM_EVT transition.</div>
+                    <div class="action-commands">
+                        <div class="command-item">
+                            <div class="command-label">✅ To Approve:</div>
+                            <div class="command-box">
+                                <span class="command-text" id="cmd-approve-framing">python scripts/cockpit__approve_artifact.py HR_PRE draft_framing_intro_evt APPROVE</span>
+                                <button class="copy-button" onclick="copyCommand('cmd-approve-framing', this)">📋 Copy</button>
+                            </div>
+                        </div>
+                        <div class="command-item">
+                            <div class="command-label">❌ To Reject:</div>
+                            <div class="command-box">
+                                <span class="command-text" id="cmd-reject-framing">python scripts/cockpit__approve_artifact.py HR_PRE draft_framing_intro_evt REJECT</span>
+                                <button class="copy-button" onclick="copyCommand('cmd-reject-framing', this)">📋 Copy</button>
+                            </div>
+                        </div>
+                        <div class="action-instructions">💻 Run command from agent-orchestrator directory. Review queue: review/HR_PRE_queue.json</div>
+                    </div>
+                    <div class="artifact-view-section">
+                        <div class="artifact-path" id="artifact-path-framing">📂 artifacts/draft_framing_intro_evt/INTRO_FRAME.json</div>
+                        <button class="artifact-view-button" onclick="loadArtifactFile('framing-artifact', 'artifacts/draft_framing_intro_evt/INTRO_FRAME.json')">📄 Instructions</button>
+                        <label for="artifact-file-framing" class="artifact-file-label">📁 Load File</label>
+                        <input type="file" id="artifact-file-framing" class="artifact-file-input" accept=".json" onchange="handleArtifactFileSelect(this, 'framing-artifact')">
+                        <div class="artifact-content" id="artifact-content-framing"></div>
+                    </div>
+                </div>
+                <div class="type-badge drafting">✍️ Drafting</div>
+                <div class="risk-level medium">⚠️ MEDIUM Risk (Operational)</div>
+            </div>
+            <div class="card-meta">
+                <span class="card-meta-item legislative-state-label">INTRO_EVT<span class="state-description">(Bill Vehicle Identified)</span></span>
+                <span class="card-meta-item">draft_framing_intro_evt</span>
+            </div>
+        </div>
+        
+        <!-- Agent Card 8 -->
+        <div class="card agent-card">
+            <div class="card-header">
+                <div class="card-title">📢 Outreach Execution Agent</div>
+                <span class="status-badge blocked">🚫 BLOCKED</span>
+            </div>
+            <div class="card-content">
+                <p>📤 Executes external outreach and communication (requires authorization)</p>
+                <div class="status-description">🔒 Status: Blocked - requires execution authorization</div>
+                <div class="action-required">
+                    <div class="action-required-title">⚡ Action Required</div>
+                    <div class="action-required-text">👀 Review execution plan and authorize via execution authorization script. External actions require approved language artifacts.</div>
+                    <div class="action-commands">
+                        <div class="command-item">
+                            <div class="command-label">🔓 To Authorize:</div>
+                            <div class="command-box">
+                                <span class="command-text" id="cmd-authorize-outreach">python scripts/cockpit__authorize_execution.py execution_outreach_comm_evt</span>
+                                <button class="copy-button" onclick="copyCommand('cmd-authorize-outreach', this)">📋 Copy</button>
+                            </div>
+                        </div>
+                        <div class="action-instructions">💻 Run command from agent-orchestrator directory. Script will prompt for confirmation if high-risk.</div>
+                    </div>
+                </div>
+                <div class="type-badge execution">⚡ Execution</div>
+                <div class="risk-level high">🔴 HIGH Risk (External Actions)</div>
+            </div>
+            <div class="card-meta">
+                <span class="card-meta-item legislative-state-label">COMM_EVT<span class="state-description">(Committee Referral)</span></span>
+                <span class="card-meta-item">execution_outreach_comm_evt</span>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Background Agents Section -->
+    <div class="status-group">
+        <div class="status-group-header">
+            <span class="status-group-icon">⚙️</span>
+            <span class="status-group-title">Background Agents</span>
+            <span class="status-group-count">5</span>
+        </div>
+        <div class="grid-container" id="background-agents">
+        <!-- Agent Card 1 -->
+        <div class="card agent-card">
+            <div class="card-header">
+                <div class="card-title">Signal Scan Agent</div>
+                <span class="status-badge running">RUNNING</span>
+            </div>
+            <div class="card-content">
+                <p>Scans industry, court, and agency signals for policy opportunities</p>
+                <div class="agent-purpose">Purpose: Read-only analysis, no human review required</div>
+                <div class="status-description">Status: Actively executing - no action needed</div>
+                <div class="type-badge intelligence">Intelligence</div>
+                <div class="risk-level low">LOW Risk (Read-Only)</div>
+            </div>
+            <div class="card-meta">
+                <span class="card-meta-item legislative-state-label">PRE_EVT<span class="state-description">(Policy Opportunity)</span></span>
+                <span class="card-meta-item">intel_signal_scan_pre_evt</span>
+            </div>
+        </div>
+        
+        <!-- Agent Card 2 -->
+        <div class="card agent-card">
+            <div class="card-header">
+                <div class="card-title">Stakeholder Mapping Agent</div>
+                <span class="status-badge idle">IDLE</span>
+            </div>
+            <div class="card-content">
+                <p>Maps stakeholder landscape and identifies key actors</p>
+                <div class="agent-purpose">Purpose: Read-only analysis, no human review required</div>
+                <div class="status-description">Status: Task complete, may re-run if triggered</div>
+                <div class="type-badge intelligence">Intelligence</div>
+                <div class="risk-level low">LOW Risk (Read-Only)</div>
+            </div>
+            <div class="card-meta">
+                <span class="card-meta-item legislative-state-label">PRE_EVT<span class="state-description">(Policy Opportunity)</span></span>
+                <span class="card-meta-item">intel_stakeholder_map_pre_evt</span>
+            </div>
+        </div>
+        
+        <!-- Agent Card 5 -->
+        <div class="card agent-card">
+            <div class="card-header">
+                <div class="card-title">⚖️ Legislative Language Agent</div>
+                <span class="status-badge running">🟢 RUNNING</span>
+            </div>
+            <div class="card-content">
+                <p>📜 Generates draft legislative language and statutory text</p>
+                <div class="agent-purpose">🎯 Purpose: Human-gated document generation</div>
+                <div class="status-description">⚙️ Status: Actively drafting - will require HR_LANG review when complete</div>
+                <div class="type-badge drafting">✍️ Drafting</div>
+                <div class="risk-level high">🔴 HIGH Risk (Legislative Language)</div>
+            </div>
+            <div class="card-meta">
+                <span class="card-meta-item legislative-state-label">COMM_EVT<span class="state-description">(Committee Referral)</span></span>
+                <span class="card-meta-item">draft_legislative_language_comm_evt</span>
+            </div>
+        </div>
+        
+        <!-- Agent Card 6 -->
+        <div class="card agent-card">
+            <div class="card-header">
+                <div class="card-title">⚠️ Risk Assessment Agent</div>
+                <span class="status-badge idle">⚪ IDLE</span>
+            </div>
+            <div class="card-content">
+                <p>📊 Assesses risks across political, legal, fiscal, implementation, and timeline categories</p>
+                <div class="agent-purpose">🎯 Purpose: Read-only analysis, no human review required</div>
+                <div class="status-description">✅ Status: Assessment complete, may re-run if triggered</div>
+                <div class="type-badge intelligence">🧠 Intelligence</div>
+                <div class="risk-level low">🟢 LOW Risk (Read-Only)</div>
+            </div>
+            <div class="card-meta">
+                <span class="card-meta-item legislative-state-label">COMM_EVT<span class="state-description">(Committee Referral)</span></span>
+                <span class="card-meta-item">intel_risk_assessment_comm_evt</span>
+            </div>
+        </div>
+        
+        <!-- Agent Card 7 -->
+        <div class="card agent-card">
+            <div class="card-header">
+                <div class="card-title">Committee Agenda Agent</div>
+                <span class="status-badge idle">IDLE</span>
+            </div>
+            <div class="card-content">
+                <p>Analyzes committee agenda, member positions, and vote predictions</p>
+                <div class="agent-purpose">Purpose: Read-only analysis, no human review required</div>
+                <div class="status-description">Status: Analysis complete, may re-run if triggered</div>
+                <div class="type-badge intelligence">Intelligence</div>
+                <div class="risk-level low">LOW Risk (Read-Only)</div>
+            </div>
+            <div class="card-meta">
+                <span class="card-meta-item legislative-state-label">COMM_EVT<span class="state-description">(Committee Referral)</span></span>
+                <span class="card-meta-item">intel_committee_agenda_comm_evt</span>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Legislative Opportunities Section -->
+    <h2>📜 Legislative Opportunities (8)</h2>
+    <div class="grid-container" id="opportunities-grid">
+        <!-- Opportunity Card 1 -->
+        <div class="card opportunity-card">
+            <div class="card-header">
+                <div class="card-title">Defense Facility Infrastructure Modernization</div>
+                <span class="relevance-stars">⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="card-content">
+                <p>Division B (Military Construction) authorizations, facility modernization programs, smart building technology integration</p>
+            </div>
+            <div class="card-meta">
+                <span class="card-meta-item">NDAA FY2026 · S.2296</span>
+                <span class="card-meta-item">VERY HIGH Relevance</span>
+            </div>
+        </div>
+        
+        <!-- Opportunity Card 2 -->
+        <div class="card opportunity-card">
+            <div class="card-header">
+                <div class="card-title">Research & Development Programs</div>
+                <span class="relevance-stars">⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="card-content">
+                <p>Title II R&D authorizations, DARPA and defense research programs, advanced manufacturing innovation hubs</p>
+            </div>
+            <div class="card-meta">
+                <span class="card-meta-item">NDAA FY2026 · S.2296</span>
+                <span class="card-meta-item">VERY HIGH Relevance</span>
+            </div>
+        </div>
+        
+        <!-- Opportunity Card 3 -->
+        <div class="card opportunity-card">
+            <div class="card-header">
+                <div class="card-title">Energy Efficiency Initiatives</div>
+                <span class="relevance-stars">⭐⭐⭐⭐</span>
+            </div>
+            <div class="card-content">
+                <p>Division C (Department of Energy) programs, energy cost savings modifications, energy infrastructure modernization</p>
+            </div>
+            <div class="card-meta">
+                <span class="card-meta-item">NDAA FY2026 · S.2296</span>
+                <span class="card-meta-item">HIGH Relevance</span>
+            </div>
+        </div>
+        
+        <!-- Opportunity Card 4 -->
+        <div class="card opportunity-card">
+            <div class="card-header">
+                <div class="card-title">Procurement and Acquisition</div>
+                <span class="relevance-stars">⭐⭐⭐⭐</span>
+            </div>
+            <div class="card-content">
+                <p>Title I (Procurement) authorizations, technology acquisition programs, small business innovation programs</p>
+            </div>
+            <div class="card-meta">
+                <span class="card-meta-item">NDAA FY2026 · S.2296</span>
+                <span class="card-meta-item">HIGH Relevance</span>
+            </div>
+        </div>
+        
+        <!-- Opportunity Card 5 -->
+        <div class="card opportunity-card">
+            <div class="card-header">
+                <div class="card-title">Advanced Manufacturing Programs</div>
+                <span class="relevance-stars">⭐⭐⭐⭐</span>
+            </div>
+            <div class="card-content">
+                <p>Sec. 227, 220A-220B: Advanced manufacturing technologies, additive manufacturing programs, production and deployment</p>
+            </div>
+            <div class="card-meta">
+                <span class="card-meta-item">NDAA FY2026 · S.2296</span>
+                <span class="card-meta-item">HIGH Relevance</span>
+            </div>
+        </div>
+        
+        <!-- Opportunity Card 6 -->
+        <div class="card opportunity-card">
+            <div class="card-header">
+                <div class="card-title">Technology Enhancement Programs</div>
+                <span class="relevance-stars">⭐⭐⭐</span>
+            </div>
+            <div class="card-content">
+                <p>Sec. 322: Technology enhancement for surface ship maintenance, IoT and sensor technology deployment</p>
+            </div>
+            <div class="card-meta">
+                <span class="card-meta-item">NDAA FY2026 · S.2296</span>
+                <span class="card-meta-item">MEDIUM Relevance</span>
+            </div>
+        </div>
+        
+        <!-- Opportunity Card 7 -->
+        <div class="card opportunity-card">
+            <div class="card-header">
+                <div class="card-title">Smart Building Integration</div>
+                <span class="relevance-stars">⭐⭐⭐</span>
+            </div>
+            <div class="card-content">
+                <p>Smart building technology integration for security systems, IoT sensors, digital displays, facility modernization</p>
+            </div>
+            <div class="card-meta">
+                <span class="card-meta-item">NDAA FY2026 · S.2296</span>
+                <span class="card-meta-item">MEDIUM Relevance</span>
+            </div>
+        </div>
+        
+        <!-- Opportunity Card 8 -->
+        <div class="card opportunity-card">
+            <div class="card-header">
+                <div class="card-title">Health Care Facility Applications</div>
+                <span class="relevance-stars">⭐⭐⭐</span>
+            </div>
+            <div class="card-content">
+                <p>Title VII: Health care facilities, air quality monitoring for health and safety compliance, medical facility modernization</p>
+            </div>
+            <div class="card-meta">
+                <span class="card-meta-item">NDAA FY2026 · S.2296</span>
+                <span class="card-meta-item">MEDIUM Relevance</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <p><strong>📂 Data Sources:</strong> agent-orchestrator/registry/agent-registry.json · agent-orchestrator/artifacts/policy/key_findings.md · agent-orchestrator/state/legislative-state.json</p>
+        <p><strong>📊 Status Legend:</strong> <span class="status-badge running" style="margin: 0 0.25rem;">🟢 RUNNING</span> = Active execution | <span class="status-badge idle" style="margin: 0 0.25rem;">⚪ IDLE</span> = Complete, may re-run | <span class="status-badge waiting" style="margin: 0 0.25rem;">⏳ WAITING_REVIEW</span> = Needs human approval | <span class="status-badge blocked" style="margin: 0 0.25rem;">🚫 BLOCKED</span> = Requires authorization</p>
+        <p><strong>⚡ How to Take Action:</strong> Click "📋 Copy" buttons in action boxes, then run the commands in your terminal. Commands use scripts in <code>scripts/cockpit__*.py</code></p>
+        <p><strong>📄 How to Review Artifacts:</strong> Click "📁 Load File" buttons to select artifact JSON files for review. This dashboard uses HTML-only, local-first pattern (no server required).</p>
+        <p><strong>🎨 Dashboard Design:</strong> Hybrid Layout · Single-file HTML · HTML-only Cockpit Pattern · Local-First · Progressive Enhancement</p>
+    </div>
+    
+    <!-- Progressive Enhancement: Core content visible without JavaScript -->
+    <noscript>
+        <style>
+            .artifact-view-button, .artifact-file-label, .copy-button {
+                display: none;
+            }
+        </style>
+        <div style="padding: var(--spacing-md); margin: var(--spacing-md) 0; background: var(--color-warning-bg); border-radius: var(--radius-md); border: 1px solid var(--color-warning);">
+            <p><strong>⚠️ JavaScript Disabled:</strong> This dashboard works best with JavaScript enabled for interactive features (file loading, copy buttons). All critical content is visible above.</p>
+        </div>
+    </noscript>
+    
+    <script>
+        // Progressive Enhancement: JavaScript adds interactivity, not core functionality
+        // Update last updated timestamp
+        const lastUpdatedEl = document.getElementById('last-updated');
+        if (lastUpdatedEl) {
+            lastUpdatedEl.textContent = new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+        
+        // Copy command to clipboard
+        // Supports two calling patterns:
+        // 1. copyCommand(elementId, button) - reads text from element with ID
+        // 2. copyCommand(button, commandText) - uses provided command text
+        function copyCommand(arg1, arg2) {
+            let commandText;
+            let button;
+            
+            // Determine calling pattern
+            if (typeof arg1 === 'string' && arg1.startsWith('cmd-')) {
+                // Pattern 1: copyCommand('cmd-approve-concept', button)
+                const elementId = arg1;
+                button = arg2;
+                const element = document.getElementById(elementId);
+                if (!element) {
+                    console.error('Element not found:', elementId);
+                    return;
+                }
+                commandText = element.textContent.trim();
+            } else {
+                // Pattern 2: copyCommand(button, 'command text')
+                button = arg1;
+                commandText = arg2;
+            }
+            
+            // Use modern Clipboard API with fallback for local-first compatibility
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(commandText).then(function() {
+                    // Show feedback
+                    const originalText = button.textContent;
+                    button.textContent = '✅ Copied!';
+                    button.classList.add('copied');
+                    
+                    // Reset after 2 seconds
+                    setTimeout(function() {
+                        button.textContent = originalText;
+                        button.classList.remove('copied');
+                    }, 2000);
+                }).catch(function(err) {
+                    console.error('Failed to copy command:', err);
+                    // Fallback to execCommand for older browsers (local-first compatibility)
+                    fallbackCopyToClipboard(commandText, button);
+                });
+            } else {
+                // No Clipboard API available - use fallback
+                fallbackCopyToClipboard(commandText, button);
+            }
+        }
+        
+        // Fallback copy mechanism for older browsers (local-first compatibility)
+        function fallbackCopyToClipboard(text, button) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            textarea.style.pointerEvents = 'none';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                const originalText = button.textContent;
+                button.textContent = '✅ Copied!';
+                button.classList.add('copied');
+                setTimeout(function() {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                // Final fallback: show text for manual copy
+                button.textContent = '❌ Copy Failed';
+                setTimeout(function() {
+                    button.textContent = '📋 Copy';
+                    alert('Please select and copy the command manually:\n\n' + text);
+                }, 2000);
+            }
+            document.body.removeChild(textarea);
+        }
+        
+        // Load artifact file via fetch (works if served via HTTP server)
+        async function loadArtifactFile(artifactId, artifactPath) {
+            const contentDiv = document.getElementById(`artifact-content-${artifactId}`);
+            contentDiv.innerHTML = '<div style="padding: var(--spacing-md); text-align: center;">Loading artifact...</div>';
+            contentDiv.classList.add('visible');
+            
+            try {
+                // Try to fetch via relative path (works if served via HTTP server)
+                const response = await fetch(`../${artifactPath}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                const data = await response.json();
+                displayArtifactContent(artifactId, data);
+            } catch (error) {
+                // If fetch fails, show file input instructions
+                contentDiv.innerHTML = `
+                    <div style="padding: var(--spacing-md);">
+                        <p style="color: var(--color-warning); margin-bottom: 0.5rem;">⚠️ Cannot load file directly (requires HTTP server or file selection)</p>
+                        <p style="font-size: var(--font-xs); color: var(--text-secondary); margin-bottom: 0.5rem;">
+                            <strong>📁 Option 1:</strong> Click "📁 Load File" button above to select the artifact file manually<br>
+                            <strong>💻 Option 2:</strong> Open file path in Cursor: <code style="background: var(--color-neutral); padding: 0.125rem 0.25rem; border-radius: 3px;">${artifactPath}</code>
+                        </p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Handle file input selection
+        function handleArtifactFileSelect(input, artifactId) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    displayArtifactContent(artifactId, data);
+                } catch (error) {
+                    const contentDiv = document.getElementById(`artifact-content-${artifactId}`);
+                    contentDiv.innerHTML = `<div style="padding: var(--spacing-md); color: var(--color-error);">❌ Error parsing JSON: ${error.message}</div>`;
+                    contentDiv.classList.add('visible');
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        // Display artifact content
+        function displayArtifactContent(artifactId, data) {
+            const contentDiv = document.getElementById(`artifact-content-${artifactId}`);
+            let html = '<div style="padding: var(--spacing-sm) 0;">';
+            
+            // Metadata section
+            if (data._meta) {
+                html += '<div style="margin-bottom: var(--spacing-md); padding-bottom: 1rem; border-bottom: 1px solid var(--color-neutral);">';
+                html += '<strong style="font-size: var(--font-sm);">Metadata:</strong><br>';
+                html += `<span style="font-size: var(--font-xs);">Agent: ${data._meta.agent_id || 'N/A'}</span><br>`;
+                html += `<span style="font-size: var(--font-xs);">Generated: ${data._meta.generated_at || 'N/A'}</span><br>`;
+                html += `<span style="font-size: var(--font-xs);">Type: ${data._meta.artifact_type || 'N/A'}</span>`;
+                if (data._meta.status) {
+                    html += `<br><span style="font-size: var(--font-xs);">Status: ${data._meta.status}</span>`;
+                }
+                html += '</div>';
+            }
+            
+            // Executive Summary
+            if (data.executive_summary) {
+                html += '<div style="margin-bottom: var(--spacing-md);">';
+                html += '<strong style="font-size: var(--font-sm);">Executive Summary:</strong>';
+                if (data.executive_summary.policy_opportunity) {
+                    html += `<p style="font-size: var(--font-xs); margin: 0.5rem 0;">${escapeHtml(data.executive_summary.policy_opportunity)}</p>`;
+                }
+                if (data.executive_summary.key_findings && Array.isArray(data.executive_summary.key_findings)) {
+                    html += '<ul style="font-size: var(--font-xs); margin: 0.5rem 0; padding-left: 1.5rem;">';
+                    data.executive_summary.key_findings.forEach(finding => {
+                        html += `<li>${escapeHtml(finding)}</li>`;
+                    });
+                    html += '</ul>';
+                }
+                html += '</div>';
+            }
+            
+            // Policy Opportunity (for concept memos)
+            if (data.executive_summary && data.executive_summary.policy_opportunity) {
+                html += '<div style="margin-bottom: var(--spacing-md);">';
+                html += '<strong style="font-size: var(--font-sm);">🎯 Policy Opportunity:</strong>';
+                html += `<p style="font-size: var(--font-xs); margin: 0.5rem 0;">${escapeHtml(data.executive_summary.policy_opportunity)}</p>`;
+                html += '</div>';
+            }
+            
+            // Key Findings
+            if (data.executive_summary && data.executive_summary.key_findings) {
+                html += '<div style="margin-bottom: var(--spacing-md);">';
+                html += '<strong style="font-size: var(--font-sm);">🔍 Key Findings:</strong>';
+                html += '<ul style="font-size: var(--font-xs); margin: 0.5rem 0; padding-left: 1.5rem;">';
+                data.executive_summary.key_findings.forEach(finding => {
+                    html += `<li>${escapeHtml(String(finding))}</li>`;
+                });
+                html += '</ul>';
+                html += '</div>';
+            }
+            
+            // Purpose/Headline (for framing documents)
+            if (data.executive_summary && data.executive_summary.purpose) {
+                html += '<div style="margin-bottom: var(--spacing-md);">';
+                html += '<strong style="font-size: var(--font-sm);">Purpose:</strong>';
+                html += `<p style="font-size: var(--font-xs); margin: 0.5rem 0;">${escapeHtml(data.executive_summary.purpose)}</p>`;
+                html += '</div>';
+            }
+            
+            // Full JSON view (collapsible)
+            html += '<details style="margin-top: var(--spacing-md);">';
+            html += '<summary style="cursor: pointer; font-size: var(--font-xs); font-weight: var(--font-weight-semibold); color: var(--text-secondary);">📋 View Full JSON</summary>';
+            html += `<pre style="font-size: 10px; overflow-x: auto; margin-top: 0.5rem;">${escapeHtml(JSON.stringify(data, null, 2))}</pre>`;
+            html += '</details>';
+            
+            html += '</div>';
+            contentDiv.innerHTML = html;
+            contentDiv.classList.add('visible');
+        }
+        
+        // Escape HTML for safe display
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

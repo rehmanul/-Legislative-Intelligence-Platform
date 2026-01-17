@@ -1,0 +1,23 @@
+{
+    "current_state": "PRE_EVT",
+    "state_history": [
+        {
+            "state": "PRE_EVT",
+            "entered_at": "2026-01-07T03:06:00Z",
+            "source": "system",
+            "note": "Initial state - Pre-Introduction Event phase"
+        }
+    ],
+    "permitted_agent_classes": [
+        "intelligence",
+        "drafting"
+    ],
+    "valid_next_transitions": [
+        "INTRO_EVT"
+    ],
+    "_meta": {
+        "version": "1.0",
+        "last_updated": "2026-01-16T16:10:00Z",
+        "description": "Legislative state cursor - agents cannot advance state, only external reality or human confirmation"
+    }
+}

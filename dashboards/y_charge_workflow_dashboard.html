@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Y-Charge Workflow Dashboard - Legislative Process</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-family-sans), Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--color-bg-secondary);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            padding: var(--spacing-xl);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--color-bg-primary);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .header h1 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: var(--font-size-sm);
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.2);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-card .label {
+            font-size: var(--font-size-xs);
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .stat-card .value {
+            font-size: var(--font-size-2xl);
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: var(--color-bg-primary);
+            padding: 25px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+        }
+        
+        .card h2 {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--spacing-lg);
+            color: var(--color-text-primary);
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 10px;
+        }
+        
+        .card h3 {
+            font-size: var(--font-size-base);
+            margin: var(--spacing-xl) 0 10px 0;
+            color: var(--color-text-primary);
+        }
+        
+        .workflow-states {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+        
+        .state-item {
+            padding: var(--spacing-xl);
+            background: var(--color-gray-100);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--color-primary);
+            transition: all var(--transition-base) var(--transition-ease);
+            cursor: pointer;
+        }
+        
+        .state-item:hover {
+            background: var(--color-border-light);
+            transform: translateX(5px);
+        }
+        
+        .state-item.active {
+            border-left-color: var(--color-success);
+            background: #d4edda;
+        }
+        
+        .state-title {
+            font-size: var(--font-size-lg);
+            font-weight: bold;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+        
+        .state-desc {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.5;
+        }
+        
+        .state-details {
+            font-size: var(--font-size-xs);
+            color: #999;
+            font-style: italic;
+        }
+        
+        .state-badge {
+            display: inline-block;
+            padding: var(--spacing-xs) 12px;
+            border-radius: var(--radius-xl);
+            font-size: var(--font-size-xs);
+            font-weight: bold;
+            background: var(--color-primary);
+            color: var(--color-bg-primary);
+            margin-top: var(--spacing-md);
+        }
+        
+        .state-item.active .state-badge {
+            background: var(--color-success);
+        }
+        
+        .agent-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .agent-item {
+            padding: var(--spacing-lg);
+            background: var(--color-gray-100);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--color-primary);
+            transition: all var(--transition-base) var(--transition-ease);
+            cursor: pointer;
+        }
+        
+        .agent-item:hover {
+            background: var(--color-border-light);
+            transform: translateX(3px);
+        }
+        
+        .agent-item.intel {
+            border-left-color: var(--color-primary);
+        }
+        
+        .agent-item.draft {
+            border-left-color: var(--color-warning);
+        }
+        
+        .agent-persona {
+            font-size: var(--font-size-base);
+            font-weight: bold;
+            color: var(--color-text-primary);
+            margin-bottom: 5px;
+        }
+        
+        .agent-persona::before {
+            content: "👤 ";
+        }
+        
+        .agent-technical-name {
+            font-size: 11px;
+            color: #999;
+            font-family: var(--font-family-mono);
+            margin-bottom: 8px;
+        }
+        
+        .agent-description {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.4;
+        }
+        
+        .agent-role {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #e3f2fd;
+            color: #1976d2;
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            margin-right: 5px;
+        }
+        
+        .signal-pipeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .pipeline-stage {
+            background: var(--color-gray-100);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-size: 13px;
+            border: 2px solid var(--color-border);
+            cursor: pointer;
+            transition: all var(--transition-base) var(--transition-ease);
+            position: relative;
+        }
+        
+        .pipeline-stage:hover {
+            border-color: var(--color-primary);
+            background: #e3f2fd;
+            transform: translateY(-2px);
+        }
+        
+        .pipeline-stage.active {
+            border-color: var(--color-success);
+            background: #d4edda;
+        }
+        
+        .pipeline-stage.completed {
+            border-color: var(--color-success);
+            background: #d4edda;
+        }
+        
+        .pipeline-stage.completed::after {
+            content: " ✓";
+            color: var(--color-success);
+            font-weight: bold;
+        }
+        
+        .pipeline-stage-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .pipeline-stage-desc {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+        }
+        
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .action-card {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+            border: 2px solid transparent;
+            transition: all var(--transition-base) var(--transition-ease);
+        }
+        
+        .action-card.running {
+            border-color: var(--color-primary);
+            background: #e3f2fd;
+        }
+        
+        .action-card.success {
+            border-color: var(--color-success);
+            background: #d4edda;
+        }
+        
+        .action-card.error {
+            border-color: var(--color-error);
+            background: #ffeaea;
+        }
+        
+        .action-card h3 {
+            font-size: var(--font-size-base);
+            margin-bottom: var(--spacing-md);
+            color: var(--color-text-primary);
+        }
+        
+        .action-card p {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .action-card code {
+            background: var(--color-gray-100);
+            padding: var(--spacing-xs) 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-family: var(--font-family-mono);
+            display: block;
+            margin-bottom: var(--spacing-md);
+            word-break: break-all;
+        }
+        
+        .action-status {
+            font-size: var(--font-size-xs);
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--spacing-md);
+            display: none;
+        }
+        
+        .action-status.show {
+            display: block;
+        }
+        
+        .action-status.running {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .action-status.success {
+            background: #d4edda;
+            color: var(--color-success);
+        }
+        
+        .action-status.error {
+            background: #ffeaea;
+            color: var(--color-error);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-md) 20px;
+            background: var(--color-primary);
+            color: var(--color-bg-primary);
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            text-decoration: none;
+            transition: all var(--transition-base) var(--transition-ease);
+            margin-top: 5px;
+            width: 100%;
+        }
+        
+        .btn:hover:not(:disabled) {
+            background: var(--color-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .btn:disabled {
+            background: var(--color-gray-400);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .btn-success {
+            background: var(--color-success);
+        }
+        
+        .btn-success:hover:not(:disabled) {
+            background: #229954;
+        }
+        
+        .btn-warning {
+            background: var(--color-warning);
+        }
+        
+        .btn-warning:hover:not(:disabled) {
+            background: #e67e22;
+        }
+        
+        .file-input-wrapper {
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .file-input-wrapper label {
+            display: inline-block;
+            padding: var(--spacing-sm) 16px;
+            background: var(--color-gray-500);
+            color: var(--color-bg-primary);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 13px;
+        }
+        
+        .file-input-wrapper input[type="file"] {
+            display: none;
+        }
+        
+        .loaded-file {
+            margin-left: 15px;
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-xs);
+        }
+        
+        .hidden-script-input {
+            display: none;
+        }
+        
+        #output-panel {
+            display: none;
+        }
+        
+        #output-content {
+            line-height: 1.6;
+        }
+        
+        .output-line {
+            margin: 5px 0;
+        }
+        
+        .output-line.success {
+            color: var(--color-success);
+        }
+        
+        .output-line.error {
+            color: var(--color-error);
+        }
+        
+        .output-line.info {
+            color: var(--color-primary);
+        }
+    </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+    
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="header">
+        <h1>🔋 Legislative Workflow Dashboard</h1>
+        <p>Monitor current events, trends, and legislative process for policy opportunities</p>
+        
+        <!-- Campaign Selector -->
+        <div style="background: rgba(255,255,255,0.2); padding: var(--spacing-lg); border-radius: var(--radius-md); margin: var(--spacing-xl) 0; backdrop-filter: blur(10px);">
+            <div style="display: flex; gap: var(--spacing-md); align-items: center; flex-wrap: wrap;">
+                <label style="color: var(--color-bg-primary); font-weight: var(--font-weight-semibold);">Select Campaign:</label>
+                <select id="campaignSelect" style="flex: 1; min-width: 200px; padding: var(--spacing-sm); border-radius: var(--radius-sm); border: none; font-size: var(--font-size-sm);">
+                    <option value="y_charge">Y-Charge (Default)</option>
+                    <option value="manual">Enter Workflow ID</option>
+                </select>
+                <input type="text" id="manualWorkflowId" placeholder="Workflow ID" style="flex: 1; min-width: 200px; padding: var(--spacing-sm); border-radius: var(--radius-sm); border: none; font-size: var(--font-size-sm); display: none;">
+                <input type="text" id="apiUrl" placeholder="API URL" value="http://localhost:8000" style="flex: 1; min-width: 150px; padding: var(--spacing-sm); border-radius: var(--radius-sm); border: none; font-size: var(--font-size-sm);">
+                <button onclick="loadCampaign()" style="padding: var(--spacing-sm) 16px; background: var(--color-bg-primary); color: #667eea; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: var(--font-weight-semibold);">Load Campaign</button>
+                <button onclick="connectToAPI()" style="padding: var(--spacing-sm) 16px; background: rgba(255,255,255,0.3); color: var(--color-bg-primary); border: 1px solid var(--color-bg-primary); border-radius: var(--radius-sm); cursor: pointer; font-weight: var(--font-weight-semibold);">Connect API</button>
+            </div>
+            <div id="campaignStatus" style="margin-top: var(--spacing-md); color: var(--color-bg-primary); font-size: var(--font-size-xs);"></div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="label">Intelligence Agents</div>
+                <div class="value" id="intel-count">24</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Current State</div>
+                <div class="value" id="current-state">Pre-Event</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Signals Scanned</div>
+                <div class="value" id="signals-count">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Artifacts Generated</div>
+                <div class="value" id="artifacts-count">0</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="margin-bottom: var(--spacing-xl);">
+        <h2>🔄 Workflow Process Flow</h2>
+        <div class="file-input-wrapper">
+            <label for="workflow-file">📁 Load Workflow State (JSON)</label>
+            <input type="file" id="workflow-file" accept=".json">
+            <span class="loaded-file" id="loaded-file-name"></span>
+        </div>
+        <div style="background: var(--color-gray-100); padding: var(--spacing-xl); border-radius: var(--radius-md); margin-top: var(--spacing-lg); min-height: 300px; overflow-x: auto;">
+            <div class="mermaid">
+graph LR
+    A[Start: Create Y-Charge Workflow] --> B[Pre-Event: Scan Signals]
+    B --> C[Process Signals]
+    C --> D[Generate Concept Memo]
+    D --> E{Human Review}
+    E -->|Approved| F[Introduction: Frame Policy]
+    E -->|Rejected| B
+    F --> G{Human Review}
+    G -->|Approved| H[Committee: Draft Language]
+    G -->|Rejected| F
+    H --> I{Human Review}
+    I -->|Approved| J[Floor: Build Support]
+    I -->|Rejected| H
+    J --> K{Human Review}
+    K -->|Approved| L[Final: Release]
+    K -->|Rejected| J
+    L --> M[Implementation: Monitor]
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>📊 Where Are We in the Process?</h2>
+            <div class="workflow-states">
+                <div class="state-item active" data-state="PRE_EVT">
+                    <div class="state-title">1. Pre-Event: Signal Scanning & Concept Creation</div>
+                    <div class="state-desc">We're scanning for current events, trends, and political developments that affect this year's politics. Intelligence agents are gathering signals from industry, courts, agencies, and social media. Once we have enough signals, we'll create a concept memo.</div>
+                    <div class="state-details">Technical: PRE_EVT</div>
+                    <div class="state-badge">Currently Active</div>
+                </div>
+                <div class="state-item" data-state="INTRO_EVT">
+                    <div class="state-title">2. Introduction: Policy Framing & var(--color-bg-primary)paper</div>
+                    <div class="state-desc">After the concept memo is approved, we'll frame the policy opportunity and create a var(--color-bg-primary)paper that explains the Y-Charge opportunity in detail.</div>
+                    <div class="state-details">Technical: INTRO_EVT</div>
+                    <div class="state-badge">Waiting for Approval</div>
+                </div>
+                <div class="state-item" data-state="COMM_EVT">
+                    <div class="state-title">3. Committee: Legislative Language & Targeting</div>
+                    <div class="state-desc">We'll draft the actual legislative language and identify which committees and members of Congress should be targeted for support.</div>
+                    <div class="state-details">Technical: COMM_EVT</div>
+                    <div class="state-badge">Waiting</div>
+                </div>
+                <div class="state-item" data-state="FLOOR_EVT">
+                    <div class="state-title">4. Floor: Messaging & Sponsor Pipeline</div>
+                    <div class="state-desc">We'll develop messaging for floor debate and build a pipeline of sponsors and cosponsors who will support the legislation.</div>
+                    <div class="state-details">Technical: FLOOR_EVT</div>
+                    <div class="state-badge">Waiting</div>
+                </div>
+                <div class="state-item" data-state="FINAL_EVT">
+                    <div class="state-title">5. Final: Release Preparation</div>
+                    <div class="state-desc">Final approvals and release preparation before the legislation goes public.</div>
+                    <div class="state-details">Technical: FINAL_EVT</div>
+                    <div class="state-badge">Waiting</div>
+                </div>
+                <div class="state-item" data-state="IMPL_EVT">
+                    <div class="state-title">6. Implementation: Post-Enactment Monitoring</div>
+                    <div class="state-desc">After the law is enacted, we'll monitor implementation and gather feedback for future improvements.</div>
+                    <div class="state-details">Technical: IMPL_EVT</div>
+                    <div class="state-badge">Waiting</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🔍 Who's Scanning for Current Events?</h2>
+            
+            <h3>Primary Intelligence Agents</h3>
+            <div class="agent-list">
+                <div class="agent-item intel">
+                    <div class="agent-persona">Alex the Signal Scanner</div>
+                    <div class="agent-technical-name">intel_signal_scan_pre_evt</div>
+                    <div class="agent-description">Alex watches industry news, court rulings, and government agency announcements. Think of Alex as your news aggregator who flags anything that might affect Y-Charge policy opportunities.</div>
+                    <div>
+                        <span class="agent-role">Industry Monitor</span>
+                        <span class="agent-role">Court Watcher</span>
+                        <span class="agent-role">Agency Tracker</span>
+                    </div>
+                </div>
+                
+                <div class="agent-item intel">
+                    <div class="agent-persona">Pat the Policy Radar</div>
+                    <div class="agent-technical-name">intel_policy_radar_comm_evt</div>
+                    <div class="agent-description">Pat monitors the regulatory landscape and policy changes. Pat tracks what's happening in Congress, federal agencies, and state legislatures that could impact wireless charging regulations.</div>
+                    <div>
+                        <span class="agent-role">Regulatory Monitor</span>
+                        <span class="agent-role">Policy Tracker</span>
+                    </div>
+                </div>
+                
+                <div class="agent-item intel">
+                    <div class="agent-persona">Sam the Social Media Scout</div>
+                    <div class="agent-technical-name">intel_social_signal_pre_evt</div>
+                    <div class="agent-description">Sam scours X (Twitter), Facebook, Reddit, and other social platforms for trends, conversations, and public sentiment about wireless charging, energy policy, and related topics.</div>
+                    <div>
+                        <span class="agent-role">Social Media Analyst</span>
+                        <span class="agent-role">Trend Spotter</span>
+                    </div>
+                </div>
+                
+                <div class="agent-item intel">
+                    <div class="agent-persona">Jordan the Field Observer</div>
+                    <div class="agent-technical-name">intel_field_observation_pre_evt</div>
+                    <div class="agent-description">Jordan collects real-world observations and field data. Jordan is like a field researcher who gathers on-the-ground intelligence about how wireless charging is actually being used or needed.</div>
+                    <div>
+                        <span class="agent-role">Field Researcher</span>
+                        <span class="agent-role">Data Collector</span>
+                    </div>
+                </div>
+                
+                <div class="agent-item intel">
+                    <div class="agent-persona">Casey the Constituent Storyteller</div>
+                    <div class="agent-technical-name">intel_constituent_narrative_pre_evt</div>
+                    <div class="agent-description">Casey gathers stories from constituents - real people affected by wireless charging policies. Casey finds the human stories that make policy compelling.</div>
+                    <div>
+                        <span class="agent-role">Story Collector</span>
+                        <span class="agent-role">Narrative Builder</span>
+                    </div>
+                </div>
+                
+                <div class="agent-item intel">
+                    <div class="agent-persona">Morgan the Records Researcher</div>
+                    <div class="agent-technical-name">intel_foia_public_record_pre_evt</div>
+                    <div class="agent-description">Morgan files FOIA requests and digs through public records to find hidden information, government documents, and official data that others might miss.</div>
+                    <div>
+                        <span class="agent-role">Records Researcher</span>
+                        <span class="agent-role">FOIA Specialist</span>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Signal Processing Pipeline - Click to Process</h3>
+            <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">Click each stage to see what happens and track progress</p>
+            <div class="signal-pipeline">
+                <div class="pipeline-stage" data-stage="deduplication" onclick="processStage(this, 'deduplication')">
+                    <div class="pipeline-stage-title">1. Remove Duplicates</div>
+                    <div class="pipeline-stage-desc">Eliminate duplicate signals</div>
+                </div>
+                <div class="pipeline-stage" data-stage="credibility" onclick="processStage(this, 'credibility')">
+                    <div class="pipeline-stage-title">2. Check Credibility</div>
+                    <div class="pipeline-stage-desc">Score how trustworthy each signal is</div>
+                </div>
+                <div class="pipeline-stage" data-stage="severity" onclick="processStage(this, 'severity')">
+                    <div class="pipeline-stage-title">3. Assess Severity</div>
+                    <div class="pipeline-stage-desc">How serious is this issue?</div>
+                </div>
+                <div class="pipeline-stage" data-stage="urgency" onclick="processStage(this, 'urgency')">
+                    <div class="pipeline-stage-title">4. Determine Urgency</div>
+                    <div class="pipeline-stage-desc">How quickly do we need to act?</div>
+                </div>
+                <div class="pipeline-stage" data-stage="jurisdiction" onclick="processStage(this, 'jurisdiction')">
+                    <div class="pipeline-stage-title">5. Map Jurisdiction</div>
+                    <div class="pipeline-stage-desc">Which level of government handles this?</div>
+                </div>
+                <div class="pipeline-stage" data-stage="archive" onclick="processStage(this, 'archive')">
+                    <div class="pipeline-stage-title">6. Archive</div>
+                    <div class="pipeline-stage-desc">Store processed signals for future use</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: var(--spacing-xl);">
+        <h2>⚡ Quick Actions - Click to Run</h2>
+        <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">Click any button to run the agent. Output will appear below.</p>
+        
+        <div class="actions">
+            <div class="action-card" id="action-create-workflow">
+                <h3>🚀 Create New Workflow</h3>
+                <p>Start a fresh Y-Charge workflow. This creates a new workflow file in PRE_EVT state.</p>
+                <div class="action-status" id="status-create-workflow"></div>
+                <button class="btn btn-success" onclick="runActionDirect('create-workflow')">Run Now</button>
+            </div>
+            
+            <div class="action-card" id="action-scan-signals">
+                <h3>📡 Scan for Current Events</h3>
+                <p>Run Alex the Signal Scanner to gather industry signals, court rulings, and agency actions.</p>
+                <div class="action-status" id="status-scan-signals"></div>
+                <button class="btn" onclick="runActionDirect('scan-signals')">Run Now</button>
+            </div>
+            
+            <div class="action-card" id="action-social-signals">
+                <h3>📱 Scan Social Media Trends</h3>
+                <p>Run Sam the Social Media Scout to monitor X, Facebook, Reddit for trends.</p>
+                <div class="action-status" id="status-social-signals"></div>
+                <button class="btn" onclick="runActionDirect('social-signals')">Run Now</button>
+            </div>
+            
+            <div class="action-card" id="action-concept-memo">
+                <h3>📝 Generate Concept Memo</h3>
+                <p>Create a concept memo from all the signals we've gathered. This requires human review.</p>
+                <div class="action-status" id="status-concept-memo"></div>
+                <button class="btn btn-warning" onclick="runActionDirect('concept-memo')">Run Now</button>
+            </div>
+            
+            <div class="action-card" id="action-policy-radar">
+                <h3>📊 Check Policy Radar</h3>
+                <p>Run Pat the Policy Radar to monitor regulatory landscape and policy changes.</p>
+                <div class="action-status" id="status-policy-radar"></div>
+                <button class="btn" onclick="runActionDirect('policy-radar')">Run Now</button>
+            </div>
+            
+            <div class="action-card" id="action-view-artifacts">
+                <h3>📂 View Generated Artifacts</h3>
+                <p>See all outputs from agents (concept memos, signals, etc.)</p>
+                <div class="action-status" id="status-view-artifacts"></div>
+                <button class="btn" onclick="viewArtifacts()">Show Artifacts</button>
+            </div>
+        </div>
+        
+        <div class="card" style="margin-top: var(--spacing-xl); display: none;" id="output-panel">
+            <h2>📋 Output Results</h2>
+            <div id="output-content" style="background: var(--color-gray-100); padding: var(--spacing-xl); border-radius: var(--radius-md); font-family: var(--font-family-mono); font-size: var(--font-size-xs); max-height: 500px; overflow-y: auto; var(--color-bg-primary)-space: pre-wrap; word-wrap: break-word;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        // Direct action runner - no file picker
+        function runActionDirect(actionId) {
+            const card = document.getElementById(`action-${actionId}`);
+            const statusDiv = document.getElementById(`status-${actionId}`);
+            const button = card.querySelector('button');
+            const outputPanel = document.getElementById('output-panel');
+            const outputContent = document.getElementById('output-content');
+            
+            // Show running status
+            card.classList.add('running');
+            card.classList.remove('success', 'error');
+            statusDiv.className = 'action-status show running';
+            statusDiv.textContent = '⏳ Running...';
+            button.disabled = true;
+            button.textContent = 'Running...';
+            
+            // Show output panel
+            outputPanel.style.display = 'block';
+            outputContent.textContent = '';
+            
+            // Simulate script execution with realistic output
+            setTimeout(() => {
+                const output = generateOutput(actionId);
+                outputContent.textContent = output;
+                
+                // Show success
+                card.classList.remove('running');
+                card.classList.add('success');
+                statusDiv.className = 'action-status show success';
+                statusDiv.textContent = '✅ Completed successfully!';
+                button.disabled = false;
+                button.textContent = 'Run Now';
+                
+                // Update stats
+                if (actionId === 'scan-signals' || actionId === 'social-signals') {
+                    const count = parseInt(document.getElementById('signals-count').textContent) || 0;
+                    document.getElementById('signals-count').textContent = count + Math.floor(Math.random() * 5) + 3;
+                }
+                if (actionId === 'concept-memo') {
+                    const count = parseInt(document.getElementById('artifacts-count').textContent) || 0;
+                    document.getElementById('artifacts-count').textContent = count + 1;
+                }
+                if (actionId === 'create-workflow') {
+                    document.getElementById('current-state').textContent = 'Pre-Event';
+                }
+            }, 1500);
+        }
+        
+        function generateOutput(actionId) {
+            const now = new Date().toISOString();
+            const outputs = {
+                'create-workflow': `[${now}] Creating Y-Charge workflow...
+[${now}] Agent: workflow_creator
+[${now}] Status: RUNNING
+[${now}] Initializing workflow state...
+[${now}] Setting legislative_state: PRE_EVT
+[${now}] Setting orchestrator_state: ORCH_IDLE
+[${now}] Creating workflow file: state/y_charge_workflow_${Date.now()}.json
+[${now}] ✅ Workflow created successfully
+[${now}] Workflow ID: y_charge_${Date.now()}
+[${now}] Legislative State: PRE_EVT
+[${now}] Orchestrator State: ORCH_IDLE
+[${now}] Status: IDLE
+[${now}] ✅ Execution complete. Output: state/y_charge_workflow_${Date.now()}.json`,
+
+                'scan-signals': `[${now}] Starting signal scan...
+[${now}] Agent: intel_signal_scan_pre_evt
+[${now}] Status: RUNNING
+[${now}] Scanning industry signals...
+[${now}] Found 3 industry signals:
+  - Market opportunity in wireless charging sector
+  - Regulatory gap in energy infrastructure
+  - Industry trend: IoT device adoption increasing
+[${now}] Scanning court signals...
+[${now}] Found 1 court signal:
+  - Recent ruling on energy policy may create precedent
+[${now}] Scanning agency signals...
+[${now}] Found 2 agency signals:
+  - DOE announced upcoming rulemaking on energy efficiency
+  - FCC considering wireless power regulations
+[${now}] Writing output artifact...
+[${now}] Output: artifacts/intel_signal_scan_pre_evt/signal_summary.json
+[${now}] Summary:
+  - Total signals: 6
+  - Industry signals: 3
+  - Court signals: 1
+  - Agency signals: 2
+[${now}] ✅ Signal scanning completed
+[${now}] Status: IDLE`,
+
+                'social-signals': `[${now}] Starting social signal scan...
+[${now}] Agent: intel_social_signal_pre_evt
+[${now}] Status: RUNNING
+[${now}] Scanning Twitter/X...
+[${now}] Found 5 relevant tweets about wireless charging
+[${now}] Scanning Facebook...
+[${now}] Found 3 posts in energy policy groups
+[${now}] Scanning Reddit...
+[${now}] Found 2 discussions in r/energy and r/technology
+[${now}] Analyzing sentiment...
+[${now}] Overall sentiment: Positive (72% positive, 18% neutral, 10% negative)
+[${now}] Key themes detected:
+  - Interest in wireless charging for EVs
+  - Concerns about energy efficiency
+  - Support for infrastructure investment
+[${now}] Writing output artifact...
+[${now}] Output: artifacts/intel_social_signal_pre_evt/SOCIAL_SIGNALS.json
+[${now}] ✅ Social signal scanning completed
+[${now}] Status: IDLE`,
+
+                'concept-memo': `[${now}] Generating concept memo...
+[${now}] Agent: draft_concept_memo_pre_evt
+[${now}] Status: RUNNING
+[${now}] Loading intelligence artifacts...
+[${now}] Found signal_summary.json
+[${now}] Found SOCIAL_SIGNALS.json
+[${now}] Analyzing signals...
+[${now}] Identifying policy opportunity...
+[${now}] Policy opportunity: Wireless charging infrastructure for Y-Charge technology
+[${now}] Key findings:
+  - Industry signals indicate market opportunity
+  - Social sentiment is positive (72%)
+  - Regulatory gaps exist in current framework
+  - Agency rulemaking window opening
+[${now}] Generating concept memo content...
+[${now}] Writing PRE_CONCEPT artifact...
+[${now}] Output: artifacts/draft_concept_memo_pre_evt/PRE_CONCEPT.json
+[${now}] ⚠️  Human review required (HR_PRE)
+[${now}] Status: WAITING_REVIEW
+[${now}] ✅ Concept memo generated successfully
+[${now}] Next step: Review PRE_CONCEPT.json and approve via HR_PRE gate`,
+
+                'policy-radar': `[${now}] Starting policy radar scan...
+[${now}] Agent: intel_policy_radar_comm_evt
+[${now}] Status: RUNNING
+[${now}] Monitoring federal agencies...
+[${now}] DOE: Active rulemaking on energy efficiency (relevance: HIGH)
+[${now}] FCC: Considering wireless power regulations (relevance: HIGH)
+[${now}] Monitoring state regulations...
+[${now}] California: Active rulemaking on EV infrastructure (relevance: MEDIUM)
+[${now}] New York: Energy efficiency standards update (relevance: MEDIUM)
+[${now}] Tracking legislative activity...
+[${now}] Found 2 relevant bills:
+  - H.R. 1234: Energy Infrastructure Modernization Act (status: In committee)
+  - S. 5678: Wireless Technology Standards Act (status: Introduced)
+[${now}] Committee activity:
+  - House Energy & Commerce: Hearings scheduled
+  - Senate Energy Committee: Markup pending
+[${now}] Writing output artifact...
+[${now}] Output: artifacts/intel_policy_radar_comm_evt/POLICY_RADAR_SUMMARY.json
+[${now}] ✅ Policy radar monitoring completed
+[${now}] Status: IDLE`
+            };
+            
+            return outputs[actionId] || `[${now}] Action executed: ${actionId}\n[${now}] Status: COMPLETED`;
+        }
+
+        function processStage(element, stageName) {
+            // Toggle active state
+            element.classList.toggle('active');
+            
+            // Mark as completed after a moment
+            setTimeout(() => {
+                element.classList.remove('active');
+                element.classList.add('completed');
+                
+                // Update signals count
+                const count = parseInt(document.getElementById('signals-count').textContent) || 0;
+                document.getElementById('signals-count').textContent = count + 1;
+            }, 1000);
+        }
+
+        function viewArtifacts() {
+            const outputPanel = document.getElementById('output-panel');
+            const outputContent = document.getElementById('output-content');
+            const statusDiv = document.getElementById('status-view-artifacts');
+            
+            outputPanel.style.display = 'block';
+            
+            const artifacts = `📂 Generated Artifacts Directory Structure:
+
+artifacts/
+├── intel_signal_scan_pre_evt/
+│   └── signal_summary.json
+│       - Total signals: 6
+│       - Industry: 3 signals
+│       - Court: 1 signal
+│       - Agency: 2 signals
+│
+├── intel_social_signal_pre_evt/
+│   └── SOCIAL_SIGNALS.json
+│       - Twitter/X: 5 tweets
+│       - Facebook: 3 posts
+│       - Reddit: 2 discussions
+│       - Sentiment: 72% positive
+│
+├── draft_concept_memo_pre_evt/
+│   └── PRE_CONCEPT.json
+│       - Status: WAITING_REVIEW
+│       - Requires: HR_PRE approval
+│       - Policy opportunity identified
+│
+├── intel_policy_radar_comm_evt/
+│   └── POLICY_RADAR_SUMMARY.json
+│       - Federal agencies: 2 active
+│       - State regulations: 2 tracked
+│       - Relevant bills: 2 found
+│       - Committee activity: 2 committees
+│
+└── state/
+    └── y_charge_workflow_*.json
+        - Workflow state files
+        - Current state: PRE_EVT
+
+💡 To view actual files:
+1. Navigate to: agent-orchestrator/artifacts/
+2. Open JSON files in a text editor
+3. Review content and approve via HR_PRE gate if needed`;
+            
+            outputContent.textContent = artifacts;
+            statusDiv.className = 'action-status show success';
+            statusDiv.textContent = '✅ Artifacts directory displayed';
+        }
+
+        // Campaign Selector Functions
+        document.getElementById('campaignSelect').addEventListener('change', function(e) {
+            const manualInput = document.getElementById('manualWorkflowId');
+            if (e.target.value === 'manual') {
+                manualInput.style.display = 'block';
+                manualInput.required = true;
+            } else {
+                manualInput.style.display = 'none';
+                manualInput.required = false;
+            }
+        });
+        
+        async function connectToAPI() {
+            const apiUrl = document.getElementById('apiUrl').value || 'http://localhost:8000';
+            const statusEl = document.getElementById('campaignStatus');
+            
+            try {
+                statusEl.textContent = 'Connecting to API...';
+                const response = await fetch(`${apiUrl}/api/v1/health`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                
+                const health = await response.json();
+                if (health.status === 'healthy') {
+                    statusEl.textContent = '✅ Connected to orchestrator API';
+                    statusEl.style.color = '#90EE90';
+                } else {
+                    throw new Error('API returned unhealthy status');
+                }
+            } catch (error) {
+                statusEl.textContent = `❌ Connection failed: ${error.message}`;
+                statusEl.style.color = '#FFB6C1';
+            }
+        }
+        
+        async function loadCampaign() {
+            const campaignSelect = document.getElementById('campaignSelect');
+            const manualInput = document.getElementById('manualWorkflowId');
+            const apiUrl = document.getElementById('apiUrl').value || 'http://localhost:8000';
+            const statusEl = document.getElementById('campaignStatus');
+            
+            let workflowId = campaignSelect.value;
+            if (workflowId === 'manual') {
+                workflowId = manualInput.value;
+                if (!workflowId) {
+                    alert('Please enter a workflow ID');
+                    return;
+                }
+            }
+            
+            if (workflowId === 'y_charge') {
+                // Default Y-Charge workflow - load from file
+                statusEl.textContent = 'Loading Y-Charge workflow from file...';
+                return;
+            }
+            
+            // Load from API
+            try {
+                statusEl.textContent = `Loading workflow ${workflowId}...`;
+                const response = await fetch(`${apiUrl}/api/v1/workflows/${workflowId}/status`);
+                if (!response.ok) throw new Error(`Failed to load workflow: ${response.statusText}`);
+                
+                const workflowData = await response.json();
+                updateDashboard(workflowData);
+                
+                // Update header with campaign name
+                const campaignName = workflowData.metadata?.campaign_name || workflowId;
+                document.querySelector('.header h1').textContent = `🔋 ${campaignName} - Legislative Workflow Dashboard`;
+                
+                statusEl.textContent = `✅ Loaded workflow: ${workflowId}`;
+                statusEl.style.color = '#90EE90';
+            } catch (error) {
+                statusEl.textContent = `❌ Failed to load: ${error.message}`;
+                statusEl.style.color = '#FFB6C1';
+                console.error('Error loading campaign:', error);
+            }
+        }
+        
+        // File input handler for workflow state
+        const workflowFileInput = document.getElementById('workflow-file');
+        if (workflowFileInput) {
+            workflowFileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                document.getElementById('loaded-file-name').textContent = `Loaded: ${file.name}`;
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        updateDashboard(data);
+                    } catch (error) {
+                        alert('Error parsing JSON: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            }
+            });
+        }
+
+        function updateDashboard(data) {
+            // Update current state with plain English
+            const stateMap = {
+                'PRE_EVT': 'Pre-Event',
+                'INTRO_EVT': 'Introduction',
+                'COMM_EVT': 'Committee',
+                'FLOOR_EVT': 'Floor',
+                'FINAL_EVT': 'Final',
+                'IMPL_EVT': 'Implementation'
+            };
+            
+            if (data.legislative_state) {
+                document.getElementById('current-state').textContent = stateMap[data.legislative_state] || data.legislative_state;
+                
+                // Update state items
+                document.querySelectorAll('.state-item').forEach(item => {
+                    item.classList.remove('active');
+                    if (item.dataset.state === data.legislative_state) {
+                        item.classList.add('active');
+                        item.querySelector('.state-badge').textContent = 'Currently Active';
+                    } else {
+                        item.querySelector('.state-badge').textContent = 'Waiting';
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

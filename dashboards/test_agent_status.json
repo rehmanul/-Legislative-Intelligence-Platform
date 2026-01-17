@@ -1,0 +1,338 @@
+{
+  "timestamp": "2026-01-08T08:34:40.769059+00:00Z",
+  "legislative": {
+    "_meta": {
+      "state_version": "1.0",
+      "last_updated": "2026-01-07T20:16:58.811721+00:00",
+      "authority": "api_synced",
+      "workflow_id": "e50e49b3-7e56-4d6e-afa9-54c1799894e1"
+    },
+    "current_state": "IMPL_EVT",
+    "state_definition": "Implementation & Monitoring",
+    "state_lock": true,
+    "state_history": [
+      {
+        "state": "PRE_EVT",
+        "entered_at": "2026-01-07T07:24:44.315573Z",
+        "entered_by": "system",
+        "reason": "Workflow created"
+      },
+      {
+        "state": "INTRO_EVT",
+        "entered_at": "2026-01-07T07:24:44.436802Z",
+        "entered_by": "system",
+        "reason": "State advanced"
+      },
+      {
+        "state": "COMM_EVT",
+        "entered_at": "2026-01-07T19:01:23.159580Z",
+        "entered_by": "system",
+        "reason": "State advanced - INTRO_EVT artifacts approved, committee referral confirmed"
+      },
+      {
+        "state": "FLOOR_EVT",
+        "entered_at": "2026-01-07T20:12:44.045920+00:00",
+        "entered_by": "system",
+        "reason": "State advanced - COMM_EVT artifacts approved via HR_LANG, floor scheduling confirmed"
+      },
+      {
+        "state": "FINAL_EVT",
+        "entered_at": "2026-01-07T20:15:05.713432+00:00",
+        "entered_by": "system",
+        "reason": "State advanced - FLOOR_EVT artifacts approved via HR_MSG, vote result confirmed"
+      },
+      {
+        "state": "IMPL_EVT",
+        "entered_at": "2026-01-07T20:16:58.811721+00:00",
+        "entered_by": "system",
+        "reason": "State advanced - FINAL_EVT artifacts approved via HR_RELEASE, enactment confirmed"
+      }
+    ],
+    "next_allowed_states": [],
+    "state_advancement_rule": "Terminal state - workflow complete"
+  },
+  "agents": {
+    "_meta": {
+      "registry_version": "1.0",
+      "last_updated": "2026-01-07T08:36:48.054437+00:00Z",
+      "total_agents": 20,
+      "active_agents": 2,
+      "idle_agents": 0,
+      "waiting_review_agents": 1,
+      "blocked_agents": 1,
+      "retired_agents": 8,
+      "cleaned_at": "2026-01-07T08:36:48.054437+00:00Z",
+      "duplicates_removed": 20,
+      "stale_agents_retired": 8
+    },
+    "agents": [
+      {
+        "agent_id": "intel_signal_scan_pre_evt",
+        "agent_type": "Intelligence",
+        "status": "RETIRED",
+        "scope": "Signal scanning only (read-only)",
+        "current_task": "Auto-retired: stale heartbeat (4.7h old)",
+        "last_heartbeat": "2026-01-07T03:54:16.606060Z",
+        "risk_level": "LOW",
+        "outputs": [],
+        "spawned_at": "2026-01-07T03:54:16.606404Z"
+      },
+      {
+        "agent_id": "intel_stakeholder_map_pre_evt",
+        "agent_type": "Intelligence",
+        "status": "RETIRED",
+        "scope": "Stakeholder mapping only (read-only)",
+        "current_task": "Auto-retired: stale heartbeat (3.9h old)",
+        "last_heartbeat": "2026-01-07T04:41:21.533843Z",
+        "risk_level": "LOW",
+        "outputs": [],
+        "spawned_at": "2026-01-07T04:41:21.534251Z"
+      },
+      {
+        "agent_id": "intel_opposition_detect_pre_evt",
+        "agent_type": "Intelligence",
+        "status": "RETIRED",
+        "scope": "Opposition detection only (read-only)",
+        "current_task": "Auto-retired: stale heartbeat (5.5h old)",
+        "last_heartbeat": "2026-01-07T03:06:35.176587Z",
+        "risk_level": "LOW",
+        "outputs": [],
+        "spawned_at": "2026-01-07T03:06:35.177593Z"
+      },
+      {
+        "agent_id": "draft_concept_memo_pre_evt",
+        "agent_type": "Drafting",
+        "status": "WAITING_REVIEW",
+        "scope": "Generate PRE_CONCEPT artifact ONLY (human-gated)",
+        "current_task": "Concept memo generated - awaiting HR_PRE review",
+        "last_heartbeat": "2026-01-07T03:07:42.831794Z",
+        "risk_level": "MEDIUM",
+        "outputs": [
+          "artifacts\\draft_concept_memo_pre_evt\\PRE_CONCEPT.json"
+        ],
+        "spawned_at": "2026-01-07T03:07:42.831794Z",
+        "guidance_signed": false
+      },
+      {
+        "agent_id": "intel_signal_scan_intro_evt",
+        "agent_type": "Intelligence",
+        "status": "RETIRED",
+        "scope": "Signal scanning only (read-only) - INTRO_EVT phase",
+        "current_task": "Auto-retired: stale heartbeat (4.4h old)",
+        "last_heartbeat": "2026-01-07T04:15:46.173034Z",
+        "risk_level": "LOW",
+        "outputs": [],
+        "spawned_at": "2026-01-07T04:15:46.173034Z",
+        "termination_condition": "State advances to COMM_EVT OR explicit termination OR 30-day max runtime"
+      },
+      {
+        "agent_id": "intel_stakeholder_map_intro_evt",
+        "agent_type": "Intelligence",
+        "status": "RETIRED",
+        "scope": "Stakeholder mapping only (read-only) - INTRO_EVT phase",
+        "current_task": "Auto-retired: stale heartbeat (4.3h old)",
+        "last_heartbeat": "2026-01-07T04:15:49.294061Z",
+        "risk_level": "LOW",
+        "outputs": [],
+        "spawned_at": "2026-01-07T04:15:49.294061Z",
+        "termination_condition": "Map artifact complete and validated OR state advances to COMM_EVT OR explicit termination"
+      },
+      {
+        "agent_id": "intel_opposition_detect_intro_evt",
+        "agent_type": "Intelligence",
+        "status": "RETIRED",
+        "scope": "Opposition detection only (read-only) - INTRO_EVT phase",
+        "current_task": "Auto-retired: stale heartbeat (4.3h old)",
+        "last_heartbeat": "2026-01-07T04:15:52.418712Z",
+        "risk_level": "LOW",
+        "outputs": [],
+        "spawned_at": "2026-01-07T04:15:52.418712Z",
+        "termination_condition": "State advances to COMM_EVT OR explicit termination"
+      },
+      {
+        "agent_id": "draft_framing_intro_evt",
+        "agent_type": "Drafting",
+        "status": "RETIRED",
+        "scope": "Generate INTRO_FRAME artifact ONLY (human-gated)",
+        "current_task": "Auto-retired: stale heartbeat (4.3h old)",
+        "last_heartbeat": "2026-01-07T04:15:55.562256Z",
+        "risk_level": "MEDIUM",
+        "outputs": [],
+        "spawned_at": "2026-01-07T04:15:55.562256Z",
+        "guidance_signed": false
+      },
+      {
+        "agent_id": "draft_whitepaper_intro_evt",
+        "agent_type": "Drafting",
+        "status": "RETIRED",
+        "scope": "Generate INTRO_WHITEPAPER artifact ONLY (human-gated)",
+        "current_task": "Auto-retired: stale heartbeat (4.3h old)",
+        "last_heartbeat": "2026-01-07T04:15:57.776815Z",
+        "risk_level": "MEDIUM",
+        "outputs": [],
+        "spawned_at": "2026-01-07T04:15:57.776815Z",
+        "guidance_signed": false
+      },
+      {
+        "agent_id": "execution_outreach_comm_evt",
+        "agent_type": "Execution",
+        "status": "BLOCKED",
+        "scope": "Outreach execution (requires explicit human authorization)",
+        "current_task": "Blocked until authorized",
+        "last_heartbeat": "2026-01-07T04:41:53.536247+00:00",
+        "risk_level": "HIGH",
+        "outputs": [],
+        "spawned_at": "2026-01-07T04:41:53.536267+00:00",
+        "guidance_signed": false
+      },
+      {
+        "agent_id": "intel_policy_context_analyzer_pre_evt",
+        "agent_type": "Intelligence",
+        "status": "IDLE",
+        "scope": "Analyze policy artifacts as READ-ONLY context (intelligence only)",
+        "current_task": "Loading and analyzing policy context",
+        "last_heartbeat": "2026-01-07T10:07:31.957820Z",
+        "risk_level": "LOW",
+        "outputs": [
+          "artifacts\\intel_policy_context_analyzer_pre_evt\\POLICY_CONTEXT_ANALYSIS.json",
+          "artifacts\\intel_policy_context_analyzer_pre_evt\\POLICY_CONTEXT_ANALYSIS.json"
+        ],
+        "spawned_at": "2026-01-07T10:07:31.957820Z",
+        "policy_context_usage": "READ_ONLY"
+      },
+      {
+        "agent_id": "intel_policy_context_analyzer_pre_evt",
+        "agent_type": "Intelligence",
+        "status": "RUNNING",
+        "scope": "Analyze policy artifacts as READ-ONLY context (intelligence only)",
+        "current_task": "Loading and analyzing policy context",
+        "last_heartbeat": "2026-01-07T10:11:18.735297Z",
+        "risk_level": "LOW",
+        "outputs": [],
+        "spawned_at": "2026-01-07T10:11:18.735297Z",
+        "policy_context_usage": "READ_ONLY"
+      },
+      {
+        "agent_id": "draft_legislative_language_comm_evt",
+        "agent_type": "Drafting",
+        "status": "WAITING_REVIEW",
+        "scope": "Generate legislative language draft (COMM_EVT, human-gated)",
+        "current_task": "Legislative language draft generated - awaiting HR_LANG",
+        "last_heartbeat": "2026-01-07T20:11:31.433188+00:00",
+        "risk_level": "HIGH",
+        "outputs": [
+          "artifacts\\legislative_language_comm_evt\\draft_legislative_language.json"
+        ],
+        "spawned_at": "2026-01-07T20:11:31.406704+00:00",
+        "guidance_signed": false
+      },
+      {
+        "agent_id": "draft_amendment_strategy_comm_evt",
+        "agent_type": "Drafting",
+        "status": "WAITING_REVIEW",
+        "scope": "Generate amendment strategy (COMM_EVT, human-gated)",
+        "current_task": "Amendment strategy generated - awaiting HR_PRE",
+        "last_heartbeat": "2026-01-07T20:11:42.519641+00:00",
+        "risk_level": "MEDIUM",
+        "outputs": [
+          "artifacts\\amendment_strategy_comm_evt\\amendment_strategy.json"
+        ],
+        "spawned_at": "2026-01-07T20:11:42.457521+00:00",
+        "guidance_signed": false
+      },
+      {
+        "agent_id": "intel_graph_builder_pre_evt",
+        "agent_type": "Intelligence",
+        "status": "IDLE",
+        "scope": "Build and maintain Congressional influence graph",
+        "current_task": "Graph building completed",
+        "last_heartbeat": "2026-01-08T01:18:15.782997Z",
+        "risk_level": "MEDIUM",
+        "outputs": [
+          "artifacts\\intel_graph_builder_pre_evt\\GRAPH_SUMMARY.json"
+        ],
+        "spawned_at": "2026-01-08T01:18:15.782997Z"
+      },
+      {
+        "agent_id": "intel_power_classifier_pre_evt",
+        "agent_type": "Intelligence",
+        "status": "IDLE",
+        "scope": "Classify entity power (PRIMARY/SECONDARY/SHADOW)",
+        "current_task": "Power classification completed",
+        "last_heartbeat": "2026-01-08T01:18:30.055762Z",
+        "risk_level": "MEDIUM",
+        "outputs": [
+          "artifacts\\intel_power_classifier_pre_evt\\POWER_CLASSIFICATION_SUMMARY.json"
+        ],
+        "spawned_at": "2026-01-08T01:18:30.055762Z"
+      },
+      {
+        "agent_id": "learning_conversion_diagnostic_impl_evt",
+        "agent_type": "Learning",
+        "status": "IDLE",
+        "scope": "Diagnose conversion rate issues",
+        "current_task": "Analyzing speculative artifacts",
+        "last_heartbeat": "2026-01-08T02:20:27.422949Z",
+        "risk_level": "LOW",
+        "outputs": [
+          "artifacts\\learning_conversion_diagnostic_impl_evt\\CONVERSION_DIAGNOSTIC.json"
+        ],
+        "spawned_at": "2026-01-08T02:20:27.422949Z"
+      },
+      {
+        "agent_id": "learning_audit_backfill_impl_evt",
+        "agent_type": "Learning",
+        "status": "IDLE",
+        "scope": "Backfill missing decision logs",
+        "current_task": "Finding missing decision logs",
+        "last_heartbeat": "2026-01-08T02:21:38.617493Z",
+        "risk_level": "LOW",
+        "outputs": [
+          "artifacts\\learning_audit_backfill_impl_evt\\AUDIT_BACKFILL.json"
+        ],
+        "spawned_at": "2026-01-08T02:21:38.617493Z"
+      },
+      {
+        "agent_id": "learning_conversion_remediation_impl_evt",
+        "agent_type": "Learning",
+        "status": "IDLE",
+        "scope": "Remediate conversion rate issues",
+        "current_task": "Executing remediation recommendations",
+        "last_heartbeat": "2026-01-08T02:26:07.098733Z",
+        "risk_level": "MEDIUM",
+        "outputs": [
+          "artifacts\\learning_conversion_remediation_impl_evt\\CONVERSION_REMEDIATION.json",
+          "artifacts\\learning_conversion_remediation_impl_evt\\CONVERSION_REMEDIATION.json"
+        ],
+        "spawned_at": "2026-01-08T02:26:07.098733Z"
+      },
+      {
+        "agent_id": "learning_conversion_remediation_impl_evt",
+        "agent_type": "Learning",
+        "status": "RUNNING",
+        "scope": "Remediate conversion rate issues",
+        "current_task": "Executing remediation recommendations",
+        "last_heartbeat": "2026-01-08T02:27:17.964014Z",
+        "risk_level": "MEDIUM",
+        "outputs": [],
+        "spawned_at": "2026-01-08T02:27:17.965120Z"
+      }
+    ]
+  },
+  "system": {
+    "current_state": "IMPL_EVT",
+    "state_definition": "Implementation & Monitoring",
+    "state_lock": true,
+    "next_allowed_states": [],
+    "agents": {
+      "total": 20,
+      "running": 2,
+      "idle": 6,
+      "waiting_review": 3,
+      "blocked": 1,
+      "retired": 8
+    }
+  },
+  "review_gates": [],
+  "alerts": []
+}

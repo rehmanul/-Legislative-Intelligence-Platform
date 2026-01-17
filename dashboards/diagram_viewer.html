@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Orchestrator - Interactive Diagram Viewer</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-family-sans), Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1e40af 0%, var(--color-primary) 100%);
+            min-height: 100vh;
+            padding: var(--spacing-xl);
+        }
+        
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-2xl);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, var(--color-primary) 100%);
+            color: var(--color-bg-primary);
+            padding: 30px 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: var(--spacing-lg);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .header-controls {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            margin-top: var(--spacing-xl);
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            transition: all var(--transition-slow) var(--transition-ease);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--color-bg-primary);
+            color: #1e40af;
+        }
+        
+        .btn-primary:hover {
+            background: #f0f9ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: var(--color-bg-primary);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .file-picker-section {
+            background: #f8fafc;
+            padding: var(--spacing-xl) 40px;
+            border-bottom: 2px solid var(--color-border);
+        }
+        
+        .file-picker-wrapper {
+            display: flex;
+            gap: var(--spacing-lg);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .file-input-label {
+            padding: 12px 24px;
+            background: #1e40af;
+            color: var(--color-bg-primary);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            font-weight: var(--font-weight-semibold);
+            transition: all var(--transition-slow) var(--transition-ease);
+            display: inline-block;
+        }
+        
+        .file-input-label:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+        
+        .file-input-label input[type="file"] {
+            display: none;
+        }
+        
+        .loaded-files {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .file-badge {
+            padding: var(--spacing-sm) 16px;
+            background: #e0e7ff;
+            color: #1e40af;
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .file-badge .remove {
+            cursor: pointer;
+            font-weight: bold;
+            opacity: 0.7;
+        }
+        
+        .file-badge .remove:hover {
+            opacity: 1;
+        }
+        
+        .tabs {
+            display: flex;
+            background: var(--color-bg-secondary);
+            border-bottom: 3px solid var(--color-border);
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+        
+        .tab {
+            flex: 1;
+            min-width: 180px;
+            padding: var(--spacing-xl);
+            text-align: center;
+            cursor: pointer;
+            font-weight: var(--font-weight-semibold);
+            font-size: 1em;
+            transition: all var(--transition-slow) var(--transition-ease);
+            border-bottom: 4px solid transparent;
+            position: relative;
+            var(--color-bg-primary)-space: nowrap;
+        }
+        
+        .tab:hover {
+            background: #e0e7ff;
+        }
+        
+        .tab.active {
+            background: var(--color-bg-primary);
+            border-bottom: 4px solid #1e40af;
+            color: #1e40af;
+        }
+        
+        .content {
+            padding: 40px;
+            min-height: 600px;
+            position: relative;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .diagram-container {
+            background: var(--color-bg-primary);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            padding: 30px;
+            overflow: auto;
+            position: relative;
+            min-height: 500px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .diagram-container.fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+            border-radius: 0;
+            padding: 60px;
+            background: var(--color-bg-primary);
+        }
+        
+        .diagram-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+        
+        .mermaid {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: var(--color-text-secondary);
+            font-size: 1.2em;
+        }
+        
+        .error {
+            background: #fee2e2;
+            border: 2px solid var(--color-error-hover);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            color: #991b1b;
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .info-panel {
+            background: #f0f9ff;
+            border-left: 4px solid #1e40af;
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+        }
+        
+        .info-panel h3 {
+            color: #1e40af;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .info-panel p {
+            color: #1e3a8a;
+            line-height: 1.6;
+        }
+        
+        .zoom-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: var(--spacing-md);
+            z-index: 100;
+            background: var(--color-bg-primary);
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+        }
+        
+        .zoom-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #1e40af;
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-lg);
+            font-weight: bold;
+            color: #1e40af;
+            transition: all var(--transition-slow) var(--transition-ease);
+        }
+        
+        .zoom-btn:hover {
+            background: #1e40af;
+            color: var(--color-bg-primary);
+        }
+        
+        .search-box {
+            margin-bottom: var(--spacing-xl);
+            padding: 12px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            font-size: var(--font-size-sm);
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: #1e40af;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--color-text-secondary);
+        }
+        
+        .empty-state h2 {
+            font-size: 1.5em;
+            margin-bottom: var(--spacing-md);
+            color: #374151;
+        }
+        
+        .empty-state p {
+            font-size: 1.1em;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .diagram-info {
+            background: var(--color-bg-tertiary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+        
+        .diagram-info strong {
+            color: #374151;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: var(--spacing-xl);
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                min-width: 100%;
+            }
+            
+            .content {
+                padding: var(--spacing-xl);
+            }
+            
+            .diagram-container {
+                padding: var(--spacing-lg);
+            }
+        }
+    </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+    
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="container">
+        <div class="header">
+            <h1>📊 Agent Orchestrator Diagram Viewer</h1>
+            <p>Visualize system architecture, legislative states, and agent workflows. Load Mermaid (.mmd) diagram files to explore the agent orchestrator system.</p>
+            <div class="header-controls">
+                <button class="btn btn-primary" onclick="exportCurrent()">📥 Export PNG</button>
+                <button class="btn btn-secondary" onclick="toggleFullscreen()">🔍 Fullscreen</button>
+                <button class="btn btn-secondary" onclick="clearAll()">🗑️ Clear All</button>
+            </div>
+        </div>
+        
+        <div class="file-picker-section">
+            <div class="file-picker-wrapper">
+                <label class="file-input-label">
+                    📁 Load Diagram File
+                    <input type="file" id="fileInput" accept=".mmd,.mermaid,.txt" multiple>
+                </label>
+                <div class="loaded-files" id="loadedFiles"></div>
+            </div>
+        </div>
+        
+        <div class="tabs" id="tabs">
+            <!-- Tabs will be dynamically generated -->
+        </div>
+        
+        <div class="content">
+            <div id="emptyState" class="empty-state">
+                <h2>📐 No Diagrams Loaded</h2>
+                <p>Click "Load Diagram File" above to load Mermaid diagram files (.mmd)</p>
+                <p style="margin-top: var(--spacing-xl); font-size: 0.9em; opacity: 0.8;">
+                    <strong>Why this dashboard exists:</strong><br>
+                    This viewer helps you understand the agent orchestrator system architecture by visualizing:<br>
+                    • Legislative process states (PRE_EVT, COMM_EVT, FLOOR_EVT, etc.)<br>
+                    • Agent workflows and relationships<br>
+                    • System components and data flows<br>
+                    • Review gates and decision points
+                </p>
+            </div>
+            <div id="tabContents"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: 'default',
+            securityLevel: 'loose',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+        
+        // Store loaded diagrams
+        const loadedDiagrams = {};
+        const zoomLevels = {};
+        let currentTab = null;
+        
+        // File input handler
+        document.getElementById('fileInput').addEventListener('change', async (e) => {
+            const files = Array.from(e.target.files);
+            for (const file of files) {
+                await loadDiagramFile(file);
+            }
+            e.target.value = ''; // Reset input
+        });
+        
+        // Load diagram from file
+        async function loadDiagramFile(file) {
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const content = e.target.result;
+                const key = file.name.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                
+                loadedDiagrams[key] = {
+                    name: file.name,
+                    content: content,
+                    size: file.size,
+                    lastModified: file.lastModified
+                };
+                
+                updateUI();
+                await renderDiagram(key);
+            };
+            reader.readAsText(file);
+        }
+        
+        // Update UI with loaded files
+        function updateUI() {
+            const loadedFilesDiv = document.getElementById('loadedFiles');
+            const tabsDiv = document.getElementById('tabs');
+            const tabContentsDiv = document.getElementById('tabContents');
+            const emptyState = document.getElementById('emptyState');
+            
+            // Update file badges
+            loadedFilesDiv.innerHTML = Object.entries(loadedDiagrams).map(([key, diagram]) => 
+                `<div class="file-badge">
+                    <span>${diagram.name}</span>
+                    <span class="remove" onclick="removeDiagram('${key}')" title="Remove">×</span>
+                </div>`
+            ).join('');
+            
+            // Update tabs
+            const diagramKeys = Object.keys(loadedDiagrams);
+            if (diagramKeys.length === 0) {
+                tabsDiv.innerHTML = '';
+                tabContentsDiv.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            tabsDiv.innerHTML = diagramKeys.map((key, index) => 
+                `<div class="tab ${index === 0 ? 'active' : ''}" onclick="showTab('${key}')">
+                    ${loadedDiagrams[key].name}
+                </div>`
+            ).join('');
+            
+            tabContentsDiv.innerHTML = diagramKeys.map((key, index) => `
+                <div id="tab-${key}" class="tab-content ${index === 0 ? 'active' : ''}">
+                    <div class="diagram-info">
+                        <strong>File:</strong> ${loadedDiagrams[key].name}<br>
+                        <strong>Size:</strong> ${formatBytes(loadedDiagrams[key].size)}<br>
+                        <strong>Modified:</strong> ${new Date(loadedDiagrams[key].lastModified).toLocaleString()}
+                    </div>
+                    <div class="diagram-container" id="diagram-${key}">
+                        <div class="zoom-controls">
+                            <button class="zoom-btn" onclick="zoomIn('${key}')" title="Zoom In">+</button>
+                            <button class="zoom-btn" onclick="zoomOut('${key}')" title="Zoom Out">-</button>
+                            <button class="zoom-btn" onclick="zoomReset('${key}')" title="Reset Zoom">⟲</button>
+                        </div>
+                        <div class="diagram-wrapper">
+                            <div class="loading">Loading diagram...</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            if (diagramKeys.length > 0 && !currentTab) {
+                currentTab = diagramKeys[0];
+            }
+        }
+        
+        // Render diagram
+        async function renderDiagram(key) {
+            if (!loadedDiagrams[key]) return;
+            
+            const container = document.getElementById(`diagram-${key}`);
+            if (!container) return;
+            
+            const wrapper = container.querySelector('.diagram-wrapper');
+            if (!wrapper) return;
+            
+            // Show loading
+            wrapper.innerHTML = '<div class="loading">Rendering diagram...</div>';
+            
+            // Create unique ID for this diagram
+            const diagramId = `mermaid-${key}-${Date.now()}`;
+            wrapper.innerHTML = `<div class="mermaid" id="${diagramId}">${loadedDiagrams[key].content}</div>`;
+            
+            // Initialize zoom level
+            if (!zoomLevels[key]) {
+                zoomLevels[key] = 1;
+            }
+            
+            // Render with Mermaid
+            try {
+                await mermaid.init(undefined, document.getElementById(diagramId));
+                
+                // Apply zoom
+                const svg = document.querySelector(`#${diagramId} svg`);
+                if (svg) {
+                    svg.style.transform = `scale(${zoomLevels[key]})`;
+                    svg.style.transformOrigin = 'top left';
+                }
+            } catch (error) {
+                console.error(`Error rendering diagram ${key}:`, error);
+                wrapper.innerHTML = `<div class="error">❌ Error rendering diagram: ${error.message}<br><br>Check the Mermaid syntax in your file.</div>`;
+            }
+        }
+        
+        // Show tab
+        function showTab(key) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            const tabContent = document.getElementById(`tab-${key}`);
+            if (tabContent) {
+                tabContent.classList.add('active');
+            }
+            
+            // Add active class to clicked tab button
+            event.target.classList.add('active');
+            
+            currentTab = key;
+            
+            // Re-render if needed
+            const container = document.getElementById(`diagram-${key}`);
+            if (container) {
+                const svg = container.querySelector('svg');
+                if (!svg) {
+                    renderDiagram(key);
+                }
+            }
+        }
+        
+        // Zoom functions
+        function zoomIn(key) {
+            if (!zoomLevels[key]) zoomLevels[key] = 1;
+            zoomLevels[key] = Math.min(zoomLevels[key] + 0.1, 3);
+            applyZoom(key);
+        }
+        
+        function zoomOut(key) {
+            if (!zoomLevels[key]) zoomLevels[key] = 1;
+            zoomLevels[key] = Math.max(zoomLevels[key] - 0.1, 0.5);
+            applyZoom(key);
+        }
+        
+        function zoomReset(key) {
+            zoomLevels[key] = 1;
+            applyZoom(key);
+        }
+        
+        function applyZoom(key) {
+            const container = document.getElementById(`diagram-${key}`);
+            if (!container) return;
+            const svg = container.querySelector('svg');
+            if (svg) {
+                svg.style.transform = `scale(${zoomLevels[key]})`;
+                svg.style.transformOrigin = 'top left';
+            }
+        }
+        
+        // Fullscreen toggle
+        function toggleFullscreen() {
+            if (!currentTab) {
+                alert('No diagram loaded');
+                return;
+            }
+            
+            const container = document.getElementById(`diagram-${currentTab}`);
+            if (!container) return;
+            
+            if (!document.fullscreenElement) {
+                container.classList.add('fullscreen');
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+                container.classList.remove('fullscreen');
+            }
+        }
+        
+        // Export current diagram as PNG
+        async function exportCurrent() {
+            if (!currentTab) {
+                alert('No diagram loaded');
+                return;
+            }
+            
+            const container = document.getElementById(`diagram-${currentTab}`);
+            if (!container) return;
+            
+            const svg = container.querySelector('svg');
+            if (!svg) {
+                alert('No diagram to export');
+                return;
+            }
+            
+            try {
+                // Clone SVG
+                const clonedSvg = svg.cloneNode(true);
+                clonedSvg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+                
+                // Convert to data URL
+                const svgData = new XMLSerializer().serializeToString(clonedSvg);
+                const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+                const svgUrl = URL.createObjectURL(svgBlob);
+                
+                // Create image
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.fillStyle = 'var(--color-bg-primary)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0);
+                    
+                    // Download
+                    canvas.toBlob(function(blob) {
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `${loadedDiagrams[currentTab].name.replace(/\.[^/.]+$/, '')}-${Date.now()}.png`;
+                        a.click();
+                        URL.revokeObjectURL(url);
+                    });
+                    
+                    URL.revokeObjectURL(svgUrl);
+                };
+                img.src = svgUrl;
+            } catch (error) {
+                console.error('Export error:', error);
+                alert('Failed to export diagram. Please try again.');
+            }
+        }
+        
+        // Remove diagram
+        function removeDiagram(key) {
+            delete loadedDiagrams[key];
+            delete zoomLevels[key];
+            if (currentTab === key) {
+                const remaining = Object.keys(loadedDiagrams);
+                currentTab = remaining.length > 0 ? remaining[0] : null;
+            }
+            updateUI();
+        }
+        
+        // Clear all diagrams
+        function clearAll() {
+            if (Object.keys(loadedDiagrams).length === 0) {
+                return;
+            }
+            
+            if (confirm('Clear all loaded diagrams?')) {
+                Object.keys(loadedDiagrams).forEach(key => {
+                    delete loadedDiagrams[key];
+                    delete zoomLevels[key];
+                });
+                currentTab = null;
+                updateUI();
+            }
+        }
+        
+        // Format bytes
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        }
+        
+        // Handle fullscreen exit
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                document.querySelectorAll('.diagram-container').forEach(container => {
+                    container.classList.remove('fullscreen');
+                });
+            }
+        });
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === '=' || e.key === '+') {
+                    e.preventDefault();
+                    if (currentTab) zoomIn(currentTab);
+                } else if (e.key === '-') {
+                    e.preventDefault();
+                    if (currentTab) zoomOut(currentTab);
+                } else if (e.key === '0') {
+                    e.preventDefault();
+                    if (currentTab) zoomReset(currentTab);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "_meta": {
+    "agent_id": "draft_vote_whip_floor_evt",
+    "generated_at": "2026-01-20T23:30:00Z",
+    "artifact_type": "FLOOR_VOTE_WHIP",
+    "artifact_name": "Floor Vote Whip Strategy",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": null,
+    "guidance_status": "SIGNED"
+  },
+  "vote_context": "H.R. 8888 - Data Privacy Act, Floor Vote Scheduled 2026-03-15",
+  "vote_counting": {
+    "likely_yes": 195,
+    "likely_no": 180,
+    "undecided": 60,
+    "needed_for_passage": 218
+  },
+  "whip_targets": [
+    {"member": "Rep. Chen (D-CA)", "status": "LEANING_YES", "ask": "Confirm support", "priority": "HIGH"},
+    {"member": "Rep. Martinez (R-TX)", "status": "UNDECIDED", "ask": "Emphasize business certainty benefits", "priority": "HIGH"},
+    {"member": "Rep. O'Connor (D-OH)", "status": "LEANING_NO", "ask": "Address preemption concerns", "priority": "MEDIUM"}
+  ],
+  "messaging_by_member_type": {
+    "moderate_democrats": "Consumer protection and data security - core Democratic values",
+    "moderate_republicans": "Federal preemption provides business certainty, better than patchwork state laws"
+  },
+  "disclaimer": "Vote counting is dynamic and subject to change. Requires continuous monitoring and member contact."
+}

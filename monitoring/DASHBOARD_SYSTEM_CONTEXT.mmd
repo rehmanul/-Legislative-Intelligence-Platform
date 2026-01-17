@@ -1,0 +1,189 @@
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+---
+config:
+  layout: dagre
+  theme: default
+---
+flowchart TB
+    subgraph SYSTEM["🤖 Agent Orchestrator System"]
+        direction TB
+        
+        subgraph DATA_LAYER["📊 Data Layer"]
+            REGISTRY["Agent Registry<br/>agent-registry.json"]
+            STATE["Legislative State<br/>legislative-state.json"]
+            REVIEWS["Review Queues<br/>review/*_queue.json"]
+            GOALS["Workflow Goals<br/>goals/workflow-goal.json"]
+            AUDIT["Audit Log<br/>audit/audit-log.jsonl"]
+        end
+        
+        subgraph DASHBOARD_LAYER["📈 Dashboard Layer (NEW)"]
+            direction TB
+            
+            MAIN_DASH["Main Dashboard<br/>dashboard-terminal.py<br/>[Human-Review Focused]"]
+            TIMELINE_DASH["Timeline Dashboard<br/>dashboard-timeline.py<br/>[Time-Horizon Views]"]
+            
+            subgraph TIME_HORIZONS["⏰ Time-Horizon Categorization"]
+                URGENT["Urgent<br/>(48 hours)"]
+                WEEKLY["Weekly<br/>(7 days)"]
+                MONTHLY["Monthly<br/>(30 days)"]
+            end
+            
+            CATEGORIZE["categorize_by_time_horizon()<br/>[Categorization Logic]"]
+        end
+        
+        subgraph VISUALIZATION["📊 Visualization Output"]
+            MAIN_CHART["dashboard-status.mmd<br/>[System Status Chart]"]
+            TIMELINE_CHART["timeline-chart.mmd<br/>[Gantt Timeline]"]
+        end
+        
+        subgraph AGENTS["🤖 Agent Layer"]
+            INTEL_AGENTS["Intelligence Agents<br/>[Read-Only]"]
+            DRAFT_AGENTS["Drafting Agents<br/>[Human-Gated]"]
+            EXEC_AGENTS["Execution Agents<br/>[Authorized]"]
+        end
+        
+        subgraph LEGISLATIVE["📜 Legislative Timeline"]
+            direction TB
+            
+            subgraph PRE_LEG["PRE-LEGISLATION"]
+                ISSUE_DISC["Issue Discovery<br/>Signal Detection"]
+                STAFF_EDU["Staff Education<br/>Member Briefing"]
+                CONCEPT_MEMO["Concept Memo<br/>Circulation"]
+                VEHICLE_SCOUT["Vehicle Scouting<br/>Bill Search"]
+            end
+            
+            subgraph INTRODUCTION["INTRODUCTION"]
+                SPONSOR_SEC["Sponsor Secured<br/>Member Commitment"]
+                COSPONSOR_SIG["Co-Sponsor Signaling<br/>Whip Count"]
+                REFERRAL_MECH["Referral Mechanics<br/>Jurisdiction"]
+            end
+            
+            subgraph COMMITTEE["COMMITTEE PROCESS"]
+                SUBCOMM_REF["Subcommittee Referral<br/>Assignment"]
+                HEARINGS["Hearings Scheduled<br/>Witness Prep"]
+                STAFF_QA["Staff Q&A<br/>Technical Review"]
+                MARKUP["Markup Scheduled<br/>Amendment Risk"]
+                AMEND_RISK{"Amendment<br/>Exposure"}
+            end
+            
+            subgraph FLOOR_PASS["FLOOR & PASSAGE"]
+                FLOOR_SCHED["Floor Scheduling<br/>Calendar Risk"]
+                FLOOR_AMEND{"Floor Amendment<br/>Exposure"}
+                PASSAGE{"Passage<br/>Uncertainty"}
+            end
+            
+            subgraph BICAMERAL["BICAMERAL / CONFERENCE"]
+                SENATE_PROC["Senate Process<br/>Parallel Track"]
+                CONF_RISK{"Conference<br/>Committee Risk"}
+                RECONCILE["House-Senate<br/>Reconciliation"]
+            end
+            
+            subgraph POST_PASS["POST-PASSAGE"]
+                AUTH_VS_APPROP{"Authorization vs<br/>Appropriation"}
+                REPORT_LANG["Report Language<br/>Interpretation"]
+                AGENCY_IMPL["Agency Implementation<br/>Discretion"]
+            end
+            
+            DIE_STALL["Bill Dies/Stalls<br/>Session Ends"]
+        end
+    end
+    
+    subgraph UTILITIES["🔧 Utility Scripts"]
+        CLEANUP["cleanup__agent_registry.py<br/>[Deduplicate & Retire Stale]"]
+    end
+    
+    %% Data flow
+    REGISTRY --> MAIN_DASH
+    REGISTRY --> TIMELINE_DASH
+    STATE --> MAIN_DASH
+    STATE --> TIMELINE_DASH
+    REVIEWS --> MAIN_DASH
+    REVIEWS --> TIMELINE_DASH
+    GOALS --> MAIN_DASH
+    GOALS --> TIMELINE_DASH
+    AUDIT --> MAIN_DASH
+    
+    %% Dashboard processing
+    MAIN_DASH --> CATEGORIZE
+    TIMELINE_DASH --> CATEGORIZE
+    CATEGORIZE --> URGENT
+    CATEGORIZE --> WEEKLY
+    CATEGORIZE --> MONTHLY
+    
+    %% Visualization
+    MAIN_DASH --> MAIN_CHART
+    TIMELINE_DASH --> TIMELINE_CHART
+    
+    %% Agent relationships
+    INTEL_AGENTS --> REGISTRY
+    DRAFT_AGENTS --> REGISTRY
+    DRAFT_AGENTS --> REVIEWS
+    EXEC_AGENTS --> REGISTRY
+    
+    %% Legislative progression (forward flow)
+    ISSUE_DISC --> STAFF_EDU
+    STAFF_EDU --> CONCEPT_MEMO
+    CONCEPT_MEMO --> VEHICLE_SCOUT
+    VEHICLE_SCOUT --> SPONSOR_SEC
+    SPONSOR_SEC --> COSPONSOR_SIG
+    COSPONSOR_SIG --> REFERRAL_MECH
+    REFERRAL_MECH --> SUBCOMM_REF
+    SUBCOMM_REF --> HEARINGS
+    HEARINGS --> STAFF_QA
+    STAFF_QA --> MARKUP
+    MARKUP --> AMEND_RISK
+    AMEND_RISK -->|Pass| FLOOR_SCHED
+    AMEND_RISK -->|Fail| DIE_STALL
+    FLOOR_SCHED --> FLOOR_AMEND
+    FLOOR_AMEND -->|Pass| PASSAGE
+    FLOOR_AMEND -->|Fail| DIE_STALL
+    PASSAGE -->|House| SENATE_PROC
+    PASSAGE -->|Senate| SENATE_PROC
+    SENATE_PROC --> CONF_RISK
+    CONF_RISK -->|Need Conference| RECONCILE
+    CONF_RISK -->|No Conference| AUTH_VS_APPROP
+    RECONCILE --> AUTH_VS_APPROP
+    AUTH_VS_APPROP -->|Authorization| REPORT_LANG
+    AUTH_VS_APPROP -->|Appropriation| AGENCY_IMPL
+    REPORT_LANG --> AGENCY_IMPL
+    
+    %% Feedback loops (setbacks and iteration)
+    AMEND_RISK -.->|Major Changes| CONCEPT_MEMO
+    FLOOR_AMEND -.->|Rejected| MARKUP
+    CONF_RISK -.->|Irreconcilable| DIE_STALL
+    DIE_STALL -.->|Next Session| ISSUE_DISC
+    STAFF_QA -.->|Technical Issues| CONCEPT_MEMO
+    
+    %% Legislative alignment with system
+    LEGISLATIVE --> STATE
+    STATE --> TIME_HORIZONS
+    
+    %% Dashboard monitoring of legislative risks
+    AMEND_RISK --> TIME_HORIZONS
+    FLOOR_SCHED --> TIME_HORIZONS
+    CONF_RISK --> TIME_HORIZONS
+    DIE_STALL --> TIME_HORIZONS
+    
+    %% Cleanup utility
+    REGISTRY --> CLEANUP
+    CLEANUP --> REGISTRY
+    
+    %% Styling
+    classDef new fill:#D1FAE5,stroke:#065F46,stroke-width:3px
+    classDef data fill:#DBEAFE,stroke:#1E40AF,stroke-width:2px
+    classDef dashboard fill:#FEF3C7,stroke:#92400E,stroke-width:3px
+    classDef agent fill:#E0E7FF,stroke:#4338CA,stroke-width:2px
+    classDef legislative fill:#F3F4F6,stroke:#6B7280,stroke-width:2px
+    classDef decision fill:#FEE2E2,stroke:#991B1B,stroke-width:3px
+    classDef failure fill:#FCA5A5,stroke:#DC2626,stroke-width:2px
+    classDef utility fill:#FCE7F3,stroke:#BE185D,stroke-width:2px
+    
+    class MAIN_DASH,TIMELINE_DASH,CATEGORIZE,URGENT,WEEKLY,MONTHLY new
+    class REGISTRY,STATE,REVIEWS,GOALS,AUDIT data
+    class MAIN_CHART,TIMELINE_CHART dashboard
+    class INTEL_AGENTS,DRAFT_AGENTS,EXEC_AGENTS agent
+    class ISSUE_DISC,STAFF_EDU,CONCEPT_MEMO,VEHICLE_SCOUT,SPONSOR_SEC,COSPONSOR_SIG,REFERRAL_MECH,SUBCOMM_REF,HEARINGS,STAFF_QA,MARKUP,FLOOR_SCHED,SENATE_PROC,RECONCILE,REPORT_LANG,AGENCY_IMPL legislative
+    class AMEND_RISK,FLOOR_AMEND,PASSAGE,CONF_RISK,AUTH_VS_APPROP decision
+    class DIE_STALL failure
+    class CLEANUP utility

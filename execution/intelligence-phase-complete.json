@@ -1,0 +1,36 @@
+{
+  "_meta": {
+    "phase": "intelligence",
+    "completed_at": "2026-01-07T03:06:26Z",
+    "status": "COMPLETE"
+  },
+  "agents_executed": [
+    {
+      "agent_id": "intel_signal_scan_pre_evt",
+      "status": "COMPLETE",
+      "output": "artifacts/intel_signal_scan_pre_evt/signal_summary.json",
+      "signals_detected": 4
+    },
+    {
+      "agent_id": "intel_stakeholder_map_pre_evt",
+      "status": "COMPLETE",
+      "output": "artifacts/intel_stakeholder_map_pre_evt/PRE_STAKEHOLDER_MAP.json",
+      "stakeholders_mapped": 5
+    },
+    {
+      "agent_id": "intel_opposition_detect_pre_evt",
+      "status": "COMPLETE",
+      "output": "artifacts/intel_opposition_detect_pre_evt/opposition_risk_assessment.json",
+      "opposition_risk": "medium"
+    }
+  ],
+  "artifacts_generated": [
+    "signal_summary.json",
+    "PRE_STAKEHOLDER_MAP.json",
+    "opposition_risk_assessment.json"
+  ],
+  "next_phase": "drafting",
+  "next_phase_blocked": true,
+  "blocking_reason": "GUIDANCE artifact not signed. Drafting agents require signed professional guidance.",
+  "required_action": "Sign GUIDANCE artifact or proceed with test mode (if authorized)"
+}

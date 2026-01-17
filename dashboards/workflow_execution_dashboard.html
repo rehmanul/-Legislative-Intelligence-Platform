@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workflow Execution Dashboard - Agent Orchestrator</title>
+    <style>
+        :root {
+            --primary-color: #fa709a;
+            --secondary-color: #fee140;
+            --success-color: var(--color-success);
+            --danger-color: var(--color-error);
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --bg-color: var(--color-bg-secondary);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-primary: var(--color-text-primary);
+            --text-secondary: var(--color-gray-500);
+            --border-color: var(--color-border);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.16);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-family-sans), Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: var(--spacing-xl);
+            color: var(--text-primary);
+        }
+        
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--color-bg-primary);
+            padding: 40px;
+            border-radius: var(--radius-2xl);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        header h1 {
+            font-size: 36px;
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            z-index: 1;
+        }
+        
+        header p {
+            font-size: var(--font-size-base);
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--spacing-xl);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideIn 0.4s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            user-select: none;
+            transition: color 0.2s ease;
+        }
+        
+        .card h3:hover {
+            color: var(--primary-color);
+        }
+        
+        .card h3 .collapse-icon {
+            font-size: var(--font-size-base);
+            transition: transform 0.3s ease;
+        }
+        
+        .card h3.collapsed .collapse-icon {
+            transform: rotate(-90deg);
+        }
+        
+        .card-content {
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+            padding: 0;
+        }
+        
+        .controls {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: var(--radius-xl);
+            margin-bottom: 30px;
+            display: flex;
+            gap: var(--spacing-lg);
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .controls input[type="file"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px dashed var(--border-color);
+            border-radius: var(--radius-lg);
+            background: var(--color-bg-primary);
+            font-size: var(--font-size-sm);
+            cursor: pointer;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+        
+        .controls input[type="file"]:hover {
+            border-color: var(--primary-color);
+            background: #fefefe;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-sm);
+            transition: all var(--transition-base) var(--transition-ease) ease;
+            box-shadow: var(--shadow-sm);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--color-bg-primary);
+        }
+        
+        .btn-success {
+            background: var(--success-color);
+            color: var(--color-bg-primary);
+        }
+        
+        .btn-secondary {
+            background: var(--text-secondary);
+            color: var(--color-bg-primary);
+        }
+        
+        .btn-small {
+            padding: var(--spacing-sm) 16px;
+            font-size: var(--font-size-xs);
+        }
+        
+        #lastUpdated {
+            margin-left: auto;
+            color: var(--text-secondary);
+            font-size: 13px;
+            var(--color-bg-primary)-space: nowrap;
+        }
+        
+        .search-box {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            font-size: var(--font-size-sm);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(250, 112, 154, 0.1);
+        }
+        
+        .sort-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+            flex-wrap: wrap;
+        }
+        
+        .workflow-item {
+            padding: 18px;
+            background: linear-gradient(135deg, var(--color-gray-100) 0%, var(--color-bg-primary) 100%);
+            border-radius: var(--radius-lg);
+            margin-bottom: 12px;
+            border-left: 4px solid transparent;
+            transition: all var(--transition-base) var(--transition-ease) ease;
+            animation: slideIn 0.3s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .workflow-item:hover {
+            border-left-color: var(--primary-color);
+            box-shadow: var(--shadow-sm);
+            transform: translateX(4px);
+        }
+        
+        .workflow-item:nth-child(1) { animation-delay: 0.1s; }
+        .workflow-item:nth-child(2) { animation-delay: 0.15s; }
+        .workflow-item:nth-child(3) { animation-delay: 0.2s; }
+        .workflow-item:nth-child(4) { animation-delay: 0.25s; }
+        
+        .status-badge {
+            display: inline-block;
+            padding: var(--spacing-sm) 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: var(--font-weight-bold);
+            margin-right: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .status-completed {
+            background: var(--success-color);
+            color: var(--color-bg-primary);
+        }
+        
+        .status-running {
+            background: var(--info-color);
+            color: var(--color-bg-primary);
+            animation: pulse 2s infinite;
+        }
+        
+        .status-failed {
+            background: var(--danger-color);
+            color: var(--color-bg-primary);
+        }
+        
+        .status-pending {
+            background: var(--text-secondary);
+            color: var(--color-bg-primary);
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 0 0 rgba(23, 162, 184, 0.7);
+            }
+            50% {
+                opacity: 0.8;
+                box-shadow: 0 0 0 8px rgba(23, 162, 184, 0);
+            }
+        }
+        
+        .timeline-container {
+            position: relative;
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 70px;
+            margin-bottom: 30px;
+            animation: slideIn 0.4s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        
+        .timeline-marker {
+            position: absolute;
+            left: 18px;
+            top: 5px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 4px solid var(--color-bg-primary);
+            box-shadow: var(--shadow-md);
+            z-index: 2;
+        }
+        
+        .timeline-marker.completed {
+            background: var(--success-color);
+        }
+        
+        .timeline-marker.running {
+            background: var(--info-color);
+            animation: pulse 2s infinite;
+        }
+        
+        .timeline-marker.failed {
+            background: var(--danger-color);
+        }
+        
+        .timeline-marker.pending {
+            background: var(--text-secondary);
+        }
+        
+        .timeline-content {
+            background: linear-gradient(135deg, var(--color-gray-100) 0%, var(--color-bg-primary) 100%);
+            padding: var(--spacing-xl);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+            transition: all var(--transition-base) var(--transition-ease) ease;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .timeline-content:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateX(4px);
+        }
+        
+        .timeline-content h4 {
+            margin: 0 0 10px 0;
+            color: var(--text-primary);
+            font-size: var(--font-size-base);
+        }
+        
+        .timeline-content .time {
+            font-size: var(--font-size-xs);
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: var(--font-weight-medium);
+        }
+        
+        .timeline-content .details {
+            font-size: var(--font-size-sm);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+        
+        .recent-files {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .recent-file-item {
+            padding: 12px;
+            background: var(--color-bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all var(--transition-base) var(--transition-ease) ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .recent-file-item:hover {
+            border-color: var(--primary-color);
+            background: var(--color-gray-100);
+            transform: translateX(4px);
+        }
+        
+        .recent-file-item small {
+            color: var(--text-secondary);
+            font-size: var(--font-size-xs);
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: var(--spacing-xl) auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        #tooltip {
+            position: absolute;
+            background: rgba(44, 62, 80, 0.95);
+            color: var(--color-bg-primary);
+            padding: var(--spacing-sm) 12px;
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-xs);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+            max-width: 250px;
+        }
+        
+        #emptyState {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--color-bg-primary);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+        }
+        
+        #emptyState h3 {
+            font-size: 32px;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        #emptyState p {
+            font-size: var(--font-size-base);
+            margin-bottom: var(--spacing-md);
+            color: var(--text-secondary);
+        }
+        
+        #emptyState code {
+            background: var(--color-gray-100);
+            padding: var(--spacing-xs) 8px;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-sm);
+        }
+        
+        .error-box {
+            background: #fff5f5;
+            border: 2px solid var(--danger-color);
+            color: #721c24;
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--info-color);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--spacing-xl);
+        }
+        
+        .summary-item {
+            padding: var(--spacing-xl);
+            background: linear-gradient(135deg, var(--color-gray-100) 0%, var(--color-bg-primary) 100%);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .summary-item strong {
+            display: block;
+            font-size: var(--font-size-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .summary-item span {
+            display: block;
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+        }
+        
+        .summary-item.clickable {
+            cursor: pointer;
+            transition: all var(--transition-base) var(--transition-ease) ease;
+        }
+        
+        .summary-item.clickable:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filter-buttons label {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            margin-right: 5px;
+        }
+        
+        .btn-active {
+            background: var(--primary-color) !important;
+            color: var(--color-bg-primary) !important;
+        }
+    </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+    
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="container">
+        <header>
+            <h1>⚙️ Workflow Execution Dashboard</h1>
+            <p>End-to-end workflow execution tracking and agent execution results</p>
+        </header>
+        
+        <div id="recentFilesContainer" class="card recent-files" style="display: none;">
+            <h3>📂 Recent Files</h3>
+            <div id="recentFilesList" class="card-content"></div>
+        </div>
+        
+        <div class="controls">
+            <input type="file" id="fileInput" accept=".json" aria-label="Select workflow JSON file to load" />
+            <button class="btn btn-primary" onclick="loadDefault()" data-tooltip="Show instructions for loading workflow data">
+                📋 Load Instructions
+            </button>
+            <button class="btn btn-success" onclick="exportData()" id="exportBtn" style="display: none;" data-tooltip="Export current workflow data as JSON file">
+                💾 Export JSON
+            </button>
+            <span id="lastUpdated"></span>
+        </div>
+        
+        <div id="errorContainer"></div>
+        
+        <div id="dashboardContent" style="display: none;">
+            <div class="card">
+                <h3 onclick="toggleSection(this)">
+                    <span class="collapse-icon">▼</span>
+                    Workflow Summary
+                </h3>
+                <div class="card-content" id="workflowSummary"></div>
+            </div>
+            
+            <div class="card">
+                <h3 onclick="toggleSection(this)">
+                    <span class="collapse-icon">▼</span>
+                    Execution Timeline
+                </h3>
+                <div class="card-content" id="executionTimeline"></div>
+            </div>
+            
+            <div class="card">
+                <h3 onclick="toggleSection(this)">
+                    <span class="collapse-icon">▼</span>
+                    Agent Execution Results
+                </h3>
+                <div class="card-content">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="🔍 Search agents, status, or details..." aria-label="Search agent execution results" />
+                    </div>
+                    <div class="sort-buttons">
+                        <button class="btn btn-secondary btn-small" onclick="sortAgents('name')">Sort by Name</button>
+                        <button class="btn btn-secondary btn-small" onclick="sortAgents('status')">Sort by Status</button>
+                        <button class="btn btn-secondary btn-small" onclick="sortAgents('original')">Reset Order</button>
+                    </div>
+                    <div class="filter-buttons">
+                        <label>Filter by status:</label>
+                        <button class="btn btn-secondary btn-small btn-active" onclick="filterAgents('all')" id="filter-all">All</button>
+                        <button class="btn btn-secondary btn-small" onclick="filterAgents('completed')" id="filter-completed">✅ Completed</button>
+                        <button class="btn btn-secondary btn-small" onclick="filterAgents('failed')" id="filter-failed">❌ Failed</button>
+                        <button class="btn btn-secondary btn-small" onclick="filterAgents('running')" id="filter-running">🔄 Running</button>
+                        <button class="btn btn-secondary btn-small" onclick="filterAgents('pending')" id="filter-pending">⏳ Pending</button>
+                    </div>
+                    <div id="agentResults"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="emptyState">
+            <h3>📁 No Workflow Data</h3>
+            <p>Select a workflow JSON file to view execution results.</p>
+            <p style="margin-top: var(--spacing-md); font-size: var(--font-size-sm);">
+                Run: <code>python scripts/test_workflow_execution.py</code> to generate workflow data
+            </p>
+        </div>
+    </div>
+    
+    <div id="tooltip"></div>
+    
+    <script>
+        // Configuration constants
+        const CONFIG = {
+            SEARCH_DEBOUNCE_MS: 150,
+            TOOLTIP_OFFSET: 15,
+            MAX_RECENT_FILES: 5,
+            ANIMATION_STAGGER: 0.1,
+            AUTO_RESTORE_ENABLED: true,
+            LAST_WORKFLOW_KEY: 'lastWorkflowData',
+            LAST_FILENAME_KEY: 'lastWorkflowFilename'
+        };
+        
+        let currentData = null;
+        let originalAgentOrder = [];
+        let currentFilter = 'all';
+        let searchTimeout = null;
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateRecentFilesMenu();
+            initializeEventDelegation();
+            
+            // Try to restore last viewed workflow from cache
+            if (CONFIG.AUTO_RESTORE_ENABLED) {
+                tryAutoRestore();
+            }
+            
+            document.getElementById('fileInput').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    showLoading();
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        try {
+                            const data = JSON.parse(event.target.result);
+                            currentData = data;
+                            saveRecentFile(file.name, data);
+                            renderDashboard(data);
+                        } catch (error) {
+                            showError('Failed to parse JSON: ' + error.message);
+                            hideLoading();
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            });
+        });
+        
+        function tryAutoRestore() {
+            try {
+                const lastData = localStorage.getItem(CONFIG.LAST_WORKFLOW_KEY);
+                const lastFilename = localStorage.getItem(CONFIG.LAST_FILENAME_KEY);
+                
+                if (lastData && lastFilename) {
+                    try {
+                        const data = JSON.parse(lastData);
+                        currentData = data;
+                        renderDashboard(data);
+                        showInfo(`📋 Auto-restored last viewed workflow: <strong>${lastFilename}</strong> (from browser cache)`);
+                        return; // Exit if we successfully restored cached data
+                    } catch (e) {
+                        console.error('Failed to restore cached data:', e);
+                        // Clear corrupted cache
+                        localStorage.removeItem(CONFIG.LAST_WORKFLOW_KEY);
+                        localStorage.removeItem(CONFIG.LAST_FILENAME_KEY);
+                    }
+                }
+                
+                // If no cached data, show demo data automatically
+                showDemoData();
+            } catch (e) {
+                console.error('Failed to check for cached workflow:', e);
+                // Still show demo data even if there's an error
+                showDemoData();
+            }
+        }
+        
+        function showDemoData() {
+            const demoData = {
+                workflow_id: "demo-workflow-001",
+                created_at: new Date().toISOString(),
+                status: {
+                    current_mode: "WORK",
+                    execution_ready: true,
+                    last_updated: new Date().toISOString()
+                },
+                plan: {
+                    locked: true,
+                    sequence: [
+                        "intel_signal_scan_pre_evt",
+                        "intel_stakeholder_map_pre_evt",
+                        "draft_concept_memo_pre_evt",
+                        "execution_outreach_comm_evt",
+                        "learning_post_analysis_impl_evt"
+                    ],
+                    agent_registry: {
+                        "intel_signal_scan_pre_evt": {
+                            executed: true,
+                            status: "COMPLETED",
+                            scope: "Scan industry signals for policy opportunities",
+                            executed_at: new Date(Date.now() - 3600000).toISOString()
+                        },
+                        "intel_stakeholder_map_pre_evt": {
+                            executed: true,
+                            status: "COMPLETED",
+                            scope: "Map stakeholders and influence networks",
+                            executed_at: new Date(Date.now() - 1800000).toISOString()
+                        },
+                        "draft_concept_memo_pre_evt": {
+                            executed: true,
+                            status: "RUNNING",
+                            scope: "Generate concept memo for HR_PRE review",
+                            executed_at: new Date(Date.now() - 600000).toISOString()
+                        },
+                        "execution_outreach_comm_evt": {
+                            executed: true,
+                            status: "PENDING",
+                            scope: "Coordinate stakeholder outreach"
+                        },
+                        "learning_post_analysis_impl_evt": {
+                            executed: false,
+                            status: "PENDING",
+                            scope: "Analyze execution outcomes"
+                        }
+                    }
+                }
+            };
+            
+            currentData = demoData;
+            renderDashboard(demoData);
+            showInfo(`🎯 <strong>Demo Mode:</strong> Showing sample workflow data. Load your own JSON file to view real workflows.`);
+        }
+        
+        // Event delegation for tooltips (works with dynamically added elements)
+        function initializeEventDelegation() {
+            const tooltip = document.getElementById('tooltip');
+            
+            document.addEventListener('mouseover', function(e) {
+                const tooltipEl = e.target.closest('[data-tooltip]');
+                if (tooltipEl) {
+                    tooltip.textContent = tooltipEl.dataset.tooltip;
+                    tooltip.style.opacity = '1';
+                }
+            });
+            
+            document.addEventListener('mousemove', function(e) {
+                if (tooltip.style.opacity === '1') {
+                    tooltip.style.left = (e.pageX + CONFIG.TOOLTIP_OFFSET) + 'px';
+                    tooltip.style.top = (e.pageY + CONFIG.TOOLTIP_OFFSET) + 'px';
+                }
+            });
+            
+            document.addEventListener('mouseout', function(e) {
+                if (e.target.closest('[data-tooltip]')) {
+                    tooltip.style.opacity = '0';
+                }
+            });
+        }
+        
+        function showLoading() {
+            document.getElementById('dashboardContent').style.display = 'block';
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('dashboardContent').innerHTML = `
+                <div class="card" style="text-align: center; padding: 60px;">
+                    <div class="loading-spinner"></div>
+                    <p style="margin-top: var(--spacing-xl); color: var(--text-secondary);">Loading workflow data...</p>
+                </div>
+            `;
+        }
+        
+        function hideLoading() {
+            // Will be replaced by renderDashboard
+        }
+        
+        function loadDefault() {
+            document.getElementById('errorContainer').innerHTML = `
+                <div class="info-box">
+                    <strong>ℹ️ Instructions:</strong><br>
+                    <p style="margin-top: var(--spacing-md);">
+                        To load workflow data, select a JSON file from:<br>
+                        <code>data/workflows/{workflow_id}/workflow.json</code>
+                    </p>
+                    <p style="margin-top: var(--spacing-md);">
+                        Or run: <code>python scripts/test_workflow_execution.py</code> to generate a test workflow.
+                    </p>
+                </div>
+            `;
+        }
+        
+        function showError(message) {
+            document.getElementById('errorContainer').innerHTML = `
+                <div class="error-box">
+                    <strong>❌ Error:</strong> ${message}
+                </div>
+            `;
+        }
+        
+        function showInfo(message) {
+            document.getElementById('errorContainer').innerHTML = `
+                <div class="info-box">
+                    ${message}
+                </div>
+            `;
+            // Auto-hide info messages after 5 seconds
+            setTimeout(() => {
+                const container = document.getElementById('errorContainer');
+                if (container.querySelector('.info-box')) {
+                    container.innerHTML = '';
+                }
+            }, 5000);
+        }
+        
+        function renderDashboard(data) {
+            currentData = data;
+            document.getElementById('emptyState').style.display = 'none';
+            
+            // Restore dashboard structure if it was replaced by loading state
+            const dashboardContent = document.getElementById('dashboardContent');
+            if (!dashboardContent.querySelector('#workflowSummary')) {
+                dashboardContent.innerHTML = `
+                    <div class="card">
+                        <h3 onclick="toggleSection(this)">
+                            <span class="collapse-icon">▼</span>
+                            Workflow Summary
+                        </h3>
+                        <div class="card-content" id="workflowSummary"></div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 onclick="toggleSection(this)">
+                            <span class="collapse-icon">▼</span>
+                            Execution Timeline
+                        </h3>
+                        <div class="card-content" id="executionTimeline"></div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 onclick="toggleSection(this)">
+                            <span class="collapse-icon">▼</span>
+                            Agent Execution Results
+                        </h3>
+                        <div class="card-content">
+                            <div class="search-box">
+                                <input type="text" id="searchInput" placeholder="🔍 Search agents, status, or details..." aria-label="Search agent execution results" />
+                            </div>
+                            <div class="sort-buttons">
+                                <button class="btn btn-secondary btn-small" onclick="sortAgents('name')">Sort by Name</button>
+                                <button class="btn btn-secondary btn-small" onclick="sortAgents('status')">Sort by Status</button>
+                                <button class="btn btn-secondary btn-small" onclick="sortAgents('original')">Reset Order</button>
+                            </div>
+                            <div class="filter-buttons">
+                                <label>Filter by status:</label>
+                                <button class="btn btn-secondary btn-small btn-active" onclick="filterAgents('all')" id="filter-all">All</button>
+                                <button class="btn btn-secondary btn-small" onclick="filterAgents('completed')" id="filter-completed">✅ Completed</button>
+                                <button class="btn btn-secondary btn-small" onclick="filterAgents('failed')" id="filter-failed">❌ Failed</button>
+                                <button class="btn btn-secondary btn-small" onclick="filterAgents('running')" id="filter-running">🔄 Running</button>
+                                <button class="btn btn-secondary btn-small" onclick="filterAgents('pending')" id="filter-pending">⏳ Pending</button>
+                            </div>
+                            <div id="agentResults"></div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            dashboardContent.style.display = 'block';
+            document.getElementById('exportBtn').style.display = 'inline-flex';
+            document.getElementById('lastUpdated').textContent = `Last updated: ${new Date().toLocaleString()}`;
+            
+            const status = data.status || {};
+            const plan = data.plan || {};
+            
+            // Render workflow summary
+            const workflowId = data.workflow_id || 'unknown';
+            document.getElementById('workflowSummary').innerHTML = `
+                <div class="summary-grid">
+                    <div class="summary-item clickable" onclick="copyToClipboard('${workflowId}', this)" data-tooltip="Click to copy Workflow ID">
+                        <strong>Workflow ID</strong>
+                        <span id="workflow-id-span">${workflowId}</span>
+                    </div>
+                    <div class="summary-item">
+                        <strong>Current Mode</strong>
+                        <span>${status.current_mode || 'UNKNOWN'}</span>
+                    </div>
+                    <div class="summary-item">
+                        <strong>Execution Ready</strong>
+                        <span>${status.execution_ready ? '✅ Yes' : '❌ No'}</span>
+                    </div>
+                    <div class="summary-item">
+                        <strong>Plan Locked</strong>
+                        <span>${plan.locked ? '🔒 Yes' : '🔓 No'}</span>
+                    </div>
+                    <div class="summary-item">
+                        <strong>Sequence Length</strong>
+                        <span>${plan.sequence ? plan.sequence.length : 0}</span>
+                    </div>
+                    <div class="summary-item">
+                        <strong>Agents Registered</strong>
+                        <span>${plan.agent_registry ? Object.keys(plan.agent_registry).length : 0}</span>
+                    </div>
+                </div>
+            `;
+            
+            // Render agent results
+            renderAgentResults(plan.agent_registry || {});
+            
+            // Render timeline
+            renderTimeline(data);
+            
+            // Initialize search and reset filter (re-initialize after structure restore)
+            setTimeout(() => {
+                initializeSearch();
+                currentFilter = 'all';
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) searchInput.value = '';
+                performSearch('');
+            }, 0);
+        }
+        
+        function renderAgentResults(agentRegistry) {
+            const executed = Object.entries(agentRegistry).filter(([_, info]) => info.executed);
+            
+            let html = '';
+            originalAgentOrder = [];
+            
+            executed.forEach(([agentId, info], index) => {
+                const status = (info.status || 'UNKNOWN').toLowerCase();
+                const statusClass = status === 'completed' ? 'status-completed' : 
+                                  status === 'failed' ? 'status-failed' : 
+                                  status === 'running' ? 'status-running' : 'status-pending';
+                
+                originalAgentOrder.push({ agentId, info, status, statusClass, index });
+                
+                html += `
+                    <div class="workflow-item" data-agent-id="${agentId}" data-status="${status}">
+                        <span class="status-badge ${statusClass}">${status.toUpperCase()}</span>
+                        <strong>${agentId}</strong>
+                        ${info.error ? `<div style="color:#721c24;font-size:13px;margin-top:8px;padding: var(--spacing-sm);background:#fff5f5;border-radius: var(--radius-sm);">⚠️ Error: ${info.error}</div>` : ''}
+                        ${info.scope ? `<div style="color:var(--text-secondary);font-size: var(--font-size-xs);margin-top:5px;">Scope: ${info.scope}</div>` : ''}
+                        ${info.executed_at ? `<div style="color:var(--text-secondary);font-size:11px;margin-top:5px;">Executed: ${new Date(info.executed_at).toLocaleString()}</div>` : ''}
+                    </div>
+                `;
+            });
+            
+            document.getElementById('agentResults').innerHTML = html || '<p style="color:var(--text-secondary);text-align:center;padding:40px;">No agent execution data available</p>';
+        }
+        
+        function renderTimeline(data) {
+            const plan = data.plan || {};
+            const sequence = plan.sequence || [];
+            const agentRegistry = plan.agent_registry || {};
+            const status = data.status || {};
+            
+            if (sequence.length === 0 && Object.keys(agentRegistry).length === 0) {
+                document.getElementById('executionTimeline').innerHTML = '<p style="color:var(--text-secondary);text-align:center;padding:40px;">No execution sequence data available</p>';
+                return;
+            }
+            
+            let timelineItems = [];
+            
+            // Add workflow start
+            timelineItems.push({
+                agentId: 'WORKFLOW_START',
+                status: 'completed',
+                time: data.created_at || data.started_at || 'Unknown',
+                details: `Workflow ${data.workflow_id || 'unknown'} started in ${status.current_mode || 'UNKNOWN'} mode`
+            });
+            
+            // Process sequence if available
+            if (sequence.length > 0) {
+                sequence.forEach((agentId, index) => {
+                    const agentInfo = agentRegistry[agentId] || {};
+                    const agentStatus = agentInfo.executed ? (agentInfo.status || 'pending') : 'pending';
+                    timelineItems.push({
+                        agentId: agentId,
+                        status: agentStatus,
+                        time: agentInfo.executed_at || agentInfo.started_at || null,
+                        details: agentInfo.error ? `Error: ${agentInfo.error}` : agentInfo.scope || agentId,
+                        index: index + 1,
+                        total: sequence.length
+                    });
+                });
+            } else {
+                // Fallback: use agent registry
+                Object.entries(agentRegistry).forEach(([agentId, info], index) => {
+                    if (info.executed) {
+                        const agentStatus = info.status || 'pending';
+                        timelineItems.push({
+                            agentId: agentId,
+                            status: agentStatus,
+                            time: info.executed_at || info.started_at || null,
+                            details: info.error ? `Error: ${info.error}` : info.scope || agentId,
+                            index: index + 1
+                        });
+                    }
+                });
+            }
+            
+            // Add workflow current state
+            if (status.current_mode) {
+                timelineItems.push({
+                    agentId: 'WORKFLOW_STATE',
+                    status: status.execution_ready ? 'completed' : 'running',
+                    time: status.last_updated || 'Current',
+                    details: `Current mode: ${status.current_mode} | Execution ready: ${status.execution_ready ? 'Yes' : 'No'}`
+                });
+            }
+            
+            // Render timeline
+            let timelineHtml = '<div class="timeline-container"><div class="timeline-line"></div>';
+            
+            timelineItems.forEach((item, idx) => {
+                const statusClass = item.status === 'completed' ? 'completed' : 
+                                  item.status === 'running' ? 'running' :
+                                  item.status === 'failed' ? 'failed' : 'pending';
+                const timeStr = item.time ? new Date(item.time).toLocaleString() : 'Pending';
+                
+                timelineHtml += `
+                    <div class="timeline-item" style="animation-delay: ${idx * 0.1}s">
+                        <div class="timeline-marker ${statusClass}"></div>
+                        <div class="timeline-content">
+                            <h4>${item.agentId}</h4>
+                            <div class="time">${timeStr}${item.index ? ` (Step ${item.index}${item.total ? ` of ${item.total}` : ''})` : ''}</div>
+                            <div class="details">${item.details}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            timelineHtml += '</div>';
+            document.getElementById('executionTimeline').innerHTML = timelineHtml;
+        }
+        
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.collapse-icon');
+            
+            if (content.classList.contains('collapsed')) {
+                content.classList.remove('collapsed');
+                header.classList.remove('collapsed');
+                icon.textContent = '▼';
+            } else {
+                content.classList.add('collapsed');
+                header.classList.add('collapsed');
+                icon.textContent = '▶';
+            }
+        }
+        
+        function initializeSearch() {
+            const searchInput = document.getElementById('searchInput');
+            if (!searchInput) return;
+            
+            // Remove existing event listeners by cloning and replacing
+            const newSearchInput = searchInput.cloneNode(true);
+            searchInput.parentNode.replaceChild(newSearchInput, searchInput);
+            
+            newSearchInput.addEventListener('input', function(e) {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                const searchTerm = e.target.value.toLowerCase().trim();
+                    performSearch(searchTerm);
+                }, CONFIG.SEARCH_DEBOUNCE_MS);
+            });
+        }
+        
+        function performSearch(searchTerm) {
+                const items = document.querySelectorAll('.workflow-item');
+            let visibleCount = 0;
+            
+            items.forEach(item => {
+                const itemStatus = item.getAttribute('data-status');
+                const matchesFilter = currentFilter === 'all' || itemStatus === currentFilter;
+                const matchesSearch = searchTerm === '' || item.textContent.toLowerCase().includes(searchTerm);
+                
+                if (matchesFilter && matchesSearch) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            updateSearchResults(visibleCount, items.length);
+        }
+        
+        function updateSearchResults(visibleCount, totalCount) {
+            const container = document.getElementById('agentResults');
+            const existingNoResults = container.querySelector('.no-results-message');
+            
+            if (visibleCount === 0 && totalCount > 0) {
+                if (!existingNoResults) {
+                    const noResults = document.createElement('div');
+                    noResults.className = 'info-box no-results-message';
+                    noResults.innerHTML = '<strong>No results found</strong><p style="margin-top: var(--spacing-md);">Try adjusting your search or filter criteria.</p>';
+                    container.appendChild(noResults);
+                }
+            } else {
+                if (existingNoResults) {
+                    existingNoResults.remove();
+                }
+            }
+        }
+        
+        function filterAgents(status) {
+            currentFilter = status;
+            
+            // Update active button state
+            document.querySelectorAll('.filter-buttons .btn').forEach(btn => {
+                btn.classList.remove('btn-active');
+            });
+            const activeBtn = document.getElementById(`filter-${status}`);
+            if (activeBtn) {
+                activeBtn.classList.add('btn-active');
+            }
+            
+            // Get current search term
+            const searchInput = document.getElementById('searchInput');
+            const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+            
+            // Apply filter and search
+            performSearch(searchTerm);
+        }
+        
+        function sortAgents(sortBy) {
+            const container = document.getElementById('agentResults');
+            const items = Array.from(document.querySelectorAll('.workflow-item'));
+            
+            if (sortBy === 'original') {
+                // Reset to original order
+                container.innerHTML = '';
+                originalAgentOrder.forEach(({ agentId, info, status, statusClass }) => {
+                    const item = document.createElement('div');
+                    item.className = 'workflow-item';
+                    item.setAttribute('data-agent-id', agentId);
+                    item.setAttribute('data-status', status);
+                    item.innerHTML = `
+                        <span class="status-badge ${statusClass}">${status.toUpperCase()}</span>
+                        <strong>${agentId}</strong>
+                        ${info.error ? `<div style="color:#721c24;font-size:13px;margin-top:8px;padding: var(--spacing-sm);background:#fff5f5;border-radius: var(--radius-sm);">⚠️ Error: ${info.error}</div>` : ''}
+                        ${info.scope ? `<div style="color:var(--text-secondary);font-size: var(--font-size-xs);margin-top:5px;">Scope: ${info.scope}</div>` : ''}
+                        ${info.executed_at ? `<div style="color:var(--text-secondary);font-size:11px;margin-top:5px;">Executed: ${new Date(info.executed_at).toLocaleString()}</div>` : ''}
+                    `;
+                    container.appendChild(item);
+                });
+                // Reapply filter after resetting order
+                const searchInput = document.getElementById('searchInput');
+                const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+                performSearch(searchTerm);
+                return;
+            }
+            
+            items.sort((a, b) => {
+                if (sortBy === 'name') {
+                    const nameA = a.querySelector('strong').textContent;
+                    const nameB = b.querySelector('strong').textContent;
+                    return nameA.localeCompare(nameB);
+                } else if (sortBy === 'status') {
+                    const statusOrder = { 'completed': 1, 'running': 2, 'failed': 3, 'pending': 4, 'unknown': 5 };
+                    const statusA = statusOrder[a.getAttribute('data-status')] || 5;
+                    const statusB = statusOrder[b.getAttribute('data-status')] || 5;
+                    return statusA - statusB;
+                }
+                return 0;
+            });
+            
+            container.innerHTML = '';
+            items.forEach(item => container.appendChild(item));
+            
+            // Reapply filter after sorting
+            const searchInput = document.getElementById('searchInput');
+            const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+            performSearch(searchTerm);
+        }
+        
+        function copyToClipboard(text, element) {
+            if (!text || text === 'unknown') return;
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    const span = element.querySelector('span');
+                    const original = span.textContent;
+                    span.textContent = '✅ Copied!';
+                    setTimeout(() => {
+                        span.textContent = original;
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy:', err);
+                    showError('Failed to copy to clipboard');
+                });
+            } else {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    const span = element.querySelector('span');
+                    const original = span.textContent;
+                    span.textContent = '✅ Copied!';
+                    setTimeout(() => {
+                        span.textContent = original;
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy:', err);
+                    showError('Failed to copy to clipboard');
+                }
+                document.body.removeChild(textarea);
+            }
+        }
+        
+        function saveRecentFile(filename, data) {
+            try {
+                // Save to recent files list
+                const recent = JSON.parse(localStorage.getItem('recentWorkflows') || '[]');
+                const entry = {
+                    filename: filename,
+                    timestamp: new Date().toISOString(),
+                    workflowId: data.workflow_id || 'unknown'
+                };
+                
+                // Remove if already exists
+                const index = recent.findIndex(r => r.filename === filename);
+                if (index > -1) recent.splice(index, 1);
+                
+                // Add to front
+                recent.unshift(entry);
+                
+                // Keep only last N files (from config)
+                if (recent.length > CONFIG.MAX_RECENT_FILES) recent.pop();
+                
+                localStorage.setItem('recentWorkflows', JSON.stringify(recent));
+                
+                // Save full data for auto-restore (if enabled)
+                if (CONFIG.AUTO_RESTORE_ENABLED) {
+                    try {
+                        // Store the full workflow data for auto-restore
+                        localStorage.setItem(CONFIG.LAST_WORKFLOW_KEY, JSON.stringify(data));
+                        localStorage.setItem(CONFIG.LAST_FILENAME_KEY, filename);
+                    } catch (e) {
+                        // If data is too large for localStorage, just log a warning
+                        console.warn('Workflow data too large for localStorage auto-restore:', e);
+                        // Clear the cache if it exists
+                        localStorage.removeItem(CONFIG.LAST_WORKFLOW_KEY);
+                        localStorage.removeItem(CONFIG.LAST_FILENAME_KEY);
+                    }
+                }
+                
+                updateRecentFilesMenu();
+            } catch (e) {
+                console.error('Failed to save recent file:', e);
+            }
+        }
+        
+        function updateRecentFilesMenu() {
+            try {
+                const recent = JSON.parse(localStorage.getItem('recentWorkflows') || '[]');
+                const container = document.getElementById('recentFilesContainer');
+                const list = document.getElementById('recentFilesList');
+                
+                if (recent.length === 0) {
+                    container.style.display = 'none';
+                    return;
+                }
+                
+                container.style.display = 'block';
+                list.innerHTML = recent.map(file => `
+                    <div class="recent-file-item" onclick="loadRecentFile('${file.filename}')" data-tooltip="Click to reload this file">
+                        <div>
+                            <strong>${file.filename}</strong><br>
+                            <small>${new Date(file.timestamp).toLocaleString()}</small>
+                        </div>
+                        <span>📂</span>
+                    </div>
+                `).join('');
+                
+                // Event delegation handles tooltips automatically
+            } catch (e) {
+                console.error('Failed to load recent files:', e);
+            }
+        }
+        
+        function loadRecentFile(filename) {
+            // Show info that user needs to manually select the file
+            document.getElementById('errorContainer').innerHTML = `
+                <div class="info-box">
+                    <strong>📂 Recent File Selected:</strong> ${filename}<br>
+                    <p style="margin-top: var(--spacing-md);">Please use the file input above to select this file again, or navigate to where you saved it.</p>
+                </div>
+            `;
+        }
+        
+        function exportData() {
+            if (!currentData) {
+                showError('No data to export');
+                return;
+            }
+            
+            try {
+                const json = JSON.stringify(currentData, null, 2);
+                const blob = new Blob([json], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `workflow_${currentData.workflow_id || 'export'}_${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                // Show success message
+                const errorContainer = document.getElementById('errorContainer');
+                errorContainer.innerHTML = `
+                    <div class="info-box" style="background: #d4edda; border-color: var(--success-color); color: #155724;">
+                        <strong>✅ Export Successful!</strong> File downloaded to your Downloads folder.
+                    </div>
+                `;
+                setTimeout(() => {
+                    errorContainer.innerHTML = '';
+                }, 3000);
+            } catch (e) {
+                showError('Failed to export: ' + e.message);
+            }
+        }
+    </script>
+</body>
+</html>

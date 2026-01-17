@@ -1,0 +1,23 @@
+{
+  "_meta": {
+    "agent_id": "intel_stakeholder_map_intro_evt",
+    "generated_at": "2026-01-21T01:00:00Z",
+    "artifact_type": "STAKEHOLDER_MAP",
+    "artifact_name": "Stakeholder Landscape Map",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": false,
+    "requires_review": null,
+    "guidance_status": "SIGNED"
+  },
+  "policy_domain": "Cybersecurity Workforce Development",
+  "allies": [
+    {"organization": "National Veterans' Organizations", "influence": "HIGH", "position": "STRONG_SUPPORT"},
+    {"organization": "HBCU Presidents Council", "influence": "MEDIUM", "position": "SUPPORT"}
+  ],
+  "opponents": [
+    {"organization": "Some fiscal conservative groups", "influence": "MEDIUM", "position": "OPPOSE_COST"}
+  ],
+  "key_insights": "Strong veteran and education coalition support, cost concerns are primary opposition",
+  "disclaimer": "Stakeholder positions are based on available information and may change."
+}

@@ -1,0 +1,189 @@
+{
+  "_meta": {
+    "artifact_type": "REVIEW_TEMPLATE",
+    "artifact_name": "HR_LANG Review Checklist",
+    "generated_at": "2026-01-20T12:30:00.000000Z",
+    "generated_by": "continuation_development_agent",
+    "purpose": "Template and checklist for HR_LANG review gate preparation",
+    "read_only": true,
+    "authoritative": false,
+    "review_gate": "HR_LANG",
+    "phase": "COMM_EVT",
+    "non_executive": true
+  },
+  "review_gate": {
+    "gate_id": "HR_LANG",
+    "gate_name": "Legislative Language Approval",
+    "required_for_transition": "COMM_EVT → FLOOR_EVT",
+    "time_estimate": "45-90 minutes",
+    "risk_level": "High",
+    "status": "NOT_STARTED"
+  },
+  "required_artifacts": [
+    {
+      "artifact_name": "Committee Briefing Packets",
+      "artifact_type": "COMM_BRIEFING",
+      "produced_by": "draft_committee_briefing_comm_evt",
+      "purpose": "Staff education and committee member briefing materials",
+      "review_requirements": [
+        "Review briefing packet content for accuracy",
+        "Assess alignment with approved policy framing",
+        "Evaluate clarity and completeness",
+        "Verify factual claims and citations"
+      ],
+      "current_status": "NOT_GENERATED",
+      "note": "Artifact will be generated in COMM_EVT phase"
+    },
+    {
+      "artifact_name": "Draft Legislative Language",
+      "artifact_type": "COMM_LANGUAGE",
+      "produced_by": "draft_legislative_language_comm_evt",
+      "purpose": "Statutory text for legislative proposal",
+      "review_requirements": [
+        "Review legislative language for legal accuracy",
+        "Assess statutory implications and compliance",
+        "Evaluate alignment with policy goals",
+        "Check for unintended consequences or conflicts",
+        "Verify technical legal terminology",
+        "Approve or reject language"
+      ],
+      "current_status": "NOT_GENERATED",
+      "note": "Artifact will be generated in COMM_EVT phase"
+    },
+    {
+      "artifact_name": "Amendment Strategy",
+      "artifact_type": "COMM_AMENDMENT_STRATEGY",
+      "produced_by": "draft_amendment_strategy_comm_evt",
+      "purpose": "Tactical options for amendments and modifications",
+      "review_requirements": [
+        "Review amendment strategy options",
+        "Assess tactical viability",
+        "Evaluate political and strategic implications",
+        "Approve or reject strategy"
+      ],
+      "current_status": "NOT_GENERATED",
+      "note": "Artifact will be generated in COMM_EVT phase"
+    }
+  ],
+  "review_checklist": {
+    "pre_review_preparation": [
+      "Confirm all three required artifacts have been generated",
+      "Verify artifacts are in correct format and location",
+      "Check that artifacts reference approved INTRO_EVT artifacts (Policy Framing, Whitepaper)",
+      "Ensure artifacts align with approved PRE_CONCEPT direction"
+    ],
+    "review_process": [
+      {
+        "step": 1,
+        "action": "Review Committee Briefing Packets",
+        "focus_areas": [
+          "Content accuracy and completeness",
+          "Alignment with approved policy direction",
+          "Clarity for committee staff",
+          "Factual verification"
+        ],
+        "time_estimate": "15-30 minutes"
+      },
+      {
+        "step": 2,
+        "action": "Review Draft Legislative Language",
+        "focus_areas": [
+          "Legal accuracy and statutory compliance",
+          "Alignment with policy goals",
+          "Technical legal terminology",
+          "Unintended consequences or conflicts",
+          "Implementation feasibility"
+        ],
+        "time_estimate": "20-40 minutes"
+      },
+      {
+        "step": 3,
+        "action": "Review Amendment Strategy",
+        "focus_areas": [
+          "Tactical viability",
+          "Political implications",
+          "Strategic alignment",
+          "Risk assessment"
+        ],
+        "time_estimate": "10-20 minutes"
+      }
+    ],
+    "decision_criteria": {
+      "approve_if": [
+        "All artifacts align with approved policy direction",
+        "Legislative language is legally sound and compliant",
+        "Amendment strategy is tactically viable",
+        "No significant risks or unintended consequences identified"
+      ],
+      "reject_if": [
+        "Artifacts do not align with approved policy direction",
+        "Legal language contains errors or compliance issues",
+        "Amendment strategy presents unacceptable risks",
+        "Significant unintended consequences identified"
+      ],
+      "revise_if": [
+        "Minor corrections or improvements needed",
+        "Alignment issues can be resolved with edits",
+        "Tactical adjustments required"
+      ]
+    }
+  },
+  "prerequisites": {
+    "required_before_hr_lang": [
+      {
+        "prerequisite": "Policy Framing (INTRO_FRAME) approved via HR_PRE",
+        "current_status": "PENDING",
+        "blocks": "HR_LANG cannot start until prerequisite satisfied"
+      },
+      {
+        "prerequisite": "Policy Whitepaper (INTRO_WHITEPAPER) approved via HR_PRE",
+        "current_status": "PENDING",
+        "blocks": "HR_LANG cannot start until prerequisite satisfied"
+      },
+      {
+        "prerequisite": "Committee referral external event confirmed",
+        "current_status": "PENDING",
+        "blocks": "System must be in COMM_EVT phase before HR_LANG artifacts can be generated"
+      }
+    ]
+  },
+  "review_gate_workflow": {
+    "artifact_submission": {
+      "trigger": "Agent generates artifact and submits to HR_LANG gate",
+      "gate_state": "PENDING",
+      "reviewer_notification": "Required"
+    },
+    "review_process": {
+      "reviewer_actions": [
+        "Access artifacts via review queue",
+        "Review each artifact according to checklist",
+        "Document decision and rationale",
+        "Approve, reject, or request revision"
+      ],
+      "decision_logging": {
+        "required_fields": [
+          "decision (APPROVED/REJECTED/REVISED)",
+          "decision_by (reviewer identifier)",
+          "decision_at (timestamp)",
+          "decision_rationale (optional but recommended)"
+        ]
+      }
+    },
+    "post_approval": {
+      "state_advancement": "COMM_EVT → FLOOR_EVT (requires additional external event: floor_scheduling)",
+      "unblocked_agents": "FLOOR_EVT drafting agents may proceed",
+      "note": "HR_LANG approval alone does not advance state; external event also required"
+    }
+  },
+  "current_phase_status": {
+    "system_phase": "INTRO_EVT",
+    "hr_lang_readiness": "NOT_READY",
+    "blocking_reasons": [
+      "System not yet in COMM_EVT phase",
+      "Required INTRO_EVT artifacts not yet approved",
+      "Committee referral not yet confirmed"
+    ],
+    "note": "This checklist is prepared for future use when system reaches COMM_EVT phase"
+  },
+  "disclaimer": "This is a review template and checklist only. It does not constitute actual review or approval. Actual review will occur when artifacts are submitted to HR_LANG gate in COMM_EVT phase."
+}

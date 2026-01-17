@@ -1,0 +1,55 @@
+%% INTERNAL, NON-AUTHORITATIVE — Pending HR_PRE approval
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+```mermaid
+flowchart TD
+    INTRO_EVT((INTRO_EVT))
+
+    subgraph Signals["Evidence Sources"]
+        Court["Court signals"]
+        Agency["Agency signals"]
+        Industry["Industry signals"]
+    end
+
+    subgraph Synthesis["Evidence Synthesis"]
+        LegalSynth["Legal precedents"]
+        RegSynth["Regulatory evidence"]
+        IndSynth["Industry evidence"]
+        StakeSynth["Stakeholder alignment"]
+    end
+
+    subgraph Rationale["Policy Rationale"]
+        Problem["Problem statement"]
+        Solution["Proposed solution"]
+        Impact["Expected impact"]
+    end
+
+    subgraph Validation["Academic Validation"]
+        Method["Methodology"]
+        Criteria["Validation criteria"]
+    end
+
+    HR_PRE{{HR_PRE decision gate}}
+
+    INTRO_EVT --> Synthesis
+    Synthesis --> Rationale
+    Rationale --> Validation
+    Validation --> HR_PRE
+
+    Court -.-> LegalSynth
+    Agency -.-> RegSynth
+    Industry -.-> IndSynth
+    StakeSynth -.-> Rationale
+
+    LegalSynth -.-> Rationale
+    RegSynth -.-> Rationale
+    IndSynth -.-> Rationale
+
+    classDef legal fill:#f8f0ff,stroke:#7b5cd6,color:#2c1a5f;
+    classDef reg fill:#eef7ff,stroke:#2b7bb9,color:#0f2a48;
+    classDef stake fill:#f4fff0,stroke:#6fa03d,color:#1f3313;
+    class LegalSynth legal
+    class RegSynth reg
+    class IndSynth reg
+    class StakeSynth stake
+```

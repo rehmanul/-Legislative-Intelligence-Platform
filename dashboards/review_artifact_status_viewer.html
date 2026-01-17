@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Artifact Status Viewer - Agent Orchestrator</title>
+    <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-family-sans), sans-serif; background: var(--color-bg-secondary); padding: var(--spacing-xl); }
+        .container { max-width: var(--container-max-width); margin: 0 auto; }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: var(--color-bg-primary); padding: 30px; border-radius: var(--radius-lg); margin-bottom: 30px; }
+        header h1 { font-size: 32px; margin-bottom: var(--spacing-md); }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-lg); margin-bottom: 30px; }
+        .stat-card { background: var(--color-bg-primary); padding: var(--spacing-xl); border-radius: var(--radius-lg); box-shadow: var(--shadow-2); text-align: center; }
+        .stat-value { font-size: 36px; font-weight: bold; margin: var(--spacing-md) 0; }
+        .stat-label { color: var(--color-text-secondary); font-size: var(--font-size-sm); }
+        .controls { background: var(--color-bg-primary); padding: var(--spacing-xl); border-radius: var(--radius-lg); margin-bottom: 30px; }
+        .controls input { padding: var(--spacing-md); border: 2px solid var(--color-border); border-radius: var(--radius-sm); width: 100%; margin-top: var(--spacing-md); }
+        .filters { display: flex; gap: var(--spacing-md); flex-wrap: wrap; margin-top: var(--spacing-lg); }
+        .filter-btn { padding: var(--spacing-sm) 16px; border: 2px solid var(--color-border); background: var(--color-bg-primary); border-radius: var(--radius-sm); cursor: pointer; }
+        .filter-btn.active { background: #667eea; color: var(--color-bg-primary); border-color: #667eea; }
+        .artifact-list { display: grid; gap: var(--spacing-lg); }
+        .artifact-card { background: var(--color-bg-primary); padding: var(--spacing-xl); border-radius: var(--radius-lg); box-shadow: var(--shadow-2); border-left: 4px solid var(--color-border); }
+        .artifact-card.status-complete { border-left-color: var(--color-success); }
+        .artifact-card.status-draft { border-left-color: #ffc107; }
+        .artifact-card.status-implementation { border-left-color: #17a2b8; }
+        .artifact-card.status-verification { border-left-color: #6f42c1; }
+        .artifact-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--spacing-md); }
+        .artifact-title { font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); color: var(--color-text-primary); }
+        .artifact-badge { display: inline-block; padding: var(--spacing-xs) 10px; border-radius: var(--radius-xl); font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); margin-left: 10px; }
+        .badge-draft { background: #fff3cd; color: #856404; }
+        .badge-complete { background: #d4edda; color: #155724; }
+        .badge-implementation { background: #d1ecf1; color: #0c5460; }
+        .badge-verification { background: #e2d9f3; color: #6f42c1; }
+        .artifact-meta { display: flex; gap: var(--spacing-lg); font-size: 13px; color: var(--color-text-secondary); margin-top: var(--spacing-md); }
+        .artifact-actions { margin-top: var(--spacing-lg); }
+        .btn { padding: var(--spacing-sm) 12px; border: none; border-radius: var(--radius-sm); cursor: pointer; font-size: 13px; margin-right: 8px; }
+        .btn-view { background: #667eea; color: var(--color-bg-primary); }
+        .btn-promote { background: var(--color-success); color: var(--color-bg-primary); }
+        .btn-archive { background: var(--color-gray-500); color: var(--color-bg-primary); }
+        .empty-state { text-align: center; padding: 60px; color: #999; }
+        
+        /* Vibe Check Styles */
+        .vibe-check-section {
+          margin-top: var(--spacing-lg);
+          padding: var(--spacing-lg);
+          background: #fff9e6;
+          border: 2px solid #ffc107;
+          border-radius: var(--radius-lg);
+        }
+        
+        .vibe-check-section h3 {
+          font-size: var(--font-size-base);
+          margin-bottom: var(--spacing-md);
+          color: #856404;
+        }
+        
+        .vibe-check-section details summary {
+          cursor: pointer;
+          font-weight: var(--font-weight-semibold);
+          color: #856404;
+          padding: var(--spacing-sm);
+          background: var(--color-bg-primary);
+          border-radius: var(--radius-sm);
+          transition: background var(--transition-base) var(--transition-ease);
+        }
+        
+        .vibe-check-section details summary:hover {
+          background: #fffbf0;
+        }
+        
+        .ai-interpretation {
+          margin-top: var(--spacing-lg);
+          padding: var(--spacing-lg);
+          background: #e7f3ff;
+          border-left: 4px solid var(--color-primary);
+          border-radius: var(--radius-sm);
+        }
+    </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+    
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="container">
+        <header>
+            <h1>📋 Review Artifact Status Viewer</h1>
+            <p>Audit and manage review artifacts - DRAFT vs COMPLETE status</p>
+        </header>
+        
+        <div class="stats" id="statsContainer">
+            <div class="stat-card">
+                <div class="stat-label">Total Artifacts</div>
+                <div class="stat-value" id="totalCount">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">DRAFT</div>
+                <div class="stat-value" id="draftCount" style="color: #ffc107;">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">COMPLETE</div>
+                <div class="stat-value" id="completeCount" style="color: var(--color-success);">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">VERIFICATION</div>
+                <div class="stat-value" id="verificationCount" style="color: #6f42c1;">0</div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <strong>📁 Load Artifacts Directory</strong>
+            <input type="file" id="directoryInput" webkitdirectory directory multiple accept="*.md,*.json" placeholder="Select artifacts/review/ directory" />
+            <p style="margin-top: var(--spacing-md); font-size: 13px; color: var(--color-text-secondary);">Or select individual files from <code>artifacts/review/</code></p>
+            
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all" onclick="filterArtifacts('all')">All</button>
+                <button class="filter-btn" data-filter="draft" onclick="filterArtifacts('draft')">DRAFT</button>
+                <button class="filter-btn" data-filter="complete" onclick="filterArtifacts('complete')">COMPLETE</button>
+                <button class="filter-btn" data-filter="implementation" onclick="filterArtifacts('implementation')">IMPLEMENTATION</button>
+                <button class="filter-btn" data-filter="verification" onclick="filterArtifacts('verification')">VERIFICATION</button>
+            </div>
+        </div>
+        
+        <div id="artifactList" class="artifact-list"></div>
+        <div id="emptyState" class="empty-state">
+            <h3>📁 No Artifacts Loaded</h3>
+            <p>Select files from the <code>artifacts/review/</code> directory to view status</p>
+        </div>
+    </div>
+    
+    <script>
+        let allArtifacts = [];
+        let currentFilter = 'all';
+        
+        document.getElementById('directoryInput').addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            allArtifacts = [];
+            
+            Promise.all(files.map(file => {
+                return new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const content = event.target.result;
+                        const artifact = parseArtifact(file.name, content);
+                        if (artifact) {
+                            allArtifacts.push(artifact);
+                        }
+                        resolve();
+                    };
+                    reader.readAsText(file);
+                });
+            })).then(() => {
+                updateStats();
+                renderArtifacts();
+            });
+        });
+        
+        function parseArtifact(filename, content) {
+            const artifact = {
+                filename: filename,
+                path: filename,
+                status: 'draft',
+                title: filename.replace(/_/g, ' ').replace(/\.[^.]+$/, ''),
+                type: filename.endsWith('.md') ? 'markdown' : 'json',
+                hasComplete: false,
+                hasImplementation: false,
+                hasVerification: false,
+                metadata: {}
+            };
+            
+            // Determine status from filename and content
+            if (filename.includes('__implementation_complete__') || filename.includes('__execution_complete__')) {
+                artifact.status = 'complete';
+                artifact.hasComplete = true;
+            } else if (filename.includes('__VERIFICATION_')) {
+                artifact.status = 'verification';
+                artifact.hasVerification = true;
+            } else if (filename.includes('__implementation__') || filename.includes('__design_implementation__')) {
+                artifact.status = 'implementation';
+                artifact.hasImplementation = true;
+            } else if (filename.includes('__DRAFT__')) {
+                artifact.status = 'draft';
+            }
+            
+            // Parse content for additional metadata
+            if (content) {
+                // Extract title from markdown
+                const titleMatch = content.match(/^#\s+(.+)$/m);
+                if (titleMatch) {
+                    artifact.title = titleMatch[1];
+                }
+                
+                // Check for status keywords in content
+                if (content.includes('IMPLEMENTATION COMPLETE') || content.includes('✅ COMPLETE') || content.includes('Status: ✅ COMPLETE')) {
+                    artifact.hasComplete = true;
+                }
+                if (content.includes('VERIFICATION') || content.includes('VERIFIED')) {
+                    artifact.hasVerification = true;
+                }
+            }
+            
+            return artifact;
+        }
+        
+        function updateStats() {
+            const total = allArtifacts.length;
+            const draft = allArtifacts.filter(a => a.status === 'draft' || a.filename.includes('__DRAFT__')).length;
+            const complete = allArtifacts.filter(a => a.status === 'complete' || a.hasComplete).length;
+            const verification = allArtifacts.filter(a => a.status === 'verification' || a.hasVerification).length;
+            
+            document.getElementById('totalCount').textContent = total;
+            document.getElementById('draftCount').textContent = draft;
+            document.getElementById('completeCount').textContent = complete;
+            document.getElementById('verificationCount').textContent = verification;
+        }
+        
+        function filterArtifacts(filter) {
+            currentFilter = filter;
+            
+            // Update filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === filter) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            renderArtifacts();
+        }
+        
+        function renderArtifacts() {
+            const container = document.getElementById('artifactList');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (allArtifacts.length === 0) {
+                container.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            let filtered = allArtifacts;
+            if (currentFilter !== 'all') {
+                filtered = allArtifacts.filter(a => {
+                    if (currentFilter === 'draft') return a.status === 'draft' || a.filename.includes('__DRAFT__');
+                    if (currentFilter === 'complete') return a.status === 'complete' || a.hasComplete;
+                    if (currentFilter === 'implementation') return a.status === 'implementation' || a.hasImplementation;
+                    if (currentFilter === 'verification') return a.status === 'verification' || a.hasVerification;
+                    return true;
+                });
+            }
+            
+            let html = '';
+            filtered.forEach(artifact => {
+                const statusClass = artifact.status === 'complete' ? 'complete' : 
+                                  artifact.status === 'verification' ? 'verification' :
+                                  artifact.status === 'implementation' ? 'implementation' : 'draft';
+                const badgeClass = artifact.status === 'complete' ? 'badge-complete' : 
+                                 artifact.status === 'verification' ? 'badge-verification' :
+                                 artifact.status === 'implementation' ? 'badge-implementation' : 'badge-draft';
+                const badgeText = artifact.status === 'complete' ? 'COMPLETE' : 
+                                artifact.status === 'verification' ? 'VERIFICATION' : 
+                                artifact.status === 'implementation' ? 'IMPLEMENTATION' : 'DRAFT';
+                
+                html += `
+                    <div class="artifact-card status-${statusClass}">
+                        <div class="artifact-header">
+                            <div class="artifact-title">${artifact.title}</div>
+                            <span class="artifact-badge ${badgeClass}">${badgeText}</span>
+                        </div>
+                        <div class="artifact-meta">
+                            <span>📄 ${artifact.filename}</span>
+                            <span>📝 ${artifact.type.toUpperCase()}</span>
+                            ${artifact.hasComplete ? '<span>✅ Has COMPLETE marker</span>' : ''}
+                            ${artifact.hasVerification ? '<span>🔍 Has VERIFICATION marker</span>' : ''}
+                        </div>
+                        
+                        ${artifact.status === 'draft' ? `
+                        <div style="margin-top: var(--spacing-lg); padding: var(--spacing-lg); background: #fff9e6; border: 2px solid #ffc107; border-radius: var(--radius-lg);">
+                            <h3 style="font-size: var(--font-size-base); margin-bottom: var(--spacing-md); color: #856404;">🧭 Vibe Check: Human Judgment Zone</h3>
+                            <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">
+                              This artifact is in DRAFT status. If something feels off, flag it here.
+                            </p>
+                            
+                            <details style="margin-top: var(--spacing-lg);">
+                              <summary style="cursor: pointer; font-weight: var(--font-weight-semibold); color: #856404; padding: var(--spacing-sm); background: var(--color-bg-primary); border-radius: var(--radius-sm);">
+                                ⚠️ Something feels off in this section
+                              </summary>
+                              
+                              <div style="margin-top: var(--spacing-lg); padding: var(--spacing-lg); background: var(--color-bg-primary); border-radius: var(--radius-sm);">
+                                <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">
+                                  You don't need to explain technically. A short note or even a fragment is enough.
+                                </p>
+                                
+                                <textarea
+                                  id="vibeInput-${artifact.filename.replace(/[^a-zA-Z0-9]/g, '_')}"
+                                  placeholder="e.g. This conclusion feels rushed, or I don't trust this assumption…"
+                                  style="width:100%;height:80px;padding: var(--spacing-md);border:1px solid var(--color-border);border-radius: var(--radius-sm);font-family:inherit;font-size:13px;resize:vertical;"
+                                ></textarea>
+                                
+                                <h4 style="margin-top: var(--spacing-lg); font-size: var(--font-size-sm); color: var(--color-text-primary);">Send this vibe to AI for clarification</h4>
+                                <pre style="background: var(--color-gray-100); padding: 12px; border-radius: var(--radius-sm); font-size: var(--font-size-xs); overflow-x: auto; margin-top: 8px; border: 1px solid var(--color-border);">ASK:
+The user feels discomfort about the artifact: ${artifact.filename}
+Their concern is subjective and may be imprecise.
+
+Tasks:
+- Restate the concern clearly and charitably
+- Identify what might be causing the discomfort
+- Suggest whether this warrants revision or is acceptable
+
+Do NOT propose code.
+Do NOT defend the artifact.
+Focus on sense-making.</pre>
+                              </div>
+                            </details>
+                            
+                            <div id="aiInterpretation-${artifact.filename.replace(/[^a-zA-Z0-9]/g, '_')}" style="display: none; margin-top: var(--spacing-lg); padding: var(--spacing-lg); background: #e7f3ff; border-left: 4px solid var(--color-primary); border-radius: var(--radius-sm);">
+                              <h3 style="font-size: var(--font-size-base); margin-bottom: var(--spacing-md); color: #084298;">🤖 AI Interpretation of User Concern</h3>
+                              <pre id="aiInterpretationText-${artifact.filename.replace(/[^a-zA-Z0-9]/g, '_')}" style="background: var(--color-bg-primary); padding: 12px; border-radius: var(--radius-sm); font-size: var(--font-size-xs); var(--color-bg-primary)-space: pre-wrap; margin: 0;"></pre>
+                              
+                              <h3 style="font-size: var(--font-size-sm); margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md); color: var(--color-text-primary);">Resolve This Concern</h3>
+                              
+                              <div style="margin-top: var(--spacing-md); display: grid; gap: var(--spacing-md);">
+                                <div style="padding: 12px; background: #d4edda; border: 1px solid var(--color-success); border-radius: var(--radius-sm);">
+                                  <h4 style="font-size: 13px; margin-bottom: 8px; color: #155724;">✅ Yes, that's right — revise</h4>
+                                  <pre style="background: var(--color-bg-primary); padding: var(--spacing-sm); border-radius: var(--radius-sm); font-size: 11px; margin: 0; overflow-x: auto;">DECISION:
+Artifact: ${artifact.filename}
+Decision: REVISE
+Reason: AI-reflected concern accepted
+Route Back to Execution: TRUE</pre>
+                                </div>
+                                
+                                <div style="padding: 12px; background: #d1ecf1; border: 1px solid #17a2b8; border-radius: var(--radius-sm);">
+                                  <h4 style="font-size: 13px; margin-bottom: 8px; color: #0c5460;">➡️ No, this is fine — proceed</h4>
+                                  <pre style="background: var(--color-bg-primary); padding: var(--spacing-sm); border-radius: var(--radius-sm); font-size: 11px; margin: 0; overflow-x: auto;">DECISION:
+Artifact: ${artifact.filename}
+Decision: APPROVED
+Note: Concern acknowledged but accepted</pre>
+                                </div>
+                                
+                                <div style="padding: 12px; background: #f8d7da; border: 1px solid var(--color-error); border-radius: var(--radius-sm);">
+                                  <h4 style="font-size: 13px; margin-bottom: 8px; color: #721c24;">🗑️ This undermines the artifact — discard</h4>
+                                  <pre style="background: var(--color-bg-primary); padding: var(--spacing-sm); border-radius: var(--radius-sm); font-size: 11px; margin: 0; overflow-x: auto;">DECISION:
+Artifact: ${artifact.filename}
+Decision: DISCARD
+Reason: Core assumption not trusted</pre>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        <div class="artifact-actions">
+                            <button class="btn btn-view" onclick="viewArtifact('${artifact.filename}')">👁️ View</button>
+                            ${artifact.status === 'draft' ? `<button class="btn btn-promote" onclick="promoteArtifact('${artifact.filename}')">⬆️ Promote</button>` : ''}
+                            <button class="btn btn-archive" onclick="archiveArtifact('${artifact.filename}')">📦 Archive</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html || '<div class="empty-state"><p>No artifacts match the current filter</p></div>';
+        }
+        
+        function viewArtifact(filename) {
+            alert(`View artifact: ${filename}\n\n(File viewing would open in new tab or modal)`);
+        }
+        
+        function promoteArtifact(filename) {
+            if (confirm(`Promote ${filename} from DRAFT to COMPLETE?`)) {
+                alert(`Would rename: ${filename}\nTo: ${filename.replace('__DRAFT__', '__COMPLETE__')}`);
+            }
+        }
+        
+        function archiveArtifact(filename) {
+            if (confirm(`Archive ${filename}?`)) {
+                alert(`Would move to: artifacts/archive/${filename}`);
+            }
+        }
+    </script>
+</body>
+</html>

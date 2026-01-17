@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "agent_id": "execution_outreach_comm_evt",
+    "generated_at": "2026-01-21T03:30:00Z",
+    "artifact_type": "OUTREACH_PLAN",
+    "artifact_name": "Stakeholder Outreach Execution Plan",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": null,
+    "guidance_status": "SIGNED"
+  },
+  "campaign_objective": "Build coalition support for H.R. 9102 - Agricultural Data Transparency Act",
+  "target_audiences": ["Farmer organizations", "Consumer advocacy groups", "Rural development organizations"],
+  "tactics": [
+    {"tactic": "Direct mail to farmer organization members", "timeline": "Week 1-2"},
+    {"tactic": "Op-eds in agricultural trade press", "timeline": "Week 2-3"},
+    {"tactic": "Virtual town halls with farmer members", "timeline": "Week 3-4"}
+  ],
+  "success_metrics": ["Member organization endorsements", "Letter-writing campaign participation", "Media coverage"],
+  "disclaimer": "Outreach plan requires review and approval before execution. All communications must comply with advocacy guidelines."
+}

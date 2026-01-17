@@ -1,0 +1,73 @@
+---
+config:
+  layout: dagre
+  theme: default
+---
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+flowchart TB
+
+START["Policy Opportunity<br/>Wi-Charge Technology"]:::start
+
+START --> DECIDE{Choose Execution Path}
+
+DECIDE -->|Infrastructure| PATH1["Path 1: Defense Facility<br/>Infrastructure Modernization"]
+DECIDE -->|R&D| PATH2["Path 2: R&D Programs"]
+DECIDE -->|Energy| PATH3["Path 3: Energy Efficiency"]
+
+subgraph P1["Path 1: Infrastructure (Division B)"]
+  direction TB
+  P1_PHASE1["Phase 1: Foundation<br/>Days 1-30<br/>Develop pilot proposal"]
+  P1_PHASE2["Phase 2: Engagement<br/>Days 31-60<br/>Brief energy offices"]
+  P1_PHASE3["Phase 3: Implementation<br/>Days 61-90<br/>Submit ERCIP proposal"]
+  P1_SECTIONS["Sections: 2101, 2201, 2301, 2402"]
+  
+  P1_PHASE1 --> P1_PHASE2
+  P1_PHASE2 --> P1_PHASE3
+  P1_SECTIONS --> P1_PHASE1
+end
+
+subgraph P2["Path 2: R&D (Title II)"]
+  direction TB
+  P2_PHASE1["Phase 1: Program ID<br/>Days 1-30<br/>Identify SBIR/STTR topics"]
+  P2_PHASE2["Phase 2: Proposal Dev<br/>Days 31-60<br/>Develop proposals"]
+  P2_PHASE3["Phase 3: Engagement<br/>Days 61-90<br/>Submit & engage"]
+  P2_SECTIONS["Sections: 220A, 220"]
+  
+  P2_PHASE1 --> P2_PHASE2
+  P2_PHASE2 --> P2_PHASE3
+  P2_SECTIONS --> P2_PHASE1
+end
+
+subgraph P3["Path 3: Energy (Division C)"]
+  direction TB
+  P3_PHASE1["Phase 1: Program Analysis<br/>Days 1-30<br/>Analyze ERCIP opportunities"]
+  P3_PHASE2["Phase 2: Proposal Dev<br/>Days 31-60<br/>Develop ERCIP proposal"]
+  P3_PHASE3["Phase 3: Engagement<br/>Days 61-90<br/>Submit proposals"]
+  P3_SECTIONS["Sections: 2402, 314"]
+  
+  P3_PHASE1 --> P3_PHASE2
+  P3_PHASE2 --> P3_PHASE3
+  P3_SECTIONS --> P3_PHASE1
+end
+
+PATH1 --> P1
+PATH2 --> P2
+PATH3 --> P3
+
+P1_PHASE3 --> SUCCESS["Success Metrics<br/>6-12 Months"]
+P2_PHASE3 --> SUCCESS
+P3_PHASE3 --> SUCCESS
+
+classDef start fill:#D1FAE5,stroke:#065F46,stroke-width:3px
+classDef path fill:#DBEAFE,stroke:#1E40AF,stroke-width:2px
+classDef phase fill:#FEF3C7,stroke:#92400E,stroke-width:2px
+classDef section fill:#E0F2FE,stroke:#0369A1,stroke-width:2px
+classDef success fill:#D1FAE5,stroke:#065F46,stroke-width:3px
+classDef decide fill:#F3F4F6,stroke:#6B7280,stroke-width:2px
+
+class START,SUCCESS start
+class PATH1,PATH2,PATH3 path
+class P1_PHASE1,P1_PHASE2,P1_PHASE3,P2_PHASE1,P2_PHASE2,P2_PHASE3,P3_PHASE1,P3_PHASE2,P3_PHASE3 phase
+class P1_SECTIONS,P2_SECTIONS,P3_SECTIONS section
+class DECIDE decide

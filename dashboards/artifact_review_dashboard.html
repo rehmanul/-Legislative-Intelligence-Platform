@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artifact Review Dashboard - Local-First</title>
+    <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+        body {
+            font-family: var(--font-family-sans), sans-serif;
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: var(--spacing-xl);
+            background: var(--color-bg-secondary);
+        }
+        .header {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: var(--shadow-2);
+        }
+        .header h1 {
+            margin: 0 0 10px 0;
+            color: var(--color-text-primary);
+        }
+        .header p {
+            margin: 0;
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+        }
+        .file-loader {
+            background: #e7f3ff;
+            border: 2px dashed var(--color-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+            text-align: center;
+        }
+        .file-loader h3 {
+            margin-top: 0;
+            color: var(--color-primary);
+        }
+        .file-input-group {
+            margin: var(--spacing-lg) 0;
+        }
+        .file-input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-secondary);
+        }
+        .file-input-wrapper {
+            display: flex;
+            gap: var(--spacing-md);
+            align-items: center;
+        }
+        input[type="file"] {
+            flex: 1;
+            padding: var(--spacing-sm);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-sm);
+        }
+        .card {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: var(--shadow-2);
+        }
+        .card h2 {
+            margin-top: 0;
+            color: var(--color-text-primary);
+        }
+        .btn {
+            padding: var(--spacing-md) 20px;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+            margin-right: 10px;
+            margin-bottom: var(--spacing-md);
+            font-weight: var(--font-weight-medium);
+        }
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--color-bg-primary);
+        }
+        .btn-success {
+            background: var(--color-success);
+            color: var(--color-bg-primary);
+        }
+        .btn-danger {
+            background: var(--color-error);
+            color: var(--color-bg-primary);
+        }
+        .btn-info {
+            background: #17a2b8;
+            color: var(--color-bg-primary);
+        }
+        .btn-secondary {
+            background: var(--color-gray-500);
+            color: var(--color-bg-primary);
+        }
+        .btn-small {
+            padding: var(--spacing-sm) 12px;
+            font-size: var(--font-size-xs);
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .btn.loading {
+            position: relative;
+            color: transparent;
+        }
+        .btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 50%;
+            left: 50%;
+            margin-left: -8px;
+            margin-top: -8px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .btn.success {
+            background: var(--color-success);
+        }
+        .review-item.decided {
+            opacity: 0.6;
+            border-left: 4px solid var(--color-success);
+        }
+        .review-item.decided.rejected {
+            border-left-color: var(--color-error);
+        }
+        .message-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-3);
+            z-index: 2000;
+            animation: slideIn 0.3s ease;
+            max-width: 400px;
+        }
+        .message-toast.success {
+            background: var(--color-success);
+            color: white;
+        }
+        .message-toast.error {
+            background: var(--color-error);
+            color: white;
+        }
+        .message-toast.info {
+            background: var(--color-info);
+            color: white;
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        .routing-indicator {
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+            margin-left: var(--spacing-sm);
+        }
+        .routing-indicator.external {
+            background: var(--color-warning-light);
+            color: var(--color-warning-dark);
+        }
+        .routing-indicator.internal {
+            background: var(--color-info-light);
+            color: var(--color-info-dark);
+        }
+        .routing-indicator.agent {
+            background: var(--color-gray-200);
+            color: var(--color-gray-700);
+        }
+        .decisions-section {
+            margin-top: var(--spacing-xl);
+        }
+        .decision-item {
+            padding: var(--spacing-md);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--spacing-sm);
+            background: var(--color-bg-tertiary);
+        }
+        .decision-item.approved {
+            border-left: 4px solid var(--color-success);
+        }
+        .decision-item.rejected {
+            border-left: 4px solid var(--color-error);
+        }
+        .pending-reviews {
+            margin-top: var(--spacing-xl);
+        }
+        .review-item {
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            background: var(--color-bg-tertiary);
+        }
+        .review-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        .review-item-title {
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-base);
+            color: var(--color-text-primary);
+        }
+        .review-item-meta {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-md);
+        }
+        .review-item-meta span {
+            margin-right: 15px;
+        }
+        .review-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            margin-top: var(--spacing-md);
+        }
+        .command-form {
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+            background: var(--color-bg-tertiary);
+        }
+        .command-form h3 {
+            margin-top: 0;
+            margin-bottom: var(--spacing-lg);
+            color: var(--color-text-primary);
+        }
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text-secondary);
+            font-size: 13px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: var(--spacing-sm) 12px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-sm);
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .routing-section {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            margin-bottom: var(--spacing-lg);
+        }
+        .routing-section label {
+            font-weight: var(--font-weight-semibold);
+            color: #856404;
+        }
+        .copy-feedback {
+            display: inline-block;
+            margin-left: 10px;
+            color: var(--color-success);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow: auto;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: var(--spacing-xl);
+            border: 1px solid var(--color-text-tertiary);
+            border-radius: var(--radius-lg);
+            width: 90%;
+            max-width: 900px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+        .modal-title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-primary);
+        }
+        .close {
+            color: #aaa;
+            font-size: var(--font-size-2xl);
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: #000;
+        }
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: var(--spacing-lg);
+        }
+        .artifact-content {
+            background: var(--color-gray-100);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: var(--spacing-lg);
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-xs);
+            var(--color-bg-primary)-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .copy-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        .status-badge {
+            display: inline-block;
+            padding: var(--spacing-xs) 12px;
+            border-radius: var(--radius-xl);
+            font-size: 11px;
+            font-weight: var(--font-weight-semibold);
+            margin-left: 10px;
+        }
+        .status-badge.loaded {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+        
+        /* Vibe Check Styles */
+        .vibe-check-section {
+          margin-top: var(--spacing-xl);
+          padding: var(--spacing-xl);
+          background: #fff9e6;
+          border: 2px solid #ffc107;
+          border-radius: var(--radius-lg);
+        }
+        
+        .vibe-check-section h2 {
+          font-size: var(--font-size-lg);
+          margin-bottom: var(--spacing-md);
+          color: #856404;
+        }
+        
+        .vibe-check-section details summary {
+          cursor: pointer;
+          font-weight: var(--font-weight-semibold);
+          color: #856404;
+          padding: var(--spacing-sm);
+          background: var(--color-bg-primary);
+          border-radius: var(--radius-sm);
+          transition: background var(--transition-base) var(--transition-ease);
+        }
+        
+        .vibe-check-section details summary:hover {
+          background: #fffbf0;
+        }
+        
+        .ai-interpretation {
+          margin-top: var(--spacing-lg);
+          padding: var(--spacing-lg);
+          background: #e7f3ff;
+          border-left: 4px solid var(--color-primary);
+          border-radius: var(--radius-sm);
+        }
+    </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+    
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="header">
+        <h1>📋 Artifact Review Dashboard</h1>
+        <p>Local-First • No Backend Required • File-Based Review System</p>
+    </div>
+
+    <div class="file-loader">
+        <h3>📁 Load Review Queue File</h3>
+        <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">
+            Select a review queue file (HR_PRE_queue.json, HR_LANG_queue.json, etc.)<br>
+            Files are typically located in: <code>agent-orchestrator/review/</code>
+        </p>
+        <div class="file-input-group">
+            <label>Review Queue File:</label>
+            <div class="file-input-wrapper">
+                <input type="file" id="queueFile" accept=".json">
+                <span id="loadedFileStatus" class="status-badge" style="display: none;">Not Loaded</span>
+            </div>
+        </div>
+        <div class="file-input-group">
+            <label>Or Load Artifact Directly (for viewing):</label>
+            <div class="file-input-wrapper">
+                <input type="file" id="artifactFile" accept=".json">
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="pendingReviewsCard" style="display: none;">
+        <h2>Pending Reviews</h2>
+        <div id="pendingReviewsContainer">
+            <p style="color: #999; font-style: italic;">Loading...</p>
+        </div>
+    </div>
+
+    <div class="card" id="sessionDecisionsCard" style="display: none;">
+        <h2>📝 Decisions Made This Session</h2>
+        <div id="sessionDecisionsContainer">
+            <p style="color: #999; font-style: italic;">No decisions made yet.</p>
+        </div>
+        <div style="margin-top: var(--spacing-lg);">
+            <button class="btn btn-secondary" onclick="exportAllDecisions()">📥 Export All Decisions</button>
+            <button class="btn btn-secondary" onclick="clearSessionDecisions()">🗑️ Clear Session</button>
+        </div>
+    </div>
+
+    <div class="card" id="commandsCard" style="display: none;">
+        <h2>Review Actions</h2>
+        
+        <div class="command-form">
+            <h3>✅ Approve Artifact</h3>
+            <div class="form-group">
+                <label>Select Artifact</label>
+                <select id="approveArtifactSelect" onchange="populateArtifactInfo('approve', this.value)">
+                    <option value="">-- Select from pending reviews --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Gate ID</label>
+                <input type="text" id="approveGateId" placeholder="Gate ID (e.g., HR_PRE)" value="HR_PRE">
+            </div>
+            <div class="form-group">
+                <label>Artifact ID / Path</label>
+                <input type="text" id="approveArtifactId" placeholder="Artifact ID or path">
+            </div>
+            <div class="routing-section">
+                <label>Route To: <span id="approveRoutingIndicator" class="routing-indicator" style="display: none;"></span></label>
+                <select id="approveRouting" onchange="updateRationaleFromRouting('approve')">
+                    <option value="">-- Select routing option --</option>
+                    <option value="external_human">Route to External Human</option>
+                    <option value="internal_human">Route to Internal Human</option>
+                    <option value="back_to_agent">Back to Agent</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Rationale</label>
+                <textarea id="approveRationale" placeholder="Enter rationale or paste content from artifact..."></textarea>
+                <div style="margin-top: 5px;">
+                    <button class="btn btn-secondary btn-small" onclick="copyFromArtifact('approve')">📋 Copy from Artifact</button>
+                    <span id="approveCopyFeedback" class="copy-feedback" style="display: none;"></span>
+                </div>
+            </div>
+            <button class="btn btn-success" onclick="handleApprove(event)">✅ Approve</button>
+        </div>
+
+        <div class="command-form">
+            <h3>❌ Reject Artifact</h3>
+            <div class="form-group">
+                <label>Select Artifact</label>
+                <select id="rejectArtifactSelect" onchange="populateArtifactInfo('reject', this.value)">
+                    <option value="">-- Select from pending reviews --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Gate ID</label>
+                <input type="text" id="rejectGateId" placeholder="Gate ID" value="HR_PRE">
+            </div>
+            <div class="form-group">
+                <label>Artifact ID / Path</label>
+                <input type="text" id="rejectArtifactId" placeholder="Artifact ID or path">
+            </div>
+            <div class="routing-section">
+                <label>Route To: <span id="rejectRoutingIndicator" class="routing-indicator" style="display: none;"></span></label>
+                <select id="rejectRouting" onchange="updateRationaleFromRouting('reject')">
+                    <option value="">-- Select routing option --</option>
+                    <option value="external_human">Route to External Human</option>
+                    <option value="internal_human">Route to Internal Human</option>
+                    <option value="back_to_agent">Back to Agent</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Rationale</label>
+                <textarea id="rejectRationale" placeholder="Enter rationale or paste content from artifact..."></textarea>
+                <div style="margin-top: 5px;">
+                    <button class="btn btn-secondary btn-small" onclick="copyFromArtifact('reject')">📋 Copy from Artifact</button>
+                    <span id="rejectCopyFeedback" class="copy-feedback" style="display: none;"></span>
+                </div>
+            </div>
+            <button class="btn btn-danger" onclick="handleReject(event)">❌ Reject</button>
+        </div>
+    </div>
+
+    <!-- Artifact Viewer Modal -->
+    <div id="artifactModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">Artifact Viewer</div>
+                <span class="close" onclick="closeArtifactModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="artifact-content" id="modalArtifactContent"></div>
+                <div class="copy-buttons">
+                    <button class="btn btn-secondary btn-small" onclick="copyArtifactContent()">📋 Copy All</button>
+                    <button class="btn btn-secondary btn-small" onclick="copyArtifactSummary()">📋 Copy Summary</button>
+                    <button class="btn btn-secondary btn-small" onclick="copyArtifactKeyFindings()">📋 Copy Key Findings</button>
+                </div>
+                
+                <div id="vibeCheckSection" style="margin-top: 30px; padding: var(--spacing-xl); background: #fff9e6; border: 2px solid #ffc107; border-radius: var(--radius-lg); display: none;">
+                    <h2 style="font-size: var(--font-size-lg); margin-bottom: var(--spacing-md); color: #856404;">🧭 Vibe Check: Human Judgment Zone</h2>
+                    <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">
+                      This section exists for subjective discomfort. You do not need to be precise.
+                      If something feels off, flag it here.
+                    </p>
+                    
+                    <details style="margin-top: var(--spacing-lg);">
+                      <summary style="cursor: pointer; font-weight: var(--font-weight-semibold); color: #856404; padding: var(--spacing-sm); background: var(--color-bg-primary); border-radius: var(--radius-sm);">
+                        ⚠️ Something feels off in this section
+                      </summary>
+                      
+                      <div style="margin-top: var(--spacing-lg); padding: var(--spacing-lg); background: var(--color-bg-primary); border-radius: var(--radius-sm);">
+                        <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">
+                          You don't need to explain technically. A short note or even a fragment is enough.
+                        </p>
+                        
+                        <textarea
+                          id="vibeInputModal"
+                          placeholder="e.g. This conclusion feels rushed, or I don't trust this assumption…"
+                          style="width:100%;height:80px;padding: var(--spacing-md);border:1px solid var(--color-border);border-radius: var(--radius-sm);font-family:inherit;font-size:13px;resize:vertical;"
+                        ></textarea>
+                        
+                        <h4 style="margin-top: var(--spacing-lg); font-size: var(--font-size-sm); color: var(--color-text-primary);">Send this vibe to AI for clarification</h4>
+                        <pre style="background: var(--color-gray-100); padding: 12px; border-radius: var(--radius-sm); font-size: var(--font-size-xs); overflow-x: auto; margin-top: 8px; border: 1px solid var(--color-border);">ASK:
+The user feels discomfort about the highlighted section.
+Their concern is subjective and may be imprecise.
+
+Tasks:
+- Restate the concern clearly and charitably
+- Identify what might be causing the discomfort
+- Suggest whether this warrants revision or is acceptable
+
+Do NOT propose code.
+Do NOT defend the artifact.
+Focus on sense-making.</pre>
+                      </div>
+                    </details>
+                    
+                    <div id="aiInterpretationModal" style="display: none; margin-top: var(--spacing-lg); padding: var(--spacing-lg); background: #e7f3ff; border-left: 4px solid var(--color-primary); border-radius: var(--radius-sm);">
+                      <h3 style="font-size: var(--font-size-base); margin-bottom: var(--spacing-md); color: #084298;">🤖 AI Interpretation of User Concern</h3>
+                      <pre id="aiInterpretationTextModal" style="background: var(--color-bg-primary); padding: 12px; border-radius: var(--radius-sm); font-size: var(--font-size-xs); var(--color-bg-primary)-space: pre-wrap; margin: 0;"></pre>
+                      
+                      <h3 style="font-size: var(--font-size-sm); margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md); color: var(--color-text-primary);">Resolve This Concern</h3>
+                      
+                      <div style="margin-top: var(--spacing-md); display: grid; gap: var(--spacing-md);">
+                        <div style="padding: 12px; background: #d4edda; border: 1px solid var(--color-success); border-radius: var(--radius-sm);">
+                          <h4 style="font-size: 13px; margin-bottom: 8px; color: #155724;">✅ Yes, that's right — revise</h4>
+                          <pre style="background: var(--color-bg-primary); padding: var(--spacing-sm); border-radius: var(--radius-sm); font-size: 11px; margin: 0; overflow-x: auto;">DECISION:
+Artifact ID: [from current artifact]
+Decision: REVISE
+Reason: AI-reflected concern accepted
+Route Back to Execution: TRUE</pre>
+                        </div>
+                        
+                        <div style="padding: 12px; background: #d1ecf1; border: 1px solid #17a2b8; border-radius: var(--radius-sm);">
+                          <h4 style="font-size: 13px; margin-bottom: 8px; color: #0c5460;">➡️ No, this is fine — proceed</h4>
+                          <pre style="background: var(--color-bg-primary); padding: var(--spacing-sm); border-radius: var(--radius-sm); font-size: 11px; margin: 0; overflow-x: auto;">DECISION:
+Artifact ID: [from current artifact]
+Decision: APPROVED
+Note: Concern acknowledged but accepted</pre>
+                        </div>
+                        
+                        <div style="padding: 12px; background: #f8d7da; border: 1px solid var(--color-error); border-radius: var(--radius-sm);">
+                          <h4 style="font-size: 13px; margin-bottom: 8px; color: #721c24;">🗑️ This undermines the artifact — discard</h4>
+                          <pre style="background: var(--color-bg-primary); padding: var(--spacing-sm); border-radius: var(--radius-sm); font-size: 11px; margin: 0; overflow-x: auto;">DECISION:
+Artifact ID: [from current artifact]
+Decision: DISCARD
+Reason: Core assumption not trusted</pre>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentQueueData = null;
+        let pendingReviewsList = [];
+        let currentArtifactData = null;
+        let sessionDecisions = [];
+        let decidedReviews = new Set(); // Track which reviews have been decided in this session
+
+        // Load review queue file
+        document.getElementById('queueFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                loadQueueFile(file);
+            }
+        });
+
+        // Load artifact file directly
+        document.getElementById('artifactFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                loadArtifactFile(file);
+            }
+        });
+
+        function loadQueueFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    currentQueueData = JSON.parse(e.target.result);
+                    document.getElementById('loadedFileStatus').textContent = `Loaded: ${file.name}`;
+                    document.getElementById('loadedFileStatus').className = 'status-badge loaded';
+                    document.getElementById('loadedFileStatus').style.display = 'inline-block';
+                    
+                    updatePendingReviews(currentQueueData);
+                    document.getElementById('pendingReviewsCard').style.display = 'block';
+                    document.getElementById('commandsCard').style.display = 'block';
+                    loadSessionDecisions();
+                    updateSessionDecisionsDisplay();
+                } catch (error) {
+                    alert('Error parsing JSON file: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function loadArtifactFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    currentArtifactData = JSON.parse(e.target.result);
+                    document.getElementById('modalTitle').textContent = `Artifact: ${file.name}`;
+                    document.getElementById('modalArtifactContent').textContent = JSON.stringify(currentArtifactData, null, 2);
+                    
+                    // Show vibe check if artifact is speculative or has low confidence
+                    const meta = currentArtifactData._meta || {};
+                    const confidence = meta.confidence || '';
+                    const status = meta.status || '';
+                    const shouldShowVibe = confidence === 'SPECULATIVE' || confidence === 'LOW' || 
+                                         status === 'SPECULATIVE' || meta.human_review_required === true;
+                    
+                    const vibeSection = document.getElementById('vibeCheckSection');
+                    if (vibeSection) {
+                        vibeSection.style.display = shouldShowVibe ? 'block' : 'none';
+                    }
+                    
+                    document.getElementById('artifactModal').style.display = 'block';
+                } catch (error) {
+                    alert('Error parsing JSON file: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function updatePendingReviews(queueData) {
+            const pending = queueData.pending_reviews || [];
+            pendingReviewsList = pending;
+
+            const container = document.getElementById('pendingReviewsContainer');
+            const approveSelect = document.getElementById('approveArtifactSelect');
+            const rejectSelect = document.getElementById('rejectArtifactSelect');
+
+            // Clear and rebuild selects
+            approveSelect.innerHTML = '<option value="">-- Select from pending reviews --</option>';
+            rejectSelect.innerHTML = '<option value="">-- Select from pending reviews --</option>';
+
+            if (pending.length === 0) {
+                container.innerHTML = '<div class="empty-state"><p>No pending reviews in this queue file.</p></div>';
+                return;
+            }
+
+            let html = '<div class="pending-reviews">';
+            pending.forEach((review, index) => {
+                // Only show reviews without decisions (unless decided in this session)
+                if (review.decision && !decidedReviews.has(index)) {
+                    return; // Skip already decided reviews from file
+                }
+
+                const artifactId = review.artifact_id || review.artifact_path || `review_${index}`;
+                const gateId = review.gate_id || review.review_gate || queueData._meta?.review_gate || 'UNKNOWN';
+                const artifactName = review.artifact_name || review.artifact_type || artifactId;
+                const submittedBy = review.submitted_by || review.agent_id || 'Unknown';
+                const submittedAt = review.submitted_at ? new Date(review.submitted_at).toLocaleString() : 'Unknown';
+                const isDecided = decidedReviews.has(index);
+                const decisionType = isDecided ? 
+                    (sessionDecisions.find(d => d.artifact_id === artifactId || artifactId.includes(d.artifact_id))?.decision || '') : '';
+
+                // Add to selects only if not decided
+                if (!isDecided) {
+                    const optionText = `${artifactName} (${gateId})`;
+                    approveSelect.innerHTML += `<option value="${index}">${optionText}</option>`;
+                    rejectSelect.innerHTML += `<option value="${index}">${optionText}</option>`;
+                }
+
+                const decidedClass = isDecided ? (decisionType === 'APPROVED' ? 'decided' : 'decided rejected') : '';
+                const statusBadge = isDecided ? 
+                    `<span class="status-badge ${decisionType === 'APPROVED' ? 'loaded' : ''}" style="background: ${decisionType === 'APPROVED' ? '#d1e7dd' : '#fee2e2'}; color: ${decisionType === 'APPROVED' ? '#0f5132' : '#991b1b'};">
+                        ${decisionType === 'APPROVED' ? '✅ Approved' : '❌ Rejected'} (This Session)
+                    </span>` : '';
+
+                html += `
+                    <div class="review-item ${decidedClass}">
+                        <div class="review-item-header">
+                            <div class="review-item-title">${artifactName} ${statusBadge}</div>
+                            <button class="btn btn-info btn-small" onclick="viewArtifact(${index})" ${isDecided ? 'disabled' : ''}>👁️ View Artifact</button>
+                        </div>
+                        <div class="review-item-meta">
+                            <span><strong>Gate:</strong> ${gateId}</span>
+                            <span><strong>ID:</strong> ${artifactId}</span>
+                            <span><strong>Submitted by:</strong> ${submittedBy}</span>
+                            <span><strong>Submitted at:</strong> ${submittedAt}</span>
+                        </div>
+                        ${!isDecided ? `
+                        <div class="review-actions">
+                            <button class="btn btn-success btn-small" onclick="quickApprove(${index})">✅ Approve</button>
+                            <button class="btn btn-danger btn-small" onclick="quickReject(${index})">❌ Reject</button>
+                        </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function resolveArtifactPath(artifactPath) {
+            // For file:// protocol, we need to use relative paths
+            // Dashboard is at: agent-orchestrator/dashboards/artifact_review_dashboard.html
+            // Artifacts are typically at: agent-orchestrator/artifacts/...
+            
+            // If path already starts with artifacts/, it's relative to agent-orchestrator root
+            if (artifactPath.startsWith('artifacts/')) {
+                // Go up one directory from dashboards/ to agent-orchestrator/
+                return '../' + artifactPath;
+            }
+            
+            // If path contains artifacts/, extract and use relative path
+            if (artifactPath.includes('artifacts/')) {
+                const parts = artifactPath.split('artifacts/');
+                return '../artifacts/' + parts[parts.length - 1];
+            }
+            
+            // Default: assume it's relative to agent-orchestrator root
+            return '../' + artifactPath;
+        }
+
+        async function viewArtifact(index) {
+            const review = pendingReviewsList[index];
+            if (!review) {
+                showToast('Review not found', 'error');
+                return;
+            }
+
+            const artifactPath = review.artifact_path || review.artifact_id;
+            if (!artifactPath) {
+                // Fallback to file picker
+                showFilePickerForArtifact();
+                return;
+            }
+
+            // Try to load from known path first
+            // Note: fetch() doesn't work with file:// protocol due to CORS
+            // So we'll always fall back to file picker for local files
+            // But we can show a helpful message
+            console.log('Attempting to load artifact from path:', artifactPath);
+            
+            // For now, always use file picker since fetch won't work with file://
+            // In the future, if served via HTTP server, we could use fetch
+            showFilePickerForArtifact();
+            
+            // Show a helpful message
+            showToast('Please select the artifact file manually (file:// protocol limitation)', 'info');
+        }
+
+        function showFilePickerForArtifact() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    loadArtifactFile(file);
+                }
+            };
+            input.click();
+        }
+
+        function displayArtifactInModal(artifactData, review) {
+            currentArtifactData = artifactData;
+            const artifactName = review.artifact_name || review.artifact_type || 'Artifact';
+            document.getElementById('modalTitle').textContent = `Artifact: ${artifactName}`;
+            document.getElementById('modalArtifactContent').textContent = JSON.stringify(artifactData, null, 2);
+            
+            // Show vibe check if artifact is speculative or has low confidence
+            const meta = artifactData._meta || {};
+            const confidence = meta.confidence || '';
+            const status = meta.status || '';
+            const shouldShowVibe = confidence === 'SPECULATIVE' || confidence === 'LOW' || 
+                                 status === 'SPECULATIVE' || meta.human_review_required === true;
+            
+            const vibeSection = document.getElementById('vibeCheckSection');
+            if (vibeSection) {
+                vibeSection.style.display = shouldShowVibe ? 'block' : 'none';
+            }
+            
+            document.getElementById('artifactModal').style.display = 'block';
+        }
+
+        function closeArtifactModal() {
+            document.getElementById('artifactModal').style.display = 'none';
+        }
+
+        function copyArtifactContent() {
+            if (!currentArtifactData) return;
+            const text = JSON.stringify(currentArtifactData, null, 2);
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Artifact content copied to clipboard!');
+            });
+        }
+
+        function copyArtifactSummary() {
+            if (!currentArtifactData) return;
+            const summary = currentArtifactData.executive_summary || currentArtifactData.summary || {};
+            const text = JSON.stringify(summary, null, 2);
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Artifact summary copied to clipboard!');
+            });
+        }
+
+        function copyArtifactKeyFindings() {
+            if (!currentArtifactData) return;
+            const findings = currentArtifactData.executive_summary?.key_findings || 
+                           currentArtifactData.key_findings || 
+                           [];
+            const text = Array.isArray(findings) ? findings.join('\n') : JSON.stringify(findings, null, 2);
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Key findings copied to clipboard!');
+            });
+        }
+
+        function copyFromArtifact(action) {
+            if (!currentArtifactData) {
+                alert('Please view an artifact first by clicking "👁️ View Artifact"');
+                return;
+            }
+
+            const rationaleTextarea = document.getElementById(`${action}Rationale`);
+            const copyFeedback = document.getElementById(`${action}CopyFeedback`);
+
+            // Copy executive summary or key findings
+            const summary = currentArtifactData.executive_summary || {};
+            const findings = summary.key_findings || [];
+            const textToCopy = findings.length > 0 
+                ? findings.join('\n- ')
+                : JSON.stringify(summary, null, 2);
+
+            // Append to rationale
+            if (rationaleTextarea.value) {
+                rationaleTextarea.value += '\n\n' + textToCopy;
+            } else {
+                rationaleTextarea.value = textToCopy;
+            }
+
+            // Show feedback
+            copyFeedback.textContent = '✓ Copied!';
+            copyFeedback.style.display = 'inline-block';
+            setTimeout(() => {
+                copyFeedback.style.display = 'none';
+            }, 2000);
+        }
+
+        function populateArtifactInfo(action, index) {
+            if (!index || index === '') return;
+
+            const review = pendingReviewsList[parseInt(index)];
+            if (!review) return;
+
+            const artifactId = review.artifact_id || review.artifact_path || '';
+            const gateId = review.gate_id || review.review_gate || currentQueueData?._meta?.review_gate || 'HR_PRE';
+
+            if (action === 'approve') {
+                document.getElementById('approveArtifactId').value = artifactId;
+                document.getElementById('approveGateId').value = gateId;
+            } else if (action === 'reject') {
+                document.getElementById('rejectArtifactId').value = artifactId;
+                document.getElementById('rejectGateId').value = gateId;
+            }
+        }
+
+        function updateRationaleFromRouting(action) {
+            const routingSelect = document.getElementById(`${action}Routing`);
+            const rationaleTextarea = document.getElementById(`${action}Rationale`);
+            const routingIndicator = document.getElementById(`${action}RoutingIndicator`);
+            const routing = routingSelect.value;
+
+            // Update visual indicator
+            if (routingIndicator) {
+                if (!routing) {
+                    routingIndicator.style.display = 'none';
+                } else {
+                    routingIndicator.style.display = 'inline-block';
+                    let text = '';
+                    let className = '';
+                    if (routing === 'external_human') {
+                        text = '→ External Human';
+                        className = 'external';
+                    } else if (routing === 'internal_human') {
+                        text = '→ Internal Human';
+                        className = 'internal';
+                    } else if (routing === 'back_to_agent') {
+                        text = '→ Back to Agent';
+                        className = 'agent';
+                    }
+                    routingIndicator.textContent = text;
+                    routingIndicator.className = 'routing-indicator ' + className;
+                }
+            }
+
+            if (!routing) return;
+
+            let prefix = '';
+            if (routing === 'external_human') {
+                prefix = 'ROUTED TO EXTERNAL HUMAN: ';
+            } else if (routing === 'internal_human') {
+                prefix = 'ROUTED TO INTERNAL HUMAN: ';
+            } else if (routing === 'back_to_agent') {
+                prefix = 'RETURNED TO AGENT FOR REVISION: ';
+            }
+
+            if (rationaleTextarea.value && !rationaleTextarea.value.startsWith(prefix)) {
+                rationaleTextarea.value = prefix + rationaleTextarea.value;
+            } else if (!rationaleTextarea.value) {
+                rationaleTextarea.value = prefix;
+            }
+        }
+
+        function quickApprove(index) {
+            const review = pendingReviewsList[index];
+            if (!review) return;
+
+            const artifactId = review.artifact_id || review.artifact_path || '';
+            const gateId = review.gate_id || review.review_gate || currentQueueData?._meta?.review_gate || 'HR_PRE';
+
+            document.getElementById('approveArtifactSelect').value = index;
+            populateArtifactInfo('approve', index);
+            document.getElementById('approveArtifactId').value = artifactId;
+            document.getElementById('approveGateId').value = gateId;
+
+            // Scroll to approve form
+            document.querySelector('.command-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function quickReject(index) {
+            const review = pendingReviewsList[index];
+            if (!review) return;
+
+            const artifactId = review.artifact_id || review.artifact_path || '';
+            const gateId = review.gate_id || review.review_gate || currentQueueData?._meta?.review_gate || 'HR_PRE';
+
+            document.getElementById('rejectArtifactSelect').value = index;
+            populateArtifactInfo('reject', index);
+            document.getElementById('rejectArtifactId').value = artifactId;
+            document.getElementById('rejectGateId').value = gateId;
+
+            // Scroll to reject form
+            const rejectForm = document.querySelectorAll('.command-form')[1];
+            rejectForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function handleApprove(event) {
+            try {
+                const button = event && event.target ? event.target : document.querySelector('#commandsCard .btn-success');
+                if (!button) {
+                    console.error('Could not find approve button');
+                    showToast('Error: Could not find approve button', 'error');
+                    return;
+                }
+
+                const gateId = document.getElementById('approveGateId').value;
+                const artifactId = document.getElementById('approveArtifactId').value;
+                const rationale = document.getElementById('approveRationale').value;
+                const routing = document.getElementById('approveRouting').value;
+
+                if (!gateId || !artifactId) {
+                    showToast('Please fill in Gate ID and Artifact ID', 'error');
+                    return;
+                }
+
+                // Show loading state
+                const originalText = button.textContent;
+                button.disabled = true;
+                button.classList.add('loading');
+                button.textContent = '⏳ Processing...';
+
+            // Find review index for this artifact
+            let reviewIndex = -1;
+            for (let i = 0; i < pendingReviewsList.length; i++) {
+                const review = pendingReviewsList[i];
+                const reviewId = review.artifact_id || review.artifact_path || '';
+                if (reviewId === artifactId || artifactId.includes(reviewId) || reviewId.includes(artifactId)) {
+                    reviewIndex = i;
+                    break;
+                }
+            }
+
+            // Generate approval command JSON
+            const approvalCommand = {
+                command_type: "approve_artifact",
+                gate_id: gateId,
+                artifact_id: artifactId,
+                rationale: rationale,
+                routing: routing || null,
+                timestamp: new Date().toISOString(),
+                approved_by: "dashboard_user"
+            };
+
+            // Track decision in session
+            trackDecision({
+                decision: 'APPROVED',
+                gate_id: gateId,
+                artifact_id: artifactId,
+                artifact_name: reviewIndex >= 0 ? (pendingReviewsList[reviewIndex].artifact_name || artifactId) : artifactId,
+                rationale: rationale,
+                routing: routing
+            });
+
+            // Mark review as decided
+            if (reviewIndex >= 0) {
+                markReviewAsDecided(reviewIndex, 'APPROVED');
+            }
+
+            // Download as JSON file
+            downloadJSON(approvalCommand, `approve_${gateId}_${Date.now()}.json`);
+
+            // Show success message
+            showToast(`Artifact "${artifactId}" approved successfully!`, 'success');
+
+            // Update UI
+            updatePendingReviewsDisplay();
+            updateSessionDecisionsDisplay();
+
+            // Restore button after short delay
+            setTimeout(() => {
+                button.disabled = false;
+                button.classList.remove('loading');
+                button.textContent = originalText;
+            }, 1000);
+        }
+
+        function handleReject(event) {
+            try {
+                const button = event && event.target ? event.target : document.querySelector('#commandsCard .btn-danger');
+                if (!button) {
+                    console.error('Could not find reject button');
+                    showToast('Error: Could not find reject button', 'error');
+                    return;
+                }
+
+                const gateId = document.getElementById('rejectGateId').value;
+                const artifactId = document.getElementById('rejectArtifactId').value;
+                const rationale = document.getElementById('rejectRationale').value;
+                const routing = document.getElementById('rejectRouting').value;
+
+                if (!gateId || !artifactId) {
+                    showToast('Please fill in Gate ID and Artifact ID', 'error');
+                    return;
+                }
+
+                // Show loading state
+                const originalText = button.textContent;
+                button.disabled = true;
+                button.classList.add('loading');
+                button.textContent = '⏳ Processing...';
+
+            // Find review index for this artifact
+            let reviewIndex = -1;
+            for (let i = 0; i < pendingReviewsList.length; i++) {
+                const review = pendingReviewsList[i];
+                const reviewId = review.artifact_id || review.artifact_path || '';
+                if (reviewId === artifactId || artifactId.includes(reviewId) || reviewId.includes(artifactId)) {
+                    reviewIndex = i;
+                    break;
+                }
+            }
+
+            // Generate rejection command JSON
+            const rejectionCommand = {
+                command_type: "reject_artifact",
+                gate_id: gateId,
+                artifact_id: artifactId,
+                rationale: rationale,
+                routing: routing || null,
+                timestamp: new Date().toISOString(),
+                rejected_by: "dashboard_user"
+            };
+
+            // Track decision in session
+            trackDecision({
+                decision: 'REJECTED',
+                gate_id: gateId,
+                artifact_id: artifactId,
+                artifact_name: reviewIndex >= 0 ? (pendingReviewsList[reviewIndex].artifact_name || artifactId) : artifactId,
+                rationale: rationale,
+                routing: routing
+            });
+
+            // Mark review as decided
+            if (reviewIndex >= 0) {
+                markReviewAsDecided(reviewIndex, 'REJECTED');
+            }
+
+            // Download as JSON file
+            downloadJSON(rejectionCommand, `reject_${gateId}_${Date.now()}.json`);
+
+            // Show success message
+            showToast(`Artifact "${artifactId}" rejected.`, 'info');
+
+            // Update UI
+            updatePendingReviewsDisplay();
+            updateSessionDecisionsDisplay();
+
+                // Restore button after short delay
+                setTimeout(() => {
+                    if (button) {
+                        button.disabled = false;
+                        button.classList.remove('loading');
+                        button.textContent = originalText;
+                    }
+                }, 1000);
+            } catch (error) {
+                console.error('Error in handleReject:', error);
+                showToast('Error processing rejection: ' + error.message, 'error');
+            }
+        }
+
+        function downloadJSON(data, filename) {
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Session state management
+        function trackDecision(decision) {
+            sessionDecisions.push({
+                ...decision,
+                timestamp: new Date().toISOString()
+            });
+            saveSessionState();
+        }
+
+        function saveSessionState() {
+            try {
+                localStorage.setItem('reviewSessionDecisions', JSON.stringify(sessionDecisions));
+            } catch (e) {
+                console.warn('Could not save to localStorage:', e);
+            }
+        }
+
+        function loadSessionDecisions() {
+            try {
+                const saved = localStorage.getItem('reviewSessionDecisions');
+                if (saved) {
+                    sessionDecisions = JSON.parse(saved);
+                    // Mark reviews as decided based on session decisions
+                    sessionDecisions.forEach(decision => {
+                        for (let i = 0; i < pendingReviewsList.length; i++) {
+                            const review = pendingReviewsList[i];
+                            const reviewId = review.artifact_id || review.artifact_path || '';
+                            if (reviewId === decision.artifact_id || 
+                                decision.artifact_id.includes(reviewId) || 
+                                reviewId.includes(decision.artifact_id)) {
+                                decidedReviews.add(i);
+                                break;
+                            }
+                        }
+                    });
+                }
+            } catch (e) {
+                console.warn('Could not load from localStorage:', e);
+                sessionDecisions = [];
+            }
+        }
+
+        function updateSessionDecisionsDisplay() {
+            const container = document.getElementById('sessionDecisionsContainer');
+            const card = document.getElementById('sessionDecisionsCard');
+            
+            if (!container || !card) return;
+
+            if (sessionDecisions.length === 0) {
+                container.innerHTML = '<p style="color: #999; font-style: italic;">No decisions made yet.</p>';
+                card.style.display = 'none';
+                return;
+            }
+
+            card.style.display = 'block';
+            let html = '<div class="decisions-section">';
+            sessionDecisions.forEach((decision, index) => {
+                const decisionClass = decision.decision === 'APPROVED' ? 'approved' : 'rejected';
+                const decisionIcon = decision.decision === 'APPROVED' ? '✅' : '❌';
+                const timestamp = new Date(decision.timestamp).toLocaleString();
+                html += `
+                    <div class="decision-item ${decisionClass}">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <strong>${decisionIcon} ${decision.decision}</strong> - ${decision.artifact_name || decision.artifact_id}
+                                <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: 4px;">
+                                    Gate: ${decision.gate_id} • ${timestamp}
+                                </div>
+                                ${decision.routing ? `<div style="font-size: var(--font-size-xs); color: var(--color-text-secondary);">Routing: ${decision.routing}</div>` : ''}
+                                ${decision.rationale ? `<div style="margin-top: 8px; font-size: var(--font-size-sm); color: var(--color-text-secondary);">${decision.rationale.substring(0, 100)}${decision.rationale.length > 100 ? '...' : ''}</div>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function exportAllDecisions() {
+            if (sessionDecisions.length === 0) {
+                showToast('No decisions to export', 'info');
+                return;
+            }
+
+            const manifest = {
+                _meta: {
+                    generated_at: new Date().toISOString(),
+                    total_decisions: sessionDecisions.length,
+                    generated_by: "artifact_review_dashboard"
+                },
+                decisions: sessionDecisions
+            };
+
+            downloadJSON(manifest, `review_decisions_manifest_${Date.now()}.json`);
+            showToast(`Exported ${sessionDecisions.length} decisions`, 'success');
+        }
+
+        function clearSessionDecisions() {
+            if (confirm('Clear all session decisions? This cannot be undone.')) {
+                sessionDecisions = [];
+                decidedReviews.clear();
+                saveSessionState();
+                updateSessionDecisionsDisplay();
+                updatePendingReviewsDisplay();
+                showToast('Session decisions cleared', 'info');
+            }
+        }
+
+        function markReviewAsDecided(index, decision) {
+            decidedReviews.add(index);
+            // Update the review item visually
+            updatePendingReviewsDisplay();
+        }
+
+        function updatePendingReviewsDisplay() {
+            if (!currentQueueData) return;
+            updatePendingReviews(currentQueueData);
+        }
+
+        function showToast(message, type = 'info') {
+            // Remove existing toasts
+            const existing = document.querySelectorAll('.message-toast');
+            existing.forEach(toast => toast.remove());
+
+            const toast = document.createElement('div');
+            toast.className = `message-toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            // Auto-remove after 3 seconds
+            setTimeout(() => {
+                toast.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('artifactModal');
+            if (event.target === modal) {
+                closeArtifactModal();
+            }
+        }
+    </script>
+</body>
+</html>

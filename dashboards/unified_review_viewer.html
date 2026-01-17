@@ -1,0 +1,2231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unified Review Interface - Markdown, Mermaid & JSON</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--color-text-primary);
+      background: var(--color-bg-secondary);
+      padding: var(--spacing-xl);
+    }
+    
+    .container {
+      max-width: var(--container-max-width);
+      margin: 0 auto;
+    }
+    
+    header {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+      box-shadow: var(--shadow-2);
+    }
+    
+    h1 {
+      font-size: var(--font-size-2xl);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .tabs {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+      border-bottom: 2px solid var(--color-border);
+      background: var(--color-bg-primary);
+      padding: 0 20px;
+      border-radius: var(--radius-lg) 8px 0 0;
+    }
+    
+    .tab {
+      padding: var(--spacing-md) var(--spacing-xl);
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-secondary);
+      transition: all var(--transition-base) var(--transition-ease);
+      position: relative;
+    }
+    
+    .tab:hover {
+      color: var(--color-primary);
+      background: var(--color-gray-100);
+      transform: translateY(-1px);
+    }
+    
+    .tab.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-primary);
+      background: var(--color-bg-primary);
+      box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .tab-content {
+      display: none;
+      background: var(--color-bg-primary);
+      padding: var(--spacing-xl);
+      border-radius: 0 8px 8px 8px;
+      box-shadow: var(--shadow-2);
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    .file-input-wrapper {
+      margin: var(--spacing-lg) 0;
+    }
+    
+    .file-input-wrapper label {
+      display: inline-block;
+      padding: var(--spacing-md) 20px;
+      background: var(--color-primary);
+      color: var(--color-bg-primary);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: var(--font-size-sm);
+    }
+    
+    .file-input-wrapper input[type="file"] {
+      display: none;
+    }
+    
+    .loaded-file {
+      margin-left: 15px;
+      color: var(--color-text-secondary);
+      font-size: 13px;
+    }
+    
+    /* JSON Review Section Styles */
+    .review-item {
+      padding: var(--spacing-xl);
+      margin-bottom: var(--spacing-lg);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      background: var(--color-bg-primary);
+      box-shadow: var(--shadow-2);
+      transition: all var(--transition-base) var(--transition-ease);
+      position: relative;
+    }
+    
+    .review-item:hover {
+      box-shadow: var(--shadow-3);
+      transform: translateY(-2px);
+    }
+    
+    .review-item.pending {
+      border-left: 4px solid #ffc107;
+      background: linear-gradient(to right, #fffbf0 0%, #ffffff 4px);
+    }
+    
+    .review-item.approved {
+      border-left: 4px solid var(--color-success);
+      background: linear-gradient(to right, #f0fff4 0%, #ffffff 4px);
+    }
+    
+    .review-item.rejected {
+      border-left: 4px solid var(--color-error);
+      background: linear-gradient(to right, #fff5f5 0%, #ffffff 4px);
+    }
+    
+    .review-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-md);
+      margin: var(--spacing-lg) 0;
+    }
+    
+    .meta-item {
+      padding: var(--spacing-md);
+      background: var(--color-gray-50);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border-light);
+      font-size: var(--font-size-sm);
+      transition: all var(--transition-base) var(--transition-ease);
+    }
+    
+    .meta-item:hover {
+      background: var(--color-gray-100);
+      border-color: var(--color-primary);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-1);
+    }
+    
+    .meta-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      margin-bottom: 4px;
+    }
+    
+    .meta-value {
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+    }
+    
+    .btn {
+      padding: var(--spacing-md) 20px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: all var(--transition-base) var(--transition-ease);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    
+    .btn.loading {
+      color: transparent;
+    }
+    
+    .btn.loading::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 50%;
+      left: 50%;
+      margin-left: -8px;
+      margin-top: -8px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 0.6s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .btn-approve {
+      background: var(--color-success);
+      color: var(--color-bg-primary);
+    }
+    
+    .btn-approve:hover {
+      background: #218838;
+    }
+    
+    .btn-reject {
+      background: var(--color-error);
+      color: var(--color-bg-primary);
+    }
+    
+    .btn-reject:hover {
+      background: var(--color-error-hover);
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+      padding-top: 15px;
+      border-top: 2px solid var(--color-border);
+    }
+    
+    /* Markdown Viewer Styles */
+    .markdown-viewer {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      max-width: 100%;
+    }
+    
+    .markdown-viewer h1,
+    .markdown-viewer h2,
+    .markdown-viewer h3 {
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+      color: var(--color-text-primary);
+    }
+    
+    .markdown-viewer code {
+      background: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: var(--font-family-mono);
+      font-size: 0.9em;
+    }
+    
+    .markdown-viewer pre {
+      background: #f4f4f4;
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-sm);
+      overflow-x: auto;
+      margin: var(--spacing-lg) 0;
+    }
+    
+    .markdown-viewer pre code {
+      background: transparent;
+      padding: 0;
+    }
+    
+    .markdown-viewer blockquote {
+      border-left: 4px solid var(--color-primary);
+      padding-left: 15px;
+      margin: var(--spacing-lg) 0;
+      color: var(--color-text-secondary);
+    }
+    
+    .markdown-viewer table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--spacing-lg) 0;
+    }
+    
+    .markdown-viewer table th,
+    .markdown-viewer table td {
+      padding: var(--spacing-md);
+      border: 1px solid var(--color-border);
+      text-align: left;
+    }
+    
+    .markdown-viewer table th {
+      background: var(--color-gray-100);
+      font-weight: var(--font-weight-semibold);
+    }
+    
+    /* Interactive Checkbox Styles */
+    .todo-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-md);
+      padding: var(--spacing-sm);
+      margin: 5px 0;
+      border-radius: var(--radius-sm);
+      transition: background var(--transition-base) var(--transition-ease);
+    }
+    
+    .todo-checkbox:hover {
+      background: var(--color-gray-100);
+    }
+    
+    .todo-checkbox input[type="checkbox"] {
+      margin-top: 4px;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    
+    .todo-checkbox label {
+      flex: 1;
+      cursor: pointer;
+      margin: 0;
+    }
+    
+    .todo-checkbox.completed label {
+      text-decoration: line-through;
+      color: #999;
+    }
+    
+    .save-checkboxes-btn {
+      margin-top: var(--spacing-lg);
+      padding: var(--spacing-md) 20px;
+      background: var(--color-success);
+      color: var(--color-bg-primary);
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+    }
+    
+    .save-checkboxes-btn:hover {
+      background: #218838;
+    }
+    
+    /* Mermaid Diagram Styles */
+    .mermaid-container {
+      background: var(--color-bg-tertiary);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      margin: var(--spacing-xl) 0;
+      overflow-x: auto;
+      text-align: center;
+    }
+    
+    .mermaid {
+      display: inline-block;
+    }
+    
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+    }
+    
+    .status-badge {
+      display: inline-block;
+      padding: var(--spacing-xs) 12px;
+      border-radius: var(--radius-xl);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      margin-left: 10px;
+    }
+    
+    .status-badge.pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+    
+    .status-badge.approved {
+      background: #d4edda;
+      color: #155724;
+    }
+    
+    .status-badge.rejected {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    
+    .status-badge.action-required {
+      background: #f8d7da;
+      color: #721c24;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    
+    .rationale-input {
+      width: 100%;
+      padding: var(--spacing-md);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      font-family: inherit;
+      margin-top: var(--spacing-md);
+      resize: vertical;
+    }
+    
+    .high-risk {
+      background: linear-gradient(135deg, #f8d7da 0%, #ffebee 100%);
+      border: 2px solid var(--color-error);
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-radius: var(--radius-md);
+      margin: var(--spacing-lg) 0;
+      font-size: var(--font-size-sm);
+      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.95; transform: scale(1.01); }
+    }
+    
+    .artifact-viewer {
+      margin-top: var(--spacing-lg);
+      display: none;
+    }
+    
+    .artifact-viewer.visible {
+      display: block;
+    }
+    
+    .artifact-viewer-content {
+      padding: var(--spacing-lg);
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      max-height: 500px;
+      overflow-y: auto;
+      font-family: var(--font-family-mono);
+      font-size: 11px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    
+    .context-dropdown-wrapper {
+      display: flex;
+      gap: var(--spacing-md);
+      align-items: center;
+      margin-top: var(--spacing-lg);
+      flex-wrap: wrap;
+    }
+    
+    .context-dropdown-wrapper label {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-primary);
+    }
+    
+    .context-dropdown-wrapper select {
+      padding: var(--spacing-sm) 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      background: var(--color-bg-primary);
+      min-width: 250px;
+      cursor: pointer;
+    }
+    
+    .context-dropdown-wrapper button {
+      padding: var(--spacing-sm) 16px;
+      background: var(--color-gray-500);
+      color: var(--color-bg-primary);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      cursor: pointer;
+      transition: background var(--transition-base) var(--transition-ease);
+    }
+    
+    .context-dropdown-wrapper button:hover {
+      background: var(--color-gray-600);
+    }
+    
+    .loading-skeleton {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      margin: var(--spacing-xl) 0;
+    }
+    
+    .skeleton-item {
+      height: 100px;
+      background: linear-gradient(90deg, #f0f0f0 25%, var(--color-border) 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
+    .status-message {
+      padding: var(--spacing-md) 15px;
+      border-radius: var(--radius-sm);
+      margin-top: var(--spacing-md);
+      font-size: 13px;
+      display: none;
+    }
+    
+    .status-message.success {
+      background: #d1e7dd;
+      color: #0f5132;
+      border: 1px solid #badbcc;
+      display: block;
+    }
+    
+    .status-message.error {
+      background: #f8d7da;
+      color: #842029;
+      border: 1px solid #f5c2c7;
+      display: block;
+    }
+    
+    .status-message.info {
+      background: #cfe2ff;
+      color: #084298;
+      border: 1px solid #b6d4fe;
+      display: block;
+    }
+    
+    /* Vibe Check Styles */
+    .vibe-check-section {
+      margin-top: var(--spacing-xl);
+      padding: var(--spacing-xl);
+      background: #fff9e6;
+      border: 2px solid #ffc107;
+      border-radius: var(--radius-lg);
+    }
+    
+    .vibe-check-section h2 {
+      font-size: var(--font-size-lg);
+      margin-bottom: var(--spacing-md);
+      color: #856404;
+    }
+    
+    .vibe-check-section details summary {
+      cursor: pointer;
+      font-weight: var(--font-weight-semibold);
+      color: #856404;
+      padding: var(--spacing-sm);
+      background: var(--color-bg-primary);
+      border-radius: var(--radius-sm);
+      transition: background var(--transition-base) var(--transition-ease);
+    }
+    
+    .vibe-check-section details summary:hover {
+      background: #fffbf0;
+    }
+    
+    .ai-interpretation {
+      margin-top: var(--spacing-lg);
+      padding: var(--spacing-lg);
+      background: #e7f3ff;
+      border-left: 4px solid var(--color-primary);
+      border-radius: var(--radius-sm);
+    }
+  </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+  
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="container">
+    <header>
+      <h1>Unified Review Interface</h1>
+      <p style="color: var(--color-text-secondary); margin-top: 5px;">Review JSON artifacts, markdown documents with interactive checkboxes, and mermaid diagrams</p>
+    </header>
+    
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('json')">📋 JSON Artifacts</button>
+      <button class="tab" onclick="switchTab('markdown')">📝 Markdown Files</button>
+      <button class="tab" onclick="switchTab('mermaid')">📊 Mermaid Diagrams</button>
+    </div>
+    
+    <!-- JSON Review Tab -->
+    <div id="json-tab" class="tab-content active">
+      <div style="background: var(--color-bg-primary); padding: var(--spacing-xl); border-radius: var(--radius-lg); box-shadow: var(--shadow-2); margin-bottom: var(--spacing-xl);">
+        <div style="display: flex; align-items: center; gap: var(--spacing-lg); flex-wrap: wrap; margin-bottom: var(--spacing-lg);">
+          <button class="btn btn-primary" onclick="refreshFromIndex()" id="btnRefreshIndex" style="font-size: var(--font-size-base); padding: var(--spacing-md) var(--spacing-xl); display: flex; align-items: center; gap: var(--spacing-sm); font-weight: var(--font-weight-semibold); box-shadow: var(--shadow-2);">
+            <span id="refreshIcon">🔄</span>
+            <span>Refresh from Index</span>
+          </button>
+          <div style="flex: 1; min-width: 250px;">
+            <label for="jsonQueueDropdown" style="display: block; margin-bottom: var(--spacing-xs); font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); color: var(--color-text-secondary);">📋 Quick Load Queue:</label>
+            <select id="jsonQueueDropdown" onchange="loadJSONFromDropdown(this.value)" style="width: 100%; padding: var(--spacing-md); border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: var(--font-size-sm);">
+              <option value="">Select review queue...</option>
+              <optgroup label="Review Queues">
+                <option value="HR_PRE">HR_PRE_queue.json</option>
+                <option value="HR_LANG">HR_LANG_queue.json</option>
+                <option value="HR_MSG">HR_MSG_queue.json</option>
+                <option value="HR_RELEASE">HR_RELEASE_queue.json</option>
+              </optgroup>
+              <optgroup label="Recent Files" id="jsonRecentFilesGroup">
+                <!-- Populated from localStorage -->
+              </optgroup>
+            </select>
+          </div>
+        </div>
+        <details style="margin-top: var(--spacing-md);">
+          <summary style="cursor: pointer; font-size: var(--font-size-sm); color: var(--color-text-secondary); padding: var(--spacing-sm);">📁 Load Manual File (Advanced)</summary>
+          <div class="file-input-wrapper" style="margin-top: var(--spacing-sm);">
+            <label for="jsonQueueFile" style="padding: var(--spacing-sm) var(--spacing-lg); font-size: var(--font-size-sm);">Select JSON file...</label>
+            <input type="file" id="jsonQueueFile" accept=".json">
+            <span id="jsonLoadedFile" class="loaded-file" style="margin-left: var(--spacing-md);"></span>
+          </div>
+        </details>
+      </div>
+      <div id="jsonStatusMessage" class="status-message"></div>
+      <div id="jsonLoadingSkeleton" class="loading-skeleton" style="display: none;">
+        <div class="skeleton-item"></div>
+        <div class="skeleton-item"></div>
+      </div>
+      <div id="jsonReviewContainer"></div>
+    </div>
+    
+    <!-- Markdown Viewer Tab -->
+    <div id="markdown-tab" class="tab-content">
+      <div class="context-dropdown-wrapper">
+        <label for="markdownDropdown">📋 Quick Load:</label>
+        <select id="markdownDropdown" onchange="loadMarkdownFromDropdown(this.value)">
+          <option value="">Select markdown file...</option>
+          <optgroup label="Common Files" id="markdownCommonFilesGroup">
+            <!-- Populated dynamically -->
+          </optgroup>
+          <optgroup label="Recent Files" id="markdownRecentFilesGroup">
+            <!-- Populated from localStorage -->
+          </optgroup>
+        </select>
+        <button onclick="refreshMarkdownDropdown()">🔄 Refresh</button>
+      </div>
+      <div class="file-input-wrapper">
+        <label for="markdownFile">📁 Load Markdown File</label>
+        <input type="file" id="markdownFile" accept=".md">
+        <span id="markdownLoadedFile" class="loaded-file"></span>
+      </div>
+      <div id="markdownStatusMessage" class="status-message"></div>
+      <div id="markdownViewer" class="markdown-viewer"></div>
+    </div>
+    
+    <!-- Mermaid Viewer Tab -->
+    <div id="mermaid-tab" class="tab-content">
+      <div style="background: var(--color-bg-primary); padding: var(--spacing-xl); border-radius: var(--radius-lg); box-shadow: var(--shadow-2); margin-bottom: var(--spacing-xl);">
+        <div class="context-dropdown-wrapper" style="margin: 0;">
+          <label for="mermaidDropdown" style="font-weight: var(--font-weight-medium);">📋 Quick Load:</label>
+          <select id="mermaidDropdown" onchange="loadMermaidFromDropdown(this.value)" style="flex: 1;">
+            <option value="">Select mermaid diagram...</option>
+            <optgroup label="Common Files" id="mermaidCommonFilesGroup">
+              <!-- Populated dynamically -->
+            </optgroup>
+            <optgroup label="Recent Files" id="mermaidRecentFilesGroup">
+              <!-- Populated from localStorage -->
+            </optgroup>
+          </select>
+        </div>
+        <details style="margin-top: var(--spacing-md);">
+          <summary style="cursor: pointer; font-size: var(--font-size-sm); color: var(--color-text-secondary); padding: var(--spacing-sm);">📁 Load Manual File (Advanced)</summary>
+          <div class="file-input-wrapper" style="margin-top: var(--spacing-sm);">
+            <label for="mermaidFile" style="padding: var(--spacing-sm) var(--spacing-lg); font-size: var(--font-size-sm);">Select mermaid diagram...</label>
+            <input type="file" id="mermaidFile" accept=".mmd">
+            <span id="mermaidLoadedFile" class="loaded-file"></span>
+          </div>
+        </details>
+      </div>
+      <div id="mermaidStatusMessage" class="status-message"></div>
+      <div id="mermaidViewer" class="mermaid-container"></div>
+    </div>
+    
+    <!-- Export Section - Sticky when visible -->
+    <div id="exportSection" style="display: none; background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%); padding: var(--spacing-xl); border-radius: var(--radius-lg); margin-top: var(--spacing-xl); box-shadow: var(--shadow-4); border: 2px solid var(--color-primary); position: sticky; top: var(--spacing-xl); z-index: 100;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--spacing-lg);">
+        <h3 style="margin: 0; color: var(--color-primary); font-size: var(--font-size-xl); display: flex; align-items: center; gap: var(--spacing-sm);">
+          <span>📋</span>
+          <span>Next Step: Run This Command</span>
+        </h3>
+        <button onclick="document.getElementById('exportSection').style.display='none'" style="background: none; border: none; font-size: var(--font-size-xl); cursor: pointer; color: var(--color-text-secondary); padding: var(--spacing-xs); line-height: 1;">×</button>
+      </div>
+      <div id="commandOutput" style="margin-bottom: var(--spacing-lg); padding: var(--spacing-xl); background: var(--color-bg-primary); border: 2px solid var(--color-primary); border-radius: var(--radius-lg); box-shadow: var(--shadow-2);">
+        <div style="margin-bottom: var(--spacing-md); font-weight: var(--font-weight-semibold); color: var(--color-text-primary); display: flex; align-items: center; gap: var(--spacing-sm);">
+          <span>⚡</span>
+          <span>Copy and run this command in your terminal:</span>
+        </div>
+        <div style="display: flex; gap: var(--spacing-md); align-items: flex-start;">
+          <code id="commandText" style="flex: 1; padding: var(--spacing-lg); background: #1e293b; color: #e2e8f0; border: none; border-radius: var(--radius-sm); font-family: 'Courier New', monospace; font-size: var(--font-size-sm); white-space: pre-wrap; word-break: break-all; overflow-x: auto; line-height: 1.6; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);"></code>
+          <button class="btn btn-primary" onclick="copyCommand()" id="copyCommandBtn" style="flex-shrink: 0; padding: var(--spacing-lg); font-size: var(--font-size-base); box-shadow: var(--shadow-3); display: flex; align-items: center; gap: var(--spacing-sm);">
+            <span id="copyIcon">📋</span>
+            <span>Copy</span>
+          </button>
+        </div>
+        <div id="copyFeedback" style="display: none; margin-top: var(--spacing-md); padding: var(--spacing-sm); background: var(--color-success-light); color: var(--color-success-dark); border-radius: var(--radius-sm); font-size: var(--font-size-sm); text-align: center; animation: fadeIn 0.3s;">
+          ✓ Command copied to clipboard!
+        </div>
+      </div>
+      <details style="margin-top: var(--spacing-md);">
+        <summary style="cursor: pointer; font-weight: var(--font-weight-medium); color: var(--color-text-secondary); padding: var(--spacing-sm); background: var(--color-gray-50); border-radius: var(--radius-sm);">📄 Manifest JSON (for batch processing)</summary>
+        <div style="margin-top: var(--spacing-md);">
+          <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-sm); font-size: 13px;">
+            Use this for batch processing multiple decisions:
+          </p>
+          <textarea id="manifestOutput" readonly style="width: 100%; height: 200px; padding: var(--spacing-md); font-family: monospace; font-size: var(--font-size-xs); border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-bg-primary);"></textarea>
+          <div style="display: flex; gap: var(--spacing-md); margin-top: var(--spacing-md);">
+            <button class="btn btn-approve" onclick="copyManifest()">📋 Copy Manifest</button>
+            <button class="btn btn-approve" onclick="downloadManifest()">💾 Download Manifest</button>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+  
+  <script>
+    let currentQueueData = null;
+    let sessionDecisions = [];
+    let markdownCheckboxes = {};
+    let artifactIndex = null;
+    let artifactPathMap = {};
+    
+    // Initialize Mermaid
+    mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    
+    // Utility: Escape HTML to prevent XSS
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    // ============================================
+    // ARTIFACT INDEX RESOLVER
+    // ============================================
+    
+    async function loadArtifactIndex() {
+      try {
+        const response = await fetch('artifacts/ARTIFACT_INDEX.json?t=' + Date.now());
+        if (response.ok) {
+          artifactIndex = await response.json();
+          
+          // Build lookup maps
+          artifactPathMap = {};
+          Object.values(artifactIndex.artifacts || {}).flat().forEach(artifact => {
+            // Map by name
+            if (artifact.name) {
+              artifactPathMap[artifact.name] = artifact.path;
+            }
+            // Map by artifact_id from meta
+            if (artifact.meta?.agent_id) {
+              artifactPathMap[artifact.meta.agent_id] = artifact.path;
+            }
+            // Map by artifact_type
+            if (artifact.meta?.artifact_type) {
+              artifactPathMap[artifact.meta.artifact_type] = artifact.path;
+            }
+            // Map by full path for direct lookup
+            if (artifact.path) {
+              artifactPathMap[artifact.path] = artifact.path;
+              // Also map just the filename
+              const fileName = artifact.path.split('/').pop();
+              if (fileName) {
+                artifactPathMap[fileName] = artifact.path;
+              }
+            }
+          });
+          
+          localStorage.setItem('artifactIndex', JSON.stringify(artifactIndex));
+          localStorage.setItem('artifactPathMap', JSON.stringify(artifactPathMap));
+          return true;
+        }
+      } catch (e) {
+        console.warn('Could not load artifact index:', e);
+        // Try loading from localStorage
+        const cached = localStorage.getItem('artifactIndex');
+        if (cached) {
+          artifactIndex = JSON.parse(cached);
+          artifactPathMap = JSON.parse(localStorage.getItem('artifactPathMap') || '{}');
+          return true;
+        }
+      }
+      return false;
+    }
+    
+    function resolveArtifactPath(artifactName, artifactType, agentId, providedPath) {
+      // Try multiple lookup strategies
+      if (providedPath) {
+        // Normalize the provided path
+        const normalizedPath = providedPath.replace(/\\/g, '/');
+        if (artifactPathMap[normalizedPath]) {
+          return artifactPathMap[normalizedPath];
+        }
+        // Try just the filename from provided path
+        const fileName = normalizedPath.split('/').pop();
+        if (fileName && artifactPathMap[fileName]) {
+          return artifactPathMap[fileName];
+        }
+        // Return normalized path as-is for direct fetch attempts
+        return normalizedPath;
+      }
+      
+      return artifactPathMap[artifactName] ||
+             artifactPathMap[artifactType] ||
+             artifactPathMap[agentId] ||
+             null;
+    }
+    
+    // Tab switching
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById(tabName + '-tab').classList.add('active');
+      
+      // Auto-load when switching to a tab if not already loaded
+      if (tabName === 'json' && !currentQueueData) {
+        autoLoadJSONQueue();
+      } else if (tabName === 'markdown' && document.getElementById('markdownViewer').innerHTML === '') {
+        autoLoadMarkdown();
+      } else if (tabName === 'mermaid' && document.getElementById('mermaidViewer').innerHTML === '') {
+        autoLoadMermaid();
+      }
+    }
+    
+    // Load decisions from localStorage
+    try {
+      const saved = localStorage.getItem('reviewDecisions');
+      if (saved) {
+        sessionDecisions = JSON.parse(saved);
+      }
+    } catch (e) {
+      console.warn('Could not load saved decisions:', e);
+    }
+    
+    // Auto-load on page load
+    window.addEventListener('DOMContentLoaded', function() {
+      // Load artifact index first
+      loadArtifactIndex().then(success => {
+        if (success) {
+          console.log('Artifact index loaded successfully');
+        }
+      });
+      populateRecentFiles();
+      autoLoadJSONQueue();
+    });
+    
+    // JSON Review Queue Handler
+    document.getElementById('jsonQueueFile').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        loadJSONQueue(file);
+      }
+    });
+    
+    // Auto-load JSON queue
+    async function autoLoadJSONQueue() {
+      const lastGate = localStorage.getItem('lastSuccessfulJSONGate');
+      if (lastGate) {
+        const result = await tryLoadJSONQueueFile(lastGate);
+        if (result.success) {
+          showJSONStatus('Auto-loaded: ' + lastGate + '_queue.json', 'success');
+          return;
+        }
+      }
+      
+      const queueFiles = ['HR_PRE', 'HR_LANG', 'HR_MSG', 'HR_RELEASE'];
+      const loadingSkeleton = document.getElementById('jsonLoadingSkeleton');
+      if (loadingSkeleton) {
+        loadingSkeleton.style.display = 'block';
+      }
+      
+      for (const gate of queueFiles) {
+        const result = await tryLoadJSONQueueFile(gate);
+        if (result.success) {
+          showJSONStatus('Auto-loaded: ' + gate + '_queue.json', 'success');
+          if (loadingSkeleton) {
+            loadingSkeleton.style.display = 'none';
+          }
+          return;
+        }
+      }
+      
+      if (loadingSkeleton) {
+        loadingSkeleton.style.display = 'none';
+      }
+    }
+    
+    // Try loading JSON queue file
+    async function tryLoadJSONQueueFile(gate, preferredPath = null) {
+      const paths = preferredPath ? [preferredPath] : [
+        `review/${gate}_queue.json`,
+        `../review/${gate}_queue.json`,
+        `../../review/${gate}_queue.json`,
+        `agent-orchestrator/review/${gate}_queue.json`
+      ];
+      
+      for (const basePath of paths) {
+        try {
+          const response = await fetch(basePath);
+          if (response.ok) {
+            const data = await response.json();
+            if (data._meta && data._meta.review_gate) {
+              currentQueueData = data;
+              document.getElementById('jsonLoadedFile').textContent = `Loaded: ${gate}_queue.json`;
+              
+              localStorage.setItem('lastSuccessfulJSONPath', basePath);
+              localStorage.setItem('lastSuccessfulJSONGate', gate);
+              
+              const dropdown = document.getElementById('jsonQueueDropdown');
+              if (dropdown) {
+                dropdown.value = gate;
+              }
+              
+              addToRecentJSONFiles(gate, basePath);
+              renderJSONReviews(data);
+              return { success: true, data, path: basePath };
+            }
+          }
+        } catch (e) {
+          continue;
+        }
+      }
+      
+      return { success: false };
+    }
+    
+    // Load from JSON dropdown
+    async function loadJSONFromDropdown(gate) {
+      if (!gate) return;
+      
+      const loadingSkeleton = document.getElementById('jsonLoadingSkeleton');
+      if (loadingSkeleton) {
+        loadingSkeleton.style.display = 'block';
+      }
+      
+      showJSONStatus('Loading ' + gate + '_queue.json...', 'info');
+      
+      const result = await tryLoadJSONQueueFile(gate);
+      
+      if (loadingSkeleton) {
+        loadingSkeleton.style.display = 'none';
+      }
+      
+      if (result.success) {
+        showJSONStatus('Loaded: ' + gate + '_queue.json', 'success');
+      } else {
+        showJSONStatus('Could not load ' + gate + '_queue.json', 'error');
+      }
+    }
+    
+    function loadJSONQueue(file) {
+      const loadingSkeleton = document.getElementById('jsonLoadingSkeleton');
+      if (loadingSkeleton) {
+        loadingSkeleton.style.display = 'block';
+      }
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (!data._meta || !data._meta.review_gate) {
+            throw new Error('File does not appear to be a valid review queue file');
+          }
+          
+          currentQueueData = data;
+          document.getElementById('jsonLoadedFile').textContent = `Loaded: ${file.name}`;
+          
+          const gate = data._meta.review_gate;
+          const dropdown = document.getElementById('jsonQueueDropdown');
+          if (dropdown) {
+            dropdown.value = gate;
+          }
+          
+          addToRecentJSONFiles(gate, file.name);
+          
+          if (loadingSkeleton) {
+            loadingSkeleton.style.display = 'none';
+          }
+          
+          showJSONStatus('Loaded: ' + file.name, 'success');
+          renderJSONReviews(data);
+        } catch (error) {
+          if (loadingSkeleton) {
+            loadingSkeleton.style.display = 'none';
+          }
+          showJSONStatus('Error parsing JSON file: ' + error.message, 'error');
+        }
+      };
+      reader.readAsText(file);
+    }
+    
+    function renderJSONReviews(queueData) {
+      const container = document.getElementById('jsonReviewContainer');
+      const pendingReviews = queueData.pending_reviews || [];
+      
+      // Anti-flash rendering
+      container.style.visibility = 'hidden';
+      container.style.opacity = '0';
+      container.style.transition = 'opacity 0.2s';
+      
+      if (pendingReviews.length === 0) {
+        requestAnimationFrame(() => {
+          container.innerHTML = '<div class="empty-state"><p>No pending reviews in this queue.</p></div>';
+          container.style.visibility = 'visible';
+          container.style.opacity = '1';
+        });
+        return;
+      }
+      
+      let html = '<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--spacing-xl); padding-bottom: var(--spacing-md); border-bottom: 2px solid var(--color-border);">' +
+                 '<h2 style="margin: 0; font-size: var(--font-size-2xl); color: var(--color-text-primary);">Pending Reviews</h2>' +
+                 '<div style="display: flex; align-items: center; gap: var(--spacing-md);">' +
+                 '<span style="padding: var(--spacing-xs) var(--spacing-md); background: var(--color-primary-light); color: var(--color-primary); border-radius: var(--radius-full); font-weight: var(--font-weight-semibold); font-size: var(--font-size-lg);">' + pendingReviews.length + '</span>' +
+                 '</div>' +
+                 '</div>';
+      
+      pendingReviews.forEach(review => {
+        const reviewId = review.review_id || '';
+        const artifactName = review.artifact_name || 'Unnamed Artifact';
+        const riskLevel = review.risk_level || 'Unknown';
+        const gateId = review.review_gate || queueData._meta?.review_gate || 'UNKNOWN';
+        const submittedBy = review.submitted_by || 'Unknown';
+        const submittedAt = review.submitted_at || '';
+        const artifactPath = review.artifact_path || '';
+        const artifactType = review.artifact_type || 'UNKNOWN';
+        const reviewEffort = review.review_effort_estimate || 'N/A';
+        const requirements = review.review_requirements || [];
+        
+        const existingDecision = sessionDecisions.find(d => d.review_id === reviewId);
+        const isDecided = !!existingDecision;
+        const decisionClass = existingDecision ? (existingDecision.decision === 'APPROVE' ? 'approved' : 'rejected') : 'pending';
+        
+        html += `
+          <div class="review-item ${decisionClass}" id="review-${reviewId}">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--spacing-lg); padding-bottom: var(--spacing-lg); border-bottom: 1px solid var(--color-border-light);">
+              <div style="flex: 1;">
+                <div style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-sm);">
+                  <div style="font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); color: var(--color-text-primary);">${escapeHtml(artifactName)}</div>
+                  <span class="status-badge ${decisionClass}">${isDecided ? existingDecision.decision : 'PENDING'}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--spacing-md); font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+                  <span style="padding: var(--spacing-xs) var(--spacing-sm); background: var(--color-gray-100); border-radius: var(--radius-full);">${gateId}</span>
+                  <span>•</span>
+                  <span>${artifactType}</span>
+                  ${riskLevel ? `<span>•</span><span style="color: ${riskLevel.toUpperCase().includes('HIGH') ? 'var(--color-error)' : riskLevel.toUpperCase().includes('MEDIUM') ? 'var(--color-warning)' : 'var(--color-text-secondary)'};">${riskLevel}</span>` : ''}
+                </div>
+              </div>
+            </div>
+            
+            ${riskLevel.toUpperCase().includes('HIGH') ? `
+              <div class="high-risk">
+                <strong>⚠️ HIGH RISK ARTIFACT</strong> - Review carefully before approval
+              </div>
+            ` : ''}
+            
+            <div class="review-meta">
+              <div class="meta-item">
+                <div class="meta-label">Artifact Type</div>
+                <div class="meta-value">${artifactType}</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Risk Level</div>
+                <div class="meta-value">${riskLevel}</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Review Effort</div>
+                <div class="meta-value">${reviewEffort}</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Submitted By</div>
+                <div class="meta-value" style="font-family: monospace; font-size: 11px;">${submittedBy}</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Submitted At</div>
+                <div class="meta-value" style="font-size: 11px;">${submittedAt ? new Date(submittedAt).toLocaleString() : 'N/A'}</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Artifact Path</div>
+                <div class="meta-value" style="font-family: monospace; font-size: 11px; word-break: break-all;">${artifactPath}</div>
+              </div>
+            </div>
+            
+            ${requirements.length > 0 ? `
+              <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: #e7f3ff; border-radius: var(--radius-sm);">
+                <div class="meta-label" style="margin-bottom: 8px;">Review Requirements</div>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                  ${requirements.map(req => `<li>${req}</li>`).join('')}
+                </ul>
+              </div>
+            ` : ''}
+            
+            ${!isDecided && (riskLevel.toUpperCase().includes('HIGH') || riskLevel.toUpperCase().includes('MEDIUM') || artifactType.includes('SPECULATIVE') || artifactType.includes('DRAFT')) ? `
+              <div style="margin-top: var(--spacing-xl); padding: var(--spacing-xl); background: #fff9e6; border: 2px solid #ffc107; border-radius: var(--radius-lg);">
+                <h2 style="font-size: var(--font-size-lg); margin-bottom: var(--spacing-md); color: #856404;">🧭 Vibe Check: Human Judgment Zone</h2>
+                <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">
+                  This section exists for subjective discomfort. You do not need to be precise.
+                  If something feels off, flag it here.
+                </p>
+                
+                <details style="margin-top: var(--spacing-lg);">
+                  <summary style="cursor: pointer; font-weight: var(--font-weight-semibold); color: #856404; padding: var(--spacing-sm); background: var(--color-bg-primary); border-radius: var(--radius-sm);">
+                    ⚠️ Something feels off in this section
+                  </summary>
+                  
+                  <div style="margin-top: var(--spacing-lg); padding: var(--spacing-lg); background: var(--color-bg-primary); border-radius: var(--radius-sm);">
+                    <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">
+                      You don't need to explain technically. A short note or even a fragment is enough.
+                    </p>
+                    
+                    <textarea
+                      id="vibeInput-${reviewId}"
+                      placeholder="e.g. This conclusion feels rushed, or I don't trust this assumption…"
+                      style="width:100%;height:80px;padding: var(--spacing-md);border:1px solid var(--color-border);border-radius: var(--radius-sm);font-family:inherit;font-size:13px;resize:vertical;"
+                    ></textarea>
+                    
+                    <h4 style="margin-top: var(--spacing-lg); font-size: var(--font-size-sm); color: var(--color-text-primary);">Send this vibe to AI for clarification</h4>
+                    <pre style="background: var(--color-gray-100); padding: 12px; border-radius: var(--radius-sm); font-size: var(--font-size-xs); overflow-x: auto; margin-top: 8px; border: 1px solid var(--color-border);">ASK:
+The user feels discomfort about the highlighted section.
+Their concern is subjective and may be imprecise.
+
+Tasks:
+- Restate the concern clearly and charitably
+- Identify what might be causing the discomfort
+- Suggest whether this warrants revision or is acceptable
+
+Do NOT propose code.
+Do NOT defend the artifact.
+Focus on sense-making.</pre>
+                  </div>
+                </details>
+                
+                <div id="aiInterpretation-${reviewId}" style="display: none; margin-top: var(--spacing-lg); padding: var(--spacing-lg); background: #e7f3ff; border-left: 4px solid var(--color-primary); border-radius: var(--radius-sm);">
+                  <h3 style="font-size: var(--font-size-base); margin-bottom: var(--spacing-md); color: #084298;">🤖 AI Interpretation of User Concern</h3>
+                  <pre id="aiInterpretationText-${reviewId}" style="background: var(--color-bg-primary); padding: 12px; border-radius: var(--radius-sm); font-size: var(--font-size-xs); white-space: pre-wrap; margin: 0;"></pre>
+                  
+                  <h3 style="font-size: var(--font-size-sm); margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md); color: var(--color-text-primary);">Resolve This Concern</h3>
+                  
+                  <div style="margin-top: var(--spacing-md); display: grid; gap: var(--spacing-md);">
+                    <div style="padding: 12px; background: #d4edda; border: 1px solid var(--color-success); border-radius: var(--radius-sm);">
+                      <h4 style="font-size: 13px; margin-bottom: 8px; color: #155724;">✅ Yes, that's right — revise</h4>
+                      <pre style="background: var(--color-bg-primary); padding: var(--spacing-sm); border-radius: var(--radius-sm); font-size: 11px; margin: 0; overflow-x: auto;">DECISION:
+Artifact ID: ${reviewId}
+Decision: REVISE
+Reason: AI-reflected concern accepted
+Route Back to Execution: TRUE</pre>
+                    </div>
+                    
+                    <div style="padding: 12px; background: #d1ecf1; border: 1px solid #17a2b8; border-radius: var(--radius-sm);">
+                      <h4 style="font-size: 13px; margin-bottom: 8px; color: #0c5460;">➡️ No, this is fine — proceed</h4>
+                      <pre style="background: var(--color-bg-primary); padding: var(--spacing-sm); border-radius: var(--radius-sm); font-size: 11px; margin: 0; overflow-x: auto;">DECISION:
+Artifact ID: ${reviewId}
+Decision: APPROVED
+Note: Concern acknowledged but accepted</pre>
+                    </div>
+                    
+                    <div style="padding: 12px; background: #f8d7da; border: 1px solid var(--color-error); border-radius: var(--radius-sm);">
+                      <h4 style="font-size: 13px; margin-bottom: 8px; color: #721c24;">🗑️ This undermines the artifact — discard</h4>
+                      <pre style="background: var(--color-bg-primary); padding: var(--spacing-sm); border-radius: var(--radius-sm); font-size: 11px; margin: 0; overflow-x: auto;">DECISION:
+Artifact ID: ${reviewId}
+Decision: DISCARD
+Reason: Core assumption not trusted</pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ` : ''}
+            
+            ${!isDecided ? `
+              <div style="margin-top: var(--spacing-lg);">
+                <label for="rationale-${reviewId}" style="font-size: 13px; font-weight: var(--font-weight-semibold);">Rationale (optional):</label>
+                <textarea id="rationale-${reviewId}" class="rationale-input" placeholder="Enter rationale for your decision..."></textarea>
+              </div>
+              
+              <div class="action-buttons">
+                <button class="btn btn-approve" onclick="makeDecision('${reviewId}', 'APPROVE', '${gateId}', '${artifactPath}', '${artifactName}', '${riskLevel}')">
+                  ✅ APPROVE
+                </button>
+                <button class="btn btn-reject" onclick="makeDecision('${reviewId}', 'REJECT', '${gateId}', '${artifactPath}', '${artifactName}', '${riskLevel}')">
+                  ❌ REJECT
+                </button>
+                <button class="btn" style="background: #17a2b8; color: var(--color-bg-primary);" onclick="loadArtifactFile('${reviewId}', '${artifactPath}')">
+                  👁️ View Artifact
+                </button>
+              </div>
+            ` : `
+              <div class="action-buttons">
+                <div style="padding: var(--spacing-md); background: ${existingDecision.decision === 'APPROVE' ? '#d4edda' : '#f8d7da'}; border-radius: var(--radius-sm); color: ${existingDecision.decision === 'APPROVE' ? '#155724' : '#721c24'};">
+                  <strong>Decision: ${existingDecision.decision}</strong>
+                  ${existingDecision.rationale ? `<div style="margin-top: 5px; font-size: 13px;">${existingDecision.rationale}</div>` : ''}
+                  <div style="margin-top: 5px; font-size: 11px; opacity: 0.8;">
+                    Decided at: ${new Date(existingDecision.decision_at).toLocaleString()}
+                  </div>
+                </div>
+                <button class="btn" style="background: var(--color-gray-500); color: var(--color-bg-primary);" onclick="undoDecision('${reviewId}')">
+                  ↺ Undo
+                </button>
+              </div>
+            `}
+            
+            <div id="artifactViewer-${reviewId}" class="artifact-viewer">
+              <div class="artifact-viewer-content" id="artifactContent-${reviewId}"></div>
+            </div>
+          </div>
+        `;
+      });
+      
+      // Batch update DOM
+      requestAnimationFrame(() => {
+        container.innerHTML = html;
+        updateExportSection();
+        container.style.visibility = 'visible';
+        container.style.opacity = '1';
+      });
+    }
+    
+    // Refresh from Index - reloads index + queues + updates UI
+    async function refreshFromIndex() {
+      const btn = document.getElementById('btnRefreshIndex');
+      const icon = document.getElementById('refreshIcon');
+      const originalText = btn.innerHTML;
+      
+      // Show loading state
+      btn.disabled = true;
+      btn.classList.add('loading');
+      icon.textContent = '⏳';
+      showJSONStatus('Refreshing from index...', 'info');
+      
+      try {
+        // 1. Load ARTIFACT_INDEX.json
+        const indexLoaded = await loadArtifactIndex();
+        
+        // 2. Reload all review queues
+        const queues = ['HR_PRE', 'HR_LANG', 'HR_MSG', 'HR_RELEASE'];
+        const queueData = [];
+        const loadedGates = [];
+        
+        for (const gate of queues) {
+          const result = await tryLoadJSONQueueFile(gate);
+          if (result.success) {
+            queueData.push(result.data);
+            loadedGates.push(gate);
+          }
+        }
+        
+        // 3. Update UI if queues loaded
+        if (queueData.length > 0) {
+          currentQueueData = queueData[0]; // Use first for single queue view
+          renderJSONReviews(currentQueueData);
+          showJSONStatus(`✅ Refreshed: ${indexLoaded ? 'Index' : 'Cached index'} + ${loadedGates.length} queue(s) loaded`, 'success');
+          
+          // Show success animation
+          icon.textContent = '✓';
+          setTimeout(() => {
+            icon.textContent = '🔄';
+          }, 1500);
+        } else {
+          showJSONStatus('⚠️ Refreshed index' + (indexLoaded ? ' (new)' : ' (cached)') + ' but no queues loaded', 'warning');
+          icon.textContent = '⚠️';
+          setTimeout(() => {
+            icon.textContent = '🔄';
+          }, 2000);
+        }
+      } catch (error) {
+        showJSONStatus('❌ Error refreshing from index: ' + error.message, 'error');
+        icon.textContent = '❌';
+        setTimeout(() => {
+          icon.textContent = '🔄';
+        }, 2000);
+      } finally {
+        btn.disabled = false;
+        btn.classList.remove('loading');
+      }
+    }
+    
+    // JSON dropdown helpers
+    function refreshJSONDropdown() {
+      populateRecentFiles();
+      showJSONStatus('Dropdown refreshed', 'info');
+      setTimeout(() => {
+        const msg = document.getElementById('jsonStatusMessage');
+        if (msg) msg.className = 'status-message';
+      }, 2000);
+    }
+    
+    function populateRecentFiles() {
+      // JSON recent files
+      const jsonGroup = document.getElementById('jsonRecentFilesGroup');
+      if (jsonGroup) {
+        try {
+          const recent = JSON.parse(localStorage.getItem('recentJSONFiles') || '[]');
+          jsonGroup.innerHTML = '';
+          recent.slice(0, 5).forEach(file => {
+            const option = document.createElement('option');
+            option.value = file.gate;
+            option.textContent = file.gate + '_queue.json (Recent)';
+            jsonGroup.appendChild(option);
+          });
+        } catch (e) {
+          console.warn('Could not load recent JSON files:', e);
+        }
+      }
+      
+      // Markdown recent files
+      const mdGroup = document.getElementById('markdownRecentFilesGroup');
+      if (mdGroup) {
+        try {
+          const recent = JSON.parse(localStorage.getItem('recentMarkdownFiles') || '[]');
+          mdGroup.innerHTML = '';
+          recent.slice(0, 5).forEach(file => {
+            const option = document.createElement('option');
+            option.value = file.path;
+            option.textContent = file.name + ' (Recent)';
+            mdGroup.appendChild(option);
+          });
+        } catch (e) {
+          console.warn('Could not load recent markdown files:', e);
+        }
+      }
+      
+      // Mermaid recent files
+      const mmdGroup = document.getElementById('mermaidRecentFilesGroup');
+      if (mmdGroup) {
+        try {
+          const recent = JSON.parse(localStorage.getItem('recentMermaidFiles') || '[]');
+          mmdGroup.innerHTML = '';
+          recent.slice(0, 5).forEach(file => {
+            const option = document.createElement('option');
+            option.value = file.path;
+            option.textContent = file.name + ' (Recent)';
+            mmdGroup.appendChild(option);
+          });
+        } catch (e) {
+          console.warn('Could not load recent mermaid files:', e);
+        }
+      }
+    }
+    
+    function addToRecentJSONFiles(gate, path) {
+      try {
+        const recent = JSON.parse(localStorage.getItem('recentJSONFiles') || '[]');
+        const filtered = recent.filter(f => f.gate !== gate);
+        filtered.unshift({ gate, path, timestamp: new Date().toISOString() });
+        localStorage.setItem('recentJSONFiles', JSON.stringify(filtered.slice(0, 10)));
+        populateRecentFiles();
+      } catch (e) {
+        console.warn('Could not save recent JSON files:', e);
+      }
+    }
+    
+    function showJSONStatus(message, type) {
+      const msg = document.getElementById('jsonStatusMessage');
+      if (!msg) return;
+      const icons = {
+        'success': '✅',
+        'error': '❌',
+        'warning': '⚠️',
+        'info': 'ℹ️'
+      };
+      msg.innerHTML = `<span>${icons[type] || 'ℹ️'}</span><span>${message}</span>`;
+      msg.className = 'status-message ' + type;
+      if (type === 'success' || type === 'info' || type === 'warning') {
+        setTimeout(() => {
+          msg.className = 'status-message';
+        }, 5000);
+      }
+    }
+    
+    function makeDecision(reviewId, decision, gateId, artifactPath, artifactName, riskLevel) {
+      if (decision === 'APPROVE' && riskLevel.toUpperCase().includes('HIGH')) {
+        if (!confirm('⚠️ HIGH RISK ARTIFACT\n\nAre you sure you want to APPROVE this high-risk artifact?')) {
+          return;
+        }
+      }
+      
+      const rationale = document.getElementById(`rationale-${reviewId}`)?.value || null;
+      const decisionObj = {
+        review_id: reviewId,
+        gate_id: gateId,
+        artifact_path: artifactPath,
+        artifact_name: artifactName,
+        decision: decision,
+        rationale: rationale,
+        decision_at: new Date().toISOString(),
+        decision_by: 'human:reviewer',
+        risk_level: riskLevel
+      };
+      
+      sessionDecisions = sessionDecisions.filter(d => d.review_id !== reviewId);
+      sessionDecisions.push(decisionObj);
+      
+      try {
+        localStorage.setItem('reviewDecisions', JSON.stringify(sessionDecisions));
+      } catch (e) {
+        console.warn('Could not save decisions:', e);
+      }
+      
+      updateExportSection();
+      if (currentQueueData) {
+        renderJSONReviews(currentQueueData);
+      }
+    }
+    
+    function undoDecision(reviewId) {
+      sessionDecisions = sessionDecisions.filter(d => d.review_id !== reviewId);
+      try {
+        localStorage.setItem('reviewDecisions', JSON.stringify(sessionDecisions));
+      } catch (e) {
+        console.warn('Could not save decisions:', e);
+      }
+      updateExportSection();
+      if (currentQueueData) {
+        renderJSONReviews(currentQueueData);
+      }
+    }
+    
+    // Auto-load artifact file from known paths
+    async function loadArtifactFile(reviewId, artifactPath, artifactName, artifactType) {
+      const viewer = document.getElementById(`artifactViewer-${reviewId}`);
+      const content = document.getElementById(`artifactContent-${reviewId}`);
+      
+      // Show loading state
+      viewer.classList.add('visible');
+      content.innerHTML = '<div style="padding: var(--spacing-xl); text-align: center; color: var(--color-text-secondary);">⏳ Loading artifact...</div>';
+      
+      // Get the review entry to extract more info
+      const review = currentQueueData?.pending_reviews?.find(r => r.review_id === reviewId);
+      const agentId = review?.submitted_by || artifactPath.split('/').slice(-2, -1)[0] || '';
+      
+      // Resolve path from index
+      const resolvedPath = resolveArtifactPath(artifactName, artifactType, agentId, artifactPath);
+      
+      // Try known paths (prioritize resolved path from index)
+      const possiblePaths = [];
+      if (resolvedPath) {
+        possiblePaths.push(resolvedPath);
+        possiblePaths.push(`artifacts/${resolvedPath.split('/').slice(-2).join('/')}`);
+        possiblePaths.push(`../${resolvedPath}`);
+        possiblePaths.push(`../../${resolvedPath}`);
+      }
+      // Add original path variations
+      possiblePaths.push(artifactPath);
+      possiblePaths.push(`artifacts/${artifactPath.split('/').slice(-2).join('/')}`);
+      possiblePaths.push(`../${artifactPath}`);
+      possiblePaths.push(`../../${artifactPath}`);
+      // Try just the filename
+      const fileName = artifactPath.split('/').pop();
+      if (fileName) {
+        possiblePaths.push(`artifacts/**/${fileName}`);
+        possiblePaths.push(fileName);
+      }
+      
+      // Check cached path first
+      const cachedPath = localStorage.getItem(`lastArtifactPath_${reviewId}`);
+      if (cachedPath && !cachedPath.includes('**') && !cachedPath.includes('*')) {
+        possiblePaths.unshift(cachedPath);
+      }
+      
+      // Remove duplicates
+      const uniquePaths = [...new Set(possiblePaths.filter(p => p))];
+      
+      // Try each path
+      for (const path of uniquePaths) {
+        // Skip wildcard paths (can't fetch directly)
+        if (path.includes('**') || path.includes('*')) continue;
+        
+        try {
+          const response = await fetch(path + '?t=' + Date.now()); // Cache-bust
+          if (response.ok) {
+            const jsonData = await response.json();
+            const formatted = JSON.stringify(jsonData, null, 2);
+            content.textContent = formatted;
+            
+            // Cache successful path
+            localStorage.setItem(`lastArtifactPath_${reviewId}`, path);
+            showJSONStatus(`✓ Loaded artifact`, 'success');
+            return; // Success - no file picker needed
+          }
+        } catch (e) {
+          continue; // Try next path
+        }
+      }
+      
+      // All paths failed - show error and offer file picker
+      content.innerHTML = `
+        <div style="padding: var(--spacing-xl); text-align: center;">
+          <div style="color: var(--color-error); margin-bottom: var(--spacing-md);">❌ Could not auto-load artifact</div>
+          <button class="btn" style="background: var(--color-primary); color: var(--color-bg-primary);" onclick="showFilePickerForArtifact('${reviewId}', '${artifactPath}')">
+            📁 Select File Manually
+          </button>
+        </div>
+      `;
+    }
+    
+    function showFilePickerForArtifact(reviewId, artifactPath) {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.json';
+      input.onchange = function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            try {
+              const jsonData = JSON.parse(e.target.result);
+              const formatted = JSON.stringify(jsonData, null, 2);
+              document.getElementById(`artifactContent-${reviewId}`).textContent = formatted;
+              document.getElementById(`artifactViewer-${reviewId}`).classList.add('visible');
+            } catch (error) {
+              document.getElementById(`artifactContent-${reviewId}`).innerHTML = 
+                `<span style="color: var(--color-error);">Error parsing JSON: ${error.message}</span>`;
+              document.getElementById(`artifactViewer-${reviewId}`).classList.add('visible');
+            }
+          };
+          reader.readAsText(file);
+        }
+      };
+      input.click();
+    }
+    
+    // Markdown Viewer Handler
+    document.getElementById('markdownFile').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        loadMarkdown(file);
+      }
+    });
+    
+    // Auto-load markdown
+    async function autoLoadMarkdown() {
+      const lastPath = localStorage.getItem('lastSuccessfulMarkdownPath');
+      if (lastPath) {
+        try {
+          const response = await fetch(lastPath);
+          if (response.ok) {
+            const content = await response.text();
+            document.getElementById('markdownLoadedFile').textContent = `Loaded: ${lastPath}`;
+            renderMarkdown(content, lastPath.split('/').pop());
+            showMarkdownStatus('Auto-loaded: ' + lastPath.split('/').pop(), 'success');
+            return;
+          }
+        } catch (e) {
+          // Continue to try common paths
+        }
+      }
+      
+      // Try common markdown paths
+      const commonPaths = [
+        'artifacts/review/*.md',
+        '../artifacts/review/*.md',
+        '../../artifacts/review/*.md'
+      ];
+      
+      // Note: Can't actually list directories, so we'll just show status
+      showMarkdownStatus('Use dropdown or file picker to load markdown files', 'info');
+    }
+    
+    // Load markdown from dropdown
+    async function loadMarkdownFromDropdown(path) {
+      if (!path) return;
+      
+      showMarkdownStatus('Loading ' + path + '...', 'info');
+      
+      try {
+        const response = await fetch(path);
+        if (response.ok) {
+          const content = await response.text();
+          document.getElementById('markdownLoadedFile').textContent = `Loaded: ${path}`;
+          localStorage.setItem('lastSuccessfulMarkdownPath', path);
+          addToRecentMarkdownFiles(path);
+          renderMarkdown(content, path.split('/').pop());
+          showMarkdownStatus('Loaded: ' + path.split('/').pop(), 'success');
+        } else {
+          showMarkdownStatus('Could not load ' + path, 'error');
+        }
+      } catch (e) {
+        showMarkdownStatus('Error loading ' + path + ': ' + e.message, 'error');
+      }
+    }
+    
+    function loadMarkdown(file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const content = e.target.result;
+        document.getElementById('markdownLoadedFile').textContent = `Loaded: ${file.name}`;
+        localStorage.setItem('lastSuccessfulMarkdownPath', file.name);
+        addToRecentMarkdownFiles(file.name);
+        renderMarkdown(content, file.name);
+        showMarkdownStatus('Loaded: ' + file.name, 'success');
+      };
+      reader.readAsText(file);
+    }
+    
+    function refreshMarkdownDropdown() {
+      populateRecentFiles();
+      showMarkdownStatus('Dropdown refreshed', 'info');
+      setTimeout(() => {
+        const msg = document.getElementById('markdownStatusMessage');
+        if (msg) msg.className = 'status-message';
+      }, 2000);
+    }
+    
+    function addToRecentMarkdownFiles(path) {
+      try {
+        const recent = JSON.parse(localStorage.getItem('recentMarkdownFiles') || '[]');
+        const name = path.split('/').pop();
+        const filtered = recent.filter(f => f.path !== path);
+        filtered.unshift({ name, path, timestamp: new Date().toISOString() });
+        localStorage.setItem('recentMarkdownFiles', JSON.stringify(filtered.slice(0, 10)));
+        populateRecentFiles();
+      } catch (e) {
+        console.warn('Could not save recent markdown files:', e);
+      }
+    }
+    
+    function showMarkdownStatus(message, type) {
+      const msg = document.getElementById('markdownStatusMessage');
+      if (!msg) return;
+      msg.textContent = message;
+      msg.className = 'status-message ' + type;
+      if (type === 'success' || type === 'info') {
+        setTimeout(() => {
+          msg.className = 'status-message';
+        }, 5000);
+      }
+    }
+    
+    function renderMarkdown(content, fileName) {
+      const checkboxId = 'cb-' + Date.now();
+      let checkboxCounter = 0;
+      const checkboxMap = [];
+      
+      // Store original content for saving
+      window.currentMarkdownContent = content;
+      window.currentMarkdownFileName = fileName;
+      
+      // Extract all checkbox lines with their context
+      const lines = content.split('\n');
+      const processedLines = [];
+      
+      lines.forEach((line, index) => {
+        const checkboxMatch = line.match(/^(\s*)- \[([ x])\](.*)$/i);
+        if (checkboxMatch) {
+          const indent = checkboxMatch[1];
+          const checked = checkboxMatch[2].toLowerCase() === 'x';
+          const text = checkboxMatch[3].trim();
+          const id = `${checkboxId}-${checkboxCounter++}`;
+          
+          checkboxMap.push({
+            id: id,
+            originalLine: line,
+            index: index,
+            text: text,
+            checked: checked
+          });
+          
+          // Replace with placeholder that will be converted to HTML
+          processedLines.push(`${indent}<!--CHECKBOX:${id}:${checked}:${text}-->`);
+        } else {
+          processedLines.push(line);
+        }
+      });
+      
+      // Convert markdown to HTML
+      const html = marked.parse(processedLines.join('\n'));
+      
+      // Replace checkbox placeholders with interactive checkboxes
+      let finalHtml = html;
+      checkboxMap.forEach(cb => {
+        const placeholder = `<!--CHECKBOX:${cb.id}:${cb.checked}:${cb.text}-->`;
+        const checkboxHtml = `
+          <div class="todo-checkbox ${cb.checked ? 'completed' : ''}" id="todo-${cb.id}">
+            <input type="checkbox" id="${cb.id}" ${cb.checked ? 'checked' : ''} onchange="toggleTodo('${cb.id}')">
+            <label for="${cb.id}">${cb.text}</label>
+          </div>
+        `;
+        finalHtml = finalHtml.replace(placeholder, checkboxHtml);
+        
+        // Store checkbox state
+        if (cb.checked) {
+          markdownCheckboxes[cb.id] = true;
+        }
+      });
+      
+      const viewer = document.getElementById('markdownViewer');
+      viewer.innerHTML = finalHtml + `
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid var(--color-border);">
+          <button class="save-checkboxes-btn" onclick="saveCheckboxState('${fileName}')">
+            💾 Save Checkbox State
+          </button>
+        </div>
+      `;
+      
+      // Load saved checkbox state
+      loadCheckboxState(fileName);
+    }
+    
+    function toggleTodo(checkboxId) {
+      const checkbox = document.getElementById(checkboxId);
+      const container = document.getElementById('todo-' + checkboxId);
+      if (!checkbox || !container) return;
+      
+      if (checkbox.checked) {
+        container.classList.add('completed');
+        markdownCheckboxes[checkboxId] = true;
+      } else {
+        container.classList.remove('completed');
+        markdownCheckboxes[checkboxId] = false;
+      }
+      
+      // Auto-save on toggle
+      if (window.currentMarkdownFileName) {
+        saveCheckboxState(window.currentMarkdownFileName);
+      }
+    }
+    
+    function saveCheckboxState(fileName) {
+      try {
+        const key = 'md-checkboxes-' + fileName;
+        localStorage.setItem(key, JSON.stringify(markdownCheckboxes));
+        // Show subtle feedback instead of alert
+        const btn = event?.target;
+        if (btn) {
+          const originalText = btn.textContent;
+          btn.textContent = '✓ Saved';
+          btn.style.background = 'var(--color-success)';
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = '';
+          }, 2000);
+        }
+      } catch (e) {
+        console.warn('Could not save checkbox state:', e);
+        alert('Could not save checkbox state');
+      }
+    }
+    
+    function loadCheckboxState(fileName) {
+      try {
+        const key = 'md-checkboxes-' + fileName;
+        const saved = localStorage.getItem(key);
+        if (saved) {
+          const savedState = JSON.parse(saved);
+          Object.keys(savedState).forEach(id => {
+            if (document.getElementById(id)) {
+              document.getElementById(id).checked = savedState[id];
+              toggleTodo(id);
+            }
+          });
+        }
+      } catch (e) {
+        console.warn('Could not load checkbox state:', e);
+      }
+    }
+    
+    // Mermaid Viewer Handler
+    document.getElementById('mermaidFile').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        loadMermaid(file);
+      }
+    });
+    
+    // Auto-load mermaid
+    async function autoLoadMermaid() {
+      const lastPath = localStorage.getItem('lastSuccessfulMermaidPath');
+      if (lastPath) {
+        try {
+          const response = await fetch(lastPath);
+          if (response.ok) {
+            const content = await response.text();
+            document.getElementById('mermaidLoadedFile').textContent = `Loaded: ${lastPath}`;
+            renderMermaid(content, lastPath.split('/').pop());
+            showMermaidStatus('Auto-loaded: ' + lastPath.split('/').pop(), 'success');
+            return;
+          }
+        } catch (e) {
+          // Continue to try common paths
+        }
+      }
+      
+      showMermaidStatus('Use dropdown or file picker to load mermaid diagrams', 'info');
+    }
+    
+    // Load mermaid from dropdown
+    async function loadMermaidFromDropdown(path) {
+      if (!path) return;
+      
+      showMermaidStatus('Loading ' + path + '...', 'info');
+      
+      try {
+        const response = await fetch(path);
+        if (response.ok) {
+          const content = await response.text();
+          document.getElementById('mermaidLoadedFile').textContent = `Loaded: ${path}`;
+          localStorage.setItem('lastSuccessfulMermaidPath', path);
+          addToRecentMermaidFiles(path);
+          renderMermaid(content, path.split('/').pop());
+          showMermaidStatus('Loaded: ' + path.split('/').pop(), 'success');
+        } else {
+          showMermaidStatus('Could not load ' + path, 'error');
+        }
+      } catch (e) {
+        showMermaidStatus('Error loading ' + path + ': ' + e.message, 'error');
+      }
+    }
+    
+    function loadMermaid(file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const content = e.target.result;
+        document.getElementById('mermaidLoadedFile').textContent = `Loaded: ${file.name}`;
+        localStorage.setItem('lastSuccessfulMermaidPath', file.name);
+        addToRecentMermaidFiles(file.name);
+        renderMermaid(content, file.name);
+        showMermaidStatus('Loaded: ' + file.name, 'success');
+      };
+      reader.readAsText(file);
+    }
+    
+    function refreshMermaidDropdown() {
+      populateRecentFiles();
+      showMermaidStatus('Dropdown refreshed', 'info');
+      setTimeout(() => {
+        const msg = document.getElementById('mermaidStatusMessage');
+        if (msg) msg.className = 'status-message';
+      }, 2000);
+    }
+    
+    function addToRecentMermaidFiles(path) {
+      try {
+        const recent = JSON.parse(localStorage.getItem('recentMermaidFiles') || '[]');
+        const name = path.split('/').pop();
+        const filtered = recent.filter(f => f.path !== path);
+        filtered.unshift({ name, path, timestamp: new Date().toISOString() });
+        localStorage.setItem('recentMermaidFiles', JSON.stringify(filtered.slice(0, 10)));
+        populateRecentFiles();
+      } catch (e) {
+        console.warn('Could not save recent mermaid files:', e);
+      }
+    }
+    
+    function showMermaidStatus(message, type) {
+      const msg = document.getElementById('mermaidStatusMessage');
+      if (!msg) return;
+      msg.textContent = message;
+      msg.className = 'status-message ' + type;
+      if (type === 'success' || type === 'info') {
+        setTimeout(() => {
+          msg.className = 'status-message';
+        }, 5000);
+      }
+    }
+    
+    function renderMermaid(content, fileName) {
+      const viewer = document.getElementById('mermaidViewer');
+      const diagramId = 'mermaid-' + Date.now();
+      
+      viewer.innerHTML = `
+        <div class="mermaid" id="${diagramId}">
+${content}
+        </div>
+      `;
+      
+      // Render the diagram using mermaid.run or mermaid.init
+      try {
+        const diagramElement = document.getElementById(diagramId);
+        if (!diagramElement) {
+          throw new Error('Diagram element not found');
+        }
+        
+        // Try mermaid.run() first (v10+ API)
+        if (typeof mermaid.run === 'function') {
+          mermaid.run({
+            querySelector: '#' + diagramId,
+            suppressErrors: false
+          }).catch(err => {
+            console.error('Mermaid.run error:', err);
+            // Fallback to mermaid.init()
+            try {
+              mermaid.init(undefined, '#' + diagramId);
+            } catch (initErr) {
+              showMermaidError(viewer, err.message || initErr.message, content);
+            }
+          });
+        } else {
+          // Fallback to mermaid.init() (older API)
+          mermaid.init(undefined, '#' + diagramId);
+        }
+      } catch (err) {
+        console.error('Mermaid rendering error:', err);
+        showMermaidError(viewer, err.message, content);
+      }
+    }
+    
+    function showMermaidError(container, message, content) {
+      container.innerHTML = `
+        <div style="color: var(--color-error); padding: var(--spacing-xl); background: #fff5f5; border: 2px solid var(--color-error); border-radius: var(--radius-lg);">
+          <strong>❌ Error rendering diagram:</strong>
+          <p>${message}</p>
+          <details style="margin-top: var(--spacing-lg);">
+            <summary style="cursor: pointer; font-weight: var(--font-weight-semibold);">View Source Code</summary>
+            <pre style="margin-top: var(--spacing-md); background: #f4f4f4; padding: var(--spacing-lg); border-radius: var(--radius-sm); overflow-x: auto; text-align: left;">${content}</pre>
+          </details>
+        </div>
+      `;
+    }
+    
+    function updateExportSection() {
+      if (sessionDecisions.length === 0) {
+        document.getElementById('exportSection').style.display = 'none';
+        return;
+      }
+      
+      const manifest = {
+        _meta: {
+          manifest_version: "1.0.0",
+          generated_at: new Date().toISOString(),
+          generated_by: "unified_review_viewer.html",
+          total_decisions: sessionDecisions.length
+        },
+        decisions: sessionDecisions
+      };
+      
+      document.getElementById('exportSection').style.display = 'block';
+      document.getElementById('manifestOutput').value = JSON.stringify(manifest, null, 2);
+      
+      // Generate command(s)
+      if (sessionDecisions.length === 1) {
+        // Single decision - show single command
+        const decision = sessionDecisions[0];
+        const rationale = decision.rationale ? decision.rationale.replace(/"/g, '\\"').replace(/\n/g, ' ') : '';
+        const cmd = `python scripts/cockpit__approve_artifact.py --gate-id ${decision.gate_id} --artifact-id ${decision.review_id} --decision ${decision.decision}` + 
+                    (rationale ? ` --rationale "${rationale}"` : '');
+        document.getElementById('commandText').textContent = cmd;
+      } else {
+        // Multiple decisions - show batch command with instructions
+        document.getElementById('commandText').textContent = 
+          `# Step 1: Download the manifest JSON below\n` +
+          `# Step 2: Save it as 'approval_manifest.json' in the agent-orchestrator directory\n` +
+          `# Step 3: Run this command:\n\n` +
+          `python scripts/cockpit__approve_artifact.py --manifest-file approval_manifest.json`;
+      }
+    }
+    
+    function copyCommand() {
+      const commandText = document.getElementById('commandText').textContent;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(commandText).then(() => {
+          showJSONStatus('Command copied to clipboard!', 'success');
+        }).catch(() => {
+          // Fallback for older browsers
+          const textarea = document.createElement('textarea');
+          textarea.value = commandText;
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          showJSONStatus('Command copied to clipboard!', 'success');
+        });
+      } else {
+        // Fallback
+        const textarea = document.createElement('textarea');
+        textarea.value = commandText;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showJSONStatus('Command copied to clipboard!', 'success');
+      }
+    }
+    
+    function copyManifest() {
+      const manifestOutput = document.getElementById('manifestOutput');
+      manifestOutput.select();
+      document.execCommand('copy');
+      showJSONStatus('Manifest JSON copied to clipboard!', 'success');
+    }
+    
+    function downloadManifest() {
+      const manifest = {
+        _meta: {
+          manifest_version: "1.0.0",
+          generated_at: new Date().toISOString(),
+          generated_by: "unified_review_viewer.html",
+          total_decisions: sessionDecisions.length
+        },
+        decisions: sessionDecisions
+      };
+      
+      const dataStr = JSON.stringify(manifest, null, 2);
+      const dataBlob = new Blob([dataStr], {type: 'application/json'});
+      const url = URL.createObjectURL(dataBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `approval_manifest_${new Date().toISOString().split('T')[0]}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>

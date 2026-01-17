@@ -1,0 +1,132 @@
+{
+  "_meta": {
+    "agent_id": "draft_fallback_options_comm_evt",
+    "generated_at": "2026-01-20T22:00:00Z",
+    "artifact_type": "FALLBACK_OPTIONS",
+    "artifact_name": "Legislative Fallback Strategy",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": null,
+    "guidance_status": "SIGNED"
+  },
+  "primary_legislative_goal": {
+    "policy_objective": "Establish federal standards for data breach notification and consumer data protection",
+    "preferred_vehicle": "H.R. 8888 - Comprehensive Data Privacy Act (standalone bill)",
+    "committee": "House Energy and Commerce - Consumer Protection Subcommittee",
+    "status": "MARKUP_BLOCKED - Opposition from tech industry and some committee members"
+  },
+  "fallback_hierarchy": {
+    "option_1": {
+      "name": "Narrowed Scope Bill",
+      "description": "Reduce scope to data breach notification only, remove broader privacy provisions",
+      "vehicle": "H.R. 8888-A (amended version)",
+      "pros": [
+        "Lower opposition - data breach notification has broader support",
+        "Fits Energy and Commerce jurisdiction cleanly",
+        "Can build on existing state law precedents"
+      ],
+      "cons": [
+        "Achieves only partial policy goal",
+        "May reduce momentum for comprehensive privacy legislation"
+      ],
+      "viability": "HIGH",
+      "timeline": "2-3 months to revise and re-markup"
+    },
+    "option_2": {
+      "name": "Rider on Must-Pass Vehicle",
+      "description": "Attach data breach notification provisions to must-pass appropriations or authorization bill",
+      "vehicle": "FY2027 Commerce, Justice, Science Appropriations or NDAA",
+      "pros": [
+        "Must-pass vehicle increases enactment probability",
+        "Can bypass Energy and Commerce if included in appropriations",
+        "Harder to remove once included"
+      ],
+      "cons": [
+        "Jurisdictional challenges may arise",
+        "Appropriations riders face points of order",
+        "Limited scope due to vehicle constraints"
+      ],
+      "viability": "MEDIUM",
+      "timeline": "4-6 months to appropriations cycle"
+    },
+    "option_3": {
+      "name": "State Law Preemption Approach",
+      "description": "Federal standard that preempts state laws but sets minimum floor (not ceiling)",
+      "vehicle": "H.R. 8888-B (revised)",
+      "pros": [
+        "Addresses industry concern about patchwork of state laws",
+        "Can attract industry support by providing uniformity",
+        "Maintains stronger state protections where they exist"
+      ],
+      "cons": [
+        "Preemption language controversial with states' rights advocates",
+        "May lose consumer advocacy support if seen as weakening protections"
+      ],
+      "viability": "MEDIUM-HIGH",
+      "timeline": "3-4 months for revision and coalition rebuilding"
+    },
+    "option_4": {
+      "name": "Sector-Specific Approach",
+      "description": "Start with healthcare or financial services data (already have sectoral privacy laws)",
+      "vehicle": "Amendment to existing sectoral privacy laws or new sectoral bill",
+      "pros": [
+        "Builds on existing regulatory framework",
+        "Lower opposition in specific sectors",
+        "Can expand to other sectors over time"
+      ],
+      "cons": [
+        "Incremental approach, may take years to achieve comprehensive coverage",
+        "Each sector requires separate legislative effort"
+      ],
+      "viability": "HIGH for individual sectors",
+      "timeline": "6-12 months per sector"
+    },
+    "option_5": {
+      "name": "Executive Action + Report Language",
+      "description": "Support Administration rulemaking or executive order, plus appropriations report language",
+      "vehicle": "Executive order + CJS Appropriations report language",
+      "pros": [
+        "Faster than legislation",
+        "Can achieve some policy goals without congressional action",
+        "Report language can guide implementation"
+      ],
+      "cons": [
+        "Executive actions can be reversed by future administrations",
+        "Less durable than statutory requirements",
+        "Limited authority for comprehensive privacy regulation"
+      ],
+      "viability": "MEDIUM (depends on Administration priorities)",
+      "timeline": "2-4 months if Administration prioritizes"
+    }
+  },
+  "recommended_strategy": {
+    "primary_path": "Option 1 - Narrowed scope bill focusing on data breach notification",
+    "rationale": "Highest viability, achieves meaningful progress, can build momentum for broader legislation later",
+    "parallel_paths": [
+      "Continue advocating for comprehensive bill for future Congress",
+      "Support Option 4 for high-priority sectors (healthcare data breaches are urgent)"
+    ],
+    "abandon_if": "None - all options advance policy goals to some degree"
+  },
+  "decision_criteria": {
+    "when_to_activate_fallback": [
+      "Primary vehicle fails committee vote or is indefinitely delayed",
+      "Opposition is intractable and compromise unlikely",
+      "Legislative calendar constraints require faster action",
+      "Administration signals support for alternative approach"
+    ],
+    "option_selection_factors": [
+      "Policy impact (how much of goal is achieved)",
+      "Political viability (likelihood of passage)",
+      "Timeline (urgency of policy need)",
+      "Coalition maintenance (does option maintain key supporter relationships)"
+    ]
+  },
+  "coalition_management": {
+    "maintain_supporters": "Communicate that fallback options are strategic, not abandonment of comprehensive goals",
+    "address_concerns": "Some advocates may see fallbacks as 'selling out' - need clear communication about long-term strategy",
+    "opposition_response": "Fallback options may actually reduce opposition by addressing their concerns (narrower scope, preemption)"
+  },
+  "disclaimer": "Fallback options represent strategic flexibility when primary legislative path is blocked. Selection should balance policy goals, political reality, and long-term strategy."
+}

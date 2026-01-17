@@ -1,0 +1,26 @@
+{
+  "_meta": {
+    "dashboard_version": "1.0",
+    "last_updated": "2026-01-07T03:20:00Z",
+    "refresh_interval_seconds": 2
+  },
+  "overall_status": "WAITING_REVIEW",
+  "legislative_state": "PRE_EVT",
+  "pending_approvals": 1,
+  "agents": {
+    "total": 4,
+    "running": 0,
+    "idle": 3,
+    "blocked": 0,
+    "waiting_review": 1,
+    "failed": 0,
+    "retired": 0
+  },
+  "task_queue": {
+    "queued": 0,
+    "running": 0,
+    "completed": 4
+  },
+  "last_error": null,
+  "heartbeat": "2026-01-07T03:20:00Z"
+}

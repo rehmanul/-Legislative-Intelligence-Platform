@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Crisis Event Schema",
+  "description": "Schema for crisis events that trigger temporary edge weight adjustments",
+  "type": "object",
+  "required": [
+    "event_id",
+    "event_type",
+    "scope",
+    "impact",
+    "event_at",
+    "_meta"
+  ],
+  "properties": {
+    "_meta": {
+      "type": "object",
+      "required": ["schema_version", "created_at"],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "default": "1.0.0",
+          "description": "Schema version"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO-8601 UTC timestamp when event was created"
+        },
+        "created_by": {
+          "type": "string",
+          "description": "Human identifier who created this event"
+        }
+      }
+    },
+    "event_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this crisis event"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "ELECTION",
+        "SCANDAL",
+        "EMERGENCY",
+        "REORGANIZATION",
+        "LEADERSHIP_CHANGE"
+      ],
+      "description": "Type of crisis event"
+    },
+    "scope": {
+      "type": "string",
+      "enum": [
+        "ENTITY_SPECIFIC",
+        "COMMITTEE_WIDE",
+        "CHAMBER_WIDE",
+        "SYSTEM_WIDE"
+      ],
+      "description": "Scope of event impact"
+    },
+    "impact": {
+      "type": "string",
+      "enum": ["BOOST", "SUPPRESS", "REVERT_TO_BASE"],
+      "description": "Type of weight adjustment"
+    },
+    "event_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the crisis event occurred"
+    },
+    "expires_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "When this override expires (null if permanent)"
+    },
+    "duration": {
+      "type": "string",
+      "enum": ["TEMPORARY", "PERMANENT"],
+      "default": "TEMPORARY",
+      "description": "Whether override auto-expires or requires manual clearing"
+    },
+    "affected_entities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Entity IDs affected by this event (required for ENTITY_SPECIFIC scope)"
+    },
+    "weight_overrides": {
+      "type": "object",
+      "description": "Weight adjustments to apply (per axis)",
+      "additionalProperties": {
+        "type": "number",
+        "description": "Adjustment value to add/subtract from current weight (for BOOST/SUPPRESS) or ignored (for REVERT_TO_BASE)"
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of this crisis event"
+    },
+    "approved_by": {
+      "type": ["string", "null"],
+      "description": "Human identifier who approved this crisis override (null if auto-generated)"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,49 @@
+PENDING APPROVALS
+================================================================================
+
+HR_PRE (Concept Direction Review)
+  [1] Legitimacy & Policy Framing
+      Agent: draft_framing_intro_evt
+      Risk: Low-Medium
+      Effort: 10-15 minutes
+      Submitted: 9m 38s ago
+      [APPROVE] [REJECT] [VIEW]
+
+  [2] Policy Whitepaper
+      Agent: draft_whitepaper_intro_evt
+      Risk: Low-Medium
+      Effort: 10-15 minutes
+      Submitted: 9m 38s ago
+      [APPROVE] [REJECT] [VIEW]
+
+HR_LANG (Legislative Language Review)
+  [No pending reviews]
+
+HR_MSG (Messaging & Narrative Review)
+  [No pending reviews]
+
+HR_RELEASE (Public Release Authorization)
+  [No pending reviews]
+
+STATE ADVANCEMENT
+--------------------------------------------------------------------------------
+Current: INTRO_EVT (Bill Vehicle Identified)
+Next:    COMM_EVT (Committee Referral)
+Requirements:
+  [X] HR_PRE approval pending (2 items)
+  [X] External confirmation: committee_referral
+
+[ADVANCE STATE] (disabled: requirements not met)
+
+EXECUTION AUTHORIZATIONS
+--------------------------------------------------------------------------------
+Agent: execution_outreach_comm_evt
+  Status: Blocked until authorized
+  Risk: HIGH
+  Guidance signed: [X]
+  [AUTHORIZE] [VIEW PLAN]
+
+
+RECENT REVIEW HISTORY (Last 5)
+--------------------------------------------------------------------------------
+HR_PRE: Concept Memo - APPROVED by test (8h 58m ago)

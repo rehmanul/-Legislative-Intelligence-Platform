@@ -1,0 +1,66 @@
+graph TB
+    subgraph Current["Current State (20% Sophistication)"]
+        A1["Basic Bill Parser<br/>Keyword Matching"]
+        A2["Placeholder Briefing<br/>Generic Content"]
+        A3["Basic Member Data<br/>Schema Only"]
+        A4["Simple Artifacts<br/>Structural Templates"]
+    end
+    
+    subgraph Phase1["Phase 1: Foundation (Weeks 1-2)"]
+        B1["Enhanced Bill Parser<br/>- Section Hierarchy<br/>- Authority Citations<br/>- Cross-References"]
+        B2["Member Database Builder<br/>- Congress.gov API<br/>- Voting History<br/>- Committee Assignments"]
+        B3["Enhanced Briefing Agent<br/>- Authority Integration<br/>- Member-Specific Points"]
+        B4["Staff One-Pager Generator<br/>- Problem Statements<br/>- Actionable Asks"]
+    end
+    
+    subgraph Phase2["Phase 2: Intelligence (Weeks 3-4)"]
+        C1["Legislative Calendar<br/>- Committee Schedules<br/>- Amendment Deadlines<br/>- Timing Windows"]
+        C2["Precedent Analyzer<br/>- Similar Provisions<br/>- Implementation Examples<br/>- Opposition Patterns"]
+        C3["Risk Assessor<br/>- Risk Identification<br/>- Opposition Likelihood<br/>- Mitigation Strategies"]
+        C4["Deep Member Intelligence<br/>- Voting Patterns<br/>- Issue Expertise<br/>- Relationship Mapping"]
+    end
+    
+    subgraph Phase3["Phase 3: Advanced (Weeks 5-6)"]
+        D1["Policy Analyzer<br/>- Mechanism Analysis<br/>- Impact Quantification<br/>- Implementation Pathways"]
+        D2["Member-Specific Comms<br/>- Customized Talking Points<br/>- District Impact<br/>- Style Adaptation"]
+        D3["Timing Predictor<br/>- Vote Timing<br/>- Amendment Windows<br/>- Engagement Timing"]
+        D4["Communication Templates<br/>- Multiple Formats<br/>- Context-Aware<br/>- Dynamic Content"]
+    end
+    
+    subgraph Outputs["Staffer-Ready Artifacts (90% Sophistication)"]
+        E1["Committee Briefing Packets<br/>- Authority Citations<br/>- Member-Specific Points<br/>- Risk Assessment"]
+        E2["Staff One-Pagers<br/>- Problem Statements<br/>- Actionable Asks<br/>- Authority Foundation"]
+        E3["Member-Specific Comms<br/>- Customized Messages<br/>- District Impact<br/>- Relationship Context"]
+        E4["Timing Intelligence<br/>- Optimal Windows<br/>- Urgency Signals<br/>- Deadline Tracking"]
+    end
+    
+    A1 -->|Enhance| B1
+    A2 -->|Enhance| B3
+    A3 -->|Populate| B2
+    A4 -->|Upgrade| B4
+    
+    B1 -->|Feeds| C2
+    B2 -->|Feeds| C4
+    B3 -->|Integrates| C1
+    B4 -->|Integrates| C3
+    
+    C1 -->|Feeds| D3
+    C2 -->|Feeds| D1
+    C3 -->|Feeds| D2
+    C4 -->|Feeds| D2
+    
+    D1 -->|Generates| E1
+    D2 -->|Generates| E3
+    D3 -->|Generates| E4
+    D4 -->|Formats| E2
+    
+    B1 -->|Direct Input| E1
+    B2 -->|Direct Input| E3
+    B3 -->|Generates| E1
+    B4 -->|Generates| E2
+    
+    style Current fill:#ffcccc
+    style Phase1 fill:#ffffcc
+    style Phase2 fill:#ccffcc
+    style Phase3 fill:#ccccff
+    style Outputs fill:#ccffff

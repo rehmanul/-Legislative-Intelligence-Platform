@@ -1,0 +1,66 @@
+{
+  "_meta": {
+    "agent_id": "intel_stakeholder_map_comm_evt",
+    "generated_at": "2026-01-07T12:00:00Z",
+    "artifact_type": "stakeholder_map",
+    "phase": "COMM_EVT"
+  },
+  "stakeholders": [
+    {
+      "name": "Senator Johnson's Office",
+      "email": "legislative.director@senatorjohnson.senate.gov",
+      "contact_name": "Sarah Williams",
+      "contact_email": "sarah.williams@senatorjohnson.senate.gov",
+      "type": "ally",
+      "alignment": "supportive",
+      "role": "Legislative Director",
+      "organization": "Senator Johnson's Office",
+      "influence": "high",
+      "position": "support",
+      "sponsor_alignment_score": 0.85
+    },
+    {
+      "name": "Representative Martinez's Office",
+      "email": "policy.analyst@rep.martinez.house.gov",
+      "contact_name": "Michael Chen",
+      "contact_email": "michael.chen@rep.martinez.house.gov",
+      "type": "ally",
+      "alignment": "supportive",
+      "role": "Senior Policy Analyst",
+      "organization": "Representative Martinez's Office",
+      "influence": "medium",
+      "position": "support",
+      "sponsor_alignment_score": 0.75
+    },
+    {
+      "name": "Energy Innovation Alliance",
+      "email": "info@energyinnovation.org",
+      "contact_name": "Dr. Jennifer Park",
+      "contact_email": "j.park@energyinnovation.org",
+      "type": "ally",
+      "alignment": "supportive",
+      "role": "Policy Director",
+      "organization": "Energy Innovation Alliance",
+      "influence": "high",
+      "position": "support",
+      "sponsor_alignment_score": 0.80
+    },
+    {
+      "name": "Clean Energy Coalition",
+      "email": "advocacy@cleanenergycoalition.org",
+      "contact_name": "Robert Thompson",
+      "contact_email": "r.thompson@cleanenergycoalition.org",
+      "type": "neutral",
+      "alignment": "neutral",
+      "role": "Advocacy Coordinator",
+      "organization": "Clean Energy Coalition",
+      "influence": "medium",
+      "position": "neutral"
+    }
+  ],
+  "influence_heatmap": {
+    "high_influence_allies": 2,
+    "medium_influence_allies": 1,
+    "neutral_contacts": 1
+  }
+}

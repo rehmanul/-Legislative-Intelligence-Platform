@@ -1,0 +1,51 @@
+{
+  "_meta": {
+    "agent_id": "draft_cosponsorship_model_originate_comm_evt",
+    "generated_at": "2026-01-13T07:36:05.234621Z",
+    "artifact_type": "COSPONSOR_MODEL",
+    "artifact_name": "Cosponsor Model",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": "HR_PRE",
+    "guidance_status": "TEST_MODE",
+    "dependencies": [
+      "intel_cosponsorship_pathway_evaluate_comm_evt/COSPONSOR_PATHWAYS.json"
+    ]
+  },
+  "model_framework": {
+    "recruitment_model": {
+      "model_type": "influence-pathway-based",
+      "targeting_strategy": "priority-ranked",
+      "timing_optimization": "window-based"
+    },
+    "engagement_model": {
+      "engagement_layers": [
+        "direct",
+        "influence-pathway",
+        "coalition"
+      ],
+      "recruitment_pathways": [
+        "staff-to-member",
+        "peer-to-peer",
+        "constituent-to-member"
+      ]
+    },
+    "effectiveness_indicators": {
+      "recruitment_metrics": [
+        "commitment_rate",
+        "response_time"
+      ],
+      "impact_metrics": [
+        "cosponsor_quality",
+        "whip_count_progression"
+      ]
+    }
+  },
+  "recommendations": [
+    "Develop reusable cosponsorship recruitment models",
+    "Test models across different legislative contexts",
+    "Refine models based on pathway effectiveness"
+  ],
+  "disclaimer": "This cosponsorship model is generated for human review. All recommendations require professional judgment."
+}

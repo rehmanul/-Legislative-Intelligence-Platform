@@ -1,0 +1,3544 @@
+{
+  "bill_analysis": {
+    "bill_number": "S.2296",
+    "analysis_date": "2026-01-07T08:15:06.097774",
+    "technology_context": {
+      "wireless_power": "Wi-Charge R1 transmitter technology",
+      "air_quality": "Building air quality monitoring requirements",
+      "iot_devices": "Connected device ecosystem"
+    },
+    "key_findings": [],
+    "policy_opportunities": [],
+    "technology_alignment": {},
+    "uncertainty_notes": [],
+    "section_analysis": {},
+    "funding_mentions": [
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$50,000,000 ",
+        "context": "d maintenance for Defense- 16 wide activities as specified in the funding table in 17 section 4301, $50,000,000 shall be available only for 18 the purpose of providing assistance to local edu- 19 cational agencie"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$10,000,000 ",
+        "context": "nd mainte- 8 nance for Defense-wide activities as specified in the 9 funding table in section 4301, $10,000,000 shall be 10 available for payments under section 363 of the 11 Floyd D. Spence National Defense Auth"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$20,000,000\n",
+        "context": "nd 18 maintenance for Defense-wide activities as specified 19 in the funding table in section 4301, $20,000,000 20 shall be available for use by the Secretary of Defense 21 to make payments to local educational a"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$10,000 ",
+        "context": "r of the Armed Forces 6 under the jurisdiction of the Secretary a one-time bonus 7 of not more than $10,000 if the member or former mem- 8 ber— 9 (1) agrees to be an instructor for the Junior 10 Reserve Offic"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$2,000,000",
+        "context": "appears and inserting ‘‘June 30, 2026’’; †S 2296 ES  417 1 (B) in subparagraph (A), by striking 2 ‘‘$2,000,000’’ and inserting ‘‘$10,000,000’’; 3 and 4 (C) in subparagraph (B), by striking 5 ‘‘$750,000’’ and in"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$10,000,000",
+        "context": "30, 2026’’; †S 2296 ES  417 1 (B) in subparagraph (A), by striking 2 ‘‘$2,000,000’’ and inserting ‘‘$10,000,000’’; 3 and 4 (C) in subparagraph (B), by striking 5 ‘‘$750,000’’ and inserting ‘‘$2,000,000’’; 6 (2)"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$750,000",
+        "context": "ng 2 ‘‘$2,000,000’’ and inserting ‘‘$10,000,000’’; 3 and 4 (C) in subparagraph (B), by striking 5 ‘‘$750,000’’ and inserting ‘‘$2,000,000’’; 6 (2) in paragraph (2), by striking ‘‘$2,000,000’’ 7 and inserting"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$2,000,000",
+        "context": "erting ‘‘$10,000,000’’; 3 and 4 (C) in subparagraph (B), by striking 5 ‘‘$750,000’’ and inserting ‘‘$2,000,000’’; 6 (2) in paragraph (2), by striking ‘‘$2,000,000’’ 7 and inserting ‘‘$10,000,000’’; and 8 (3) in"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$2,000,000",
+        "context": "(B), by striking 5 ‘‘$750,000’’ and inserting ‘‘$2,000,000’’; 6 (2) in paragraph (2), by striking ‘‘$2,000,000’’ 7 and inserting ‘‘$10,000,000’’; and 8 (3) in subparagraph (3)(A), by striking 9 ‘‘$2,000,000’’ a"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$10,000,000",
+        "context": "and inserting ‘‘$2,000,000’’; 6 (2) in paragraph (2), by striking ‘‘$2,000,000’’ 7 and inserting ‘‘$10,000,000’’; and 8 (3) in subparagraph (3)(A), by striking 9 ‘‘$2,000,000’’ and inserting ‘‘$10,000,000’’. Su"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$2,000,000",
+        "context": "g ‘‘$2,000,000’’ 7 and inserting ‘‘$10,000,000’’; and 8 (3) in subparagraph (3)(A), by striking 9 ‘‘$2,000,000’’ and inserting ‘‘$10,000,000’’. Subtitle C—Industrial Base 10 Matters 11 12 SEC. 841. REPEAL OF LI"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$10,000,000",
+        "context": "ing ‘‘$10,000,000’’; and 8 (3) in subparagraph (3)(A), by striking 9 ‘‘$2,000,000’’ and inserting ‘‘$10,000,000’’. Subtitle C—Industrial Base 10 Matters 11 12 SEC. 841. REPEAL OF LIMITATIONS ON CERTAIN DEPART- 1"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$100,000,000 ",
+        "context": "ach Army 23 organic industrial base installation that— †S 2296 ES  431 1 (1) has received less than $100,000,000 in cu- 2 mulative modernization funding across all Army ac- 3 counts during the two most recent fisc"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$1,000,000",
+        "context": "S SERVICE AREAS.—Section 4955(a)(4) of 12 title 10, United States Code, is amended by striking 13 ‘‘$1,000,000’’ and inserting ‘‘$1,500,000’’. 14 (c) APEX CENTERS OF EXCELLENCE.—The Under 15 Secretary of Defens"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$1,500,000",
+        "context": "(a)(4) of 12 title 10, United States Code, is amended by striking 13 ‘‘$1,000,000’’ and inserting ‘‘$1,500,000’’. 14 (c) APEX CENTERS OF EXCELLENCE.—The Under 15 Secretary of Defense for Acquisition and Sustain"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$100,000,000",
+        "context": "a contract for an 20 amount exceeding the simplified acquisition 21 threshold (but not more than 22 $100,000,000)— 23 ‘‘(I) by the competition advocate 24 for the contracting activity (without 25 further delegati"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$100,000,000 ",
+        "context": "referred to in 2 clause (ii) or (iii); 3 ‘‘(ii) in the case of a contract for an 4 amount exceeding $100,000,000 (but not 5 more than $500,000,000)— 6 ‘‘(I) by the head of the con- 7 tracting activity (without fur"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$500,000,000",
+        "context": "ii); 3 ‘‘(ii) in the case of a contract for an 4 amount exceeding $100,000,000 (but not 5 more than $500,000,000)— 6 ‘‘(I) by the head of the con- 7 tracting activity (without further dele- 8 gation); 9 ‘‘(II) by"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$500,000,000",
+        "context": "y the director of the 15 agency; or 16 ‘‘(iii) in the case of a contract for an 17 amount exceeding $500,000,000— 18 ‘‘(I) by the senior procurement 19 executive for the agency as designated 20 for the purpose of"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$300,000,000 ",
+        "context": ".’’; 3 (11) in section 4201— 4 (A) in subsection (a)(2)— 5 (i) in subparagraph (A), by striking 6 ‘‘$300,000,000 (based on fiscal year 1990 7 constant dollars)’’ and inserting 8 ‘‘$1,000,000,000 (based on fiscal y"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$1,000,000,000 ",
+        "context": "A), by striking 6 ‘‘$300,000,000 (based on fiscal year 1990 7 constant dollars)’’ and inserting 8 ‘‘$1,000,000,000 (based on fiscal year 9 2024 constant dollars)’’; and 10 (ii) in subparagraph (B), by striking 11 ‘‘"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$1,800,000,000 ",
+        "context": "(based on fiscal year 9 2024 constant dollars)’’; and 10 (ii) in subparagraph (B), by striking 11 ‘‘$1,800,000,000 (based on fiscal year 12 1990 constant dollars)’’ and inserting 13 ‘‘$5,000,000,000 (based on fiscal"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$5,000,000,000 ",
+        "context": "y striking 11 ‘‘$1,800,000,000 (based on fiscal year 12 1990 constant dollars)’’ and inserting 13 ‘‘$5,000,000,000 (based on fiscal year 14 2024 constant dollars)’’; and 15 (B) in subsection (b), by adding at the en"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$6,000,000,000",
+        "context": "orizations that 17 the Secretary may transfer under the authority of 18 this section may not exceed $6,000,000,000. 19 (3) EXCEPTION FOR TRANSFERS BETWEEN 20 MILITARY PERSONNEL AUTHORIZATIONS.—A trans- 21 fer of fu"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$5,000,000",
+        "context": "VERNMENT PERSONNEL. 6 Section 408(d)(1) of title 10, United States Code, is 7 amended by striking ‘‘$5,000,000’’ and inserting 8 ‘‘$15,000,000’’. 9 SEC. 1052. EXTENSION OF ADMISSION TO GUAM OR THE 10 COMMONWEAL"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$15,000,000",
+        "context": "08(d)(1) of title 10, United States Code, is 7 amended by striking ‘‘$5,000,000’’ and inserting 8 ‘‘$15,000,000’’. 9 SEC. 1052. EXTENSION OF ADMISSION TO GUAM OR THE 10 COMMONWEALTH OF THE NORTHERN MAR- 11 IANA"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$70,000,000 ",
+        "context": "nd and inserting ‘‘; and’’; and 25 (3) by adding at the end the following: †S 2296 ES  757 1 ‘‘(13) $70,000,000 for each of fiscal years 2026 2 through 2028.’’. 3 (h) ADDITIONAL REGIONAL COMPUTER FORENSIC 4 LABS."
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$10,000,000 ",
+        "context": "There 2 are authorized to be appropriated to the Department of 3 Commerce to carry out this section $10,000,000 for each 4 of fiscal years 2025 through 2030.’’. 5 SEC. 1095. VISA SANCTIONS FOR FOREIGN PERSONS. 6"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$2,000,000",
+        "context": "ATION OF APPROPRIATIONS.— 16 There is authorized to be appropriated to carry out 17 this subsection $2,000,000.’’. 18 (d) REPORT.—Not later than 24 months after the 19 date of enactment of this Act, the Adminis"
+      },
+      {
+        "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+        "match": "$500,000,000",
+        "context": "ubsection (f), by adding at the end the 24 following new paragraph: 25 ‘‘(11) For fiscal year 2026, $500,000,000.’’; 26 and †S 2296 ES  852 1 (3) in subsection (h), by striking ‘‘December 2 31, 2026’’ and inserti"
+      }
+    ],
+    "technology_provisions": [
+      {
+        "line": 127,
+        "text": "Subtitle D—Biotechnology",
+        "context": "Sec. 225. Congressionally directed programs for test and evaluation oversight.\nSec. 226. Prohibition on modification of indirect cost rates for institutions of\nhigher education and nonprofit organizations.\nSec. 227. Enhance international coordination for advanced manufacturing tech-\nniques, technologies, and adoption.\nSubtitle D—Biotechnology\nSec. 231. Biotechnology Management Office.\nSec. 232. Department of Defense biotechnology strategy.\nSec. 233. Defining guidelines and policies on the use of"
+      },
+      {
+        "line": 128,
+        "text": "Sec. 231. Biotechnology Management Office.",
+        "context": "Sec. 226. Prohibition on modification of indirect cost rates for institutions of\nhigher education and nonprofit organizations.\nSec. 227. Enhance international coordination for advanced manufacturing tech-\nniques, technologies, and adoption.\nSubtitle D—Biotechnology\nSec. 231. Biotechnology Management Office.\nSec. 232. Department of Defense biotechnology strategy.\nSec. 233. Defining guidelines and policies on the use of biotechnology for the\nArmed Forces.\nSec. 234. Enhancement of international bio"
+      },
+      {
+        "line": 129,
+        "text": "Sec. 232. Department of Defense biotechnology strategy.",
+        "context": "higher education and nonprofit organizations.\nSec. 227. Enhance international coordination for advanced manufacturing tech-\nniques, technologies, and adoption.\nSubtitle D—Biotechnology\nSec. 231. Biotechnology Management Office.\nSec. 232. Department of Defense biotechnology strategy.\nSec. 233. Defining guidelines and policies on the use of biotechnology for the\nArmed Forces.\nSec. 234. Enhancement of international biodefense capacity.\nTITLE III—OPERATION AND MAINTENANCE\n†S 2296 ES\n\n5\nSubtitle A—Au"
+      },
+      {
+        "line": 130,
+        "text": "Sec. 233. Defining guidelines and policies on the use of biotechnology for the",
+        "context": "Sec. 227. Enhance international coordination for advanced manufacturing tech-\nniques, technologies, and adoption.\nSubtitle D—Biotechnology\nSec. 231. Biotechnology Management Office.\nSec. 232. Department of Defense biotechnology strategy.\nSec. 233. Defining guidelines and policies on the use of biotechnology for the\nArmed Forces.\nSec. 234. Enhancement of international biodefense capacity.\nTITLE III—OPERATION AND MAINTENANCE\n†S 2296 ES\n\n5\nSubtitle A—Authorization of Appropriations\nSec. 301. Author"
+      },
+      {
+        "line": 496,
+        "text": "Sec. 881. Prohibition on contracting with certain biotechnology providers.",
+        "context": "†S 2296 ES\n\n12\nSec. 880. Prohibition on operation, procurement, and contracting related to for-\neign-made additive manufacturing machines.\nSec. 881. Prohibition on contracting with certain biotechnology providers.\nSec. 882. SkyFoundry Program.\nTITLE IX—DEPARTMENT OF DEFENSE ORGANIZATION AND\nMANAGEMENT\nSubtitle A—Office of the Secretary of Defense and Related Matters\nSec. 901. Economic Defense Unit.\nSec. 902. Additional authorities for Office of Strategic Capital.\nSec. 903. Modifications to respo"
+      },
+      {
+        "line": 590,
+        "text": "Sec. 1037. Prohibition on operation of connected vehicles designed, developed,",
+        "context": "persons: authority to provide protection.\nSec. 1035. Notification of the use of military aircraft for immigration enforce-\nment operations.\nSec. 1036. Modification of requirements relating to support of civil authorities\nby Armed Forces.\nSec. 1037. Prohibition on operation of connected vehicles designed, developed,\nmanufactured, or supplied by persons owned by, controlled by,\nor subject to the jurisdiction of a foreign entity of concern on\nDepartment of Defense property.\nSec. 1038. Continued imp"
+      },
+      {
+        "line": 1550,
+        "text": "Sec. 502. Enhanced intelligence sharing relating to foreign adversary biotechno-",
+        "context": "†S 2296 ES\n\n33\nSec. 501. Declassification of information relating to actions by foreign govern-\nments to assist persons evading justice.\nSec. 502. Enhanced intelligence sharing relating to foreign adversary biotechno-\nlogical threats.\nSec. 503. Threat assessment regarding unmanned aircraft systems at or near\nthe international borders of the United States.\nSec. 504. Assessment of the potential effect of expanded partnerships among\nwestern hemisphere countries.\nSubtitle B—People’s Republic of Chin"
+      },
+      {
+        "line": 1559,
+        "text": "tary companies engaged in biotechnology research, develop-",
+        "context": "Sec. 504. Assessment of the potential effect of expanded partnerships among\nwestern hemisphere countries.\nSubtitle B—People’s Republic of China\nSec. 511. Countering Chinese Communist Party efforts that threaten Europe.\nSec. 512. Prohibition on intelligence community contracting with Chinese mili-\ntary companies engaged in biotechnology research, develop-\nment, or manufacturing.\nSec. 513. Report on the wealth of the leadership of the Chinese Communist\nParty.\nSec. 514. Assessment and report on inv"
+      },
+      {
+        "line": 1585,
+        "text": "Sec. 602. Enhancing biotechnology talent within the intelligence community.",
+        "context": "of uranium-235.\nSec. 535. Duty to warn United States persons threatened by Iranian lethal\nplotting.\nTITLE VI—EMERGING TECHNOLOGIES\nSec. 601. Intelligence Community Technology Bridge Program.\nSec. 602. Enhancing biotechnology talent within the intelligence community.\nSec. 603. Enhanced intelligence community support to secure United States\ngenomic data.\nSec. 604. Ensuring intelligence community procurement of domestic United\nStates production of synthetic DNA and RNA.\nSec. 605. Report on identifi"
+      },
+      {
+        "line": 1593,
+        "text": "States-origin biotechnology.",
+        "context": "Sec. 604. Ensuring intelligence community procurement of domestic United\nStates production of synthetic DNA and RNA.\nSec. 605. Report on identification of intelligence community sites for advanced\nnuclear technologies.\nSec. 606. Addressing intelligence gaps relating to China’s investment in United\nStates-origin biotechnology.\nSec. 607. Additional functions and requirements of Artificial Intelligence Secu-\nrity Center.\n†S 2296 ES\n\n34\nSec. 608. Artificial intelligence development and usage by inte"
+      },
+      {
+        "line": 2382,
+        "text": "9 towed-array sensor system ship program unless the Sec-",
+        "context": "4 be appropriated by this Act or otherwise made available\n5 for fiscal year 2026 for the Navy may be obligated or ex-\n6 pended for the scope of work, including priced or unpriced\n7 options, for the construction, advance procurement, or\n8 long-lead material of any ships in the TAGOS surveillance\n9 towed-array sensor system ship program unless the Sec-\n10 retary of the Navy submits the report described in sub-\n11 section (b) to the Committee on Armed Service of the Sen-\n12 ate and the Committee on"
+      },
+      {
+        "line": 2394,
+        "text": "21 sensor system ships and how compliance with section",
+        "context": "16 mit to the Committee on Armed Service of the Senate and\n17 the Committee on Armed Services of the House of Rep-\n18 resentatives a report on the following:\n19 (1) Progress made on basic and functional de-\n20 sign completion for TAGOS surveillance towed-array\n21 sensor system ships and how compliance with section\n22 8669c of title 10, United States Code, will be main-\n23 tained.\n24 (2) The accuracy, timeliness, and completeness\n25 of the Navy’s provisioning of contract baseline de-\n26 sign, gen"
+      },
+      {
+        "line": 2713,
+        "text": "20 veillance, and reconnaissance platforms, sensors, and",
+        "context": "15 jected intelligence, surveillance, and reconnaissance\n16 requirements for the Air Force across all domains,\n17 including air, space, and cyberspace.\n18 (2) An inventory of current (as of the date on\n19 which the roadmap is submitted) intelligence, sur-\n20 veillance, and reconnaissance platforms, sensors, and\n21 associated data-processing systems, including the\n22 mission capabilities, operational status, and expected\n23 service life for each.\n24 (3) A plan for the modernization or divestment\n"
+      },
+      {
+        "line": 4157,
+        "text": "14 leveraging machine sensors and software",
+        "context": "9 porate the process window qualification method-\n10 ology, which is designed to be machine-agnostic,\n11 or independent of specific machine brands or\n12 software providers, as well as the following:\n13 (I) Real-time process monitoring\n14 leveraging machine sensors and software\n15 analytics to detect and instantly mitigate\n16 deviations prevents defects and unauthor-\n17 ized parameter changes.\n18 (II) Integration of machine learning\n19 algorithms that analyze production data in\n20 real-time allow"
+      },
+      {
+        "line": 4619,
+        "text": "Subtitle D—Biotechnology",
+        "context": "13 standards for advanced manufacturing techniques, tech-\n14 nologies, and adoption. The countries involved should be\n15 those with which the United States has reciprocal defense\n16 procurement agreements or security of supply arrange-\n17 ments.\nSubtitle D—Biotechnology\n18\n19\nSEC. 231. BIOTECHNOLOGY MANAGEMENT OFFICE.\n20 (a) DESIGNATION OF SENIOR OFFICIAL.—Not later\n21 than 90 days after the date of the enactment of this Act,\n22 the Secretary of Defense shall designate a senior official,\n23 with"
+      },
+      {
+        "line": 4622,
+        "text": "SEC. 231. BIOTECHNOLOGY MANAGEMENT OFFICE.",
+        "context": "16 procurement agreements or security of supply arrange-\n17 ments.\nSubtitle D—Biotechnology\n18\n19\nSEC. 231. BIOTECHNOLOGY MANAGEMENT OFFICE.\n20 (a) DESIGNATION OF SENIOR OFFICIAL.—Not later\n21 than 90 days after the date of the enactment of this Act,\n22 the Secretary of Defense shall designate a senior official,\n23 with relevant biotechnology experience, from a position\n24 within the Department of Defense that was in effect on\n25 the day before the date of the enactment of this Act—\n†S 2296 ES\n\n"
+      },
+      {
+        "line": 4626,
+        "text": "23 with relevant biotechnology experience, from a position",
+        "context": "19\nSEC. 231. BIOTECHNOLOGY MANAGEMENT OFFICE.\n20 (a) DESIGNATION OF SENIOR OFFICIAL.—Not later\n21 than 90 days after the date of the enactment of this Act,\n22 the Secretary of Defense shall designate a senior official,\n23 with relevant biotechnology experience, from a position\n24 within the Department of Defense that was in effect on\n25 the day before the date of the enactment of this Act—\n†S 2296 ES\n\n131\n1 (1) to be the senior official for biotechnology\n2 issues;\n3 (2) to be the head the Biotec"
+      },
+      {
+        "line": 4632,
+        "text": "1 (1) to be the senior official for biotechnology",
+        "context": "24 within the Department of Defense that was in effect on\n25 the day before the date of the enactment of this Act—\n†S 2296 ES\n\n131\n1 (1) to be the senior official for biotechnology\n2 issues;\n3 (2) to be the head the Biotechnology Manage-\n4 ment Office established under subsection (b); and\n5 (3) to carry out the responsibilities for the of-\n6 fice in subsection (c).\n7 (b) ESTABLISHMENT OF BIOTECHNOLOGY MANAGE-\n8 MENT OFFICE.—Not later than 120 days after the date\n9 of the enactment of this Act, t"
+      },
+      {
+        "line": 4634,
+        "text": "3 (2) to be the head the Biotechnology Manage-",
+        "context": "†S 2296 ES\n\n131\n1 (1) to be the senior official for biotechnology\n2 issues;\n3 (2) to be the head the Biotechnology Manage-\n4 ment Office established under subsection (b); and\n5 (3) to carry out the responsibilities for the of-\n6 fice in subsection (c).\n7 (b) ESTABLISHMENT OF BIOTECHNOLOGY MANAGE-\n8 MENT OFFICE.—Not later than 120 days after the date\n9 of the enactment of this Act, the Secretary of Defense\n10 shall, with input from the senior official designated under\n11 subsection (a), charter a"
+      },
+      {
+        "line": 4638,
+        "text": "7 (b) ESTABLISHMENT OF BIOTECHNOLOGY MANAGE-",
+        "context": "2 issues;\n3 (2) to be the head the Biotechnology Manage-\n4 ment Office established under subsection (b); and\n5 (3) to carry out the responsibilities for the of-\n6 fice in subsection (c).\n7 (b) ESTABLISHMENT OF BIOTECHNOLOGY MANAGE-\n8 MENT OFFICE.—Not later than 120 days after the date\n9 of the enactment of this Act, the Secretary of Defense\n10 shall, with input from the senior official designated under\n11 subsection (a), charter and establish, under the authority,\n12 direction, and control of th"
+      },
+      {
+        "line": 4644,
+        "text": "13 a Biotechnology Management Office to foster the develop-",
+        "context": "8 MENT OFFICE.—Not later than 120 days after the date\n9 of the enactment of this Act, the Secretary of Defense\n10 shall, with input from the senior official designated under\n11 subsection (a), charter and establish, under the authority,\n12 direction, and control of the Deputy Secretary of Defense,\n13 a Biotechnology Management Office to foster the develop-\n14 ment, acquisition and sustainment of broad-based bio-\n15 technology capabilities for the Department.\n16 (c) RESPONSIBILITIES.—The office e"
+      },
+      {
+        "line": 4659,
+        "text": "1 and transition of biotechnology-based products into",
+        "context": "23 (2) Updating policies and guidance within the\n24 Department relating to the acquisition, adoption,\n†S 2296 ES\n\n132\n1 and transition of biotechnology-based products into\n2 Department use.\n3 (3) Coordinating with activities across the De-\n4 partment, the Federal Government, industry, aca-\n5 demia, and international partners relating to bio-\n6 technology.\n7 (4) Proposing options for streamlining the regu-\n8 latory or acquisition process of the Department.\n9 (5) Conducting, as may be needed, glob"
+      },
+      {
+        "line": 4669,
+        "text": "11 support decisionmakers on biotechnology advances.",
+        "context": "6 technology.\n7 (4) Proposing options for streamlining the regu-\n8 latory or acquisition process of the Department.\n9 (5) Conducting, as may be needed, global com-\n10 petition analyses, net assessment or forecasting to\n11 support decisionmakers on biotechnology advances.\n12 (6) Supporting the development of public-pri-\n13 vate partnerships with academia, industry, and other\n14 State and local government partners, including\n15 through the development or fostering of regionally\n16 focused innovati"
+      },
+      {
+        "line": 4675,
+        "text": "17 (7) Identifying biotechnology workforce and",
+        "context": "12 (6) Supporting the development of public-pri-\n13 vate partnerships with academia, industry, and other\n14 State and local government partners, including\n15 through the development or fostering of regionally\n16 focused innovation ecosystems.\n17 (7) Identifying biotechnology workforce and\n18 training gaps across the workforce of the Depart-\n19 ment.\n20 (8) Such other responsibilities as the Secretary\n21 considers appropriate.\n22 (d) SUNSET.—The office established pursuant to sub-\n23 section (a) "
+      },
+      {
+        "line": 4694,
+        "text": "SEC. 232. DEPARTMENT OF DEFENSE BIOTECHNOLOGY",
+        "context": "3 for the office to be established pursuant to subsection (b),\n4 as well as implementation plans for preliminary activities\n5 the office will pursue during the proceeding one-year pe-\n6 riod.\n7\nSEC. 232. DEPARTMENT OF DEFENSE BIOTECHNOLOGY\n8\nSTRATEGY.\n9 (a) IN GENERAL.—Not later than June 1, 2026, the\n10 Secretary of Defense shall, in coordination with the Under\n11 Secretary of Defense for Research and Engineering and\n12 the Under Secretary of Defense for Acquisition and\n13 Sustainment, submit t"
+      },
+      {
+        "line": 4704,
+        "text": "16 security implications of emerging biotechnologies, includ-",
+        "context": "11 Secretary of Defense for Research and Engineering and\n12 the Under Secretary of Defense for Acquisition and\n13 Sustainment, submit to the Committee on Armed Services\n14 of the Senate and the Committee on Armed Services of\n15 the House of Representatives a strategy on the national\n16 security implications of emerging biotechnologies, includ-\n17 ing the future role that biotechnology will play in defense,\n18 and means to improve industry, interagency, and inter-\n19 national relationships in thi"
+      },
+      {
+        "line": 4705,
+        "text": "17 ing the future role that biotechnology will play in defense,",
+        "context": "12 the Under Secretary of Defense for Acquisition and\n13 Sustainment, submit to the Committee on Armed Services\n14 of the Senate and the Committee on Armed Services of\n15 the House of Representatives a strategy on the national\n16 security implications of emerging biotechnologies, includ-\n17 ing the future role that biotechnology will play in defense,\n18 and means to improve industry, interagency, and inter-\n19 national relationships in this sector.\n20 (b) ELEMENTS.—The strategy required pursuant"
+      },
+      {
+        "line": 4719,
+        "text": "3 products with biotechnology-based products.",
+        "context": "†S 2296 ES\n\n134\n1 (2) Review and update of military specifications\n2 in order to better incorporate or substitute current\n3 products with biotechnology-based products.\n4 (3) Updated plans and policies for the Depart-\n5 ment to enter into advance market commitments\n6 and offtake agreements for biotechnology products\n7 that have defense applications.\n8 (4) A description of how the Department could\n9 better incorporate military-relevant applications of\n10 emerging biotechnology into wargaming exerc"
+      },
+      {
+        "line": 4722,
+        "text": "6 and offtake agreements for biotechnology products",
+        "context": "1 (2) Review and update of military specifications\n2 in order to better incorporate or substitute current\n3 products with biotechnology-based products.\n4 (3) Updated plans and policies for the Depart-\n5 ment to enter into advance market commitments\n6 and offtake agreements for biotechnology products\n7 that have defense applications.\n8 (4) A description of how the Department could\n9 better incorporate military-relevant applications of\n10 emerging biotechnology into wargaming exercises,\n11 tableto"
+      },
+      {
+        "line": 4726,
+        "text": "10 emerging biotechnology into wargaming exercises,",
+        "context": "5 ment to enter into advance market commitments\n6 and offtake agreements for biotechnology products\n7 that have defense applications.\n8 (4) A description of how the Department could\n9 better incorporate military-relevant applications of\n10 emerging biotechnology into wargaming exercises,\n11 tabletop exercises, or other net assessment analyses.\n12 (5) The benefits and costs of issuing a research\n13 grand challenge, or a series of challenges, that focus\n14 on making biotechnology predictably engin"
+      },
+      {
+        "line": 4730,
+        "text": "14 on making biotechnology predictably engineerable",
+        "context": "9 better incorporate military-relevant applications of\n10 emerging biotechnology into wargaming exercises,\n11 tabletop exercises, or other net assessment analyses.\n12 (5) The benefits and costs of issuing a research\n13 grand challenge, or a series of challenges, that focus\n14 on making biotechnology predictably engineerable\n15 and how the Department would implement such re-\n16 search grand challenge, or challenges.\n17 (6) Development of a biotechnology regulation\n18 science and technology progra"
+      },
+      {
+        "line": 4733,
+        "text": "17 (6) Development of a biotechnology regulation",
+        "context": "12 (5) The benefits and costs of issuing a research\n13 grand challenge, or a series of challenges, that focus\n14 on making biotechnology predictably engineerable\n15 and how the Department would implement such re-\n16 search grand challenge, or challenges.\n17 (6) Development of a biotechnology regulation\n18 science and technology program within the Depart-\n19 ment, including development of digital infrastructure\n20 to support simplified regulation and the development\n21 of biometrology tools.\n22 ("
+      },
+      {
+        "line": 4745,
+        "text": "1 mand and pool purchasing power for biotechnology",
+        "context": "24 in encouraging member countries of the North At-\n25 lantic Treaty Organization (NATO) to aggregate de-\n†S 2296 ES\n\n135\n1 mand and pool purchasing power for biotechnology\n2 products.\n3 (8) Review of plans and guidance on how the\n4 Department can work to develop, integrate, and dis-\n5 seminate biotechnology research initiatives across\n6 member countries of the North Atlantic Treaty Or-\n7 ganization, and how the Department might coordi-\n8 nate with international stakeholders to utilize the\n9 com"
+      },
+      {
+        "line": 4749,
+        "text": "5 seminate biotechnology research initiatives across",
+        "context": "135\n1 mand and pool purchasing power for biotechnology\n2 products.\n3 (8) Review of plans and guidance on how the\n4 Department can work to develop, integrate, and dis-\n5 seminate biotechnology research initiatives across\n6 member countries of the North Atlantic Treaty Or-\n7 ganization, and how the Department might coordi-\n8 nate with international stakeholders to utilize the\n9 combined research capabilities of such member coun-\n10 tries to drive a biotechnology development approach.\n11\nSEC. 233. "
+      },
+      {
+        "line": 4754,
+        "text": "10 tries to drive a biotechnology development approach.",
+        "context": "5 seminate biotechnology research initiatives across\n6 member countries of the North Atlantic Treaty Or-\n7 ganization, and how the Department might coordi-\n8 nate with international stakeholders to utilize the\n9 combined research capabilities of such member coun-\n10 tries to drive a biotechnology development approach.\n11\nSEC. 233. DEFINING GUIDELINES AND POLICIES ON THE\n12\nUSE OF BIOTECHNOLOGY FOR THE ARMED\n13\nFORCES.\n14 (a) GUIDELINES AND POLICIES REQUIRED.—Not\n15 later than one year after the "
+      },
+      {
+        "line": 4758,
+        "text": "USE OF BIOTECHNOLOGY FOR THE ARMED",
+        "context": "9 combined research capabilities of such member coun-\n10 tries to drive a biotechnology development approach.\n11\nSEC. 233. DEFINING GUIDELINES AND POLICIES ON THE\n12\nUSE OF BIOTECHNOLOGY FOR THE ARMED\n13\nFORCES.\n14 (a) GUIDELINES AND POLICIES REQUIRED.—Not\n15 later than one year after the date of the enactment of this\n16 Act, the Secretary of Defense shall, after coordinating\n17 with the Under Secretary of Defense for Research and En-\n18 gineering, the Under Secretary of Defense for Acquisition\n"
+      },
+      {
+        "line": 4770,
+        "text": "23 ployment of biotechnology within the Department of De-",
+        "context": "18 gineering, the Under Secretary of Defense for Acquisition\n19 and Sustainment, the Under Secretary of Defense for Pol-\n20 icy and external stakeholders, including representation\n21 from industry and academia, develop guidelines and poli-\n22 cies on the ethical and responsible development and de-\n23 ployment of biotechnology within the Department of De-\n24 fense and the Armed Forces.\n†S 2296 ES\n\n136\n1 (b) ELEMENTS.—The guidelines and policies devel-\n2 oped pursuant to subsection (a) shall inclu"
+      },
+      {
+        "line": 4778,
+        "text": "4 opment and use of biotechnology.",
+        "context": "\n136\n1 (b) ELEMENTS.—The guidelines and policies devel-\n2 oped pursuant to subsection (a) shall include the following:\n3 (1) Definitions of ethical and responsible devel-\n4 opment and use of biotechnology.\n5 (2) Guidelines relating to ethical and respon-\n6 sible development and use of biotechnology.\n7 (3) Policies relating to informed consent of\n8 members of the Armed Forces participating in bio-\n9 technology development.\n10 (4) Policies relating to reversibility and heri-\n11 table treatment of "
+      },
+      {
+        "line": 4780,
+        "text": "6 sible development and use of biotechnology.",
+        "context": "1 (b) ELEMENTS.—The guidelines and policies devel-\n2 oped pursuant to subsection (a) shall include the following:\n3 (1) Definitions of ethical and responsible devel-\n4 opment and use of biotechnology.\n5 (2) Guidelines relating to ethical and respon-\n6 sible development and use of biotechnology.\n7 (3) Policies relating to informed consent of\n8 members of the Armed Forces participating in bio-\n9 technology development.\n10 (4) Policies relating to reversibility and heri-\n11 table treatment of poten"
+      },
+      {
+        "line": 4785,
+        "text": "11 table treatment of potential biotechnology applica-",
+        "context": "6 sible development and use of biotechnology.\n7 (3) Policies relating to informed consent of\n8 members of the Armed Forces participating in bio-\n9 technology development.\n10 (4) Policies relating to reversibility and heri-\n11 table treatment of potential biotechnology applica-\n12 tions.\n13 (5) Policies relating to biotechnologies and their\n14 potential effects on the environment.\n15 (6) Policies relating to human performance en-\n16 hancement.\n17 (7) Policies relating to the compliance and obli-\n"
+      }
+    ],
+    "keyword_matches": {
+      "wireless": [
+        "wireless"
+      ],
+      "energy": [
+        "energy",
+        "power",
+        "electricity",
+        "energy cost savings"
+      ],
+      "iot": [
+        "iot",
+        "internet of things",
+        "connected devices",
+        "sensors"
+      ],
+      "air_quality": [
+        "hvac",
+        "airborne"
+      ],
+      "building": [
+        "building",
+        "buildings",
+        "infrastructure",
+        "construction",
+        "facility",
+        "facilities",
+        "military construction"
+      ],
+      "standards": [
+        "standards",
+        "regulations",
+        "compliance",
+        "certification",
+        "guidelines"
+      ],
+      "research": [
+        "research",
+        "development",
+        "r&d",
+        "darpa",
+        "advanced research"
+      ],
+      "manufacturing": [
+        "manufacturing",
+        "advanced manufacturing",
+        "additive manufacturing",
+        "production"
+      ],
+      "technology": [
+        "technology",
+        "technologies",
+        "tech",
+        "innovation",
+        "advanced"
+      ]
+    },
+    "keyword_contexts": {
+      "wireless": [
+        {
+          "keyword": "wireless",
+          "context": "em’ 12 means a Department of Defense system that relies on the 13 electromagnetic spectrum for its function, including any 14 communications, weapons, precision munitions, sensor, 15 geo-location, or wireless device.’’. TITLE XVI—CYBERSPACE- 16 RELATED MATTERS 17 Subtitle A—Matters Relating to 18 Cy"
+        }
+      ],
+      "energy": [
+        {
+          "keyword": "energy",
+          "context": "1ST SESSION AN ACT To authorize appropriations for fiscal year 2026 for military activities of the Department of Defense, for military construction, and for defense activities of the Depart- ment of Energy, to prescribe military personnel strengths for such fiscal year, and for other purposes.  2 1 "
+        },
+        {
+          "keyword": "power",
+          "context": "VISION OF SUPPORT Sec. 1286. Equity investment. Sec. 1287. Special projects. Sec. 1288. Terms and conditions. Sec. 1289. Termination. PART IV—OTHER MATTERS Sec. 1290. Operations. Sec. 1291. Corporate powers. Sec. 1292. Maximum contingent liability. Sec. 1293. Performance measures, evaluation, and le"
+        },
+        {
+          "keyword": "electricity",
+          "context": "impacts; 20 (ix) the ability to integrate into elec- 21 tric applications and nonelectric applica- 22 tions; 23 (x) modular sizes to allow for deploy- 24 ment that corresponds with the demand 25 for electricity or process heat; and †S 2296 ES  1879 1 (xi) operational flexibility to respond 2 to chan"
+        },
+        {
+          "keyword": "energy cost savings",
+          "context": "ec. 312. Requirement to support training on wildfire prevention and response. Sec. 313. Use of solid waste disposal systems by Department of Defense. Sec. 314. Modification of availability and use of energy cost savings. Sec. 315. Authority of Department of Defense to destroy or dispose of perfluoro"
+        }
+      ],
+      "iot": [
+        {
+          "keyword": "iot",
+          "context": "t rates for institutions of higher education and nonprofit organizations. Sec. 227. Enhance international coordination for advanced manufacturing tech- niques, technologies, and adoption. Subtitle D—Biotechnology Sec. 231. Biotechnology Management Office. Sec. 232. Department of Defense biotechnolog"
+        },
+        {
+          "keyword": "internet of things",
+          "context": "the Homeland Secu- 23 rity Act of 2002 (6 U.S.C. 665i(f)). 24 (2) OPERATIONAL TECHNOLOGY.—The term 25 ‘‘operational technology’’ has the meaning given †S 2296 ES  1210 1 such term in section 3 of the Internet of Things Cy- 2 bersecurity Improvement Act of 2020 (15 U.S.C. 3 278g–3a). 4 SEC. 1614. FRA"
+        },
+        {
+          "keyword": "connected devices",
+          "context": "ct, retain, or knowingly or recklessly fa- 25 cilitate the collection or retention of location data †S 2296 ES  2090 1 from phones, wearable fitness trackers, and other 2 cellular-enabled or cellular-connected devices located 3 in any covered location, regardless of whether service 4 for such device"
+        },
+        {
+          "keyword": "sensors",
+          "context": "l domains, 17 including air, space, and cyberspace. 18 (2) An inventory of current (as of the date on 19 which the roadmap is submitted) intelligence, sur- 20 veillance, and reconnaissance platforms, sensors, and 21 associated data-processing systems, including the 22 mission capabilities, operation"
+        }
+      ],
+      "air_quality": [
+        {
+          "keyword": "hvac",
+          "context": "(vii) Approval of supplemental assist- 20 ance, including insurance or guarantee, to 21 a project previously approved by the Sec- 22 retary. 23 (viii) Emergency homeowner or renter 24 assistance for HVAC, hot water heaters, †S 2296 ES  2780 1 and other necessary uses of existing utili- 2 ties requir"
+        },
+        {
+          "keyword": "airborne",
+          "context": "cargo transportation services. Sec. 142. Extension of prohibition on certain reductions to B–1 bomber aircraft squadrons. †S 2296 ES  4 Sec. 143. Prohibition on certain reductions to inventory of E–3 airborne warn- ing and control system aircraft. TITLE II—RESEARCH, DEVELOPMENT, TEST, AND EVALUATION"
+        }
+      ],
+      "building": [
+        {
+          "keyword": "building",
+          "context": "btitle A—Authorization of Appropriations Sec. 201. Authorization of appropriations. Subtitle B—Program Requirements, Restrictions, and Limitations Sec. 211. Modifications to defense research capacity building program. Sec. 212. Program for the enhancement of the research, development, test, and eval"
+        },
+        {
+          "keyword": "buildings",
+          "context": "bclause (IX), as so re- 15 designated, by striking the period at 16 the end and inserting a semicolon; 17 and 18 (III) by adding at the end the 19 following new subclauses: 20 ‘‘(X) protection of the buildings, 21 grounds, and property to which the 22 public are not permitted regular, un- 23 restric"
+        },
+        {
+          "keyword": "infrastructure",
+          "context": "pabilities into logistics operations. Sec. 329. Pilot program on arsenal workload sustainment. Subtitle D—Reports Sec. 331. Modification of report on improved oversight for implementation of Shipyard Infrastructure Optimization Program of the Navy. Sec. 332. Modification of readiness report to inclu"
+        },
+        {
+          "keyword": "construction",
+          "context": "119TH CONGRESS S. 2296 1ST SESSION AN ACT To authorize appropriations for fiscal year 2026 for military activities of the Department of Defense, for military construction, and for defense activities of the Depart- ment of Energy, to prescribe military personnel strengths for such fiscal year, and fo"
+        },
+        {
+          "keyword": "facility",
+          "context": "and Other Matters Sec. 721. Strategic infectious disease medical research plan. †S 2296 ES  10 Sec. 722. Extension of authority for Joint Department of Defense–Department of Veterans Affairs Medical Facility Demonstration Fund. Sec. 723. Pilot program on wastewater surveillance system of Department "
+        }
+      ],
+      "standards": [
+        {
+          "keyword": "standards",
+          "context": "ifications to modular open systems approach. Sec. 805. Alternative test and evaluation pathway for designated defense acqui- sition programs. Sec. 806. Department of Defense member of Cost Accounting Standards Board. Sec. 807. Combatant command experimentation authority. Subtitle B—Amendments to Gen"
+        },
+        {
+          "keyword": "regulations",
+          "context": "schools operated by Department of Defense Education Activity. †S 2296 ES  8 Sec. 553. Enrollment of children of certain American Red Cross employees in defense dependents’ education system. Sec. 554. Regulations on the use of portable electronic mobile devices in De- partment of Defense Education Ac"
+        },
+        {
+          "keyword": "compliance",
+          "context": "for persons whose score on the Armed Forces Qualification Test is below a prescribed level for the future servicemember preparatory course. Sec. 584. Recruiter access to secondary schools. Sec. 585. Compliance with travel charge card deactivation requirements. TITLE VI—COMPENSATION AND OTHER PERSONN"
+        },
+        {
+          "keyword": "certification",
+          "context": "conducting Department of Defense- funded research. Sec. 217. Western regional range complex demonstration. Sec. 218. Modification of requirement for Department of Defense policies for management and certification of Link 16 military tactical data link network. Sec. 219. Advanced robotic automation f"
+        },
+        {
+          "keyword": "guidelines",
+          "context": "manufacturing tech- niques, technologies, and adoption. Subtitle D—Biotechnology Sec. 231. Biotechnology Management Office. Sec. 232. Department of Defense biotechnology strategy. Sec. 233. Defining guidelines and policies on the use of biotechnology for the Armed Forces. Sec. 234. Enhancement of in"
+        }
+      ],
+      "research": [
+        {
+          "keyword": "research",
+          "context": "hibition on certain reductions to B–1 bomber aircraft squadrons. †S 2296 ES  4 Sec. 143. Prohibition on certain reductions to inventory of E–3 airborne warn- ing and control system aircraft. TITLE II—RESEARCH, DEVELOPMENT, TEST, AND EVALUATION Subtitle A—Authorization of Appropriations Sec. 201. Aut"
+        },
+        {
+          "keyword": "development",
+          "context": "n certain reductions to B–1 bomber aircraft squadrons. †S 2296 ES  4 Sec. 143. Prohibition on certain reductions to inventory of E–3 airborne warn- ing and control system aircraft. TITLE II—RESEARCH, DEVELOPMENT, TEST, AND EVALUATION Subtitle A—Authorization of Appropriations Sec. 201. Authorization"
+        },
+        {
+          "keyword": "r&d",
+          "context": "592 191 0605805A MUNITIONS STANDARDIZATION, EFFECTIVENESS AND 44,465 44,465 SAFETY. 192 0605857A ENVIRONMENTAL QUALITY TECHNOLOGY MGMT SUPPORT 2,857 2,857 193 0605898A ARMY DIRECT REPORT HEADQUARTERS—R&D - MHA ......... 53,436 53,436 194 0606002A RONALD REAGAN BALLISTIC MISSILE DEFENSE TEST 72,302 8"
+        },
+        {
+          "keyword": "darpa",
+          "context": "0603379D8Z ADVANCED TECHNICAL INTEGRATION ..................................... 19,991 19,991 54 0603384BP CHEMICAL AND BIOLOGICAL DEFENSE PROGRAM—AD- 247,043 247,043 VANCED DEVELOPMENT. 55 0603467E DARPA ADVANCED TECHNOLOGY DEVELOPMENT ................ 1,643,465 1,643,465 56 0603468E ADVANCED COMPL"
+        },
+        {
+          "keyword": "advanced research",
+          "context": "ding program. Sec. 212. Program for the enhancement of the research, development, test, and evaluation centers of the Department of Defense. Sec. 213. Extension of authority for assignment to Defense Advanced Research Projects Agency of private sector personnel with critical re- search and developme"
+        }
+      ],
+      "manufacturing": [
+        {
+          "keyword": "manufacturing",
+          "context": "18. Modification of requirement for Department of Defense policies for management and certification of Link 16 military tactical data link network. Sec. 219. Advanced robotic automation for munitions manufacturing. Sec. 220. Dual-use and defense advanced manufacturing innovation hubs. Sec. 220A. Adv"
+        },
+        {
+          "keyword": "advanced manufacturing",
+          "context": "of Defense policies for management and certification of Link 16 military tactical data link network. Sec. 219. Advanced robotic automation for munitions manufacturing. Sec. 220. Dual-use and defense advanced manufacturing innovation hubs. Sec. 220A. Advanced manufacturing and additive manufacturing "
+        },
+        {
+          "keyword": "additive manufacturing",
+          "context": "ical data link network. Sec. 219. Advanced robotic automation for munitions manufacturing. Sec. 220. Dual-use and defense advanced manufacturing innovation hubs. Sec. 220A. Advanced manufacturing and additive manufacturing programs. Sec. 220B. Improvements relating to advanced manufacturing. Sec. 22"
+        },
+        {
+          "keyword": "production",
+          "context": "ource qualification. Sec. 870. Enhanced product support management for integrated sustainment of weapon systems. Sec. 871. Modifications to current defense acquisition requirements. Sec. 872. Minimum production levels for munitions. Sec. 873. Processes for incentivizing contractor expansion of sourc"
+        }
+      ],
+      "technology": [
+        {
+          "keyword": "technology",
+          "context": "ch collabo- ration with certain academic institutions. Subtitle C—Plans, Reports, and Other Matters Sec. 221. Catalyst Pathfinder Program. Sec. 222. Extension of period for annual reports on critical technology areas supportive of the National Defense Strategy. Sec. 223. Evaluation of additional tes"
+        },
+        {
+          "keyword": "technologies",
+          "context": "hibition on modification of indirect cost rates for institutions of higher education and nonprofit organizations. Sec. 227. Enhance international coordination for advanced manufacturing tech- niques, technologies, and adoption. Subtitle D—Biotechnology Sec. 231. Biotechnology Management Office. Sec."
+        },
+        {
+          "keyword": "tech",
+          "context": "ch collabo- ration with certain academic institutions. Subtitle C—Plans, Reports, and Other Matters Sec. 221. Catalyst Pathfinder Program. Sec. 222. Extension of period for annual reports on critical technology areas supportive of the National Defense Strategy. Sec. 223. Evaluation of additional tes"
+        },
+        {
+          "keyword": "innovation",
+          "context": "r management and certification of Link 16 military tactical data link network. Sec. 219. Advanced robotic automation for munitions manufacturing. Sec. 220. Dual-use and defense advanced manufacturing innovation hubs. Sec. 220A. Advanced manufacturing and additive manufacturing programs. Sec. 220B. I"
+        },
+        {
+          "keyword": "advanced",
+          "context": "ding program. Sec. 212. Program for the enhancement of the research, development, test, and evaluation centers of the Department of Defense. Sec. 213. Extension of authority for assignment to Defense Advanced Research Projects Agency of private sector personnel with critical re- search and developme"
+        }
+      ]
+    },
+    "bill_structure": {
+      "divisions": [
+        {
+          "line": 21,
+          "text": "8 (a) DIVISIONS.—This Act is organized into ten divi-"
+        },
+        {
+          "line": 23,
+          "text": "10 (1) Division A—Department of Defense Au-"
+        },
+        {
+          "line": 25,
+          "text": "12 (2) Division B—Military Construction Author-"
+        },
+        {
+          "line": 27,
+          "text": "14 (3) Division C—Department of Energy Na-"
+        },
+        {
+          "line": 30,
+          "text": "17 (4) Division D—Funding Tables."
+        },
+        {
+          "line": 31,
+          "text": "18 (5) Division E—Additional Provisions."
+        },
+        {
+          "line": 32,
+          "text": "19 (6) Division F—Intelligence Authorization Act"
+        },
+        {
+          "line": 34,
+          "text": "21 (7) Division G—Department of State Matters."
+        },
+        {
+          "line": 35,
+          "text": "22 (8) Division H—Coast Guard Authorization Act"
+        },
+        {
+          "line": 37,
+          "text": "24 (9) Division I—ROAD to Housing Act."
+        },
+        {
+          "line": 41,
+          "text": "1 (10) Division J—Department of State Author-"
+        },
+        {
+          "line": 49,
+          "text": "DIVISION A—DEPARTMENT OF DEFENSE AUTHORIZATIONS"
+        },
+        {
+          "line": 1114,
+          "text": "DIVISION B—MILITARY CONSTRUCTION AUTHORIZATIONS"
+        },
+        {
+          "line": 1261,
+          "text": "DIVISION C—DEPARTMENT OF ENERGY NATIONAL SECURITY"
+        },
+        {
+          "line": 1300,
+          "text": "DIVISION D—FUNDING TABLES"
+        },
+        {
+          "line": 1321,
+          "text": "DIVISION E—ADDITIONAL PROVISIONS"
+        },
+        {
+          "line": 1476,
+          "text": "DIVISION F—INTELLIGENCE AUTHORIZATION ACT FOR FISCAL"
+        },
+        {
+          "line": 1641,
+          "text": "DIVISION G—DEPARTMENT OF STATE MATTERS"
+        },
+        {
+          "line": 1688,
+          "text": "DIVISION H—COAST GUARD AUTHORIZATION ACT OF 2025"
+        },
+        {
+          "line": 1976,
+          "text": "DIVISION I—ROAD TO HOUSING ACT"
+        }
+      ],
+      "titles": [
+        {
+          "line": 50,
+          "text": "TITLE I—PROCUREMENT"
+        },
+        {
+          "line": 51,
+          "text": "Subtitle A—Authorization of Appropriations"
+        },
+        {
+          "line": 53,
+          "text": "Subtitle B—Army Programs"
+        },
+        {
+          "line": 55,
+          "text": "Subtitle C—Navy Programs"
+        },
+        {
+          "line": 67,
+          "text": "Subtitle D—Air Force Programs"
+        },
+        {
+          "line": 89,
+          "text": "TITLE II—RESEARCH, DEVELOPMENT, TEST, AND EVALUATION"
+        },
+        {
+          "line": 90,
+          "text": "Subtitle A—Authorization of Appropriations"
+        },
+        {
+          "line": 92,
+          "text": "Subtitle B—Program Requirements, Restrictions, and Limitations"
+        },
+        {
+          "line": 115,
+          "text": "Subtitle C—Plans, Reports, and Other Matters"
+        },
+        {
+          "line": 127,
+          "text": "Subtitle D—Biotechnology"
+        },
+        {
+          "line": 133,
+          "text": "TITLE III—OPERATION AND MAINTENANCE"
+        },
+        {
+          "line": 137,
+          "text": "Subtitle A—Authorization of Appropriations"
+        },
+        {
+          "line": 139,
+          "text": "Subtitle B—Energy and Environment"
+        },
+        {
+          "line": 161,
+          "text": "Subtitle C—Logistics and Sustainment"
+        },
+        {
+          "line": 178,
+          "text": "Subtitle D—Reports"
+        },
+        {
+          "line": 189,
+          "text": "Subtitle E—Other Matters"
+        },
+        {
+          "line": 213,
+          "text": "TITLE IV—MILITARY PERSONNEL AUTHORIZATIONS"
+        },
+        {
+          "line": 214,
+          "text": "Subtitle A—Active Forces"
+        },
+        {
+          "line": 216,
+          "text": "Subtitle B—Reserve Forces"
+        },
+        {
+          "line": 222,
+          "text": "Subtitle C—Authorization of Appropriations"
+        },
+        {
+          "line": 224,
+          "text": "TITLE V—MILITARY PERSONNEL POLICY"
+        },
+        {
+          "line": 225,
+          "text": "Subtitle A—Officer Personnel Policy"
+        },
+        {
+          "line": 241,
+          "text": "Subtitle B—Reserve Component Management"
+        },
+        {
+          "line": 251,
+          "text": "Subtitle C—General Service Authorities and Military Records"
+        },
+        {
+          "line": 258,
+          "text": "Subtitle D—Military Justice and Other Legal Matters"
+        },
+        {
+          "line": 261,
+          "text": "Subtitle E—Member Education, Training, and Transition"
+        },
+        {
+          "line": 278,
+          "text": "Subtitle F—Military Family Readiness and Dependents’ Education"
+        },
+        {
+          "line": 303,
+          "text": "Subtitle G—Junior Reserve Officers’ Training Corps"
+        },
+        {
+          "line": 308,
+          "text": "Subtitle H—Decorations and Other Awards, Miscellaneous Reports, and Other"
+        },
+        {
+          "line": 317,
+          "text": "TITLE VI—COMPENSATION AND OTHER PERSONNEL BENEFITS"
+        }
+      ],
+      "sections": [
+        {
+          "line": 14,
+          "text": "SECTION 1. SHORT TITLE."
+        },
+        {
+          "line": 18,
+          "text": "SEC. 2. ORGANIZATION OF ACT INTO DIVISIONS; TABLE OF"
+        },
+        {
+          "line": 45,
+          "text": "Sec. 1. Short title."
+        },
+        {
+          "line": 46,
+          "text": "Sec. 2. Organization of Act into divisions; table of contents."
+        },
+        {
+          "line": 47,
+          "text": "Sec. 3. Congressional defense committees."
+        },
+        {
+          "line": 48,
+          "text": "Sec. 4. Budgetary effects of this Act."
+        },
+        {
+          "line": 52,
+          "text": "Sec. 101. Authorization of appropriations."
+        },
+        {
+          "line": 54,
+          "text": "Sec. 111. Strategy for Army tactical wheeled vehicle program."
+        },
+        {
+          "line": 56,
+          "text": "Sec. 121. Procurement authority for Columbia-class submarine program."
+        },
+        {
+          "line": 57,
+          "text": "Sec. 122. Procurement authorities for Medium Landing Ships."
+        },
+        {
+          "line": 58,
+          "text": "Sec. 123. Recapitalization of Navy waterborne security barriers; modification of"
+        },
+        {
+          "line": 61,
+          "text": "Sec. 124. Modification to limitations on Navy medium and large unmanned sur-"
+        },
+        {
+          "line": 63,
+          "text": "Sec. 125. Limitation on availability of funds for TAGOS ship program."
+        },
+        {
+          "line": 64,
+          "text": "Sec. 126. Limitation on availability of funds relating to amphibious warfare"
+        },
+        {
+          "line": 66,
+          "text": "Sec. 127. Temporary unavailability of amphibious warfare ships."
+        },
+        {
+          "line": 68,
+          "text": "Sec. 131. B–21 bomber aircraft program accountability matrices."
+        },
+        {
+          "line": 69,
+          "text": "Sec. 132. Bomber aircraft force structure and transition roadmap."
+        },
+        {
+          "line": 70,
+          "text": "Sec. 133. Requirement for an intelligence, surveillance, and reconnaissance"
+        },
+        {
+          "line": 72,
+          "text": "Sec. 134. Annual report on Department of Defense unified datalink strategy."
+        },
+        {
+          "line": 73,
+          "text": "Sec. 135. Plan for open mission systems of F–35 aircraft."
+        },
+        {
+          "line": 74,
+          "text": "Sec. 136. Modification of prohibition on retirement of F–15E aircraft."
+        },
+        {
+          "line": 75,
+          "text": "Sec. 137. Prohibition on retirement of A–10 aircraft."
+        },
+        {
+          "line": 76,
+          "text": "Sec. 138. Extension of limitations and minimum inventory requirement relating"
+        },
+        {
+          "line": 78,
+          "text": "Sec. 139. Expansion of air refueler fleet."
+        },
+        {
+          "line": 79,
+          "text": "Sec. 140. Requirements relating to C–130 aircraft."
+        },
+        {
+          "line": 80,
+          "text": "Sec. 141. Information on future large and oversized air cargo transportation"
+        },
+        {
+          "line": 82,
+          "text": "Sec. 142. Extension of prohibition on certain reductions to B–1 bomber aircraft"
+        },
+        {
+          "line": 87,
+          "text": "Sec. 143. Prohibition on certain reductions to inventory of E–3 airborne warn-"
+        },
+        {
+          "line": 91,
+          "text": "Sec. 201. Authorization of appropriations."
+        },
+        {
+          "line": 93,
+          "text": "Sec. 211. Modifications to defense research capacity building program."
+        },
+        {
+          "line": 94,
+          "text": "Sec. 212. Program for the enhancement of the research, development, test, and"
+        },
+        {
+          "line": 96,
+          "text": "Sec. 213. Extension of authority for assignment to Defense Advanced Research"
+        },
+        {
+          "line": 99,
+          "text": "Sec. 214. Limitation on use of funds for certain Navy software."
+        },
+        {
+          "line": 100,
+          "text": "Sec. 215. Limitation on availability of funds for Under Secretary of Defense for"
+        },
+        {
+          "line": 102,
+          "text": "Sec. 216. Prohibition on contracts between certain foreign entities and institu-"
+        },
+        {
+          "line": 105,
+          "text": "Sec. 217. Western regional range complex demonstration."
+        },
+        {
+          "line": 106,
+          "text": "Sec. 218. Modification of requirement for Department of Defense policies for"
+        },
+        {
+          "line": 109,
+          "text": "Sec. 219. Advanced robotic automation for munitions manufacturing."
+        },
+        {
+          "line": 110,
+          "text": "Sec. 220. Dual-use and defense advanced manufacturing innovation hubs."
+        },
+        {
+          "line": 111,
+          "text": "Sec. 220A. Advanced manufacturing and additive manufacturing programs."
+        },
+        {
+          "line": 112,
+          "text": "Sec. 220B. Improvements relating to advanced manufacturing."
+        },
+        {
+          "line": 113,
+          "text": "Sec. 220C. Limitation on availability of funds for fundamental research collabo-"
+        },
+        {
+          "line": 116,
+          "text": "Sec. 221. Catalyst Pathfinder Program."
+        },
+        {
+          "line": 117,
+          "text": "Sec. 222. Extension of period for annual reports on critical technology areas"
+        },
+        {
+          "line": 119,
+          "text": "Sec. 223. Evaluation of additional test corridors for hypersonic and long-range"
+        },
+        {
+          "line": 121,
+          "text": "Sec. 224. Technical correction."
+        },
+        {
+          "line": 122,
+          "text": "Sec. 225. Congressionally directed programs for test and evaluation oversight."
+        },
+        {
+          "line": 123,
+          "text": "Sec. 226. Prohibition on modification of indirect cost rates for institutions of"
+        },
+        {
+          "line": 125,
+          "text": "Sec. 227. Enhance international coordination for advanced manufacturing tech-"
+        },
+        {
+          "line": 128,
+          "text": "Sec. 231. Biotechnology Management Office."
+        },
+        {
+          "line": 129,
+          "text": "Sec. 232. Department of Defense biotechnology strategy."
+        },
+        {
+          "line": 130,
+          "text": "Sec. 233. Defining guidelines and policies on the use of biotechnology for the"
+        },
+        {
+          "line": 132,
+          "text": "Sec. 234. Enhancement of international biodefense capacity."
+        },
+        {
+          "line": 138,
+          "text": "Sec. 301. Authorization of appropriations."
+        },
+        {
+          "line": 140,
+          "text": "Sec. 311. Department of Defense guidelines regarding implementation of the"
+        },
+        {
+          "line": 142,
+          "text": "Sec. 312. Requirement to support training on wildfire prevention and response."
+        },
+        {
+          "line": 143,
+          "text": "Sec. 313. Use of solid waste disposal systems by Department of Defense."
+        },
+        {
+          "line": 144,
+          "text": "Sec. 314. Modification of availability and use of energy cost savings."
+        },
+        {
+          "line": 145,
+          "text": "Sec. 315. Authority of Department of Defense to destroy or dispose of"
+        },
+        {
+          "line": 147,
+          "text": "Sec. 316. Modification to restriction on procurement or purchasing of personal"
+        },
+        {
+          "line": 150,
+          "text": "Sec. 317. Provision of bottled water to communities with private drinking water"
+        },
+        {
+          "line": 153,
+          "text": "Sec. 318. Repeal of prohibition on procurement by Department of Defense of"
+        },
+        {
+          "line": 156,
+          "text": "Sec. 319. Repeal of temporary moratorium on incineration by Department of"
+        },
+        {
+          "line": 159,
+          "text": "Sec. 320. Interim responses to address releases or threatened releases of"
+        },
+        {
+          "line": 162,
+          "text": "Sec. 321. Surface ship sustainment and readiness."
+        },
+        {
+          "line": 163,
+          "text": "Sec. 322. Technology enhancement for surface ship maintenance."
+        },
+        {
+          "line": 164,
+          "text": "Sec. 323. Delegation to United States Transportation Command of mitigating"
+        },
+        {
+          "line": 167,
+          "text": "Sec. 324. Requirements for Department of Defense aircraft operations near"
+        },
+        {
+          "line": 169,
+          "text": "Sec. 325. Extension and modification of semiannual briefings on operational"
+        },
+        {
+          "line": 171,
+          "text": "Sec. 326. Prohibition on closure of Army organic industrial base sites."
+        },
+        {
+          "line": 172,
+          "text": "Sec. 327. Establishment of Defense Personal Property Management Office"
+        },
+        {
+          "line": 175,
+          "text": "Sec. 328. Integration of commercially available artificial intelligence capabilities"
+        },
+        {
+          "line": 177,
+          "text": "Sec. 329. Pilot program on arsenal workload sustainment."
+        },
+        {
+          "line": 179,
+          "text": "Sec. 331. Modification of report on improved oversight for implementation of"
+        },
+        {
+          "line": 181,
+          "text": "Sec. 332. Modification of readiness report to include summary count of certain"
+        },
+        {
+          "line": 183,
+          "text": "Sec. 333. Annual report on funding and status of interim remedial actions of"
+        },
+        {
+          "line": 190,
+          "text": "Sec. 341. Provision of sports foods and third-party certified dietary supple-"
+        },
+        {
+          "line": 193,
+          "text": "Sec. 342. Limitation on use of funds to establish or expand Space Force Spe-"
+        },
+        {
+          "line": 195,
+          "text": "Sec. 343. Requirements for contracts relating to permanent change of station"
+        },
+        {
+          "line": 197,
+          "text": "Sec. 344. Limitation on transformation by the Army of primary helicopter"
+        },
+        {
+          "line": 199,
+          "text": "Sec. 345. Conveyance of certain aircraft from Air Force to Arizona Aviation"
+        },
+        {
+          "line": 201,
+          "text": "Sec. 346. Limitation on use of funds by the Army until submittal of plan to"
+        },
+        {
+          "line": 204,
+          "text": "Sec. 347. Limitation on use of certain funds of the Air Force until acquisition"
+        },
+        {
+          "line": 207,
+          "text": "Sec. 348. Pilot program for contracted amphibious air resources for the area"
+        },
+        {
+          "line": 209,
+          "text": "Sec. 349. Naming of certain assets of the Department of Defense in the Com-"
+        },
+        {
+          "line": 211,
+          "text": "Sec. 350. Modification of protection of certain facilities and assets from incur-"
+        },
+        {
+          "line": 215,
+          "text": "Sec. 401. End strengths for active forces."
+        },
+        {
+          "line": 217,
+          "text": "Sec. 411. End strengths for selected reserve."
+        },
+        {
+          "line": 218,
+          "text": "Sec. 412. End strengths for reserves on active duty in support of the reserves."
+        },
+        {
+          "line": 219,
+          "text": "Sec. 413. End strengths for military technicians (dual status)."
+        },
+        {
+          "line": 220,
+          "text": "Sec. 414. Maximum number of reserve personnel authorized to be on active"
+        },
+        {
+          "line": 223,
+          "text": "Sec. 421. Military personnel."
+        },
+        {
+          "line": 226,
+          "text": "Sec. 501. Statutory adjustment to reflect transfer of certain general officer bil-"
+        },
+        {
+          "line": 228,
+          "text": "Sec. 502. Notice of removal of Judge Advocates General."
+        },
+        {
+          "line": 229,
+          "text": "Sec. 503. Qualifications for judge advocates."
+        },
+        {
+          "line": 230,
+          "text": "Sec. 504. Modification of waiver authority related to joint qualified officer re-"
+        },
+        {
+          "line": 232,
+          "text": "Sec. 505. Notification of removal of officers from selection board reports and"
+        },
+        {
+          "line": 234,
+          "text": "Sec. 506. Space Force general officer management."
+        },
+        {
+          "line": 238,
+          "text": "Sec. 507. Temporary increase in fiscal year percentage limitation for reduction"
+        },
+        {
+          "line": 242,
+          "text": "Sec. 511. Expansion of authority to waive limitations on release of reserves"
+        }
+      ],
+      "subtitles": [
+        {
+          "line": 51,
+          "text": "Subtitle A—Authorization of Appropriations"
+        },
+        {
+          "line": 53,
+          "text": "Subtitle B—Army Programs"
+        },
+        {
+          "line": 55,
+          "text": "Subtitle C—Navy Programs"
+        },
+        {
+          "line": 67,
+          "text": "Subtitle D—Air Force Programs"
+        },
+        {
+          "line": 90,
+          "text": "Subtitle A—Authorization of Appropriations"
+        },
+        {
+          "line": 92,
+          "text": "Subtitle B—Program Requirements, Restrictions, and Limitations"
+        },
+        {
+          "line": 115,
+          "text": "Subtitle C—Plans, Reports, and Other Matters"
+        },
+        {
+          "line": 127,
+          "text": "Subtitle D—Biotechnology"
+        },
+        {
+          "line": 137,
+          "text": "Subtitle A—Authorization of Appropriations"
+        },
+        {
+          "line": 139,
+          "text": "Subtitle B—Energy and Environment"
+        },
+        {
+          "line": 161,
+          "text": "Subtitle C—Logistics and Sustainment"
+        },
+        {
+          "line": 178,
+          "text": "Subtitle D—Reports"
+        },
+        {
+          "line": 189,
+          "text": "Subtitle E—Other Matters"
+        },
+        {
+          "line": 214,
+          "text": "Subtitle A—Active Forces"
+        },
+        {
+          "line": 216,
+          "text": "Subtitle B—Reserve Forces"
+        },
+        {
+          "line": 222,
+          "text": "Subtitle C—Authorization of Appropriations"
+        },
+        {
+          "line": 225,
+          "text": "Subtitle A—Officer Personnel Policy"
+        },
+        {
+          "line": 241,
+          "text": "Subtitle B—Reserve Component Management"
+        },
+        {
+          "line": 251,
+          "text": "Subtitle C—General Service Authorities and Military Records"
+        },
+        {
+          "line": 258,
+          "text": "Subtitle D—Military Justice and Other Legal Matters"
+        },
+        {
+          "line": 261,
+          "text": "Subtitle E—Member Education, Training, and Transition"
+        },
+        {
+          "line": 278,
+          "text": "Subtitle F—Military Family Readiness and Dependents’ Education"
+        },
+        {
+          "line": 303,
+          "text": "Subtitle G—Junior Reserve Officers’ Training Corps"
+        },
+        {
+          "line": 308,
+          "text": "Subtitle H—Decorations and Other Awards, Miscellaneous Reports, and Other"
+        },
+        {
+          "line": 318,
+          "text": "Subtitle A—Pay and Allowances"
+        },
+        {
+          "line": 325,
+          "text": "Subtitle B—Special and Incentive Pay"
+        },
+        {
+          "line": 331,
+          "text": "Subtitle C—Other Matters"
+        },
+        {
+          "line": 352,
+          "text": "Subtitle A—TRICARE, Brain Health, and Other Health Care Benefits"
+        },
+        {
+          "line": 367,
+          "text": "Subtitle B—Health Care Administration"
+        },
+        {
+          "line": 382,
+          "text": "Subtitle C—Reports and Other Matters"
+        }
+      ]
+    },
+    "relevant_sections": [
+      {
+        "line": 93,
+        "text": "Sec. 211. Modifications to defense research capacity building program."
+      },
+      {
+        "line": 94,
+        "text": "Sec. 212. Program for the enhancement of the research, development, test, and"
+      },
+      {
+        "line": 96,
+        "text": "Sec. 213. Extension of authority for assignment to Defense Advanced Research"
+      },
+      {
+        "line": 109,
+        "text": "Sec. 219. Advanced robotic automation for munitions manufacturing."
+      },
+      {
+        "line": 110,
+        "text": "Sec. 220. Dual-use and defense advanced manufacturing innovation hubs."
+      },
+      {
+        "line": 111,
+        "text": "Sec. 220A. Advanced manufacturing and additive manufacturing programs."
+      },
+      {
+        "line": 112,
+        "text": "Sec. 220B. Improvements relating to advanced manufacturing."
+      },
+      {
+        "line": 113,
+        "text": "Sec. 220C. Limitation on availability of funds for fundamental research collabo-"
+      },
+      {
+        "line": 117,
+        "text": "Sec. 222. Extension of period for annual reports on critical technology areas"
+      },
+      {
+        "line": 125,
+        "text": "Sec. 227. Enhance international coordination for advanced manufacturing tech-"
+      },
+      {
+        "line": 128,
+        "text": "Sec. 231. Biotechnology Management Office."
+      },
+      {
+        "line": 129,
+        "text": "Sec. 232. Department of Defense biotechnology strategy."
+      },
+      {
+        "line": 130,
+        "text": "Sec. 233. Defining guidelines and policies on the use of biotechnology for the"
+      },
+      {
+        "line": 144,
+        "text": "Sec. 314. Modification of availability and use of energy cost savings."
+      },
+      {
+        "line": 163,
+        "text": "Sec. 322. Technology enhancement for surface ship maintenance."
+      },
+      {
+        "line": 383,
+        "text": "Sec. 721. Strategic infectious disease medical research plan."
+      },
+      {
+        "line": 496,
+        "text": "Sec. 881. Prohibition on contracting with certain biotechnology providers."
+      },
+      {
+        "line": 511,
+        "text": "Sec. 907. Modification of covered technology categories for Office of Strategic"
+      },
+      {
+        "line": 555,
+        "text": "Sec. 1014. Prohibition on retiring and decommissioning oceanographic research"
+      },
+      {
+        "line": 561,
+        "text": "Sec. 1018. Pilot program on use of automated shipbuilding technologies and ca-"
+      },
+      {
+        "line": 616,
+        "text": "Sec. 1053. Prohibiting Secretary of Defense from developing voting technology"
+      },
+      {
+        "line": 629,
+        "text": "Sec. 1060. Priority consideration of energy projects that are likely to experience"
+      },
+      {
+        "line": 711,
+        "text": "Sec. 1099F. Rule of construction."
+      },
+      {
+        "line": 737,
+        "text": "Sec. 1205. Building capacity of the armed forces of Mexico to counter"
+      },
+      {
+        "line": 769,
+        "text": "Sec. 1222. Extension of annual report on military and security developments"
+      },
+      {
+        "line": 800,
+        "text": "Sec. 1238. Report on critical digital infrastructure of Taiwan."
+      },
+      {
+        "line": 803,
+        "text": "Sec. 1241. Modification to annual report on military and security developments"
+      },
+      {
+        "line": 852,
+        "text": "Sec. 1276. Democratic and economic development and prosperity initiatives."
+      },
+      {
+        "line": 873,
+        "text": "Sec. 1277. Chief Development Officer."
+      },
+      {
+        "line": 876,
+        "text": "Sec. 1280. Development Advisory Finance Council."
+      },
+      {
+        "line": 879,
+        "text": "Sec. 1283. Development finance education."
+      },
+      {
+        "line": 896,
+        "text": "Sec. 1298. Repeal of European Energy Security and Diversification Act of"
+      },
+      {
+        "line": 985,
+        "text": "Sec. 1542. Accelerating development of autonomous agents to defend against"
+      },
+      {
+        "line": 1059,
+        "text": "Sec. 1614. Framework for integration of information technology technical debt"
+      },
+      {
+        "line": 1061,
+        "text": "Sec. 1615. Mission Infrastructure Resilience Task Force."
+      },
+      {
+        "line": 1123,
+        "text": "Sec. 2101. Authorized Army construction and land acquisition projects."
+      },
+      {
+        "line": 1133,
+        "text": "Sec. 2201. Authorized Navy construction and land acquisition projects."
+      },
+      {
+        "line": 1139,
+        "text": "Sec. 2301. Authorized Air Force construction and land acquisition projects."
+      },
+      {
+        "line": 1151,
+        "text": "Sec. 2401. Authorized Defense Agencies construction and land acquisition"
+      },
+      {
+        "line": 1153,
+        "text": "Sec. 2402. Authorized Energy Resilience and Conservation Investment Program"
+      },
+      {
+        "line": 1166,
+        "text": "Sec. 2501. Authorized NATO construction and land acquisition projects."
+      },
+      {
+        "line": 1172,
+        "text": "Sec. 2511. Republic of Korea funded construction projects."
+      },
+      {
+        "line": 1173,
+        "text": "Sec. 2512. Republic of Poland funded construction projects."
+      },
+      {
+        "line": 1175,
+        "text": "Sec. 2601. Authorized Army National Guard construction and land acquisition"
+      },
+      {
+        "line": 1177,
+        "text": "Sec. 2602. Authorized Army Reserve construction and land acquisition projects."
+      },
+      {
+        "line": 1178,
+        "text": "Sec. 2603. Authorized Navy Reserve and Marine Corps Reserve construction"
+      },
+      {
+        "line": 1180,
+        "text": "Sec. 2604. Authorized Air National Guard construction and land acquisition"
+      },
+      {
+        "line": 1182,
+        "text": "Sec. 2605. Authorized Air Force Reserve construction and land acquisition"
+      },
+      {
+        "line": 1213,
+        "text": "Sec. 2809. Prohibition on designation of military construction projects as part"
+      },
+      {
+        "line": 1215,
+        "text": "Sec. 2810. Expansion of Defense Community Infrastructure Program to in-"
+      }
+    ]
+  },
+  "scenario": {
+    "_meta": {
+      "scenario_id": "wi_charge_air_quality_policy",
+      "generated_at": "2026-01-07T08:15:07.537393",
+      "bill_number": "S.2296",
+      "analysis_type": "Technology-Policy Alignment Assessment"
+    },
+    "bill_analysis": {
+      "bill_number": "S.2296",
+      "analysis_date": "2026-01-07T08:15:06.097774",
+      "technology_context": {
+        "wireless_power": "Wi-Charge R1 transmitter technology",
+        "air_quality": "Building air quality monitoring requirements",
+        "iot_devices": "Connected device ecosystem"
+      },
+      "key_findings": [],
+      "policy_opportunities": [],
+      "technology_alignment": {},
+      "uncertainty_notes": [],
+      "section_analysis": {},
+      "funding_mentions": [
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$50,000,000 ",
+          "context": "d maintenance for Defense- 16 wide activities as specified in the funding table in 17 section 4301, $50,000,000 shall be available only for 18 the purpose of providing assistance to local edu- 19 cational agencie"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$10,000,000 ",
+          "context": "nd mainte- 8 nance for Defense-wide activities as specified in the 9 funding table in section 4301, $10,000,000 shall be 10 available for payments under section 363 of the 11 Floyd D. Spence National Defense Auth"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$20,000,000\n",
+          "context": "nd 18 maintenance for Defense-wide activities as specified 19 in the funding table in section 4301, $20,000,000 20 shall be available for use by the Secretary of Defense 21 to make payments to local educational a"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$10,000 ",
+          "context": "r of the Armed Forces 6 under the jurisdiction of the Secretary a one-time bonus 7 of not more than $10,000 if the member or former mem- 8 ber— 9 (1) agrees to be an instructor for the Junior 10 Reserve Offic"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$2,000,000",
+          "context": "appears and inserting ‘‘June 30, 2026’’; †S 2296 ES  417 1 (B) in subparagraph (A), by striking 2 ‘‘$2,000,000’’ and inserting ‘‘$10,000,000’’; 3 and 4 (C) in subparagraph (B), by striking 5 ‘‘$750,000’’ and in"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$10,000,000",
+          "context": "30, 2026’’; †S 2296 ES  417 1 (B) in subparagraph (A), by striking 2 ‘‘$2,000,000’’ and inserting ‘‘$10,000,000’’; 3 and 4 (C) in subparagraph (B), by striking 5 ‘‘$750,000’’ and inserting ‘‘$2,000,000’’; 6 (2)"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$750,000",
+          "context": "ng 2 ‘‘$2,000,000’’ and inserting ‘‘$10,000,000’’; 3 and 4 (C) in subparagraph (B), by striking 5 ‘‘$750,000’’ and inserting ‘‘$2,000,000’’; 6 (2) in paragraph (2), by striking ‘‘$2,000,000’’ 7 and inserting"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$2,000,000",
+          "context": "erting ‘‘$10,000,000’’; 3 and 4 (C) in subparagraph (B), by striking 5 ‘‘$750,000’’ and inserting ‘‘$2,000,000’’; 6 (2) in paragraph (2), by striking ‘‘$2,000,000’’ 7 and inserting ‘‘$10,000,000’’; and 8 (3) in"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$2,000,000",
+          "context": "(B), by striking 5 ‘‘$750,000’’ and inserting ‘‘$2,000,000’’; 6 (2) in paragraph (2), by striking ‘‘$2,000,000’’ 7 and inserting ‘‘$10,000,000’’; and 8 (3) in subparagraph (3)(A), by striking 9 ‘‘$2,000,000’’ a"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$10,000,000",
+          "context": "and inserting ‘‘$2,000,000’’; 6 (2) in paragraph (2), by striking ‘‘$2,000,000’’ 7 and inserting ‘‘$10,000,000’’; and 8 (3) in subparagraph (3)(A), by striking 9 ‘‘$2,000,000’’ and inserting ‘‘$10,000,000’’. Su"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$2,000,000",
+          "context": "g ‘‘$2,000,000’’ 7 and inserting ‘‘$10,000,000’’; and 8 (3) in subparagraph (3)(A), by striking 9 ‘‘$2,000,000’’ and inserting ‘‘$10,000,000’’. Subtitle C—Industrial Base 10 Matters 11 12 SEC. 841. REPEAL OF LI"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$10,000,000",
+          "context": "ing ‘‘$10,000,000’’; and 8 (3) in subparagraph (3)(A), by striking 9 ‘‘$2,000,000’’ and inserting ‘‘$10,000,000’’. Subtitle C—Industrial Base 10 Matters 11 12 SEC. 841. REPEAL OF LIMITATIONS ON CERTAIN DEPART- 1"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$100,000,000 ",
+          "context": "ach Army 23 organic industrial base installation that— †S 2296 ES  431 1 (1) has received less than $100,000,000 in cu- 2 mulative modernization funding across all Army ac- 3 counts during the two most recent fisc"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$1,000,000",
+          "context": "S SERVICE AREAS.—Section 4955(a)(4) of 12 title 10, United States Code, is amended by striking 13 ‘‘$1,000,000’’ and inserting ‘‘$1,500,000’’. 14 (c) APEX CENTERS OF EXCELLENCE.—The Under 15 Secretary of Defens"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$1,500,000",
+          "context": "(a)(4) of 12 title 10, United States Code, is amended by striking 13 ‘‘$1,000,000’’ and inserting ‘‘$1,500,000’’. 14 (c) APEX CENTERS OF EXCELLENCE.—The Under 15 Secretary of Defense for Acquisition and Sustain"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$100,000,000",
+          "context": "a contract for an 20 amount exceeding the simplified acquisition 21 threshold (but not more than 22 $100,000,000)— 23 ‘‘(I) by the competition advocate 24 for the contracting activity (without 25 further delegati"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$100,000,000 ",
+          "context": "referred to in 2 clause (ii) or (iii); 3 ‘‘(ii) in the case of a contract for an 4 amount exceeding $100,000,000 (but not 5 more than $500,000,000)— 6 ‘‘(I) by the head of the con- 7 tracting activity (without fur"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$500,000,000",
+          "context": "ii); 3 ‘‘(ii) in the case of a contract for an 4 amount exceeding $100,000,000 (but not 5 more than $500,000,000)— 6 ‘‘(I) by the head of the con- 7 tracting activity (without further dele- 8 gation); 9 ‘‘(II) by"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$500,000,000",
+          "context": "y the director of the 15 agency; or 16 ‘‘(iii) in the case of a contract for an 17 amount exceeding $500,000,000— 18 ‘‘(I) by the senior procurement 19 executive for the agency as designated 20 for the purpose of"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$300,000,000 ",
+          "context": ".’’; 3 (11) in section 4201— 4 (A) in subsection (a)(2)— 5 (i) in subparagraph (A), by striking 6 ‘‘$300,000,000 (based on fiscal year 1990 7 constant dollars)’’ and inserting 8 ‘‘$1,000,000,000 (based on fiscal y"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$1,000,000,000 ",
+          "context": "A), by striking 6 ‘‘$300,000,000 (based on fiscal year 1990 7 constant dollars)’’ and inserting 8 ‘‘$1,000,000,000 (based on fiscal year 9 2024 constant dollars)’’; and 10 (ii) in subparagraph (B), by striking 11 ‘‘"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$1,800,000,000 ",
+          "context": "(based on fiscal year 9 2024 constant dollars)’’; and 10 (ii) in subparagraph (B), by striking 11 ‘‘$1,800,000,000 (based on fiscal year 12 1990 constant dollars)’’ and inserting 13 ‘‘$5,000,000,000 (based on fiscal"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$5,000,000,000 ",
+          "context": "y striking 11 ‘‘$1,800,000,000 (based on fiscal year 12 1990 constant dollars)’’ and inserting 13 ‘‘$5,000,000,000 (based on fiscal year 14 2024 constant dollars)’’; and 15 (B) in subsection (b), by adding at the en"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$6,000,000,000",
+          "context": "orizations that 17 the Secretary may transfer under the authority of 18 this section may not exceed $6,000,000,000. 19 (3) EXCEPTION FOR TRANSFERS BETWEEN 20 MILITARY PERSONNEL AUTHORIZATIONS.—A trans- 21 fer of fu"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$5,000,000",
+          "context": "VERNMENT PERSONNEL. 6 Section 408(d)(1) of title 10, United States Code, is 7 amended by striking ‘‘$5,000,000’’ and inserting 8 ‘‘$15,000,000’’. 9 SEC. 1052. EXTENSION OF ADMISSION TO GUAM OR THE 10 COMMONWEAL"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$15,000,000",
+          "context": "08(d)(1) of title 10, United States Code, is 7 amended by striking ‘‘$5,000,000’’ and inserting 8 ‘‘$15,000,000’’. 9 SEC. 1052. EXTENSION OF ADMISSION TO GUAM OR THE 10 COMMONWEALTH OF THE NORTHERN MAR- 11 IANA"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$70,000,000 ",
+          "context": "nd and inserting ‘‘; and’’; and 25 (3) by adding at the end the following: †S 2296 ES  757 1 ‘‘(13) $70,000,000 for each of fiscal years 2026 2 through 2028.’’. 3 (h) ADDITIONAL REGIONAL COMPUTER FORENSIC 4 LABS."
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$10,000,000 ",
+          "context": "There 2 are authorized to be appropriated to the Department of 3 Commerce to carry out this section $10,000,000 for each 4 of fiscal years 2025 through 2030.’’. 5 SEC. 1095. VISA SANCTIONS FOR FOREIGN PERSONS. 6"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$2,000,000",
+          "context": "ATION OF APPROPRIATIONS.— 16 There is authorized to be appropriated to carry out 17 this subsection $2,000,000.’’. 18 (d) REPORT.—Not later than 24 months after the 19 date of enactment of this Act, the Adminis"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$500,000,000",
+          "context": "ubsection (f), by adding at the end the 24 following new paragraph: 25 ‘‘(11) For fiscal year 2026, $500,000,000.’’; 26 and †S 2296 ES  852 1 (3) in subsection (h), by striking ‘‘December 2 31, 2026’’ and inserti"
+        }
+      ],
+      "technology_provisions": [
+        {
+          "line": 127,
+          "text": "Subtitle D—Biotechnology",
+          "context": "Sec. 225. Congressionally directed programs for test and evaluation oversight.\nSec. 226. Prohibition on modification of indirect cost rates for institutions of\nhigher education and nonprofit organizations.\nSec. 227. Enhance international coordination for advanced manufacturing tech-\nniques, technologies, and adoption.\nSubtitle D—Biotechnology\nSec. 231. Biotechnology Management Office.\nSec. 232. Department of Defense biotechnology strategy.\nSec. 233. Defining guidelines and policies on the use of"
+        },
+        {
+          "line": 128,
+          "text": "Sec. 231. Biotechnology Management Office.",
+          "context": "Sec. 226. Prohibition on modification of indirect cost rates for institutions of\nhigher education and nonprofit organizations.\nSec. 227. Enhance international coordination for advanced manufacturing tech-\nniques, technologies, and adoption.\nSubtitle D—Biotechnology\nSec. 231. Biotechnology Management Office.\nSec. 232. Department of Defense biotechnology strategy.\nSec. 233. Defining guidelines and policies on the use of biotechnology for the\nArmed Forces.\nSec. 234. Enhancement of international bio"
+        },
+        {
+          "line": 129,
+          "text": "Sec. 232. Department of Defense biotechnology strategy.",
+          "context": "higher education and nonprofit organizations.\nSec. 227. Enhance international coordination for advanced manufacturing tech-\nniques, technologies, and adoption.\nSubtitle D—Biotechnology\nSec. 231. Biotechnology Management Office.\nSec. 232. Department of Defense biotechnology strategy.\nSec. 233. Defining guidelines and policies on the use of biotechnology for the\nArmed Forces.\nSec. 234. Enhancement of international biodefense capacity.\nTITLE III—OPERATION AND MAINTENANCE\n†S 2296 ES\n\n5\nSubtitle A—Au"
+        },
+        {
+          "line": 130,
+          "text": "Sec. 233. Defining guidelines and policies on the use of biotechnology for the",
+          "context": "Sec. 227. Enhance international coordination for advanced manufacturing tech-\nniques, technologies, and adoption.\nSubtitle D—Biotechnology\nSec. 231. Biotechnology Management Office.\nSec. 232. Department of Defense biotechnology strategy.\nSec. 233. Defining guidelines and policies on the use of biotechnology for the\nArmed Forces.\nSec. 234. Enhancement of international biodefense capacity.\nTITLE III—OPERATION AND MAINTENANCE\n†S 2296 ES\n\n5\nSubtitle A—Authorization of Appropriations\nSec. 301. Author"
+        },
+        {
+          "line": 496,
+          "text": "Sec. 881. Prohibition on contracting with certain biotechnology providers.",
+          "context": "†S 2296 ES\n\n12\nSec. 880. Prohibition on operation, procurement, and contracting related to for-\neign-made additive manufacturing machines.\nSec. 881. Prohibition on contracting with certain biotechnology providers.\nSec. 882. SkyFoundry Program.\nTITLE IX—DEPARTMENT OF DEFENSE ORGANIZATION AND\nMANAGEMENT\nSubtitle A—Office of the Secretary of Defense and Related Matters\nSec. 901. Economic Defense Unit.\nSec. 902. Additional authorities for Office of Strategic Capital.\nSec. 903. Modifications to respo"
+        },
+        {
+          "line": 590,
+          "text": "Sec. 1037. Prohibition on operation of connected vehicles designed, developed,",
+          "context": "persons: authority to provide protection.\nSec. 1035. Notification of the use of military aircraft for immigration enforce-\nment operations.\nSec. 1036. Modification of requirements relating to support of civil authorities\nby Armed Forces.\nSec. 1037. Prohibition on operation of connected vehicles designed, developed,\nmanufactured, or supplied by persons owned by, controlled by,\nor subject to the jurisdiction of a foreign entity of concern on\nDepartment of Defense property.\nSec. 1038. Continued imp"
+        },
+        {
+          "line": 1550,
+          "text": "Sec. 502. Enhanced intelligence sharing relating to foreign adversary biotechno-",
+          "context": "†S 2296 ES\n\n33\nSec. 501. Declassification of information relating to actions by foreign govern-\nments to assist persons evading justice.\nSec. 502. Enhanced intelligence sharing relating to foreign adversary biotechno-\nlogical threats.\nSec. 503. Threat assessment regarding unmanned aircraft systems at or near\nthe international borders of the United States.\nSec. 504. Assessment of the potential effect of expanded partnerships among\nwestern hemisphere countries.\nSubtitle B—People’s Republic of Chin"
+        },
+        {
+          "line": 1559,
+          "text": "tary companies engaged in biotechnology research, develop-",
+          "context": "Sec. 504. Assessment of the potential effect of expanded partnerships among\nwestern hemisphere countries.\nSubtitle B—People’s Republic of China\nSec. 511. Countering Chinese Communist Party efforts that threaten Europe.\nSec. 512. Prohibition on intelligence community contracting with Chinese mili-\ntary companies engaged in biotechnology research, develop-\nment, or manufacturing.\nSec. 513. Report on the wealth of the leadership of the Chinese Communist\nParty.\nSec. 514. Assessment and report on inv"
+        },
+        {
+          "line": 1585,
+          "text": "Sec. 602. Enhancing biotechnology talent within the intelligence community.",
+          "context": "of uranium-235.\nSec. 535. Duty to warn United States persons threatened by Iranian lethal\nplotting.\nTITLE VI—EMERGING TECHNOLOGIES\nSec. 601. Intelligence Community Technology Bridge Program.\nSec. 602. Enhancing biotechnology talent within the intelligence community.\nSec. 603. Enhanced intelligence community support to secure United States\ngenomic data.\nSec. 604. Ensuring intelligence community procurement of domestic United\nStates production of synthetic DNA and RNA.\nSec. 605. Report on identifi"
+        },
+        {
+          "line": 1593,
+          "text": "States-origin biotechnology.",
+          "context": "Sec. 604. Ensuring intelligence community procurement of domestic United\nStates production of synthetic DNA and RNA.\nSec. 605. Report on identification of intelligence community sites for advanced\nnuclear technologies.\nSec. 606. Addressing intelligence gaps relating to China’s investment in United\nStates-origin biotechnology.\nSec. 607. Additional functions and requirements of Artificial Intelligence Secu-\nrity Center.\n†S 2296 ES\n\n34\nSec. 608. Artificial intelligence development and usage by inte"
+        },
+        {
+          "line": 2382,
+          "text": "9 towed-array sensor system ship program unless the Sec-",
+          "context": "4 be appropriated by this Act or otherwise made available\n5 for fiscal year 2026 for the Navy may be obligated or ex-\n6 pended for the scope of work, including priced or unpriced\n7 options, for the construction, advance procurement, or\n8 long-lead material of any ships in the TAGOS surveillance\n9 towed-array sensor system ship program unless the Sec-\n10 retary of the Navy submits the report described in sub-\n11 section (b) to the Committee on Armed Service of the Sen-\n12 ate and the Committee on"
+        },
+        {
+          "line": 2394,
+          "text": "21 sensor system ships and how compliance with section",
+          "context": "16 mit to the Committee on Armed Service of the Senate and\n17 the Committee on Armed Services of the House of Rep-\n18 resentatives a report on the following:\n19 (1) Progress made on basic and functional de-\n20 sign completion for TAGOS surveillance towed-array\n21 sensor system ships and how compliance with section\n22 8669c of title 10, United States Code, will be main-\n23 tained.\n24 (2) The accuracy, timeliness, and completeness\n25 of the Navy’s provisioning of contract baseline de-\n26 sign, gen"
+        },
+        {
+          "line": 2713,
+          "text": "20 veillance, and reconnaissance platforms, sensors, and",
+          "context": "15 jected intelligence, surveillance, and reconnaissance\n16 requirements for the Air Force across all domains,\n17 including air, space, and cyberspace.\n18 (2) An inventory of current (as of the date on\n19 which the roadmap is submitted) intelligence, sur-\n20 veillance, and reconnaissance platforms, sensors, and\n21 associated data-processing systems, including the\n22 mission capabilities, operational status, and expected\n23 service life for each.\n24 (3) A plan for the modernization or divestment\n"
+        },
+        {
+          "line": 4157,
+          "text": "14 leveraging machine sensors and software",
+          "context": "9 porate the process window qualification method-\n10 ology, which is designed to be machine-agnostic,\n11 or independent of specific machine brands or\n12 software providers, as well as the following:\n13 (I) Real-time process monitoring\n14 leveraging machine sensors and software\n15 analytics to detect and instantly mitigate\n16 deviations prevents defects and unauthor-\n17 ized parameter changes.\n18 (II) Integration of machine learning\n19 algorithms that analyze production data in\n20 real-time allow"
+        },
+        {
+          "line": 4619,
+          "text": "Subtitle D—Biotechnology",
+          "context": "13 standards for advanced manufacturing techniques, tech-\n14 nologies, and adoption. The countries involved should be\n15 those with which the United States has reciprocal defense\n16 procurement agreements or security of supply arrange-\n17 ments.\nSubtitle D—Biotechnology\n18\n19\nSEC. 231. BIOTECHNOLOGY MANAGEMENT OFFICE.\n20 (a) DESIGNATION OF SENIOR OFFICIAL.—Not later\n21 than 90 days after the date of the enactment of this Act,\n22 the Secretary of Defense shall designate a senior official,\n23 with"
+        },
+        {
+          "line": 4622,
+          "text": "SEC. 231. BIOTECHNOLOGY MANAGEMENT OFFICE.",
+          "context": "16 procurement agreements or security of supply arrange-\n17 ments.\nSubtitle D—Biotechnology\n18\n19\nSEC. 231. BIOTECHNOLOGY MANAGEMENT OFFICE.\n20 (a) DESIGNATION OF SENIOR OFFICIAL.—Not later\n21 than 90 days after the date of the enactment of this Act,\n22 the Secretary of Defense shall designate a senior official,\n23 with relevant biotechnology experience, from a position\n24 within the Department of Defense that was in effect on\n25 the day before the date of the enactment of this Act—\n†S 2296 ES\n\n"
+        },
+        {
+          "line": 4626,
+          "text": "23 with relevant biotechnology experience, from a position",
+          "context": "19\nSEC. 231. BIOTECHNOLOGY MANAGEMENT OFFICE.\n20 (a) DESIGNATION OF SENIOR OFFICIAL.—Not later\n21 than 90 days after the date of the enactment of this Act,\n22 the Secretary of Defense shall designate a senior official,\n23 with relevant biotechnology experience, from a position\n24 within the Department of Defense that was in effect on\n25 the day before the date of the enactment of this Act—\n†S 2296 ES\n\n131\n1 (1) to be the senior official for biotechnology\n2 issues;\n3 (2) to be the head the Biotec"
+        },
+        {
+          "line": 4632,
+          "text": "1 (1) to be the senior official for biotechnology",
+          "context": "24 within the Department of Defense that was in effect on\n25 the day before the date of the enactment of this Act—\n†S 2296 ES\n\n131\n1 (1) to be the senior official for biotechnology\n2 issues;\n3 (2) to be the head the Biotechnology Manage-\n4 ment Office established under subsection (b); and\n5 (3) to carry out the responsibilities for the of-\n6 fice in subsection (c).\n7 (b) ESTABLISHMENT OF BIOTECHNOLOGY MANAGE-\n8 MENT OFFICE.—Not later than 120 days after the date\n9 of the enactment of this Act, t"
+        },
+        {
+          "line": 4634,
+          "text": "3 (2) to be the head the Biotechnology Manage-",
+          "context": "†S 2296 ES\n\n131\n1 (1) to be the senior official for biotechnology\n2 issues;\n3 (2) to be the head the Biotechnology Manage-\n4 ment Office established under subsection (b); and\n5 (3) to carry out the responsibilities for the of-\n6 fice in subsection (c).\n7 (b) ESTABLISHMENT OF BIOTECHNOLOGY MANAGE-\n8 MENT OFFICE.—Not later than 120 days after the date\n9 of the enactment of this Act, the Secretary of Defense\n10 shall, with input from the senior official designated under\n11 subsection (a), charter a"
+        },
+        {
+          "line": 4638,
+          "text": "7 (b) ESTABLISHMENT OF BIOTECHNOLOGY MANAGE-",
+          "context": "2 issues;\n3 (2) to be the head the Biotechnology Manage-\n4 ment Office established under subsection (b); and\n5 (3) to carry out the responsibilities for the of-\n6 fice in subsection (c).\n7 (b) ESTABLISHMENT OF BIOTECHNOLOGY MANAGE-\n8 MENT OFFICE.—Not later than 120 days after the date\n9 of the enactment of this Act, the Secretary of Defense\n10 shall, with input from the senior official designated under\n11 subsection (a), charter and establish, under the authority,\n12 direction, and control of th"
+        },
+        {
+          "line": 4644,
+          "text": "13 a Biotechnology Management Office to foster the develop-",
+          "context": "8 MENT OFFICE.—Not later than 120 days after the date\n9 of the enactment of this Act, the Secretary of Defense\n10 shall, with input from the senior official designated under\n11 subsection (a), charter and establish, under the authority,\n12 direction, and control of the Deputy Secretary of Defense,\n13 a Biotechnology Management Office to foster the develop-\n14 ment, acquisition and sustainment of broad-based bio-\n15 technology capabilities for the Department.\n16 (c) RESPONSIBILITIES.—The office e"
+        },
+        {
+          "line": 4659,
+          "text": "1 and transition of biotechnology-based products into",
+          "context": "23 (2) Updating policies and guidance within the\n24 Department relating to the acquisition, adoption,\n†S 2296 ES\n\n132\n1 and transition of biotechnology-based products into\n2 Department use.\n3 (3) Coordinating with activities across the De-\n4 partment, the Federal Government, industry, aca-\n5 demia, and international partners relating to bio-\n6 technology.\n7 (4) Proposing options for streamlining the regu-\n8 latory or acquisition process of the Department.\n9 (5) Conducting, as may be needed, glob"
+        },
+        {
+          "line": 4669,
+          "text": "11 support decisionmakers on biotechnology advances.",
+          "context": "6 technology.\n7 (4) Proposing options for streamlining the regu-\n8 latory or acquisition process of the Department.\n9 (5) Conducting, as may be needed, global com-\n10 petition analyses, net assessment or forecasting to\n11 support decisionmakers on biotechnology advances.\n12 (6) Supporting the development of public-pri-\n13 vate partnerships with academia, industry, and other\n14 State and local government partners, including\n15 through the development or fostering of regionally\n16 focused innovati"
+        },
+        {
+          "line": 4675,
+          "text": "17 (7) Identifying biotechnology workforce and",
+          "context": "12 (6) Supporting the development of public-pri-\n13 vate partnerships with academia, industry, and other\n14 State and local government partners, including\n15 through the development or fostering of regionally\n16 focused innovation ecosystems.\n17 (7) Identifying biotechnology workforce and\n18 training gaps across the workforce of the Depart-\n19 ment.\n20 (8) Such other responsibilities as the Secretary\n21 considers appropriate.\n22 (d) SUNSET.—The office established pursuant to sub-\n23 section (a) "
+        },
+        {
+          "line": 4694,
+          "text": "SEC. 232. DEPARTMENT OF DEFENSE BIOTECHNOLOGY",
+          "context": "3 for the office to be established pursuant to subsection (b),\n4 as well as implementation plans for preliminary activities\n5 the office will pursue during the proceeding one-year pe-\n6 riod.\n7\nSEC. 232. DEPARTMENT OF DEFENSE BIOTECHNOLOGY\n8\nSTRATEGY.\n9 (a) IN GENERAL.—Not later than June 1, 2026, the\n10 Secretary of Defense shall, in coordination with the Under\n11 Secretary of Defense for Research and Engineering and\n12 the Under Secretary of Defense for Acquisition and\n13 Sustainment, submit t"
+        },
+        {
+          "line": 4704,
+          "text": "16 security implications of emerging biotechnologies, includ-",
+          "context": "11 Secretary of Defense for Research and Engineering and\n12 the Under Secretary of Defense for Acquisition and\n13 Sustainment, submit to the Committee on Armed Services\n14 of the Senate and the Committee on Armed Services of\n15 the House of Representatives a strategy on the national\n16 security implications of emerging biotechnologies, includ-\n17 ing the future role that biotechnology will play in defense,\n18 and means to improve industry, interagency, and inter-\n19 national relationships in thi"
+        },
+        {
+          "line": 4705,
+          "text": "17 ing the future role that biotechnology will play in defense,",
+          "context": "12 the Under Secretary of Defense for Acquisition and\n13 Sustainment, submit to the Committee on Armed Services\n14 of the Senate and the Committee on Armed Services of\n15 the House of Representatives a strategy on the national\n16 security implications of emerging biotechnologies, includ-\n17 ing the future role that biotechnology will play in defense,\n18 and means to improve industry, interagency, and inter-\n19 national relationships in this sector.\n20 (b) ELEMENTS.—The strategy required pursuant"
+        },
+        {
+          "line": 4719,
+          "text": "3 products with biotechnology-based products.",
+          "context": "†S 2296 ES\n\n134\n1 (2) Review and update of military specifications\n2 in order to better incorporate or substitute current\n3 products with biotechnology-based products.\n4 (3) Updated plans and policies for the Depart-\n5 ment to enter into advance market commitments\n6 and offtake agreements for biotechnology products\n7 that have defense applications.\n8 (4) A description of how the Department could\n9 better incorporate military-relevant applications of\n10 emerging biotechnology into wargaming exerc"
+        },
+        {
+          "line": 4722,
+          "text": "6 and offtake agreements for biotechnology products",
+          "context": "1 (2) Review and update of military specifications\n2 in order to better incorporate or substitute current\n3 products with biotechnology-based products.\n4 (3) Updated plans and policies for the Depart-\n5 ment to enter into advance market commitments\n6 and offtake agreements for biotechnology products\n7 that have defense applications.\n8 (4) A description of how the Department could\n9 better incorporate military-relevant applications of\n10 emerging biotechnology into wargaming exercises,\n11 tableto"
+        },
+        {
+          "line": 4726,
+          "text": "10 emerging biotechnology into wargaming exercises,",
+          "context": "5 ment to enter into advance market commitments\n6 and offtake agreements for biotechnology products\n7 that have defense applications.\n8 (4) A description of how the Department could\n9 better incorporate military-relevant applications of\n10 emerging biotechnology into wargaming exercises,\n11 tabletop exercises, or other net assessment analyses.\n12 (5) The benefits and costs of issuing a research\n13 grand challenge, or a series of challenges, that focus\n14 on making biotechnology predictably engin"
+        },
+        {
+          "line": 4730,
+          "text": "14 on making biotechnology predictably engineerable",
+          "context": "9 better incorporate military-relevant applications of\n10 emerging biotechnology into wargaming exercises,\n11 tabletop exercises, or other net assessment analyses.\n12 (5) The benefits and costs of issuing a research\n13 grand challenge, or a series of challenges, that focus\n14 on making biotechnology predictably engineerable\n15 and how the Department would implement such re-\n16 search grand challenge, or challenges.\n17 (6) Development of a biotechnology regulation\n18 science and technology progra"
+        },
+        {
+          "line": 4733,
+          "text": "17 (6) Development of a biotechnology regulation",
+          "context": "12 (5) The benefits and costs of issuing a research\n13 grand challenge, or a series of challenges, that focus\n14 on making biotechnology predictably engineerable\n15 and how the Department would implement such re-\n16 search grand challenge, or challenges.\n17 (6) Development of a biotechnology regulation\n18 science and technology program within the Depart-\n19 ment, including development of digital infrastructure\n20 to support simplified regulation and the development\n21 of biometrology tools.\n22 ("
+        },
+        {
+          "line": 4745,
+          "text": "1 mand and pool purchasing power for biotechnology",
+          "context": "24 in encouraging member countries of the North At-\n25 lantic Treaty Organization (NATO) to aggregate de-\n†S 2296 ES\n\n135\n1 mand and pool purchasing power for biotechnology\n2 products.\n3 (8) Review of plans and guidance on how the\n4 Department can work to develop, integrate, and dis-\n5 seminate biotechnology research initiatives across\n6 member countries of the North Atlantic Treaty Or-\n7 ganization, and how the Department might coordi-\n8 nate with international stakeholders to utilize the\n9 com"
+        },
+        {
+          "line": 4749,
+          "text": "5 seminate biotechnology research initiatives across",
+          "context": "135\n1 mand and pool purchasing power for biotechnology\n2 products.\n3 (8) Review of plans and guidance on how the\n4 Department can work to develop, integrate, and dis-\n5 seminate biotechnology research initiatives across\n6 member countries of the North Atlantic Treaty Or-\n7 ganization, and how the Department might coordi-\n8 nate with international stakeholders to utilize the\n9 combined research capabilities of such member coun-\n10 tries to drive a biotechnology development approach.\n11\nSEC. 233. "
+        },
+        {
+          "line": 4754,
+          "text": "10 tries to drive a biotechnology development approach.",
+          "context": "5 seminate biotechnology research initiatives across\n6 member countries of the North Atlantic Treaty Or-\n7 ganization, and how the Department might coordi-\n8 nate with international stakeholders to utilize the\n9 combined research capabilities of such member coun-\n10 tries to drive a biotechnology development approach.\n11\nSEC. 233. DEFINING GUIDELINES AND POLICIES ON THE\n12\nUSE OF BIOTECHNOLOGY FOR THE ARMED\n13\nFORCES.\n14 (a) GUIDELINES AND POLICIES REQUIRED.—Not\n15 later than one year after the "
+        },
+        {
+          "line": 4758,
+          "text": "USE OF BIOTECHNOLOGY FOR THE ARMED",
+          "context": "9 combined research capabilities of such member coun-\n10 tries to drive a biotechnology development approach.\n11\nSEC. 233. DEFINING GUIDELINES AND POLICIES ON THE\n12\nUSE OF BIOTECHNOLOGY FOR THE ARMED\n13\nFORCES.\n14 (a) GUIDELINES AND POLICIES REQUIRED.—Not\n15 later than one year after the date of the enactment of this\n16 Act, the Secretary of Defense shall, after coordinating\n17 with the Under Secretary of Defense for Research and En-\n18 gineering, the Under Secretary of Defense for Acquisition\n"
+        },
+        {
+          "line": 4770,
+          "text": "23 ployment of biotechnology within the Department of De-",
+          "context": "18 gineering, the Under Secretary of Defense for Acquisition\n19 and Sustainment, the Under Secretary of Defense for Pol-\n20 icy and external stakeholders, including representation\n21 from industry and academia, develop guidelines and poli-\n22 cies on the ethical and responsible development and de-\n23 ployment of biotechnology within the Department of De-\n24 fense and the Armed Forces.\n†S 2296 ES\n\n136\n1 (b) ELEMENTS.—The guidelines and policies devel-\n2 oped pursuant to subsection (a) shall inclu"
+        },
+        {
+          "line": 4778,
+          "text": "4 opment and use of biotechnology.",
+          "context": "\n136\n1 (b) ELEMENTS.—The guidelines and policies devel-\n2 oped pursuant to subsection (a) shall include the following:\n3 (1) Definitions of ethical and responsible devel-\n4 opment and use of biotechnology.\n5 (2) Guidelines relating to ethical and respon-\n6 sible development and use of biotechnology.\n7 (3) Policies relating to informed consent of\n8 members of the Armed Forces participating in bio-\n9 technology development.\n10 (4) Policies relating to reversibility and heri-\n11 table treatment of "
+        },
+        {
+          "line": 4780,
+          "text": "6 sible development and use of biotechnology.",
+          "context": "1 (b) ELEMENTS.—The guidelines and policies devel-\n2 oped pursuant to subsection (a) shall include the following:\n3 (1) Definitions of ethical and responsible devel-\n4 opment and use of biotechnology.\n5 (2) Guidelines relating to ethical and respon-\n6 sible development and use of biotechnology.\n7 (3) Policies relating to informed consent of\n8 members of the Armed Forces participating in bio-\n9 technology development.\n10 (4) Policies relating to reversibility and heri-\n11 table treatment of poten"
+        },
+        {
+          "line": 4785,
+          "text": "11 table treatment of potential biotechnology applica-",
+          "context": "6 sible development and use of biotechnology.\n7 (3) Policies relating to informed consent of\n8 members of the Armed Forces participating in bio-\n9 technology development.\n10 (4) Policies relating to reversibility and heri-\n11 table treatment of potential biotechnology applica-\n12 tions.\n13 (5) Policies relating to biotechnologies and their\n14 potential effects on the environment.\n15 (6) Policies relating to human performance en-\n16 hancement.\n17 (7) Policies relating to the compliance and obli-\n"
+        }
+      ],
+      "keyword_matches": {
+        "wireless": [
+          "wireless"
+        ],
+        "energy": [
+          "energy",
+          "power",
+          "electricity",
+          "energy cost savings"
+        ],
+        "iot": [
+          "iot",
+          "internet of things",
+          "connected devices",
+          "sensors"
+        ],
+        "air_quality": [
+          "hvac",
+          "airborne"
+        ],
+        "building": [
+          "building",
+          "buildings",
+          "infrastructure",
+          "construction",
+          "facility",
+          "facilities",
+          "military construction"
+        ],
+        "standards": [
+          "standards",
+          "regulations",
+          "compliance",
+          "certification",
+          "guidelines"
+        ],
+        "research": [
+          "research",
+          "development",
+          "r&d",
+          "darpa",
+          "advanced research"
+        ],
+        "manufacturing": [
+          "manufacturing",
+          "advanced manufacturing",
+          "additive manufacturing",
+          "production"
+        ],
+        "technology": [
+          "technology",
+          "technologies",
+          "tech",
+          "innovation",
+          "advanced"
+        ]
+      },
+      "keyword_contexts": {
+        "wireless": [
+          {
+            "keyword": "wireless",
+            "context": "em’ 12 means a Department of Defense system that relies on the 13 electromagnetic spectrum for its function, including any 14 communications, weapons, precision munitions, sensor, 15 geo-location, or wireless device.’’. TITLE XVI—CYBERSPACE- 16 RELATED MATTERS 17 Subtitle A—Matters Relating to 18 Cy"
+          }
+        ],
+        "energy": [
+          {
+            "keyword": "energy",
+            "context": "1ST SESSION AN ACT To authorize appropriations for fiscal year 2026 for military activities of the Department of Defense, for military construction, and for defense activities of the Depart- ment of Energy, to prescribe military personnel strengths for such fiscal year, and for other purposes.  2 1 "
+          },
+          {
+            "keyword": "power",
+            "context": "VISION OF SUPPORT Sec. 1286. Equity investment. Sec. 1287. Special projects. Sec. 1288. Terms and conditions. Sec. 1289. Termination. PART IV—OTHER MATTERS Sec. 1290. Operations. Sec. 1291. Corporate powers. Sec. 1292. Maximum contingent liability. Sec. 1293. Performance measures, evaluation, and le"
+          },
+          {
+            "keyword": "electricity",
+            "context": "impacts; 20 (ix) the ability to integrate into elec- 21 tric applications and nonelectric applica- 22 tions; 23 (x) modular sizes to allow for deploy- 24 ment that corresponds with the demand 25 for electricity or process heat; and †S 2296 ES  1879 1 (xi) operational flexibility to respond 2 to chan"
+          },
+          {
+            "keyword": "energy cost savings",
+            "context": "ec. 312. Requirement to support training on wildfire prevention and response. Sec. 313. Use of solid waste disposal systems by Department of Defense. Sec. 314. Modification of availability and use of energy cost savings. Sec. 315. Authority of Department of Defense to destroy or dispose of perfluoro"
+          }
+        ],
+        "iot": [
+          {
+            "keyword": "iot",
+            "context": "t rates for institutions of higher education and nonprofit organizations. Sec. 227. Enhance international coordination for advanced manufacturing tech- niques, technologies, and adoption. Subtitle D—Biotechnology Sec. 231. Biotechnology Management Office. Sec. 232. Department of Defense biotechnolog"
+          },
+          {
+            "keyword": "internet of things",
+            "context": "the Homeland Secu- 23 rity Act of 2002 (6 U.S.C. 665i(f)). 24 (2) OPERATIONAL TECHNOLOGY.—The term 25 ‘‘operational technology’’ has the meaning given †S 2296 ES  1210 1 such term in section 3 of the Internet of Things Cy- 2 bersecurity Improvement Act of 2020 (15 U.S.C. 3 278g–3a). 4 SEC. 1614. FRA"
+          },
+          {
+            "keyword": "connected devices",
+            "context": "ct, retain, or knowingly or recklessly fa- 25 cilitate the collection or retention of location data †S 2296 ES  2090 1 from phones, wearable fitness trackers, and other 2 cellular-enabled or cellular-connected devices located 3 in any covered location, regardless of whether service 4 for such device"
+          },
+          {
+            "keyword": "sensors",
+            "context": "l domains, 17 including air, space, and cyberspace. 18 (2) An inventory of current (as of the date on 19 which the roadmap is submitted) intelligence, sur- 20 veillance, and reconnaissance platforms, sensors, and 21 associated data-processing systems, including the 22 mission capabilities, operation"
+          }
+        ],
+        "air_quality": [
+          {
+            "keyword": "hvac",
+            "context": "(vii) Approval of supplemental assist- 20 ance, including insurance or guarantee, to 21 a project previously approved by the Sec- 22 retary. 23 (viii) Emergency homeowner or renter 24 assistance for HVAC, hot water heaters, †S 2296 ES  2780 1 and other necessary uses of existing utili- 2 ties requir"
+          },
+          {
+            "keyword": "airborne",
+            "context": "cargo transportation services. Sec. 142. Extension of prohibition on certain reductions to B–1 bomber aircraft squadrons. †S 2296 ES  4 Sec. 143. Prohibition on certain reductions to inventory of E–3 airborne warn- ing and control system aircraft. TITLE II—RESEARCH, DEVELOPMENT, TEST, AND EVALUATION"
+          }
+        ],
+        "building": [
+          {
+            "keyword": "building",
+            "context": "btitle A—Authorization of Appropriations Sec. 201. Authorization of appropriations. Subtitle B—Program Requirements, Restrictions, and Limitations Sec. 211. Modifications to defense research capacity building program. Sec. 212. Program for the enhancement of the research, development, test, and eval"
+          },
+          {
+            "keyword": "buildings",
+            "context": "bclause (IX), as so re- 15 designated, by striking the period at 16 the end and inserting a semicolon; 17 and 18 (III) by adding at the end the 19 following new subclauses: 20 ‘‘(X) protection of the buildings, 21 grounds, and property to which the 22 public are not permitted regular, un- 23 restric"
+          },
+          {
+            "keyword": "infrastructure",
+            "context": "pabilities into logistics operations. Sec. 329. Pilot program on arsenal workload sustainment. Subtitle D—Reports Sec. 331. Modification of report on improved oversight for implementation of Shipyard Infrastructure Optimization Program of the Navy. Sec. 332. Modification of readiness report to inclu"
+          },
+          {
+            "keyword": "construction",
+            "context": "119TH CONGRESS S. 2296 1ST SESSION AN ACT To authorize appropriations for fiscal year 2026 for military activities of the Department of Defense, for military construction, and for defense activities of the Depart- ment of Energy, to prescribe military personnel strengths for such fiscal year, and fo"
+          },
+          {
+            "keyword": "facility",
+            "context": "and Other Matters Sec. 721. Strategic infectious disease medical research plan. †S 2296 ES  10 Sec. 722. Extension of authority for Joint Department of Defense–Department of Veterans Affairs Medical Facility Demonstration Fund. Sec. 723. Pilot program on wastewater surveillance system of Department "
+          }
+        ],
+        "standards": [
+          {
+            "keyword": "standards",
+            "context": "ifications to modular open systems approach. Sec. 805. Alternative test and evaluation pathway for designated defense acqui- sition programs. Sec. 806. Department of Defense member of Cost Accounting Standards Board. Sec. 807. Combatant command experimentation authority. Subtitle B—Amendments to Gen"
+          },
+          {
+            "keyword": "regulations",
+            "context": "schools operated by Department of Defense Education Activity. †S 2296 ES  8 Sec. 553. Enrollment of children of certain American Red Cross employees in defense dependents’ education system. Sec. 554. Regulations on the use of portable electronic mobile devices in De- partment of Defense Education Ac"
+          },
+          {
+            "keyword": "compliance",
+            "context": "for persons whose score on the Armed Forces Qualification Test is below a prescribed level for the future servicemember preparatory course. Sec. 584. Recruiter access to secondary schools. Sec. 585. Compliance with travel charge card deactivation requirements. TITLE VI—COMPENSATION AND OTHER PERSONN"
+          },
+          {
+            "keyword": "certification",
+            "context": "conducting Department of Defense- funded research. Sec. 217. Western regional range complex demonstration. Sec. 218. Modification of requirement for Department of Defense policies for management and certification of Link 16 military tactical data link network. Sec. 219. Advanced robotic automation f"
+          },
+          {
+            "keyword": "guidelines",
+            "context": "manufacturing tech- niques, technologies, and adoption. Subtitle D—Biotechnology Sec. 231. Biotechnology Management Office. Sec. 232. Department of Defense biotechnology strategy. Sec. 233. Defining guidelines and policies on the use of biotechnology for the Armed Forces. Sec. 234. Enhancement of in"
+          }
+        ],
+        "research": [
+          {
+            "keyword": "research",
+            "context": "hibition on certain reductions to B–1 bomber aircraft squadrons. †S 2296 ES  4 Sec. 143. Prohibition on certain reductions to inventory of E–3 airborne warn- ing and control system aircraft. TITLE II—RESEARCH, DEVELOPMENT, TEST, AND EVALUATION Subtitle A—Authorization of Appropriations Sec. 201. Aut"
+          },
+          {
+            "keyword": "development",
+            "context": "n certain reductions to B–1 bomber aircraft squadrons. †S 2296 ES  4 Sec. 143. Prohibition on certain reductions to inventory of E–3 airborne warn- ing and control system aircraft. TITLE II—RESEARCH, DEVELOPMENT, TEST, AND EVALUATION Subtitle A—Authorization of Appropriations Sec. 201. Authorization"
+          },
+          {
+            "keyword": "r&d",
+            "context": "592 191 0605805A MUNITIONS STANDARDIZATION, EFFECTIVENESS AND 44,465 44,465 SAFETY. 192 0605857A ENVIRONMENTAL QUALITY TECHNOLOGY MGMT SUPPORT 2,857 2,857 193 0605898A ARMY DIRECT REPORT HEADQUARTERS—R&D - MHA ......... 53,436 53,436 194 0606002A RONALD REAGAN BALLISTIC MISSILE DEFENSE TEST 72,302 8"
+          },
+          {
+            "keyword": "darpa",
+            "context": "0603379D8Z ADVANCED TECHNICAL INTEGRATION ..................................... 19,991 19,991 54 0603384BP CHEMICAL AND BIOLOGICAL DEFENSE PROGRAM—AD- 247,043 247,043 VANCED DEVELOPMENT. 55 0603467E DARPA ADVANCED TECHNOLOGY DEVELOPMENT ................ 1,643,465 1,643,465 56 0603468E ADVANCED COMPL"
+          },
+          {
+            "keyword": "advanced research",
+            "context": "ding program. Sec. 212. Program for the enhancement of the research, development, test, and evaluation centers of the Department of Defense. Sec. 213. Extension of authority for assignment to Defense Advanced Research Projects Agency of private sector personnel with critical re- search and developme"
+          }
+        ],
+        "manufacturing": [
+          {
+            "keyword": "manufacturing",
+            "context": "18. Modification of requirement for Department of Defense policies for management and certification of Link 16 military tactical data link network. Sec. 219. Advanced robotic automation for munitions manufacturing. Sec. 220. Dual-use and defense advanced manufacturing innovation hubs. Sec. 220A. Adv"
+          },
+          {
+            "keyword": "advanced manufacturing",
+            "context": "of Defense policies for management and certification of Link 16 military tactical data link network. Sec. 219. Advanced robotic automation for munitions manufacturing. Sec. 220. Dual-use and defense advanced manufacturing innovation hubs. Sec. 220A. Advanced manufacturing and additive manufacturing "
+          },
+          {
+            "keyword": "additive manufacturing",
+            "context": "ical data link network. Sec. 219. Advanced robotic automation for munitions manufacturing. Sec. 220. Dual-use and defense advanced manufacturing innovation hubs. Sec. 220A. Advanced manufacturing and additive manufacturing programs. Sec. 220B. Improvements relating to advanced manufacturing. Sec. 22"
+          },
+          {
+            "keyword": "production",
+            "context": "ource qualification. Sec. 870. Enhanced product support management for integrated sustainment of weapon systems. Sec. 871. Modifications to current defense acquisition requirements. Sec. 872. Minimum production levels for munitions. Sec. 873. Processes for incentivizing contractor expansion of sourc"
+          }
+        ],
+        "technology": [
+          {
+            "keyword": "technology",
+            "context": "ch collabo- ration with certain academic institutions. Subtitle C—Plans, Reports, and Other Matters Sec. 221. Catalyst Pathfinder Program. Sec. 222. Extension of period for annual reports on critical technology areas supportive of the National Defense Strategy. Sec. 223. Evaluation of additional tes"
+          },
+          {
+            "keyword": "technologies",
+            "context": "hibition on modification of indirect cost rates for institutions of higher education and nonprofit organizations. Sec. 227. Enhance international coordination for advanced manufacturing tech- niques, technologies, and adoption. Subtitle D—Biotechnology Sec. 231. Biotechnology Management Office. Sec."
+          },
+          {
+            "keyword": "tech",
+            "context": "ch collabo- ration with certain academic institutions. Subtitle C—Plans, Reports, and Other Matters Sec. 221. Catalyst Pathfinder Program. Sec. 222. Extension of period for annual reports on critical technology areas supportive of the National Defense Strategy. Sec. 223. Evaluation of additional tes"
+          },
+          {
+            "keyword": "innovation",
+            "context": "r management and certification of Link 16 military tactical data link network. Sec. 219. Advanced robotic automation for munitions manufacturing. Sec. 220. Dual-use and defense advanced manufacturing innovation hubs. Sec. 220A. Advanced manufacturing and additive manufacturing programs. Sec. 220B. I"
+          },
+          {
+            "keyword": "advanced",
+            "context": "ding program. Sec. 212. Program for the enhancement of the research, development, test, and evaluation centers of the Department of Defense. Sec. 213. Extension of authority for assignment to Defense Advanced Research Projects Agency of private sector personnel with critical re- search and developme"
+          }
+        ]
+      },
+      "bill_structure": {
+        "divisions": [
+          {
+            "line": 21,
+            "text": "8 (a) DIVISIONS.—This Act is organized into ten divi-"
+          },
+          {
+            "line": 23,
+            "text": "10 (1) Division A—Department of Defense Au-"
+          },
+          {
+            "line": 25,
+            "text": "12 (2) Division B—Military Construction Author-"
+          },
+          {
+            "line": 27,
+            "text": "14 (3) Division C—Department of Energy Na-"
+          },
+          {
+            "line": 30,
+            "text": "17 (4) Division D—Funding Tables."
+          },
+          {
+            "line": 31,
+            "text": "18 (5) Division E—Additional Provisions."
+          },
+          {
+            "line": 32,
+            "text": "19 (6) Division F—Intelligence Authorization Act"
+          },
+          {
+            "line": 34,
+            "text": "21 (7) Division G—Department of State Matters."
+          },
+          {
+            "line": 35,
+            "text": "22 (8) Division H—Coast Guard Authorization Act"
+          },
+          {
+            "line": 37,
+            "text": "24 (9) Division I—ROAD to Housing Act."
+          },
+          {
+            "line": 41,
+            "text": "1 (10) Division J—Department of State Author-"
+          },
+          {
+            "line": 49,
+            "text": "DIVISION A—DEPARTMENT OF DEFENSE AUTHORIZATIONS"
+          },
+          {
+            "line": 1114,
+            "text": "DIVISION B—MILITARY CONSTRUCTION AUTHORIZATIONS"
+          },
+          {
+            "line": 1261,
+            "text": "DIVISION C—DEPARTMENT OF ENERGY NATIONAL SECURITY"
+          },
+          {
+            "line": 1300,
+            "text": "DIVISION D—FUNDING TABLES"
+          },
+          {
+            "line": 1321,
+            "text": "DIVISION E—ADDITIONAL PROVISIONS"
+          },
+          {
+            "line": 1476,
+            "text": "DIVISION F—INTELLIGENCE AUTHORIZATION ACT FOR FISCAL"
+          },
+          {
+            "line": 1641,
+            "text": "DIVISION G—DEPARTMENT OF STATE MATTERS"
+          },
+          {
+            "line": 1688,
+            "text": "DIVISION H—COAST GUARD AUTHORIZATION ACT OF 2025"
+          },
+          {
+            "line": 1976,
+            "text": "DIVISION I—ROAD TO HOUSING ACT"
+          }
+        ],
+        "titles": [
+          {
+            "line": 50,
+            "text": "TITLE I—PROCUREMENT"
+          },
+          {
+            "line": 51,
+            "text": "Subtitle A—Authorization of Appropriations"
+          },
+          {
+            "line": 53,
+            "text": "Subtitle B—Army Programs"
+          },
+          {
+            "line": 55,
+            "text": "Subtitle C—Navy Programs"
+          },
+          {
+            "line": 67,
+            "text": "Subtitle D—Air Force Programs"
+          },
+          {
+            "line": 89,
+            "text": "TITLE II—RESEARCH, DEVELOPMENT, TEST, AND EVALUATION"
+          },
+          {
+            "line": 90,
+            "text": "Subtitle A—Authorization of Appropriations"
+          },
+          {
+            "line": 92,
+            "text": "Subtitle B—Program Requirements, Restrictions, and Limitations"
+          },
+          {
+            "line": 115,
+            "text": "Subtitle C—Plans, Reports, and Other Matters"
+          },
+          {
+            "line": 127,
+            "text": "Subtitle D—Biotechnology"
+          },
+          {
+            "line": 133,
+            "text": "TITLE III—OPERATION AND MAINTENANCE"
+          },
+          {
+            "line": 137,
+            "text": "Subtitle A—Authorization of Appropriations"
+          },
+          {
+            "line": 139,
+            "text": "Subtitle B—Energy and Environment"
+          },
+          {
+            "line": 161,
+            "text": "Subtitle C—Logistics and Sustainment"
+          },
+          {
+            "line": 178,
+            "text": "Subtitle D—Reports"
+          },
+          {
+            "line": 189,
+            "text": "Subtitle E—Other Matters"
+          },
+          {
+            "line": 213,
+            "text": "TITLE IV—MILITARY PERSONNEL AUTHORIZATIONS"
+          },
+          {
+            "line": 214,
+            "text": "Subtitle A—Active Forces"
+          },
+          {
+            "line": 216,
+            "text": "Subtitle B—Reserve Forces"
+          },
+          {
+            "line": 222,
+            "text": "Subtitle C—Authorization of Appropriations"
+          },
+          {
+            "line": 224,
+            "text": "TITLE V—MILITARY PERSONNEL POLICY"
+          },
+          {
+            "line": 225,
+            "text": "Subtitle A—Officer Personnel Policy"
+          },
+          {
+            "line": 241,
+            "text": "Subtitle B—Reserve Component Management"
+          },
+          {
+            "line": 251,
+            "text": "Subtitle C—General Service Authorities and Military Records"
+          },
+          {
+            "line": 258,
+            "text": "Subtitle D—Military Justice and Other Legal Matters"
+          },
+          {
+            "line": 261,
+            "text": "Subtitle E—Member Education, Training, and Transition"
+          },
+          {
+            "line": 278,
+            "text": "Subtitle F—Military Family Readiness and Dependents’ Education"
+          },
+          {
+            "line": 303,
+            "text": "Subtitle G—Junior Reserve Officers’ Training Corps"
+          },
+          {
+            "line": 308,
+            "text": "Subtitle H—Decorations and Other Awards, Miscellaneous Reports, and Other"
+          },
+          {
+            "line": 317,
+            "text": "TITLE VI—COMPENSATION AND OTHER PERSONNEL BENEFITS"
+          }
+        ],
+        "sections": [
+          {
+            "line": 14,
+            "text": "SECTION 1. SHORT TITLE."
+          },
+          {
+            "line": 18,
+            "text": "SEC. 2. ORGANIZATION OF ACT INTO DIVISIONS; TABLE OF"
+          },
+          {
+            "line": 45,
+            "text": "Sec. 1. Short title."
+          },
+          {
+            "line": 46,
+            "text": "Sec. 2. Organization of Act into divisions; table of contents."
+          },
+          {
+            "line": 47,
+            "text": "Sec. 3. Congressional defense committees."
+          },
+          {
+            "line": 48,
+            "text": "Sec. 4. Budgetary effects of this Act."
+          },
+          {
+            "line": 52,
+            "text": "Sec. 101. Authorization of appropriations."
+          },
+          {
+            "line": 54,
+            "text": "Sec. 111. Strategy for Army tactical wheeled vehicle program."
+          },
+          {
+            "line": 56,
+            "text": "Sec. 121. Procurement authority for Columbia-class submarine program."
+          },
+          {
+            "line": 57,
+            "text": "Sec. 122. Procurement authorities for Medium Landing Ships."
+          },
+          {
+            "line": 58,
+            "text": "Sec. 123. Recapitalization of Navy waterborne security barriers; modification of"
+          },
+          {
+            "line": 61,
+            "text": "Sec. 124. Modification to limitations on Navy medium and large unmanned sur-"
+          },
+          {
+            "line": 63,
+            "text": "Sec. 125. Limitation on availability of funds for TAGOS ship program."
+          },
+          {
+            "line": 64,
+            "text": "Sec. 126. Limitation on availability of funds relating to amphibious warfare"
+          },
+          {
+            "line": 66,
+            "text": "Sec. 127. Temporary unavailability of amphibious warfare ships."
+          },
+          {
+            "line": 68,
+            "text": "Sec. 131. B–21 bomber aircraft program accountability matrices."
+          },
+          {
+            "line": 69,
+            "text": "Sec. 132. Bomber aircraft force structure and transition roadmap."
+          },
+          {
+            "line": 70,
+            "text": "Sec. 133. Requirement for an intelligence, surveillance, and reconnaissance"
+          },
+          {
+            "line": 72,
+            "text": "Sec. 134. Annual report on Department of Defense unified datalink strategy."
+          },
+          {
+            "line": 73,
+            "text": "Sec. 135. Plan for open mission systems of F–35 aircraft."
+          },
+          {
+            "line": 74,
+            "text": "Sec. 136. Modification of prohibition on retirement of F–15E aircraft."
+          },
+          {
+            "line": 75,
+            "text": "Sec. 137. Prohibition on retirement of A–10 aircraft."
+          },
+          {
+            "line": 76,
+            "text": "Sec. 138. Extension of limitations and minimum inventory requirement relating"
+          },
+          {
+            "line": 78,
+            "text": "Sec. 139. Expansion of air refueler fleet."
+          },
+          {
+            "line": 79,
+            "text": "Sec. 140. Requirements relating to C–130 aircraft."
+          },
+          {
+            "line": 80,
+            "text": "Sec. 141. Information on future large and oversized air cargo transportation"
+          },
+          {
+            "line": 82,
+            "text": "Sec. 142. Extension of prohibition on certain reductions to B–1 bomber aircraft"
+          },
+          {
+            "line": 87,
+            "text": "Sec. 143. Prohibition on certain reductions to inventory of E–3 airborne warn-"
+          },
+          {
+            "line": 91,
+            "text": "Sec. 201. Authorization of appropriations."
+          },
+          {
+            "line": 93,
+            "text": "Sec. 211. Modifications to defense research capacity building program."
+          },
+          {
+            "line": 94,
+            "text": "Sec. 212. Program for the enhancement of the research, development, test, and"
+          },
+          {
+            "line": 96,
+            "text": "Sec. 213. Extension of authority for assignment to Defense Advanced Research"
+          },
+          {
+            "line": 99,
+            "text": "Sec. 214. Limitation on use of funds for certain Navy software."
+          },
+          {
+            "line": 100,
+            "text": "Sec. 215. Limitation on availability of funds for Under Secretary of Defense for"
+          },
+          {
+            "line": 102,
+            "text": "Sec. 216. Prohibition on contracts between certain foreign entities and institu-"
+          },
+          {
+            "line": 105,
+            "text": "Sec. 217. Western regional range complex demonstration."
+          },
+          {
+            "line": 106,
+            "text": "Sec. 218. Modification of requirement for Department of Defense policies for"
+          },
+          {
+            "line": 109,
+            "text": "Sec. 219. Advanced robotic automation for munitions manufacturing."
+          },
+          {
+            "line": 110,
+            "text": "Sec. 220. Dual-use and defense advanced manufacturing innovation hubs."
+          },
+          {
+            "line": 111,
+            "text": "Sec. 220A. Advanced manufacturing and additive manufacturing programs."
+          },
+          {
+            "line": 112,
+            "text": "Sec. 220B. Improvements relating to advanced manufacturing."
+          },
+          {
+            "line": 113,
+            "text": "Sec. 220C. Limitation on availability of funds for fundamental research collabo-"
+          },
+          {
+            "line": 116,
+            "text": "Sec. 221. Catalyst Pathfinder Program."
+          },
+          {
+            "line": 117,
+            "text": "Sec. 222. Extension of period for annual reports on critical technology areas"
+          },
+          {
+            "line": 119,
+            "text": "Sec. 223. Evaluation of additional test corridors for hypersonic and long-range"
+          },
+          {
+            "line": 121,
+            "text": "Sec. 224. Technical correction."
+          },
+          {
+            "line": 122,
+            "text": "Sec. 225. Congressionally directed programs for test and evaluation oversight."
+          },
+          {
+            "line": 123,
+            "text": "Sec. 226. Prohibition on modification of indirect cost rates for institutions of"
+          },
+          {
+            "line": 125,
+            "text": "Sec. 227. Enhance international coordination for advanced manufacturing tech-"
+          },
+          {
+            "line": 128,
+            "text": "Sec. 231. Biotechnology Management Office."
+          },
+          {
+            "line": 129,
+            "text": "Sec. 232. Department of Defense biotechnology strategy."
+          },
+          {
+            "line": 130,
+            "text": "Sec. 233. Defining guidelines and policies on the use of biotechnology for the"
+          },
+          {
+            "line": 132,
+            "text": "Sec. 234. Enhancement of international biodefense capacity."
+          },
+          {
+            "line": 138,
+            "text": "Sec. 301. Authorization of appropriations."
+          },
+          {
+            "line": 140,
+            "text": "Sec. 311. Department of Defense guidelines regarding implementation of the"
+          },
+          {
+            "line": 142,
+            "text": "Sec. 312. Requirement to support training on wildfire prevention and response."
+          },
+          {
+            "line": 143,
+            "text": "Sec. 313. Use of solid waste disposal systems by Department of Defense."
+          },
+          {
+            "line": 144,
+            "text": "Sec. 314. Modification of availability and use of energy cost savings."
+          },
+          {
+            "line": 145,
+            "text": "Sec. 315. Authority of Department of Defense to destroy or dispose of"
+          },
+          {
+            "line": 147,
+            "text": "Sec. 316. Modification to restriction on procurement or purchasing of personal"
+          },
+          {
+            "line": 150,
+            "text": "Sec. 317. Provision of bottled water to communities with private drinking water"
+          },
+          {
+            "line": 153,
+            "text": "Sec. 318. Repeal of prohibition on procurement by Department of Defense of"
+          },
+          {
+            "line": 156,
+            "text": "Sec. 319. Repeal of temporary moratorium on incineration by Department of"
+          },
+          {
+            "line": 159,
+            "text": "Sec. 320. Interim responses to address releases or threatened releases of"
+          },
+          {
+            "line": 162,
+            "text": "Sec. 321. Surface ship sustainment and readiness."
+          },
+          {
+            "line": 163,
+            "text": "Sec. 322. Technology enhancement for surface ship maintenance."
+          },
+          {
+            "line": 164,
+            "text": "Sec. 323. Delegation to United States Transportation Command of mitigating"
+          },
+          {
+            "line": 167,
+            "text": "Sec. 324. Requirements for Department of Defense aircraft operations near"
+          },
+          {
+            "line": 169,
+            "text": "Sec. 325. Extension and modification of semiannual briefings on operational"
+          },
+          {
+            "line": 171,
+            "text": "Sec. 326. Prohibition on closure of Army organic industrial base sites."
+          },
+          {
+            "line": 172,
+            "text": "Sec. 327. Establishment of Defense Personal Property Management Office"
+          },
+          {
+            "line": 175,
+            "text": "Sec. 328. Integration of commercially available artificial intelligence capabilities"
+          },
+          {
+            "line": 177,
+            "text": "Sec. 329. Pilot program on arsenal workload sustainment."
+          },
+          {
+            "line": 179,
+            "text": "Sec. 331. Modification of report on improved oversight for implementation of"
+          },
+          {
+            "line": 181,
+            "text": "Sec. 332. Modification of readiness report to include summary count of certain"
+          },
+          {
+            "line": 183,
+            "text": "Sec. 333. Annual report on funding and status of interim remedial actions of"
+          },
+          {
+            "line": 190,
+            "text": "Sec. 341. Provision of sports foods and third-party certified dietary supple-"
+          },
+          {
+            "line": 193,
+            "text": "Sec. 342. Limitation on use of funds to establish or expand Space Force Spe-"
+          },
+          {
+            "line": 195,
+            "text": "Sec. 343. Requirements for contracts relating to permanent change of station"
+          },
+          {
+            "line": 197,
+            "text": "Sec. 344. Limitation on transformation by the Army of primary helicopter"
+          },
+          {
+            "line": 199,
+            "text": "Sec. 345. Conveyance of certain aircraft from Air Force to Arizona Aviation"
+          },
+          {
+            "line": 201,
+            "text": "Sec. 346. Limitation on use of funds by the Army until submittal of plan to"
+          },
+          {
+            "line": 204,
+            "text": "Sec. 347. Limitation on use of certain funds of the Air Force until acquisition"
+          },
+          {
+            "line": 207,
+            "text": "Sec. 348. Pilot program for contracted amphibious air resources for the area"
+          },
+          {
+            "line": 209,
+            "text": "Sec. 349. Naming of certain assets of the Department of Defense in the Com-"
+          },
+          {
+            "line": 211,
+            "text": "Sec. 350. Modification of protection of certain facilities and assets from incur-"
+          },
+          {
+            "line": 215,
+            "text": "Sec. 401. End strengths for active forces."
+          },
+          {
+            "line": 217,
+            "text": "Sec. 411. End strengths for selected reserve."
+          },
+          {
+            "line": 218,
+            "text": "Sec. 412. End strengths for reserves on active duty in support of the reserves."
+          },
+          {
+            "line": 219,
+            "text": "Sec. 413. End strengths for military technicians (dual status)."
+          },
+          {
+            "line": 220,
+            "text": "Sec. 414. Maximum number of reserve personnel authorized to be on active"
+          },
+          {
+            "line": 223,
+            "text": "Sec. 421. Military personnel."
+          },
+          {
+            "line": 226,
+            "text": "Sec. 501. Statutory adjustment to reflect transfer of certain general officer bil-"
+          },
+          {
+            "line": 228,
+            "text": "Sec. 502. Notice of removal of Judge Advocates General."
+          },
+          {
+            "line": 229,
+            "text": "Sec. 503. Qualifications for judge advocates."
+          },
+          {
+            "line": 230,
+            "text": "Sec. 504. Modification of waiver authority related to joint qualified officer re-"
+          },
+          {
+            "line": 232,
+            "text": "Sec. 505. Notification of removal of officers from selection board reports and"
+          },
+          {
+            "line": 234,
+            "text": "Sec. 506. Space Force general officer management."
+          },
+          {
+            "line": 238,
+            "text": "Sec. 507. Temporary increase in fiscal year percentage limitation for reduction"
+          },
+          {
+            "line": 242,
+            "text": "Sec. 511. Expansion of authority to waive limitations on release of reserves"
+          }
+        ],
+        "subtitles": [
+          {
+            "line": 51,
+            "text": "Subtitle A—Authorization of Appropriations"
+          },
+          {
+            "line": 53,
+            "text": "Subtitle B—Army Programs"
+          },
+          {
+            "line": 55,
+            "text": "Subtitle C—Navy Programs"
+          },
+          {
+            "line": 67,
+            "text": "Subtitle D—Air Force Programs"
+          },
+          {
+            "line": 90,
+            "text": "Subtitle A—Authorization of Appropriations"
+          },
+          {
+            "line": 92,
+            "text": "Subtitle B—Program Requirements, Restrictions, and Limitations"
+          },
+          {
+            "line": 115,
+            "text": "Subtitle C—Plans, Reports, and Other Matters"
+          },
+          {
+            "line": 127,
+            "text": "Subtitle D—Biotechnology"
+          },
+          {
+            "line": 137,
+            "text": "Subtitle A—Authorization of Appropriations"
+          },
+          {
+            "line": 139,
+            "text": "Subtitle B—Energy and Environment"
+          },
+          {
+            "line": 161,
+            "text": "Subtitle C—Logistics and Sustainment"
+          },
+          {
+            "line": 178,
+            "text": "Subtitle D—Reports"
+          },
+          {
+            "line": 189,
+            "text": "Subtitle E—Other Matters"
+          },
+          {
+            "line": 214,
+            "text": "Subtitle A—Active Forces"
+          },
+          {
+            "line": 216,
+            "text": "Subtitle B—Reserve Forces"
+          },
+          {
+            "line": 222,
+            "text": "Subtitle C—Authorization of Appropriations"
+          },
+          {
+            "line": 225,
+            "text": "Subtitle A—Officer Personnel Policy"
+          },
+          {
+            "line": 241,
+            "text": "Subtitle B—Reserve Component Management"
+          },
+          {
+            "line": 251,
+            "text": "Subtitle C—General Service Authorities and Military Records"
+          },
+          {
+            "line": 258,
+            "text": "Subtitle D—Military Justice and Other Legal Matters"
+          },
+          {
+            "line": 261,
+            "text": "Subtitle E—Member Education, Training, and Transition"
+          },
+          {
+            "line": 278,
+            "text": "Subtitle F—Military Family Readiness and Dependents’ Education"
+          },
+          {
+            "line": 303,
+            "text": "Subtitle G—Junior Reserve Officers’ Training Corps"
+          },
+          {
+            "line": 308,
+            "text": "Subtitle H—Decorations and Other Awards, Miscellaneous Reports, and Other"
+          },
+          {
+            "line": 318,
+            "text": "Subtitle A—Pay and Allowances"
+          },
+          {
+            "line": 325,
+            "text": "Subtitle B—Special and Incentive Pay"
+          },
+          {
+            "line": 331,
+            "text": "Subtitle C—Other Matters"
+          },
+          {
+            "line": 352,
+            "text": "Subtitle A—TRICARE, Brain Health, and Other Health Care Benefits"
+          },
+          {
+            "line": 367,
+            "text": "Subtitle B—Health Care Administration"
+          },
+          {
+            "line": 382,
+            "text": "Subtitle C—Reports and Other Matters"
+          }
+        ]
+      },
+      "relevant_sections": [
+        {
+          "line": 93,
+          "text": "Sec. 211. Modifications to defense research capacity building program."
+        },
+        {
+          "line": 94,
+          "text": "Sec. 212. Program for the enhancement of the research, development, test, and"
+        },
+        {
+          "line": 96,
+          "text": "Sec. 213. Extension of authority for assignment to Defense Advanced Research"
+        },
+        {
+          "line": 109,
+          "text": "Sec. 219. Advanced robotic automation for munitions manufacturing."
+        },
+        {
+          "line": 110,
+          "text": "Sec. 220. Dual-use and defense advanced manufacturing innovation hubs."
+        },
+        {
+          "line": 111,
+          "text": "Sec. 220A. Advanced manufacturing and additive manufacturing programs."
+        },
+        {
+          "line": 112,
+          "text": "Sec. 220B. Improvements relating to advanced manufacturing."
+        },
+        {
+          "line": 113,
+          "text": "Sec. 220C. Limitation on availability of funds for fundamental research collabo-"
+        },
+        {
+          "line": 117,
+          "text": "Sec. 222. Extension of period for annual reports on critical technology areas"
+        },
+        {
+          "line": 125,
+          "text": "Sec. 227. Enhance international coordination for advanced manufacturing tech-"
+        },
+        {
+          "line": 128,
+          "text": "Sec. 231. Biotechnology Management Office."
+        },
+        {
+          "line": 129,
+          "text": "Sec. 232. Department of Defense biotechnology strategy."
+        },
+        {
+          "line": 130,
+          "text": "Sec. 233. Defining guidelines and policies on the use of biotechnology for the"
+        },
+        {
+          "line": 144,
+          "text": "Sec. 314. Modification of availability and use of energy cost savings."
+        },
+        {
+          "line": 163,
+          "text": "Sec. 322. Technology enhancement for surface ship maintenance."
+        },
+        {
+          "line": 383,
+          "text": "Sec. 721. Strategic infectious disease medical research plan."
+        },
+        {
+          "line": 496,
+          "text": "Sec. 881. Prohibition on contracting with certain biotechnology providers."
+        },
+        {
+          "line": 511,
+          "text": "Sec. 907. Modification of covered technology categories for Office of Strategic"
+        },
+        {
+          "line": 555,
+          "text": "Sec. 1014. Prohibition on retiring and decommissioning oceanographic research"
+        },
+        {
+          "line": 561,
+          "text": "Sec. 1018. Pilot program on use of automated shipbuilding technologies and ca-"
+        },
+        {
+          "line": 616,
+          "text": "Sec. 1053. Prohibiting Secretary of Defense from developing voting technology"
+        },
+        {
+          "line": 629,
+          "text": "Sec. 1060. Priority consideration of energy projects that are likely to experience"
+        },
+        {
+          "line": 711,
+          "text": "Sec. 1099F. Rule of construction."
+        },
+        {
+          "line": 737,
+          "text": "Sec. 1205. Building capacity of the armed forces of Mexico to counter"
+        },
+        {
+          "line": 769,
+          "text": "Sec. 1222. Extension of annual report on military and security developments"
+        },
+        {
+          "line": 800,
+          "text": "Sec. 1238. Report on critical digital infrastructure of Taiwan."
+        },
+        {
+          "line": 803,
+          "text": "Sec. 1241. Modification to annual report on military and security developments"
+        },
+        {
+          "line": 852,
+          "text": "Sec. 1276. Democratic and economic development and prosperity initiatives."
+        },
+        {
+          "line": 873,
+          "text": "Sec. 1277. Chief Development Officer."
+        },
+        {
+          "line": 876,
+          "text": "Sec. 1280. Development Advisory Finance Council."
+        },
+        {
+          "line": 879,
+          "text": "Sec. 1283. Development finance education."
+        },
+        {
+          "line": 896,
+          "text": "Sec. 1298. Repeal of European Energy Security and Diversification Act of"
+        },
+        {
+          "line": 985,
+          "text": "Sec. 1542. Accelerating development of autonomous agents to defend against"
+        },
+        {
+          "line": 1059,
+          "text": "Sec. 1614. Framework for integration of information technology technical debt"
+        },
+        {
+          "line": 1061,
+          "text": "Sec. 1615. Mission Infrastructure Resilience Task Force."
+        },
+        {
+          "line": 1123,
+          "text": "Sec. 2101. Authorized Army construction and land acquisition projects."
+        },
+        {
+          "line": 1133,
+          "text": "Sec. 2201. Authorized Navy construction and land acquisition projects."
+        },
+        {
+          "line": 1139,
+          "text": "Sec. 2301. Authorized Air Force construction and land acquisition projects."
+        },
+        {
+          "line": 1151,
+          "text": "Sec. 2401. Authorized Defense Agencies construction and land acquisition"
+        },
+        {
+          "line": 1153,
+          "text": "Sec. 2402. Authorized Energy Resilience and Conservation Investment Program"
+        },
+        {
+          "line": 1166,
+          "text": "Sec. 2501. Authorized NATO construction and land acquisition projects."
+        },
+        {
+          "line": 1172,
+          "text": "Sec. 2511. Republic of Korea funded construction projects."
+        },
+        {
+          "line": 1173,
+          "text": "Sec. 2512. Republic of Poland funded construction projects."
+        },
+        {
+          "line": 1175,
+          "text": "Sec. 2601. Authorized Army National Guard construction and land acquisition"
+        },
+        {
+          "line": 1177,
+          "text": "Sec. 2602. Authorized Army Reserve construction and land acquisition projects."
+        },
+        {
+          "line": 1178,
+          "text": "Sec. 2603. Authorized Navy Reserve and Marine Corps Reserve construction"
+        },
+        {
+          "line": 1180,
+          "text": "Sec. 2604. Authorized Air National Guard construction and land acquisition"
+        },
+        {
+          "line": 1182,
+          "text": "Sec. 2605. Authorized Air Force Reserve construction and land acquisition"
+        },
+        {
+          "line": 1213,
+          "text": "Sec. 2809. Prohibition on designation of military construction projects as part"
+        },
+        {
+          "line": 1215,
+          "text": "Sec. 2810. Expansion of Defense Community Infrastructure Program to in-"
+        }
+      ]
+    },
+    "technology_specifications": {
+      "wireless_power": {
+        "device": "Wi-Charge R1/R1HP Transmitter",
+        "power_delivery": "100mW at 10m (R1) or 300mW at 5m (R1HP)",
+        "applications": [
+          "IoT devices",
+          "Security systems",
+          "Digital signage",
+          "Medical devices"
+        ],
+        "connectivity": "Wi-Fi enabled",
+        "safety": "Class 1 laser product, US and international compliance"
+      },
+      "air_quality_monitoring": {
+        "power_requirements": "USB-C or PoE",
+        "connectivity": "Wi-Fi or cellular (2.4GHz/5GHz)",
+        "storage": "12+ hours local storage",
+        "integration": "Building management systems (HVAC control)",
+        "software": "Dashboard, mobile apps, API access, alerts, data export",
+        "standards": "LEED and WELL building standards compliance"
+      }
+    },
+    "policy_technology_alignment": {
+      "alignment_score": 1.5,
+      "matched_categories": [
+        "wireless",
+        "energy",
+        "iot",
+        "air_quality",
+        "building",
+        "standards",
+        "research",
+        "manufacturing",
+        "technology"
+      ],
+      "alignment_strength": "high",
+      "key_connections": []
+    },
+    "opportunity_assessment": {
+      "policy_window": "unknown",
+      "technology_relevance": "high",
+      "stakeholder_implications": "to_be_analyzed",
+      "regulatory_considerations": "to_be_analyzed"
+    },
+    "recommendations": [],
+    "detailed_section_analysis": {
+      "divisions": {
+        "10 (1) Division A—Department of Defense Au-": {
+          "line": 23,
+          "relevance": "medium"
+        },
+        "12 (2) Division B—Military Construction Author-": {
+          "line": 25,
+          "relevance": "high"
+        },
+        "14 (3) Division C—Department of Energy Na-": {
+          "line": 27,
+          "relevance": "high"
+        }
+      },
+      "key_sections": [
+        {
+          "section_text": "Sec. 211. Modifications to defense research capacity building program.",
+          "line": 93,
+          "relevance_score": 1
+        },
+        {
+          "section_text": "Sec. 212. Program for the enhancement of the research, development, test, and",
+          "line": 94,
+          "relevance_score": 1
+        },
+        {
+          "section_text": "Sec. 213. Extension of authority for assignment to Defense Advanced Research",
+          "line": 96,
+          "relevance_score": 1
+        },
+        {
+          "section_text": "Sec. 219. Advanced robotic automation for munitions manufacturing.",
+          "line": 109,
+          "relevance_score": 0
+        },
+        {
+          "section_text": "Sec. 220. Dual-use and defense advanced manufacturing innovation hubs.",
+          "line": 110,
+          "relevance_score": 0
+        },
+        {
+          "section_text": "Sec. 220A. Advanced manufacturing and additive manufacturing programs.",
+          "line": 111,
+          "relevance_score": 0
+        },
+        {
+          "section_text": "Sec. 220B. Improvements relating to advanced manufacturing.",
+          "line": 112,
+          "relevance_score": 0
+        },
+        {
+          "section_text": "Sec. 220C. Limitation on availability of funds for fundamental research collabo-",
+          "line": 113,
+          "relevance_score": 1
+        },
+        {
+          "section_text": "Sec. 222. Extension of period for annual reports on critical technology areas",
+          "line": 117,
+          "relevance_score": 1
+        },
+        {
+          "section_text": "Sec. 227. Enhance international coordination for advanced manufacturing tech-",
+          "line": 125,
+          "relevance_score": 0
+        },
+        {
+          "section_text": "Sec. 231. Biotechnology Management Office.",
+          "line": 128,
+          "relevance_score": 1
+        },
+        {
+          "section_text": "Sec. 232. Department of Defense biotechnology strategy.",
+          "line": 129,
+          "relevance_score": 1
+        },
+        {
+          "section_text": "Sec. 233. Defining guidelines and policies on the use of biotechnology for the",
+          "line": 130,
+          "relevance_score": 1
+        },
+        {
+          "section_text": "Sec. 314. Modification of availability and use of energy cost savings.",
+          "line": 144,
+          "relevance_score": 1
+        },
+        {
+          "section_text": "Sec. 322. Technology enhancement for surface ship maintenance.",
+          "line": 163,
+          "relevance_score": 1
+        },
+        {
+          "section_text": "Sec. 721. Strategic infectious disease medical research plan.",
+          "line": 383,
+          "relevance_score": 1
+        },
+        {
+          "section_text": "Sec. 881. Prohibition on contracting with certain biotechnology providers.",
+          "line": 496,
+          "relevance_score": 1
+        },
+        {
+          "section_text": "Sec. 907. Modification of covered technology categories for Office of Strategic",
+          "line": 511,
+          "relevance_score": 1
+        },
+        {
+          "section_text": "Sec. 1014. Prohibition on retiring and decommissioning oceanographic research",
+          "line": 555,
+          "relevance_score": 1
+        },
+        {
+          "section_text": "Sec. 1018. Pilot program on use of automated shipbuilding technologies and ca-",
+          "line": 561,
+          "relevance_score": 0
+        }
+      ],
+      "funding_analysis": {
+        "total_mentions": 30,
+        "sample_mentions": [
+          {
+            "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+            "match": "$50,000,000 ",
+            "context": "d maintenance for Defense- 16 wide activities as specified in the funding table in 17 section 4301, $50,000,000 shall be available only for 18 the purpose of providing assistance to local edu- 19 cational agencie"
+          },
+          {
+            "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+            "match": "$10,000,000 ",
+            "context": "nd mainte- 8 nance for Defense-wide activities as specified in the 9 funding table in section 4301, $10,000,000 shall be 10 available for payments under section 363 of the 11 Floyd D. Spence National Defense Auth"
+          },
+          {
+            "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+            "match": "$20,000,000\n",
+            "context": "nd 18 maintenance for Defense-wide activities as specified 19 in the funding table in section 4301, $20,000,000 20 shall be available for use by the Secretary of Defense 21 to make payments to local educational a"
+          },
+          {
+            "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+            "match": "$10,000 ",
+            "context": "r of the Armed Forces 6 under the jurisdiction of the Secretary a one-time bonus 7 of not more than $10,000 if the member or former mem- 8 ber— 9 (1) agrees to be an instructor for the Junior 10 Reserve Offic"
+          },
+          {
+            "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+            "match": "$2,000,000",
+            "context": "appears and inserting ‘‘June 30, 2026’’; †S 2296 ES  417 1 (B) in subparagraph (A), by striking 2 ‘‘$2,000,000’’ and inserting ‘‘$10,000,000’’; 3 and 4 (C) in subparagraph (B), by striking 5 ‘‘$750,000’’ and in"
+          }
+        ]
+      },
+      "technology_opportunities": [
+        {
+          "provision": "Subtitle D—Biotechnology",
+          "context": "Sec. 225. Congressionally directed programs for test and evaluation oversight.\nSec. 226. Prohibition on modification of indirect cost rates for institutions of\nhigher education and nonprofit organizations.\nSec. 227. Enhance international coordination for advanced manufacturing tech-\nniques, technolo",
+          "line": 127
+        },
+        {
+          "provision": "Sec. 231. Biotechnology Management Office.",
+          "context": "Sec. 226. Prohibition on modification of indirect cost rates for institutions of\nhigher education and nonprofit organizations.\nSec. 227. Enhance international coordination for advanced manufacturing tech-\nniques, technologies, and adoption.\nSubtitle D—Biotechnology\nSec. 231. Biotechnology Management",
+          "line": 128
+        },
+        {
+          "provision": "Sec. 232. Department of Defense biotechnology strategy.",
+          "context": "higher education and nonprofit organizations.\nSec. 227. Enhance international coordination for advanced manufacturing tech-\nniques, technologies, and adoption.\nSubtitle D—Biotechnology\nSec. 231. Biotechnology Management Office.\nSec. 232. Department of Defense biotechnology strategy.\nSec. 233. Defini",
+          "line": 129
+        },
+        {
+          "provision": "Sec. 233. Defining guidelines and policies on the use of biotechnology for the",
+          "context": "Sec. 227. Enhance international coordination for advanced manufacturing tech-\nniques, technologies, and adoption.\nSubtitle D—Biotechnology\nSec. 231. Biotechnology Management Office.\nSec. 232. Department of Defense biotechnology strategy.\nSec. 233. Defining guidelines and policies on the use of biote",
+          "line": 130
+        },
+        {
+          "provision": "Sec. 881. Prohibition on contracting with certain biotechnology providers.",
+          "context": "†S 2296 ES\n\n12\nSec. 880. Prohibition on operation, procurement, and contracting related to for-\neign-made additive manufacturing machines.\nSec. 881. Prohibition on contracting with certain biotechnology providers.\nSec. 882. SkyFoundry Program.\nTITLE IX—DEPARTMENT OF DEFENSE ORGANIZATION AND\nMANAGEME",
+          "line": 496
+        },
+        {
+          "provision": "Sec. 1037. Prohibition on operation of connected vehicles designed, developed,",
+          "context": "persons: authority to provide protection.\nSec. 1035. Notification of the use of military aircraft for immigration enforce-\nment operations.\nSec. 1036. Modification of requirements relating to support of civil authorities\nby Armed Forces.\nSec. 1037. Prohibition on operation of connected vehicles desi",
+          "line": 590
+        },
+        {
+          "provision": "Sec. 502. Enhanced intelligence sharing relating to foreign adversary biotechno-",
+          "context": "†S 2296 ES\n\n33\nSec. 501. Declassification of information relating to actions by foreign govern-\nments to assist persons evading justice.\nSec. 502. Enhanced intelligence sharing relating to foreign adversary biotechno-\nlogical threats.\nSec. 503. Threat assessment regarding unmanned aircraft systems a",
+          "line": 1550
+        },
+        {
+          "provision": "tary companies engaged in biotechnology research, develop-",
+          "context": "Sec. 504. Assessment of the potential effect of expanded partnerships among\nwestern hemisphere countries.\nSubtitle B—People’s Republic of China\nSec. 511. Countering Chinese Communist Party efforts that threaten Europe.\nSec. 512. Prohibition on intelligence community contracting with Chinese mili-\nta",
+          "line": 1559
+        },
+        {
+          "provision": "Sec. 602. Enhancing biotechnology talent within the intelligence community.",
+          "context": "of uranium-235.\nSec. 535. Duty to warn United States persons threatened by Iranian lethal\nplotting.\nTITLE VI—EMERGING TECHNOLOGIES\nSec. 601. Intelligence Community Technology Bridge Program.\nSec. 602. Enhancing biotechnology talent within the intelligence community.\nSec. 603. Enhanced intelligence c",
+          "line": 1585
+        },
+        {
+          "provision": "States-origin biotechnology.",
+          "context": "Sec. 604. Ensuring intelligence community procurement of domestic United\nStates production of synthetic DNA and RNA.\nSec. 605. Report on identification of intelligence community sites for advanced\nnuclear technologies.\nSec. 606. Addressing intelligence gaps relating to China’s investment in United\nS",
+          "line": 1593
+        },
+        {
+          "provision": "9 towed-array sensor system ship program unless the Sec-",
+          "context": "4 be appropriated by this Act or otherwise made available\n5 for fiscal year 2026 for the Navy may be obligated or ex-\n6 pended for the scope of work, including priced or unpriced\n7 options, for the construction, advance procurement, or\n8 long-lead material of any ships in the TAGOS surveillance\n9 to",
+          "line": 2382
+        },
+        {
+          "provision": "21 sensor system ships and how compliance with section",
+          "context": "16 mit to the Committee on Armed Service of the Senate and\n17 the Committee on Armed Services of the House of Rep-\n18 resentatives a report on the following:\n19 (1) Progress made on basic and functional de-\n20 sign completion for TAGOS surveillance towed-array\n21 sensor system ships and how complian",
+          "line": 2394
+        },
+        {
+          "provision": "20 veillance, and reconnaissance platforms, sensors, and",
+          "context": "15 jected intelligence, surveillance, and reconnaissance\n16 requirements for the Air Force across all domains,\n17 including air, space, and cyberspace.\n18 (2) An inventory of current (as of the date on\n19 which the roadmap is submitted) intelligence, sur-\n20 veillance, and reconnaissance platforms, ",
+          "line": 2713
+        },
+        {
+          "provision": "14 leveraging machine sensors and software",
+          "context": "9 porate the process window qualification method-\n10 ology, which is designed to be machine-agnostic,\n11 or independent of specific machine brands or\n12 software providers, as well as the following:\n13 (I) Real-time process monitoring\n14 leveraging machine sensors and software\n15 analytics to detect",
+          "line": 4157
+        },
+        {
+          "provision": "Subtitle D—Biotechnology",
+          "context": "13 standards for advanced manufacturing techniques, tech-\n14 nologies, and adoption. The countries involved should be\n15 those with which the United States has reciprocal defense\n16 procurement agreements or security of supply arrange-\n17 ments.\nSubtitle D—Biotechnology\n18\n19\nSEC. 231. BIOTECHNOLOGY",
+          "line": 4619
+        }
+      ]
+    }
+  },
+  "section_analysis": {
+    "divisions": {
+      "10 (1) Division A—Department of Defense Au-": {
+        "line": 23,
+        "relevance": "medium"
+      },
+      "12 (2) Division B—Military Construction Author-": {
+        "line": 25,
+        "relevance": "high"
+      },
+      "14 (3) Division C—Department of Energy Na-": {
+        "line": 27,
+        "relevance": "high"
+      }
+    },
+    "key_sections": [
+      {
+        "section_text": "Sec. 211. Modifications to defense research capacity building program.",
+        "line": 93,
+        "relevance_score": 1
+      },
+      {
+        "section_text": "Sec. 212. Program for the enhancement of the research, development, test, and",
+        "line": 94,
+        "relevance_score": 1
+      },
+      {
+        "section_text": "Sec. 213. Extension of authority for assignment to Defense Advanced Research",
+        "line": 96,
+        "relevance_score": 1
+      },
+      {
+        "section_text": "Sec. 219. Advanced robotic automation for munitions manufacturing.",
+        "line": 109,
+        "relevance_score": 0
+      },
+      {
+        "section_text": "Sec. 220. Dual-use and defense advanced manufacturing innovation hubs.",
+        "line": 110,
+        "relevance_score": 0
+      },
+      {
+        "section_text": "Sec. 220A. Advanced manufacturing and additive manufacturing programs.",
+        "line": 111,
+        "relevance_score": 0
+      },
+      {
+        "section_text": "Sec. 220B. Improvements relating to advanced manufacturing.",
+        "line": 112,
+        "relevance_score": 0
+      },
+      {
+        "section_text": "Sec. 220C. Limitation on availability of funds for fundamental research collabo-",
+        "line": 113,
+        "relevance_score": 1
+      },
+      {
+        "section_text": "Sec. 222. Extension of period for annual reports on critical technology areas",
+        "line": 117,
+        "relevance_score": 1
+      },
+      {
+        "section_text": "Sec. 227. Enhance international coordination for advanced manufacturing tech-",
+        "line": 125,
+        "relevance_score": 0
+      },
+      {
+        "section_text": "Sec. 231. Biotechnology Management Office.",
+        "line": 128,
+        "relevance_score": 1
+      },
+      {
+        "section_text": "Sec. 232. Department of Defense biotechnology strategy.",
+        "line": 129,
+        "relevance_score": 1
+      },
+      {
+        "section_text": "Sec. 233. Defining guidelines and policies on the use of biotechnology for the",
+        "line": 130,
+        "relevance_score": 1
+      },
+      {
+        "section_text": "Sec. 314. Modification of availability and use of energy cost savings.",
+        "line": 144,
+        "relevance_score": 1
+      },
+      {
+        "section_text": "Sec. 322. Technology enhancement for surface ship maintenance.",
+        "line": 163,
+        "relevance_score": 1
+      },
+      {
+        "section_text": "Sec. 721. Strategic infectious disease medical research plan.",
+        "line": 383,
+        "relevance_score": 1
+      },
+      {
+        "section_text": "Sec. 881. Prohibition on contracting with certain biotechnology providers.",
+        "line": 496,
+        "relevance_score": 1
+      },
+      {
+        "section_text": "Sec. 907. Modification of covered technology categories for Office of Strategic",
+        "line": 511,
+        "relevance_score": 1
+      },
+      {
+        "section_text": "Sec. 1014. Prohibition on retiring and decommissioning oceanographic research",
+        "line": 555,
+        "relevance_score": 1
+      },
+      {
+        "section_text": "Sec. 1018. Pilot program on use of automated shipbuilding technologies and ca-",
+        "line": 561,
+        "relevance_score": 0
+      }
+    ],
+    "funding_analysis": {
+      "total_mentions": 30,
+      "sample_mentions": [
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$50,000,000 ",
+          "context": "d maintenance for Defense- 16 wide activities as specified in the funding table in 17 section 4301, $50,000,000 shall be available only for 18 the purpose of providing assistance to local edu- 19 cational agencie"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$10,000,000 ",
+          "context": "nd mainte- 8 nance for Defense-wide activities as specified in the 9 funding table in section 4301, $10,000,000 shall be 10 available for payments under section 363 of the 11 Floyd D. Spence National Defense Auth"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$20,000,000\n",
+          "context": "nd 18 maintenance for Defense-wide activities as specified 19 in the funding table in section 4301, $20,000,000 20 shall be available for use by the Secretary of Defense 21 to make payments to local educational a"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$10,000 ",
+          "context": "r of the Armed Forces 6 under the jurisdiction of the Secretary a one-time bonus 7 of not more than $10,000 if the member or former mem- 8 ber— 9 (1) agrees to be an instructor for the Junior 10 Reserve Offic"
+        },
+        {
+          "pattern": "\\$[\\d,]+(?:\\.\\d+)?\\s*(?:million|billion|thousand)?",
+          "match": "$2,000,000",
+          "context": "appears and inserting ‘‘June 30, 2026’’; †S 2296 ES  417 1 (B) in subparagraph (A), by striking 2 ‘‘$2,000,000’’ and inserting ‘‘$10,000,000’’; 3 and 4 (C) in subparagraph (B), by striking 5 ‘‘$750,000’’ and in"
+        }
+      ]
+    },
+    "technology_opportunities": [
+      {
+        "provision": "Subtitle D—Biotechnology",
+        "context": "Sec. 225. Congressionally directed programs for test and evaluation oversight.\nSec. 226. Prohibition on modification of indirect cost rates for institutions of\nhigher education and nonprofit organizations.\nSec. 227. Enhance international coordination for advanced manufacturing tech-\nniques, technolo",
+        "line": 127
+      },
+      {
+        "provision": "Sec. 231. Biotechnology Management Office.",
+        "context": "Sec. 226. Prohibition on modification of indirect cost rates for institutions of\nhigher education and nonprofit organizations.\nSec. 227. Enhance international coordination for advanced manufacturing tech-\nniques, technologies, and adoption.\nSubtitle D—Biotechnology\nSec. 231. Biotechnology Management",
+        "line": 128
+      },
+      {
+        "provision": "Sec. 232. Department of Defense biotechnology strategy.",
+        "context": "higher education and nonprofit organizations.\nSec. 227. Enhance international coordination for advanced manufacturing tech-\nniques, technologies, and adoption.\nSubtitle D—Biotechnology\nSec. 231. Biotechnology Management Office.\nSec. 232. Department of Defense biotechnology strategy.\nSec. 233. Defini",
+        "line": 129
+      },
+      {
+        "provision": "Sec. 233. Defining guidelines and policies on the use of biotechnology for the",
+        "context": "Sec. 227. Enhance international coordination for advanced manufacturing tech-\nniques, technologies, and adoption.\nSubtitle D—Biotechnology\nSec. 231. Biotechnology Management Office.\nSec. 232. Department of Defense biotechnology strategy.\nSec. 233. Defining guidelines and policies on the use of biote",
+        "line": 130
+      },
+      {
+        "provision": "Sec. 881. Prohibition on contracting with certain biotechnology providers.",
+        "context": "†S 2296 ES\n\n12\nSec. 880. Prohibition on operation, procurement, and contracting related to for-\neign-made additive manufacturing machines.\nSec. 881. Prohibition on contracting with certain biotechnology providers.\nSec. 882. SkyFoundry Program.\nTITLE IX—DEPARTMENT OF DEFENSE ORGANIZATION AND\nMANAGEME",
+        "line": 496
+      },
+      {
+        "provision": "Sec. 1037. Prohibition on operation of connected vehicles designed, developed,",
+        "context": "persons: authority to provide protection.\nSec. 1035. Notification of the use of military aircraft for immigration enforce-\nment operations.\nSec. 1036. Modification of requirements relating to support of civil authorities\nby Armed Forces.\nSec. 1037. Prohibition on operation of connected vehicles desi",
+        "line": 590
+      },
+      {
+        "provision": "Sec. 502. Enhanced intelligence sharing relating to foreign adversary biotechno-",
+        "context": "†S 2296 ES\n\n33\nSec. 501. Declassification of information relating to actions by foreign govern-\nments to assist persons evading justice.\nSec. 502. Enhanced intelligence sharing relating to foreign adversary biotechno-\nlogical threats.\nSec. 503. Threat assessment regarding unmanned aircraft systems a",
+        "line": 1550
+      },
+      {
+        "provision": "tary companies engaged in biotechnology research, develop-",
+        "context": "Sec. 504. Assessment of the potential effect of expanded partnerships among\nwestern hemisphere countries.\nSubtitle B—People’s Republic of China\nSec. 511. Countering Chinese Communist Party efforts that threaten Europe.\nSec. 512. Prohibition on intelligence community contracting with Chinese mili-\nta",
+        "line": 1559
+      },
+      {
+        "provision": "Sec. 602. Enhancing biotechnology talent within the intelligence community.",
+        "context": "of uranium-235.\nSec. 535. Duty to warn United States persons threatened by Iranian lethal\nplotting.\nTITLE VI—EMERGING TECHNOLOGIES\nSec. 601. Intelligence Community Technology Bridge Program.\nSec. 602. Enhancing biotechnology talent within the intelligence community.\nSec. 603. Enhanced intelligence c",
+        "line": 1585
+      },
+      {
+        "provision": "States-origin biotechnology.",
+        "context": "Sec. 604. Ensuring intelligence community procurement of domestic United\nStates production of synthetic DNA and RNA.\nSec. 605. Report on identification of intelligence community sites for advanced\nnuclear technologies.\nSec. 606. Addressing intelligence gaps relating to China’s investment in United\nS",
+        "line": 1593
+      },
+      {
+        "provision": "9 towed-array sensor system ship program unless the Sec-",
+        "context": "4 be appropriated by this Act or otherwise made available\n5 for fiscal year 2026 for the Navy may be obligated or ex-\n6 pended for the scope of work, including priced or unpriced\n7 options, for the construction, advance procurement, or\n8 long-lead material of any ships in the TAGOS surveillance\n9 to",
+        "line": 2382
+      },
+      {
+        "provision": "21 sensor system ships and how compliance with section",
+        "context": "16 mit to the Committee on Armed Service of the Senate and\n17 the Committee on Armed Services of the House of Rep-\n18 resentatives a report on the following:\n19 (1) Progress made on basic and functional de-\n20 sign completion for TAGOS surveillance towed-array\n21 sensor system ships and how complian",
+        "line": 2394
+      },
+      {
+        "provision": "20 veillance, and reconnaissance platforms, sensors, and",
+        "context": "15 jected intelligence, surveillance, and reconnaissance\n16 requirements for the Air Force across all domains,\n17 including air, space, and cyberspace.\n18 (2) An inventory of current (as of the date on\n19 which the roadmap is submitted) intelligence, sur-\n20 veillance, and reconnaissance platforms, ",
+        "line": 2713
+      },
+      {
+        "provision": "14 leveraging machine sensors and software",
+        "context": "9 porate the process window qualification method-\n10 ology, which is designed to be machine-agnostic,\n11 or independent of specific machine brands or\n12 software providers, as well as the following:\n13 (I) Real-time process monitoring\n14 leveraging machine sensors and software\n15 analytics to detect",
+        "line": 4157
+      },
+      {
+        "provision": "Subtitle D—Biotechnology",
+        "context": "13 standards for advanced manufacturing techniques, tech-\n14 nologies, and adoption. The countries involved should be\n15 those with which the United States has reciprocal defense\n16 procurement agreements or security of supply arrange-\n17 ments.\nSubtitle D—Biotechnology\n18\n19\nSEC. 231. BIOTECHNOLOGY",
+        "line": 4619
+      }
+    ]
+  },
+  "extraction_metadata": {
+    "method": "pdfplumber",
+    "page_count": 3100,
+    "total_chars": 3816332
+  }
+}

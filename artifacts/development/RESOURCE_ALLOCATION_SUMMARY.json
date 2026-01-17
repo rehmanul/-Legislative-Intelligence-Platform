@@ -1,0 +1,173 @@
+{
+  "_meta": {
+    "artifact_type": "DEVELOPMENT_RESOURCE_ALLOCATION_SUMMARY",
+    "artifact_name": "Resource Allocation Development Summary",
+    "generated_at": "2026-01-20T13:30:00.000000Z",
+    "generated_by": "forward_development_scaffolding_agent",
+    "purpose": "Summary of development resource allocation tools and configuration",
+    "read_only": true,
+    "authoritative": false,
+    "status": "COMPLETE"
+  },
+  "development_tools_created": {
+    "documentation": [
+      {
+        "file": "docs/AGENT_RESOURCE_ALLOCATION_GUIDE.md",
+        "purpose": "Complete guide for allocating agent resources to development",
+        "status": "CREATED"
+      },
+      {
+        "file": "docs/DEVELOPMENT_QUICK_START.md",
+        "purpose": "Quick reference for development resource allocation",
+        "status": "CREATED"
+      },
+      {
+        "file": "scripts/README_DEV_TOOLS.md",
+        "purpose": "README for all development tools",
+        "status": "CREATED"
+      }
+    ],
+    "scripts": [
+      {
+        "file": "scripts/dev__spawn_intelligence_agents.py",
+        "purpose": "Spawn Intelligence agents for development work",
+        "status": "CREATED",
+        "executable": true
+      },
+      {
+        "file": "scripts/dev__configure_resource_allocation.py",
+        "purpose": "Configure development resource allocation settings",
+        "status": "CREATED",
+        "executable": true,
+        "output": "config/development_config.json"
+      },
+      {
+        "file": "scripts/dev__monitor_resource_usage.py",
+        "purpose": "Monitor current agent resource usage and allocation",
+        "status": "CREATED",
+        "executable": true
+      },
+      {
+        "file": "scripts/dev__workflow.py",
+        "purpose": "Integrated development workflow (all-in-one)",
+        "status": "CREATED",
+        "executable": true
+      },
+      {
+        "file": "scripts/dev__batch_execute.py",
+        "purpose": "Execute multiple development agents in batch",
+        "status": "CREATED",
+        "executable": true
+      },
+      {
+        "file": "scripts/dev__status_dashboard.py",
+        "purpose": "Comprehensive development status dashboard",
+        "status": "CREATED",
+        "executable": true
+      }
+    ],
+    "configuration": [
+      {
+        "file": "config/development_config.json",
+        "purpose": "Development-specific resource allocation configuration",
+        "status": "CREATED"
+      }
+    ]
+  },
+  "resource_allocation_methods": {
+    "method_1_concurrent_limits": {
+      "description": "Configure MAX_CONCURRENT_AGENTS environment variable",
+      "implementation": "Set MAX_CONCURRENT_AGENTS=4 in environment or config.py",
+      "use_case": "Reserve CPU/memory resources for development"
+    },
+    "method_2_type_filtering": {
+      "description": "Filter agents by type (Intelligence only for development)",
+      "implementation": "spawner.spawn_agents_for_state(agent_types=['Intelligence'])",
+      "use_case": "Run only read-only, safe agents for development"
+    },
+    "method_3_priority_queue": {
+      "description": "Assign higher priority to development agents",
+      "implementation": "executor.enqueue_agent(priority=10, metadata={'development': True})",
+      "use_case": "Ensure development agents execute before production"
+    },
+    "method_4_selective_spawning": {
+      "description": "Spawn specific agents by ID for development",
+      "implementation": "spawner.spawn_agent(agent_id='intel_...', metadata={'development': True})",
+      "use_case": "Test specific agents without spawning full suite"
+    },
+    "method_5_resource_pooling": {
+      "description": "Create separate development executor with dedicated resources",
+      "implementation": "AgentExecutor(max_workers=4, workflow_id='dev-workflow')",
+      "use_case": "Complete separation of development and production"
+    },
+    "method_6_agent_limiting": {
+      "description": "Limit number of agents spawned per state",
+      "implementation": "spawner.spawn_agents_for_state(max_agents=2)",
+      "use_case": "Test with subset of agents before full deployment"
+    }
+  },
+  "current_system_state": {
+    "legislative_state": "INTRO_EVT",
+    "total_agents": 12,
+    "active_agents": 2,
+    "resource_utilization_percent": 16.67,
+    "status_breakdown": {
+      "RUNNING": 1,
+      "IDLE": 1,
+      "BLOCKED": 1,
+      "WAITING_REVIEW": 1,
+      "RETIRED": 8
+    },
+    "type_breakdown": {
+      "Intelligence": 8,
+      "Drafting": 3,
+      "Execution": 1
+    },
+    "development_agents": 0,
+    "production_agents": 12,
+    "resource_availability": "LOW_USAGE - can spawn development agents"
+  },
+  "recommended_actions": [
+    {
+      "action": "Set environment variables for resource limits",
+      "command": "export MAX_CONCURRENT_AGENTS=4",
+      "priority": "HIGH"
+    },
+    {
+      "action": "Monitor current resource usage",
+      "command": "python scripts/dev__monitor_resource_usage.py",
+      "priority": "HIGH"
+    },
+    {
+      "action": "Spawn Intelligence agents for development",
+      "command": "python scripts/dev__spawn_intelligence_agents.py",
+      "priority": "MEDIUM"
+    },
+    {
+      "action": "Configure development resource allocation",
+      "command": "python scripts/dev__configure_resource_allocation.py",
+      "priority": "MEDIUM"
+    }
+  ],
+  "safety_features": {
+    "intelligence_agents_only": "Development scripts spawn only Intelligence agents (read-only)",
+    "limited_concurrency": "Resource limits prevent exhaustion",
+    "high_priority": "Development agents get priority=10 (highest)",
+    "metadata_tagging": "All development agents tagged with development_mode=True",
+    "no_state_changes": "Development agents don't advance workflow state",
+    "governance_compliant": "All development tools respect review gates and blocking rules"
+  },
+  "next_steps": {
+    "immediate": [
+      "Run dev__monitor_resource_usage.py to check current state",
+      "Set MAX_CONCURRENT_AGENTS=4 environment variable",
+      "Use dev__spawn_intelligence_agents.py to spawn development agents"
+    ],
+    "planning": [
+      "Review AGENT_RESOURCE_ALLOCATION_GUIDE.md for detailed methods",
+      "Configure resource pools if complete separation needed",
+      "Set up monitoring for resource utilization tracking"
+    ]
+  },
+  "disclaimer": "These tools are for development resource allocation only. They do not modify system state, advance workflows, or authorize execution actions."
+}

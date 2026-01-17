@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Orchestrator - Complete Dashboard Index</title>
+    <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-family-sans), Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+            background: var(--color-bg-secondary);
+            padding: var(--spacing-xl);
+        }
+        
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e40af 0%, var(--color-primary) 100%);
+            color: var(--color-bg-primary);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 36px;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        header .subtitle {
+            font-size: var(--font-size-lg);
+            opacity: 0.95;
+        }
+        
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+            text-align: center;
+        }
+        
+        .stat-card .number {
+            font-size: 32px;
+            font-weight: var(--font-weight-bold);
+            color: #1e40af;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card .label {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .category-section {
+            margin-bottom: 40px;
+        }
+        
+        .category-header {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-xl);
+            border-left: 5px solid #1e40af;
+            box-shadow: var(--shadow-2);
+        }
+        
+        .category-header h2 {
+            font-size: var(--font-size-2xl);
+            color: #1e40af;
+            margin-bottom: 5px;
+        }
+        
+        .category-header p {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--spacing-xl);
+        }
+        
+        .dashboard-card {
+            background: var(--color-bg-primary);
+            padding: 25px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-3);
+        }
+        
+        .dashboard-card .status-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: var(--spacing-xs) 10px;
+            border-radius: var(--radius-xl);
+            font-size: 11px;
+            font-weight: var(--font-weight-semibold);
+            text-transform: uppercase;
+        }
+        
+        .status-badge.existing {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-badge.missing {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-badge.json-only {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .dashboard-card h3 {
+            font-size: var(--font-size-xl);
+            color: #1e40af;
+            margin-bottom: var(--spacing-md);
+            padding-right: 80px;
+        }
+        
+        .dashboard-card .description {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.5;
+        }
+        
+        .dashboard-card .file-info {
+            font-size: var(--font-size-xs);
+            color: #999;
+            margin-bottom: var(--spacing-lg);
+            font-family: var(--font-family-mono);
+        }
+        
+        .dashboard-card .features {
+            list-style: none;
+            margin-bottom: var(--spacing-xl);
+            font-size: 13px;
+        }
+        
+        .dashboard-card .features li {
+            padding: 5px 0;
+            color: var(--color-text-secondary);
+        }
+        
+        .dashboard-card .features li:before {
+            content: "✓ ";
+            color: var(--color-success);
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .dashboard-card .btn {
+            display: inline-block;
+            padding: var(--spacing-md) 20px;
+            background: var(--color-primary);
+            color: var(--color-bg-primary);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            transition: background var(--transition-base) var(--transition-ease);
+            width: 100%;
+            text-align: center;
+            margin-top: var(--spacing-md);
+        }
+        
+        .dashboard-card .btn:hover {
+            background: var(--color-primary-hover);
+        }
+        
+        .dashboard-card .btn.missing {
+            background: var(--color-gray-500);
+            cursor: not-allowed;
+        }
+        
+        .dashboard-card .btn.missing:hover {
+            background: var(--color-gray-600);
+        }
+        
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--color-primary);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-sm);
+            margin-bottom: 30px;
+        }
+        
+        .info-box h3 {
+            margin-bottom: var(--spacing-md);
+            color: var(--color-primary);
+        }
+        
+        .legend {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-2);
+        }
+        
+        .legend h3 {
+            margin-bottom: var(--spacing-lg);
+            color: var(--color-text-primary);
+        }
+        
+        .legend-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xl);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .legend-badge {
+            padding: var(--spacing-xs) 10px;
+            border-radius: var(--radius-xl);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #999;
+            font-size: 13px;
+            margin-top: 50px;
+        }
+        
+        .search-box {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-2);
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-base);
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+    </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+    
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="container">
+        <header>
+            <h1>📊 Agent Orchestrator Dashboard Index</h1>
+            <p class="subtitle">Complete catalog of all dashboards, viewers, and interfaces</p>
+        </header>
+        
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="number" id="totalDashboards">24</div>
+                <div class="label">Total Dashboards</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="existingDashboards">22</div>
+                <div class="label">Existing (HTML)</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="missingDashboards">2</div>
+                <div class="label">Missing Dashboards</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="jsonOnly">2</div>
+                <div class="label">JSON (No Viewer)</div>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <h3>Legend</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <span class="legend-badge existing">Existing</span>
+                    <span>HTML dashboard exists and is functional</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-badge json-only">JSON Only</span>
+                    <span>JSON data exists but no HTML viewer</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-badge missing">Missing</span>
+                    <span>Dashboard not yet created (needed)</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Search dashboards by name, category, or description...">
+        </div>
+        
+        <!-- REVIEW & APPROVAL DASHBOARDS -->
+        <div class="category-section" data-category="review">
+            <div class="category-header">
+                <h2>📋 Review & Approval Dashboards</h2>
+                <p>Dashboards for reviewing artifacts, approval queues, and human review workflows</p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Unified Review Viewer</h3>
+                    <div class="file-info">unified_review_viewer.html</div>
+                    <p class="description">Single interface for reviewing JSON artifacts, markdown files, and Mermaid diagrams in one place.</p>
+                    <ul class="features">
+                        <li>Review JSON artifacts with approve/reject buttons</li>
+                        <li>Interactive markdown checkboxes for TODOs</li>
+                        <li>Mermaid diagram rendering</li>
+                        <li>Tabbed interface for easy switching</li>
+                    </ul>
+                    <a href="unified_review_viewer.html" class="btn">Open Dashboard →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Cockpit Review Interface</h3>
+                    <div class="file-info">cockpit_review.html</div>
+                    <p class="description">Specialized viewer for JSON artifact review queues with human-in-the-loop approval workflow.</p>
+                    <ul class="features">
+                        <li>Load review queue files (HR_PRE, HR_LANG, HR_MSG, HR_RELEASE)</li>
+                        <li>Approve/Reject with rationale</li>
+                        <li>High-risk artifact warnings</li>
+                        <li>Export approval manifest</li>
+                    </ul>
+                    <a href="cockpit_review.html" class="btn">Open Dashboard →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Cockpit Batch Review</h3>
+                    <div class="file-info">cockpit_batch_review.html</div>
+                    <p class="description">Batch review interface for processing multiple artifacts simultaneously.</p>
+                    <ul class="features">
+                        <li>Select multiple artifacts for review</li>
+                        <li>Bulk approve/reject actions</li>
+                        <li>Batch status tracking</li>
+                    </ul>
+                    <a href="cockpit_batch_review.html" class="btn">Open Dashboard →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Artifact Review Dashboard</h3>
+                    <div class="file-info">artifact_review_dashboard.html</div>
+                    <p class="description">Local-first artifact review interface with file loading capabilities.</p>
+                    <ul class="features">
+                        <li>Load JSON artifacts from file system</li>
+                        <li>Review artifact metadata</li>
+                        <li>Approve/reject workflow</li>
+                    </ul>
+                    <a href="artifact_review_dashboard.html" class="btn">Open Dashboard →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Markdown Review Viewer</h3>
+                    <div class="file-info">markdown_review_viewer.html</div>
+                    <p class="description">Dedicated viewer for markdown files with interactive TODO checkboxes that auto-save.</p>
+                    <ul class="features">
+                        <li>Interactive checkboxes for `- [ ]` TODOs</li>
+                        <li>Auto-save checkbox state</li>
+                        <li>TODO statistics (total, completed, remaining)</li>
+                        <li>Action Required / Draft status detection</li>
+                    </ul>
+                    <a href="markdown_review_viewer.html" class="btn">Open Dashboard →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- WORKFLOW DASHBOARDS -->
+        <div class="category-section" data-category="workflow">
+            <div class="category-header">
+                <h2>🔄 Workflow Execution Dashboards</h2>
+                <p>Dashboards for tracking workflow execution, state progression, and agent orchestration</p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Workflow Cockpit</h3>
+                    <div class="file-info">workflow_cockpit.html</div>
+                    <p class="description">Comprehensive workflow execution viewer showing agent contract system state and execution flow.</p>
+                    <ul class="features">
+                        <li>Workflow state visualization</li>
+                        <li>Agent execution tracking</li>
+                        <li>Mode transitions (ASK, PLAN, AGENT)</li>
+                        <li>Context and data status</li>
+                    </ul>
+                    <a href="workflow_cockpit.html" class="btn">Open Dashboard →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Y-Charge Workflow Dashboard</h3>
+                    <div class="file-info">y_charge_workflow_dashboard.html</div>
+                    <p class="description">Specialized dashboard for Y-Charge legislative workflow tracking through all 6 states.</p>
+                    <ul class="features">
+                        <li>6-state progression visualization (PRE_EVT → IMPL_EVT)</li>
+                        <li>Pipeline stage tracking</li>
+                        <li>State-specific artifacts</li>
+                        <li>Workflow status monitoring</li>
+                    </ul>
+                    <a href="y_charge_workflow_dashboard.html" class="btn">Open Dashboard →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Workflow Execution Dashboard</h3>
+                    <div class="file-info">workflow_execution_dashboard.html</div>
+                    <p class="description">Visualization for test_workflow_execution.py output showing end-to-end workflow execution results with interactive timeline.</p>
+                    <ul class="features">
+                        <li>Workflow execution summary</li>
+                        <li>Interactive execution timeline with visual markers</li>
+                        <li>Success/failure tracking</li>
+                        <li>Agent execution status visualization</li>
+                        <li>Step-by-step progression tracking</li>
+                    </ul>
+                    <a href="workflow_execution_dashboard.html" class="btn">Open Dashboard →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- LOBBYING SYSTEM DASHBOARDS -->
+        <div class="category-section" data-category="lobbying">
+            <div class="category-header">
+                <h2>🏛️ Lobbying System Dashboards</h2>
+                <p>Dashboards for lobbying artifacts, coalition building services, AVOQ workflows, and legislative tracking</p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Lobbying System Dashboard</h3>
+                    <div class="file-info">lobbying_dashboard.html</div>
+                    <p class="description">Comprehensive dashboard for viewing lobbying artifacts, services, coalition building, and workflow executions.</p>
+                    <ul class="features">
+                        <li>View lobbying artifacts and metadata</li>
+                        <li>Browse coalition building services (A4, AVOQ)</li>
+                        <li>Track workflow executions (Legislative, Grassroots, AVOQ, Client Services)</li>
+                        <li>Service registry with stage and category information</li>
+                        <li>File-based loading from lobbying system data directories</li>
+                    </ul>
+                    <a href="lobbying_dashboard.html" class="btn">Open Dashboard →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- METRICS & ANALYTICS DASHBOARDS -->
+        <div class="category-section" data-category="metrics">
+            <div class="category-header">
+                <h2>📈 Metrics & Analytics Dashboards</h2>
+                <p>Dashboards for velocity metrics, KPIs, heat maps, and performance analytics</p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Velocity Metrics Dashboard</h3>
+                    <div class="file-info">velocity_metrics_dashboard.html</div>
+                    <p class="description">Visual dashboard for velocity__calculate__metrics.py output showing system velocity, bottlenecks, and time metrics.</p>
+                    <ul class="features">
+                        <li>Time in state visualization with progress bars</li>
+                        <li>Review cycle health (HR_PRE, HR_LANG, HR_MSG, HR_RELEASE)</li>
+                        <li>Bottleneck identification and prioritization</li>
+                        <li>Actions needed with impact assessment</li>
+                    </ul>
+                    <a href="velocity_metrics_dashboard.html" class="btn">Open Dashboard →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Velocity Report Viewer</h3>
+                    <div class="file-info">velocity_metrics_dashboard.html (reads velocity_report.json)</div>
+                    <p class="description">HTML viewer for velocity__export__report.py JSON export - visualizes structured velocity data.</p>
+                    <ul class="features">
+                        <li>Read velocity_report.json</li>
+                        <li>Display time metrics</li>
+                        <li>Show bottlenecks with priorities</li>
+                        <li>Interactive bottleneck exploration</li>
+                    </ul>
+                    <a href="velocity_metrics_dashboard.html" class="btn">Open Dashboard →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Heat Map Dashboard</h3>
+                    <div class="file-info">heat_map_viewer.html</div>
+                    <p class="description">Visual heat map for snapshot__generate__heat_map.py showing system health, agent status, and review gates.</p>
+                    <ul class="features">
+                        <li>Visual heat map (Green/Yellow/Red status)</li>
+                        <li>Agent status distribution</li>
+                        <li>Review gate status</li>
+                        <li>Blocking conditions visualization</li>
+                    </ul>
+                    <a href="heat_map_viewer.html" class="btn">Open Dashboard →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Heat Map Snapshot Viewer</h3>
+                    <div class="file-info">heat_map_viewer.html (reads heat_map_snapshot.json)</div>
+                    <p class="description">HTML viewer for snapshot__generate__heat_map_json.py JSON export - interactive heat map visualization.</p>
+                    <ul class="features">
+                        <li>Load heat_map_snapshot.json</li>
+                        <li>Visual status indicators</li>
+                        <li>Interactive state exploration</li>
+                        <li>Agent and review gate breakdowns</li>
+                    </ul>
+                    <a href="heat_map_viewer.html" class="btn">Open Dashboard →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Unified KPI Dashboard</h3>
+                    <div class="file-info">kpi_dashboard.html</div>
+                    <p class="description">Unified dashboard for operational and strategic KPIs from metrics__calculate__operational_kpis.py and metrics__calculate__strategic_kpis.py.</p>
+                    <ul class="features">
+                        <li>Operational KPI metrics</li>
+                        <li>Strategic KPI metrics</li>
+                        <li>Combined KPI view</li>
+                        <li>Performance visualization</li>
+                    </ul>
+                    <a href="kpi_dashboard.html" class="btn">Open Dashboard →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- STATUS & MONITORING DASHBOARDS -->
+        <div class="category-section" data-category="status">
+            <div class="category-header">
+                <h2>🔍 Status & Monitoring Dashboards</h2>
+                <p>Dashboards for system status, resource monitoring, agent health, and alignment checks</p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Next Steps Checklist</h3>
+                    <div class="file-info">next_steps_checklist.html</div>
+                    <p class="description">Interactive checklist for tracking actionable next steps with form inputs and progress tracking.</p>
+                    <ul class="features">
+                        <li>Interactive checklist with checkboxes</li>
+                        <li>Form inputs for requirements gathering</li>
+                        <li>Progress tracking</li>
+                        <li>Export capabilities</li>
+                    </ul>
+                    <a href="next_steps_checklist.html" class="btn">Open Dashboard →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Operator Modes Viewer</h3>
+                    <div class="file-info">operator_modes_viewer.html</div>
+                    <p class="description">Dashboard for operator mode selection and agent status overview with batch actions.</p>
+                    <ul class="features">
+                        <li>Operator mode selection</li>
+                        <li>Agent status overview</li>
+                        <li>Batch approval actions</li>
+                        <li>Execution authorization controls</li>
+                    </ul>
+                    <a href="operator_modes_viewer.html" class="btn">Open Dashboard →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Development Status Dashboard</h3>
+                    <div class="file-info">dev_status_dashboard.html</div>
+                    <p class="description">HTML version of dev__status_dashboard.py showing development resource allocation and agent status.</p>
+                    <ul class="features">
+                        <li>Development vs production agents</li>
+                        <li>Resource configuration display</li>
+                        <li>Agent statistics by status and type</li>
+                        <li>Resource allocation recommendations</li>
+                    </ul>
+                    <a href="dev_status_dashboard.html" class="btn">Open Dashboard →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Resource Usage Dashboard</h3>
+                    <div class="file-info">resource_usage_dashboard.html</div>
+                    <p class="description">HTML version of dev__monitor_resource_usage.py showing agent resource utilization and allocation.</p>
+                    <ul class="features">
+                        <li>Resource utilization percentage</li>
+                        <li>Status and type breakdowns</li>
+                        <li>Development vs production categorization</li>
+                        <li>Visual resource allocation charts</li>
+                    </ul>
+                    <a href="resource_usage_dashboard.html" class="btn">Open Dashboard →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Master Alignment Status Dashboard</h3>
+                    <div class="file-info">master_alignment_dashboard.html</div>
+                    <p class="description">HTML version of check_master_alignment.py showing system alignment status and diagram references.</p>
+                    <ul class="features">
+                        <li>Alignment check results</li>
+                        <li>Diagram reference status</li>
+                        <li>Component mapping validation</li>
+                        <li>Issue identification and resolution</li>
+                    </ul>
+                    <a href="master_alignment_dashboard.html" class="btn">Open Dashboard →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- VISUALIZATION DASHBOARDS -->
+        <div class="category-section" data-category="visualization">
+            <div class="category-header">
+                <h2>📊 Visualization & Diagram Viewers</h2>
+                <p>Dashboards for viewing diagrams, Mermaid charts, and visual representations</p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Mermaid Diagram Viewer</h3>
+                    <div class="file-info">mermaid_viewer.html</div>
+                    <p class="description">View and render Mermaid diagram files (.mmd) with source code toggle.</p>
+                    <ul class="features">
+                        <li>Render Mermaid diagrams</li>
+                        <li>Toggle source code view</li>
+                        <li>List of known diagrams</li>
+                        <li>Error handling with source display</li>
+                    </ul>
+                    <a href="mermaid_viewer.html" class="btn">Open Dashboard →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Diagram Viewer</h3>
+                    <div class="file-info">diagram_viewer.html</div>
+                    <p class="description">General purpose diagram viewer for various diagram formats.</p>
+                    <ul class="features">
+                        <li>Multiple diagram format support</li>
+                        <li>File loading interface</li>
+                        <li>Zoom and pan controls</li>
+                    </ul>
+                    <a href="diagram_viewer.html" class="btn">Open Dashboard →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- NEW TOOLS & AUDIT DASHBOARDS -->
+        <div class="category-section" data-category="audit">
+            <div class="category-header">
+                <h2>🔍 Audit & Status Tools</h2>
+                <p>Tools for auditing artifacts, port registry, and system status</p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Review Artifact Status Viewer</h3>
+                    <div class="file-info">review_artifact_status_viewer.html</div>
+                    <p class="description">Audit and manage review artifacts - view DRAFT vs COMPLETE status, filter by status, and identify artifacts needing promotion.</p>
+                    <ul class="features">
+                        <li>Load artifacts/review/ directory</li>
+                        <li>Filter by status (DRAFT, COMPLETE, IMPLEMENTATION, VERIFICATION)</li>
+                        <li>Status statistics (total, draft, complete counts)</li>
+                        <li>View, promote, and archive actions</li>
+                    </ul>
+                    <a href="review_artifact_status_viewer.html" class="btn">Open Tool →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Port Registry Visualizer</h3>
+                    <div class="file-info">../../infrastructure/port_registry_visualizer.html</div>
+                    <p class="description">Visualize port assignments, detect conflicts, and verify registry compliance across all systems.</p>
+                    <ul class="features">
+                        <li>Load infrastructure/ports.registry.json</li>
+                        <li>Visualize port assignments by system</li>
+                        <li>Detect port conflicts automatically</li>
+                        <li>Show resolved conflicts history</li>
+                        <li>Port range breakdown (user-facing, internal, dev-only)</li>
+                    </ul>
+                    <a href="../../infrastructure/port_registry_visualizer.html" class="btn">Open Tool →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- UTILITY DASHBOARDS -->
+        <div class="category-section" data-category="utility">
+            <div class="category-header">
+                <h2>🛠️ Utility & Template Dashboards</h2>
+                <p>Templates, examples, and utility dashboards for development and reference</p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Cockpit Template</h3>
+                    <div class="file-info">cockpit_template.html</div>
+                    <p class="description">Template for creating new cockpit-style dashboards with standard layout and controls.</p>
+                    <ul class="features">
+                        <li>Standard cockpit layout</li>
+                        <li>Reusable CSS and structure</li>
+                        <li>File loading patterns</li>
+                    </ul>
+                    <a href="cockpit_template.html" class="btn">Open Template →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Dashboard Integration Example</h3>
+                    <div class="file-info">js/dashboard-integration-example.html</div>
+                    <p class="description">Example showing how to integrate dashboard API client into HTML dashboards.</p>
+                    <ul class="features">
+                        <li>API client integration</li>
+                        <li>Real-time updates</li>
+                        <li>State management examples</li>
+                    </ul>
+                    <a href="js/dashboard-integration-example.html" class="btn">Open Example →</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <span class="status-badge existing">Existing</span>
+                    <h3>Test Cockpit</h3>
+                    <div class="file-info">test_cockpit.html</div>
+                    <p class="description">Testing and development cockpit for validating dashboard functionality.</p>
+                    <ul class="features">
+                        <li>Test interface</li>
+                        <li>Development utilities</li>
+                    </ul>
+                    <a href="test_cockpit.html" class="btn">Open Test →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- INFO BOXES -->
+        <div class="info-box">
+            <h3>📚 About This Index</h3>
+            <p><strong>Purpose:</strong> This index catalogs all dashboards in the Agent Orchestrator system, including existing dashboards, missing dashboards that are needed, and JSON outputs that lack HTML viewers.</p>
+            <p><strong>Status Categories:</strong></p>
+            <ul>
+                <li><strong>Existing:</strong> HTML dashboard exists and is functional</li>
+                <li><strong>JSON Only:</strong> JSON data file exists but no HTML viewer has been created</li>
+                <li><strong>Missing:</strong> Dashboard is needed but not yet created</li>
+            </ul>
+            <p><strong>Priority:</strong> High-priority missing dashboards include Velocity Metrics, Heat Map Viewer, and KPI dashboards that provide critical system visibility.</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>🔗 Quick Links</h3>
+            <p>
+                <strong>Main Index:</strong> <a href="index.html" style="color: var(--color-primary);">Review Viewers Index</a> | 
+                <strong>Documentation:</strong> <a href="REVIEW_VIEWERS_README.md" target="_blank" style="color: var(--color-primary);">README</a> | 
+                <strong>Dashboard Guide:</strong> <a href="QUICK_START.md" target="_blank" style="color: var(--color-primary);">Quick Start</a>
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>Agent Orchestrator Dashboard Index | Generated: 2026-01-20</p>
+            <p style="margin-top: 5px; font-size: var(--font-size-xs); color: #999;">
+                All dashboards are HTML-only, local-first, and require no backend services.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const categorySections = document.querySelectorAll('.category-section');
+        const dashboardCards = document.querySelectorAll('.dashboard-card');
+        
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                // Show all
+                categorySections.forEach(section => section.style.display = 'block');
+                dashboardCards.forEach(card => card.style.display = 'block');
+                return;
+            }
+            
+            // Filter dashboards
+            let visibleCount = 0;
+            dashboardCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('.description').textContent.toLowerCase();
+                const fileInfo = card.querySelector('.file-info').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm) || fileInfo.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Hide/show category sections based on visible cards
+            categorySections.forEach(section => {
+                const visibleCards = section.querySelectorAll('.dashboard-card[style="display: block;"]');
+                if (visibleCards.length > 0) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        });
+        
+        // Update stats dynamically
+        function updateStats() {
+            const existing = document.querySelectorAll('.status-badge.existing').length;
+            const missing = document.querySelectorAll('.status-badge.missing').length;
+            const jsonOnly = document.querySelectorAll('.status-badge.json-only').length;
+            const total = existing + missing + jsonOnly;
+            
+            document.getElementById('totalDashboards').textContent = total;
+            document.getElementById('existingDashboards').textContent = existing;
+            document.getElementById('missingDashboards').textContent = missing;
+            document.getElementById('jsonOnly').textContent = jsonOnly;
+        }
+        
+        // Initialize stats
+        updateStats();
+    </script>
+</body>
+</html>

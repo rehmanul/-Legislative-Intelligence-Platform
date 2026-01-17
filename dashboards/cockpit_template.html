@@ -1,0 +1,3117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Control Cockpit</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-family-sans), Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--color-text-primary);
+      background: var(--color-bg-secondary);
+      padding: var(--spacing-xl);
+      position: relative;
+    }
+    
+    .container {
+      max-width: var(--container-max-width);
+      margin: 0 auto;
+    }
+    
+    .live-timer {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--color-bg-primary);
+      padding: var(--spacing-lg) 20px;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 1000;
+      min-width: 200px;
+      border-left: 4px solid var(--color-success);
+    }
+    
+    .live-timer.active {
+      border-left-color: var(--color-success);
+    }
+    
+    .live-timer.inactive {
+      border-left-color: #999;
+    }
+    
+    .timer-label {
+      font-size: 11px;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+    }
+    
+    .timer-clock {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      font-family: var(--font-family-mono);
+      color: var(--color-success);
+      letter-spacing: 2px;
+      transition: color 0.3s;
+    }
+    
+    .timer-clock.updating {
+      color: var(--color-primary);
+      animation: clockPulse 1s ease-in-out;
+    }
+    
+    @keyframes clockPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .timer-status {
+      font-size: 11px;
+      color: var(--color-success);
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: var(--font-weight-semibold);
+    }
+    
+    .timer-status::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-success);
+      animation: pulse 2s infinite;
+      box-shadow: 0 0 4px rgba(40, 167, 69, 0.6);
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.2); }
+    }
+    
+    header {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+      box-shadow: var(--shadow-2);
+    }
+    
+    h1 {
+      font-size: var(--font-size-2xl);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .timestamp {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+    }
+    
+    .controls {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+      box-shadow: var(--shadow-2);
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+      align-items: center;
+    }
+    
+    .controls-section {
+      display: flex;
+      gap: var(--spacing-md);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+      padding: var(--spacing-sm) 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+    }
+    
+    .filter-buttons {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+      padding: var(--spacing-sm) 12px;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg-primary);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: var(--font-size-xs);
+      transition: all var(--transition-base) var(--transition-ease);
+    }
+    
+    .filter-btn:hover {
+      background: #f0f0f0;
+    }
+    
+    .filter-btn.active {
+      background: var(--color-primary);
+      color: var(--color-bg-primary);
+      border-color: var(--color-primary);
+    }
+    
+    .drag-drop-zone {
+      border: 2px dashed #ccc;
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      text-align: center;
+      color: var(--color-text-secondary);
+      transition: all var(--transition-slow) var(--transition-ease);
+      margin-top: var(--spacing-md);
+    }
+    
+    .drag-drop-zone.dragover {
+      border-color: var(--color-primary);
+      background: #e7f3ff;
+      color: var(--color-primary);
+    }
+    
+    .loading {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid var(--color-primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-left: 10px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .sortable {
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    .sortable:hover {
+      background: #f0f0f0;
+    }
+    
+    .sort-indicator {
+      margin-left: 5px;
+      font-size: 10px;
+    }
+    
+    .file-input-wrapper {
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .file-input-wrapper label {
+      display: inline-block;
+      padding: var(--spacing-sm) 16px;
+      background: var(--color-primary);
+      color: var(--color-bg-primary);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: var(--font-size-sm);
+    }
+    
+    .file-input-wrapper input[type="file"] {
+      display: none;
+    }
+    
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-xl);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .card {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-2);
+    }
+    
+    .card h2 {
+      font-size: var(--font-size-lg);
+      margin-bottom: var(--spacing-lg);
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+    
+    .status-item {
+      padding: var(--spacing-md);
+      margin-bottom: 8px;
+      border-left: 4px solid var(--color-border);
+      background: #f9f9f9;
+    }
+    
+    .status-item.active {
+      border-left-color: var(--color-success);
+    }
+    
+    .status-item.warning {
+      border-left-color: #ffc107;
+    }
+    
+    .status-item.error {
+      border-left-color: var(--color-error);
+    }
+    
+    .alerts {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-2);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .alert {
+      padding: 12px;
+      margin-bottom: var(--spacing-md);
+      border-radius: var(--radius-sm);
+      border-left: 4px solid;
+    }
+    
+    .alert.info {
+      background: #d1ecf1;
+      border-left-color: #0c5460;
+    }
+    
+    .alert.warning {
+      background: #fff3cd;
+      border-left-color: #856404;
+    }
+    
+    .alert.error {
+      background: #f8d7da;
+      border-left-color: #721c24;
+    }
+    
+    .review-section {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-2);
+    }
+    
+    .review-item {
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+    }
+    
+    .review-item.pending {
+      background: #fff3cd;
+      border-color: #ffc107;
+    }
+    
+    .review-item.approved {
+      background: #d4edda;
+      border-color: var(--color-success);
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: #999;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: var(--spacing-xs) 8px;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      margin-left: 8px;
+    }
+    
+    .badge.success {
+      background: #d4edda;
+      color: #155724;
+    }
+    
+    .badge.warning {
+      background: #fff3cd;
+      color: #856404;
+    }
+    
+    .badge.error {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    
+    .collapsible {
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    .collapsible::before {
+      content: '▶ ';
+      display: inline-block;
+      transition: transform 0.2s;
+      margin-right: 5px;
+    }
+    
+    .collapsible.expanded::before {
+      transform: rotate(90deg);
+    }
+    
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    
+    .collapsible-content.expanded {
+      max-height: 5000px;
+      transition: max-height 0.5s ease-in;
+    }
+    
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+    
+    .metric {
+      padding: var(--spacing-sm);
+      background: var(--color-gray-100);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+    }
+    
+    .metric-label {
+      color: var(--color-text-secondary);
+      font-size: 11px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    
+    .metric-value {
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-base);
+      color: var(--color-text-primary);
+    }
+    
+    /* Congress Structure Visualization Styles */
+    .congress-section {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-2);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .congress-tabs {
+      display: flex;
+      gap: 5px;
+      margin-bottom: var(--spacing-lg);
+      border-bottom: 2px solid #f0f0f0;
+    }
+    
+    .congress-tab {
+      padding: var(--spacing-md) 20px;
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-secondary);
+      transition: all var(--transition-base) var(--transition-ease);
+    }
+    
+    .congress-tab:hover {
+      color: var(--color-primary);
+      background: var(--color-gray-100);
+    }
+    
+    .congress-tab.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-primary);
+    }
+    
+    .congress-tab-content {
+      display: none;
+    }
+    
+    .congress-tab-content.active {
+      display: block;
+    }
+    
+    .mermaid-container {
+      background: var(--color-bg-tertiary);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      overflow-x: auto;
+      min-height: 400px;
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .mermaid {
+      text-align: center;
+    }
+    
+    .congress-phase-info {
+      padding: var(--spacing-lg);
+      background: #e7f3ff;
+      border-left: 4px solid var(--color-primary);
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .congress-phase-info h3 {
+      margin: 0 0 8px 0;
+      font-size: var(--font-size-base);
+      color: var(--color-primary);
+    }
+    
+    .congress-phase-info p {
+      margin: 4px 0;
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+    
+    .congress-progress {
+      display: flex;
+      gap: 5px;
+      margin-top: var(--spacing-lg);
+      padding: var(--spacing-md);
+      background: var(--color-gray-100);
+      border-radius: var(--radius-sm);
+    }
+    
+    .congress-progress-step {
+      flex: 1;
+      padding: var(--spacing-sm);
+      text-align: center;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      transition: all var(--transition-slow) var(--transition-ease);
+    }
+    
+    .congress-progress-step.completed {
+      background: #d4edda;
+      color: #155724;
+      border: 2px solid var(--color-success);
+    }
+    
+    .congress-progress-step.current {
+      background: #fff3cd;
+      color: #856404;
+      border: 2px solid #ffc107;
+      animation: pulse 2s infinite;
+    }
+    
+    .congress-progress-step.pending {
+      background: var(--color-gray-100);
+      color: var(--color-gray-500);
+      border: 2px solid var(--color-border);
+    }
+    
+    /* Enhanced card hover effects */
+    .card {
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+    }
+    
+    .card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transform: translateY(-2px);
+    }
+    
+    /* Progress bar for state advancement */
+    .state-progress {
+      width: 100%;
+      height: 8px;
+      background: var(--color-border-light);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin-top: var(--spacing-md);
+    }
+    
+    .state-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-success), #20c997);
+      transition: width 0.5s ease;
+      border-radius: var(--radius-sm);
+    }
+  </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+  
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="live-timer active" id="liveTimer">
+    <div class="timer-label">Live Clock</div>
+    <div class="timer-clock" id="timerClock">--:--:--</div>
+    <div class="timer-status" id="timerStatus">Active</div>
+  </div>
+  
+  <div class="container">
+    <header>
+      <h1>System Control Cockpit</h1>
+      <div class="timestamp" id="lastUpdated">
+        State loaded: <span id="timestamp">—</span>
+      </div>
+    </header>
+    
+      <div class="controls">
+      <div class="controls-section">
+        <div class="file-input-wrapper">
+          <label for="stateFile">📁 Load State File</label>
+          <input type="file" id="stateFile" accept=".json">
+        </div>
+        <button onclick="clearState()" style="padding: var(--spacing-sm) 16px; background: var(--color-gray-500); color: var(--color-bg-primary); border: none; border-radius: var(--radius-sm); cursor: pointer; font-size: var(--font-size-sm);">
+          Clear
+        </button>
+        <button onclick="exportState()" id="exportBtn" style="padding: var(--spacing-sm) 16px; background: var(--color-success); color: var(--color-bg-primary); border: none; border-radius: var(--radius-sm); cursor: pointer; font-size: var(--font-size-sm); display: none;">
+          💾 Export View
+        </button>
+      </div>
+      <div style="flex: 1; min-width: 250px;">
+        <input type="text" id="searchBox" class="search-box" placeholder="🔍 Search agents, artifacts, reviews..." onkeyup="filterContent()">
+      </div>
+      <div class="filter-buttons" id="filterButtons" style="display: none;">
+        <button class="filter-btn active" onclick="setFilter('all')" data-filter="all">All</button>
+        <button class="filter-btn" onclick="setFilter('pending')" data-filter="pending">Pending</button>
+        <button class="filter-btn" onclick="setFilter('approved')" data-filter="approved">Approved</button>
+        <button class="filter-btn" onclick="setFilter('high-risk')" data-filter="high-risk">High Risk</button>
+      </div>
+    </div>
+    
+    <div class="drag-drop-zone" id="dragDropZone" style="display: none;">
+      <div>📥 Drag and drop JSON file here</div>
+      <div style="font-size: var(--font-size-xs); margin-top: 5px; color: #999;">or use the "Load State File" button above</div>
+    </div>
+    
+    <div class="status-grid" id="statusGrid">
+      <div class="card">
+        <h2>Legislative State</h2>
+        <div class="empty-state">Load a state file to view legislative state</div>
+      </div>
+      <div class="card">
+        <h2>Agent Status</h2>
+        <div class="empty-state">Load a state file to view agent status</div>
+      </div>
+      <div class="card">
+        <h2>Review Gates</h2>
+        <div class="empty-state">Load a state file to view review gates</div>
+      </div>
+    </div>
+    
+    <div class="card" id="agentsSection" style="display: none;">
+      <h2>Agent List</h2>
+      <div id="agentsContainer"></div>
+    </div>
+    
+    <div class="alerts" id="alertsSection" style="display: none;">
+      <h2>Alerts</h2>
+      <div id="alertsContainer"></div>
+    </div>
+    
+    <div class="review-section" id="reviewSection" style="display: none;">
+      <h2>📋 Artifacts Pending Review</h2>
+      <div id="reviewContainer"></div>
+    </div>
+    
+    <div class="congress-section" id="congressSection" style="display: none;">
+      <h2 class="collapsible" onclick="toggleCollapse(this)">🏛️ Congress Structure & Workflow Mapping</h2>
+      <div class="collapsible-content expanded">
+        <div id="congressPhaseInfo" class="congress-phase-info" style="display: none;">
+          <h3 id="congressPhaseTitle">Current Phase</h3>
+          <p id="congressPhaseDescription"></p>
+        </div>
+        
+        <div class="congress-tabs">
+          <button class="congress-tab active" onclick="showCongressTab('full', this)">Full Structure</button>
+          <button class="congress-tab" onclick="showCongressTab('phase', this)">Current Phase</button>
+          <button class="congress-tab" onclick="showCongressTab('flow', this)">Process Flow</button>
+        </div>
+        
+        <div id="congressTabFull" class="congress-tab-content active">
+          <div class="mermaid-container">
+            <div class="mermaid" id="congressDiagramFull">
+flowchart TB
+    %% Core Actors
+    House["👤 House Members"]:::actor
+    Senate["👤 Senators"]:::actor
+    
+    %% Leadership
+    HouseLead["👤 House Leadership"]:::actor
+    SenateLead["👤 Senate Leadership"]:::actor
+    Rules["🧭 Rules Committee"]:::primary
+    Approps["💰 Appropriations Committees"]:::shadow
+    
+    %% Committees
+    HouseComm["📦 House Committees"]:::primary
+    SenateComm["📦 Senate Committees"]:::primary
+    SubComm["📂 Subcommittees"]:::primary
+    JointComm["🔗 Joint Committees"]:::secondary
+    
+    %% Staff
+    CommStaff["🧠 Committee Staff"]:::staff
+    SubStaff["🧠 Subcommittee Staff"]:::staff
+    LeadStaff["🧠 Leadership Staff"]:::staff
+    PersonalStaff["🧠 Personal Office Staff"]:::staff
+    
+    %% Process / Bill
+    Idea(("💡 Policy Idea")):::event
+    Draft["✍️ Drafting"]:::process
+    Markup["📝 Markup"]:::process
+    Report["📄 Report Language"]:::process
+    Floor["🏛️ Floor Action"]:::process
+    Conference["🤝 Conference"]:::process
+    Law(("📜 Enacted Law")):::event
+    
+    %% Executive
+    Agencies["🏢 Federal Agencies"]:::external
+    OMB["🏢 OMB"]:::external
+    WH["🏛️ WH Leg Affairs"]:::external
+    
+    %% Shadow / Informal
+    Caucus["🕸️ Caucuses"]:::shadow
+    Industry["🕸️ Industry Coalitions"]:::shadow
+    NGOs["🕸️ NGOs / Think Tanks"]:::shadow
+    FormerStaff["🕸️ Former Staffers"]:::shadow
+    
+    %% State & Local
+    Governors["🏴 Governors"]:::secondary
+    StateAgencies["🏴 State Agencies"]:::secondary
+    LocalGov["🏘️ Local Governments"]:::secondary
+    
+    %% Relationships
+    Idea --> Draft
+    Industry -.influences_drafting.-> Draft
+    NGOs -.influences_drafting.-> Draft
+    FormerStaff -.memory_transfer.-> CommStaff
+    
+    Draft --> CommStaff
+    CommStaff --> SubStaff
+    SubStaff --> SubComm
+    SubComm --> Markup
+    Markup --> Report
+    
+    House --> HouseComm
+    Senate --> SenateComm
+    HouseComm --> SubComm
+    SenateComm --> SubComm
+    
+    HouseLead --> Rules
+    Rules --> Floor
+    Approps -.controls_reality.-> Report
+    
+    Report --> Floor
+    Floor --> Conference
+    Conference --> Law
+    
+    Law --> Agencies
+    Agencies --> StateAgencies
+    StateAgencies --> LocalGov
+    
+    WH -.signals_pre_clearance.-> HouseLead
+    WH -.signals_pre_clearance.-> SenateLead
+    OMB -.budget_pressure.-> Approps
+    
+    Caucus -.routes_around.-> HouseComm
+    Caucus -.routes_around.-> SenateComm
+    Industry -.off_ledger_pressure.-> LeadStaff
+    LeadStaff -.controls_access.-> HouseLead
+    LeadStaff -.controls_access.-> SenateLead
+    
+    Governors -.waiver_pressure.-> Agencies
+    LocalGov -.implementation_feedback.-> StateAgencies
+    
+    classDef actor fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef primary fill:#e8f5e9,stroke:var(--color-success-dark),stroke-width:2px
+    classDef secondary fill:#fffde7,stroke:#f9a825,stroke-width:2px
+    classDef shadow fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px,stroke-dasharray: 5 5
+    classDef staff fill:#eceff1,stroke:#37474f,stroke-width:2px
+    classDef process fill:#ede7f6,stroke:#4527a0,stroke-width:2px
+    classDef external fill:#e0f2f1,stroke:#00695c,stroke-width:2px
+    classDef event fill:#ffebee,stroke:#b71c1c,stroke-width:2px
+    classDef current fill:#fff3cd,stroke:#ffc107,stroke-width:3px
+    classDef completed fill:#d4edda,stroke:var(--color-success),stroke-width:2px
+            </div>
+          </div>
+        </div>
+        
+        <div id="congressTabPhase" class="congress-tab-content">
+          <div class="mermaid-container">
+            <div class="mermaid" id="congressDiagramPhase">
+              <p>Current phase view will be generated based on legislative state</p>
+            </div>
+          </div>
+        </div>
+        
+        <div id="congressTabFlow" class="congress-tab-content">
+          <div class="mermaid-container">
+            <div class="mermaid" id="congressDiagramFlow">
+flowchart LR
+    Idea(("💡 PRE_EVT<br/>Policy Idea")):::event
+    Draft["✍️ INTRO_EVT<br/>Drafting"]:::process
+    Comm["📝 COMM_EVT<br/>Markup/Report"]:::process
+    Floor["🏛️ FLOOR_EVT<br/>Floor Action"]:::process
+    Final["🤝 FINAL_EVT<br/>Conference"]:::process
+    Law(("📜 IMPL_EVT<br/>Enacted Law")):::event
+    
+    Idea --> Draft
+    Draft --> Comm
+    Comm --> Floor
+    Floor --> Final
+    Final --> Law
+    
+    classDef event fill:#ffebee,stroke:#b71c1c,stroke-width:2px
+    classDef process fill:#ede7f6,stroke:#4527a0,stroke-width:2px
+    classDef current fill:#fff3cd,stroke:#ffc107,stroke-width:3px
+    classDef completed fill:#d4edda,stroke:var(--color-success),stroke-width:2px
+            </div>
+          </div>
+        </div>
+        
+        <div id="congressProgress" class="congress-progress" style="display: none;"></div>
+      </div>
+    </div>
+    
+    <div class="card" id="conversionPipelineSection" style="display: none;">
+      <h2 class="collapsible" onclick="toggleCollapse(this)">🔄 Conversion Pipeline Status</h2>
+      <div class="collapsible-content expanded" id="conversionPipelineContainer"></div>
+    </div>
+    
+    <div class="card" id="auditCompletenessSection" style="display: none;">
+      <h2 class="collapsible" onclick="toggleCollapse(this)">📊 Audit Completeness</h2>
+      <div class="collapsible-content expanded" id="auditCompletenessContainer"></div>
+    </div>
+    
+    <div class="card" id="stateHistorySection" style="display: none;">
+      <h2>State History</h2>
+      <div id="stateHistoryContainer"></div>
+    </div>
+    
+    <div class="card" id="revolvingDoorSection" style="display: none;">
+      <h2 class="collapsible" onclick="toggleCollapse(this)">🔄 Revolving-Door Influence</h2>
+      <div class="collapsible-content expanded" id="revolvingDoorContainer"></div>
+    </div>
+  </div>
+  
+  <script>
+    // Mermaid initialization
+    mermaid.initialize({ 
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#e8f5e9',
+        primaryTextColor: 'var(--color-success-dark)',
+        primaryBorderColor: 'var(--color-success)',
+        lineColor: '#81c784',
+        secondaryColor: '#fff3e0',
+        tertiaryColor: '#e3f2fd',
+        noteBkgColor: '#fff9c4',
+        noteTextColor: '#000',
+        noteBorderColor: '#f9a825',
+        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif',
+        fontSize: '14px'
+      },
+      flowchart: {
+        useMaxWidth: true,
+        htmlLabels: true,
+        curve: 'basis'
+      }
+    });
+    
+    // State to Congress mapping
+    const stateToCongressMap = {
+      'PRE_EVT': { 
+        nodes: ['Idea', 'Draft'], 
+        phase: 'Concept Development',
+        description: 'Policy idea generation and initial drafting',
+        progress: 0,
+        nextNodes: ['Draft', 'CommStaff']
+      },
+      'INTRO_EVT': { 
+        nodes: ['Draft', 'CommStaff'], 
+        phase: 'Introduction',
+        description: 'Bill introduction and initial committee assignment',
+        progress: 16,
+        nextNodes: ['SubComm', 'Markup']
+      },
+      'COMM_EVT': { 
+        nodes: ['SubComm', 'Markup', 'Report'], 
+        phase: 'Committee',
+        description: 'Subcommittee review, markup, and report language',
+        progress: 33,
+        nextNodes: ['Floor', 'Rules']
+      },
+      'FLOOR_EVT': { 
+        nodes: ['Floor', 'Rules'], 
+        phase: 'Floor Action',
+        description: 'Floor scheduling, debate, and voting',
+        progress: 50,
+        nextNodes: ['Conference']
+      },
+      'FINAL_EVT': { 
+        nodes: ['Conference'], 
+        phase: 'Conference',
+        description: 'Conference committee reconciliation',
+        progress: 66,
+        nextNodes: ['Law']
+      },
+      'IMPL_EVT': { 
+        nodes: ['Law', 'Agencies'], 
+        phase: 'Implementation',
+        description: 'Enactment and agency implementation',
+        progress: 100,
+        nextNodes: []
+      }
+    };
+    
+    // Congress visualization functions
+    let congressDiagramRendered = false;
+    
+    function showCongressTab(tabName, eventElement) {
+      // Hide all tabs
+      document.querySelectorAll('.congress-tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.querySelectorAll('.congress-tab').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Show selected tab
+      const tabContentId = `congressTab${tabName.charAt(0).toUpperCase() + tabName.slice(1)}`;
+      const tabContent = document.getElementById(tabContentId);
+      if (tabContent) {
+        tabContent.classList.add('active');
+        if (eventElement) {
+          eventElement.classList.add('active');
+        } else if (event && event.target) {
+          event.target.classList.add('active');
+        } else {
+          // Find button by tab name
+          const buttons = document.querySelectorAll('.congress-tab');
+          buttons.forEach(btn => {
+            if (btn.textContent.trim().toLowerCase().includes(tabName.toLowerCase())) {
+              btn.classList.add('active');
+            }
+          });
+        }
+        
+        // Re-render Mermaid if needed
+        const mermaidElement = tabContent.querySelector('.mermaid');
+        if (mermaidElement && !congressDiagramRendered) {
+          setTimeout(() => {
+            mermaid.init(undefined, mermaidElement);
+            congressDiagramRendered = true;
+          }, 100);
+        }
+      }
+    }
+    
+    function highlightCongressNodes(state) {
+      if (!state) return;
+      
+      const currentState = state.legislative?.current_state || state.current_state || state.system?.current_state;
+      if (!currentState) return;
+      
+      const stateInfo = stateToCongressMap[currentState];
+      if (!stateInfo) return;
+      
+      // Show Congress section
+      document.getElementById('congressSection').style.display = 'block';
+      
+      // Update phase info
+      const phaseInfo = document.getElementById('congressPhaseInfo');
+      const phaseTitle = document.getElementById('congressPhaseTitle');
+      const phaseDesc = document.getElementById('congressPhaseDescription');
+      
+      if (phaseTitle && phaseDesc) {
+        phaseTitle.textContent = `${stateInfo.phase} (${currentState})`;
+        phaseDesc.textContent = stateInfo.description;
+        phaseInfo.style.display = 'block';
+      }
+      
+      // Update progress bar
+      const progressContainer = document.getElementById('congressProgress');
+      if (progressContainer) {
+        progressContainer.style.display = 'flex';
+        const allStates = ['PRE_EVT', 'INTRO_EVT', 'COMM_EVT', 'FLOOR_EVT', 'FINAL_EVT', 'IMPL_EVT'];
+        const currentIndex = allStates.indexOf(currentState);
+        
+        progressContainer.innerHTML = allStates.map((s, idx) => {
+          const stateMap = stateToCongressMap[s];
+          let className = 'pending';
+          if (idx < currentIndex) {
+            className = 'completed';
+          } else if (idx === currentIndex) {
+            className = 'current';
+          }
+          
+          return `<div class="congress-progress-step ${className}">${stateMap.phase}</div>`;
+        }).join('');
+      }
+      
+      // Re-render Mermaid diagrams with highlighting
+      setTimeout(() => {
+        renderCongressDiagrams(currentState, stateInfo);
+      }, 300);
+    }
+    
+    function renderCongressDiagrams(currentState, stateInfo) {
+      // Clean up any existing tooltips before regenerating
+      hideNodeTooltip();
+      
+      // Re-render full diagram with highlighting
+      const fullDiagram = document.getElementById('congressDiagramFull');
+      if (fullDiagram) {
+        // Generate diagram with highlighting classes based on current state
+        const highlightedNodes = stateInfo.nodes || [];
+        const allStates = ['PRE_EVT', 'INTRO_EVT', 'COMM_EVT', 'FLOOR_EVT', 'FINAL_EVT', 'IMPL_EVT'];
+        const currentIndex = allStates.indexOf(currentState);
+        
+        // Build sets of completed, current, and pending nodes
+        const completedNodes = new Set();
+        const currentNodes = new Set(highlightedNodes);
+        
+        // Add nodes from previous states as completed
+        for (let i = 0; i < currentIndex; i++) {
+          const prevStateInfo = stateToCongressMap[allStates[i]];
+          if (prevStateInfo && prevStateInfo.nodes) {
+            prevStateInfo.nodes.forEach(node => completedNodes.add(node));
+          }
+        }
+        
+        // Helper function to determine node class
+        function getNodeClass(nodeName) {
+          if (currentNodes.has(nodeName)) {
+            return 'current';
+          } else if (completedNodes.has(nodeName)) {
+            return 'completed';
+          }
+          // Return default class based on node type
+          if (['Idea', 'Law'].includes(nodeName)) return 'event';
+          if (['Draft', 'Markup', 'Report', 'Floor', 'Conference'].includes(nodeName)) return 'process';
+          if (['Rules', 'HouseComm', 'SenateComm', 'SubComm', 'JointComm'].includes(nodeName)) return 'primary';
+          if (['CommStaff', 'SubStaff', 'LeadStaff', 'PersonalStaff'].includes(nodeName)) return 'staff';
+          if (['Agencies', 'OMB', 'WH'].includes(nodeName)) return 'external';
+          if (['Caucus', 'Industry', 'NGOs', 'FormerStaff', 'Approps'].includes(nodeName)) return 'shadow';
+          if (['Governors', 'StateAgencies', 'LocalGov'].includes(nodeName)) return 'secondary';
+          return 'actor';
+        }
+        
+        // Determine which nodes should be highlighted, completed, or pending
+        let diagramContent = `flowchart TB
+    %% Core Actors
+    House["👤 House Members"]:::actor
+    Senate["👤 Senators"]:::actor
+    
+    %% Leadership
+    HouseLead["👤 House Leadership"]:::${getNodeClass('HouseLead')}
+    SenateLead["👤 Senate Leadership"]:::${getNodeClass('SenateLead')}
+    Rules["🧭 Rules Committee"]:::${getNodeClass('Rules')}
+    Approps["💰 Appropriations Committees"]:::${getNodeClass('Approps')}
+    
+    %% Committees
+    HouseComm["📦 House Committees"]:::${getNodeClass('HouseComm')}
+    SenateComm["📦 Senate Committees"]:::${getNodeClass('SenateComm')}
+    SubComm["📂 Subcommittees"]:::${getNodeClass('SubComm')}
+    JointComm["🔗 Joint Committees"]:::${getNodeClass('JointComm')}
+    
+    %% Staff
+    CommStaff["🧠 Committee Staff"]:::${getNodeClass('CommStaff')}
+    SubStaff["🧠 Subcommittee Staff"]:::${getNodeClass('SubStaff')}
+    LeadStaff["🧠 Leadership Staff"]:::${getNodeClass('LeadStaff')}
+    PersonalStaff["🧠 Personal Office Staff"]:::${getNodeClass('PersonalStaff')}
+    
+    %% Process / Bill
+    Idea(("💡 Policy Idea")):::${getNodeClass('Idea')}
+    Draft["✍️ Drafting"]:::${getNodeClass('Draft')}
+    Markup["📝 Markup"]:::${getNodeClass('Markup')}
+    Report["📄 Report Language"]:::${getNodeClass('Report')}
+    Floor["🏛️ Floor Action"]:::${getNodeClass('Floor')}
+    Conference["🤝 Conference"]:::${getNodeClass('Conference')}
+    Law(("📜 Enacted Law")):::${getNodeClass('Law')}
+    
+    %% Executive
+    Agencies["🏢 Federal Agencies"]:::${getNodeClass('Agencies')}
+    OMB["🏢 OMB"]:::${getNodeClass('OMB')}
+    WH["🏛️ WH Leg Affairs"]:::${getNodeClass('WH')}
+    
+    %% Shadow / Informal
+    Caucus["🕸️ Caucuses"]:::${getNodeClass('Caucus')}
+    Industry["🕸️ Industry Coalitions"]:::${getNodeClass('Industry')}
+    NGOs["🕸️ NGOs / Think Tanks"]:::${getNodeClass('NGOs')}
+    FormerStaff["🕸️ Former Staffers"]:::${getNodeClass('FormerStaff')}
+    
+    %% State & Local
+    Governors["🏴 Governors"]:::${getNodeClass('Governors')}
+    StateAgencies["🏴 State Agencies"]:::${getNodeClass('StateAgencies')}
+    LocalGov["🏘️ Local Governments"]:::${getNodeClass('LocalGov')}
+    
+    %% Relationships
+    Idea --> Draft
+    Industry -.influences_drafting.-> Draft
+    NGOs -.influences_drafting.-> Draft
+    FormerStaff -.memory_transfer.-> CommStaff
+    
+    Draft --> CommStaff
+    CommStaff --> SubStaff
+    SubStaff --> SubComm
+    SubComm --> Markup
+    Markup --> Report
+    
+    House --> HouseComm
+    Senate --> SenateComm
+    HouseComm --> SubComm
+    SenateComm --> SubComm
+    
+    HouseLead --> Rules
+    Rules --> Floor
+    Approps -.controls_reality.-> Report
+    
+    Report --> Floor
+    Floor --> Conference
+    Conference --> Law
+    
+    Law --> Agencies
+    Agencies --> StateAgencies
+    StateAgencies --> LocalGov
+    
+    WH -.signals_pre_clearance.-> HouseLead
+    WH -.signals_pre_clearance.-> SenateLead
+    OMB -.budget_pressure.-> Approps
+    
+    Caucus -.routes_around.-> HouseComm
+    Caucus -.routes_around.-> SenateComm
+    Industry -.off_ledger_pressure.-> LeadStaff
+    LeadStaff -.controls_access.-> HouseLead
+    LeadStaff -.controls_access.-> SenateLead
+    
+    Governors -.waiver_pressure.-> Agencies
+    LocalGov -.implementation_feedback.-> StateAgencies
+    
+    classDef actor fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef primary fill:#e8f5e9,stroke:var(--color-success-dark),stroke-width:2px
+    classDef secondary fill:#fffde7,stroke:#f9a825,stroke-width:2px
+    classDef shadow fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px,stroke-dasharray: 5 5
+    classDef staff fill:#eceff1,stroke:#37474f,stroke-width:2px
+    classDef process fill:#ede7f6,stroke:#4527a0,stroke-width:2px
+    classDef external fill:#e0f2f1,stroke:#00695c,stroke-width:2px
+    classDef event fill:#ffebee,stroke:#b71c1c,stroke-width:2px
+    classDef current fill:#fff3cd,stroke:#ffc107,stroke-width:3px
+    classDef completed fill:#d4edda,stroke:var(--color-success),stroke-width:2px
+        `;
+        
+        fullDiagram.innerHTML = diagramContent;
+        // Re-initialize Mermaid on this diagram
+        setTimeout(() => {
+          try {
+            const result = mermaid.init(undefined, fullDiagram);
+            // Handle both sync and async Mermaid init
+            if (result && typeof result.then === 'function') {
+              result.then(() => {
+                addDiagramInteractivity(fullDiagram, currentState, stateInfo);
+              }).catch((error) => {
+                console.error('[Congress Diagram] Mermaid init failed (async):', error);
+                // Fallback if init fails
+                setTimeout(() => addDiagramInteractivity(fullDiagram, currentState, stateInfo), 300);
+              });
+            } else {
+              // Sync version - wait a bit for rendering
+              setTimeout(() => addDiagramInteractivity(fullDiagram, currentState, stateInfo), 300);
+            }
+          } catch (error) {
+            console.error('[Congress Diagram] Mermaid init failed (sync):', error);
+            // Try to add interactivity anyway after delay
+            setTimeout(() => {
+              console.warn('[Congress Diagram] Attempting to add interactivity despite Mermaid init failure');
+              addDiagramInteractivity(fullDiagram, currentState, stateInfo);
+            }, 500);
+          }
+        }, 100);
+      }
+      
+      // Render phase-specific diagram
+      renderPhaseDiagram(currentState, stateInfo);
+      
+      // Re-render flow diagram with progress
+      renderFlowDiagram(currentState);
+    }
+    
+    function renderPhaseDiagram(currentState, stateInfo) {
+      const phaseContainer = document.getElementById('congressDiagramPhase');
+      if (!phaseContainer) return;
+      
+      // Generate focused view based on current phase
+      let phaseDiagram = '';
+      
+      switch(currentState) {
+        case 'PRE_EVT':
+          phaseDiagram = `
+flowchart TB
+    Idea(("💡 Policy Idea")):::current
+    Draft["✍️ Drafting"]:::current
+    Industry["🕸️ Industry Coalitions"]:::shadow
+    NGOs["🕸️ NGOs / Think Tanks"]:::shadow
+    
+    Idea --> Draft
+    Industry -.influences.-> Draft
+    NGOs -.influences.-> Draft
+    
+    classDef current fill:#fff3cd,stroke:#ffc107,stroke-width:3px
+    classDef shadow fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px,stroke-dasharray: 5 5
+          `;
+          break;
+        case 'INTRO_EVT':
+          phaseDiagram = `
+flowchart TB
+    Draft["✍️ Drafting"]:::current
+    CommStaff["🧠 Committee Staff"]:::current
+    LeadStaff["🧠 Leadership Staff"]:::staff
+    HouseLead["👤 House Leadership"]:::actor
+    SenateLead["👤 Senate Leadership"]:::actor
+    
+    Draft --> CommStaff
+    LeadStaff -.controls_access.-> HouseLead
+    LeadStaff -.controls_access.-> SenateLead
+    HouseLead -.signals.-> CommStaff
+    SenateLead -.signals.-> CommStaff
+    
+    classDef current fill:#fff3cd,stroke:#ffc107,stroke-width:3px
+    classDef staff fill:#eceff1,stroke:#37474f,stroke-width:2px
+    classDef actor fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+          `;
+          break;
+        case 'COMM_EVT':
+          phaseDiagram = `
+flowchart TB
+    CommStaff["🧠 Committee Staff"]:::current
+    SubStaff["🧠 Subcommittee Staff"]:::current
+    SubComm["📂 Subcommittees"]:::current
+    Markup["📝 Markup"]:::current
+    Report["📄 Report Language"]:::current
+    Approps["💰 Appropriations"]:::shadow
+    
+    CommStaff --> SubStaff
+    SubStaff --> SubComm
+    SubComm --> Markup
+    Markup --> Report
+    Approps -.controls.-> Report
+    
+    classDef current fill:#fff3cd,stroke:#ffc107,stroke-width:3px
+    classDef shadow fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px,stroke-dasharray: 5 5
+          `;
+          break;
+        case 'FLOOR_EVT':
+          phaseDiagram = `
+flowchart TB
+    Rules["🧭 Rules Committee"]:::current
+    Floor["🏛️ Floor Action"]:::current
+    HouseLead["👤 House Leadership"]:::actor
+    SenateLead["👤 Senate Leadership"]:::actor
+    
+    HouseLead --> Rules
+    Rules --> Floor
+    SenateLead --> Floor
+    
+    classDef current fill:#fff3cd,stroke:#ffc107,stroke-width:3px
+    classDef actor fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+          `;
+          break;
+        case 'FINAL_EVT':
+          phaseDiagram = `
+flowchart TB
+    Conference["🤝 Conference"]:::current
+    HouseLead["👤 House Leadership"]:::actor
+    SenateLead["👤 Senate Leadership"]:::actor
+    Law(("📜 Enacted Law")):::pending
+    
+    HouseLead --> Conference
+    SenateLead --> Conference
+    Conference --> Law
+    
+    classDef current fill:#fff3cd,stroke:#ffc107,stroke-width:3px
+    classDef actor fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef pending fill:var(--color-gray-100),stroke:var(--color-border),stroke-width:2px
+          `;
+          break;
+        case 'IMPL_EVT':
+          phaseDiagram = `
+flowchart TB
+    Law(("📜 Enacted Law")):::current
+    Agencies["🏢 Federal Agencies"]:::current
+    StateAgencies["🏴 State Agencies"]:::secondary
+    LocalGov["🏘️ Local Governments"]:::secondary
+    
+    Law --> Agencies
+    Agencies --> StateAgencies
+    StateAgencies --> LocalGov
+    
+    classDef current fill:#fff3cd,stroke:#ffc107,stroke-width:3px
+    classDef secondary fill:#fffde7,stroke:#f9a825,stroke-width:2px
+          `;
+          break;
+        default:
+          phaseDiagram = `
+flowchart TB
+    Node1["Current Phase: ${stateInfo.phase}"]:::current
+    Node2["State: ${currentState}"]:::current
+    
+    classDef current fill:#fff3cd,stroke:#ffc107,stroke-width:3px
+          `;
+      }
+      
+      phaseContainer.innerHTML = phaseDiagram;
+      try {
+        const result = mermaid.init(undefined, phaseContainer);
+        if (result && typeof result.then === 'function') {
+          result.then(() => {
+            addDiagramInteractivity(phaseContainer, currentState, stateInfo);
+          }).catch((error) => {
+            console.error('[Congress Diagram] Phase diagram Mermaid init failed:', error);
+            setTimeout(() => addDiagramInteractivity(phaseContainer, currentState, stateInfo), 300);
+          });
+        } else {
+          setTimeout(() => addDiagramInteractivity(phaseContainer, currentState, stateInfo), 300);
+        }
+      } catch (error) {
+        console.error('[Congress Diagram] Phase diagram Mermaid init error:', error);
+        setTimeout(() => addDiagramInteractivity(phaseContainer, currentState, stateInfo), 500);
+      }
+    }
+    
+    function renderFlowDiagram(currentState) {
+      const flowContainer = document.getElementById('congressDiagramFlow');
+      if (!flowContainer) return;
+      
+      const allStates = ['PRE_EVT', 'INTRO_EVT', 'COMM_EVT', 'FLOOR_EVT', 'FINAL_EVT', 'IMPL_EVT'];
+      const currentIndex = allStates.indexOf(currentState);
+      
+      let flowDiagram = 'flowchart LR\n';
+      
+      allStates.forEach((state, idx) => {
+        const stateMap = stateToCongressMap[state];
+        let className = 'pending';
+        if (idx < currentIndex) {
+          className = 'completed';
+        } else if (idx === currentIndex) {
+          className = 'current';
+        }
+        
+        const nodeId = state.toLowerCase().replace(/_/g, '');
+        const label = `${stateMap.phase}\\n${state}`;
+        
+        if (idx === 0) {
+          flowDiagram += `    ${nodeId}(("💡 ${label}")):::${className}\n`;
+        } else if (idx === allStates.length - 1) {
+          flowDiagram += `    ${nodeId}(("📜 ${label}")):::${className}\n`;
+        } else {
+          flowDiagram += `    ${nodeId}["✍️ ${label}"]:::${className}\n`;
+        }
+        
+        if (idx > 0) {
+          const prevNodeId = allStates[idx - 1].toLowerCase().replace(/_/g, '');
+          flowDiagram += `    ${prevNodeId} --> ${nodeId}\n`;
+        }
+      });
+      
+      flowDiagram += '\n    classDef current fill:#fff3cd,stroke:#ffc107,stroke-width:3px\n';
+      flowDiagram += '    classDef completed fill:#d4edda,stroke:var(--color-success),stroke-width:2px\n';
+      flowDiagram += '    classDef pending fill:var(--color-gray-100),stroke:var(--color-border),stroke-width:2px\n';
+      
+      flowContainer.innerHTML = flowDiagram;
+      try {
+        mermaid.init(undefined, flowContainer);
+      } catch (error) {
+        console.error('[Congress Diagram] Flow diagram Mermaid init error:', error);
+      }
+    }
+    
+    // Add interactive features to Mermaid diagrams
+    function addDiagramInteractivity(diagramContainer, currentState, stateInfo) {
+      if (!diagramContainer) {
+        console.warn('[Congress Diagram] addDiagramInteractivity called without container');
+        return;
+      }
+      
+      if (!currentState || !stateInfo) {
+        console.warn('[Congress Diagram] addDiagramInteractivity called without state info', { currentState, stateInfo });
+      }
+      
+      // Clean up any existing tooltips
+      hideNodeTooltip();
+      
+      // Clean up previous event listeners if any
+      // When innerHTML is set, all old event listeners are automatically removed,
+      // but we check anyway to be safe
+      const svg = diagramContainer.querySelector('svg');
+      if (svg) {
+        // Remove any existing data attributes used for tracking (shouldn't exist if innerHTML was set)
+        svg.querySelectorAll('[data-interactive-setup]').forEach(el => {
+          // If we get here, it means the SVG wasn't regenerated, so we need to clean up
+          const mouseEnterHandler = el._mouseEnterHandler;
+          const mouseLeaveHandler = el._mouseLeaveHandler;
+          const clickHandler = el._clickHandler;
+          
+          if (mouseEnterHandler) el.removeEventListener('mouseenter', mouseEnterHandler);
+          if (mouseLeaveHandler) el.removeEventListener('mouseleave', mouseLeaveHandler);
+          if (clickHandler) el.removeEventListener('click', clickHandler);
+          
+          el.removeAttribute('data-interactive-setup');
+        });
+      }
+      
+      // Wait for SVG to be rendered
+      setTimeout(() => {
+        const svg = diagramContainer.querySelector('svg');
+        if (!svg) {
+          console.warn('[Congress Diagram] SVG not found after timeout. Diagram may not have rendered.');
+          return;
+        }
+        
+        // Node descriptions for tooltips
+        const nodeDescriptions = {
+          'Idea': 'Policy idea formation - initial concept development',
+          'Draft': 'Bill drafting - converting idea to legislative language',
+          'CommStaff': 'Committee staff review - technical analysis',
+          'SubStaff': 'Subcommittee staff - detailed review',
+          'SubComm': 'Subcommittee - initial markup and review',
+          'Markup': 'Committee markup - amendments and changes',
+          'Report': 'Report language - committee recommendations',
+          'Floor': 'Floor action - debate and voting',
+          'Rules': 'Rules Committee - scheduling floor action',
+          'Conference': 'Conference committee - reconciling House/Senate versions',
+          'Law': 'Enacted law - final passage',
+          'Agencies': 'Federal agency implementation - rulemaking and execution',
+          'HouseLead': 'House leadership - sets agenda and priorities',
+          'SenateLead': 'Senate leadership - coordinates floor activity',
+          'Industry': 'Industry coalitions - external influence groups',
+          'NGOs': 'NGOs and think tanks - policy advocacy',
+          'Approps': 'Appropriations committees - budget control'
+        };
+        
+        // Try multiple selectors to find Mermaid nodes
+        // Mermaid creates complex SVG structures, so we need to find actual node elements
+        const nodeGroups = svg.querySelectorAll('g.node, g[class*="node"]');
+        
+        // Remove duplicates and find unique node containers
+        const uniqueNodes = new Set();
+        nodeGroups.forEach(nodeGroup => {
+          // nodeGroups are already group elements
+          if (nodeGroup.tagName === 'g' && nodeGroup.classList.contains('node')) {
+            uniqueNodes.add(nodeGroup);
+          }
+        });
+        
+        // If we didn't find any with .node class, try finding groups that contain node shapes
+        if (uniqueNodes.size === 0) {
+          const shapes = svg.querySelectorAll('rect, polygon, circle, ellipse, path');
+          shapes.forEach(shape => {
+            let container = shape.parentElement;
+            // Walk up to find the group container (usually 1-2 levels up)
+            while (container && container !== svg) {
+              if (container.tagName === 'g') {
+                // Check if this group has text (indicating it's a node)
+                if (container.querySelector('text, tspan')) {
+                  uniqueNodes.add(container);
+                  break;
+                }
+              }
+              container = container.parentElement;
+            }
+          });
+        }
+        
+        // Log node selection for debugging
+        if (uniqueNodes.size === 0) {
+          console.warn('[Congress Diagram] No nodes found in diagram. Mermaid structure may have changed.');
+        } else {
+          console.log(`[Congress Diagram] Found ${uniqueNodes.size} potential nodes for interactivity`);
+        }
+        
+        let nodesWithInteractivity = 0;
+        uniqueNodes.forEach((nodeContainer) => {
+          // Get node text to identify which node this is
+          const textElement = nodeContainer.querySelector('text') || nodeContainer.querySelector('tspan');
+          if (!textElement) return;
+          
+          // Get text content, removing emojis and extra var(--color-bg-primary)space for matching
+          let nodeText = textElement.textContent || '';
+          // Remove emojis and special characters for matching (keep original for display)
+          const nodeTextClean = nodeText.replace(/[\u{1F300}-\u{1F9FF}]/gu, '').replace(/[^\w\s]/g, '').trim();
+          
+          // Improved node matching: try multiple strategies
+          let nodeKey = Object.keys(nodeDescriptions).find(key => {
+            // Strategy 1: Exact match (most reliable)
+            if (nodeText === key || nodeTextClean === key) return true;
+            
+            // Strategy 2: Case-insensitive exact match
+            if (nodeText.toLowerCase() === key.toLowerCase() || nodeTextClean.toLowerCase() === key.toLowerCase()) return true;
+            
+            // Strategy 3: Whole word match (check if key appears as whole word)
+            const regex = new RegExp(`\\b${key}\\b`, 'i');
+            if (regex.test(nodeText) || regex.test(nodeTextClean)) return true;
+            
+            // Strategy 4: Partial match in cleaned text
+            if (nodeTextClean.includes(key) || nodeTextClean.toLowerCase().includes(key.toLowerCase())) return true;
+            
+            // Strategy 5: Fallback - simple includes in original text
+            return nodeText.includes(key) || nodeText.toLowerCase().includes(key.toLowerCase());
+          });
+          
+          if (nodeKey) {
+            nodesWithInteractivity++;
+            // Mark as set up to avoid duplicate setup
+            nodeContainer.setAttribute('data-interactive-setup', 'true');
+            
+            // Add title attribute for native tooltip fallback
+            nodeContainer.setAttribute('title', nodeDescriptions[nodeKey]);
+            
+            // Add cursor pointer
+            nodeContainer.style.cursor = 'pointer';
+            
+            // Create wrapped event handlers that can be removed
+            const mouseEnterHandler = function(e) {
+              this.style.opacity = '0.8';
+              this.style.transition = 'opacity 0.2s';
+              showNodeTooltip(this, nodeDescriptions[nodeKey], nodeKey, currentState, stateInfo, e);
+            };
+            
+            const mouseLeaveHandler = function() {
+              this.style.opacity = '1';
+              hideNodeTooltip();
+            };
+            
+            const clickHandler = function(e) {
+              e.stopPropagation();
+              handleNodeClick(nodeKey, currentState, stateInfo);
+            };
+            
+            // Store handlers for potential cleanup
+            nodeContainer._mouseEnterHandler = mouseEnterHandler;
+            nodeContainer._mouseLeaveHandler = mouseLeaveHandler;
+            nodeContainer._clickHandler = clickHandler;
+            
+            // Add event listeners
+            nodeContainer.addEventListener('mouseenter', mouseEnterHandler);
+            nodeContainer.addEventListener('mouseleave', mouseLeaveHandler);
+            nodeContainer.addEventListener('click', clickHandler);
+          } else {
+            // Log unmatched nodes for debugging (only in development)
+            if (nodeText.trim().length > 0 && nodeText.trim().length < 50) {
+              console.debug(`[Congress Diagram] Node not matched: "${nodeText.substring(0, 30)}..."`);
+            }
+          }
+        });
+        
+        // Log final count for debugging
+        if (nodesWithInteractivity > 0) {
+          console.log(`[Congress Diagram] Added interactivity to ${nodesWithInteractivity} nodes`);
+        } else if (uniqueNodes.size > 0) {
+          console.warn(`[Congress Diagram] Found ${uniqueNodes.size} nodes but none matched known node keys`);
+        }
+      }, 500); // Wait for Mermaid to fully render
+    }
+    
+    // Show tooltip for diagram nodes
+    function showNodeTooltip(nodeElement, description, nodeKey, currentState, stateInfo, event) {
+      if (!nodeElement || !nodeKey) {
+        console.warn('[Congress Diagram] showNodeTooltip called with invalid parameters', { nodeElement, nodeKey });
+        return;
+      }
+      
+      // Remove existing tooltip
+      const existingTooltip = document.getElementById('diagramTooltip');
+      if (existingTooltip) {
+        // Clean up its event listeners
+        if (existingTooltip._tooltipUpdateHandler) {
+          document.removeEventListener('mousemove', existingTooltip._tooltipUpdateHandler);
+        }
+        existingTooltip.remove();
+      }
+      
+      // Create tooltip
+      const tooltip = document.createElement('div');
+      tooltip.id = 'diagramTooltip';
+      tooltip.style.cssText = `
+        position: fixed;
+        background: rgba(0, 0, 0, 0.9);
+        color: var(--color-bg-primary);
+        padding: var(--spacing-md) 15px;
+        border-radius: var(--radius-md);
+        font-size: 13px;
+        max-width: 300px;
+        z-index: 10000;
+        pointer-events: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      `;
+      
+      // Check if node is relevant to current state
+      const isCurrentNode = stateInfo && stateInfo.nodes && stateInfo.nodes.includes(nodeKey);
+      const statusText = isCurrentNode ? ' (Current Phase)' : '';
+      
+      tooltip.innerHTML = `
+        <div style="font-weight: var(--font-weight-semibold); margin-bottom: 5px;">${nodeKey}${statusText}</div>
+        <div style="font-size: var(--font-size-xs); opacity: 0.9;">${description}</div>
+        ${isCurrentNode ? '<div style="font-size: 11px; margin-top: 5px; color: #ffc107;">📍 Active in current legislative state</div>' : ''}
+      `;
+      
+      document.body.appendChild(tooltip);
+      
+      // Position tooltip initially based on event or node position
+      const positionTooltip = (e) => {
+        if (!tooltip.parentNode) return; // Tooltip was removed
+        
+        let x, y;
+        if (e && e.clientX !== undefined) {
+          x = e.clientX;
+          y = e.clientY;
+        } else {
+          // Fallback to node position
+          const rect = nodeElement.getBoundingClientRect();
+          x = rect.left + rect.width / 2;
+          y = rect.top;
+        }
+        
+        // Position tooltip to the right and above cursor/node
+        const offsetX = 15;
+        const offsetY = -10;
+        
+        tooltip.style.left = (x + offsetX) + 'px';
+        tooltip.style.top = (y + offsetY - tooltip.offsetHeight) + 'px';
+        
+        // Adjust if tooltip goes off screen
+        const tooltipRect = tooltip.getBoundingClientRect();
+        if (tooltipRect.right > window.innerWidth) {
+          tooltip.style.left = (x - tooltip.offsetWidth - offsetX) + 'px';
+        }
+        if (tooltipRect.top < 0) {
+          tooltip.style.top = (y + offsetY) + 'px';
+        }
+      };
+      
+      // Position initially
+      if (event) {
+        positionTooltip(event);
+      } else {
+        // Get node position as fallback
+        const rect = nodeElement.getBoundingClientRect();
+        positionTooltip({ clientX: rect.left + rect.width / 2, clientY: rect.top });
+      }
+      
+      // Update position on mousemove with debouncing and requestAnimationFrame for performance
+      let positionUpdateScheduled = false;
+      const updateTooltipPosition = (e) => {
+        // Check if tooltip still exists before trying to position it
+        const existingTooltip = document.getElementById('diagramTooltip');
+        if (!existingTooltip || existingTooltip !== tooltip) {
+          // Tooltip was removed, clean up handler
+          document.removeEventListener('mousemove', updateTooltipPosition);
+          positionUpdateScheduled = false;
+          return;
+        }
+        
+        // Use requestAnimationFrame for smoother updates and debouncing
+        if (!positionUpdateScheduled) {
+          positionUpdateScheduled = true;
+          requestAnimationFrame(() => {
+            positionUpdateScheduled = false;
+            if (tooltip.parentNode) {
+              positionTooltip(e);
+            }
+          });
+        }
+      };
+      
+      // Store handler for cleanup
+      tooltip._tooltipUpdateHandler = updateTooltipPosition;
+      document.addEventListener('mousemove', updateTooltipPosition);
+    }
+    
+    // Hide tooltip
+    function hideNodeTooltip() {
+      const tooltip = document.getElementById('diagramTooltip');
+      if (tooltip) {
+        // Clean up event listener
+        if (tooltip._tooltipUpdateHandler) {
+          document.removeEventListener('mousemove', tooltip._tooltipUpdateHandler);
+          tooltip._tooltipUpdateHandler = null;
+        }
+        tooltip.remove();
+      }
+    }
+    
+    // Handle node click - show related information
+    function handleNodeClick(nodeKey, currentState, stateInfo) {
+      // Ensure stateInfo exists
+      if (!stateInfo) {
+        console.warn('State info not available for node click');
+        return;
+      }
+      
+      // Check if this node is part of current state
+      const isCurrentNode = stateInfo.nodes && stateInfo.nodes.includes(nodeKey);
+      
+      // Create a simple alert with node information
+      // In a more sophisticated implementation, this could show related agents/artifacts
+      let message = `Node: ${nodeKey}\n\n`;
+      
+      if (isCurrentNode) {
+        message += `Status: ACTIVE (Part of current phase: ${stateInfo.phase || 'Unknown'})\n`;
+        message += `Description: ${stateInfo.description || 'No description available'}\n\n`;
+      } else {
+        message += `Status: Not active in current state\n\n`;
+      }
+      
+      message += `Current Legislative State: ${currentState || 'Unknown'}\n`;
+      message += `Current Phase: ${stateInfo.phase || 'Unknown'}\n\n`;
+      message += `Tip: Check the "Agent List" section below to see which agents are working on this phase.`;
+      
+      // Show alert (could be replaced with a modal in future)
+      alert(message);
+    }
+    
+    // Agent orchestration state structure
+    // This matches the format written by StateManager and agent registry
+    const exampleState = {
+      // Legislative state (from state/legislative-state.json)
+      legislative: {
+        _meta: {
+          state_version: "1.0",
+          last_updated: new Date().toISOString(),
+          authority: "api_synced",
+          workflow_id: "example-workflow-id"
+        },
+        current_state: "PRE_EVT",
+        state_definition: "Pre-Event Intelligence",
+        state_lock: false,
+        state_history: [
+          {
+            state: "PRE_EVT",
+            entered_at: new Date().toISOString(),
+            entered_by: "system",
+            reason: "Workflow created"
+          }
+        ],
+        next_allowed_states: ["INTRO_EVT"],
+        state_advancement_rule: "Requires HR_PRE approval"
+      },
+      // Agent registry (from registry/agent-registry.json)
+      agents: {
+        _meta: {
+          registry_version: "1.0",
+          last_updated: new Date().toISOString(),
+          total_agents: 5,
+          active_agents: 2,
+          idle_agents: 1,
+          waiting_review_agents: 1,
+          blocked_agents: 0
+        },
+        agents: [
+          {
+            agent_id: "intel_signal_scan_pre_evt",
+            agent_type: "Intelligence",
+            status: "RUNNING",
+            scope: "Signal scanning only (read-only)",
+            current_task: "Scanning industry signals",
+            last_heartbeat: new Date().toISOString(),
+            risk_level: "LOW"
+          },
+          {
+            agent_id: "draft_concept_memo_pre_evt",
+            agent_type: "Drafting",
+            status: "WAITING_REVIEW",
+            scope: "Generate PRE_CONCEPT artifact",
+            current_task: "Waiting for HR_PRE review",
+            last_heartbeat: new Date().toISOString(),
+            risk_level: "MEDIUM"
+          }
+        ]
+      },
+      // Review gates (from workflow state)
+      review_gates: [
+        {
+          gate_id: "HR_PRE",
+          status: "PENDING",
+          required_artifacts: ["PRE_CONCEPT"],
+          approved_artifacts: [],
+          created_at: new Date().toISOString()
+        }
+      ],
+      // Alerts/diagnostics (optional)
+      alerts: [
+        {
+          level: "info",
+          message: "System operating normally",
+          timestamp: new Date().toISOString()
+        }
+      ]
+    };
+    
+    let currentState = null;
+    
+    // File loading moved to setupDragAndDrop function
+    
+    // Render state
+    function renderState(state) {
+      // Update timestamp
+      document.getElementById('timestamp').textContent = 
+        new Date(state.timestamp || Date.now()).toLocaleString();
+      
+      // Check if we have full state or partial data
+      const hasAgents = !!(state.agents?.agents?.length > 0 || state.agents?._meta || state.system?.agents);
+      const hasReviews = !!((state.reviews && state.reviews.length > 0) || (state.review_gates && state.review_gates.length > 0));
+      const hasLegislative = !!(state.legislative || state.current_state);
+      
+      // Show data completeness indicator
+      let completenessMsg = document.getElementById('dataCompleteness');
+      if (!completenessMsg) {
+        completenessMsg = document.createElement('div');
+        completenessMsg.id = 'dataCompleteness';
+        completenessMsg.style.cssText = 'padding: 12px; margin: var(--spacing-md) 0; border-radius: var(--radius-md); font-size: 13px;';
+        const controls = document.querySelector('.controls');
+        controls.parentNode.insertBefore(completenessMsg, controls);
+      }
+      
+      if (!hasAgents || !hasReviews) {
+        const missing = [];
+        if (!hasAgents) missing.push('agent registry');
+        if (!hasReviews) missing.push('review gates');
+        
+        completenessMsg.style.background = '#fff3cd';
+        completenessMsg.style.borderLeft = '4px solid #ffc107';
+        completenessMsg.style.display = 'block';
+        completenessMsg.innerHTML = `
+          <strong>⚠️ Partial Data Loaded</strong><br>
+          <div style="margin-top: 6px;">
+            Missing: <strong>${missing.join(', ')}</strong>
+          </div>
+          <div style="margin-top: 6px; font-size: var(--font-size-xs);">
+            📁 <strong>Load this file instead:</strong> <code style="background: var(--color-gray-100); padding: 2px 6px; border-radius: 3px;">dashboards/cockpit_state.out.json</code><br>
+            <span style="color: var(--color-text-secondary); font-size: 11px;">This file contains all data: legislative state + agents + reviews</span>
+          </div>
+        `;
+      } else {
+        completenessMsg.style.display = 'none';
+      }
+      
+      // Render status grid
+      renderStatusGrid(state);
+      
+      // Render alerts
+      if (state.alerts && state.alerts.length > 0) {
+        renderAlerts(state.alerts);
+        document.getElementById('alertsSection').style.display = 'block';
+      } else {
+        document.getElementById('alertsSection').style.display = 'none';
+      }
+      
+      // Render agents - always show if data exists
+      const agentsList = state.agents?.agents || [];
+      if (agentsList && agentsList.length > 0) {
+        renderAgents(agentsList);
+        document.getElementById('agentsSection').style.display = 'block';
+      } else {
+        document.getElementById('agentsSection').style.display = 'none';
+        // Show helpful message if no agents but we have other data
+        if (state.legislative || state.current_state) {
+          const agentsSection = document.getElementById('agentsSection');
+          agentsSection.innerHTML = `
+            <h2>Agent List</h2>
+            <div style="padding: var(--spacing-lg); background: #fff3cd; border-left: 4px solid #ffc107; border-radius: var(--radius-sm);">
+              <strong>No agent data in this file</strong><br>
+              <div style="margin-top: 8px; font-size: 13px;">
+                This file only contains legislative state. To see agents and reviews, load <code>cockpit_state.out.json</code> instead.
+              </div>
+            </div>
+          `;
+          agentsSection.style.display = 'block';
+        }
+      }
+      
+      // Render reviews - ALWAYS show if reviews exist (this is the main feature)
+      const reviewsList = state.reviews || [];
+      const reviewGatesSummary = state.review_gates || [];
+      
+      // Prioritize reviews array (more detailed), fallback to review_gates
+      if (reviewsList.length > 0 || reviewGatesSummary.length > 0) {
+        const itemsToShow = reviewsList.length > 0 ? reviewsList : reviewGatesSummary;
+        renderReviews(itemsToShow);
+        document.getElementById('reviewSection').style.display = 'block';
+        
+        // Also update review gates card with count
+        const pendingCount = itemsToShow.filter(r => 
+          (r.status === 'PENDING' || r.status === 'pending') || !r.status
+        ).length;
+        
+        // Update header with pending count badge
+        const header = document.querySelector('h1');
+        if (pendingCount > 0) {
+          // Highlight in header if there are pending reviews
+          header.innerHTML = `System Control Cockpit <span style="background: #ffc107; color: #856404; padding: var(--spacing-xs) 12px; border-radius: var(--radius-xl); font-size: var(--font-size-sm); margin-left: 10px;">${pendingCount} Review${pendingCount > 1 ? 's' : ''} Pending</span>`;
+        } else {
+          // Reset header if no pending reviews
+          header.innerHTML = 'System Control Cockpit';
+        }
+      } else {
+        document.getElementById('reviewSection').style.display = 'none';
+        // Reset header if no reviews
+        document.querySelector('h1').innerHTML = 'System Control Cockpit';
+      }
+      
+      // Render conversion pipeline status
+      if (state.conversion_pipeline) {
+        renderConversionPipeline(state.conversion_pipeline);
+        document.getElementById('conversionPipelineSection').style.display = 'block';
+      } else {
+        document.getElementById('conversionPipelineSection').style.display = 'none';
+      }
+      
+      // Render audit completeness
+      if (state.audit_completeness) {
+        renderAuditCompleteness(state.audit_completeness);
+        document.getElementById('auditCompletenessSection').style.display = 'block';
+      } else {
+        document.getElementById('auditCompletenessSection').style.display = 'none';
+      }
+      
+      // Render state history
+      const legislative = state.legislative || state;
+      if (legislative.state_history && legislative.state_history.length > 0) {
+        renderStateHistory(legislative.state_history);
+        document.getElementById('stateHistorySection').style.display = 'block';
+      } else {
+        document.getElementById('stateHistorySection').style.display = 'none';
+      }
+      
+      // Render revolving-door data
+      const revolvingDoorData = state.temporal?.revolving_door;
+      if (revolvingDoorData && revolvingDoorData.available) {
+        renderRevolvingDoor(revolvingDoorData);
+        document.getElementById('revolvingDoorSection').style.display = 'block';
+      } else {
+        document.getElementById('revolvingDoorSection').style.display = 'none';
+      }
+      
+      // Render Congress structure visualization
+      highlightCongressNodes(state);
+    }
+    
+    function renderStatusGrid(state) {
+      const grid = document.getElementById('statusGrid');
+      const legislative = state.legislative || state; // Support both formats
+      const agentsMeta = state.agents?._meta || state.system?.agents || {};
+      const agentsList = state.agents?.agents || [];
+      const reviewGates = state.review_gates || state.reviews || [];
+      const system = state.system || {};
+      
+      // Deduplicate agents by agent_id (keep most recent based on last_heartbeat)
+      const agentMap = new Map();
+      agentsList.forEach(agent => {
+        if (!agent.agent_id) return;
+        const existing = agentMap.get(agent.agent_id);
+        if (!existing || 
+            (!agent.last_heartbeat && existing.last_heartbeat) ||
+            (agent.last_heartbeat && existing.last_heartbeat && 
+             new Date(agent.last_heartbeat) > new Date(existing.last_heartbeat))) {
+          agentMap.set(agent.agent_id, agent);
+        }
+      });
+      const uniqueAgentsList = Array.from(agentMap.values());
+      
+      // Calculate ACTUAL counts from deduplicated unique agents (most accurate)
+      const actualTotal = uniqueAgentsList.length;
+      const actualRunning = uniqueAgentsList.filter(a => a.status === 'RUNNING').length;
+      const actualWaiting = uniqueAgentsList.filter(a => a.status === 'WAITING_REVIEW').length;
+      const actualIdle = uniqueAgentsList.filter(a => a.status === 'IDLE').length;
+      const actualBlocked = uniqueAgentsList.filter(a => a.status === 'BLOCKED').length;
+      const actualRetired = uniqueAgentsList.filter(a => a.status === 'RETIRED').length;
+      
+      // Use actual counts from unique agents (preferred), fallback to metadata if no agents array
+      const systemAgents = system.agents || {};
+      const totalAgents = actualTotal > 0 ? actualTotal : (agentsMeta.total_agents || systemAgents.total || agentsMeta.total || 0);
+      const runningAgents = actualTotal > 0 ? actualRunning : (agentsMeta.active_agents || systemAgents.running || agentsMeta.running || 0);
+      const waitingAgents = actualTotal > 0 ? actualWaiting : (agentsMeta.waiting_review_agents || systemAgents.waiting_review || agentsMeta.waiting_review || 0);
+      const idleAgents = actualTotal > 0 ? actualIdle : (agentsMeta.idle_agents || systemAgents.idle || agentsMeta.idle || 0);
+      const blockedAgents = actualTotal > 0 ? actualBlocked : (agentsMeta.blocked_agents || systemAgents.blocked || agentsMeta.blocked || 0);
+      const retiredAgents = actualTotal > 0 ? actualRetired : (agentsMeta.retired_agents || systemAgents.retired || agentsMeta.retired || 0);
+      
+      // Calculate progress for current state
+      const currentStateValue = legislative.current_state || system.current_state;
+      let progressHTML = '';
+      if (currentStateValue && stateToCongressMap[currentStateValue]) {
+        const progress = stateToCongressMap[currentStateValue].progress || 0;
+        const phaseName = stateToCongressMap[currentStateValue].phase || '';
+        progressHTML = `
+          <div style="margin-top: var(--spacing-lg);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: var(--font-size-xs); color: var(--color-text-secondary);">
+              <span>Workflow Progress</span>
+              <span style="font-weight: var(--font-weight-semibold);">${progress}%</span>
+            </div>
+            <div class="state-progress">
+              <div class="state-progress-bar" style="width: ${progress}%;"></div>
+            </div>
+            <div style="font-size: 11px; color: #999; margin-top: 5px; text-align: center;">
+              ${phaseName}
+            </div>
+          </div>
+        `;
+      }
+      
+      grid.innerHTML = `
+        <div class="card">
+          <h2 class="collapsible" onclick="toggleCollapse(this)">Legislative State</h2>
+          <div class="collapsible-content expanded">
+            ${legislative.current_state || system.current_state ? `
+              <div class="status-item ${(legislative.state_lock || system.state_lock) ? 'warning' : 'active'}">
+                <strong>Current:</strong> ${legislative.current_state || system.current_state || 'unknown'}
+                <span class="badge ${(legislative.state_lock || system.state_lock) ? 'warning' : 'success'}">
+                  ${(legislative.state_lock || system.state_lock) ? 'LOCKED' : 'UNLOCKED'}
+                </span>
+              </div>
+              <div class="status-item">
+                <strong>Definition:</strong> ${legislative.state_definition || system.state_definition || 'N/A'}
+              </div>
+              ${(legislative.next_allowed_states || system.next_allowed_states) && (legislative.next_allowed_states || system.next_allowed_states).length > 0 ? `
+                <div class="status-item">
+                  <strong>Next States:</strong> ${(legislative.next_allowed_states || system.next_allowed_states).join(', ')}
+                </div>
+              ` : `
+                <div class="status-item">
+                  <strong>Status:</strong> ${legislative.state_advancement_rule || system.state_advancement_rule || 'No advancement rule'}
+                </div>
+              `}
+              <div class="detail-grid" style="margin-top: var(--spacing-md);">
+                <div class="metric">
+                  <div class="metric-label">State Lock</div>
+                  <div class="metric-value">${(legislative.state_lock || system.state_lock) ? '🔒 Locked' : '🔓 Unlocked'}</div>
+                </div>
+                ${legislative._meta?.workflow_id || system.workflow_id ? `
+                  <div class="metric">
+                    <div class="metric-label">Workflow ID</div>
+                    <div class="metric-value" style="font-size: 11px; font-family: monospace;">${(legislative._meta?.workflow_id || system.workflow_id).substring(0, 8)}...</div>
+                  </div>
+                ` : ''}
+              </div>
+              ${progressHTML}
+            ` : '<div class="empty-state">No legislative state data</div>'}
+          </div>
+        </div>
+        <div class="card">
+          <h2 class="collapsible" onclick="toggleCollapse(this)">Agent Status</h2>
+          <div class="collapsible-content expanded">
+            ${(totalAgents !== undefined && totalAgents > 0) || agentsList.length > 0 ? `
+              ${agentsList.length > uniqueAgentsList.length ? `
+                <div style="padding: var(--spacing-sm); background: #fff3cd; border-left: 4px solid #ffc107; border-radius: var(--radius-sm); margin-bottom: var(--spacing-md); font-size: var(--font-size-xs);">
+                  <strong>ℹ️ Note:</strong> ${agentsList.length} agents in data, ${uniqueAgentsList.length} unique (${agentsList.length - uniqueAgentsList.length} duplicates removed)
+                  <div style="margin-top: 4px; font-size: 11px;">
+                    Counts below use unique agents only (keeps most recent version per agent_id)
+                  </div>
+                </div>
+              ` : ''}
+              ${(agentsMeta.idle_agents !== actualIdle || agentsMeta.active_agents !== actualRunning) && agentsList.length > 0 ? `
+                <div style="padding: var(--spacing-sm); background: #e7f3ff; border-left: 4px solid var(--color-primary); border-radius: var(--radius-sm); margin-bottom: var(--spacing-md); font-size: var(--font-size-xs);">
+                  <strong>📊 Count Comparison:</strong>
+                  <div style="margin-top: 4px; font-size: 11px; font-family: monospace;">
+                    Metadata: Running=${agentsMeta.active_agents || systemAgents.running || 0}, Idle=${agentsMeta.idle_agents || systemAgents.idle || 0}<br/>
+                    Actual (unique): Running=${actualRunning}, Idle=${actualIdle}
+                  </div>
+                </div>
+              ` : ''}
+              <div class="status-item active">
+                <strong>Running:</strong> ${runningAgents} / ${totalAgents}
+                ${totalAgents > 0 ? `<span class="badge success">${Math.round((runningAgents / totalAgents) * 100)}%</span>` : ''}
+              </div>
+              <div class="status-item warning">
+                <strong>Waiting Review:</strong> ${waitingAgents}
+              </div>
+              <div class="status-item">
+                <strong>Idle:</strong> ${idleAgents}
+              </div>
+              ${retiredAgents > 0 ? `
+                <div class="status-item">
+                  <strong>Retired:</strong> ${retiredAgents}
+                </div>
+              ` : ''}
+              ${blockedAgents > 0 ? `
+                <div class="status-item error">
+                  <strong>Blocked:</strong> ${blockedAgents}
+                </div>
+              ` : ''}
+              <div class="detail-grid" style="margin-top: var(--spacing-md);">
+                <div class="metric">
+                  <div class="metric-label">Unique Agents</div>
+                  <div class="metric-value">${totalAgents}</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-label">Active Rate</div>
+                  <div class="metric-value">${totalAgents > 0 ? Math.round(((runningAgents + waitingAgents) / totalAgents) * 100) : 0}%</div>
+                </div>
+                ${agentsMeta.last_updated ? `
+                  <div class="metric">
+                    <div class="metric-label">Last Updated</div>
+                    <div class="metric-value" style="font-size: 11px;">${new Date(agentsMeta.last_updated).toLocaleTimeString()}</div>
+                  </div>
+                ` : ''}
+              </div>
+              ${agentsList.length > uniqueAgentsList.length ? `
+                <div style="margin-top: var(--spacing-md); font-size: 11px; color: var(--color-text-secondary); font-style: italic;">
+                  Counts based on ${uniqueAgentsList.length} unique agents (latest version per ID)
+                </div>
+              ` : ''}
+            ` : '<div class="empty-state">No agent registry data</div>'}
+          </div>
+        </div>
+        <div class="card">
+          <h2 class="collapsible" onclick="toggleCollapse(this)">Review Gates</h2>
+          <div class="collapsible-content expanded">
+            ${reviewGates.length > 0 ? `
+              <div class="status-item ${reviewGates.filter(r => r.status === 'PENDING' || r.status === 'pending' || !r.status).length > 0 ? 'warning' : 'active'}">
+                <strong>Pending:</strong> ${reviewGates.filter(r => r.status === 'PENDING' || r.status === 'pending' || !r.status).length} / ${reviewGates.length}
+              </div>
+              <div class="status-item active">
+                <strong>Approved:</strong> ${reviewGates.filter(r => r.status === 'APPROVED' || r.status === 'approved').length}
+              </div>
+              <div class="detail-grid" style="margin-top: var(--spacing-md);">
+                <div class="metric">
+                  <div class="metric-label">Total Items</div>
+                  <div class="metric-value">${reviewGates.length}</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-label">Completion</div>
+                  <div class="metric-value">${reviewGates.length > 0 ? Math.round((reviewGates.filter(r => r.status === 'APPROVED' || r.status === 'approved').length / reviewGates.length) * 100) : 0}%</div>
+                </div>
+              </div>
+              <div style="margin-top: var(--spacing-md); padding: var(--spacing-md); background: #fff3cd; border-left: 4px solid #ffc107; border-radius: var(--radius-sm);">
+                <strong>📋 See detailed review items below</strong>
+              </div>
+            ` : '<div class="empty-state">No review gate data</div>'}
+          </div>
+        </div>
+      `;
+    }
+    
+    function toggleCollapse(element) {
+      element.classList.toggle('expanded');
+      const content = element.nextElementSibling;
+      if (content) {
+        content.classList.toggle('expanded');
+      }
+    }
+    
+    function renderAlerts(alerts) {
+      const container = document.getElementById('alertsContainer');
+      container.innerHTML = alerts.map(alert => `
+        <div class="alert ${alert.level}">
+          <strong>${alert.level.toUpperCase()}:</strong> ${alert.message}
+          <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: 4px;">
+            ${new Date(alert.timestamp).toLocaleString()}
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    function renderAgents(agents) {
+      const container = document.getElementById('agentsContainer');
+      
+      if (!agents || agents.length === 0) {
+        container.innerHTML = '<div class="empty-state">No agent data available</div>';
+        return;
+      }
+      
+      // Remove duplicates by agent_id (keep the most recent based on last_heartbeat)
+      const agentMap = new Map();
+      agents.forEach(agent => {
+        const existing = agentMap.get(agent.agent_id);
+        if (!existing || 
+            (!agent.last_heartbeat && existing.last_heartbeat) ||
+            (agent.last_heartbeat && existing.last_heartbeat && 
+             new Date(agent.last_heartbeat) > new Date(existing.last_heartbeat))) {
+          agentMap.set(agent.agent_id, agent);
+        }
+      });
+      const uniqueAgents = Array.from(agentMap.values());
+      
+      // Apply filters
+      let filtered = uniqueAgents;
+      
+      if (searchTerm) {
+        filtered = filtered.filter(agent => 
+          agent.agent_id.toLowerCase().includes(searchTerm) ||
+          agent.agent_type.toLowerCase().includes(searchTerm) ||
+          (agent.current_task && agent.current_task.toLowerCase().includes(searchTerm)) ||
+          agent.status.toLowerCase().includes(searchTerm)
+        );
+      }
+      
+      // Calculate actual counts from unique agents
+      const actualRunning = filtered.filter(a => a.status === 'RUNNING').length;
+      const actualWaiting = filtered.filter(a => a.status === 'WAITING_REVIEW').length;
+      const actualIdle = filtered.filter(a => a.status === 'IDLE').length;
+      const actualBlocked = filtered.filter(a => a.status === 'BLOCKED').length;
+      const actualRetired = filtered.filter(a => a.status === 'RETIRED').length;
+      const actualTotal = filtered.length;
+      
+      // Always show summary header with counts
+      const summaryHTML = searchTerm ? 
+        `<div style="padding: var(--spacing-md); background: #e7f3ff; border-left: 4px solid var(--color-primary); margin-bottom: var(--spacing-md); border-radius: var(--radius-sm);">
+          <strong>Showing ${actualTotal} of ${uniqueAgents.length} agents</strong> (filtered by search)
+          <div style="font-size: var(--font-size-xs); margin-top: 4px; color: var(--color-text-secondary);">
+            Running: ${actualRunning} | Waiting: ${actualWaiting} | Idle: ${actualIdle} | Blocked: ${actualBlocked} | Retired: ${actualRetired}
+          </div>
+        </div>` :
+        `<div style="padding: var(--spacing-md); background: var(--color-gray-100); border-left: 4px solid var(--color-gray-500); margin-bottom: var(--spacing-md); border-radius: var(--radius-sm);">
+          <strong>Total: ${uniqueAgents.length} unique agents</strong>
+          <div style="font-size: var(--font-size-xs); margin-top: 4px; color: var(--color-text-secondary);">
+            Running: ${actualRunning} | Waiting: ${actualWaiting} | Idle: ${actualIdle} | Blocked: ${actualBlocked} | Retired: ${actualRetired}
+          </div>
+        </div>`;
+      
+      container.innerHTML = summaryHTML;
+      
+      if (filtered.length === 0) {
+        container.innerHTML += '<div class="empty-state">No agents match the current filter/search</div>';
+        return;
+      }
+      
+      // Sort by status priority (RUNNING first, then WAITING_REVIEW, then others)
+      const statusPriority = { 'RUNNING': 1, 'WAITING_REVIEW': 2, 'BLOCKED': 3, 'IDLE': 4, 'RETIRED': 5 };
+      filtered.sort((a, b) => {
+        const priorityA = statusPriority[a.status] || 99;
+        const priorityB = statusPriority[b.status] || 99;
+        if (priorityA !== priorityB) return priorityA - priorityB;
+        return a.agent_id.localeCompare(b.agent_id);
+      });
+      
+      container.innerHTML += filtered.map(agent => {
+        const statusClass = agent.status === 'RUNNING' ? 'active' : 
+                           agent.status === 'WAITING_REVIEW' ? 'warning' :
+                           agent.status === 'BLOCKED' ? 'error' : '';
+        
+        // Highlight search matches
+        const highlight = (text) => {
+          if (!searchTerm) return text;
+          const regex = new RegExp(`(${searchTerm})`, 'gi');
+          return text.replace(regex, '<mark style="background: #ffeb3b; padding: 2px 4px;">$1</mark>');
+        };
+        
+        return `
+          <div class="status-item ${statusClass}">
+            <strong>${highlight(agent.agent_id)}</strong>
+            <span class="badge ${statusClass === 'active' ? 'success' : statusClass === 'warning' ? 'warning' : statusClass === 'error' ? 'error' : ''}">
+              ${agent.status}
+            </span>
+            <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-top: 4px;">
+              Type: ${highlight(agent.agent_type)} | Risk: ${agent.risk_level || 'N/A'}
+            </div>
+            ${agent.current_task ? `
+              <div style="font-size: 13px; color: var(--color-text-tertiary); margin-top: 2px;">
+                Task: ${highlight(agent.current_task)}
+              </div>
+            ` : ''}
+            ${agent.last_heartbeat ? `
+              <div style="font-size: var(--font-size-xs); color: #999; margin-top: 2px;">
+                Last heartbeat: ${new Date(agent.last_heartbeat).toLocaleString()}
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+    
+    function renderReviews(reviewItems) {
+      const container = document.getElementById('reviewContainer');
+      if (!reviewItems || reviewItems.length === 0) {
+        container.innerHTML = '<div class="empty-state">No pending reviews</div>';
+        return;
+      }
+      
+      // Apply filters
+      let filtered = reviewItems;
+      
+      if (searchTerm) {
+        filtered = filtered.filter(r =>
+          (r.artifact_name && r.artifact_name.toLowerCase().includes(searchTerm)) ||
+          (r.artifact_path && r.artifact_path.toLowerCase().includes(searchTerm)) ||
+          (r.gate_name && r.gate_name.toLowerCase().includes(searchTerm)) ||
+          (r.gate_id && r.gate_id.toLowerCase().includes(searchTerm))
+        );
+      }
+      
+      if (currentFilter === 'pending') {
+        filtered = filtered.filter(r => !r.status || r.status === 'PENDING' || r.status === 'pending');
+      } else if (currentFilter === 'approved') {
+        filtered = filtered.filter(r => r.status === 'APPROVED' || r.status === 'approved');
+      } else if (currentFilter === 'high-risk') {
+        filtered = filtered.filter(r => r.risk_level && r.risk_level.toLowerCase() === 'high');
+      }
+      
+      // Separate pending from approved
+      const pending = filtered.filter(r => 
+        !r.status || r.status === 'PENDING' || r.status === 'pending'
+      );
+      const approved = filtered.filter(r => 
+        r.status === 'APPROVED' || r.status === 'approved'
+      );
+      
+      container.innerHTML = `
+        ${pending.length > 0 ? `
+          <div style="margin-bottom: var(--spacing-xl);">
+            <h3 style="font-size: var(--font-size-base); margin-bottom: var(--spacing-md); color: #856404;">
+              ⚠️ Pending Review (${pending.length})
+            </h3>
+            ${pending.map(item => renderReviewItem(item)).join('')}
+          </div>
+        ` : ''}
+        ${approved.length > 0 ? `
+          <div style="margin-top: var(--spacing-xl); opacity: 0.7;">
+            <h3 style="font-size: var(--font-size-base); margin-bottom: var(--spacing-md); color: #155724;">
+              ✅ Approved (${approved.length})
+            </h3>
+            ${approved.map(item => renderReviewItem(item)).join('')}
+          </div>
+        ` : ''}
+      `;
+    }
+    
+    function renderReviewItem(item) {
+      const status = item.status || 'PENDING';
+      const statusLower = status.toLowerCase();
+      const isPending = !status || status === 'PENDING' || status === 'pending';
+      
+      // Highlight search matches
+      const highlight = (text) => {
+        if (!text || !searchTerm) return text || '';
+        const regex = new RegExp(`(${searchTerm})`, 'gi');
+        return String(text).replace(regex, '<mark style="background: #ffeb3b; padding: 2px 4px;">$1</mark>');
+      };
+      
+      return `
+        <div class="review-item ${statusLower}" style="margin-bottom: var(--spacing-lg);">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+            <div>
+              <strong style="font-size: var(--font-size-base);">${highlight(item.artifact_name || item.artifact || 'Unnamed Artifact')}</strong>
+              <span class="badge ${statusLower === 'approved' ? 'success' : 'warning'}" style="margin-left: 10px;">
+                ${status}
+              </span>
+            </div>
+            ${item.gate_name ? `
+              <div style="font-size: 13px; color: var(--color-text-secondary); font-weight: var(--font-weight-semibold);">
+                ${highlight(item.gate_name)}
+              </div>
+            ` : ''}
+          </div>
+          
+          ${item.gate_id ? `
+            <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: 4px;">
+              <strong>Gate:</strong> ${item.gate_id}
+            </div>
+          ` : ''}
+          
+          ${item.artifact_path ? `
+            <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: 6px; font-family: monospace; background: var(--color-gray-100); padding: var(--spacing-sm); border-radius: var(--radius-sm); word-break: break-all;">
+              📄 ${item.artifact_path.replace(/\\/g, '/')}
+            </div>
+          ` : ''}
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md); margin-top: var(--spacing-md);">
+            ${item.risk_level ? `
+              <div style="padding: var(--spacing-sm); background: ${item.risk_level.toLowerCase() === 'high' ? '#f8d7da' : item.risk_level.toLowerCase() === 'medium' ? '#fff3cd' : '#d4edda'}; border-radius: var(--radius-sm);">
+                <div style="font-size: 11px; color: var(--color-text-secondary); text-transform: uppercase;">Risk Level</div>
+                <div style="font-weight: var(--font-weight-semibold); color: var(--color-text-primary);">${item.risk_level}</div>
+              </div>
+            ` : ''}
+            
+            ${item.review_effort_estimate ? `
+              <div style="padding: var(--spacing-sm); background: #e7f3ff; border-radius: var(--radius-sm);">
+                <div style="font-size: 11px; color: var(--color-text-secondary); text-transform: uppercase;">Est. Review Time</div>
+                <div style="font-weight: var(--font-weight-semibold); color: var(--color-text-primary);">${item.review_effort_estimate}</div>
+              </div>
+            ` : ''}
+            
+            ${item.submitted_at ? `
+              <div style="padding: var(--spacing-sm); background: var(--color-gray-100); border-radius: var(--radius-sm);">
+                <div style="font-size: 11px; color: var(--color-text-secondary); text-transform: uppercase;">Submitted</div>
+                <div style="font-weight: var(--font-weight-semibold); color: var(--color-text-primary); font-size: var(--font-size-xs);">${new Date(item.submitted_at).toLocaleString()}</div>
+              </div>
+            ` : ''}
+            
+            ${item.submitted_by ? `
+              <div style="padding: var(--spacing-sm); background: var(--color-gray-100); border-radius: var(--radius-sm);">
+                <div style="font-size: 11px; color: var(--color-text-secondary); text-transform: uppercase;">Agent</div>
+                <div style="font-weight: var(--font-weight-semibold); color: var(--color-text-primary); font-size: var(--font-size-xs); font-family: monospace;">${item.submitted_by}</div>
+              </div>
+            ` : ''}
+            
+            ${item.system_mode || item._meta?.system_mode ? `
+              <div style="padding: var(--spacing-sm); background: ${(item.system_mode || item._meta?.system_mode) === 'PRODUCTION' ? '#d1ecf1' : '#fff3cd'}; border-radius: var(--radius-sm); border-left: 3px solid ${(item.system_mode || item._meta?.system_mode) === 'PRODUCTION' ? '#0c5460' : '#856404'};">
+                <div style="font-size: 11px; color: var(--color-text-secondary); text-transform: uppercase;">System Mode</div>
+                <div style="font-weight: var(--font-weight-semibold); color: var(--color-text-primary);">${item.system_mode || item._meta?.system_mode}</div>
+              </div>
+            ` : ''}
+            
+            ${item.is_placeholder || item._meta?.is_placeholder ? `
+              <div style="padding: var(--spacing-sm); background: #f8d7da; border-radius: var(--radius-sm); border-left: 3px solid #721c24;">
+                <div style="font-size: 11px; color: var(--color-text-secondary); text-transform: uppercase;">⚠️ Data Status</div>
+                <div style="font-weight: var(--font-weight-semibold); color: #721c24;">PLACEHOLDER DATA</div>
+                <div style="font-size: 10px; color: #856404; margin-top: 2px;">Contains placeholder content</div>
+              </div>
+            ` : ''}
+            
+            ${item.missing_dependencies && item.missing_dependencies.length > 0 ? `
+              <div style="padding: var(--spacing-sm); background: #fff3cd; border-radius: var(--radius-sm); border-left: 3px solid #856404;">
+                <div style="font-size: 11px; color: var(--color-text-secondary); text-transform: uppercase;">⚠️ Missing Dependencies</div>
+                <div style="font-weight: var(--font-weight-semibold); color: #856404; font-size: 11px;">${item.missing_dependencies.length} missing</div>
+                <div style="font-size: 10px; color: #856404; margin-top: 2px;">${item.missing_dependencies.slice(0, 2).join(', ')}${item.missing_dependencies.length > 2 ? '...' : ''}</div>
+              </div>
+            ` : item._meta?.missing_dependencies && item._meta.missing_dependencies.length > 0 ? `
+              <div style="padding: var(--spacing-sm); background: #fff3cd; border-radius: var(--radius-sm); border-left: 3px solid #856404;">
+                <div style="font-size: 11px; color: var(--color-text-secondary); text-transform: uppercase;">⚠️ Missing Dependencies</div>
+                <div style="font-weight: var(--font-weight-semibold); color: #856404; font-size: 11px;">${item._meta.missing_dependencies.length} missing</div>
+                <div style="font-size: 10px; color: #856404; margin-top: 2px;">${item._meta.missing_dependencies.slice(0, 2).join(', ')}${item._meta.missing_dependencies.length > 2 ? '...' : ''}</div>
+              </div>
+            ` : ''}
+          </div>
+          
+          ${(item.is_placeholder || item._meta?.is_placeholder || (item.missing_dependencies && item.missing_dependencies.length > 0) || (item._meta?.missing_dependencies && item._meta.missing_dependencies.length > 0)) && isPending ? `
+            <div style="margin-top: var(--spacing-md); padding: var(--spacing-sm); background: #f8d7da; border-left: 4px solid var(--color-error); border-radius: var(--radius-sm); font-size: var(--font-size-xs);">
+              <strong>⚠️ Authority Warning:</strong> This artifact contains placeholder data or is missing dependencies. Review carefully before approval. In PRODUCTION mode, this artifact would not have been generated.
+            </div>
+          ` : item.full_path && isPending ? `
+            <div style="margin-top: var(--spacing-md); padding: var(--spacing-sm); background: #fff3cd; border-left: 4px solid #ffc107; border-radius: var(--radius-sm); font-size: var(--font-size-xs);">
+              <strong>Action Required:</strong> Review artifact at the path above. Approve or reject via the agent orchestrator API.
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+    
+    function renderRevolvingDoor(rdData) {
+      const container = document.getElementById('revolvingDoorContainer');
+      
+      if (!rdData || !rdData.available) {
+        container.innerHTML = '<div class="empty-state">Revolving-door data not available</div>';
+        return;
+      }
+      
+      if (rdData.error) {
+        container.innerHTML = `<div class="alert warning">Error: ${rdData.error}</div>`;
+        return;
+      }
+      
+      const kpis = rdData.kpis || {};
+      const summary = rdData.summary || {};
+      const eventStatuses = rdData.event_statuses || [];
+      const currentPhase = rdData.current_phase || 'UNKNOWN';
+      const phaseSensitivity = rdData.phase_sensitivity || 0.0;
+      
+      // Health status color
+      const healthStatus = kpis.health_status || 'UNKNOWN';
+      const healthColor = healthStatus === 'HEALTHY' ? 'var(--color-success)' : '#ffc107';
+      
+      // Phase sensitivity indicator
+      const phaseSensitivityPercent = Math.round(phaseSensitivity * 100);
+      const phaseColor = phaseSensitivity === 0.0 ? 'var(--color-error)' : phaseSensitivity > 0.7 ? 'var(--color-success)' : '#ffc107';
+      
+      container.innerHTML = `
+        <div class="status-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-bottom: var(--spacing-xl);">
+          <div class="status-item ${healthStatus === 'HEALTHY' ? 'active' : 'warning'}">
+            <strong>Active Events:</strong> ${kpis.active_count || 0}
+            <div style="font-size: 11px; color: var(--color-text-secondary); margin-top: 4px;">
+              Health: <span style="color: ${healthColor};">${healthStatus}</span>
+            </div>
+          </div>
+          <div class="status-item">
+            <strong>Total Events:</strong> ${kpis.total_count || 0}
+            <div style="font-size: 11px; color: var(--color-text-secondary); margin-top: 4px;">
+              Expired: ${kpis.expired_count || 0}
+            </div>
+          </div>
+          <div class="status-item">
+            <strong>Compliance:</strong> ${kpis.expiration_compliance?.compliance_rate?.toFixed(1) || 100.0}%
+            <div style="font-size: 11px; color: var(--color-text-secondary); margin-top: 4px;">
+              Required: 100%
+            </div>
+          </div>
+          ${kpis.average_remaining_days !== null ? `
+            <div class="status-item">
+              <strong>Avg Remaining:</strong> ${kpis.average_remaining_days.toFixed(1)} days
+            </div>
+          ` : ''}
+        </div>
+        
+        <div style="padding: var(--spacing-lg); background: var(--color-gray-100); border-left: 4px solid ${phaseColor}; border-radius: var(--radius-sm); margin-bottom: var(--spacing-lg);">
+          <strong>Current Phase: ${currentPhase}</strong>
+          <div style="font-size: 13px; margin-top: 8px; color: var(--color-text-secondary);">
+            Phase Sensitivity: <strong style="color: ${phaseColor};">${phaseSensitivityPercent}%</strong>
+            ${phaseSensitivity === 0.0 ? '<br><em>No revolving-door boost applied in IMPL_EVT phase (correct behavior)</em>' : ''}
+          </div>
+        </div>
+        
+        <div style="margin-bottom: var(--spacing-lg);">
+          <h3 style="font-size: var(--font-size-base); margin-bottom: var(--spacing-md);">Event Classification</h3>
+          <div class="detail-grid">
+            <div class="metric">
+              <div class="metric-label">High Impact Now</div>
+              <div class="metric-value" style="color: var(--color-success);">${summary.high_impact_count || 0}</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Decaying But Relevant</div>
+              <div class="metric-value" style="color: #ffc107;">${summary.decaying_relevant_count || 0}</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Near Expiry</div>
+              <div class="metric-value" style="color: #ff9800;">${summary.near_expiry_count || 0}</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Safe to Ignore</div>
+              <div class="metric-value" style="color: var(--color-gray-500);">${summary.safe_to_ignore_count || 0}</div>
+            </div>
+          </div>
+        </div>
+        
+        ${eventStatuses.length > 0 ? `
+          <div style="margin-top: var(--spacing-xl);">
+            <h3 style="font-size: var(--font-size-base); margin-bottom: var(--spacing-md);">Active Events (${eventStatuses.length})</h3>
+            ${eventStatuses.map(event => {
+              const decayColor = event.decay_status === 'FULL' ? 'var(--color-success)' : 
+                                event.decay_status === 'DECAYING' ? '#ffc107' : 'var(--color-error)';
+              return `
+                <div style="padding: 12px; margin-bottom: var(--spacing-md); background: #f9f9f9; border-left: 4px solid ${decayColor}; border-radius: var(--radius-sm);">
+                  <strong>${event.from_role || 'Unknown'} → ${event.to_role || 'Unknown'}</strong>
+                  <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: 4px;">
+                    Entity: ${event.entity_id || 'N/A'} | 
+                    Days Since: ${event.days_since || 0} | 
+                    Remaining: ${event.remaining_days !== null ? event.remaining_days + ' days' : 'N/A'} | 
+                    Status: <span style="color: ${decayColor};">${event.decay_status || 'UNKNOWN'}</span> | 
+                    Boost: ${((event.boost_factor || 0) * 100).toFixed(0)}%
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        ` : `
+          <div style="padding: var(--spacing-lg); background: #e7f3ff; border-left: 4px solid var(--color-primary); border-radius: var(--radius-sm); margin-top: var(--spacing-lg);">
+            <strong>No active revolving-door events</strong>
+            <div style="font-size: 13px; margin-top: 8px; color: var(--color-text-secondary);">
+              System is ready to track revolving-door influence when events are created.
+            </div>
+          </div>
+        `}
+        
+        <div style="margin-top: var(--spacing-xl); padding: 12px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: var(--radius-sm); font-size: var(--font-size-xs);">
+          <strong>⚠️ Reminder:</strong> All revolving-door influence is temporary (max 180 days), decaying (exponential after 90 days), and advisory (confidence: MEDIUM). Human override always possible.
+        </div>
+      `;
+    }
+    
+    function renderStateHistory(history) {
+      const container = document.getElementById('stateHistoryContainer');
+      container.innerHTML = history.slice().reverse().map(entry => `
+        <div class="status-item">
+          <strong>${entry.state}</strong>
+          <div style="font-size: 13px; color: var(--color-text-secondary); margin-top: 4px;">
+            ${entry.reason || 'State transition'}
+          </div>
+          <div style="font-size: var(--font-size-xs); color: #999; margin-top: 2px;">
+            ${new Date(entry.entered_at).toLocaleString()} by ${entry.entered_by || 'system'}
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    function renderConversionPipeline(pipeline) {
+      const container = document.getElementById('conversionPipelineContainer');
+      const status = pipeline.status || {};
+      const totalPending = pipeline.total_pending || 0;
+      const byGate = pipeline.by_gate || {};
+      
+      if (totalPending === 0) {
+        container.innerHTML = `
+          <div style="padding: var(--spacing-lg); background: #d4edda; border-left: 4px solid var(--color-success); border-radius: var(--radius-sm);">
+            <strong>✅ No pending reviews in conversion pipeline</strong>
+            <div style="font-size: 13px; margin-top: 8px; color: var(--color-text-secondary);">
+              All artifacts are either actionable or do not require review.
+            </div>
+          </div>
+        `;
+        return;
+      }
+      
+      const gates = Object.keys(status);
+      container.innerHTML = `
+        <div style="margin-bottom: var(--spacing-lg);">
+          <div class="status-item ${totalPending > 0 ? 'warning' : 'active'}">
+            <strong>Total Pending:</strong> ${totalPending} artifact${totalPending !== 1 ? 's' : ''}
+          </div>
+        </div>
+        ${gates.map(gateId => {
+          const gateInfo = status[gateId];
+          const pendingCount = gateInfo.pending_count || 0;
+          const artifacts = gateInfo.artifacts || [];
+          
+          return `
+            <div style="margin-bottom: var(--spacing-xl); padding: 12px; background: #f9f9f9; border-left: 4px solid #ffc107; border-radius: var(--radius-sm);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md);">
+                <strong style="font-size: var(--font-size-base);">${gateInfo.gate_name || gateId}</strong>
+                <span class="badge warning">${pendingCount} pending</span>
+              </div>
+              ${artifacts.length > 0 ? `
+                <div style="margin-top: var(--spacing-md);">
+                  ${artifacts.map(artifact => `
+                    <div style="padding: var(--spacing-sm); margin-bottom: 6px; background: var(--color-bg-primary); border-radius: var(--radius-sm); font-size: 13px;">
+                      <strong>${artifact.artifact_name || 'Unnamed'}</strong>
+                      ${artifact.risk_level ? `
+                        <span class="badge ${artifact.risk_level.toLowerCase() === 'high' ? 'error' : 'warning'}" style="margin-left: 8px;">
+                          ${artifact.risk_level}
+                        </span>
+                      ` : ''}
+                      ${artifact.submitted_at ? `
+                        <div style="font-size: 11px; color: var(--color-text-secondary); margin-top: 4px;">
+                          Submitted: ${new Date(artifact.submitted_at).toLocaleString()}
+                        </div>
+                      ` : ''}
+                    </div>
+                  `).join('')}
+                </div>
+              ` : ''}
+            </div>
+          `;
+        }).join('')}
+        <div style="margin-top: var(--spacing-lg); padding: 12px; background: #e7f3ff; border-left: 4px solid var(--color-primary); border-radius: var(--radius-sm); font-size: var(--font-size-xs);">
+          <strong>💡 Conversion Pipeline:</strong> Artifacts move from SPECULATIVE → PENDING REVIEW → ACTIONABLE. 
+          Pending reviews are artifacts in the conversion pipeline awaiting human approval.
+        </div>
+      `;
+    }
+    
+    function renderAuditCompleteness(auditData) {
+      const container = document.getElementById('auditCompletenessContainer');
+      const explanation = auditData.explanation;
+      
+      if (!explanation) {
+        container.innerHTML = `
+          <div style="padding: var(--spacing-lg); background: #d4edda; border-left: 4px solid var(--color-success); border-radius: var(--radius-sm);">
+            <strong>✅ Audit completeness is healthy</strong>
+            <div style="font-size: 13px; margin-top: 8px; color: var(--color-text-secondary);">
+              All actionable artifacts have corresponding decision log entries.
+            </div>
+          </div>
+        `;
+        return;
+      }
+      
+      const coverage = explanation.coverage || 0;
+      const actionableCount = explanation.actionable_artifacts || 0;
+      const artifactsWithLogs = explanation.artifacts_with_logs || 0;
+      const missingLogs = explanation.missing_logs || 0;
+      const reason = explanation.reason || 'Unknown reason';
+      
+      const isLow = coverage < 90;
+      const statusColor = isLow ? 'var(--color-error)' : '#ffc107';
+      const statusBg = isLow ? '#f8d7da' : '#fff3cd';
+      
+      container.innerHTML = `
+        <div style="padding: var(--spacing-lg); background: ${statusBg}; border-left: 4px solid ${statusColor}; border-radius: var(--radius-sm); margin-bottom: var(--spacing-lg);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md);">
+            <strong style="font-size: var(--font-size-base);">Decision Log Coverage</strong>
+            <span class="badge ${isLow ? 'error' : 'warning'}" style="font-size: var(--font-size-sm);">
+              ${coverage.toFixed(1)}%
+            </span>
+          </div>
+          <div style="font-size: 13px; color: var(--color-text-secondary); margin-top: 8px;">
+            ${reason}
+          </div>
+        </div>
+        
+        <div class="detail-grid" style="margin-bottom: var(--spacing-lg);">
+          <div class="metric">
+            <div class="metric-label">Actionable Artifacts</div>
+            <div class="metric-value">${actionableCount}</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">With Decision Logs</div>
+            <div class="metric-value">${artifactsWithLogs}</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Missing Logs</div>
+            <div class="metric-value" style="color: ${isLow ? 'var(--color-error)' : 'var(--color-text-secondary)'};">${missingLogs}</div>
+          </div>
+        </div>
+        
+        ${isLow ? `
+          <div style="padding: 12px; background: #f8d7da; border-left: 4px solid var(--color-error); border-radius: var(--radius-sm); font-size: var(--font-size-xs); margin-top: var(--spacing-lg);">
+            <strong>⚠️ Low Audit Completeness:</strong> ${missingLogs} actionable artifact${missingLogs !== 1 ? 's' : ''} 
+            ${missingLogs === 1 ? 'is' : 'are'} missing decision log entries. This may block state transitions.
+            <div style="margin-top: 8px;">
+              <strong>Action:</strong> Run <code>learning_audit_backfill_impl_evt</code> agent to backfill missing logs.
+            </div>
+          </div>
+        ` : `
+          <div style="padding: 12px; background: #d4edda; border-left: 4px solid var(--color-success); border-radius: var(--radius-sm); font-size: var(--font-size-xs); margin-top: var(--spacing-lg);">
+            <strong>✅ Audit Completeness:</strong> Coverage is ${coverage >= 90 ? 'above' : 'near'} the 90% threshold. 
+            System can proceed with state transitions.
+          </div>
+        `}
+      `;
+    }
+    
+    // Live clock update with visual feedback
+    let lastSecond = -1;
+    function updateLiveClock() {
+      try {
+        const clockElement = document.getElementById('timerClock');
+        if (!clockElement) {
+          console.warn('Timer clock element not found');
+          return;
+        }
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const timeString = `${hours}:${minutes}:${seconds}`;
+        
+        // Visual feedback - pulse animation when seconds change
+        if (now.getSeconds() !== lastSecond) {
+          clockElement.classList.add('updating');
+          setTimeout(() => {
+            clockElement.classList.remove('updating');
+          }, 300);
+          lastSecond = now.getSeconds();
+        }
+        
+        clockElement.textContent = timeString;
+        
+        // Update status indicator
+        const statusElement = document.getElementById('timerStatus');
+        if (statusElement) {
+          statusElement.textContent = 'Active';
+        }
+      } catch (error) {
+        console.error('Error updating clock:', error);
+      }
+    }
+    
+    // Initialize timer when DOM is ready
+    function initTimer() {
+      try {
+        updateLiveClock(); // Initial update
+        // Update clock every second
+        setInterval(updateLiveClock, 1000);
+        console.log('✅ Timer initialized');
+      } catch (error) {
+        console.error('Error initializing timer:', error);
+      }
+    }
+    
+    // Start timer immediately if DOM already loaded, or wait for load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initTimer);
+    } else {
+      initTimer();
+    }
+    
+    // Filter and search state
+    let currentFilter = 'all';
+    let searchTerm = '';
+    
+    function filterContent() {
+      searchTerm = document.getElementById('searchBox').value.toLowerCase();
+      if (currentState) {
+        renderState(currentState);
+      }
+    }
+    
+    function setFilter(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === filter);
+      });
+      if (currentState) {
+        renderState(currentState);
+      }
+    }
+    
+    function clearState() {
+      currentState = null;
+      document.getElementById('searchBox').value = '';
+      currentFilter = 'all';
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === 'all');
+      });
+      document.getElementById('exportBtn').style.display = 'none';
+      document.getElementById('filterButtons').style.display = 'none';
+      document.getElementById('dragDropZone').style.display = 'none';
+      document.querySelector('h1').innerHTML = 'System Control Cockpit';
+      
+      // Reset all sections
+      document.getElementById('statusGrid').innerHTML = `
+        <div class="card">
+          <h2>Legislative State</h2>
+          <div class="empty-state">Load a state file to view legislative state</div>
+        </div>
+        <div class="card">
+          <h2>Agent Status</h2>
+          <div class="empty-state">Load a state file to view agent status</div>
+        </div>
+        <div class="card">
+          <h2>Review Gates</h2>
+          <div class="empty-state">Load a state file to view review gates</div>
+        </div>
+      `;
+      document.getElementById('agentsSection').style.display = 'none';
+      document.getElementById('alertsSection').style.display = 'none';
+      document.getElementById('reviewSection').style.display = 'none';
+      document.getElementById('congressSection').style.display = 'none';
+      document.getElementById('stateHistorySection').style.display = 'none';
+      document.getElementById('timestamp').textContent = '—';
+      congressDiagramRendered = false;
+    }
+    
+    function exportState() {
+      if (!currentState) return;
+      const dataStr = JSON.stringify(currentState, null, 2);
+      const dataBlob = new Blob([dataStr], {type: 'application/json'});
+      const url = URL.createObjectURL(dataBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `cockpit_export_${new Date().toISOString().split('T')[0]}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+    
+    // Drag and drop support
+    function setupDragAndDrop() {
+      const zone = document.getElementById('dragDropZone');
+      const fileInput = document.getElementById('stateFile');
+      
+      ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        zone.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
+      });
+      
+      function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      
+      ['dragenter', 'dragover'].forEach(eventName => {
+        zone.addEventListener(eventName, () => {
+          zone.classList.add('dragover');
+        }, false);
+      });
+      
+      ['dragleave', 'drop'].forEach(eventName => {
+        zone.addEventListener(eventName, () => {
+          zone.classList.remove('dragover');
+        }, false);
+      });
+      
+      zone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        if (files.length > 0 && files[0].name.endsWith('.json')) {
+          fileInput.files = files;
+          fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      }, false);
+    }
+    
+    // Enhanced file loading with localStorage memory
+    function loadStateFile(file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const data = JSON.parse(event.target.result);
+          currentState = data;
+          
+          // Remember last loaded file name
+          try {
+            localStorage.setItem('cockpit_last_file', file.name);
+          } catch(e) {
+            // localStorage may not be available in some contexts
+          }
+          
+          renderState(currentState);
+          document.getElementById('exportBtn').style.display = 'inline-block';
+          document.getElementById('filterButtons').style.display = 'flex';
+          document.getElementById('dragDropZone').style.display = 'block';
+          
+          // Show loading indicator briefly
+          const timestamp = document.getElementById('timestamp');
+          timestamp.innerHTML = '<span class="loading"></span> Loading...';
+          setTimeout(() => {
+            timestamp.textContent = new Date().toLocaleString();
+          }, 500);
+        } catch (error) {
+          alert('Error parsing JSON file: ' + error.message);
+        }
+      };
+      reader.readAsText(file);
+    }
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      // Ctrl/Cmd + O to open file
+      if ((e.ctrlKey || e.metaKey) && e.key === 'o') {
+        e.preventDefault();
+        document.getElementById('stateFile').click();
+      }
+      // Ctrl/Cmd + F to focus search
+      if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+        e.preventDefault();
+        document.getElementById('searchBox').focus();
+      }
+      // Escape to clear search
+      if (e.key === 'Escape' && document.activeElement === document.getElementById('searchBox')) {
+        document.getElementById('searchBox').value = '';
+        filterContent();
+      }
+    });
+    
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      setupDragAndDrop();
+      
+      // Update file input handler
+      document.getElementById('stateFile').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          loadStateFile(file);
+        }
+      });
+      
+      // Show last file name if remembered
+      try {
+        const lastFile = localStorage.getItem('cockpit_last_file');
+        if (lastFile) {
+          const hint = document.createElement('div');
+          hint.style.cssText = 'margin-top: var(--spacing-md); font-size: 13px; color: var(--color-text-secondary);';
+          hint.innerHTML = `Last loaded: <code>${lastFile}</code> - Use "Load State File" to reload`;
+          document.querySelector('.controls').appendChild(hint);
+        }
+      } catch(e) {
+        // localStorage not available
+      }
+    });
+  </script>
+</body>
+</html>

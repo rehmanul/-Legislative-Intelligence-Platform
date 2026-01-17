@@ -1,0 +1,64 @@
+{
+  "_meta": {
+    "agent_id": "intel_committee_agenda_comm_evt",
+    "generated_at": "2026-01-13T04:40:38.225022Z",
+    "artifact_type": "COMMITTEE_AGENDA_ANALYSIS",
+    "artifact_name": "Committee Agenda & Member Analysis",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": false,
+    "requires_review": null,
+    "guidance_status": "SIGNED"
+  },
+  "committee_info": {
+    "committee_name": "House Energy and Commerce Committee",
+    "jurisdiction": "Health, energy, and commerce matters",
+    "chair": "Rep. Smith",
+    "ranking_member": "Rep. Jones"
+  },
+  "agenda_items": [
+    {
+      "item_id": "agenda_001",
+      "title": "Air Quality Standards Review",
+      "status": "scheduled",
+      "relevance": "high",
+      "timing": "upcoming"
+    }
+  ],
+  "member_analysis": [
+    {
+      "member_id": "member_001",
+      "name": "Rep. Smith",
+      "position": "likely_support",
+      "confidence": 0.75,
+      "rationale": "Previous support for health-related legislation",
+      "key_concerns": []
+    },
+    {
+      "member_id": "member_002",
+      "name": "Rep. Jones",
+      "position": "likely_oppose",
+      "confidence": 0.65,
+      "rationale": "Cost concerns in previous votes",
+      "key_concerns": [
+        "budget_impact",
+        "implementation_cost"
+      ]
+    }
+  ],
+  "vote_prediction": {
+    "likely_yes": 12,
+    "likely_no": 8,
+    "undecided": 5,
+    "confidence": "medium",
+    "key_swing_votes": [
+      "member_015",
+      "member_018"
+    ]
+  },
+  "summary": {
+    "total_members": 25,
+    "predicted_outcome": "likely_pass",
+    "margin": "narrow"
+  }
+}

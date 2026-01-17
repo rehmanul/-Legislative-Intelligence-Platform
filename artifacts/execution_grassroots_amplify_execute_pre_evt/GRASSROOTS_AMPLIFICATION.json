@@ -1,0 +1,42 @@
+{
+  "_meta": {
+    "agent_id": "execution_grassroots_amplify_execute_pre_evt",
+    "generated_at": "2026-01-13T07:35:58.998754Z",
+    "artifact_type": "GRASSROOTS_AMPLIFICATION",
+    "artifact_name": "Grassroots Amplification",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": false,
+    "requires_review": null,
+    "guidance_status": "TEST_MODE",
+    "dependencies": [
+      "intel_grassroots_mobilization_evaluate_pre_evt/GRASSROOTS_MOBILIZATION_ASSESSMENT.json",
+      "intel_grassroots_signal_aggregator_evaluate_pre_evt/GRASSROOTS_SIGNAL_AGGREGATE.json"
+    ]
+  },
+  "amplification_activities": {
+    "signal_amplification": {
+      "target_policymakers": 15,
+      "constituent_communications": 50,
+      "amplification_channels": [
+        "email",
+        "phone",
+        "letters"
+      ]
+    },
+    "coordination_activities": {
+      "constituent_coordination": "active",
+      "policymaker_targeting": "prioritized"
+    }
+  },
+  "execution_status": {
+    "total_actions": 0,
+    "completed": 0,
+    "pending": 0
+  },
+  "recommendations": [
+    "Amplify high-priority grassroots signals to key policymakers",
+    "Coordinate constituent communications for maximum impact",
+    "Track amplification effectiveness"
+  ]
+}

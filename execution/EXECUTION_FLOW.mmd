@@ -1,0 +1,110 @@
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+flowchart TB
+    subgraph Phase1["Phase 1: Artifact Loading"]
+        Start([Agent Started]) --> LoadStakeholder[Load Stakeholder Map<br/>artifacts/intel_stakeholder_map_comm_evt]
+        Start --> LoadBriefing[Load Committee Briefing<br/>artifacts/draft_committee_briefing_comm_evt]
+    end
+    
+    subgraph Phase2["Phase 2: Target Identification"]
+        LoadStakeholder --> IdentifyTargets[Identify Outreach Targets<br/>from Stakeholder Map]
+        LoadBriefing --> IdentifyTargets
+        
+        IdentifyTargets --> Target1["Target 1: Senator Johnson's Office<br/>Email: legislative.director@senatorjohnson.senate.gov<br/>Priority: High | Type: Ally"]
+        IdentifyTargets --> Target2["Target 2: Rep Martinez's Office<br/>Email: policy.analyst@rep.martinez.house.gov<br/>Priority: High | Type: Ally"]
+        IdentifyTargets --> Target3["Target 3: Energy Innovation Alliance<br/>Email: info@energyinnovation.org<br/>Priority: High | Type: Ally"]
+        IdentifyTargets --> Target4["Target 4: Clean Energy Coalition<br/>Email: advocacy@cleanenergycoalition.org<br/>Priority: Medium | Type: Neutral"]
+    end
+    
+    subgraph Phase3["Phase 3: Contact Management"]
+        Target1 --> CreateContact1[Create Contact 1<br/>in Contact Manager]
+        Target2 --> CreateContact2[Create Contact 2<br/>in Contact Manager]
+        Target3 --> CreateContact3[Create Contact 3<br/>in Contact Manager]
+        Target4 --> CreateContact4[Create Contact 4<br/>in Contact Manager]
+        
+        CreateContact1 --> ContactStore1[(Contact Store<br/>contacts.json)]
+        CreateContact2 --> ContactStore1
+        CreateContact3 --> ContactStore1
+        CreateContact4 --> ContactStore1
+    end
+    
+    subgraph Phase4["Phase 4: Email Generation"]
+        CreateContact1 --> GenerateEmail1[Generate Email 1<br/>from Briefing Packet]
+        CreateContact2 --> GenerateEmail2[Generate Email 2<br/>from Briefing Packet]
+        CreateContact3 --> GenerateEmail3[Generate Email 3<br/>from Briefing Packet]
+        CreateContact4 --> GenerateEmail4[Generate Email 4<br/>from Briefing Packet]
+        
+        GenerateEmail1 --> EmailContent1["Subject: Committee Briefing<br/>Body: Personalized content<br/>from briefing packet"]
+        GenerateEmail2 --> EmailContent2["Subject: Committee Briefing<br/>Body: Personalized content<br/>from briefing packet"]
+        GenerateEmail3 --> EmailContent3["Subject: Committee Briefing<br/>Body: Personalized content<br/>from briefing packet"]
+        GenerateEmail4 --> EmailContent4["Subject: Committee Briefing<br/>Body: Personalized content<br/>from briefing packet"]
+    end
+    
+    subgraph Phase5["Phase 5: Execution Request Creation"]
+        EmailContent1 --> CreateRequest1[Create Execution Request 1<br/>Channel: EMAIL<br/>Review Gate: HR_LANG]
+        EmailContent2 --> CreateRequest2[Create Execution Request 2<br/>Channel: EMAIL<br/>Review Gate: HR_LANG]
+        EmailContent3 --> CreateRequest3[Create Execution Request 3<br/>Channel: EMAIL<br/>Review Gate: HR_LANG]
+        EmailContent4 --> CreateRequest4[Create Execution Request 4<br/>Channel: EMAIL<br/>Review Gate: HR_LANG]
+    end
+    
+    subgraph Phase6["Phase 6: Activity Logging"]
+        CreateRequest1 --> LogActivity1[Monitor: Log execution_requested<br/>Status: PENDING]
+        CreateRequest2 --> LogActivity2[Monitor: Log execution_requested<br/>Status: PENDING]
+        CreateRequest3 --> LogActivity3[Monitor: Log execution_requested<br/>Status: PENDING]
+        CreateRequest4 --> LogActivity4[Monitor: Log execution_requested<br/>Status: PENDING]
+        
+        LogActivity1 --> ActivityLog[(Activity Log<br/>activity-log.jsonl)]
+        LogActivity2 --> ActivityLog
+        LogActivity3 --> ActivityLog
+        LogActivity4 --> ActivityLog
+    end
+    
+    subgraph Phase7["Phase 7: Approval Submission"]
+        LogActivity1 --> SubmitApproval1[Submit to Approval Manager<br/>HR_LANG Gate]
+        LogActivity2 --> SubmitApproval2[Submit to Approval Manager<br/>HR_LANG Gate]
+        LogActivity3 --> SubmitApproval3[Submit to Approval Manager<br/>HR_LANG Gate]
+        LogActivity4 --> SubmitApproval4[Submit to Approval Manager<br/>HR_LANG Gate]
+        
+        SubmitApproval1 --> ApprovalQueue[(Approval Queue<br/>approval-queue.json<br/>Status: PENDING)]
+        SubmitApproval2 --> ApprovalQueue
+        SubmitApproval3 --> ApprovalQueue
+        SubmitApproval4 --> ApprovalQueue
+    end
+    
+    subgraph Phase8["Phase 8: Approval Check"]
+        ApprovalQueue --> CheckApproval{Check Approval Status<br/>for All Requests}
+        
+        CheckApproval -->|0 Approved| PendingState[Status: PENDING_APPROVAL<br/>4 requests awaiting HR_LANG approval]
+        CheckApproval -->|If Approved| ExecuteApproved[Execute Approved Requests]
+    end
+    
+    subgraph Phase9["Phase 9: Execution (When Approved)"]
+        ExecuteApproved --> ValidateEmail[Email Provider: Validate Request]
+        ValidateEmail --> DryRunCheck{DRY_RUN_MODE?<br/>Currently: TRUE}
+        
+        DryRunCheck -->|True| LogDryRun[Log to dry-run-log.jsonl<br/>No actual email sent<br/>Dry-run entry created]
+        DryRunCheck -->|False| SendEmail[Send via SMTP<br/>Phase 2: Blocked]
+        
+        LogDryRun --> LogExecuted[Monitor: Log execution_executed<br/>Status: EXECUTED]
+        SendEmail --> LogExecuted
+        
+        LogExecuted --> UpdateContacts[Contact Manager: Mark as Contacted<br/>Update last_contacted timestamp]
+        UpdateContacts --> UpdateContactStore[(Contact Store<br/>Updated)]
+    end
+    
+    subgraph Phase10["Phase 10: Output Generation"]
+        PendingState --> GeneratePlan[Generate Execution Plan<br/>outreach_execution_plan.json]
+        LogExecuted --> GeneratePlan
+        
+        GeneratePlan --> PlanArtifact[(Execution Plan Artifact<br/>Status: PENDING_APPROVAL<br/>Targets: 4<br/>Requests: 4<br/>Pending: 4<br/>Executed: 0)]
+    end
+    
+    PlanArtifact --> End([Execution Complete])
+    
+    style Start fill:#e1f5ff
+    style End fill:#d4edda
+    style ApprovalQueue fill:#fff3cd
+    style PendingState fill:#fff3cd
+    style LogDryRun fill:#d1ecf1
+    style ExecuteApproved fill:#d4edda
+    style PlanArtifact fill:#f8d7da

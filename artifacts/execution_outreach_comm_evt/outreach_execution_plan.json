@@ -1,0 +1,42 @@
+{
+  "_meta": {
+    "agent_id": "execution_outreach_comm_evt",
+    "phase": "COMM_EVT",
+    "generated_at": "2026-01-07T20:06:26.023431+00:00",
+    "authoritative": false,
+    "note": "Governance refactor: Execution planning is free. Approval checked at send time for actual communication."
+  },
+  "status": "COMPLETED",
+  "dry_run": true,
+  "targets_identified": 4,
+  "execution_requests_created": 4,
+  "executed": 4,
+  "queued": 0,
+  "execution_results": [
+    {
+      "execution_id": "6d002ec3-6f04-49a7-b784-66159e8d4859",
+      "success": true,
+      "dry_run": true,
+      "contact": "Senator Johnson's Office"
+    },
+    {
+      "execution_id": "09ea754e-3940-4a6f-8cc0-631c01c2666d",
+      "success": true,
+      "dry_run": true,
+      "contact": "Representative Martinez's Office"
+    },
+    {
+      "execution_id": "eacb9df7-4a52-4ff7-b732-abf81607e336",
+      "success": true,
+      "dry_run": true,
+      "contact": "Energy Innovation Alliance"
+    },
+    {
+      "execution_id": "c8be3783-f1f2-4e8d-8639-56f783ec1a06",
+      "success": true,
+      "dry_run": true,
+      "contact": "Clean Energy Coalition"
+    }
+  ],
+  "queued_executions": []
+}

@@ -1,0 +1,31 @@
+{
+  "_meta": {
+    "agent_id": "intel_doc_analysis_artifact_4f97f6f90427",
+    "workflow_id": "artifact_4f97f6f90427",
+    "output_path": "",
+    "generated_at": "2026-01-16T18:35:04.794460Z",
+    "responsibility": "Analyze uploaded documents for key insights"
+  },
+  "data": {
+    "document_type": "Meeting Minutes",
+    "key_entities": [
+      "The",
+      "Project",
+      "Q1",
+      "Attendees",
+      "Agreed",
+      "Meeting",
+      "Hire**",
+      "Date",
+      "Deployment",
+      "Action"
+    ],
+    "risk_assessment": "LOW",
+    "summary": "# Meeting Minutes: Project Alpha\n\n## Date: 2026-01-15\n\n## Attendees: Alice, Bob, Charlie\n\n## Key Decisions\n\n1. **Budget Approval**: The finance committee approved the Q1 budget of $50k.\n2. **Timeline ...",
+    "analysis_metadata": {
+      "analyzer": "GenericIntelligenceAgent v1.0",
+      "timestamp": "2026-01-16T18:35:04.793897Z",
+      "content_length": 397
+    }
+  }
+}

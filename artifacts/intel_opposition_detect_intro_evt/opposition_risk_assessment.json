@@ -1,0 +1,55 @@
+{
+  "_meta": {
+    "agent_id": "intel_opposition_detect_intro_evt",
+    "generated_at": "2026-01-13T07:35:54.997295Z",
+    "artifact_type": "opposition_risk_assessment",
+    "phase": "INTRO_EVT",
+    "updated_from_pre_evt": true
+  },
+  "risk_assessment": {
+    "overall_risk": "medium",
+    "risk_trend": "stable",
+    "opposition_strength": "moderate",
+    "early_warning": true
+  },
+  "opposition_indicators": [
+    {
+      "source": "mock_media_feed",
+      "indicator_type": "counter_narrative",
+      "description": "Media coverage suggests opposition framing emerging",
+      "severity": "medium",
+      "timestamp": "2026-01-13T05:27:38.758296Z"
+    },
+    {
+      "source": "media_monitor",
+      "signal_type": "counter_narrative_emergence",
+      "description": "Early counter-narrative detected in media coverage",
+      "confidence": "medium",
+      "timestamp": "2026-01-13T07:35:54.997295Z",
+      "severity": "moderate"
+    },
+    {
+      "source": "social_signals",
+      "signal_type": "organized_resistance",
+      "description": "Social media signals suggest organized opposition forming",
+      "confidence": "low",
+      "timestamp": "2026-01-13T07:35:54.997295Z",
+      "severity": "low"
+    }
+  ],
+  "counter_narrative_analysis": {
+    "detected_narratives": [
+      {
+        "narrative": "Policy overreach concern",
+        "source": "media",
+        "frequency": "low",
+        "severity": "moderate"
+      }
+    ],
+    "recommendation": "Monitor closely - prepare counter-framing"
+  },
+  "risk_score": {
+    "numerical_score": 0.45,
+    "interpretation": "Moderate opposition risk - manageable with proper framing"
+  }
+}

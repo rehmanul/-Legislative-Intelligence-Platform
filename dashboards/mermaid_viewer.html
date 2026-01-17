@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mermaid Diagram Viewer</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--color-text-primary);
+      background: var(--color-bg-secondary);
+      padding: var(--spacing-xl);
+    }
+    
+    .container {
+      max-width: var(--container-max-width-wide);
+      margin: 0 auto;
+    }
+    
+    header {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+      box-shadow: var(--shadow-2);
+    }
+    
+    h1 {
+      font-size: var(--font-size-2xl);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .file-input-wrapper {
+      margin: var(--spacing-lg) 0;
+    }
+    
+    .file-input-wrapper label {
+      display: inline-block;
+      padding: var(--spacing-md) 20px;
+      background: var(--color-primary);
+      color: var(--color-bg-primary);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: var(--font-size-sm);
+    }
+    
+    .file-input-wrapper input[type="file"] {
+      display: none;
+    }
+    
+    .loaded-file {
+      margin-left: 15px;
+      color: var(--color-text-secondary);
+      font-size: 13px;
+    }
+    
+    .context-dropdown-wrapper {
+      display: flex;
+      gap: var(--spacing-md);
+      align-items: center;
+      margin-top: var(--spacing-lg);
+      flex-wrap: wrap;
+    }
+    
+    .context-dropdown-wrapper label {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-primary);
+    }
+    
+    .context-dropdown-wrapper select {
+      padding: var(--spacing-sm) 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      background: var(--color-bg-primary);
+      min-width: 250px;
+      cursor: pointer;
+    }
+    
+    .context-dropdown-wrapper button {
+      padding: var(--spacing-sm) 16px;
+      background: var(--color-gray-500);
+      color: var(--color-bg-primary);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      cursor: pointer;
+      transition: background var(--transition-base) var(--transition-ease);
+    }
+    
+    .context-dropdown-wrapper button:hover {
+      background: var(--color-gray-600);
+    }
+    
+    .status-message {
+      padding: var(--spacing-md) 15px;
+      border-radius: var(--radius-sm);
+      margin-top: var(--spacing-md);
+      font-size: 13px;
+      display: none;
+    }
+    
+    .status-message.success {
+      background: #d1e7dd;
+      color: #0f5132;
+      border: 1px solid #badbcc;
+      display: block;
+    }
+    
+    .status-message.error {
+      background: #f8d7da;
+      color: #842029;
+      border: 1px solid #f5c2c7;
+      display: block;
+    }
+    
+    .status-message.info {
+      background: #cfe2ff;
+      color: #084298;
+      border: 1px solid #b6d4fe;
+      display: block;
+    }
+    
+    .diagram-container {
+      background: var(--color-bg-primary);
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-2);
+      margin-top: var(--spacing-xl);
+      overflow-x: auto;
+      overflow-y: auto;
+      max-height: calc(100vh - 300px);
+      text-align: center;
+    }
+    
+    .mermaid {
+      display: inline-block;
+      min-width: 100%;
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+    }
+    
+    .error-state {
+      background: #fff5f5;
+      border: 2px solid var(--color-error);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      margin: var(--spacing-xl) 0;
+      color: #721c24;
+    }
+    
+    .error-state pre {
+      margin-top: var(--spacing-lg);
+      padding: var(--spacing-lg);
+      background: #f4f4f4;
+      border-radius: var(--radius-sm);
+      overflow-x: auto;
+      text-align: left;
+      font-family: var(--font-family-mono);
+      font-size: var(--font-size-xs);
+    }
+    
+    .source-code {
+      background: var(--color-gray-100);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      margin-top: var(--spacing-xl);
+      box-shadow: var(--shadow-2);
+    }
+    
+    .source-code h3 {
+      margin-bottom: var(--spacing-lg);
+      color: var(--color-text-primary);
+    }
+    
+    .source-code pre {
+      background: #f4f4f4;
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-sm);
+      overflow-x: auto;
+      font-family: var(--font-family-mono);
+      font-size: var(--font-size-xs);
+      text-align: left;
+      border: 1px solid var(--color-border);
+    }
+    
+    .diagram-list {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+      box-shadow: var(--shadow-2);
+    }
+    
+    .diagram-list h3 {
+      margin-bottom: var(--spacing-lg);
+      color: var(--color-text-primary);
+    }
+    
+    .diagram-list ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    .diagram-list li {
+      padding: var(--spacing-md);
+      margin-bottom: 8px;
+      background: var(--color-gray-100);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--color-primary);
+      font-size: var(--font-size-sm);
+    }
+    
+    .diagram-list li:hover {
+      background: var(--color-border-light);
+      cursor: pointer;
+    }
+    
+    .diagram-list li.loading {
+      background: #fff3cd;
+      border-left-color: #ffc107;
+      cursor: wait;
+    }
+    
+    .diagram-list li.loading::after {
+      content: ' ⏳ Loading...';
+      color: #856404;
+      font-size: var(--font-size-xs);
+      margin-left: 10px;
+    }
+    
+    .diagram-list li.error {
+      background: #f8d7da;
+      border-left-color: var(--color-error);
+    }
+    
+    .diagram-list li.success {
+      background: #d4edda;
+      border-left-color: var(--color-success);
+      transition: background 0.3s;
+    }
+    
+    .controls {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+      box-shadow: var(--shadow-2);
+      display: flex;
+      gap: var(--spacing-md);
+      align-items: center;
+    }
+    
+    .btn {
+      padding: var(--spacing-sm) 16px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: all var(--transition-base) var(--transition-ease);
+    }
+    
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-bg-primary);
+    }
+    
+    .btn-primary:hover {
+      background: var(--color-primary-hover);
+    }
+    
+    .btn-secondary {
+      background: var(--color-gray-500);
+      color: var(--color-bg-primary);
+    }
+    
+    .btn-secondary:hover {
+      background: #545b62;
+    }
+    
+    .toggle-source {
+      margin-left: auto;
+    }
+  </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+  
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="container">
+    <header>
+      <h1>Mermaid Diagram Viewer</h1>
+      <p style="color: var(--color-text-secondary); margin-top: 5px;">View and render Mermaid diagrams from .mmd files</p>
+      
+      <div style="background: #e7f3ff; border-left: 4px solid #2196F3; padding: 12px; margin: var(--spacing-lg) 0; border-radius: var(--radius-sm); font-size: 13px;">
+        <strong>💡 Tip:</strong> For automatic diagram loading, serve this page via HTTP server:
+        <code style="background: #fff; padding: 2px 6px; border-radius: 3px; font-family: monospace;">python -m http.server 8000</code>
+        then open <code style="background: #fff; padding: 2px 6px; border-radius: 3px; font-family: monospace;">http://localhost:8000/dashboards/mermaid_viewer.html</code>
+      </div>
+      
+      <div class="context-dropdown-wrapper">
+        <label for="mermaidDropdown">📋 Quick Load:</label>
+        <select id="mermaidDropdown" onchange="loadMermaidFromDropdown(this.value)">
+          <option value="">Select mermaid diagram...</option>
+          <optgroup label="Common Diagrams">
+            <option value="artifacts/AGENT_DEPENDENCY_GRAPH.mmd">AGENT_DEPENDENCY_GRAPH.mmd</option>
+            <option value="artifacts/vibe_coding_workflow_with_agents.mmd">vibe_coding_workflow_with_agents.mmd</option>
+            <option value="artifacts/intro_evt/FUTURE_STATE_TRANSITIONS.mmd">intro_evt/FUTURE_STATE_TRANSITIONS.mmd</option>
+            <option value="artifacts/policy/diagrams/system_context.mmd">policy/diagrams/system_context.mmd</option>
+          </optgroup>
+          <optgroup label="Recent Files" id="mermaidRecentFilesGroup">
+            <!-- Populated from localStorage -->
+          </optgroup>
+        </select>
+        <button onclick="refreshMermaidDropdown()">🔄 Refresh</button>
+      </div>
+      <div class="file-input-wrapper">
+        <label for="mermaidFile">📁 Load Mermaid Diagram File (.mmd)</label>
+        <input type="file" id="mermaidFile" accept=".mmd">
+        <span id="loadedFile" class="loaded-file"></span>
+      </div>
+      <div id="statusMessage" class="status-message"></div>
+    </header>
+    
+    <div class="diagram-list">
+      <h3>Known Mermaid Diagrams</h3>
+      <p style="color: var(--color-text-secondary); font-size: 13px; margin-bottom: var(--spacing-md);">Click a diagram name below to load and view it:</p>
+      <ul>
+        <li onclick="showDiagramInfo('AGENT_DEPENDENCY_GRAPH.mmd')">📊 AGENT_DEPENDENCY_GRAPH.mmd</li>
+        <li onclick="showDiagramInfo('vibe_coding_workflow_with_agents.mmd')">📊 vibe_coding_workflow_with_agents.mmd</li>
+        <li onclick="showDiagramInfo('intro_evt/FUTURE_STATE_TRANSITIONS.mmd')">📊 intro_evt/FUTURE_STATE_TRANSITIONS.mmd</li>
+        <li onclick="showDiagramInfo('policy/diagrams/system_context.mmd')">📊 policy/diagrams/system_context.mmd</li>
+        <li onclick="showDiagramInfo('policy/diagrams/stakeholder_hierarchy.mmd')">📊 policy/diagrams/stakeholder_hierarchy.mmd</li>
+        <li onclick="showDiagramInfo('policy/diagrams/section_to_ask_flow.mmd')">📊 policy/diagrams/section_to_ask_flow.mmd</li>
+        <li onclick="showDiagramInfo('policy/diagrams/section_priority_map.mmd')">📊 policy/diagrams/section_priority_map.mmd</li>
+        <li onclick="showDiagramInfo('policy/diagrams/master_dashboard.mmd')">📊 policy/diagrams/master_dashboard.mmd</li>
+        <li onclick="showDiagramInfo('policy/diagrams/execution_paths_flowchart.mmd')">📊 policy/diagrams/execution_paths_flowchart.mmd</li>
+        <li onclick="showDiagramInfo('policy/diagrams/comprehensive_overview.mmd')">📊 policy/diagrams/comprehensive_overview.mmd</li>
+        <li onclick="showDiagramInfo('policy/diagrams/completion_status.mmd')">📊 policy/diagrams/completion_status.mmd</li>
+        <li onclick="showDiagramInfo('policy/diagrams/clear_ask_decision_tree.mmd')">📊 policy/diagrams/clear_ask_decision_tree.mmd</li>
+        <li onclick="showDiagramInfo('policy/diagrams/agent_integration_flow.mmd')">📊 policy/diagrams/agent_integration_flow.mmd</li>
+        <li onclick="showDiagramInfo('policy/diagrams/90_day_timeline.mmd')">📊 policy/diagrams/90_day_timeline.mmd</li>
+        <li onclick="showDiagramInfo('development/RESOURCE_ALLOCATION_SYSTEM.mmd')">📊 development/RESOURCE_ALLOCATION_SYSTEM.mmd</li>
+      </ul>
+      <p style="color: var(--color-text-secondary); font-size: var(--font-size-xs); margin-top: var(--spacing-md);">💡 Tip: Use the file picker above to load any .mmd file for viewing</p>
+    </div>
+    
+    <div id="diagramViewer" class="diagram-container" style="display: none;">
+      <div class="controls">
+        <button class="btn btn-secondary" onclick="toggleSourceCode()">📄 Toggle Source Code</button>
+      </div>
+      <div id="mermaidContainer"></div>
+      <div id="sourceCode" class="source-code" style="display: none;">
+        <h3>Mermaid Source Code</h3>
+        <pre id="sourceCodeContent"></pre>
+      </div>
+    </div>
+    
+    <div id="emptyViewer" class="empty-state">
+      <p>Load a Mermaid diagram file (.mmd) to view it.</p>
+      <p style="margin-top: var(--spacing-md); font-size: var(--font-size-xs); color: #999;">
+        Files are typically located in: <code>agent-orchestrator/artifacts/**/*.mmd</code>
+      </p>
+    </div>
+  </div>
+  
+  <script>
+    let currentDiagramContent = null;
+    let showSource = false;
+    
+    // Auto-load on page load
+    window.addEventListener('DOMContentLoaded', function() {
+      populateRecentMermaidFiles();
+      autoLoadMermaid();
+    });
+    
+    // Populate recent files dropdown
+    function populateRecentMermaidFiles() {
+      const group = document.getElementById('mermaidRecentFilesGroup');
+      if (!group) return;
+      
+      try {
+        const recent = JSON.parse(localStorage.getItem('recentMermaidFiles') || '[]');
+        group.innerHTML = '';
+        
+        recent.slice(0, 10).forEach(file => {
+          const option = document.createElement('option');
+          option.value = file.path;
+          option.textContent = file.name + ' (Recent)';
+          group.appendChild(option);
+        });
+      } catch (e) {
+        console.warn('Could not load recent mermaid files:', e);
+      }
+    }
+    
+    // Auto-load mermaid
+    async function autoLoadMermaid() {
+      const lastPath = localStorage.getItem('lastSuccessfulMermaidPath');
+      if (lastPath) {
+        try {
+          const response = await fetch(lastPath);
+          if (response.ok) {
+            const content = await response.text();
+            document.getElementById('loadedFile').textContent = `Loaded: ${lastPath.split('/').pop()}`;
+            renderMermaid(content, lastPath.split('/').pop());
+            showStatus('Auto-loaded: ' + lastPath.split('/').pop(), 'success');
+            return;
+          }
+        } catch (e) {
+          // Continue
+        }
+      }
+    }
+    
+    // Load from dropdown
+    async function loadMermaidFromDropdown(path) {
+      if (!path) return;
+      
+      showStatus('Loading ' + path + '...', 'info');
+      
+      try {
+        const response = await fetch(path);
+        if (response.ok) {
+          const content = await response.text();
+          document.getElementById('loadedFile').textContent = `Loaded: ${path.split('/').pop()}`;
+          localStorage.setItem('lastSuccessfulMermaidPath', path);
+          addToRecentMermaidFiles(path);
+          renderMermaid(content, path.split('/').pop());
+          showStatus('Loaded: ' + path.split('/').pop(), 'success');
+        } else {
+          showStatus('Could not load ' + path, 'error');
+        }
+      } catch (e) {
+        showStatus('Error loading ' + path + ': ' + e.message, 'error');
+      }
+    }
+    
+    // Refresh dropdown
+    function refreshMermaidDropdown() {
+      populateRecentMermaidFiles();
+      showStatus('Dropdown refreshed', 'info');
+      setTimeout(() => {
+        const msg = document.getElementById('statusMessage');
+        if (msg) msg.className = 'status-message';
+      }, 2000);
+    }
+    
+    // Add to recent files
+    function addToRecentMermaidFiles(path) {
+      try {
+        const recent = JSON.parse(localStorage.getItem('recentMermaidFiles') || '[]');
+        const name = path.split('/').pop();
+        const filtered = recent.filter(f => f.path !== path);
+        filtered.unshift({ name, path, timestamp: new Date().toISOString() });
+        localStorage.setItem('recentMermaidFiles', JSON.stringify(filtered.slice(0, 10)));
+        populateRecentMermaidFiles();
+      } catch (e) {
+        console.warn('Could not save recent mermaid files:', e);
+      }
+    }
+    
+    // Show status
+    function showStatus(message, type) {
+      const msg = document.getElementById('statusMessage');
+      if (!msg) return;
+      msg.textContent = message;
+      msg.className = 'status-message ' + type;
+      if (type === 'success' || type === 'info') {
+        setTimeout(() => {
+          msg.className = 'status-message';
+        }, 5000);
+      }
+    }
+    
+    // Initialize Mermaid with theme
+    mermaid.initialize({ 
+      startOnLoad: false,
+      theme: 'default',
+      themeVariables: {
+        fontFamily: '-apple-system, BlinkSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif',
+        fontSize: '14px'
+      },
+      flowchart: {
+        curve: 'basis',
+        padding: 20
+      }
+    });
+    
+    // File input handler
+    document.getElementById('mermaidFile').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        loadMermaid(file);
+      }
+    });
+    
+    // Load and render Mermaid diagram
+    function loadMermaid(file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const content = e.target.result;
+        currentDiagramContent = content;
+        document.getElementById('loadedFile').textContent = `Loaded: ${file.name}`;
+        localStorage.setItem('lastSuccessfulMermaidPath', file.name);
+        addToRecentMermaidFiles(file.name);
+        renderMermaid(content, file.name);
+        showStatus('Loaded: ' + file.name, 'success');
+      };
+      reader.readAsText(file);
+    }
+    
+    // Render Mermaid diagram (anti-flash)
+    function renderMermaid(content, fileName) {
+      const container = document.getElementById('mermaidContainer');
+      const diagramId = 'mermaid-diagram-' + Date.now();
+      const emptyViewer = document.getElementById('emptyViewer');
+      const diagramViewer = document.getElementById('diagramViewer');
+      const sourceCodeContent = document.getElementById('sourceCodeContent');
+      
+      // Anti-flash: hide during update
+      diagramViewer.style.visibility = 'hidden';
+      diagramViewer.style.opacity = '0';
+      diagramViewer.style.transition = 'opacity 0.2s';
+      
+      // Hide empty state, show viewer
+      emptyViewer.style.display = 'none';
+      diagramViewer.style.display = 'block';
+      
+      // Clear previous diagram
+      container.innerHTML = '';
+      sourceCodeContent.textContent = content;
+      
+      // Create new diagram container
+      const diagramDiv = document.createElement('div');
+      diagramDiv.className = 'mermaid';
+      diagramDiv.id = diagramId;
+      diagramDiv.textContent = content;
+      container.appendChild(diagramDiv);
+      
+      // Render diagram
+      try {
+        // Use mermaid.run() for dynamic rendering
+        mermaid.run({
+          querySelector: '#' + diagramId,
+          suppressErrors: false
+        }).then(() => {
+          console.log('Mermaid diagram rendered successfully');
+          // Show smoothly after render
+          requestAnimationFrame(() => {
+            diagramViewer.style.visibility = 'visible';
+            diagramViewer.style.opacity = '1';
+          });
+        }).catch(err => {
+          console.error('Mermaid rendering error:', err);
+          // Fallback: try using mermaid.init()
+          try {
+            mermaid.init(undefined, '#' + diagramId);
+            requestAnimationFrame(() => {
+              diagramViewer.style.visibility = 'visible';
+              diagramViewer.style.opacity = '1';
+            });
+          } catch (initErr) {
+            console.error('Mermaid init error:', initErr);
+            container.innerHTML = `
+              <div class="error-state">
+                <strong>❌ Error rendering diagram:</strong>
+                <p>${err.message || 'Unknown error occurred while rendering the diagram'}</p>
+                <details style="margin-top: var(--spacing-lg);">
+                  <summary>Source Code</summary>
+                  <pre>${content}</pre>
+                </details>
+              </div>
+            `;
+            requestAnimationFrame(() => {
+              diagramViewer.style.visibility = 'visible';
+              diagramViewer.style.opacity = '1';
+            });
+          }
+        });
+      } catch (err) {
+        console.error('Mermaid error:', err);
+        container.innerHTML = `
+          <div class="error-state">
+            <strong>❌ Error rendering diagram:</strong>
+            <p>${err.message || 'Unknown error occurred'}</p>
+            <details style="margin-top: var(--spacing-lg);">
+              <summary>Source Code</summary>
+              <pre>${content}</pre>
+            </details>
+          </div>
+        `;
+        requestAnimationFrame(() => {
+          diagramViewer.style.visibility = 'visible';
+          diagramViewer.style.opacity = '1';
+        });
+      }
+    }
+    
+    // Toggle source code display
+    function toggleSourceCode() {
+      showSource = !showSource;
+      const sourceCode = document.getElementById('sourceCode');
+      sourceCode.style.display = showSource ? 'block' : 'none';
+    }
+    
+    // Load diagram from known path
+    async function showDiagramInfo(path) {
+      // Find the clicked list item and update its state
+      const listItems = document.querySelectorAll('.diagram-list li');
+      let clickedItem = null;
+      for (const item of listItems) {
+        if (item.textContent.includes(path)) {
+          clickedItem = item;
+          break;
+        }
+      }
+      
+      if (clickedItem) {
+        clickedItem.classList.remove('error', 'success');
+        clickedItem.classList.add('loading');
+      }
+      
+      // Try multiple path resolutions
+      const pathAttempts = [
+        `artifacts/${path}`,  // Relative to current directory
+        `../artifacts/${path}`,  // Relative to dashboards folder
+        `../../artifacts/${path}`,  // From deeper nested locations
+        path  // Direct path
+      ];
+      
+      // Try to fetch the file (works if served via HTTP server)
+      let loaded = false;
+      for (const fullPath of pathAttempts) {
+        try {
+          const response = await fetch(fullPath);
+          if (response.ok) {
+            const content = await response.text();
+            currentDiagramContent = content;
+            document.getElementById('loadedFile').textContent = `Loaded: ${path}`;
+            renderMermaid(content, path);
+            
+            if (clickedItem) {
+              clickedItem.classList.remove('loading');
+              clickedItem.classList.add('success');
+              setTimeout(() => {
+                clickedItem.classList.remove('success');
+              }, 2000);
+            }
+            loaded = true;
+            return;
+          }
+        } catch (err) {
+          // Continue to next path attempt
+          continue;
+        }
+      }
+      
+      if (!loaded) {
+        console.log('All fetch attempts failed, trying File System Access API');
+      }
+      
+      // Try File System Access API (modern browsers)
+      if ('showOpenFilePicker' in window) {
+        try {
+          // Show helpful message before opening picker
+          const fileName = path.split('/').pop();
+          const folderHint = path.includes('/') ? path.substring(0, path.lastIndexOf('/')) : '';
+          
+          // Create a more helpful message
+          const pickerMessage = folderHint 
+            ? `Please navigate to: artifacts/${folderHint}\n\nLooking for file: ${fileName}`
+            : `Please navigate to: artifacts/\n\nLooking for file: ${fileName}`;
+          
+          // Show a brief notification (non-blocking)
+          const notification = document.createElement('div');
+          notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--color-primary);
+            color: var(--color-bg-primary);
+            padding: var(--spacing-lg) 20px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 10000;
+            max-width: 300px;
+            font-size: 13px;
+            line-height: 1.5;
+          `;
+          notification.innerHTML = `
+            <strong>📁 File Picker Opened</strong><br>
+            Navigate to: <code>artifacts/${folderHint || ''}</code><br>
+            Select: <code>${fileName}</code>
+          `;
+          document.body.appendChild(notification);
+          setTimeout(() => notification.remove(), 5000);
+          
+          const [fileHandle] = await window.showOpenFilePicker({
+            suggestedName: fileName,
+            types: [{
+              description: 'Mermaid Diagram',
+              accept: { 'text/plain': ['.mmd'] }
+            }]
+          });
+          
+          const file = await fileHandle.getFile();
+          loadMermaid(file);
+          
+          if (clickedItem) {
+            clickedItem.classList.remove('loading');
+            clickedItem.classList.add('success');
+            setTimeout(() => {
+              clickedItem.classList.remove('success');
+            }, 2000);
+          }
+          return;
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            console.error('File System Access API error:', err);
+            if (clickedItem) {
+              clickedItem.classList.remove('loading');
+              clickedItem.classList.add('error');
+            }
+          } else {
+            // User cancelled
+            if (clickedItem) {
+              clickedItem.classList.remove('loading');
+            }
+            return;
+          }
+        }
+      }
+      
+      // Fallback: guide user to use file picker
+      const message = `Diagram: ${path}\n\nLocation: agent-orchestrator/artifacts/${path}\n\n` +
+                     `💡 Tip: For best experience, serve this HTML file via a local HTTP server:\n` +
+                     `   python -m http.server 8000\n\n` +
+                     `Then open: http://localhost:8000/dashboards/mermaid_viewer.html\n\n` +
+                     `Or use the "Load Mermaid Diagram File" button above.`;
+      
+      alert(message);
+      
+      if (clickedItem) {
+        clickedItem.classList.remove('loading');
+      }
+      
+      // Highlight the file input button
+      const fileInput = document.getElementById('mermaidFile');
+      fileInput.focus();
+      fileInput.parentElement.style.background = '#fff3cd';
+      fileInput.parentElement.style.border = '2px solid #ffc107';
+      fileInput.parentElement.style.borderRadius = '4px';
+      fileInput.parentElement.style.padding = '8px';
+      setTimeout(() => {
+        fileInput.parentElement.style.background = '';
+        fileInput.parentElement.style.border = '';
+        fileInput.parentElement.style.padding = '';
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

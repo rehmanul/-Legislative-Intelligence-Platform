@@ -1,0 +1,23 @@
+{
+  "_meta": {
+    "agent_id": "learning_audit_backfill_impl_evt",
+    "generated_at": "2026-01-08T09:16:04.437443Z",
+    "artifact_type": "AUDIT_BACKFILL",
+    "artifact_name": "Audit Completeness Backfill",
+    "status": "SPECULATIVE",
+    "confidence": "HIGH",
+    "human_review_required": false,
+    "requires_review": null,
+    "guidance_status": "SIGNED",
+    "schema_version": "1.0.0"
+  },
+  "missing_logs_count": 0,
+  "missing_logs": [],
+  "backfill_result": {
+    "backfilled_count": 0,
+    "backfilled": [],
+    "failed_count": 0,
+    "failed": []
+  },
+  "generated_at": "2026-01-08T09:16:04.437443Z"
+}

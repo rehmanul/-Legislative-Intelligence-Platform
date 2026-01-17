@@ -1,0 +1,97 @@
+---
+config:
+  layout: dagre
+  theme: default
+---
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+flowchart TB
+
+START["Policy Opportunity<br/>Wi-Charge Technology<br/>NDAA FY2026 S.2296"]:::start
+
+START --> PATHS{Choose Execution Path}
+
+PATHS -->|Infrastructure| PATH1["Path 1: Defense Facility<br/>Infrastructure<br/>Division B"]
+PATHS -->|R&D| PATH2["Path 2: R&D Programs<br/>Title II, Division A"]
+PATHS -->|Energy| PATH3["Path 3: Energy Efficiency<br/>Division C"]
+
+subgraph P1["Path 1: Infrastructure Timeline"]
+  direction TB
+  P1_SECTIONS["Sections: 2101, 2201, 2301, 2402<br/>⭐⭐⭐⭐⭐"]
+  P1_P1["Days 1-30: Foundation<br/>Develop pilot proposal"]
+  P1_P2["Days 31-60: Engagement<br/>Brief energy offices"]
+  P1_P3["Days 61-90: Implementation<br/>Submit ERCIP proposal"]
+  P1_STAKE["Stakeholders:<br/>NAVFAC, AFCEC, IMCOM<br/>ERCIP Program Office"]
+  
+  P1_SECTIONS --> P1_P1
+  P1_P1 --> P1_P2
+  P1_P2 --> P1_P3
+  P1_STAKE --> P1_P1
+end
+
+subgraph P2["Path 2: R&D Timeline"]
+  direction TB
+  P2_SECTIONS["Sections: 220A, 220<br/>⭐⭐⭐⭐⭐"]
+  P2_P1["Days 1-30: Program ID<br/>Identify SBIR/STTR topics"]
+  P2_P2["Days 31-60: Proposal Dev<br/>Develop proposals"]
+  P2_P3["Days 61-90: Engagement<br/>Submit & engage"]
+  P2_STAKE["Stakeholders:<br/>SBIR/STTR Offices<br/>DIU, Innovation Hubs"]
+  
+  P2_SECTIONS --> P2_P1
+  P2_P1 --> P2_P2
+  P2_P2 --> P2_P3
+  P2_STAKE --> P2_P1
+end
+
+subgraph P3["Path 3: Energy Timeline"]
+  direction TB
+  P3_SECTIONS["Sections: 2402, 314<br/>⭐⭐⭐⭐⭐"]
+  P3_P1["Days 1-30: Program Analysis<br/>Analyze ERCIP opportunities"]
+  P3_P2["Days 31-60: Proposal Dev<br/>Develop ERCIP proposal"]
+  P3_P3["Days 61-90: Engagement<br/>Submit proposals"]
+  P3_STAKE["Stakeholders:<br/>ERCIP Program Office<br/>Service Energy Offices"]
+  
+  P3_SECTIONS --> P3_P1
+  P3_P1 --> P3_P2
+  P3_P2 --> P3_P3
+  P3_STAKE --> P3_P1
+end
+
+PATH1 --> P1
+PATH2 --> P2
+PATH3 --> P3
+
+P1_P3 --> SUCCESS["Success Metrics<br/>6-12 Months:<br/>Pilot deployment<br/>Funding applications<br/>Engagement established"]
+P2_P3 --> SUCCESS
+P3_P3 --> SUCCESS
+
+subgraph STAKEHOLDERS["Key Stakeholder Hierarchy"]
+  direction TB
+  CONGRESS["Congressional<br/>HASC, SASC, HAC, SAC"]
+  DOD["DoD<br/>OSD, ASD EI&E, DLA Energy"]
+  SERVICES["Services<br/>Army, Navy, Air Force"]
+  IMPLEMENT["Implementing<br/>Base & Program Offices"]
+  
+  CONGRESS --> DOD
+  DOD --> SERVICES
+  SERVICES --> IMPLEMENT
+end
+
+P1_STAKE -.-> STAKEHOLDERS
+P2_STAKE -.-> STAKEHOLDERS
+P3_STAKE -.-> STAKEHOLDERS
+
+classDef start fill:#D1FAE5,stroke:#065F46,stroke-width:3px
+classDef path fill:#DBEAFE,stroke:#1E40AF,stroke-width:3px
+classDef phase fill:#FEF3C7,stroke:#92400E,stroke-width:2px
+classDef section fill:#E0F2FE,stroke:#0369A1,stroke-width:2px
+classDef stakeholder fill:#F3F4F6,stroke:#6B7280,stroke-width:2px
+classDef success fill:#D1FAE5,stroke:#065F46,stroke-width:3px
+classDef decide fill:#F3F4F6,stroke:#6B7280,stroke-width:2px
+
+class START,SUCCESS start
+class PATH1,PATH2,PATH3 path
+class P1_P1,P1_P2,P1_P3,P2_P1,P2_P2,P2_P3,P3_P1,P3_P2,P3_P3 phase
+class P1_SECTIONS,P2_SECTIONS,P3_SECTIONS section
+class P1_STAKE,P2_STAKE,P3_STAKE,CONGRESS,DOD,SERVICES,IMPLEMENT stakeholder
+class PATHS decide

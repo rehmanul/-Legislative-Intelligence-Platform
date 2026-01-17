@@ -1,0 +1,131 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Decay Configuration Schema",
+  "description": "Schema for configuring edge weight decay models based on entity type and time",
+  "type": "object",
+  "required": ["decay_types", "default_params"],
+  "properties": {
+    "_meta": {
+      "type": "object",
+      "required": ["schema_version", "last_updated"],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "default": "1.0.0",
+          "description": "Schema version"
+        },
+        "last_updated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO-8601 UTC timestamp of last update"
+        }
+      }
+    },
+    "decay_types": {
+      "type": "object",
+      "description": "Decay type configurations",
+      "properties": {
+        "PERSON_DEPENDENT": {
+          "type": "object",
+          "required": ["decay_function", "half_life_days"],
+          "properties": {
+            "decay_function": {
+              "type": "string",
+              "enum": ["LINEAR", "EXPONENTIAL", "STEP", "CONDITIONAL"],
+              "description": "Type of decay function to apply"
+            },
+            "half_life_days": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Days until weight decays to 50% of original"
+            },
+            "minimum_weight": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "default": 0.1,
+              "description": "Minimum weight floor (prevents edges from disappearing)"
+            }
+          }
+        },
+        "INSTITUTION_DEPENDENT": {
+          "type": "object",
+          "required": ["decay_function", "half_life_days"],
+          "properties": {
+            "decay_function": {
+              "type": "string",
+              "enum": ["LINEAR", "EXPONENTIAL", "STEP", "CONDITIONAL"],
+              "description": "Type of decay function to apply"
+            },
+            "half_life_days": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Days until weight decays to 50% of original"
+            },
+            "minimum_weight": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "default": 0.1,
+              "description": "Minimum weight floor"
+            }
+          }
+        },
+        "HYBRID": {
+          "type": "object",
+          "required": ["person_weight", "institution_weight"],
+          "properties": {
+            "person_weight": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "description": "Weight given to person-dependent decay (0.0-1.0)"
+            },
+            "institution_weight": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "description": "Weight given to institution-dependent decay (0.0-1.0)"
+            }
+          }
+        }
+      }
+    },
+    "entity_type_mappings": {
+      "type": "object",
+      "description": "Maps entity types to decay types",
+      "additionalProperties": {
+        "type": "string",
+        "enum": ["PERSON_DEPENDENT", "INSTITUTION_DEPENDENT", "HYBRID"]
+      }
+    },
+    "default_params": {
+      "type": "object",
+      "description": "Default decay parameters",
+      "properties": {
+        "staleness_threshold_days": {
+          "type": "object",
+          "properties": {
+            "person": {
+              "type": "object",
+              "properties": {
+                "fresh": {"type": "integer", "minimum": 1},
+                "stale": {"type": "integer", "minimum": 1},
+                "very_stale": {"type": "integer", "minimum": 1}
+              }
+            },
+            "institution": {
+              "type": "object",
+              "properties": {
+                "fresh": {"type": "integer", "minimum": 1},
+                "stale": {"type": "integer", "minimum": 1},
+                "very_stale": {"type": "integer", "minimum": 1}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

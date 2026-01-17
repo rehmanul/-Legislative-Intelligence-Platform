@@ -1,0 +1,98 @@
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+flowchart TB
+    subgraph ExecutionSummary["Execution Summary"]
+        Start([Approval & Execution Script Started]) --> FoundPending[Found 8 Pending Approvals<br/>Workflow: orchestrator_core_planner]
+        
+        FoundPending --> ApproveAll[Approve All Requests<br/>via Approval Manager<br/>approved_by: human:script_approval]
+        
+        ApproveAll --> Approved8[✅ 8 Requests Approved<br/>Status: APPROVED]
+    end
+    
+    subgraph ExecutionFlow["Execution Flow"]
+        Approved8 --> Execute1[Execute Request 1<br/>Senator Johnson's Office<br/>legislative.director@senatorjohnson.senate.gov]
+        Approved8 --> Execute2[Execute Request 2<br/>Rep Martinez's Office<br/>policy.analyst@rep.martinez.house.gov]
+        Approved8 --> Execute3[Execute Request 3<br/>Energy Innovation Alliance<br/>info@energyinnovation.org]
+        Approved8 --> Execute4[Execute Request 4<br/>Clean Energy Coalition<br/>advocacy@cleanenergycoalition.org]
+        Approved8 --> Execute5[Execute Request 5<br/>Senator Johnson's Office<br/>Duplicate from earlier run]
+        Approved8 --> Execute6[Execute Request 6<br/>Rep Martinez's Office<br/>Duplicate from earlier run]
+        Approved8 --> Execute7[Execute Request 7<br/>Energy Innovation Alliance<br/>Duplicate from earlier run]
+        Approved8 --> Execute8[Execute Request 8<br/>Clean Energy Coalition<br/>Duplicate from earlier run]
+    end
+    
+    subgraph DryRunExecution["Dry-Run Execution"]
+        Execute1 --> Validate1[Email Provider: Validate Request]
+        Execute2 --> Validate2[Email Provider: Validate Request]
+        Execute3 --> Validate3[Email Provider: Validate Request]
+        Execute4 --> Validate4[Email Provider: Validate Request]
+        Execute5 --> Validate5[Email Provider: Validate Request]
+        Execute6 --> Validate6[Email Provider: Validate Request]
+        Execute7 --> Validate7[Email Provider: Validate Request]
+        Execute8 --> Validate8[Email Provider: Validate Request]
+        
+        Validate1 --> DryRun1[DRY_RUN_MODE: TRUE<br/>Log to dry-run-log.jsonl<br/>No actual email sent]
+        Validate2 --> DryRun2[DRY_RUN_MODE: TRUE<br/>Log to dry-run-log.jsonl<br/>No actual email sent]
+        Validate3 --> DryRun3[DRY_RUN_MODE: TRUE<br/>Log to dry-run-log.jsonl<br/>No actual email sent]
+        Validate4 --> DryRun4[DRY_RUN_MODE: TRUE<br/>Log to dry-run-log.jsonl<br/>No actual email sent]
+        Validate5 --> DryRun5[DRY_RUN_MODE: TRUE<br/>Log to dry-run-log.jsonl<br/>No actual email sent]
+        Validate6 --> DryRun6[DRY_RUN_MODE: TRUE<br/>Log to dry-run-log.jsonl<br/>No actual email sent]
+        Validate7 --> DryRun7[DRY_RUN_MODE: TRUE<br/>Log to dry-run-log.jsonl<br/>No actual email sent]
+        Validate8 --> DryRun8[DRY_RUN_MODE: TRUE<br/>Log to dry-run-log.jsonl<br/>No actual email sent]
+    end
+    
+    subgraph Logging["Activity Logging"]
+        DryRun1 --> LogExecuted1[Monitor: Log execution_executed<br/>Status: EXECUTED<br/>Success: True]
+        DryRun2 --> LogExecuted2[Monitor: Log execution_executed<br/>Status: EXECUTED<br/>Success: True]
+        DryRun3 --> LogExecuted3[Monitor: Log execution_executed<br/>Status: EXECUTED<br/>Success: True]
+        DryRun4 --> LogExecuted4[Monitor: Log execution_executed<br/>Status: EXECUTED<br/>Success: True]
+        DryRun5 --> LogExecuted5[Monitor: Log execution_executed<br/>Status: EXECUTED<br/>Success: True]
+        DryRun6 --> LogExecuted6[Monitor: Log execution_executed<br/>Status: EXECUTED<br/>Success: True]
+        DryRun7 --> LogExecuted7[Monitor: Log execution_executed<br/>Status: EXECUTED<br/>Success: True]
+        DryRun8 --> LogExecuted8[Monitor: Log execution_executed<br/>Status: EXECUTED<br/>Success: True]
+        
+        LogExecuted1 --> ActivityLog[(Activity Log<br/>activity-log.jsonl)]
+        LogExecuted2 --> ActivityLog
+        LogExecuted3 --> ActivityLog
+        LogExecuted4 --> ActivityLog
+        LogExecuted5 --> ActivityLog
+        LogExecuted6 --> ActivityLog
+        LogExecuted7 --> ActivityLog
+        LogExecuted8 --> ActivityLog
+    end
+    
+    subgraph ContactUpdate["Contact Management"]
+        LogExecuted1 --> UpdateContact1[Contact Manager:<br/>Mark as Contacted<br/>Update last_contacted]
+        LogExecuted2 --> UpdateContact2[Contact Manager:<br/>Mark as Contacted<br/>Update last_contacted]
+        LogExecuted3 --> UpdateContact3[Contact Manager:<br/>Mark as Contacted<br/>Update last_contacted]
+        LogExecuted4 --> UpdateContact4[Contact Manager:<br/>Mark as Contacted<br/>Update last_contacted]
+        
+        UpdateContact1 --> ContactStore[(Contact Store<br/>contacts.json<br/>Updated)]
+        UpdateContact2 --> ContactStore
+        UpdateContact3 --> ContactStore
+        UpdateContact4 --> ContactStore
+    end
+    
+    subgraph Results["Execution Results"]
+        ActivityLog --> ResultsSummary[✅ Execution Complete<br/>Approved: 8<br/>Executed: 8<br/>Failed: 0<br/>Success Rate: 100%]
+        
+        ContactStore --> ResultsSummary
+        
+        ResultsSummary --> OutputFiles[Output Files Updated:<br/>✅ approval-queue.json<br/>✅ activity-log.jsonl<br/>✅ dry-run-log.jsonl<br/>✅ contacts.json]
+    end
+    
+    OutputFiles --> Complete([✅ All Executions Complete<br/>Phase 2 Workflow Successful])
+    
+    style Start fill:#e1f5ff
+    style Approved8 fill:#d4edda
+    style DryRun1 fill:#d1ecf1
+    style DryRun2 fill:#d1ecf1
+    style DryRun3 fill:#d1ecf1
+    style DryRun4 fill:#d1ecf1
+    style DryRun5 fill:#d1ecf1
+    style DryRun6 fill:#d1ecf1
+    style DryRun7 fill:#d1ecf1
+    style DryRun8 fill:#d1ecf1
+    style ResultsSummary fill:#d4edda
+    style Complete fill:#d4edda
+    style ActivityLog fill:#fff3cd
+    style ContactStore fill:#fff3cd

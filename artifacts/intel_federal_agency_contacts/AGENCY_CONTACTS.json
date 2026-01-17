@@ -1,0 +1,53 @@
+{
+  "_meta": {
+    "agent_id": "intel_federal_agency_contacts_comm_evt",
+    "generated_at": "2026-01-13T04:40:31.711548Z",
+    "artifact_type": "AGENCY_CONTACTS",
+    "artifact_name": "Federal Agency Contacts",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": false,
+    "requires_review": null,
+    "review_gate_status": null,
+    "guidance_status": "SIGNED",
+    "schema_version": "1.0.0"
+  },
+  "contacts": [
+    {
+      "agency": "EPA",
+      "office": "Office of Air and Radiation",
+      "name": "Abigale Tardif",
+      "title": "Director, Office of Air and Radiation or Policy Contact",
+      "email": null,
+      "phone": "(202) 564-7400",
+      "verified": false,
+      "verification_method": "scraped",
+      "verified_at": null,
+      "verified_by": null,
+      "source_url": "https://www.epa.gov/aboutepa/about-office-air-and-radiation-oar",
+      "scraped_at": "2026-01-13T04:40:29.511924Z"
+    },
+    {
+      "agency": "HUD",
+      "office": "Office of Policy Development and Research",
+      "name": "HUD Contact (Scraping Failed)",
+      "title": "Director, Office of Policy Development or Policy Contact",
+      "email": null,
+      "phone": "(202) 708-1112",
+      "verified": false,
+      "verification_method": "scraped",
+      "verified_at": null,
+      "verified_by": null,
+      "source_url": "https://www.hud.gov/about/offices",
+      "scraped_at": "2026-01-13T04:40:31.709205Z",
+      "error": "404 Client Error: Not Found for url: https://www.hud.gov/about/offices"
+    }
+  ],
+  "summary": {
+    "total_contacts": 2,
+    "epa_contacts": 1,
+    "hud_contacts": 1,
+    "verified_contacts": 0,
+    "unverified_contacts": 2
+  }
+}

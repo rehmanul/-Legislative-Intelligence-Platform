@@ -1,0 +1,168 @@
+{
+  "_meta": {
+    "agent_id": "intel_stakeholder_map_intro_evt",
+    "generated_at": "2026-01-13T07:36:02.091902Z",
+    "artifact_type": "PRE_STAKEHOLDER_MAP",
+    "phase": "INTRO_EVT",
+    "updated_from_pre_evt": true
+  },
+  "stakeholders": {
+    "allies": [
+      {
+        "name": "Veterans Organizations (VFW, American Legion)",
+        "type": "organization",
+        "influence": "high",
+        "position": "support",
+        "rationale": "Direct benefit: extending military facility air quality standards to veteran housing programs. Natural bridge from military pilot to civilian application.",
+        "scaling_relevance": "Military-to-civilian transition stakeholders",
+        "sponsor_alignment_score": 0.75,
+        "sponsor_targeting_priority": "high"
+      },
+      {
+        "name": "EPA (Environmental Protection Agency)",
+        "type": "federal_agency",
+        "influence": "high",
+        "position": "support",
+        "rationale": "Upcoming rulemaking on indoor air quality standards. Military pilot data could inform EPA regulations. Primary regulatory vehicle for scaling.",
+        "scaling_relevance": "Primary regulatory authority for air quality standards",
+        "sponsor_alignment_score": 0.75,
+        "sponsor_targeting_priority": "high"
+      },
+      {
+        "name": "HUD (Department of Housing and Urban Development)",
+        "type": "federal_agency",
+        "influence": "high",
+        "position": "support",
+        "rationale": "Interest in evidence-based air quality standards for public housing. Direct scaling path: military facilities \u00e2\u2020\u2019 HUD public housing.",
+        "scaling_relevance": "Public housing regulatory authority",
+        "sponsor_alignment_score": 0.75,
+        "sponsor_targeting_priority": "high"
+      },
+      {
+        "name": "Health Insurance Industry (AHIP, Blue Cross Blue Shield)",
+        "type": "industry_association",
+        "influence": "high",
+        "position": "support",
+        "rationale": "Respiratory illness claims linked to poor indoor air quality. Preventive policy measures reduce long-term healthcare costs. Economic case for scaling.",
+        "scaling_relevance": "Economic driver for policy scaling",
+        "sponsor_alignment_score": 0.75,
+        "sponsor_targeting_priority": "high"
+      },
+      {
+        "name": "Public Health Organizations (APHA, CDC)",
+        "type": "organization",
+        "influence": "medium",
+        "position": "support",
+        "rationale": "Health evidence base for mold exposure and respiratory health. Link military pilot health outcomes to broader public health policy.",
+        "scaling_relevance": "Health evidence base",
+        "sponsor_alignment_score": 0.75,
+        "sponsor_targeting_priority": "medium"
+      },
+      {
+        "name": "School Districts & Education Associations",
+        "type": "organization",
+        "influence": "medium",
+        "position": "support",
+        "rationale": "Inconsistent state/local air quality standards for educational facilities. Gap between military facility standards and civilian school requirements.",
+        "scaling_relevance": "Scaling opportunity: military facilities \u00e2\u2020\u2019 public schools",
+        "sponsor_alignment_score": 0.75,
+        "sponsor_targeting_priority": "medium"
+      },
+      {
+        "name": "Tenant Advocacy Organizations",
+        "type": "organization",
+        "influence": "medium",
+        "position": "support",
+        "rationale": "Increased tenant complaints about air quality and mold issues. Demand for standardized monitoring and remediation protocols.",
+        "scaling_relevance": "Grassroots support for policy scaling",
+        "sponsor_alignment_score": 0.75,
+        "sponsor_targeting_priority": "medium"
+      }
+    ],
+    "opponents": [
+      {
+        "name": "Property Management Associations (NMHC, NAA)",
+        "type": "industry_association",
+        "influence": "high",
+        "position": "oppose",
+        "rationale": "Potential cost burden of air quality monitoring and remediation requirements. May oppose mandatory standards without cost-sharing mechanisms.",
+        "scaling_relevance": "Primary industry opposition to policy scaling",
+        "sponsor_alignment_score": 0.25,
+        "sponsor_targeting_priority": "monitor"
+      },
+      {
+        "name": "Real Estate Development Industry",
+        "type": "industry_association",
+        "influence": "high",
+        "position": "oppose",
+        "rationale": "Concerns about construction costs and regulatory compliance burden. May oppose federal standards that override state/local flexibility.",
+        "scaling_relevance": "Industry resistance to federal standardization",
+        "sponsor_alignment_score": 0.25,
+        "sponsor_targeting_priority": "monitor"
+      },
+      {
+        "name": "State/Local Government Associations",
+        "type": "organization",
+        "influence": "medium",
+        "position": "oppose",
+        "rationale": "Federal preemption concerns. May oppose federal standards that override existing state/local air quality regulations.",
+        "scaling_relevance": "Federalism concerns about policy scaling",
+        "sponsor_alignment_score": 0.25,
+        "sponsor_targeting_priority": "monitor"
+      }
+    ],
+    "neutral": [
+      {
+        "name": "State Health Departments",
+        "type": "state_agency",
+        "influence": "medium",
+        "position": "neutral",
+        "rationale": "Awaiting federal coordination details. May support if federal standards align with state priorities and include state implementation flexibility.",
+        "scaling_relevance": "Implementation partners for policy scaling"
+      },
+      {
+        "name": "Building Code Organizations (ICC, NFPA)",
+        "type": "organization",
+        "influence": "medium",
+        "position": "neutral",
+        "rationale": "Awaiting technical specifications and evidence base. May support if standards align with existing building code frameworks.",
+        "scaling_relevance": "Technical standards alignment"
+      },
+      {
+        "name": "Academic Research Institutions",
+        "type": "organization",
+        "influence": "low",
+        "position": "neutral",
+        "rationale": "Awaiting peer review of military pilot evidence. May support if evidence is independently verified and published.",
+        "scaling_relevance": "Evidence verification requirement (stop condition)"
+      }
+    ],
+    "unknown": [
+      {
+        "name": "Congressional Committees (House Energy & Commerce, Senate HELP)",
+        "type": "congressional_committee",
+        "influence": "high",
+        "position": "unknown",
+        "rationale": "Jurisdiction over EPA/HUD authorizations. Position depends on committee priorities and member interests. Requires further intelligence gathering.",
+        "scaling_relevance": "Legislative vehicle committees"
+      },
+      {
+        "name": "Appropriations Committees",
+        "type": "congressional_committee",
+        "influence": "high",
+        "position": "unknown",
+        "rationale": "Budget implications of policy scaling. Position depends on cost estimates and funding mechanisms. Requires budget analysis.",
+        "scaling_relevance": "Budget authority for policy implementation"
+      }
+    ]
+  },
+  "influence_heatmap": {
+    "high_influence_allies": 4,
+    "high_influence_opponents": 2,
+    "sponsor_targeting_candidates": 4
+  },
+  "alignment_scores": {
+    "average_ally_alignment": 0.75,
+    "average_opponent_alignment": 0.25
+  }
+}

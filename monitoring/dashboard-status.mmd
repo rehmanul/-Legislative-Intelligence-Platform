@@ -1,0 +1,60 @@
+---
+config:
+  layout: dagre
+  theme: default
+---
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+flowchart TB
+
+STATUS["🟡 System Status: WAITING_REVIEW"]:::status
+
+subgraph STATES["📜 State Progression"]
+direction LR
+  PRE_EVT(("PRE_EVT")):::state
+  INTRO_EVT(("INTRO_EVT<br/>CURRENT")):::current
+  COMM_EVT(("COMM_EVT<br/>TARGET")):::target
+  FLOOR_EVT(("FLOOR_EVT")):::state
+end
+
+subgraph ARTIFACTS["📦 Artifacts"]
+direction TB
+  Concept_Memo["✓ Concept Memo"]:::complete
+  Legitimacy_and_Policy_Framing["✗ Legitimacy & Policy Framing"]:::missing
+  Policy_Whitepaper["✗ Policy Whitepaper"]:::missing
+end
+
+subgraph AGENTS["🤖 Agents"]
+direction TB
+  subgraph WAITING["Waiting on Human"]
+    draft_concept_memo_pre_evt["🟡 draft_concept_memo_pre_evt<br/>WAITING_REVIEW"]:::waiting
+    execution_outreach_comm_evt["🟡 execution_outreach_comm_evt<br/>BLOCKED"]:::waiting
+  end
+  subgraph RETIRED["Retired"]
+    intel_signal_scan_pre_evt["⚫ intel_signal_scan_pre_evt"]:::retired
+    intel_stakeholder_map_pre_evt["⚫ intel_stakeholder_map_pre_evt"]:::retired
+    intel_opposition_detect_pre_evt["⚫ intel_opposition_detect_pre_evt"]:::retired
+    intel_signal_scan_intro_evt["⚫ intel_signal_scan_intro_evt"]:::retired
+    intel_stakeholder_map_intro_evt["⚫ intel_stakeholder_map_intro_evt"]:::retired
+  end
+end
+
+STATUS --> STATES
+PRE_EVT --> INTRO_EVT
+INTRO_EVT --> COMM_EVT
+COMM_EVT --> FLOOR_EVT
+INTRO_EVT --> ARTIFACTS
+draft_framing_intro_evt --> Legitimacy_and_Policy_Framing
+draft_whitepaper_intro_evt --> Policy_Whitepaper
+
+classDef status fill:#E0F2FE,stroke:#0369A1,stroke-width:3px
+classDef current fill:#FEF3C7,stroke:#92400E,stroke-width:3px
+classDef target fill:#D1FAE5,stroke:#065F46,stroke-width:2px
+classDef state fill:#F3F4F6,stroke:#6B7280,stroke-width:2px
+classDef complete fill:#D1FAE5,stroke:#065F46,stroke-width:2px
+classDef missing fill:#FEE2E2,stroke:#991B1B,stroke-width:2px
+classDef pending fill:#FEF3C7,stroke:#92400E,stroke-width:2px
+classDef active fill:#DBEAFE,stroke:#1E40AF,stroke-width:2px
+classDef waiting fill:#FEF3C7,stroke:#92400E,stroke-width:3px
+classDef retired fill:#E5E7EB,stroke:#6B7280,stroke-width:1px
+classDef gate fill:#FEE2E2,stroke:#991B1B,stroke-width:3px

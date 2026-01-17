@@ -1,0 +1,158 @@
+{
+  "_meta": {
+    "artifact_type": "AGENT_RESPAWN_READINESS",
+    "artifact_name": "INTRO_EVT Agent Respawn Preconditions",
+    "generated_at": "2026-01-20T12:30:00.000000Z",
+    "generated_by": "continuation_development_agent",
+    "purpose": "Define preconditions for respawning INTRO_EVT drafting agents",
+    "read_only": true,
+    "authoritative": false,
+    "phase": "INTRO_EVT",
+    "non_executive": true
+  },
+  "phase": "INTRO_EVT",
+  "agent_respawn_preconditions": {
+    "draft_framing_intro_evt": {
+      "agent_id": "draft_framing_intro_evt",
+      "agent_type": "Drafting",
+      "current_status": "RETIRED",
+      "artifact_type": "INTRO_FRAME",
+      "artifact_name": "Legitimacy & Policy Framing",
+      "required_for_phase_completion": true,
+      "review_gate": "HR_PRE",
+      "preconditions": {
+        "system_state": {
+          "required": "INTRO_EVT",
+          "current": "INTRO_EVT",
+          "satisfied": true,
+          "note": "System is in correct phase"
+        },
+        "prerequisite_artifacts": {
+          "required": [
+            {
+              "artifact_type": "PRE_CONCEPT",
+              "status": "APPROVED",
+              "current_status": "APPROVED",
+              "approved_at": "2026-01-07T07:24:44.406342Z",
+              "satisfied": true,
+              "note": "Concept Memo approved via HR_PRE"
+            }
+          ],
+          "all_satisfied": true
+        },
+        "review_gate_status": {
+          "required": "HR_PRE available for new artifact submission",
+          "current_status": "APPROVED (previous artifact)",
+          "satisfied": true,
+          "note": "HR_PRE gate can accept new artifact submissions"
+        },
+        "agent_lifecycle": {
+          "current_status": "RETIRED",
+          "can_respawn": true,
+          "note": "Agent is retired and can be respawned if needed"
+        }
+      },
+      "respawn_decision": {
+        "ready_to_respawn": true,
+        "reason": "All preconditions satisfied. Agent can be respawned to generate or regenerate INTRO_FRAME artifact.",
+        "optional_note": "Artifact INTRO_FRAME.json already exists but may need regeneration or review submission"
+      },
+      "post_respawn_workflow": {
+        "artifact_generation": "Agent will generate INTRO_FRAME artifact",
+        "artifact_submission": "Artifact must be submitted to HR_PRE review gate",
+        "review_required": true,
+        "review_gate": "HR_PRE",
+        "approval_required": "HR_PRE approval required before phase completion"
+      }
+    },
+    "draft_whitepaper_intro_evt": {
+      "agent_id": "draft_whitepaper_intro_evt",
+      "agent_type": "Drafting",
+      "current_status": "RETIRED",
+      "artifact_type": "INTRO_WHITEPAPER",
+      "artifact_name": "Policy Whitepaper",
+      "required_for_phase_completion": true,
+      "review_gate": "HR_PRE",
+      "preconditions": {
+        "system_state": {
+          "required": "INTRO_EVT",
+          "current": "INTRO_EVT",
+          "satisfied": true,
+          "note": "System is in correct phase"
+        },
+        "prerequisite_artifacts": {
+          "required": [
+            {
+              "artifact_type": "PRE_CONCEPT",
+              "status": "APPROVED",
+              "current_status": "APPROVED",
+              "approved_at": "2026-01-07T07:24:44.406342Z",
+              "satisfied": true,
+              "note": "Concept Memo approved via HR_PRE"
+            }
+          ],
+          "all_satisfied": true
+        },
+        "review_gate_status": {
+          "required": "HR_PRE available for new artifact submission",
+          "current_status": "APPROVED (previous artifact)",
+          "satisfied": true,
+          "note": "HR_PRE gate can accept new artifact submissions"
+        },
+        "agent_lifecycle": {
+          "current_status": "RETIRED",
+          "can_respawn": true,
+          "note": "Agent is retired and can be respawned if needed"
+        }
+      },
+      "respawn_decision": {
+        "ready_to_respawn": true,
+        "reason": "All preconditions satisfied. Agent can be respawned to generate or regenerate INTRO_WHITEPAPER artifact.",
+        "optional_note": "Artifact INTRO_WHITEPAPER.json already exists but may need regeneration or review submission"
+      },
+      "post_respawn_workflow": {
+        "artifact_generation": "Agent will generate INTRO_WHITEPAPER artifact",
+        "artifact_submission": "Artifact must be submitted to HR_PRE review gate",
+        "review_required": true,
+        "review_gate": "HR_PRE",
+        "approval_required": "HR_PRE approval required before phase completion"
+      }
+    }
+  },
+  "existing_artifacts_status": {
+    "INTRO_FRAME": {
+      "path": "artifacts/draft_framing_intro_evt/INTRO_FRAME.json",
+      "exists": true,
+      "review_status": "NOT_SUBMITTED",
+      "note": "Artifact exists but has not been submitted for HR_PRE review. Agent respawn may be needed to submit for review or regenerate."
+    },
+    "INTRO_WHITEPAPER": {
+      "path": "artifacts/draft_whitepaper_intro_evt/INTRO_WHITEPAPER.json",
+      "exists": true,
+      "review_status": "NOT_SUBMITTED",
+      "note": "Artifact exists but has not been submitted for HR_PRE review. Agent respawn may be needed to submit for review or regenerate."
+    }
+  },
+  "respawn_authorization": {
+    "authorization_required": "Human decision",
+    "authorization_type": "Explicit agent spawn command",
+    "note": "This artifact defines preconditions only. Actual agent respawn requires explicit human or orchestrator command.",
+    "governance_compliance": {
+      "respects_review_gates": true,
+      "does_not_advance_state": true,
+      "does_not_unblock_execution": true,
+      "compliance_note": "Agent respawn for artifact generation is allowed in INTRO_EVT phase and does not violate governance rules"
+    }
+  },
+  "summary": {
+    "agents_ready_for_respawn": 2,
+    "agents": [
+      "draft_framing_intro_evt",
+      "draft_whitepaper_intro_evt"
+    ],
+    "all_preconditions_satisfied": true,
+    "respawn_purpose": "Generate or regenerate INTRO_EVT artifacts for HR_PRE review submission",
+    "note": "Respawn is optional but recommended if artifacts need regeneration or review submission"
+  },
+  "disclaimer": "This artifact defines preconditions only. It does not actually respawn agents or modify system state. Actual agent respawn requires explicit authorization."
+}

@@ -1,0 +1,64 @@
+╔═══════════════════════════════════════════════════════════════╗
+║  ⚡ VELOCITY STATUS: SLOW ⚠                                    ║
+║  High-priority bottlenecks detected                           ║
+╚═══════════════════════════════════════════════════════════════╝
+
+AT-A-GLANCE
+─────────────────────────────────────────────────────────────────
+State:        IMPL_EVT (1d 7h 29m)
+Reviews:      HR_LANG, HR_MSG, HR_PRE, HR_RELEASE: FAST ✓
+Blocked:      1 agent(s) awaiting authorization ⚠
+Bottlenecks:  2 high-priority, 1 medium-priority
+
+TIME IN STATE
+─────────────────────────────────────────────────────────────────
+IMPL_EVT: 1d 7h 29m
+Status: No expected time
+
+REVIEW CYCLE TIMES (last 10 reviews)
+─────────────────────────────────────────────────────────────────
+  HR_PRE:     avg 14m  (threshold: 90m)  ✓ FAST ↓
+  HR_LANG:     avg 0m  (threshold: 90m)  ✓ FAST ↓
+  HR_MSG:     avg 0m  (threshold: 30m)  ✓ FAST ↓
+  HR_RELEASE:     avg 0m  (threshold: 10m)  ✓ FAST ↓
+
+AGENT EXECUTION TIMES
+─────────────────────────────────────────────────────────────────
+  Intelligence:    no data
+  Drafting:    no data
+  Execution:    no data
+  Learning:    no data
+
+QUEUE DEPTHS
+─────────────────────────────────────────────────────────────────
+  Pending reviews: 2
+  Blocked agents:  1
+  Waiting state advancement: 0
+
+BOTTLENECKS
+─────────────────────────────────────────────────────────────────
+ 1. [HIGH] Amendment Strategy waiting 1894m for HR_PRE review
+    → python scripts/cockpit__list__pending_approvals.py
+
+ 2. [HIGH] Legislative Language Draft waiting 1895m for HR_PRE review
+    → python scripts/cockpit__list__pending_approvals.py
+
+ 3. [MEDIUM] 1 agents blocked awaiting authorization
+    → python scripts/cockpit__authorize_execution.py
+
+ACTIONS NEEDED
+─────────────────────────────────────────────────────────────────
+[HIGH] Amendment Strategy waiting 1894m for HR_PRE review
+  Why: Amendment Strategy has been waiting Amendment for review, exceeding threshold
+  Impact: Reduces wait time for artifact and prevents further delays
+  Action: python scripts/cockpit__list__pending_approvals.py
+
+[HIGH] Legislative Language Draft waiting 1895m for HR_PRE review
+  Why: Legislative Language Draft has been waiting 1895m for review, exceeding threshold
+  Impact: Reduces wait time for artifact and prevents further delays
+  Action: python scripts/cockpit__list__pending_approvals.py
+
+[MEDIUM] 1 agents blocked awaiting authorization
+  Why: Execution agent is blocked and cannot proceed without authorization
+  Impact: Unblocks agent execution and allows workflow to continue
+  Action: python scripts/cockpit__authorize_execution.py

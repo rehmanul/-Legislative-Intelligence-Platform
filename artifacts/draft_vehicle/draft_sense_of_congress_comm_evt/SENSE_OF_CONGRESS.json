@@ -1,0 +1,80 @@
+{
+  "_meta": {
+    "agent_id": "draft_sense_of_congress_comm_evt",
+    "generated_at": "2026-01-20T20:30:00Z",
+    "artifact_type": "SENSE_OF_CONGRESS",
+    "artifact_name": "Sense of Congress Resolution",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": null,
+    "guidance_status": "SIGNED"
+  },
+  "resolution_metadata": {
+    "resolution_number": "H.Res. 1247",
+    "title": "Expressing the sense of Congress that the United States should support international efforts to combat climate change through innovation and technology deployment",
+    "sponsor": "Rep. Martinez (D-CA)",
+    "vehicle_type": "SENSE_OF_CONGRESS",
+    "rationale": "Non-binding resolution allows policy statement without binding commitments or spending authority"
+  },
+  "resolution_language": {
+    "whereas_clauses": [
+      "Whereas climate change poses significant threats to national security, economic stability, and global stability;",
+      "Whereas the United States has historically led in technological innovation and can contribute to global climate solutions;",
+      "Whereas international cooperation is necessary to address transboundary climate challenges;",
+      "Whereas innovation and technology deployment can address climate change while supporting economic growth;",
+      "Whereas the United States should maintain leadership in clean energy technology development and export"
+    ],
+    "resolved_clauses": [
+      "Resolved, That the House of Representatives—",
+      "(1) supports United States participation in international climate cooperation frameworks that promote innovation and technology deployment;",
+      "(2) encourages public-private partnerships to accelerate clean energy technology development and deployment;",
+      "(3) affirms that climate action and economic growth are mutually reinforcing, not conflicting goals;",
+      "(4) calls upon the Administration to prioritize climate technology innovation in international engagement and trade policy"
+    ]
+  },
+  "vehicle_advantages": {
+    "non_binding": "Does not require spending or binding commitments - easier to pass than authorizing or appropriating legislation",
+    "policy_signal": "Sends clear message about congressional priorities without creating enforcement mechanisms",
+    "coalition_building": "Can attract broader support than binding legislation, builds momentum for future binding action",
+    "media_value": "Provides messaging opportunity and demonstrates congressional position on issue"
+  },
+  "strategic_use_cases": {
+    "policy_staking": "Establishes congressional position on issue for future legislative efforts",
+    "administration_guidance": "Signals congressional expectations to executive branch",
+    "international_messaging": "Demonstrates U.S. congressional support for international cooperation",
+    "coalition_testing": "Tests support levels before investing in binding legislation"
+  },
+  "messaging_framework": {
+    "headline": "House Resolution Affirms U.S. Commitment to Climate Innovation Leadership",
+    "key_points": [
+      "Bipartisan resolution demonstrates congressional support for climate technology solutions",
+      "Emphasizes innovation and economic growth, not regulation and cost",
+      "Positions U.S. as global leader in clean energy technology"
+    ],
+    "opposition_preemption": "Focus on innovation and economic opportunity, not climate regulation - appeals to broader caucus"
+  },
+  "vote_prospects": {
+    "support_base": "Democrats: 200+ likely yes, Moderate Republicans: 30-40 possible yes",
+    "opposition_base": "Conservative Republicans: 150-160 likely no",
+    "swing_votes": "20-30 moderate Republicans - messaging focus",
+    "passage_probability": "MEDIUM-HIGH if framed around innovation and economic opportunity rather than climate regulation"
+  },
+  "procedural_pathway": {
+    "committee": "Foreign Affairs Committee or Energy and Commerce Committee",
+    "floor_time": "Likely considered under suspension of rules (2/3 majority required) or regular order",
+    "senate_companion": "May have Senate companion (S.Res. XXX) but not required for House passage",
+    "timeline": "Could move quickly if leadership prioritizes - 2-4 weeks from introduction to vote"
+  },
+  "implementation_considerations": {
+    "administrative_impact": "Non-binding but may influence executive branch policy development",
+    "future_legislation": "Can serve as foundation for future binding authorizing or appropriating legislation",
+    "international_signal": "Demonstrates congressional support for Administration climate diplomacy efforts"
+  },
+  "messaging_variations": {
+    "for_democrats": "Demonstrates U.S. leadership on climate while supporting innovation economy",
+    "for_republicans": "Emphasizes innovation, technology, and economic opportunity - not regulation",
+    "for_media": "Bipartisan resolution shows Congress can find common ground on climate through innovation focus"
+  },
+  "disclaimer": "Sense of Congress resolutions are non-binding policy statements. Success depends on framing and coalition building rather than binding authority."
+}

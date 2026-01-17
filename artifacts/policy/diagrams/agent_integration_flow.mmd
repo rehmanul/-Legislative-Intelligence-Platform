@@ -1,0 +1,78 @@
+---
+config:
+  layout: dagre
+  theme: default
+---
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+flowchart TB
+
+subgraph AGENT["Agent Execution"]
+  direction TB
+  
+  AGENT_START["Agent Spawned"]:::start
+  
+  AGENT_START --> CHECK{Need Policy\nContext?}
+  
+  CHECK -->|Yes| LOAD["Load Policy Artifacts\n🟦 READ-ONLY"]
+  CHECK -->|No| EXECUTE["Execute Agent Logic"]
+  
+  LOAD --> DECLARE["Declare READ-ONLY Usage\nDocument References"]
+  DECLARE --> USE["Use as Background Context\n🟦 Non-Executable"]
+  
+  USE --> VALIDATE{Generate\nActionable Output?}
+  
+  VALIDATE -->|Yes| APPROVAL["Require Human Approval\n🟨 Gate Required"]
+  VALIDATE -->|No| EXECUTE
+  
+  APPROVAL --> EXECUTE
+  EXECUTE --> OUTPUT["Agent Output\nWith Policy References"]
+end
+
+subgraph POLICY["Policy Artifacts"]
+  direction TB
+  
+  POLICY_DOCS["Policy Documents\n7 core files"]
+  POLICY_DIAGRAMS["Mermaid Diagrams\n8 visualizations"]
+  POLICY_NAV["Navigation Guides"]
+end
+
+subgraph CONTRACT["Contract Enforcement"]
+  direction TB
+  
+  READ_ONLY["READ-ONLY\n🟦 Enforced"]
+  NO_EXEC["No Execution\n🟦 Protected"]
+  VALIDATION["Validation Script\n🟦 Automated"]
+end
+
+subgraph OUTPUTS["Agent Output Types"]
+  direction TB
+  
+  INTEL_OUT["Intelligence Output\n✅ Can Reference Policy"]
+  DRAFT_OUT["Draft Output\n✅ Can Reference Policy\n🟨 Requires Approval"]
+  EXEC_OUT["Execution Output\n⬜ Cannot Use Policy"]
+end
+
+LOAD --> POLICY_DOCS
+USE --> READ_ONLY
+APPROVAL --> NO_EXEC
+OUTPUT --> INTEL_OUT
+OUTPUT --> DRAFT_OUT
+EXEC_OUT -.->|"Blocked"| POLICY_DOCS
+VALIDATION --> CONTRACT
+
+classDef start fill:#D1FAE5,stroke:#065F46,stroke-width:3px
+classDef policy fill:#DBEAFE,stroke:#1E40AF,stroke-width:3px
+classDef contract fill:#D1FAE5,stroke:#065F46,stroke-width:2px
+classDef allowed fill:#D1FAE5,stroke:#065F46,stroke-width:2px
+classDef blocked fill:#FEE2E2,stroke:#991B1B,stroke-width:2px
+classDef gate fill:#FEF3C7,stroke:#92400E,stroke-width:2px
+classDef process fill:#F3F4F6,stroke:#6B7280,stroke-width:2px
+
+class AGENT_START start
+class POLICY_DOCS,POLICY_DIAGRAMS,POLICY_NAV,LOAD,USE policy
+class READ_ONLY,NO_EXEC,VALIDATION,CONTRACT contract
+class INTEL_OUT,DRAFT_OUT allowed
+class EXEC_OUT blocked
+class APPROVAL gate
+class CHECK,VALIDATE,DECLARE,EXECUTE,OUTPUT process

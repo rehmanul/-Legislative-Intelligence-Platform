@@ -1,0 +1,37 @@
+{
+  "_meta": {
+    "agent_id": "execution_grassroots_mobilize_execute_pre_evt",
+    "generated_at": "2026-01-13T07:35:57.308895Z",
+    "artifact_type": "GRASSROOTS_MOBILIZATION_LOG",
+    "artifact_name": "Grassroots Mobilization Log",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": false,
+    "requires_review": null,
+    "guidance_status": "TEST_MODE",
+    "dependencies": [
+      "intel_grassroots_mobilization_evaluate_pre_evt/GRASSROOTS_MOBILIZATION_ASSESSMENT.json"
+    ]
+  },
+  "mobilization_activities": {
+    "total_organizations": 25,
+    "activated_organizations": 0,
+    "activation_campaigns": [
+      {
+        "campaign_type": "constituent_outreach",
+        "target_organizations": 10,
+        "status": "PLANNED"
+      }
+    ]
+  },
+  "execution_status": {
+    "total_actions": 0,
+    "completed": 0,
+    "pending": 0
+  },
+  "recommendations": [
+    "Execute mobilization campaigns based on assessment",
+    "Track activation effectiveness",
+    "Coordinate with grassroots networks"
+  ]
+}

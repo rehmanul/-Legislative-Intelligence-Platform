@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Policy Artifacts Viewer - READ-ONLY CONTEXT</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header .subtitle {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+        
+        .warning {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 1rem 2rem;
+            border-radius: 4px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .sidebar {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #1e40af;
+        }
+        
+        .nav-links {
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-links a {
+            color: #3b82f6;
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        
+        .nav-links a:hover {
+            background: #eff6ff;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .content h2 {
+            color: #1e40af;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        .file-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .file-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 1rem;
+            transition: box-shadow 0.2s;
+        }
+        
+        .file-card:hover {
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .file-card h3 {
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .file-card .meta {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+        
+        .diagram-container {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+        
+        .status-readonly {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+    </style>
+<link rel="stylesheet" href="../../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+    
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="../../dashboards/unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="../../dashboards/unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="../../dashboards/session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="header">
+        <h1>Policy Artifacts Viewer</h1>
+        <div class="subtitle">READ-ONLY POLICY CONTEXT - Strategic Planning & Intelligence</div>
+    </div>
+    
+    <div class="warning">
+        <strong>⚠️ READ-ONLY POLICY CONTEXT:</strong> These artifacts provide strategic context only and MUST NOT be treated as executable instructions. See contract documentation for usage rules.
+    </div>
+    
+    <div class="container">
+        <div class="sidebar">
+            <h2>Quick Navigation</h2>
+            <ul class="nav-links">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#documents">Policy Documents</a></li>
+                <li><a href="#diagrams">Visual Diagrams</a></li>
+                <li><a href="#guides">Navigation Guides</a></li>
+            </ul>
+        </div>
+        
+        <div class="content" id="overview">
+            <h2>Policy Artifacts Overview</h2>
+            <p><strong>Location:</strong> <code>artifacts/policy/</code></p>
+            <p><strong>Status:</strong> <span class="status-badge status-readonly">READ-ONLY CONTEXT</span></p>
+            <p><strong>Purpose:</strong> Strategic policy analysis, stakeholder mapping, and execution planning for Wi-Charge technology policy opportunities in NDAA FY2026 (S.2296).</p>
+            
+            <h3 style="margin-top: 1.5rem;">System Context</h3>
+            <div class="diagram-container">
+                <div class="mermaid">
+flowchart TB
+    subgraph SYSTEM["Agent Orchestrator System"]
+        direction TB
+        subgraph POLICY["🟦 Policy Artifacts\nREAD-ONLY CONTEXT"]
+            DOCS["7 Core Documents"]
+            DIAGRAMS["9 Mermaid Diagrams"]
+            NAV["Navigation Guides"]
+        end
+        subgraph AGENTS["Agents"]
+            INTEL["Intelligence Agents\n🟨 Can Read"]
+            DRAFT["Drafting Agents\n🟨 Can Reference"]
+            EXEC["Execution Agents\n⬜ Blocked"]
+        end
+    end
+    INTEL -.->|"Read Only"| POLICY
+    DRAFT -.->|"Reference Only"| POLICY
+    EXEC -.->|"Blocked"| POLICY
+    
+    classDef policy fill:#DBEAFE,stroke:#1E40AF,stroke-width:3px
+    classDef agent fill:#FEF3C7,stroke:#92400E,stroke-width:2px
+    classDef blocked fill:#E5E7EB,stroke:#6B7280,stroke-width:1px
+    
+    class POLICY,DOCS,DIAGRAMS,NAV policy
+    class INTEL,DRAFT agent
+    class EXEC blocked
+                </div>
+            </div>
+        </div>
+        
+        <div class="content" id="documents">
+            <h2>Policy Documents</h2>
+            <div class="file-list" id="documents-list">
+                <!-- Documents will be loaded here -->
+            </div>
+        </div>
+        
+        <div class="content" id="diagrams">
+            <h2>Visual Diagrams</h2>
+            <div class="file-list" id="diagrams-list">
+                <!-- Diagrams will be loaded here -->
+            </div>
+        </div>
+        
+        <div class="content" id="guides">
+            <h2>Navigation Guides</h2>
+            <div class="file-list" id="guides-list">
+                <!-- Guides will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Policy Artifacts System - READ-ONLY POLICY CONTEXT</p>
+        <p>Generated: January 7, 2026 | Contract Version: 1.0</p>
+    </div>
+    
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+        
+        // Policy documents
+        const documents = [
+            { name: 'key_findings.md', desc: 'Executive summary of policy analysis', size: '12.8 KB' },
+            { name: 'stakeholder_map.md', desc: 'Institutional stakeholder mapping', size: '14.7 KB' },
+            { name: 'talking_points.md', desc: 'Structured talking points', size: '4.3 KB' },
+            { name: 'action_plan.md', desc: '90-day execution roadmap', size: '23.6 KB' },
+            { name: 'section_priority_table.md', desc: 'Bill section mapping', size: '10.6 KB' },
+            { name: 'staff_one_pager_p1.md', desc: 'One-page brief', size: '4.7 KB' },
+            { name: 'clear_ask_matrix_p1.md', desc: 'Ask matrix', size: '4.0 KB' }
+        ];
+        
+        // Diagrams
+        const diagrams = [
+            { name: 'comprehensive_overview.mmd', desc: 'Complete policy plan view', type: 'Merged' },
+            { name: 'master_dashboard.mmd', desc: 'Executive dashboard', type: 'Merged' },
+            { name: 'section_to_ask_flow.mmd', desc: 'Engagement flow', type: 'Merged' },
+            { name: 'stakeholder_hierarchy.mmd', desc: 'Stakeholder structure', type: 'Detailed' },
+            { name: '90_day_timeline.mmd', desc: 'Gantt timeline', type: 'Detailed' },
+            { name: 'execution_paths_flowchart.mmd', desc: 'Path selection', type: 'Detailed' },
+            { name: 'section_priority_map.mmd', desc: 'Section priorities', type: 'Detailed' },
+            { name: 'clear_ask_decision_tree.mmd', desc: 'Ask decision tree', type: 'Detailed' },
+            { name: 'system_context.mmd', desc: 'System integration', type: 'System' }
+        ];
+        
+        // Guides
+        const guides = [
+            { name: 'QUICK_REFERENCE.md', desc: 'Quick navigation guide' },
+            { name: 'INDEX.md', desc: 'Complete document index' },
+            { name: 'AGENT_INTEGRATION_GUIDE.md', desc: 'Agent usage patterns' },
+            { name: 'README.md', desc: 'Contract documentation' }
+        ];
+        
+        function renderFileList(containerId, files, basePath = '') {
+            const container = document.getElementById(containerId);
+            files.forEach(file => {
+                const card = document.createElement('div');
+                card.className = 'file-card';
+                card.innerHTML = `
+                    <h3>${file.name}</h3>
+                    <p>${file.desc}</p>
+                    <div class="meta">
+                        ${file.size ? `Size: ${file.size} | ` : ''}
+                        ${file.type ? `Type: ${file.type} | ` : ''}
+                        <a href="${basePath}${file.name}" target="_blank">View →</a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+        
+        renderFileList('documents-list', documents);
+        renderFileList('diagrams-list', diagrams, 'diagrams/');
+        renderFileList('guides-list', guides);
+    </script>
+</body>
+</html>

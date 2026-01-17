@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artifact Review Interface</title>
+  <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-family-sans), Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--color-text-primary);
+      background: var(--color-bg-secondary);
+      padding: var(--spacing-xl);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    header {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+      box-shadow: var(--shadow-2);
+    }
+    
+    h1 {
+      font-size: var(--font-size-2xl);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .file-input-wrapper {
+      margin-top: var(--spacing-lg);
+    }
+    
+    .file-input-wrapper label {
+      display: inline-block;
+      padding: var(--spacing-md) 20px;
+      background: var(--color-primary);
+      color: var(--color-bg-primary);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: var(--font-size-sm);
+    }
+    
+    .file-input-wrapper input[type="file"] {
+      display: none;
+    }
+    
+    .status-badge {
+      display: inline-block;
+      padding: var(--spacing-xs) 12px;
+      border-radius: var(--radius-xl);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      margin-left: 10px;
+    }
+    
+    .status-badge.pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+    
+    .status-badge.approved {
+      background: #d4edda;
+      color: #155724;
+    }
+    
+    .review-section {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+      box-shadow: var(--shadow-2);
+    }
+    
+    .review-item {
+      padding: var(--spacing-xl);
+      margin-bottom: var(--spacing-lg);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      background: #f9f9f9;
+    }
+    
+    .review-item.pending {
+      border-color: #ffc107;
+      background: #fffbf0;
+    }
+    
+    .review-item.approved {
+      border-color: var(--color-success);
+      background: #f0fff4;
+    }
+    
+    .review-item.rejected {
+      border-color: var(--color-error);
+      background: #fff5f5;
+    }
+    
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: var(--spacing-lg);
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--color-border);
+    }
+    
+    .review-title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+    }
+    
+    .review-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .meta-item {
+      padding: var(--spacing-sm);
+      background: var(--color-bg-primary);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+    }
+    
+    .meta-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      margin-bottom: 4px;
+    }
+    
+    .meta-value {
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+    }
+    
+    .artifact-content {
+      margin-top: var(--spacing-lg);
+      padding: var(--spacing-lg);
+      background: var(--color-bg-primary);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      max-height: 400px;
+      overflow-y: auto;
+      font-family: var(--font-family-mono);
+      font-size: var(--font-size-xs);
+      var(--color-bg-primary)-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+      padding-top: 15px;
+      border-top: 2px solid var(--color-border);
+    }
+    
+    .btn {
+      padding: var(--spacing-md) 20px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: all var(--transition-base) var(--transition-ease);
+    }
+    
+    .btn-approve {
+      background: var(--color-success);
+      color: var(--color-bg-primary);
+    }
+    
+    .btn-approve:hover {
+      background: #218838;
+    }
+    
+    .btn-reject {
+      background: var(--color-error);
+      color: var(--color-bg-primary);
+    }
+    
+    .btn-reject:hover {
+      background: var(--color-error-hover);
+    }
+    
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .rationale-input {
+      width: 100%;
+      padding: var(--spacing-md);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      font-family: inherit;
+      margin-top: var(--spacing-md);
+      resize: vertical;
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+    }
+    
+    .decisions-summary {
+      background: #e7f3ff;
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+      border-left: 4px solid var(--color-primary);
+    }
+    
+    .decisions-summary h3 {
+      margin-bottom: var(--spacing-md);
+      color: var(--color-primary);
+    }
+    
+    .decisions-list {
+      list-style: none;
+    }
+    
+    .decisions-list li {
+      padding: var(--spacing-sm);
+      margin-bottom: 5px;
+      background: var(--color-bg-primary);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+    }
+    
+    .export-section {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+      box-shadow: var(--shadow-2);
+    }
+    
+    .export-btn {
+      background: var(--color-gray-500);
+      color: var(--color-bg-primary);
+      padding: var(--spacing-md) 20px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+    }
+    
+    .export-btn:hover {
+      background: var(--color-gray-600);
+    }
+    
+    .warning-box {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      margin-top: var(--spacing-md);
+      font-size: 13px;
+    }
+    
+    .high-risk {
+      background: #f8d7da;
+      border-left: 4px solid var(--color-error);
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--spacing-lg);
+      font-size: 13px;
+    }
+    
+    .btn-view {
+      background: #17a2b8;
+      color: var(--color-bg-primary);
+    }
+    
+    .btn-view:hover {
+      background: #138496;
+    }
+    
+    .artifact-viewer {
+      margin-top: var(--spacing-lg);
+      display: none;
+    }
+    
+    .artifact-viewer.visible {
+      display: block;
+    }
+    
+    .artifact-viewer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-md);
+      background: var(--color-gray-100);
+      border: 1px solid var(--color-border);
+      border-bottom: none;
+      border-radius: var(--radius-sm) 4px 0 0;
+      font-size: 13px;
+      font-weight: var(--font-weight-semibold);
+    }
+    
+    .artifact-viewer-content {
+      padding: var(--spacing-lg);
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
+      border-radius: 0 0 4px 4px;
+      max-height: 500px;
+      overflow-y: auto;
+      font-family: var(--font-family-mono);
+      font-size: 11px;
+      var(--color-bg-primary)-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    
+    .demo-mode-badge {
+      display: inline-block;
+      padding: var(--spacing-xs) 12px;
+      background: #ffc107;
+      color: #856404;
+      border-radius: var(--radius-xl);
+      font-size: 11px;
+      font-weight: var(--font-weight-semibold);
+      margin-left: 10px;
+    }
+    
+    .artifact-file-input {
+      display: none;
+    }
+    
+    .context-dropdown-wrapper {
+      display: flex;
+      gap: var(--spacing-md);
+      align-items: center;
+      margin-top: var(--spacing-lg);
+      flex-wrap: wrap;
+    }
+    
+    .context-dropdown-wrapper label {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-primary);
+    }
+    
+    .context-dropdown-wrapper select {
+      padding: var(--spacing-sm) 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      background: var(--color-bg-primary);
+      min-width: 250px;
+      cursor: pointer;
+    }
+    
+    .context-dropdown-wrapper button {
+      padding: var(--spacing-sm) 16px;
+      background: var(--color-gray-500);
+      color: var(--color-bg-primary);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      cursor: pointer;
+      transition: background var(--transition-base) var(--transition-ease);
+    }
+    
+    .context-dropdown-wrapper button:hover {
+      background: var(--color-gray-600);
+    }
+    
+    .loading-skeleton {
+      background: var(--color-bg-primary);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+      box-shadow: var(--shadow-2);
+    }
+    
+    .skeleton-item {
+      height: 100px;
+      background: linear-gradient(90deg, #f0f0f0 25%, var(--color-border) 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
+    .status-message {
+      padding: var(--spacing-md) 15px;
+      border-radius: var(--radius-sm);
+      margin-top: var(--spacing-md);
+      font-size: 13px;
+      display: none;
+    }
+    
+    .status-message.success {
+      background: #d1e7dd;
+      color: #0f5132;
+      border: 1px solid #badbcc;
+      display: block;
+    }
+    
+    .status-message.error {
+      background: #f8d7da;
+      color: #842029;
+      border: 1px solid #f5c2c7;
+      display: block;
+    }
+    
+    .status-message.info {
+      background: #cfe2ff;
+      color: #084298;
+      border: 1px solid #b6d4fe;
+      display: block;
+    }
+    
+    /* Vibe Check Styles */
+    .vibe-check-section {
+      margin-top: var(--spacing-xl);
+      padding: var(--spacing-xl);
+      background: #fff9e6;
+      border: 2px solid #ffc107;
+      border-radius: var(--radius-lg);
+    }
+    
+    .vibe-check-section h2 {
+      font-size: var(--font-size-lg);
+      margin-bottom: var(--spacing-md);
+      color: #856404;
+    }
+    
+    .vibe-check-section details summary {
+      cursor: pointer;
+      font-weight: var(--font-weight-semibold);
+      color: #856404;
+      padding: var(--spacing-sm);
+      background: var(--color-bg-primary);
+      border-radius: var(--radius-sm);
+      transition: background var(--transition-base) var(--transition-ease);
+    }
+    
+    .vibe-check-section details summary:hover {
+      background: #fffbf0;
+    }
+    
+    .ai-interpretation {
+      margin-top: var(--spacing-lg);
+      padding: var(--spacing-lg);
+      background: #e7f3ff;
+      border-left: 4px solid var(--color-primary);
+      border-radius: var(--radius-sm);
+    }
+    
+    .resolution-option {
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      margin-top: var(--spacing-md);
+    }
+    
+    .resolution-option.revise {
+      background: #d4edda;
+      border: 1px solid var(--color-success);
+    }
+    
+    .resolution-option.proceed {
+      background: #d1ecf1;
+      border: 1px solid #17a2b8;
+    }
+    
+    .resolution-option.discard {
+      background: #f8d7da;
+      border: 1px solid var(--color-error);
+    }
+  </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+  
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="container">
+    <header>
+      <h1>Artifact Review Interface</h1>
+      <p style="color: var(--color-text-secondary); margin-top: 5px;">Human-in-the-loop approval interface for agent-generated artifacts</p>
+      <p id="demoModeIndicator" style="display: none; margin-top: var(--spacing-md); padding: var(--spacing-sm); background: #fff3cd; border-left: 4px solid #ffc107; border-radius: var(--radius-sm); font-size: var(--font-size-xs);">
+        <strong>Demo Mode:</strong> Sample data loaded. Load a real review queue file to review actual artifacts.
+      </p>
+      
+      <div class="context-dropdown-wrapper">
+        <label for="queueFileDropdown">📋 Quick Load:</label>
+        <select id="queueFileDropdown" onchange="loadFromDropdown(this.value)">
+          <option value="">Select review queue...</option>
+          <optgroup label="Review Queues">
+            <option value="HR_PRE">HR_PRE_queue.json</option>
+            <option value="HR_LANG">HR_LANG_queue.json</option>
+            <option value="HR_MSG">HR_MSG_queue.json</option>
+            <option value="HR_RELEASE">HR_RELEASE_queue.json</option>
+          </optgroup>
+          <optgroup label="Recent Files" id="recentFilesGroup">
+            <!-- Populated from localStorage -->
+          </optgroup>
+        </select>
+        <button onclick="refreshDropdown()">🔄 Refresh</button>
+      </div>
+      
+      <div class="file-input-wrapper">
+        <label for="queueFile">📁 Load Review Queue File</label>
+        <input type="file" id="queueFile" accept=".json">
+        <span id="loadedFile" style="margin-left: 15px; color: var(--color-text-secondary); font-size: 13px;"></span>
+      </div>
+      
+      <div id="statusMessage" class="status-message"></div>
+    </header>
+    
+    <div id="decisionsSummary" class="decisions-summary" style="display: none;">
+      <h3>Session Decisions</h3>
+      <ul id="decisionsList" class="decisions-list"></ul>
+    </div>
+    
+    <div id="exportSection" class="export-section" style="display: none;">
+      <h3>Export Approval Manifest</h3>
+      <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-md); font-size: 13px;">
+        Copy the JSON below and save it to <code>agent-orchestrator/approvals/manifest.json</code>, 
+        or run: <code>python scripts/cockpit__write_approval.py</code> with the manifest data.
+      </p>
+      <textarea id="manifestOutput" readonly style="width: 100%; height: 200px; padding: var(--spacing-md); font-family: monospace; font-size: var(--font-size-xs); border: 1px solid var(--color-border); border-radius: var(--radius-sm);"></textarea>
+      <button class="export-btn" onclick="copyManifest()">Copy Manifest JSON</button>
+      <button class="export-btn" onclick="downloadManifest()" style="margin-left: 10px;">Download Manifest</button>
+    </div>
+    
+    <div id="reviewContainer" class="review-section">
+      <div id="loadingSkeleton" class="loading-skeleton" style="display: none;">
+        <div class="skeleton-item"></div>
+        <div class="skeleton-item"></div>
+        <div class="skeleton-item"></div>
+      </div>
+      <div id="emptyState" class="empty-state">
+        <p>Load a review queue file (HR_PRE_queue.json, HR_LANG_queue.json, etc.) to begin reviewing artifacts.</p>
+        <p style="margin-top: var(--spacing-md); font-size: var(--font-size-xs); color: #999;">
+          Files are typically located in: <code>agent-orchestrator/review/HR_*_queue.json</code>
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    let currentQueueData = null;
+    let sessionDecisions = [];
+    
+    // Load decisions from localStorage on page load
+    try {
+      const saved = localStorage.getItem('reviewDecisions');
+      if (saved) {
+        sessionDecisions = JSON.parse(saved);
+        updateDecisionsSummary();
+      }
+    } catch (e) {
+      console.warn('Could not load saved decisions from localStorage:', e);
+    }
+    
+    document.getElementById('queueFile').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        loadQueueFile(file);
+      }
+    });
+    
+    // Auto-load review queue files if available
+    window.addEventListener('DOMContentLoaded', function() {
+      // Populate recent files dropdown
+      populateRecentFiles();
+      
+      // Try auto-loading
+      autoLoadReviewQueue();
+      
+      // Check if URL has ?demo parameter to show sample data
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('demo') === 'true') {
+        const sampleData = {
+          "_meta": {
+            "review_gate": "HR_PRE",
+            "review_gate_name": "Approve Concept Direction",
+            "display_name": "Concept Direction Review",
+            "description": "Human approval of concept memo and policy direction before bill introduction",
+            "created_at": "2026-01-07T07:24:44.377383Z",
+            "status": "PENDING"
+          },
+          "pending_reviews": [
+            {
+              "review_id": "hr_pre_001",
+              "artifact_path": "artifacts/legislative_language_comm_evt/draft_legislative_language.json",
+              "artifact_type": "COMM_LEGISLATIVE_LANGUAGE",
+              "artifact_name": "Legislative Language Draft",
+              "submitted_by": "draft_legislative_language_comm_evt",
+              "submitted_at": "2026-01-07T20:11:31.410929+00:00",
+              "review_effort_estimate": "45-90 minutes",
+              "risk_level": "High",
+              "review_requirements": [
+                "Review statutory language draft",
+                "Validate legal alignment and scope",
+                "Approve or reject legislative language"
+              ],
+              "decision": null,
+              "decision_at": null,
+              "decision_by": null,
+              "decision_rationale": null,
+              "status": "ACTIVE",
+              "review_gate": "HR_LANG"
+            },
+            {
+              "review_id": "hr_pre_002",
+              "artifact_path": "artifacts/amendment_strategy_comm_evt/amendment_strategy.json",
+              "artifact_type": "COMM_AMENDMENT_STRATEGY",
+              "artifact_name": "Amendment Strategy",
+              "submitted_by": "draft_amendment_strategy_comm_evt",
+              "submitted_at": "2026-01-07T20:11:42.490228+00:00",
+              "review_effort_estimate": "30-45 minutes",
+              "risk_level": "Medium",
+              "review_requirements": [
+                "Review amendment options",
+                "Validate risks and impacts",
+                "Approve or reject strategy direction"
+              ],
+              "decision": null,
+              "decision_at": null,
+              "decision_by": null,
+              "decision_rationale": null,
+              "status": "ACTIVE",
+              "review_gate": "HR_PRE"
+            }
+          ],
+          "review_history": []
+        };
+        currentQueueData = sampleData;
+        document.getElementById('loadedFile').textContent = 'Loaded: HR_PRE_queue.json (Demo)';
+        document.getElementById('demoModeIndicator').style.display = 'block';
+        renderReviews(sampleData);
+      }
+    });
+    
+    function loadQueueFile(file) {
+      const loadingSkeleton = document.getElementById('loadingSkeleton');
+      const emptyState = document.getElementById('emptyState');
+      
+      if (loadingSkeleton) {
+        loadingSkeleton.style.display = 'block';
+      }
+      if (emptyState) {
+        emptyState.style.display = 'none';
+      }
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const data = JSON.parse(e.target.result);
+          
+          // Validate it's a queue file
+          if (!data._meta || !data._meta.review_gate) {
+            throw new Error('File does not appear to be a valid review queue file');
+          }
+          
+          currentQueueData = data;
+          document.getElementById('loadedFile').textContent = `Loaded: ${file.name}`;
+          document.getElementById('demoModeIndicator').style.display = 'none';
+          
+          // Extract gate from filename or metadata
+          const gate = data._meta.review_gate || file.name.replace('_queue.json', '').toUpperCase();
+          
+          // Update dropdown
+          const dropdown = document.getElementById('queueFileDropdown');
+          if (dropdown) {
+            dropdown.value = gate;
+          }
+          
+          // Add to recent files
+          addToRecentFiles(gate, file.name);
+          
+          if (loadingSkeleton) {
+            loadingSkeleton.style.display = 'none';
+          }
+          
+          showStatus('Loaded: ' + file.name, 'success');
+          renderReviews(data);
+        } catch (error) {
+          if (loadingSkeleton) {
+            loadingSkeleton.style.display = 'none';
+          }
+          if (emptyState) {
+            emptyState.style.display = 'block';
+          }
+          showStatus('Error parsing JSON file: ' + error.message, 'error');
+        }
+      };
+      reader.readAsText(file);
+    }
+    
+    // Anti-flash rendering pattern
+    function renderReviews(queueData) {
+      const container = document.getElementById('reviewContainer');
+      const emptyState = document.getElementById('emptyState');
+      const loadingSkeleton = document.getElementById('loadingSkeleton');
+      const pendingReviews = queueData.pending_reviews || [];
+      
+      // Hide content smoothly
+      container.style.visibility = 'hidden';
+      container.style.opacity = '0';
+      container.style.transition = 'opacity 0.2s';
+      
+      // Hide loading skeleton
+      if (loadingSkeleton) {
+        loadingSkeleton.style.display = 'none';
+      }
+      
+      if (pendingReviews.length === 0) {
+        requestAnimationFrame(() => {
+          emptyState.style.display = 'block';
+          emptyState.innerHTML = '<div class="empty-state"><p>No pending reviews in this queue.</p></div>';
+          container.style.visibility = 'visible';
+          container.style.opacity = '1';
+        });
+        return;
+      }
+      
+      emptyState.style.display = 'none';
+      
+      let html = '<h2 style="margin-bottom: var(--spacing-xl);">Pending Reviews (' + pendingReviews.length + ')</h2>';
+      
+      pendingReviews.forEach(review => {
+        const reviewId = review.review_id || '';
+        const artifactName = review.artifact_name || 'Unnamed Artifact';
+        const riskLevel = review.risk_level || 'Unknown';
+        const gateId = review.review_gate || queueData._meta?.review_gate || 'UNKNOWN';
+        const submittedBy = review.submitted_by || 'Unknown';
+        const submittedAt = review.submitted_at || '';
+        const artifactPath = review.artifact_path || '';
+        const artifactType = review.artifact_type || 'UNKNOWN';
+        const reviewEffort = review.review_effort_estimate || 'N/A';
+        const requirements = review.review_requirements || [];
+        
+        // Check if already decided in this session
+        const existingDecision = sessionDecisions.find(d => d.review_id === reviewId);
+        const isDecided = !!existingDecision;
+        const decisionClass = existingDecision ? (existingDecision.decision === 'APPROVE' ? 'approved' : 'rejected') : 'pending';
+        
+        html += `
+          <div class="review-item ${decisionClass}" id="review-${reviewId}">
+            <div class="review-header">
+              <div>
+                <div class="review-title">${artifactName}</div>
+                <span class="status-badge ${decisionClass}">${isDecided ? existingDecision.decision : 'PENDING'}</span>
+              </div>
+              <div style="text-align: right; font-size: var(--font-size-xs); color: var(--color-text-secondary);">
+                ${gateId}
+              </div>
+            </div>
+            
+            ${riskLevel.toUpperCase().includes('HIGH') ? `
+              <div class="high-risk">
+                <strong>⚠️ HIGH RISK ARTIFACT</strong> - Review carefully before approval
+              </div>
+            ` : ''}
+            
+            <div class="review-meta">
+              <div class="meta-item">
+                <div class="meta-label">Review Gate</div>
+                <div class="meta-value">${gateId}</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Artifact Type</div>
+                <div class="meta-value">${artifactType}</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Risk Level</div>
+                <div class="meta-value">${riskLevel}</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Review Effort</div>
+                <div class="meta-value">${reviewEffort}</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Submitted By</div>
+                <div class="meta-value" style="font-family: monospace; font-size: 11px;">${submittedBy}</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Submitted At</div>
+                <div class="meta-value" style="font-size: 11px;">${submittedAt ? new Date(submittedAt).toLocaleString() : 'N/A'}</div>
+              </div>
+            </div>
+            
+            ${artifactPath ? `
+              <div class="meta-item" style="margin-top: var(--spacing-md);">
+                <div class="meta-label">Artifact Path</div>
+                <div class="meta-value" style="font-family: monospace; font-size: 11px; word-break: break-all;">${artifactPath}</div>
+                <div style="margin-top: 8px;">
+                  <input type="file" id="artifactFile-${reviewId}" class="artifact-file-input" accept=".json" onchange="loadArtifactContent('${reviewId}', this.files[0])">
+                  <button class="btn btn-view" onclick="document.getElementById('artifactFile-${reviewId}').click()" style="font-size: var(--font-size-xs); padding: var(--spacing-sm) 12px;">
+                    👁️ View Artifact Content
+                  </button>
+                </div>
+              </div>
+              <div id="artifactViewer-${reviewId}" class="artifact-viewer">
+                <div class="artifact-viewer-header">
+                  <span>Artifact Content</span>
+                  <button class="btn" style="background: var(--color-gray-500); color: var(--color-bg-primary); font-size: 11px; padding: var(--spacing-xs) 8px;" onclick="toggleArtifactViewer('${reviewId}')">
+                    ✕ Close
+                  </button>
+                </div>
+                <div id="artifactContent-${reviewId}" class="artifact-viewer-content">
+                  <em style="color: #999;">Click "View Artifact Content" and select the artifact JSON file to display its contents.</em>
+                </div>
+              </div>
+            ` : ''}
+            
+            ${requirements.length > 0 ? `
+              <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: #e7f3ff; border-radius: var(--radius-sm);">
+                <div class="meta-label" style="margin-bottom: 8px;">Review Requirements</div>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                  ${requirements.map(req => `<li>${req}</li>`).join('')}
+                </ul>
+              </div>
+            ` : ''}
+            
+            ${!isDecided && (riskLevel.toUpperCase().includes('HIGH') || riskLevel.toUpperCase().includes('MEDIUM') || artifactType.includes('SPECULATIVE') || artifactType.includes('DRAFT')) ? `
+              <div style="margin-top: var(--spacing-xl); padding: var(--spacing-xl); background: #fff9e6; border: 2px solid #ffc107; border-radius: var(--radius-lg);">
+                <h2 style="font-size: var(--font-size-lg); margin-bottom: var(--spacing-md); color: #856404;">🧭 Vibe Check: Human Judgment Zone</h2>
+                <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">
+                  This section exists for subjective discomfort. You do not need to be precise.
+                  If something feels off, flag it here.
+                </p>
+                
+                <details style="margin-top: var(--spacing-lg);">
+                  <summary style="cursor: pointer; font-weight: var(--font-weight-semibold); color: #856404; padding: var(--spacing-sm); background: var(--color-bg-primary); border-radius: var(--radius-sm);">
+                    ⚠️ Something feels off in this section
+                  </summary>
+                  
+                  <div style="margin-top: var(--spacing-lg); padding: var(--spacing-lg); background: var(--color-bg-primary); border-radius: var(--radius-sm);">
+                    <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">
+                      You don't need to explain technically. A short note or even a fragment is enough.
+                    </p>
+                    
+                    <textarea
+                      id="vibeInput-${reviewId}"
+                      placeholder="e.g. This conclusion feels rushed, or I don't trust this assumption…"
+                      style="width:100%;height:80px;padding: var(--spacing-md);border:1px solid var(--color-border);border-radius: var(--radius-sm);font-family:inherit;font-size:13px;resize:vertical;"
+                    ></textarea>
+                    
+                    <h4 style="margin-top: var(--spacing-lg); font-size: var(--font-size-sm); color: var(--color-text-primary);">Send this vibe to AI for clarification</h4>
+                    <pre style="background: var(--color-gray-100); padding: 12px; border-radius: var(--radius-sm); font-size: var(--font-size-xs); overflow-x: auto; margin-top: 8px; border: 1px solid var(--color-border);">ASK:
+The user feels discomfort about the highlighted section.
+Their concern is subjective and may be imprecise.
+
+Tasks:
+- Restate the concern clearly and charitably
+- Identify what might be causing the discomfort
+- Suggest whether this warrants revision or is acceptable
+
+Do NOT propose code.
+Do NOT defend the artifact.
+Focus on sense-making.</pre>
+                  </div>
+                </details>
+                
+                <div id="aiInterpretation-${reviewId}" style="display: none; margin-top: var(--spacing-lg); padding: var(--spacing-lg); background: #e7f3ff; border-left: 4px solid var(--color-primary); border-radius: var(--radius-sm);">
+                  <h3 style="font-size: var(--font-size-base); margin-bottom: var(--spacing-md); color: #084298;">🤖 AI Interpretation of User Concern</h3>
+                  <pre id="aiInterpretationText-${reviewId}" style="background: var(--color-bg-primary); padding: 12px; border-radius: var(--radius-sm); font-size: var(--font-size-xs); var(--color-bg-primary)-space: pre-wrap; margin: 0;"></pre>
+                  
+                  <h3 style="font-size: var(--font-size-sm); margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md); color: var(--color-text-primary);">Resolve This Concern</h3>
+                  
+                  <div style="margin-top: var(--spacing-md); display: grid; gap: var(--spacing-md);">
+                    <div style="padding: 12px; background: #d4edda; border: 1px solid var(--color-success); border-radius: var(--radius-sm);">
+                      <h4 style="font-size: 13px; margin-bottom: 8px; color: #155724;">✅ Yes, that's right — revise</h4>
+                      <pre style="background: var(--color-bg-primary); padding: var(--spacing-sm); border-radius: var(--radius-sm); font-size: 11px; margin: 0; overflow-x: auto;">DECISION:
+Artifact ID: ${reviewId}
+Decision: REVISE
+Reason: AI-reflected concern accepted
+Route Back to Execution: TRUE</pre>
+                    </div>
+                    
+                    <div style="padding: 12px; background: #d1ecf1; border: 1px solid #17a2b8; border-radius: var(--radius-sm);">
+                      <h4 style="font-size: 13px; margin-bottom: 8px; color: #0c5460;">➡️ No, this is fine — proceed</h4>
+                      <pre style="background: var(--color-bg-primary); padding: var(--spacing-sm); border-radius: var(--radius-sm); font-size: 11px; margin: 0; overflow-x: auto;">DECISION:
+Artifact ID: ${reviewId}
+Decision: APPROVED
+Note: Concern acknowledged but accepted</pre>
+                    </div>
+                    
+                    <div style="padding: 12px; background: #f8d7da; border: 1px solid var(--color-error); border-radius: var(--radius-sm);">
+                      <h4 style="font-size: 13px; margin-bottom: 8px; color: #721c24;">🗑️ This undermines the artifact — discard</h4>
+                      <pre style="background: var(--color-bg-primary); padding: var(--spacing-sm); border-radius: var(--radius-sm); font-size: 11px; margin: 0; overflow-x: auto;">DECISION:
+Artifact ID: ${reviewId}
+Decision: DISCARD
+Reason: Core assumption not trusted</pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ` : ''}
+            
+            ${!isDecided ? `
+              <div style="margin-top: var(--spacing-lg);">
+                <label for="rationale-${reviewId}" style="font-size: 13px; font-weight: var(--font-weight-semibold);">Rationale (optional):</label>
+                <textarea id="rationale-${reviewId}" class="rationale-input" placeholder="Enter rationale for your decision..."></textarea>
+              </div>
+              
+              <div class="action-buttons">
+                <button class="btn btn-approve" onclick="makeDecision('${reviewId}', 'APPROVE', '${gateId}', '${artifactPath}', '${artifactName}', '${riskLevel}')">
+                  ✅ APPROVE
+                </button>
+                <button class="btn btn-reject" onclick="makeDecision('${reviewId}', 'REJECT', '${gateId}', '${artifactPath}', '${artifactName}', '${riskLevel}')">
+                  ❌ REJECT
+                </button>
+              </div>
+              
+              ${riskLevel.toUpperCase().includes('HIGH') ? `
+                <div class="warning-box">
+                  <strong>High Risk Approval:</strong> For HIGH risk artifacts, you may need to confirm approval in the Python script as well.
+                </div>
+              ` : ''}
+            ` : `
+              <div class="action-buttons">
+                <div style="padding: var(--spacing-md); background: ${existingDecision.decision === 'APPROVE' ? '#d4edda' : '#f8d7da'}; border-radius: var(--radius-sm); color: ${existingDecision.decision === 'APPROVE' ? '#155724' : '#721c24'};">
+                  <strong>Decision: ${existingDecision.decision}</strong>
+                  ${existingDecision.rationale ? `<div style="margin-top: 5px; font-size: 13px;">${existingDecision.rationale}</div>` : ''}
+                  <div style="margin-top: 5px; font-size: 11px; opacity: 0.8;">
+                    Decided at: ${new Date(existingDecision.decision_at).toLocaleString()}
+                  </div>
+                </div>
+                <button class="btn" style="background: var(--color-gray-500); color: var(--color-bg-primary);" onclick="undoDecision('${reviewId}')">
+                  ↺ Undo
+                </button>
+              </div>
+            `}
+          </div>
+        `;
+      });
+      
+      // Batch update DOM in one operation
+      requestAnimationFrame(() => {
+        container.innerHTML = html;
+        updateExportSection();
+        container.style.visibility = 'visible';
+        container.style.opacity = '1';
+      });
+    }
+    
+    // Auto-load review queue
+    async function autoLoadReviewQueue() {
+      const statusMsg = document.getElementById('statusMessage');
+      const loadingSkeleton = document.getElementById('loadingSkeleton');
+      const emptyState = document.getElementById('emptyState');
+      
+      // Check localStorage for last successful path
+      const lastPath = localStorage.getItem('lastSuccessfulQueuePath');
+      const lastGate = localStorage.getItem('lastSuccessfulQueueGate');
+      
+      // Try to load last successful file first
+      if (lastPath && lastGate) {
+        const result = await tryLoadQueueFile(lastGate, lastPath);
+        if (result.success) {
+          showStatus('Auto-loaded: ' + lastGate + '_queue.json', 'success');
+          return;
+        }
+      }
+      
+      // Try all queue files in order
+      const queueFiles = ['HR_PRE', 'HR_LANG', 'HR_MSG', 'HR_RELEASE'];
+      
+      // Show loading skeleton
+      if (loadingSkeleton) {
+        loadingSkeleton.style.display = 'block';
+      }
+      if (emptyState) {
+        emptyState.style.display = 'none';
+      }
+      
+      for (const gate of queueFiles) {
+        const result = await tryLoadQueueFile(gate);
+        if (result.success) {
+          showStatus('Auto-loaded: ' + gate + '_queue.json', 'success');
+          if (loadingSkeleton) {
+            loadingSkeleton.style.display = 'none';
+          }
+          return;
+        }
+      }
+      
+      // No files found
+      if (loadingSkeleton) {
+        loadingSkeleton.style.display = 'none';
+      }
+      if (emptyState) {
+        emptyState.style.display = 'block';
+      }
+      showStatus('No review queue files found. Use dropdown or file picker to load manually.', 'info');
+    }
+    
+    // Try loading a queue file from multiple paths
+    async function tryLoadQueueFile(gate, preferredPath = null) {
+      const paths = preferredPath ? [preferredPath] : [
+        `review/${gate}_queue.json`,
+        `../review/${gate}_queue.json`,
+        `../../review/${gate}_queue.json`,
+        `agent-orchestrator/review/${gate}_queue.json`,
+        `./review/${gate}_queue.json`
+      ];
+      
+      for (const basePath of paths) {
+        try {
+          const response = await fetch(basePath);
+          if (response.ok) {
+            const data = await response.json();
+            // Validate it's a queue file
+            if (data._meta && data._meta.review_gate) {
+              currentQueueData = data;
+              document.getElementById('loadedFile').textContent = `Loaded: ${gate}_queue.json`;
+              document.getElementById('demoModeIndicator').style.display = 'none';
+              
+              // Store successful path
+              localStorage.setItem('lastSuccessfulQueuePath', basePath);
+              localStorage.setItem('lastSuccessfulQueueGate', gate);
+              
+              // Add to recent files
+              addToRecentFiles(gate, basePath);
+              
+              // Update dropdown selection
+              const dropdown = document.getElementById('queueFileDropdown');
+              if (dropdown) {
+                dropdown.value = gate;
+              }
+              
+              renderReviews(data);
+              return { success: true, data, path: basePath };
+            }
+          }
+        } catch (e) {
+          // Continue to next path
+          continue;
+        }
+      }
+      
+      return { success: false };
+    }
+    
+    // Load from dropdown
+    async function loadFromDropdown(gate) {
+      if (!gate) return;
+      
+      const statusMsg = document.getElementById('statusMessage');
+      const loadingSkeleton = document.getElementById('loadingSkeleton');
+      const emptyState = document.getElementById('emptyState');
+      
+      if (loadingSkeleton) {
+        loadingSkeleton.style.display = 'block';
+      }
+      if (emptyState) {
+        emptyState.style.display = 'none';
+      }
+      
+      showStatus('Loading ' + gate + '_queue.json...', 'info');
+      
+      const result = await tryLoadQueueFile(gate);
+      
+      if (loadingSkeleton) {
+        loadingSkeleton.style.display = 'none';
+      }
+      
+      if (result.success) {
+        showStatus('Loaded: ' + gate + '_queue.json', 'success');
+      } else {
+        showStatus('Could not load ' + gate + '_queue.json. Try using file picker.', 'error');
+        if (emptyState) {
+          emptyState.style.display = 'block';
+        }
+      }
+    }
+    
+    // Refresh dropdown
+    function refreshDropdown() {
+      populateRecentFiles();
+      showStatus('Dropdown refreshed', 'info');
+      setTimeout(() => {
+        const statusMsg = document.getElementById('statusMessage');
+        if (statusMsg) {
+          statusMsg.className = 'status-message';
+        }
+      }, 2000);
+    }
+    
+    // Populate recent files dropdown
+    function populateRecentFiles() {
+      const recentGroup = document.getElementById('recentFilesGroup');
+      if (!recentGroup) return;
+      
+      try {
+        const recentFiles = JSON.parse(localStorage.getItem('recentQueueFiles') || '[]');
+        recentGroup.innerHTML = '';
+        
+        if (recentFiles.length === 0) {
+          return;
+        }
+        
+        recentFiles.slice(0, 5).forEach(file => {
+          const option = document.createElement('option');
+          option.value = file.gate;
+          option.textContent = file.gate + '_queue.json (Recent)';
+          recentGroup.appendChild(option);
+        });
+      } catch (e) {
+        console.warn('Could not load recent files:', e);
+      }
+    }
+    
+    // Add to recent files
+    function addToRecentFiles(gate, path) {
+      try {
+        const recentFiles = JSON.parse(localStorage.getItem('recentQueueFiles') || '[]');
+        // Remove if already exists
+        const filtered = recentFiles.filter(f => f.gate !== gate);
+        // Add to front
+        filtered.unshift({ gate, path, timestamp: new Date().toISOString() });
+        // Keep only last 10
+        const limited = filtered.slice(0, 10);
+        localStorage.setItem('recentQueueFiles', JSON.stringify(limited));
+        populateRecentFiles();
+      } catch (e) {
+        console.warn('Could not save recent files:', e);
+      }
+    }
+    
+    // Show status message
+    function showStatus(message, type) {
+      const statusMsg = document.getElementById('statusMessage');
+      if (!statusMsg) return;
+      
+      statusMsg.textContent = message;
+      statusMsg.className = 'status-message ' + type;
+      
+      // Auto-hide success/info messages after 5 seconds
+      if (type === 'success' || type === 'info') {
+        setTimeout(() => {
+          statusMsg.className = 'status-message';
+        }, 5000);
+      }
+    }
+    
+    function makeDecision(reviewId, decision, gateId, artifactPath, artifactName, riskLevel) {
+      if (decision === 'APPROVE' && riskLevel.toUpperCase().includes('HIGH')) {
+        const confirmed = confirm('⚠️ HIGH RISK ARTIFACT\n\nAre you sure you want to APPROVE this high-risk artifact?');
+        if (!confirmed) {
+          return;
+        }
+      }
+      
+      const rationale = document.getElementById(`rationale-${reviewId}`)?.value || null;
+      const decisionObj = {
+        review_id: reviewId,
+        gate_id: gateId,
+        artifact_path: artifactPath,
+        artifact_name: artifactName,
+        decision: decision,
+        rationale: rationale,
+        decision_at: new Date().toISOString(),
+        decision_by: 'human:reviewer',
+        risk_level: riskLevel
+      };
+      
+      // Remove existing decision if any
+      sessionDecisions = sessionDecisions.filter(d => d.review_id !== reviewId);
+      sessionDecisions.push(decisionObj);
+      
+      // Save to localStorage
+      try {
+        localStorage.setItem('reviewDecisions', JSON.stringify(sessionDecisions));
+      } catch (e) {
+        console.warn('Could not save decisions to localStorage:', e);
+      }
+      
+      updateDecisionsSummary();
+      updateExportSection();
+      renderReviews(currentQueueData);
+    }
+    
+    function undoDecision(reviewId) {
+      sessionDecisions = sessionDecisions.filter(d => d.review_id !== reviewId);
+      
+      try {
+        localStorage.setItem('reviewDecisions', JSON.stringify(sessionDecisions));
+      } catch (e) {
+        console.warn('Could not save decisions to localStorage:', e);
+      }
+      
+      updateDecisionsSummary();
+      updateExportSection();
+      renderReviews(currentQueueData);
+    }
+    
+    function updateDecisionsSummary() {
+      const summaryDiv = document.getElementById('decisionsSummary');
+      const listDiv = document.getElementById('decisionsList');
+      
+      if (sessionDecisions.length === 0) {
+        summaryDiv.style.display = 'none';
+        return;
+      }
+      
+      summaryDiv.style.display = 'block';
+      listDiv.innerHTML = sessionDecisions.map(decision => {
+        const icon = decision.decision === 'APPROVE' ? '✅' : '❌';
+        return `<li>${icon} <strong>${decision.artifact_name}</strong> (${decision.gate_id}) - ${decision.decision}${decision.rationale ? ': ' + decision.rationale : ''}</li>`;
+      }).join('');
+    }
+    
+    function generateManifest() {
+      if (sessionDecisions.length === 0) {
+        return null;
+      }
+      
+      return {
+        _meta: {
+          manifest_version: "1.0.0",
+          generated_at: new Date().toISOString(),
+          generated_by: "cockpit_review.html",
+          total_decisions: sessionDecisions.length
+        },
+        decisions: sessionDecisions
+      };
+    }
+    
+    function updateExportSection() {
+      const manifest = generateManifest();
+      const exportSection = document.getElementById('exportSection');
+      const manifestOutput = document.getElementById('manifestOutput');
+      
+      if (!manifest) {
+        exportSection.style.display = 'none';
+        return;
+      }
+      
+      exportSection.style.display = 'block';
+      manifestOutput.value = JSON.stringify(manifest, null, 2);
+    }
+    
+    function copyManifest() {
+      const manifestOutput = document.getElementById('manifestOutput');
+      manifestOutput.select();
+      document.execCommand('copy');
+      alert('Manifest JSON copied to clipboard!');
+    }
+    
+    function downloadManifest() {
+      const manifest = generateManifest();
+      if (!manifest) {
+        alert('No decisions to export');
+        return;
+      }
+      
+      const dataStr = JSON.stringify(manifest, null, 2);
+      const dataBlob = new Blob([dataStr], {type: 'application/json'});
+      const url = URL.createObjectURL(dataBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `approval_manifest_${new Date().toISOString().split('T')[0]}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+    
+    function loadArtifactContent(reviewId, file) {
+      if (!file) {
+        return;
+      }
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const content = e.target.result;
+          const jsonData = JSON.parse(content);
+          
+          // Format JSON with indentation
+          const formatted = JSON.stringify(jsonData, null, 2);
+          
+          // Display in viewer
+          const contentDiv = document.getElementById(`artifactContent-${reviewId}`);
+          contentDiv.textContent = formatted;
+          
+          // Show viewer
+          const viewer = document.getElementById(`artifactViewer-${reviewId}`);
+          viewer.classList.add('visible');
+          
+          // Scroll viewer into view
+          viewer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } catch (error) {
+          const contentDiv = document.getElementById(`artifactContent-${reviewId}`);
+          contentDiv.innerHTML = `<span style="color: var(--color-error);">Error parsing JSON: ${error.message}</span>\n\n<pre>${e.target.result}</pre>`;
+          
+          const viewer = document.getElementById(`artifactViewer-${reviewId}`);
+          viewer.classList.add('visible');
+        }
+      };
+      reader.onerror = function() {
+        const contentDiv = document.getElementById(`artifactContent-${reviewId}`);
+        contentDiv.innerHTML = '<span style="color: var(--color-error);">Error reading file.</span>';
+        
+        const viewer = document.getElementById(`artifactViewer-${reviewId}`);
+        viewer.classList.add('visible');
+      };
+      reader.readAsText(file);
+    }
+    
+    function toggleArtifactViewer(reviewId) {
+      const viewer = document.getElementById(`artifactViewer-${reviewId}`);
+      viewer.classList.toggle('visible');
+    }
+  </script>
+</body>
+</html>

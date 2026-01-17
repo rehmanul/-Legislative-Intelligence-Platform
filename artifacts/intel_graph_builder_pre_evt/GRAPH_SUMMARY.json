@@ -1,0 +1,42 @@
+{
+  "_meta": {
+    "agent_id": "intel_graph_builder_pre_evt",
+    "generated_at": "2026-01-13T07:35:55.512049Z",
+    "artifact_type": "graph_summary",
+    "artifact_name": "Congressional Influence Graph Summary",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": false,
+    "requires_review": null,
+    "guidance_status": "TEST_MODE",
+    "schema_version": "1.0.0",
+    "doctrine_version": "Congressional Network Mapping v1.0",
+    "last_updated": "2026-01-13T07:35:55.512049Z"
+  },
+  "graph_location": "C:\\Users\\phi3t\\12.20 dash\\1.5.2026\\agent-orchestrator\\data\\graph\\graph.json",
+  "node_count": 0,
+  "edge_count": 0,
+  "node_types": {
+    "industry_org": 0,
+    "nonprofit_org": 0,
+    "coalition": 0,
+    "narrative": 0,
+    "boundary_actor": 0
+  },
+  "edge_types": {
+    "has_formal_authority_over": 0,
+    "controls_agenda_of": 0,
+    "can_delay": 0,
+    "can_block": 0,
+    "influences_drafting": 0,
+    "writes_report_language": 0,
+    "signals_pre_clearance": 0,
+    "routes_around": 0,
+    "translates_for": 0,
+    "confers_legitimacy_to": 0,
+    "applies_reputational_pressure_to": 0,
+    "transfers_memory_to": 0,
+    "shares_precedent_with": 0,
+    "pre_negotiates_with": 0
+  }
+}

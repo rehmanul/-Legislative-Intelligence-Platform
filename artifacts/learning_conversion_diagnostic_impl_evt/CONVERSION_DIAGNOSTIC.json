@@ -1,0 +1,164 @@
+{
+  "_meta": {
+    "agent_id": "learning_conversion_diagnostic_impl_evt",
+    "generated_at": "2026-01-10T16:24:25.392749Z",
+    "artifact_type": "CONVERSION_DIAGNOSTIC",
+    "artifact_name": "Conversion Rate Diagnostic",
+    "status": "SPECULATIVE",
+    "confidence": "HIGH",
+    "human_review_required": false,
+    "requires_review": null,
+    "guidance_status": "SIGNED",
+    "schema_version": "1.0.0"
+  },
+  "diagnosis": {
+    "conversion_rate": 0.0,
+    "low_conversion_detected": true,
+    "stalled_artifacts_count": 18,
+    "stalled_artifacts": [
+      {
+        "artifact_path": "artifacts\\draft_committee_briefing_comm_evt\\committee_briefing_packet.json",
+        "agent_id": "draft_committee_briefing_comm_evt",
+        "artifact_type": "committee_briefing_packet",
+        "artifact_name": "",
+        "generated_at": "2026-01-07T12:00:00Z",
+        "age_hours": 76.41,
+        "requires_review": null,
+        "completeness": "UNKNOWN",
+        "confidence": "SPECULATIVE",
+        "queue_status": "NO_REVIEW_REQUIRED"
+      },
+      {
+        "artifact_path": "artifacts\\draft_concept_memo_pre_evt\\PRE_CONCEPT.json",
+        "agent_id": "draft_concept_memo_pre_evt",
+        "artifact_type": "PRE_CONCEPT",
+        "artifact_name": "Concept Memo",
+        "generated_at": "2026-01-07T03:07:44.859018Z",
+        "age_hours": 85.28,
+        "requires_review": "HR_PRE",
+        "completeness": "UNKNOWN",
+        "confidence": "SPECULATIVE",
+        "queue_status": "NOT_IN_QUEUE",
+        "issue": "Artifact not submitted to review queue"
+      },
+      {
+        "artifact_path": "artifacts\\draft_framing_intro_evt\\INTRO_FRAME.json",
+        "agent_id": "draft_framing_intro_evt",
+        "artifact_type": "INTRO_FRAME",
+        "artifact_name": "Legitimacy & Policy Framing",
+        "generated_at": "2026-01-07T04:15:56.606493Z",
+        "age_hours": 84.14,
+        "requires_review": "HR_PRE",
+        "completeness": "UNKNOWN",
+        "confidence": "SPECULATIVE",
+        "queue_status": "NOT_IN_QUEUE",
+        "issue": "Artifact not submitted to review queue"
+      },
+      {
+        "artifact_path": "artifacts\\draft_whitepaper_intro_evt\\INTRO_WHITEPAPER.json",
+        "agent_id": "draft_whitepaper_intro_evt",
+        "artifact_type": "INTRO_WHITEPAPER",
+        "artifact_name": "Policy Whitepaper",
+        "generated_at": "2026-01-07T04:15:58.783038Z",
+        "age_hours": 84.14,
+        "requires_review": "HR_PRE",
+        "completeness": "UNKNOWN",
+        "confidence": "SPECULATIVE",
+        "queue_status": "NOT_IN_QUEUE",
+        "issue": "Artifact not submitted to review queue"
+      },
+      {
+        "artifact_path": "artifacts\\execution_outreach_comm_evt\\outreach_plan_placeholder.json",
+        "agent_id": "execution_outreach_comm_evt",
+        "artifact_type": "",
+        "artifact_name": "",
+        "generated_at": "2026-01-07T04:41:53.538204+00:00",
+        "age_hours": 83.71,
+        "requires_review": null,
+        "completeness": "UNKNOWN",
+        "confidence": "SPECULATIVE",
+        "queue_status": "NO_REVIEW_REQUIRED"
+      },
+      {
+        "artifact_path": "artifacts\\intel_opposition_detect_intro_evt\\opposition_risk_assessment.json",
+        "agent_id": "intel_opposition_detect_intro_evt",
+        "artifact_type": "opposition_risk_assessment",
+        "artifact_name": "",
+        "generated_at": "2026-01-07T04:15:54.422679Z",
+        "age_hours": 84.14,
+        "requires_review": null,
+        "completeness": "UNKNOWN",
+        "confidence": "SPECULATIVE",
+        "queue_status": "NO_REVIEW_REQUIRED"
+      },
+      {
+        "artifact_path": "artifacts\\intel_opposition_detect_pre_evt\\opposition_risk_assessment.json",
+        "agent_id": "intel_opposition_detect_pre_evt",
+        "artifact_type": "opposition_risk_assessment",
+        "artifact_name": "",
+        "generated_at": "2026-01-07T03:06:36.182047Z",
+        "age_hours": 85.3,
+        "requires_review": null,
+        "completeness": "UNKNOWN",
+        "confidence": "SPECULATIVE",
+        "queue_status": "NO_REVIEW_REQUIRED"
+      },
+      {
+        "artifact_path": "artifacts\\intel_policy_context_analyzer_pre_evt\\POLICY_CONTEXT_ANALYSIS.json",
+        "agent_id": "intel_policy_context_analyzer_pre_evt",
+        "artifact_type": "INTEL_POLICY_CONTEXT_ANALYSIS",
+        "artifact_name": "Policy Context Intelligence Analysis",
+        "generated_at": "2026-01-07T10:11:19.749077Z",
+        "age_hours": 78.22,
+        "requires_review": null,
+        "completeness": "UNKNOWN",
+        "confidence": "MEDIUM",
+        "queue_status": "NO_REVIEW_REQUIRED"
+      },
+      {
+        "artifact_path": "artifacts\\intel_signal_scan_intro_evt\\signal_summary.json",
+        "agent_id": "intel_signal_scan_intro_evt",
+        "artifact_type": "signal_summary",
+        "artifact_name": "",
+        "generated_at": "2026-01-07T04:15:48.177105Z",
+        "age_hours": 84.14,
+        "requires_review": null,
+        "completeness": "UNKNOWN",
+        "confidence": "SPECULATIVE",
+        "queue_status": "NO_REVIEW_REQUIRED"
+      },
+      {
+        "artifact_path": "artifacts\\intel_signal_scan_pre_evt\\signal_summary.json",
+        "agent_id": "intel_signal_scan_pre_evt",
+        "artifact_type": "signal_summary",
+        "artifact_name": "",
+        "generated_at": "2026-01-07T03:54:18.612238Z",
+        "age_hours": 84.5,
+        "requires_review": null,
+        "completeness": "UNKNOWN",
+        "confidence": "SPECULATIVE",
+        "queue_status": "NO_REVIEW_REQUIRED"
+      }
+    ],
+    "issues": {
+      "not_in_queue_count": 3,
+      "pending_too_long_count": 0,
+      "incomplete_count": 0,
+      "low_confidence_count": 15
+    },
+    "recommendations": [
+      {
+        "action": "SUBMIT_TO_REVIEW",
+        "priority": "HIGH",
+        "count": 3,
+        "artifacts": [
+          "artifacts\\draft_concept_memo_pre_evt\\PRE_CONCEPT.json",
+          "artifacts\\draft_framing_intro_evt\\INTRO_FRAME.json",
+          "artifacts\\draft_whitepaper_intro_evt\\INTRO_WHITEPAPER.json"
+        ],
+        "rationale": "Artifacts not submitted to review queue"
+      }
+    ]
+  },
+  "generated_at": "2026-01-10T16:24:25.392749Z"
+}

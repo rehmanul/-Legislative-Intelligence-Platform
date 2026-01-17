@@ -1,0 +1,26 @@
+{
+  "_meta": {
+    "agent_id": "draft_cosponsorship_model_originate_comm_evt",
+    "generated_at": "2026-01-21T03:00:00Z",
+    "artifact_type": "COSPONSORSHIP_MODEL",
+    "artifact_name": "Cosponsorship Predictive Model",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": null,
+    "guidance_status": "SIGNED"
+  },
+  "model_purpose": "Predict likelihood of member cosponsorship based on bill characteristics and member attributes",
+  "key_factors": [
+    "Member's committee membership (relevant committees increase likelihood)",
+    "Previous cosponsorships of similar bills",
+    "District characteristics (urban/rural, demographics)",
+    "Party and ideology alignment",
+    "Primary sponsor relationship with target member"
+  ],
+  "predicted_targets": [
+    {"member": "Rep. Martinez", "cosponsorship_probability": 0.85, "reasoning": "Committee member, previous similar bills, strong relationship with sponsor"},
+    {"member": "Rep. Chen", "cosponsorship_probability": 0.65, "reasoning": "District alignment, moderate on issue, relationship with sponsor"}
+  ],
+  "disclaimer": "Model predictions are probabilistic and should be validated through direct member contact."
+}

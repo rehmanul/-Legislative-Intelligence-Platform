@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heat Map Dashboard - Agent Orchestrator</title>
+    <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-family-sans), Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+            background: var(--color-bg-secondary);
+            padding: var(--spacing-xl);
+        }
+        
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: var(--color-bg-primary);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 32px;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .status-banner {
+            padding: 25px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-2);
+            text-align: center;
+        }
+        
+        .status-banner.green {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-left: 5px solid var(--color-success);
+        }
+        
+        .status-banner.yellow {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border-left: 5px solid #ffc107;
+        }
+        
+        .status-banner.red {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            border-left: 5px solid var(--color-error);
+        }
+        
+        .status-banner h2 {
+            font-size: 36px;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .status-banner.green h2 {
+            color: #155724;
+        }
+        
+        .status-banner.yellow h2 {
+            color: #856404;
+        }
+        
+        .status-banner.red h2 {
+            color: #721c24;
+        }
+        
+        .status-banner p {
+            font-size: var(--font-size-lg);
+            margin-top: var(--spacing-md);
+        }
+        
+        .controls {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-2);
+            display: flex;
+            gap: var(--spacing-lg);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .controls input[type="file"] {
+            padding: var(--spacing-md);
+            border: 2px dashed var(--color-border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+        }
+        
+        .controls button {
+            padding: var(--spacing-md) 20px;
+            background: #f5576c;
+            color: var(--color-bg-primary);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: var(--font-weight-semibold);
+        }
+        
+        .controls button:hover {
+            background: #e04459;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: var(--color-bg-primary);
+            padding: 25px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+        }
+        
+        .card h3 {
+            font-size: var(--font-size-xl);
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+        
+        .stat-value {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: #f5576c;
+            font-family: var(--font-family-mono);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: var(--spacing-sm) 12px;
+            border-radius: var(--radius-xl);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            text-transform: uppercase;
+        }
+        
+        .status-badge.running {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-badge.waiting {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-badge.blocked {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-badge.idle {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .status-badge.retired {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+        
+        .status-badge.failed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .review-gate-card {
+            background: var(--color-bg-primary);
+            padding: 25px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .review-gate-card h3 {
+            font-size: var(--font-size-xl);
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .blocking-condition {
+            padding: 12px;
+            background: #fff5f5;
+            border-left: 4px solid var(--color-error);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--spacing-md);
+            font-size: var(--font-size-sm);
+            color: #721c24;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        
+        .empty-state h3 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .error-message {
+            background: #fff5f5;
+            border: 2px solid var(--color-error);
+            color: #721c24;
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-xl);
+        }
+    </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+    
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="container">
+        <header>
+            <h1>🔥 Heat Map Dashboard</h1>
+            <p>System health snapshot with agent status, review gates, and blocking conditions</p>
+        </header>
+        
+        <div class="controls">
+            <input type="file" id="fileInput" accept=".json" />
+            <button onclick="loadDefaultFile()">Load Default (heat_map_snapshot.json)</button>
+            <button onclick="refreshData()">Refresh Data</button>
+            <span id="lastUpdated" style="margin-left: auto; color: var(--color-text-secondary); font-size: var(--font-size-sm);"></span>
+        </div>
+        
+        <div id="errorContainer"></div>
+        
+        <div id="statusBanner" style="display: none;"></div>
+        
+        <div id="dashboardContent" style="display: none;">
+            <!-- State Section -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <h3>📍 Legislative State</h3>
+                <div id="stateInfo"></div>
+            </div>
+            
+            <!-- Agent Status -->
+            <div class="card">
+                <h3>🤖 Agent Status Distribution</h3>
+                <div id="agentStatus"></div>
+            </div>
+            
+            <!-- Review Gates -->
+            <div class="card">
+                <h3>🔍 Review Gates</h3>
+                <div id="reviewGates"></div>
+            </div>
+            
+            <!-- Blocking Conditions -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <h3>🚧 Blocking Conditions</h3>
+                <div id="blockingConditions"></div>
+            </div>
+        </div>
+        
+        <div id="emptyState" class="empty-state">
+            <h3>📁 No Data Loaded</h3>
+            <p>Select a heat_map_snapshot.json file to view system health, or click "Load Default" to use the default file.</p>
+        </div>
+    </div>
+    
+    <script>
+        let heatMapData = null;
+        const DEFAULT_FILE = '../heat_map_snapshot.json';
+        
+        // File input handler
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        heatMapData = JSON.parse(event.target.result);
+                        renderDashboard(heatMapData);
+                    } catch (error) {
+                        showError('Failed to parse JSON file: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+        
+        // Load default file
+        function loadDefaultFile() {
+            fetch(DEFAULT_FILE)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('File not found. Please run: python scripts/snapshot__generate__heat_map_json.py');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    heatMapData = data;
+                    renderDashboard(data);
+                })
+                .catch(error => {
+                    showError('Failed to load default file: ' + error.message + '<br><br>Run this command to generate the data:<br><code>python scripts/snapshot__generate__heat_map_json.py</code>');
+                });
+        }
+        
+        // Refresh data
+        function refreshData() {
+            if (heatMapData) {
+                loadDefaultFile();
+            } else {
+                showError('No data loaded. Please load a file first.');
+            }
+        }
+        
+        // Show error
+        function showError(message) {
+            const container = document.getElementById('errorContainer');
+            container.innerHTML = `<div class="error-message"><strong>Error:</strong> ${message}</div>`;
+            document.getElementById('dashboardContent').style.display = 'none';
+            document.getElementById('statusBanner').style.display = 'none';
+            document.getElementById('emptyState').style.display = 'block';
+        }
+        
+        // Format duration
+        function formatDuration(seconds) {
+            if (!seconds || seconds === 0) return '0s';
+            
+            const days = Math.floor(seconds / 86400);
+            const hours = Math.floor((seconds % 86400) / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = Math.floor(seconds % 60);
+            
+            const parts = [];
+            if (days > 0) parts.push(`${days}d`);
+            if (hours > 0) parts.push(`${hours}h`);
+            if (minutes > 0) parts.push(`${minutes}m`);
+            if (secs > 0 || parts.length === 0) parts.push(`${secs}s`);
+            
+            return parts.join(' ');
+        }
+        
+        // Render dashboard
+        function renderDashboard(data) {
+            document.getElementById('errorContainer').innerHTML = '';
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('dashboardContent').style.display = 'grid';
+            
+            // Update last updated time
+            const meta = data._meta || {};
+            const generatedAt = meta.generated_at || new Date().toISOString();
+            document.getElementById('lastUpdated').textContent = `Last updated: ${new Date(generatedAt).toLocaleString()}`;
+            
+            // Render status banner
+            renderStatusBanner(data.overall_status || {});
+            
+            // Render state info
+            renderStateInfo(data.state || {});
+            
+            // Render agent status
+            renderAgentStatus(data.agents || {});
+            
+            // Render review gates
+            renderReviewGates(data.review_gates || {});
+            
+            // Render blocking conditions
+            renderBlockingConditions(data.blocking_conditions || []);
+        }
+        
+        // Render status banner
+        function renderStatusBanner(status) {
+            const container = document.getElementById('statusBanner');
+            const color = (status.color || 'UNKNOWN').toLowerCase();
+            const reason = status.reason || 'Status unknown';
+            
+            container.innerHTML = `
+                <div class="status-banner ${color}">
+                    <h2>${color === 'green' ? '✅ ALL SYSTEMS OPERATIONAL' : color === 'yellow' ? '⚠️ CAUTION' : color === 'red' ? '❌ ATTENTION REQUIRED' : '❓ UNKNOWN STATUS'}</h2>
+                    <p>${reason}</p>
+                </div>
+            `;
+            container.style.display = 'block';
+        }
+        
+        // Render state info
+        function renderStateInfo(state) {
+            const container = document.getElementById('stateInfo');
+            const currentState = state.current_state || 'UNKNOWN';
+            const stateDef = state.state_definition || currentState;
+            const timeSeconds = state.time_in_state_seconds || 0;
+            const ready = state.advancement_ready || false;
+            const nextStates = state.next_allowed_states || [];
+            const blockingReasons = state.blocking_reasons || [];
+            
+            let html = `
+                <div class="stat-row">
+                    <span class="stat-label">Current State</span>
+                    <span class="stat-value" style="font-size: var(--font-size-xl);">${currentState}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Definition</span>
+                    <span style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">${stateDef}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Time in State</span>
+                    <span class="stat-value">${formatDuration(timeSeconds)}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Advancement Ready</span>
+                    <span class="status-badge ${ready ? 'running' : 'blocked'}">
+                        ${ready ? 'Yes' : 'No'}
+                    </span>
+                </div>
+            `;
+            
+            if (nextStates.length > 0) {
+                html += `
+                    <div class="stat-row">
+                        <span class="stat-label">Next Allowed States</span>
+                        <span style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">${nextStates.join(', ')}</span>
+                    </div>
+                `;
+            }
+            
+            if (blockingReasons.length > 0) {
+                html += '<div style="margin-top: var(--spacing-xl); padding-top: 20px; border-top: 2px solid #f0f0f0;"><strong style="color: var(--color-error);">Blocking Reasons:</strong><ul style="margin-top: var(--spacing-md); margin-left: 20px;">';
+                blockingReasons.forEach(reason => {
+                    html += `<li style="color: #721c24; margin: 5px 0;">${reason}</li>`;
+                });
+                html += '</ul></div>';
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        // Render agent status
+        function renderAgentStatus(agents) {
+            const container = document.getElementById('agentStatus');
+            
+            const statuses = ['RUNNING', 'WAITING_REVIEW', 'BLOCKED', 'IDLE', 'RETIRED', 'FAILED'];
+            let total = 0;
+            
+            statuses.forEach(status => {
+                if (status in agents) {
+                    total += agents[status] || 0;
+                }
+            });
+            
+            let html = `
+                <div class="stat-row">
+                    <span class="stat-label">Total Agents</span>
+                    <span class="stat-value">${total}</span>
+                </div>
+            `;
+            
+            statuses.forEach(status => {
+                const count = agents[status] || 0;
+                if (count > 0 || status in agents) {
+                    const statusLower = status.toLowerCase().replace('_', '-');
+                    html += `
+                        <div class="stat-row">
+                            <span class="stat-label">${status.replace('_', ' ')}</span>
+                            <div style="display: flex; align-items: center; gap: var(--spacing-md);">
+                                <span class="stat-value">${count}</span>
+                                <span class="status-badge ${statusLower}">${status}</span>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        // Render review gates
+        function renderReviewGates(gates) {
+            const container = document.getElementById('reviewGates');
+            const gateIds = ['HR_PRE', 'HR_LANG', 'HR_MSG', 'HR_RELEASE'];
+            
+            let html = '';
+            
+            gateIds.forEach(gateId => {
+                const gate = gates[gateId] || {};
+                const pendingCount = gate.pending_count || 0;
+                const lastReview = gate.last_review || {};
+                const decision = lastReview.decision || 'NONE';
+                const decisionAt = lastReview.decision_at || null;
+                
+                html += `
+                    <div style="margin-bottom: var(--spacing-lg); padding-bottom: 15px; border-bottom: 1px solid #f0f0f0;">
+                        <div style="font-weight: var(--font-weight-semibold); margin-bottom: 8px;">${gateId}</div>
+                        <div style="font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold); color: #f5576c; margin-bottom: 8px;">
+                            ${pendingCount} pending
+                        </div>
+                        <div style="font-size: var(--font-size-xs); color: #999;">
+                            Last: ${decision} ${decisionAt ? new Date(decisionAt).toLocaleString() : '(never)'}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            if (!html) {
+                html = '<p style="color: #999; text-align: center; padding: var(--spacing-xl);">No review gate data available</p>';
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        // Render blocking conditions
+        function renderBlockingConditions(conditions) {
+            const container = document.getElementById('blockingConditions');
+            
+            if (!conditions || conditions.length === 0) {
+                container.innerHTML = '<div style="padding: var(--spacing-xl); background: #d4edda; border-radius: var(--radius-sm); color: #155724; text-align: center;"><strong>✅ No Blocking Conditions</strong><br>System is ready to proceed</div>';
+                return;
+            }
+            
+            let html = '';
+            conditions.forEach(condition => {
+                html += `<div class="blocking-condition">${condition}</div>`;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        // Try to load default file on page load
+        window.addEventListener('load', function() {
+            loadDefaultFile();
+        });
+    </script>
+</body>
+</html>

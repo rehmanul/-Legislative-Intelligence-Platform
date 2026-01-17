@@ -1,0 +1,378 @@
+{
+  "_meta": {
+    "agent_id": "draft_coalition_strategy_originate_impl_evt",
+    "generated_at": "2026-01-12T18:33:00.000000Z",
+    "artifact_type": "COALITION_STRATEGY",
+    "artifact_name": "Coalition Coordination Strategy - Air Quality & Mold Risk Policy Scaling",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": null,
+    "guidance_status": "SIGNED",
+    "policy_context": "Scaling Air Quality & Mold Risk Policy Beyond Military Pilot",
+    "note": "This is a STRATEGY document, not an execution plan. No external actions authorized without human approval."
+  },
+  "strategy_framework": {
+    "strategic_objectives": [
+      "Build effective coalition for policy scaling from military pilot to civilian application",
+      "Leverage coalition strengths (federal agencies, veterans orgs, health insurance) for maximum policy impact",
+      "Coordinate coalition efforts across multiple scaling pathways (veteran housing, public housing, schools, private residential)",
+      "Address coalition gaps systematically (evidence verification, opposition management, resource coordination)"
+    ],
+    "strategic_approaches": [
+      {
+        "approach": "Tiered Coalition Structure",
+        "rationale": "Three-tier structure (core allies, strategic partners, grassroots partners) enables focused coordination while maintaining broad coalition support. Core steering committee provides leadership, working groups enable specialized coordination.",
+        "effectiveness": "high",
+        "structure": {
+          "tier_1_core_steering_committee": ["Veterans Organizations (chair/co-chair)", "EPA (regulatory coordination)", "HUD (implementation coordination)"],
+          "tier_2_strategic_partners": ["Health Insurance Industry", "Public Health Organizations"],
+          "tier_3_grassroots_partners": ["School Districts", "Tenant Advocacy Organizations"]
+        }
+      },
+      {
+        "approach": "Working Group Coordination",
+        "rationale": "Specialized working groups enable focused coordination on evidence, economics, grassroots, and legislative strategy. Prevents coordination overload while maintaining strategic alignment.",
+        "effectiveness": "high",
+        "working_groups": [
+          {
+            "group": "Evidence & Research",
+            "members": ["Public Health Organizations", "Academic Research Institutions"],
+            "purpose": "Evidence verification, peer review, health outcomes analysis",
+            "deliverables": ["Evidence verification protocol", "Peer review coordination", "Health outcomes synthesis"]
+          },
+          {
+            "group": "Economic Analysis",
+            "members": ["Health Insurance Industry", "Policy Research Organizations"],
+            "purpose": "Cost-benefit analysis, economic case development, funding mechanisms",
+            "deliverables": ["Economic case document", "Cost-sharing mechanism design", "Funding strategy"]
+          },
+          {
+            "group": "Grassroots Mobilization",
+            "members": ["Tenant Advocacy Organizations", "School Districts", "Veterans Organizations"],
+            "purpose": "Grassroots narrative development, local advocacy, constituent engagement",
+            "deliverables": ["Narrative toolkit", "Grassroots organizer training", "Story collection database"]
+          },
+          {
+            "group": "Legislative Strategy",
+            "members": ["EPA", "HUD", "Veterans Organizations"],
+            "purpose": "Legislative vehicle identification, committee engagement, sponsor targeting",
+            "deliverables": ["Vehicle options analysis", "Committee engagement plan", "Sponsor targeting strategy"]
+          }
+        ]
+      },
+      {
+        "approach": "Early Engagement Priority",
+        "rationale": "Engage Tier 1 core allies immediately for steering committee formation. Coordinate with EPA and HUD on rulemaking timelines. Build coalition structure before policy windows open.",
+        "effectiveness": "high",
+        "engagement_sequence": [
+          "Immediate: Veterans Organizations, EPA, HUD (steering committee formation)",
+          "Short-term: Health Insurance Industry, Public Health Organizations (economic case, evidence verification)",
+          "Medium-term: School Districts, Tenant Advocacy (grassroots mobilization)"
+        ]
+      },
+      {
+        "approach": "Resource Alignment",
+        "rationale": "Align coalition resources for maximum effectiveness. Federal agencies provide regulatory authority and technical expertise. Veterans orgs provide credibility and grassroots. Health insurance provides economic case and potential funding.",
+        "effectiveness": "high",
+        "resource_mapping": {
+          "regulatory_authority": ["EPA", "HUD"],
+          "policy_credibility": ["Veterans Organizations", "Public Health Organizations"],
+          "economic_case": ["Health Insurance Industry"],
+          "grassroots_capacity": ["Veterans Organizations", "Tenant Advocacy", "School Districts"],
+          "evidence_synthesis": ["Public Health Organizations", "Academic Research Institutions"],
+          "media_capacity": ["Health Insurance Industry", "Veterans Organizations"]
+        }
+      }
+    ],
+    "key_learnings": [
+      "Coalition coordination is critical for policy scaling success",
+      "Tiered structure enables focused leadership while maintaining broad support",
+      "Working groups prevent coordination overload",
+      "Early engagement of core allies establishes foundation",
+      "Resource alignment maximizes coalition effectiveness",
+      "Evidence verification is prerequisite for coalition credibility"
+    ]
+  },
+  "coalition_coordination_mechanisms": {
+    "steering_committee": {
+      "composition": ["Veterans Organizations (chair/co-chair)", "EPA (regulatory coordination)", "HUD (implementation coordination)"],
+      "responsibilities": [
+        "Strategic direction and decision-making",
+        "Coalition messaging coordination",
+        "Resource allocation",
+        "Working group oversight",
+        "External representation"
+      ],
+      "meeting_frequency": "Monthly (or as needed for policy windows)",
+      "decision_authority": "Strategic decisions require steering committee approval. Tactical decisions delegated to working groups."
+    },
+    "working_group_coordination": {
+      "coordination_structure": "Working groups report to steering committee. Cross-group coordination through steering committee and designated liaisons.",
+      "information_sharing": "Regular working group updates to steering committee. Shared information repository for coalition documents.",
+      "conflict_resolution": "Steering committee resolves conflicts between working groups. Escalation path for unresolved issues."
+    },
+    "external_coordination": {
+      "policymaker_engagement": "Steering committee coordinates high-level policymaker engagement (EPA, HUD, Congress). Working groups support with specialized expertise.",
+      "media_coordination": "Health Insurance Industry and Veterans Organizations lead media coordination. Unified messaging framework across all coalition communications.",
+      "opposition_management": "Steering committee develops opposition management strategy. Working groups provide specialized analysis (economic, legal, media)."
+    }
+  },
+  "coalition_engagement_strategy": {
+    "tier_1_core_allies": {
+      "engagement_approach": "Immediate steering committee formation. High-touch coordination. Regular strategic meetings.",
+      "engagement_tactics": [
+        "Steering committee charter development",
+        "Regular strategic coordination meetings",
+        "Shared decision-making on key strategy questions",
+        "Co-branded policy materials (where appropriate)",
+        "Joint policymaker engagement"
+      ],
+      "success_indicators": [
+        "Steering committee formed and meeting regularly",
+        "Unified coalition messaging",
+        "Coordinated policymaker engagement",
+        "Resource sharing agreements"
+      ]
+    },
+    "tier_2_strategic_partners": {
+      "engagement_approach": "Working group participation. Specialized contribution areas. Regular working group meetings.",
+      "engagement_tactics": [
+        "Working group membership and active participation",
+        "Specialized contribution (economic analysis, evidence synthesis)",
+        "Resource contribution (funding, expertise, media capacity)",
+        "Coalition endorsement (where appropriate)",
+        "Targeted policymaker engagement in area of expertise"
+      ],
+      "success_indicators": [
+        "Active working group participation",
+        "Deliverables produced (economic case, evidence synthesis)",
+        "Resource contributions made",
+        "Coalition messaging alignment"
+      ]
+    },
+    "tier_3_grassroots_partners": {
+      "engagement_approach": "Grassroots working group coordination. Narrative development. Local advocacy support.",
+      "engagement_tactics": [
+        "Grassroots working group participation",
+        "Narrative development and story collection",
+        "Local advocacy coordination",
+        "Constituent engagement",
+        "Media outreach (local level)"
+      ],
+      "success_indicators": [
+        "Grassroots narrative materials developed",
+        "Story collection database populated",
+        "Local advocacy activities coordinated",
+        "Constituent engagement with policymakers"
+      ]
+    }
+  },
+  "opposition_management_strategy": {
+    "primary_opponents": [
+      {
+        "opponent": "Property Management Associations (NMHC, NAA)",
+        "concerns": "Cost burden of air quality monitoring and remediation requirements",
+        "coalition_response": [
+          "Develop cost-sharing mechanisms (federal grants, insurance incentives)",
+          "Frame as voluntary standards with incentives where possible",
+          "Emphasize long-term cost savings (preventive vs. reactive)",
+          "Engage health insurance industry to provide economic case",
+          "Highlight tenant health benefits and reduced liability"
+        ],
+        "coalition_assets": ["Health Insurance Industry (economic case)", "Tenant Advocacy (tenant stories)", "Public Health Organizations (health evidence)"]
+      },
+      {
+        "opponent": "Real Estate Development Industry",
+        "concerns": "Construction costs and regulatory compliance burden",
+        "coalition_response": [
+          "Emphasize preventive measures reduce long-term costs",
+          "Highlight insurance industry support for cost reduction",
+          "Frame as market differentiation opportunity (healthy buildings)",
+          "Develop phased implementation approach",
+          "Provide technical assistance and best practices"
+        ],
+        "coalition_assets": ["Health Insurance Industry (incentive design)", "EPA/HUD (technical expertise)", "Building Code Organizations (standards alignment)"]
+      },
+      {
+        "opponent": "State/Local Government Associations",
+        "concerns": "Federal preemption of state/local authority",
+        "coalition_response": [
+          "Frame as federal coordination with state implementation flexibility",
+          "Emphasize state health department partnership role",
+          "Develop state implementation framework with flexibility",
+          "Highlight benefits of federal coordination (consistency, resources)",
+          "Engage state health departments as implementation partners"
+        ],
+        "coalition_assets": ["State Health Departments (neutral/partners)", "EPA/HUD (coordination framework)", "Public Health Organizations (state-level relationships)"]
+      }
+    ],
+    "opposition_monitoring": {
+      "monitoring_mechanisms": [
+        "Media monitoring (opposition statements, op-eds, social media)",
+        "Industry association activity tracking",
+        "Congressional hearing monitoring",
+        "State/local government position tracking"
+      ],
+      "response_protocol": [
+        "Rapid response team (steering committee + working group leads)",
+        "Unified messaging framework for opposition responses",
+        "Coalition asset deployment (economic case, health evidence, tenant stories)",
+        "Strategic engagement (where appropriate) to address concerns"
+      ]
+    }
+  },
+  "resource_coordination": {
+    "financial_resources": {
+      "sources": [
+        "Health Insurance Industry (potential coalition funding)",
+        "Federal agency resources (EPA, HUD rulemaking budgets)",
+        "Veterans Organizations (membership dues, grants)",
+        "Public Health Organizations (grant funding)"
+      ],
+      "allocation_priorities": [
+        "Evidence verification (highest priority - stop condition)",
+        "Coalition coordination and administration",
+        "Narrative development and materials",
+        "Grassroots organizer training",
+        "Media outreach and communications"
+      ],
+      "coordination_mechanism": "Steering committee oversees resource allocation. Working groups propose resource needs. Transparent resource sharing agreements."
+    },
+    "human_resources": {
+      "staff_capacity": "Federal agencies (EPA, HUD) provide staff capacity for regulatory coordination. Veterans organizations provide policy staff. Health insurance provides economic analysis staff.",
+      "volunteer_capacity": "Veterans organizations (800), Tenant advocacy (300), School districts/parents (600), Public health (200), Health insurance employees (600)",
+      "expertise_availability": "High - federal agencies (regulatory), public health (evidence), health insurance (economics), veterans orgs (policy)"
+    },
+    "technical_resources": {
+      "evidence_synthesis": "Public Health Organizations, Academic Research Institutions",
+      "regulatory_expertise": "EPA, HUD",
+      "policy_analysis": "Federal agencies, Health Insurance Industry",
+      "grassroots_technology": "Tenant Advocacy, School Districts"
+    }
+  },
+  "coalition_timeline": {
+    "phase_1_foundation": {
+      "timeline": "Months 1-2",
+      "activities": [
+        "Steering committee formation (Veterans Organizations, EPA, HUD)",
+        "Working group establishment (Evidence, Economic, Grassroots, Legislative)",
+        "Coalition charter development",
+        "Evidence verification protocol (Evidence & Research working group)",
+        "Initial resource sharing agreements"
+      ],
+      "deliverables": [
+        "Coalition charter",
+        "Working group structure",
+        "Evidence verification protocol",
+        "Resource sharing agreements"
+      ]
+    },
+    "phase_2_strategy_development": {
+      "timeline": "Months 3-4",
+      "activities": [
+        "Evidence verification (after protocol approval)",
+        "Economic case development (Economic Analysis working group)",
+        "Narrative toolkit development (Grassroots Mobilization working group)",
+        "Legislative vehicle analysis (Legislative Strategy working group)",
+        "Opposition management strategy refinement"
+      ],
+      "deliverables": [
+        "Evidence verification report",
+        "Economic case document",
+        "Narrative toolkit",
+        "Legislative vehicle options",
+        "Opposition management plan"
+      ]
+    },
+    "phase_3_coalition_activation": {
+      "timeline": "Months 5-8",
+      "activities": [
+        "Coalition messaging launch (after evidence verification)",
+        "Coordinated policymaker engagement",
+        "Public comment campaigns (EPA, HUD rulemaking)",
+        "Media outreach coordination",
+        "Grassroots mobilization support"
+      ],
+      "deliverables": [
+        "Coalition messaging materials",
+        "Policymaker engagement reports",
+        "Public comment submissions",
+        "Media coverage tracking"
+      ]
+    },
+    "phase_4_sustained_advocacy": {
+      "timeline": "Months 9-12",
+      "activities": [
+        "Sustain coalition coordination during rulemaking/legislative processes",
+        "Monitor opposition and adapt strategy",
+        "Track policy progress and adjust tactics",
+        "Maintain coalition health and engagement"
+      ],
+      "deliverables": [
+        "Opposition monitoring reports",
+        "Policy progress tracking",
+        "Coalition health assessments",
+        "Strategy adaptation recommendations"
+      ]
+    }
+  },
+  "success_metrics": {
+    "coalition_structure_metrics": [
+      "Steering committee formed and meeting regularly",
+      "All 4 working groups established and active",
+      "Coalition charter approved by all Tier 1 partners"
+    ],
+    "coordination_metrics": [
+      "Regular working group meetings (target: bi-weekly)",
+      "Steering committee meetings (target: monthly)",
+      "Information sharing effectiveness (shared repository usage)",
+      "Conflict resolution success rate"
+    ],
+    "engagement_metrics": [
+      "Tier 1 partner engagement (target: 100% active participation)",
+      "Tier 2 partner engagement (target: 80% active participation)",
+      "Tier 3 partner engagement (target: 70% active participation)",
+      "Resource contributions (financial, human, technical)"
+    ],
+    "policy_impact_metrics": [
+      "EPA rulemaking incorporates coalition input (after evidence verification)",
+      "HUD public housing regulations reference coalition recommendations",
+      "Congressional committee engagement (hearings, briefings)",
+      "State health department adoption of federal coordination framework"
+    ]
+  },
+  "risk_mitigation": {
+    "coalition_fragmentation": {
+      "risk": "Multiple pathways and working groups may create coordination challenges",
+      "mitigation": "Strong steering committee leadership, clear working group mandates, regular coordination meetings, unified messaging framework"
+    },
+      "resource_constraints": {
+      "risk": "Insufficient resources for all coalition activities",
+      "mitigation": "Prioritize evidence verification and core activities. Phase lower-priority activities. Leverage coalition partner resources."
+    },
+    "opposition_coalition": {
+      "risk": "Opponents may form counter-coalition",
+      "mitigation": "Monitor opposition activity. Develop rapid response protocol. Leverage coalition assets (economic case, health evidence, credibility)."
+    },
+    "evidence_verification_delay": {
+      "risk": "Evidence verification may take longer than expected, delaying coalition activation",
+      "mitigation": "Prioritize evidence verification. Develop verification protocol early. Engage academic/research partners for verification support."
+    }
+  },
+  "recommendations": [
+    "Form steering committee immediately (Veterans Organizations, EPA, HUD)",
+    "Establish all 4 working groups with clear mandates and deliverables",
+    "Develop coalition charter with decision-making authority and resource sharing agreements",
+    "Prioritize evidence verification (required before coalition activation)",
+    "Develop unified messaging framework for all coalition communications",
+    "Establish regular coordination mechanisms (steering committee monthly, working groups bi-weekly)",
+    "Create shared information repository for coalition documents",
+    "Develop opposition monitoring and rapid response protocol",
+    "Align coalition timeline with EPA and HUD rulemaking windows",
+    "Track coalition metrics to measure effectiveness and adapt strategy",
+    "Maintain coalition health through regular engagement and conflict resolution",
+    "Integrate coalition strategy with grassroots strategy for coordinated advocacy"
+  ],
+  "disclaimer": "This coalition coordination strategy is generated for human review. This is a STRATEGY document, not an execution plan. No external actions (coalition formation, partner engagement, resource agreements) are authorized without human approval. All recommendations require professional judgment. Evidence verification is required before coalition activation."
+}

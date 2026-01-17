@@ -1,0 +1,28 @@
+{
+  "_meta": {
+    "agent_id": "intel_signal_scan_intro_evt",
+    "generated_at": "2026-01-21T00:30:00Z",
+    "artifact_type": "SIGNAL_SUMMARY",
+    "artifact_name": "Signal Scan Summary",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": false,
+    "requires_review": null,
+    "guidance_status": "SIGNED"
+  },
+  "scan_period": "2026-01-01 to 2026-01-20",
+  "policy_domains": ["Healthcare", "Education", "Technology", "Infrastructure"],
+  "key_signals": [
+    {
+      "signal": "FDA announces new medical device cybersecurity guidance - opportunity for healthcare data security legislation",
+      "urgency": "HIGH",
+      "policy_window": "30-60 days"
+    },
+    {
+      "signal": "Multiple state legislatures introduce AI regulation bills - federal preemption opportunity",
+      "urgency": "MEDIUM",
+      "policy_window": "90-120 days"
+    }
+  ],
+  "disclaimer": "Signal scan contains unverified information requiring human validation before policy action."
+}

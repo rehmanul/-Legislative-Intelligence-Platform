@@ -1,0 +1,79 @@
+{
+  "_meta": {
+    "agent_id": "draft_amendment_comm_evt",
+    "generated_at": "2026-01-20T19:30:00Z",
+    "artifact_type": "AMENDMENT_VEHICLE",
+    "artifact_name": "Amendment as Legislative Vehicle",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": "HR_LANG",
+    "guidance_status": "SIGNED"
+  },
+  "amendment_context": {
+    "target_bill": "H.R. 8821 - Annual Defense Authorization Act (NDAA)",
+    "amendment_sponsor": "Sen. Rodriguez (D-CA)",
+    "policy_area": "Cybersecurity workforce development",
+    "amendment_type": "RIDER",
+    "rationale": "NDAA is must-pass legislation, providing vehicle for non-defense policy priorities"
+  },
+  "amendment_content": {
+    "title": "Cybersecurity Workforce Training and Education Amendment",
+    "section_number": "SEC. 1847",
+    "language": "The Secretary of Defense, in coordination with the Secretary of Education, shall establish a program to provide cybersecurity training and education grants to institutions of higher education and community colleges that—\n(1) develop or expand cybersecurity degree and certificate programs;\n(2) partner with local employers to provide workforce training;\n(3) prioritize enrollment of veterans and underrepresented student populations; and\n(4) align curriculum with Department of Defense cybersecurity workforce needs.",
+    "funding": "$50M per year for 5 years ($250M total)",
+    "authorization": "National Defense Education Act (NDEA) authority"
+  },
+  "vehicle_advantages": {
+    "must_pass_bill": "NDAA passes annually with broad bipartisan support - high probability of enactment",
+    "relevant_nexus": "Cybersecurity workforce directly supports national defense mission",
+    "bipartisan_appeal": "Workforce development and veterans' programs have broad support",
+    "hard_to_strip": "Once included in committee or floor version, difficult to remove without jeopardizing entire bill"
+  },
+  "strategic_considerations": {
+    "committee_jurisdiction": "Education and Labor Committee has primary jurisdiction but Defense Committee can include in NDAA",
+    "jurisdictional_conflict_risk": "MEDIUM - Education Committee may object to bypass, but NDAA precedent exists for workforce provisions",
+    "negotiation_necessity": "Likely need to negotiate with Defense Committee leadership and Education Committee ranking member",
+    "timing": "NDAA markup typically in May-June, floor consideration in July-September"
+  },
+  "amendment_offer_strategy": {
+    "committee_markup": {
+      "target": "House Armed Services Committee markup",
+      "sponsor_relationship": "Sen. Rodriguez is member of Senate Armed Services - can offer in Senate version",
+      "strategy": "Coordinate House and Senate versions, accept in either chamber"
+    },
+    "floor_consideration": {
+      "backup_plan": "If not included in committee version, offer as floor amendment",
+      "vote_counting": "Cybersecurity and veterans' issues have broad support - likely to pass if reaches floor",
+      "risk": "Floor amendments more vulnerable to points of order on germaneness"
+    }
+  },
+  "messaging_framework": {
+    "defense_connection": "Cybersecurity threats are national security threats. We need trained workforce to defend critical infrastructure.",
+    "veterans_angle": "This program helps veterans transition to civilian cybersecurity careers, utilizing skills developed in military service.",
+    "workforce_development": "Cybersecurity workforce shortage threatens both national security and economic competitiveness. This addresses both."
+  },
+  "opposition_mitigation": {
+    "jurisdictional_concerns": "Acknowledge Education Committee expertise, offer to coordinate, but emphasize Defense Committee authority for national security workforce",
+    "cost_concerns": "$50M/year is 0.01% of defense budget - minimal impact on overall spending",
+    "scope_creep_concerns": "Cybersecurity directly supports defense mission - not scope creep, core mission support"
+  },
+  "success_indicators": {
+    "best_case": "Included in House or Senate committee-passed version",
+    "acceptable": "Accepted as floor amendment in either chamber",
+    "backup": "Removed in conference but provisions incorporated into separate education bill with NDAA momentum"
+  },
+  "coordination_requirements": {
+    "internal": [
+      "Coordinate with Education and Labor Committee staff",
+      "Brief Armed Services Committee members",
+      "Engage veterans' service organizations for support"
+    ],
+    "external": [
+      "Cybersecurity industry associations",
+      "Higher education associations",
+      "Veterans' advocacy organizations"
+    ]
+  },
+  "disclaimer": "Amendment vehicle strategy requires careful navigation of jurisdictional and procedural rules. Success depends on committee relationships and bill dynamics."
+}

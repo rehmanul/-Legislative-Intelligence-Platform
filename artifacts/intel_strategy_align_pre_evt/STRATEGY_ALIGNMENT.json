@@ -1,0 +1,146 @@
+{
+  "_meta": {
+    "agent_id": "intel_strategy_align_pre_evt",
+    "generated_at": "2026-01-12T18:28:35.130588Z",
+    "artifact_type": "STRATEGY_ALIGNMENT",
+    "artifact_name": "Strategy Alignment - Air Quality & Mold Risk Policy Scaling",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": false,
+    "requires_review": null,
+    "guidance_status": "SIGNED",
+    "policy_context": "Scaling Air Quality & Mold Risk Policy Beyond Military Pilot"
+  },
+  "feature_mapping": {
+    "feature_description": "Scaling Air Quality & Mold Risk Policy Beyond Military Pilot - Legislative and mobilization strategy to extend military facility air quality standards to broader civilian application (public housing, schools, private residential via insurance incentives)",
+    "questionnaire_objectives": [
+      {
+        "objective_id": "OPPORTUNITY",
+        "objective_description": "Policy opportunity: Regulatory demand for air quality standards beyond military context",
+        "relevance": "high",
+        "alignment_score": 0.95,
+        "impact_pathway": "EPA/HUD rulemaking windows create opportunity for policy scaling. Industry signals show demand for standardized air quality monitoring.",
+        "evidence": [
+          "EPA announced upcoming rulemaking on indoor air quality standards",
+          "HUD interest in evidence-based standards for public housing",
+          "Health insurance industry cost drivers (respiratory illness claims)",
+          "School districts reporting inconsistent state/local standards"
+        ]
+      },
+      {
+        "objective_id": "SCALE",
+        "objective_description": "Scale: Extend military pilot findings to broader civilian application",
+        "relevance": "high",
+        "alignment_score": 0.90,
+        "impact_pathway": "Multiple scaling pathways: military facilities → veteran housing → public housing → public schools → private residential. Each pathway builds on previous success.",
+        "scaling_pathways": [
+          "Military facilities → Veteran housing (VA, HUD) - High feasibility",
+          "Military facilities → Public housing (HUD) - High feasibility",
+          "Military facilities → Public schools - Medium feasibility",
+          "Military facilities → Private residential (via insurance) - Medium feasibility"
+        ]
+      },
+      {
+        "objective_id": "RISK",
+        "objective_description": "Risk: Costly and harmful if policy scaling fails or misrepresents military findings",
+        "relevance": "high",
+        "alignment_score": 0.85,
+        "impact_pathway": "Stop condition: Evidence verification required. Ethical boundaries: No false health claims, no misrepresentation of military findings. Risk mitigation through independent verification and human review gates.",
+        "risk_factors": [
+          "Evidence verification failure (hard stop condition)",
+          "Industry opposition (property management, real estate development)",
+          "Federalism concerns (state/local government associations)",
+          "Budget resistance (appropriations committees)",
+          "Ethical violations (false health claims, misrepresentation)"
+        ]
+      }
+    ],
+    "strategic_objectives": [
+      {
+        "objective_id": "STRATEGIC-001",
+        "objective_description": "Leverage military pilot success to inform broader public health policy",
+        "relevance": "high",
+        "impact_pathway": "Military pilot provides evidence base for scaling. Link to CDC health guidance on mold exposure and respiratory health.",
+        "success_metrics": [
+          "EPA rulemaking incorporates military pilot findings",
+          "HUD public housing regulations reference military facility standards",
+          "State health departments adopt federal coordination framework"
+        ]
+      },
+      {
+        "objective_id": "STRATEGIC-002",
+        "objective_description": "Build coalition for policy scaling across multiple jurisdictions",
+        "relevance": "high",
+        "impact_pathway": "Veterans organizations provide natural bridge. Health insurance industry provides economic case. Tenant advocacy provides grassroots support.",
+        "success_metrics": [
+          "Coalition includes 7+ high-influence allies",
+          "Veterans organizations publicly support scaling",
+          "Health insurance industry endorses preventive policy measures"
+        ]
+      },
+      {
+        "objective_id": "STRATEGIC-003",
+        "objective_description": "Create legislative and mobilization strategy (not execution)",
+        "relevance": "high",
+        "impact_pathway": "Generate reviewable artifacts for human decision-making. Strategy documents inform execution planning without committing to external actions.",
+        "success_metrics": [
+          "Concept memo addresses scaling strategy",
+          "Mobilization strategy drafted (grassroots + coalition)",
+          "Legislative vehicle options identified",
+          "Risk assessment completed"
+        ]
+      }
+    ]
+  },
+  "business_value": {
+    "expected_impact": "high",
+    "time_horizon": "6-12 months to initial policy engagement, 12-24 months to pilot deployment",
+    "resource_requirements": "moderate",
+    "risk_assessment": "medium",
+    "value_drivers": [
+      "Public health impact: Reduced respiratory illness from improved air quality",
+      "Economic value: Health insurance cost reduction through preventive measures",
+      "Policy leverage: Military pilot success provides evidence base for scaling",
+      "Coalition building: Natural allies in veterans organizations and health sector"
+    ],
+    "cost_considerations": [
+      "Evidence verification costs (independent verification of military pilot findings)",
+      "Coalition coordination resources",
+      "Legislative engagement (committee briefings, staff education)",
+      "Risk mitigation (opposition management, ethical compliance)"
+    ]
+  },
+  "recommendations": [
+    "Proceed with legislative strategy development aligned to OPPORTUNITY, SCALE, and RISK objectives",
+    "Prioritize evidence verification before advancing beyond PRE_EVT (stop condition)",
+    "Coordinate with veterans organizations as natural bridge from military to civilian context",
+    "Engage health insurance industry for economic case development",
+    "Monitor EPA and HUD rulemaking windows for policy vehicle opportunities",
+    "Maintain ethical boundaries: No false health claims, accurate representation of military findings"
+  ],
+  "organizational_capabilities": {
+    "note": "Capability assessments not available - proceeding speculatively",
+    "assumed_capabilities": [
+      "Legislative strategy development",
+      "Coalition building and coordination",
+      "Evidence synthesis and policy framing",
+      "Risk assessment and mitigation planning"
+    ]
+  },
+  "scaling_strategy_summary": {
+    "primary_pathway": "Military facilities → HUD public housing → EPA rulemaking → State/local implementation",
+    "secondary_pathway": "Military facilities → Veteran housing → Public schools → Private residential (insurance incentives)",
+    "key_leverage_points": [
+      "Veterans organizations (military-to-civilian bridge)",
+      "EPA rulemaking window (regulatory vehicle)",
+      "HUD public housing authority (direct scaling path)",
+      "Health insurance industry (economic case)"
+    ],
+    "critical_dependencies": [
+      "Independent verification of military pilot evidence (stop condition)",
+      "HR_PRE approval of concept memo (blocking gate)",
+      "Coalition partner commitment (mobilization capacity)",
+      "Legislative vehicle availability (committee jurisdiction, timing)"
+    ]
+  }
+}

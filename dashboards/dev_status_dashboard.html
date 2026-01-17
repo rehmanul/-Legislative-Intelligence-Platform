@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Development Status Dashboard - Agent Orchestrator</title>
+    <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-family-sans), Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+            background: var(--color-bg-secondary);
+            padding: var(--spacing-xl);
+        }
+        
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: var(--color-bg-primary);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 32px;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .controls {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-2);
+            display: flex;
+            gap: var(--spacing-lg);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .controls button {
+            padding: var(--spacing-md) 20px;
+            background: #11998e;
+            color: var(--color-bg-primary);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: var(--font-weight-semibold);
+        }
+        
+        .controls button:hover {
+            background: #0d7a6f;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: var(--color-bg-primary);
+            padding: 25px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+        }
+        
+        .card h3 {
+            font-size: var(--font-size-xl);
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+        
+        .stat-value {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: #11998e;
+            font-family: var(--font-family-mono);
+        }
+        
+        .progress-bar {
+            background: #f0f0f0;
+            border-radius: 10px;
+            height: 30px;
+            margin: var(--spacing-lg) 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-bg-primary);
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-xs);
+            transition: width 0.3s ease;
+            background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        .agent-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .agent-item {
+            padding: 12px;
+            background: var(--color-gray-100);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--spacing-md);
+            font-size: 13px;
+            font-family: var(--font-family-mono);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: var(--spacing-xs) 10px;
+            border-radius: var(--radius-xl);
+            font-size: 11px;
+            font-weight: var(--font-weight-semibold);
+            text-transform: uppercase;
+            margin-right: 10px;
+        }
+        
+        .status-badge.running {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-badge.idle {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .status-badge.waiting-review {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-badge.blocked {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-badge.retired {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+        
+        .recommendation {
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-lg);
+            font-size: var(--font-size-sm);
+        }
+        
+        .recommendation.ok {
+            background: #d4edda;
+            border-left: 4px solid var(--color-success);
+            color: #155724;
+        }
+        
+        .recommendation.warn {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            color: #856404;
+        }
+        
+        .recommendation.high {
+            background: #f8d7da;
+            border-left: 4px solid var(--color-error);
+            color: #721c24;
+        }
+        
+        .recommendation.tip {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            color: #0c5460;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        
+        .error-message {
+            background: #fff5f5;
+            border: 2px solid var(--color-error);
+            color: #721c24;
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .bar-chart {
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .bar-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+            gap: var(--spacing-md);
+        }
+        
+        .bar-label {
+            min-width: 150px;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+        
+        .bar-container {
+            flex: 1;
+            background: #f0f0f0;
+            border-radius: var(--radius-sm);
+            height: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+            color: var(--color-bg-primary);
+            font-size: 11px;
+            font-weight: var(--font-weight-semibold);
+        }
+    </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+    
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="container">
+        <header>
+            <h1>⚙️ Development Status Dashboard</h1>
+            <p>Development resource allocation and agent status monitoring</p>
+        </header>
+        
+        <div class="controls">
+            <button onclick="loadData()">Refresh Data</button>
+            <button onclick="loadFromFiles()">Load from Files</button>
+            <span id="lastUpdated" style="margin-left: auto; color: var(--color-text-secondary); font-size: var(--font-size-sm);"></span>
+        </div>
+        
+        <div id="errorContainer"></div>
+        
+        <div id="dashboardContent" style="display: none;">
+            <div class="grid">
+                <!-- System State -->
+                <div class="card">
+                    <h3>📍 System State</h3>
+                    <div id="systemState"></div>
+                </div>
+                
+                <!-- Resource Configuration -->
+                <div class="card">
+                    <h3>⚙️ Resource Configuration</h3>
+                    <div id="resourceConfig"></div>
+                </div>
+                
+                <!-- Agent Statistics -->
+                <div class="card">
+                    <h3>🤖 Agent Statistics</h3>
+                    <div id="agentStats"></div>
+                </div>
+                
+                <!-- Resource Utilization -->
+                <div class="card">
+                    <h3>📊 Resource Utilization</h3>
+                    <div id="resourceUtil"></div>
+                </div>
+            </div>
+            
+            <!-- Status Breakdown -->
+            <div class="card" style="margin-bottom: var(--spacing-xl);">
+                <h3>📈 Status Breakdown</h3>
+                <div id="statusBreakdown"></div>
+            </div>
+            
+            <!-- Type Breakdown -->
+            <div class="card" style="margin-bottom: var(--spacing-xl);">
+                <h3>🔍 Type Breakdown</h3>
+                <div id="typeBreakdown"></div>
+            </div>
+            
+            <!-- Development vs Production -->
+            <div class="grid">
+                <div class="card">
+                    <h3>🔧 Development Agents</h3>
+                    <div id="developmentAgents" class="agent-list"></div>
+                </div>
+                
+                <div class="card">
+                    <h3>🚀 Production Agents</h3>
+                    <div id="productionAgents" class="agent-list"></div>
+                </div>
+            </div>
+            
+            <!-- Active Agents -->
+            <div class="card" style="margin-top: var(--spacing-xl);">
+                <h3>⚡ Active Agents</h3>
+                <div id="activeAgents" class="agent-list"></div>
+            </div>
+            
+            <!-- Recommendations -->
+            <div class="card" style="margin-top: var(--spacing-xl);">
+                <h3>💡 Recommendations</h3>
+                <div id="recommendations"></div>
+            </div>
+        </div>
+        
+        <div id="emptyState" class="empty-state">
+            <h3>📁 No Data Loaded</h3>
+            <p>Click "Refresh Data" to load system state from JSON files.</p>
+            <p style="margin-top: var(--spacing-md); font-size: var(--font-size-sm);">Or click "Load from Files" to manually select JSON files.</p>
+        </div>
+    </div>
+    
+    <script>
+        let dashboardData = null;
+        
+        // Load data from default files
+        async function loadData() {
+            try {
+                const [stateRes, registryRes, configRes] = await Promise.allSettled([
+                    fetch('../state/legislative-state.json'),
+                    fetch('../registry/agent-registry.json'),
+                    fetch('../config/development_config.json')
+                ]);
+                
+                const state = stateRes.status === 'fulfilled' && stateRes.value.ok ? await stateRes.value.json() : null;
+                const registry = registryRes.status === 'fulfilled' && registryRes.value.ok ? await registryRes.value.json() : null;
+                const config = configRes.status === 'fulfilled' && configRes.value.ok ? await configRes.value.json() : null;
+                
+                if (!state || !registry) {
+                    throw new Error('Failed to load required files. Make sure state/legislative-state.json and registry/agent-registry.json exist.');
+                }
+                
+                dashboardData = { state, registry, config };
+                renderDashboard(dashboardData);
+            } catch (error) {
+                showError(error.message);
+            }
+        }
+        
+        // Load from file picker
+        function loadFromFiles() {
+            // This would require file input handling - simplified for now
+            alert('File picker functionality requires file input. Using default data loading instead.');
+            loadData();
+        }
+        
+        // Show error
+        function showError(message) {
+            const container = document.getElementById('errorContainer');
+            container.innerHTML = `<div class="error-message"><strong>Error:</strong> ${message}</div>`;
+            document.getElementById('dashboardContent').style.display = 'none';
+            document.getElementById('emptyState').style.display = 'block';
+        }
+        
+        // Format timestamp
+        function formatTimestamp(timestampStr) {
+            if (!timestampStr) return 'N/A';
+            try {
+                const dt = new Date(timestampStr);
+                const now = new Date();
+                const delta = (now - dt) / 1000;
+                
+                if (delta < 60) return `${Math.floor(delta)}s ago`;
+                if (delta < 3600) return `${Math.floor(delta / 60)}m ago`;
+                if (delta < 86400) return `${Math.floor(delta / 3600)}h ago`;
+                return `${Math.floor(delta / 86400)}d ago`;
+            } catch {
+                return timestampStr;
+            }
+        }
+        
+        // Render dashboard
+        function renderDashboard(data) {
+            document.getElementById('errorContainer').innerHTML = '';
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('dashboardContent').style.display = 'block';
+            
+            document.getElementById('lastUpdated').textContent = `Last updated: ${new Date().toLocaleString()}`;
+            
+            renderSystemState(data.state);
+            renderResourceConfig(data.config);
+            renderAgentStats(data.registry);
+            renderStatusBreakdown(data.registry);
+            renderTypeBreakdown(data.registry);
+            renderDevVsProd(data.registry);
+            renderActiveAgents(data.registry);
+            renderRecommendations(data.registry);
+        }
+        
+        // Render system state
+        function renderSystemState(state) {
+            const container = document.getElementById('systemState');
+            const currentState = state.current_state || 'UNKNOWN';
+            const workflowId = state._meta?.workflow_id || 'unknown';
+            
+            container.innerHTML = `
+                <div class="stat-row">
+                    <span class="stat-label">Legislative State</span>
+                    <span class="stat-value" style="font-size: var(--font-size-lg);">${currentState}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Workflow ID</span>
+                    <span style="font-size: 13px; color: var(--color-text-secondary); font-family: monospace;">${workflowId}</span>
+                </div>
+            `;
+        }
+        
+        // Render resource config
+        function renderResourceConfig(config) {
+            const container = document.getElementById('resourceConfig');
+            
+            if (!config || !config.execution_limits) {
+                container.innerHTML = '<div style="color: #999; font-style: italic;">No development config found - using defaults</div>';
+                return;
+            }
+            
+            const limits = config.execution_limits || {};
+            
+            container.innerHTML = `
+                <div class="stat-row">
+                    <span class="stat-label">Max Concurrent</span>
+                    <span class="stat-value">${limits.max_concurrent_agents || 'N/A'}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Dev Workers</span>
+                    <span class="stat-value">${limits.development_workers || 'N/A'}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Prod Workers</span>
+                    <span class="stat-value">${limits.production_workers || 'N/A'}</span>
+                </div>
+            `;
+        }
+        
+        // Render agent stats
+        function renderAgentStats(registry) {
+            const container = document.getElementById('agentStats');
+            const agents = registry.agents || [];
+            const statusCounts = {};
+            let activeCount = 0;
+            
+            agents.forEach(agent => {
+                const status = agent.status || 'UNKNOWN';
+                statusCounts[status] = (statusCounts[status] || 0) + 1;
+                if (status === 'RUNNING' || status === 'IDLE') {
+                    activeCount++;
+                }
+            });
+            
+            const total = agents.length;
+            const utilization = total > 0 ? (activeCount / total * 100).toFixed(1) : 0;
+            
+            container.innerHTML = `
+                <div class="stat-row">
+                    <span class="stat-label">Total Agents</span>
+                    <span class="stat-value">${total}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Active Agents</span>
+                    <span class="stat-value">${activeCount}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Utilization</span>
+                    <span class="stat-value">${utilization}%</span>
+                </div>
+                <div class="progress-bar" style="margin-top: var(--spacing-lg);">
+                    <div class="progress-fill" style="width: ${utilization}%">${utilization}%</div>
+                </div>
+            `;
+            
+            // Also render in resource util
+            document.getElementById('resourceUtil').innerHTML = `
+                <div class="stat-row">
+                    <span class="stat-label">Resource Utilization</span>
+                    <span class="stat-value">${utilization}%</span>
+                </div>
+                <div class="progress-bar" style="margin-top: var(--spacing-lg);">
+                    <div class="progress-fill" style="width: ${utilization}%">${utilization}%</div>
+                </div>
+            `;
+        }
+        
+        // Render status breakdown
+        function renderStatusBreakdown(registry) {
+            const container = document.getElementById('statusBreakdown');
+            const agents = registry.agents || [];
+            const statusCounts = {};
+            
+            agents.forEach(agent => {
+                const status = agent.status || 'UNKNOWN';
+                statusCounts[status] = (statusCounts[status] || 0) + 1;
+            });
+            
+            const maxCount = Math.max(...Object.values(statusCounts), 1);
+            
+            let html = '<div class="bar-chart">';
+            Object.entries(statusCounts).sort().forEach(([status, count]) => {
+                const percent = (count / maxCount) * 100;
+                html += `
+                    <div class="bar-item">
+                        <span class="bar-label">${status}</span>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: ${percent}%">${count}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            
+            container.innerHTML = html;
+        }
+        
+        // Render type breakdown
+        function renderTypeBreakdown(registry) {
+            const container = document.getElementById('typeBreakdown');
+            const agents = registry.agents || [];
+            const typeCounts = {};
+            
+            agents.forEach(agent => {
+                const type = agent.agent_type || 'UNKNOWN';
+                typeCounts[type] = (typeCounts[type] || 0) + 1;
+            });
+            
+            const maxCount = Math.max(...Object.values(typeCounts), 1);
+            
+            let html = '<div class="bar-chart">';
+            Object.entries(typeCounts).sort().forEach(([type, count]) => {
+                const percent = (count / maxCount) * 100;
+                html += `
+                    <div class="bar-item">
+                        <span class="bar-label">${type}</span>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: ${percent}%">${count}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            
+            container.innerHTML = html;
+        }
+        
+        // Render dev vs prod
+        function renderDevVsProd(registry) {
+            const agents = registry.agents || [];
+            const devAgents = [];
+            const prodAgents = [];
+            
+            agents.forEach(agent => {
+                const metadata = agent.metadata || {};
+                const agentData = {
+                    id: agent.agent_id || 'unknown',
+                    status: agent.status || 'UNKNOWN',
+                    type: agent.agent_type || 'UNKNOWN',
+                    heartbeat: agent.last_heartbeat || ''
+                };
+                
+                if (metadata.development_mode || metadata.development) {
+                    devAgents.push(agentData);
+                } else {
+                    prodAgents.push(agentData);
+                }
+            });
+            
+            // Render dev agents
+            const devContainer = document.getElementById('developmentAgents');
+            if (devAgents.length === 0) {
+                devContainer.innerHTML = '<div style="color: #999; text-align: center; padding: var(--spacing-xl);">No development agents</div>';
+            } else {
+                let html = '';
+                devAgents.forEach(agent => {
+                    const statusClass = agent.status.toLowerCase().replace('_', '-');
+                    html += `
+                        <div class="agent-item">
+                            <span class="status-badge ${statusClass}">${agent.status}</span>
+                            <strong>${agent.id}</strong><br>
+                            <span style="color: var(--color-text-secondary); font-size: 11px;">${formatTimestamp(agent.heartbeat)}</span>
+                        </div>
+                    `;
+                });
+                devContainer.innerHTML = html;
+            }
+            
+            // Render prod agents (limit to 10)
+            const prodContainer = document.getElementById('productionAgents');
+            const displayProd = prodAgents.slice(0, 10);
+            if (prodAgents.length === 0) {
+                prodContainer.innerHTML = '<div style="color: #999; text-align: center; padding: var(--spacing-xl);">No production agents</div>';
+            } else {
+                let html = '';
+                displayProd.forEach(agent => {
+                    const statusClass = agent.status.toLowerCase().replace('_', '-');
+                    html += `
+                        <div class="agent-item">
+                            <span class="status-badge ${statusClass}">${agent.status}</span>
+                            <strong>${agent.id}</strong><br>
+                            <span style="color: var(--color-text-secondary); font-size: 11px;">${formatTimestamp(agent.heartbeat)}</span>
+                        </div>
+                    `;
+                });
+                if (prodAgents.length > 10) {
+                    html += `<div style="text-align: center; color: var(--color-text-secondary); padding: var(--spacing-md);">... and ${prodAgents.length - 10} more</div>`;
+                }
+                prodContainer.innerHTML = html;
+            }
+        }
+        
+        // Render active agents
+        function renderActiveAgents(registry) {
+            const container = document.getElementById('activeAgents');
+            const agents = registry.agents || [];
+            const activeAgents = agents.filter(a => a.status === 'RUNNING' || a.status === 'IDLE');
+            
+            if (activeAgents.length === 0) {
+                container.innerHTML = '<div style="color: #999; text-align: center; padding: var(--spacing-xl);">No active agents</div>';
+                return;
+            }
+            
+            let html = '';
+            activeAgents.slice(0, 20).forEach(agent => {
+                const statusClass = (agent.status || 'UNKNOWN').toLowerCase().replace('_', '-');
+                html += `
+                    <div class="agent-item">
+                        <span class="status-badge ${statusClass}">${agent.status || 'UNKNOWN'}</span>
+                        <strong>${agent.agent_id || 'unknown'}</strong>
+                        <span style="color: var(--color-text-secondary); font-size: 11px; margin-left: 10px;">${formatTimestamp(agent.last_heartbeat)}</span>
+                    </div>
+                `;
+            });
+            if (activeAgents.length > 20) {
+                html += `<div style="text-align: center; color: var(--color-text-secondary); padding: var(--spacing-md);">... and ${activeAgents.length - 20} more</div>`;
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        // Render recommendations
+        function renderRecommendations(registry) {
+            const container = document.getElementById('recommendations');
+            const agents = registry.agents || [];
+            const activeCount = agents.filter(a => a.status === 'RUNNING' || a.status === 'IDLE').length;
+            const devAgents = agents.filter(a => (a.metadata || {}).development_mode || (a.metadata || {}).development);
+            
+            let html = '';
+            
+            if (activeCount === 0) {
+                html += '<div class="recommendation ok"><strong>✅ OK:</strong> No active agents - resources fully available for development</div>';
+            } else if (activeCount < 3) {
+                html += '<div class="recommendation ok"><strong>✅ OK:</strong> Low resource usage - can spawn development agents</div>';
+            } else if (activeCount < 6) {
+                html += '<div class="recommendation warn"><strong>⚠️ WARN:</strong> Moderate resource usage - consider limiting concurrent agents</div>';
+            } else {
+                html += '<div class="recommendation high"><strong>🔴 HIGH:</strong> High resource usage - wait for agents to complete or increase limits</div>';
+            }
+            
+            if (devAgents.length === 0) {
+                html += '<div class="recommendation tip"><strong>💡 TIP:</strong> No development agents active - use dev__spawn_intelligence_agents.py</div>';
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        // Try to load data on page load
+        window.addEventListener('load', function() {
+            loadData();
+        });
+    </script>
+</body>
+</html>

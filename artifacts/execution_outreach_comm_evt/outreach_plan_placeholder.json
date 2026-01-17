@@ -1,0 +1,17 @@
+{
+  "_meta": {
+    "agent_id": "execution_outreach_comm_evt",
+    "phase": "COMM_EVT",
+    "generated_at": "2026-01-07T04:41:53.538204+00:00",
+    "authoritative": false,
+    "note": "INTERNAL placeholder. Requires human authorization to execute."
+  },
+  "status": "BLOCKED",
+  "requirements": [
+    "HR authorization",
+    "Monitoring active",
+    "Explicit go command"
+  ],
+  "targets": [],
+  "messages": []
+}

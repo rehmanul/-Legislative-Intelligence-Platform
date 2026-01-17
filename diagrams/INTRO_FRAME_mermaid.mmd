@@ -1,0 +1,47 @@
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+```mermaid
+flowchart TD
+    INTRO_EVT((INTRO_EVT))
+
+    subgraph Evidence["Evidence Sources"]
+        Court["Court signals"]
+        Agency["Agency signals"]
+        Industry["Industry signals"]
+    end
+
+    subgraph Legitimacy["Legitimacy Foundation"]
+        LP["Legal precedent"]
+        RW["Regulatory window"]
+        STK["Stakeholder support"]
+    end
+
+    subgraph Narratives["Framing Narratives"]
+        Econ["Economic growth & market opportunity"]
+        Legal["Legal precedent & regulatory alignment"]
+        Stake["Broad stakeholder support"]
+    end
+
+    HR_PRE{{HR_PRE decision gate}}
+
+    INTRO_EVT --> Legitimacy
+    Legitimacy --> Narratives
+
+    Court -.-> LP
+    Agency -.-> RW
+    Industry -.-> Econ
+    STK -.-> Stake
+    LP -.-> Legal
+    RW -.-> Legal
+
+    Econ --> HR_PRE
+    Legal --> HR_PRE
+    Stake --> HR_PRE
+
+    classDef legal fill:#f8f0ff,stroke:#7b5cd6,color:#2c1a5f;
+    classDef reg fill:#eef7ff,stroke:#2b7bb9,color:#0f2a48;
+    classDef stake fill:#f4fff0,stroke:#6fa03d,color:#1f3313;
+    class LP,Legal legal
+    class RW,Agency reg
+    class STK,Stake stake
+```

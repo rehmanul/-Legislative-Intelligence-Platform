@@ -1,0 +1,39 @@
+{
+  "_meta": {
+    "report_type": "OPERATIONAL_KPIS",
+    "generated_at": "2026-01-08T09:16:18.428228+00:00Z",
+    "calculation_version": "1.0.0",
+    "source_versions": {
+      "artifact_schema_version": "1.0.0",
+      "decision_log_schema_version": "1.0.0",
+      "phase_state_schema_version": "1.0.0"
+    }
+  },
+  "operational_effectiveness": {
+    "time_to_approval": {
+      "review_gate_latency": {
+        "HR_PRE": 0.0,
+        "HR_LANG": 0.0,
+        "HR_MSG": 0.0,
+        "HR_RELEASE": 0.0
+      }
+    },
+    "artifact_rework": {
+      "speculative_to_actionable_conversion_rate": 0.0,
+      "rework_iterations": 0.0
+    },
+    "execution_readiness": {
+      "artifact_completeness_score": 1.69,
+      "dependency_satisfaction_rate": 100.0
+    },
+    "state_transition_velocity": {
+      "days_per_state": {
+        "PRE_EVT": 0.0,
+        "INTRO_EVT": 0.48,
+        "COMM_EVT": 0.05,
+        "FLOOR_EVT": 0.0,
+        "FINAL_EVT": 0.0
+      }
+    }
+  }
+}

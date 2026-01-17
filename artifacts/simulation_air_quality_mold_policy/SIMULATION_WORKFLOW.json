@@ -1,0 +1,40 @@
+{
+  "_meta": {
+    "agent_id": "simulation_workflow_generator",
+    "generated_at": "2026-01-12T18:37:13.761155Z",
+    "artifact_type": "SIMULATION_WORKFLOW",
+    "artifact_name": "Air Quality & Mold Risk Policy - Simulation Workflow",
+    "status": "SPECULATIVE",
+    "simulation_purpose": "Demonstrate enhanced review gate workflow"
+  },
+  "workflow_summary": {
+    "intake_questionnaire": {
+      "date": "2026-01-12",
+      "working_title": "Scaling Air Quality & Mold Risk Policy Beyond Military Pilot"
+    },
+    "legislative_entry_point": "PRE_EVT",
+    "current_state": "Artifacts Generated - Awaiting Review"
+  },
+  "generated_artifacts": {
+    "PRE_EVT": {
+      "drafting_artifacts": [
+        {
+          "artifact_type": "PRE_CONCEPT",
+          "review_id": "hr_pre_013",
+          "status": "SPECULATIVE",
+          "review_required": true
+        }
+      ]
+    }
+  },
+  "review_queue_status": {
+    "HR_PRE": {
+      "pending_reviews": 7
+    }
+  },
+  "next_steps": [
+    "Open Notion review queue",
+    "Select PRE_CONCEPT artifact (hr_pre_013)",
+    "Test enhanced review gate workflow"
+  ]
+}

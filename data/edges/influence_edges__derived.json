@@ -1,0 +1,17 @@
+{
+  "_meta": {
+    "source_files": [
+      "C:\\Users\\phi3t\\12.20 dash\\1.5.2026\\agent-orchestrator\\data\\entities\\staff__snapshot.json",
+      "C:\\Users\\phi3t\\12.20 dash\\1.5.2026\\agent-orchestrator\\data\\committees\\committees__snapshot.json"
+    ],
+    "derived_at": "2026-01-08T01:07:06.184876+00:00",
+    "script": "derive__influence_edges.py",
+    "schema_version": "1.0.0",
+    "doctrine_version": "Congressional Network Mapping v1.0",
+    "count": {
+      "total_edges": 0,
+      "by_type": {}
+    }
+  },
+  "edges": []
+}

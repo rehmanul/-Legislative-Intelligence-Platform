@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operator Modes System - Enhanced Dashboard</title>
+    <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: var(--spacing-xl);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: var(--container-max-width-wide);
+            margin: 0 auto;
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-2xl);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--color-success-dark) 0%, var(--color-success) 100%);
+            color: var(--color-bg-primary);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .status-yellow { background: var(--color-warning); }
+        .status-green { background: var(--color-success); }
+        .status-red { background: var(--color-error-dark); }
+        
+        .tabs {
+            display: flex;
+            background: var(--color-bg-secondary);
+            border-bottom: 3px solid var(--color-border);
+            overflow-x: auto;
+        }
+        
+        .tab {
+            flex: 1;
+            min-width: 150px;
+            padding: var(--spacing-xl);
+            text-align: center;
+            cursor: pointer;
+            font-weight: var(--font-weight-semibold);
+            font-size: 1.1em;
+            transition: all var(--transition-slow) var(--transition-ease);
+            border-bottom: 4px solid transparent;
+            position: relative;
+        }
+        
+        .tab:hover {
+            background: #e8f5e9;
+            transform: translateY(-2px);
+        }
+        
+        .tab.active {
+            background: var(--color-bg-primary);
+            border-bottom: 4px solid var(--color-success);
+            color: var(--color-success-dark);
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content {
+            padding: 40px;
+            min-height: 600px;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: var(--radius-full);
+            font-weight: var(--font-weight-semibold);
+            font-size: 1em;
+            margin: var(--spacing-md) 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s;
+        }
+        
+        .status-badge:hover {
+            transform: scale(1.05);
+        }
+        
+        .status-yellow {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            color: var(--color-warning);
+            border: 2px solid var(--color-warning);
+        }
+        
+        .status-green {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            color: var(--color-success-dark);
+            border: 2px solid var(--color-success);
+        }
+        
+        .status-red {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            color: var(--color-error-dark);
+            border: 2px solid var(--color-error-dark);
+        }
+        
+        .review-item {
+            background: var(--color-bg-primary);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin: var(--spacing-lg) 0;
+            box-shadow: var(--shadow-2);
+            transition: all var(--transition-slow) var(--transition-ease);
+        }
+        
+        .review-item:hover {
+            border-color: var(--color-success);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+        
+        .review-item.approved {
+            border-left: 5px solid var(--color-success);
+            background: #f1f8e9;
+        }
+        
+        .review-item.rejected {
+            border-left: 5px solid var(--color-error-dark);
+            background: #ffebee;
+        }
+        
+        .review-item h4 {
+            color: var(--color-success-dark);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .review-meta {
+            display: flex;
+            gap: var(--spacing-xl);
+            flex-wrap: wrap;
+            margin: var(--spacing-md) 0;
+            color: var(--color-text-secondary);
+        }
+        
+        .review-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: var(--spacing-lg);
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            transition: all var(--transition-slow) var(--transition-ease);
+            font-size: 1em;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-success) 0%, #66bb6a 100%);
+            color: var(--color-bg-primary);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            background: linear-gradient(135deg, var(--color-success-dark) 0%, var(--color-success) 100%);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, var(--color-error-dark) 0%, #e57373 100%);
+            color: var(--color-bg-primary);
+        }
+        
+        .btn-danger:hover:not(:disabled) {
+            background: linear-gradient(135deg, #b71c1c 0%, var(--color-error-dark) 100%);
+        }
+        
+        .btn-info {
+            background: linear-gradient(135deg, #1976d2 0%, #64b5f6 100%);
+            color: var(--color-bg-primary);
+        }
+        
+        .btn-info:hover:not(:disabled) {
+            background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, var(--color-warning) 0%, #ffb74d 100%);
+            color: var(--color-bg-primary);
+        }
+        
+        .btn-warning:hover:not(:disabled) {
+            background: linear-gradient(135deg, #e65100 0%, var(--color-warning) 100%);
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 5px solid #1976d2;
+            padding: var(--spacing-xl);
+            margin: 25px 0;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+        
+        .info-box.error {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border-left-color: var(--color-error-dark);
+        }
+        
+        .info-box.error h4 {
+            color: var(--color-error-dark);
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--color-success);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: var(--spacing-xl) auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .timestamp {
+            color: #999;
+            font-size: 0.9em;
+            margin-top: var(--spacing-md);
+            text-align: center;
+            padding: var(--spacing-xl);
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: var(--spacing-xl);
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-xl);
+            max-width: 1200px;
+            width: 100%;
+            margin: var(--spacing-xl) auto;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--color-success-dark) 0%, var(--color-success) 100%);
+            color: var(--color-bg-primary);
+            padding: 25px 30px;
+            border-radius: var(--radius-xl) 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        
+        .modal-close {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: var(--color-bg-primary);
+            font-size: 1.5em;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all var(--transition-slow) var(--transition-ease);
+        }
+        
+        .modal-close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+        
+        .modal-body {
+            padding: 30px;
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+        }
+        
+        .artifact-section {
+            margin: var(--spacing-xl) 0;
+            padding: var(--spacing-xl);
+            background: #f9f9f9;
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--color-success);
+        }
+        
+        .artifact-section h4 {
+            color: var(--color-success-dark);
+            margin-bottom: var(--spacing-lg);
+            font-size: 1.2em;
+        }
+        
+        .artifact-section-content {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-sm);
+            font-family: 'Segoe UI', sans-serif;
+            line-height: 1.6;
+        }
+        
+        .artifact-json-view {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            line-height: 1.6;
+            overflow-x: auto;
+            max-height: 600px;
+            overflow-y: auto;
+            var(--color-bg-primary)-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .artifact-meta-badge {
+            display: inline-block;
+            padding: var(--spacing-sm) 12px;
+            border-radius: var(--radius-xl);
+            font-size: 0.85em;
+            font-weight: var(--font-weight-semibold);
+            margin: 5px 5px 5px 0;
+        }
+        
+        .meta-badge-test {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .meta-badge-signed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .meta-badge-pending {
+            background: #fff9c4;
+            color: var(--color-warning);
+        }
+        
+        .file-access-note {
+            background: #fff9c4;
+            border: 2px solid var(--color-warning);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .file-access-note h4 {
+            color: var(--color-warning);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .file-access-note code {
+            background: #fff;
+            padding: 2px 6px;
+            border-radius: var(--radius-sm);
+            font-family: 'Consolas', monospace;
+            display: block;
+            margin: var(--spacing-md) 0;
+            word-break: break-all;
+        }
+        
+        /* Blocked Agent Alert Banner */
+        .alert-banner {
+            background: linear-gradient(135deg, var(--color-error-dark) 0%, #e57373 100%);
+            color: var(--color-bg-primary);
+            padding: var(--spacing-xl) 40px;
+            text-align: center;
+            font-weight: var(--font-weight-semibold);
+            font-size: 1.1em;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            cursor: pointer;
+            animation: pulse-banner 2s infinite;
+            border-bottom: 3px solid #b71c1c;
+        }
+        
+        @keyframes pulse-banner {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
+        }
+        
+        .alert-banner:hover {
+            background: linear-gradient(135deg, #b71c1c 0%, var(--color-error-dark) 100%);
+        }
+        
+        .blocked-agents-panel {
+            background: #ffebee;
+            border: 3px solid var(--color-error-dark);
+            border-radius: var(--radius-xl);
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 4px 16px rgba(198,40,40,0.2);
+        }
+        
+        .blocked-agent-item {
+            background: var(--color-bg-primary);
+            border: 2px solid #ffcdd2;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin: var(--spacing-lg) 0;
+            transition: all var(--transition-slow) var(--transition-ease);
+        }
+        
+        .blocked-agent-item:hover {
+            border-color: var(--color-error-dark);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .blocked-agent-item.selected {
+            border-color: var(--color-success);
+            background: #f1f8e9;
+        }
+        
+        .authorization-summary {
+            background: #f9f9f9;
+            border-left: 4px solid #1976d2;
+            padding: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+            border-radius: var(--radius-sm);
+        }
+        
+        .time-indicator {
+            display: inline-block;
+            padding: var(--spacing-xs) 12px;
+            border-radius: var(--radius-xl);
+            font-size: 0.85em;
+            font-weight: var(--font-weight-semibold);
+            margin-left: 10px;
+        }
+        
+        .time-warning { background: #fff9c4; color: var(--color-warning); }
+        .time-escalating { background: #ffe0b2; color: #e65100; }
+        .time-urgent { background: #ffcdd2; color: var(--color-error-dark); }
+        
+        .batch-actions {
+            background: var(--color-bg-primary);
+            border: 2px solid var(--color-success);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .confidence-badge {
+            display: inline-block;
+            padding: var(--spacing-xs) 10px;
+            border-radius: var(--radius-xl);
+            font-size: 0.85em;
+            font-weight: var(--font-weight-semibold);
+            margin-left: 10px;
+        }
+        
+        .confidence-high { background: #c8e6c9; color: var(--color-success-dark); }
+        .confidence-medium { background: #fff9c4; color: var(--color-warning); }
+        .confidence-low { background: #ffcdd2; color: var(--color-error-dark); }
+        
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+        
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="container">
+        <!-- Blocked Agents Alert Banner -->
+        <div id="blockedAlertBanner" class="alert-banner" style="display: none;" onclick="scrollToBlockedAgents()">
+            <span id="blockedAlertText">⚠️ 0 Agents Blocked Awaiting Authorization</span>
+        </div>
+        
+        <div class="header">
+            <h1>🚀 Operator Modes System</h1>
+            <p>Agent Orchestrator Dashboard - Real-time System Status</p>
+            <div style="margin-top: var(--spacing-xl);">
+                <span class="status-indicator status-yellow"></span>
+                <span style="font-size: 1.1em; position: relative; z-index: 1;">System Operational - YELLOW Status</span>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('overview')">📊 Overview</div>
+            <div class="tab" onclick="showTab('heatmap')">🔥 Heat Map</div>
+            <div class="tab active" onclick="showTab('cockpit')">✈️ Cockpit</div>
+            <div class="tab" onclick="showTab('velocity')">⚡ Velocity</div>
+            <div class="tab" onclick="showTab('diagram')">📐 System Diagram</div>
+        </div>
+        
+        <div class="content">
+            <!-- Overview Tab -->
+            <div id="overview" class="tab-content">
+                <h2 style="color: var(--color-success-dark); margin-bottom: var(--spacing-xl);">System Overview Dashboard</h2>
+                <div id="overviewContent">
+                    <div class="loading-spinner"></div>
+                    <p style="text-align: center; color: var(--color-text-secondary);">Loading registry data...</p>
+                </div>
+            </div>
+            
+            <!-- Heat Map Tab -->
+            <div id="heatmap" class="tab-content">
+                <h2 style="color: var(--color-success-dark); margin-bottom: var(--spacing-xl);">🔥 Heat Map Mode - System Health Snapshot</h2>
+                <div id="heatmapContent">
+                    <div class="loading-spinner"></div>
+                    <p style="text-align: center; color: var(--color-text-secondary);">Loading heat map data...</p>
+                </div>
+            </div>
+            
+            <!-- Cockpit Tab -->
+            <div id="cockpit" class="tab-content active">
+                <h2 style="color: var(--color-success-dark); margin-bottom: var(--spacing-xl);">✈️ Cockpit Mode - Pending Approvals & Actions</h2>
+                <div id="cockpitContent">
+                    <div class="loading-spinner"></div>
+                    <p style="text-align: center; color: var(--color-text-secondary);">Loading registry data...</p>
+                </div>
+            </div>
+            
+            <!-- Velocity Tab -->
+            <div id="velocity" class="tab-content">
+                <h2 style="color: var(--color-success-dark); margin-bottom: var(--spacing-xl);">⚡ Velocity Mode - Performance Metrics</h2>
+                <div id="velocityContent">
+                    <div class="loading-spinner"></div>
+                    <p style="text-align: center; color: var(--color-text-secondary);">Loading velocity data...</p>
+                </div>
+            </div>
+            
+            <!-- Diagram Tab -->
+            <div id="diagram" class="tab-content">
+                <h2 style="color: var(--color-success-dark); margin-bottom: var(--spacing-xl);">📐 System Architecture Diagram</h2>
+                <div id="diagramContent">
+                    <p style="text-align: center; color: var(--color-text-secondary);">System diagram placeholder</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="timestamp">
+            Last updated: <span id="timestamp"></span>
+        </div>
+    </div>
+    
+    <!-- Artifact Viewer Modal -->
+    <div id="artifactModal" class="modal-overlay" onclick="if(event.target === this) closeArtifactModal()">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Artifact Viewer</h3>
+                <button class="modal-close" onclick="closeArtifactModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="artifactLoader" class="loading-spinner"></div>
+                <div id="artifactDisplay"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Global state
+        let registryData = null;
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('timestamp').textContent = new Date().toLocaleString();
+            fetchRegistry();
+        });
+        
+        // Fetch registry.json
+        async function fetchRegistry() {
+            try {
+                const response = await fetch('../artifacts/registry.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                registryData = await response.json();
+                buildCockpitList(registryData);
+                buildOverview(registryData);
+            } catch (error) {
+                console.error('Failed to load registry:', error);
+                showError('cockpitContent', 'Failed to load registry.json. Please ensure the file exists at ../artifacts/registry.json');
+                showError('overviewContent', 'Failed to load registry.json');
+            }
+        }
+        
+        // Update blocked agents alert banner
+        function updateBlockedAlert(registry) {
+            const blockedAgents = (registry.agents || []).filter(a => 
+                a.agent_type === 'Execution' && a.status === 'BLOCKED'
+            );
+            
+            const banner = document.getElementById('blockedAlertBanner');
+            const bannerText = document.getElementById('blockedAlertText');
+            
+            if (blockedAgents.length > 0) {
+                banner.style.display = 'block';
+                bannerText.textContent = `⚠️ ${blockedAgents.length} Agent${blockedAgents.length > 1 ? 's' : ''} Blocked Awaiting Authorization - Click to Review`;
+            } else {
+                banner.style.display = 'none';
+            }
+        }
+        
+        // Build Cockpit Mode UI
+        function buildCockpitList(registry) {
+            const container = document.getElementById('cockpitContent');
+            
+            // Update alert banner
+            updateBlockedAlert(registry);
+            
+            let html = '';
+            
+            // Pending Reviews Section
+            if (registry.pending_review && registry.pending_review.length > 0) {
+                html += '<div><h3 style="color: var(--color-success-dark); margin-bottom: var(--spacing-xl);">Pending Approvals & Actions</h3>';
+            
+            registry.pending_review.forEach((item, index) => {
+                const decision = getDecision(item.artifact_file);
+                const submittedTime = formatTimeAgo(item.submitted_at);
+                const decisionClass = decision === 'APPROVED' ? 'approved' : decision === 'REJECTED' ? 'rejected' : '';
+                
+                html += `
+                    <div class="review-item ${decisionClass}" id="review-item-${index}">
+                        <h4>📄 [${index + 1}] ${item.artifact_name}</h4>
+                        <div class="review-meta">
+                            <span><strong>Agent:</strong> ${item.agent_id}</span>
+                            <span><strong>Risk:</strong> ${item.risk}</span>
+                            <span><strong>Effort:</strong> ${item.effort}</span>
+                            <span><strong>Submitted:</strong> ${submittedTime}</span>
+                            ${decision ? `<span style="color: ${decision === 'APPROVED' ? 'var(--color-success)' : 'var(--color-error-dark)'}; font-weight: bold;">Decision: ${decision}</span>` : ''}
+                        </div>
+                        <div class="action-buttons" style="margin-top: var(--spacing-lg);">
+                            <button class="btn btn-primary" onclick="setDecision('${item.artifact_file}', 'APPROVED', ${index})" ${decision === 'APPROVED' ? 'disabled' : ''}>
+                                ✅ APPROVE
+                            </button>
+                            <button class="btn btn-danger" onclick="setDecision('${item.artifact_file}', 'REJECTED', ${index})" ${decision === 'REJECTED' ? 'disabled' : ''}>
+                                ❌ REJECT
+                            </button>
+                            <button class="btn btn-info" onclick="loadArtifact('${item.artifact_file}', '${item.artifact_name}')">
+                                👁️ VIEW
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+                html += '</div>';
+            } else {
+                html += '<div class="info-box"><h4>✅ No Pending Reviews</h4><p>All artifacts have been reviewed.</p></div>';
+            }
+            
+            // State Advancement Panel
+            if (registry.state) {
+                const canAdvance = recomputeStateGates(registry);
+                const hrPrePending = registry.pending_review.filter(r => r.requires_review === 'HR_PRE').length;
+                
+                html += `
+                    <div class="info-box" style="margin-top: 30px;">
+                        <h4>🚀 State Advancement</h4>
+                        <p><strong>Current:</strong> ${registry.state.current || 'N/A'} ${registry.state.next ? `(Next: ${registry.state.next})` : ''}</p>
+                        ${registry.state.requirements ? `
+                            <div style="margin: var(--spacing-lg) 0;">
+                                <p style="color: ${hrPrePending > 0 ? 'var(--color-error-dark)' : 'var(--color-success)'};">
+                                    ${hrPrePending > 0 ? '❌' : '✅'} HR_PRE approval pending (${hrPrePending} items)
+                                </p>
+                                ${registry.state.requirements.external_confirmations_required ? `
+                                    <p style="color: ${canAdvance ? 'var(--color-success)' : 'var(--color-error-dark)'};">
+                                        ${canAdvance ? '✅' : '❌'} External confirmations: ${registry.state.requirements.external_confirmations_current?.join(', ') || 'none'}
+                                    </p>
+                                ` : ''}
+                            </div>
+                        ` : ''}
+                        <button class="btn btn-warning" onclick="advanceState()" ${!canAdvance ? 'disabled' : ''}>
+                            ${canAdvance ? '⚠️ ADVANCE STATE' : '⚠️ ADVANCE STATE (disabled: requirements not met)'}
+                        </button>
+                    </div>
+                `;
+            }
+            
+            // Find blocked execution agents
+            const blockedAgents = (registry.agents || []).filter(a => 
+                a.agent_type === 'Execution' && a.status === 'BLOCKED'
+            );
+            
+            // Blocked Agents Panel (Enhanced)
+            if (blockedAgents.length > 0) {
+                html += `
+                    <div class="blocked-agents-panel" id="blockedAgentsPanel">
+                        <h3 style="color: var(--color-error-dark); margin-bottom: var(--spacing-xl);">
+                            🔒 Blocked Execution Agents (${blockedAgents.length})
+                        </h3>
+                `;
+                
+                blockedAgents.forEach((agent, index) => {
+                    const agentId = agent.agent_id || 'unknown';
+                    const riskLevel = agent.risk_level || 'UNKNOWN';
+                    const blockedAt = agent.authorization_metadata?.blocked_at || agent.blocked_at;
+                    const confidence = agent.authorization_metadata?.confidence || 0.5;
+                    const minutesBlocked = blockedAt ? 
+                        Math.floor((new Date() - new Date(blockedAt)) / 60000) : 0;
+                    
+                    // Determine time indicator
+                    let timeClass = 'time-warning';
+                    let timeLabel = `${minutesBlocked}m`;
+                    if (minutesBlocked >= 30) {
+                        timeClass = 'time-urgent';
+                        timeLabel = `${minutesBlocked}m (URGENT)`;
+                    } else if (minutesBlocked >= 15) {
+                        timeClass = 'time-escalating';
+                        timeLabel = `${minutesBlocked}m (Escalating)`;
+                    }
+                    
+                    // Determine confidence badge
+                    let confidenceClass = 'confidence-medium';
+                    let confidenceLabel = `${Math.round(confidence * 100)}%`;
+                    if (confidence >= 0.8) confidenceClass = 'confidence-high';
+                    else if (confidence < 0.7) confidenceClass = 'confidence-low';
+                    
+                    // Auto-approval eligibility
+                    const autoApprovalEligible = agent.authorization_metadata?.auto_approval_eligible || false;
+                    const estimatedAutoApproval = minutesBlocked < 15 ? (15 - minutesBlocked) : null;
+                    
+                    html += `
+                        <div class="blocked-agent-item" id="blocked-agent-${index}">
+                            <div style="display: flex; align-items: center; margin-bottom: var(--spacing-lg);">
+                                <input type="checkbox" id="checkbox-${index}" onchange="toggleAgentSelection(${index})">
+                                <h4 style="margin: 0; flex: 1;">${agentId}</h4>
+                                <span class="time-indicator ${timeClass}">⏱️ ${timeLabel}</span>
+                                <span class="confidence-badge ${confidenceClass}">🎯 ${confidenceLabel}</span>
+                            </div>
+                            
+                            <div class="authorization-summary">
+                                <p><strong>Risk Level:</strong> ${riskLevel}</p>
+                                <p><strong>Blocked For:</strong> ${minutesBlocked} minutes</p>
+                                ${confidence >= 0.8 ? `<p><strong>Confidence:</strong> High (${confidenceLabel})</p>` : ''}
+                                ${autoApprovalEligible && estimatedAutoApproval ? 
+                                    `<p><strong>Auto-Approval ETA:</strong> ${estimatedAutoApproval} minutes (if no operator action)</p>` : 
+                                    '<p><strong>Auto-Approval:</strong> Not eligible (requires manual review)</p>'
+                                }
+                                <p><strong>Why Approval Required:</strong></p>
+                                <ul style="margin: var(--spacing-md) 0; padding-left: 25px;">
+                                    ${riskLevel === 'HIGH' ? '<li>High-risk operation</li>' : ''}
+                                    ${agent.external_communication ? '<li>External communication required</li>' : ''}
+                                    ${agent.authorization_metadata?.blocking_reason ? 
+                                        `<li>${agent.authorization_metadata.blocking_reason}</li>` : 
+                                        '<li>Requires operator authorization</li>'
+                                    }
+                                </ul>
+                            </div>
+                            
+                            <div class="action-buttons" style="margin-top: var(--spacing-lg);">
+                                <button class="btn btn-primary" onclick="approveAgent('${agentId}', ${index})">
+                                    ✅ APPROVE
+                                </button>
+                                <button class="btn btn-info" onclick="viewAgentPlan('${agentId}')">
+                                    📋 VIEW PLAN
+                                </button>
+                                <button class="btn btn-warning" onclick="requireManualReview('${agentId}', ${index})">
+                                    ⚠️ REQUIRE MANUAL REVIEW
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                // Batch Actions
+                html += `
+                        <div class="batch-actions">
+                            <h4 style="color: var(--color-success-dark); margin-bottom: var(--spacing-lg);">⚡ Batch Actions</h4>
+                            <div class="action-buttons">
+                                <button class="btn btn-primary" onclick="selectAllRoutine()">
+                                    ✓ SELECT ALL ROUTINE
+                                </button>
+                                <button class="btn btn-primary" onclick="approveSelected()">
+                                    ✅ APPROVE SELECTED (${blockedAgents.length})
+                                </button>
+                                <button class="btn btn-info" onclick="approveSimilar()">
+                                    🔄 APPROVE SIMILAR
+                                </button>
+                                <button class="btn btn-warning" onclick="checkAutoApprovalStatus()">
+                                    🔍 CHECK AUTO-APPROVAL STATUS
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Legacy Execution Authorizations Panel (for backward compatibility)
+            html += `
+                <div class="info-box error" style="margin-top: 30px;">
+                    <h4>🔒 Execution Authorizations (Legacy)</h4>
+                    <p><strong>Agent:</strong> execution_outreach_comm_evt</p>
+                    <p><strong>Status:</strong> ${getExecutionAuth() ? 'Authorized' : 'Blocked until authorized'}</p>
+                    <p><strong>Risk:</strong> HIGH</p>
+                    <div class="action-buttons" style="margin-top: var(--spacing-lg);">
+                        <button class="btn btn-danger" onclick="toggleExecutionAuth()">
+                            ${getExecutionAuth() ? '🔓 UNAUTHORIZE' : '🔓 AUTHORIZE'}
+                        </button>
+                        <button class="btn btn-info" onclick="viewExecutionPlan()">📋 VIEW PLAN</button>
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+        
+        // Build Overview Tab
+        function buildOverview(registry) {
+            const container = document.getElementById('overviewContent');
+            
+            const state = registry.state || {};
+            const pendingCount = registry.pending_review ? registry.pending_review.length : 0;
+            
+            let html = `
+                <div style="margin: 25px 0;">
+                    <span class="status-badge status-yellow">🟡 YELLOW STATUS</span>
+                    <span class="status-badge status-green">✅ System Operational</span>
+                    <span class="status-badge status-red">⚠️ ${pendingCount} Pending Reviews</span>
+                </div>
+                <div class="info-box">
+                    <h4>📍 Current State</h4>
+                    <p><strong>State:</strong> ${state.current || 'N/A'}</p>
+                    <p><strong>Next:</strong> ${state.next || 'N/A'}</p>
+                    ${state.requirements ? `
+                        <p><strong>HR_PRE Required:</strong> ${state.requirements.HR_PRE_approved_count_required || 0}</p>
+                        <p><strong>HR_PRE Current:</strong> ${state.requirements.HR_PRE_approved_count_current || 0}</p>
+                    ` : ''}
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+        
+        // Set decision in localStorage
+        function setDecision(artifactFile, decision, index) {
+            const key = `artifact_decision_${artifactFile}`;
+            localStorage.setItem(key, decision);
+            localStorage.setItem(`${key}_timestamp`, new Date().toISOString());
+            
+            // Update UI
+            const item = document.getElementById(`review-item-${index}`);
+            if (item) {
+                item.className = `review-item ${decision.toLowerCase()}`;
+                // Rebuild cockpit to update buttons
+                buildCockpitList(registryData);
+            }
+            
+            recomputeStateGates(registryData);
+        }
+        
+        // Get decision from localStorage
+        function getDecision(artifactFile) {
+            return localStorage.getItem(`artifact_decision_${artifactFile}`) || null;
+        }
+        
+        // Load artifact via fetch
+        async function loadArtifact(artifactFile, artifactName) {
+            const modal = document.getElementById('artifactModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const loader = document.getElementById('artifactLoader');
+            const display = document.getElementById('artifactDisplay');
+            
+            modalTitle.textContent = `📄 ${artifactName}`;
+            modal.classList.add('active');
+            loader.style.display = 'block';
+            display.innerHTML = '';
+            
+            try {
+                const artifactPath = `../artifacts/${artifactFile}`;
+                const response = await fetch(artifactPath);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                displayArtifact(data);
+            } catch (error) {
+                console.error('Failed to load artifact:', error);
+                showFileAccessNote(display, artifactFile);
+            } finally {
+                loader.style.display = 'none';
+            }
+        }
+        
+        // Display artifact in modal
+        function displayArtifact(data) {
+            const display = document.getElementById('artifactDisplay');
+            let html = '';
+            
+            // Metadata
+            if (data._meta) {
+                html += '<div class="artifact-section">';
+                html += '<h4>📋 Metadata</h4>';
+                html += '<div class="artifact-section-content">';
+                html += `<p><strong>Agent ID:</strong> ${data._meta.agent_id || 'N/A'}</p>`;
+                html += `<p><strong>Generated:</strong> ${formatDate(data._meta.generated_at)}</p>`;
+                html += `<p><strong>Artifact Type:</strong> ${data._meta.artifact_type || 'N/A'}</p>`;
+                if (data._meta.requires_review) {
+                    html += `<p><strong>Requires Review:</strong> ${data._meta.requires_review}</p>`;
+                }
+                if (data._meta.phase) {
+                    html += `<p><strong>Phase:</strong> ${data._meta.phase}</p>`;
+                }
+                if (data._meta.status) {
+                    html += `<span class="artifact-meta-badge meta-badge-pending">${data._meta.status}</span>`;
+                }
+                if (data._meta.guidance_status) {
+                    const badgeClass = data._meta.guidance_status === 'SIGNED' ? 'meta-badge-signed' : 'meta-badge-test';
+                    html += `<span class="artifact-meta-badge ${badgeClass}">${data._meta.guidance_status}</span>`;
+                }
+                html += '</div></div>';
+            }
+            
+            // Executive Summary
+            if (data.executive_summary) {
+                html += '<div class="artifact-section">';
+                html += '<h4>📊 Executive Summary</h4>';
+                html += '<div class="artifact-section-content">';
+                if (data.executive_summary.purpose) {
+                    html += `<p><strong>Purpose:</strong> ${data.executive_summary.purpose}</p>`;
+                }
+                if (data.executive_summary.headline) {
+                    html += `<p><strong>Headline:</strong> ${data.executive_summary.headline}</p>`;
+                }
+                if (data.executive_summary.key_findings) {
+                    html += '<p><strong>Key Findings:</strong></p><ul>';
+                    data.executive_summary.key_findings.forEach(finding => {
+                        html += `<li>${finding}</li>`;
+                    });
+                    html += '</ul>';
+                }
+                if (data.executive_summary.key_framing_themes) {
+                    html += '<p><strong>Key Framing Themes:</strong></p><ul>';
+                    data.executive_summary.key_framing_themes.forEach(theme => {
+                        html += `<li>${theme}</li>`;
+                    });
+                    html += '</ul>';
+                }
+                html += '</div></div>';
+            }
+            
+            // Full JSON view (collapsible)
+            html += '<div class="artifact-section">';
+            html += '<h4>🔍 Full JSON (Raw)</h4>';
+            html += '<details open>';
+            html += '<summary style="cursor: pointer; padding: var(--spacing-md); background: #f0f0f0; border-radius: var(--radius-sm); margin-bottom: var(--spacing-md);">Click to collapse/expand raw JSON</summary>';
+            html += `<div class="artifact-json-view">${JSON.stringify(data, null, 2)}</div>`;
+            html += '</details>';
+            html += '</div>';
+            
+            display.innerHTML = html;
+        }
+        
+        // Show file access note if fetch fails
+        function showFileAccessNote(container, artifactFile) {
+            container.innerHTML = `
+                <div class="file-access-note">
+                    <h4>⚠️ Local File Access Required</h4>
+                    <p>The artifact cannot be loaded automatically via <code>file://</code> protocol. Use one of the following options:</p>
+                    <div style="margin-top: var(--spacing-lg);">
+                        <p><strong>Option A: Use Local HTTP Server</strong></p>
+                        <p>1. Open a terminal in the <code>agent-orchestrator</code> directory</p>
+                        <p>2. Run: <code>python -m http.server 8000</code></p>
+                        <p>3. Open: <code>http://localhost:8000/dashboards/operator_modes_viewer.html</code></p>
+                    </div>
+                    <div style="margin-top: var(--spacing-lg);">
+                        <p><strong>Expected artifact location:</strong></p>
+                        <code>../artifacts/${artifactFile}</code>
+                    </div>
+                    <div style="margin-top: var(--spacing-lg);">
+                        <p><strong>Option B: Chrome File Access (Optional)</strong></p>
+                        <p>Close Chrome and restart with: <code>chrome.exe --allow-file-access-from-files</code></p>
+                        <p style="font-size: 0.9em; color: var(--color-text-secondary);">Note: This is less secure and not recommended for production.</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Recompute state advancement gates
+        function recomputeStateGates(registry) {
+            if (!registry.state || !registry.state.requirements) {
+                return false;
+            }
+            
+            const req = registry.state.requirements;
+            const approvedCount = registry.pending_review.filter(item => 
+                getDecision(item.artifact_file) === 'APPROVED' && item.requires_review === 'HR_PRE'
+            ).length;
+            
+            const hrPreMet = approvedCount >= (req.HR_PRE_approved_count_required || 0);
+            const externalConfirmationsMet = req.external_confirmations_current && 
+                req.external_confirmations_required.every(conf => 
+                    req.external_confirmations_current.includes(conf)
+                );
+            
+            return hrPreMet && externalConfirmationsMet;
+        }
+        
+        // Advance state (confirmation only, no file write)
+        function advanceState() {
+            if (!recomputeStateGates(registryData)) {
+                alert('Cannot advance state: requirements not met');
+                return;
+            }
+            
+            const confirmed = confirm('⚠️ ADVANCE STATE?\n\nThis action will advance the legislative state. This is simulated and will be stored in localStorage only.\n\nClick OK to confirm.');
+            if (confirmed) {
+                localStorage.setItem('last_state_advance_intent', JSON.stringify({
+                    timestamp: new Date().toISOString(),
+                    from: registryData.state.current,
+                    to: registryData.state.next
+                }));
+                alert('State advance intent recorded in localStorage. In production, this would trigger the state advancement workflow.');
+                buildCockpitList(registryData);
+            }
+        }
+        
+        // Execution authorization
+        function getExecutionAuth() {
+            return localStorage.getItem('execution_outreach_comm_evt_authorized') === 'true';
+        }
+        
+        function toggleExecutionAuth() {
+            const current = getExecutionAuth();
+            localStorage.setItem('execution_outreach_comm_evt_authorized', (!current).toString());
+            localStorage.setItem('execution_outreach_comm_evt_authorized_timestamp', new Date().toISOString());
+            buildCockpitList(registryData);
+        }
+        
+        function viewExecutionPlan() {
+            alert('Execution plan viewer placeholder. In production, this would load the execution plan artifact from the registry.');
+        }
+        
+        // Tab switching
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // Close artifact modal
+        function closeArtifactModal() {
+            document.getElementById('artifactModal').classList.remove('active');
+            document.getElementById('artifactDisplay').innerHTML = '';
+        }
+        
+        // Utility functions
+        function formatDate(dateString) {
+            if (!dateString) return 'N/A';
+            try {
+                const date = new Date(dateString);
+                return date.toLocaleString();
+            } catch (e) {
+                return dateString;
+            }
+        }
+        
+        function formatTimeAgo(timestamp) {
+            if (!timestamp) return 'N/A';
+            try {
+                const then = new Date(timestamp);
+                const now = new Date();
+                const diffMs = now - then;
+                const diffMins = Math.floor(diffMs / 60000);
+                const diffHours = Math.floor(diffMs / 3600000);
+                const diffDays = Math.floor(diffMs / 86400000);
+                
+                if (diffMins < 60) {
+                    return `${diffMins} min ago`;
+                } else if (diffHours < 24) {
+                    return `${diffHours}h ago`;
+                } else {
+                    return `${diffDays}d ago`;
+                }
+            } catch (e) {
+                return timestamp;
+            }
+        }
+        
+        function showError(containerId, message) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `
+                <div class="info-box error">
+                    <h4>⚠️ Error</h4>
+                    <p>${message}</p>
+                </div>
+            `;
+        }
+        
+        // Blocked Agents Functions
+        function scrollToBlockedAgents() {
+            const panel = document.getElementById('blockedAgentsPanel');
+            if (panel) {
+                panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        
+        function toggleAgentSelection(index) {
+            const item = document.getElementById(`blocked-agent-${index}`);
+            const checkbox = document.getElementById(`checkbox-${index}`);
+            if (checkbox.checked) {
+                item.classList.add('selected');
+            } else {
+                item.classList.remove('selected');
+            }
+        }
+        
+        function approveAgent(agentId, index) {
+            if (confirm(`Approve execution agent: ${agentId}?`)) {
+                // In production, this would call an API endpoint
+                // For now, update localStorage and refresh
+                localStorage.setItem(`execution_auth_${agentId}`, 'true');
+                localStorage.setItem(`execution_auth_${agentId}_timestamp`, new Date().toISOString());
+                alert(`Agent ${agentId} approved. In production, this would update the registry.`);
+                // Refresh view
+                fetchRegistry();
+            }
+        }
+        
+        function approveSelected() {
+            const selected = document.querySelectorAll('.blocked-agent-item.selected');
+            if (selected.length === 0) {
+                alert('No agents selected. Please select agents using checkboxes.');
+                return;
+            }
+            
+            if (confirm(`Approve ${selected.length} selected agent(s)?`)) {
+                // Batch approval logic
+                selected.forEach(item => {
+                    // Extract agent ID and approve
+                    // In production, call API endpoint
+                });
+                alert(`Batch approval initiated for ${selected.length} agent(s).`);
+                fetchRegistry();
+            }
+        }
+        
+        function selectAllRoutine() {
+            // Select all agents with routine/medium risk
+            const items = document.querySelectorAll('.blocked-agent-item');
+            items.forEach((item, index) => {
+                const checkbox = document.getElementById(`checkbox-${index}`);
+                if (checkbox) {
+                    checkbox.checked = true;
+                    toggleAgentSelection(index);
+                }
+            });
+        }
+        
+        function approveSimilar() {
+            alert('Approve Similar: This would approve all agents matching the same criteria. In production, this would analyze similarity and batch approve.');
+        }
+        
+        function requireManualReview(agentId, index) {
+            if (confirm(`Require manual review for ${agentId}? This will prevent auto-approval.`)) {
+                localStorage.setItem(`execution_auth_${agentId}_require_manual`, 'true');
+                alert(`Manual review required for ${agentId}.`);
+                fetchRegistry();
+            }
+        }
+        
+        function viewAgentPlan(agentId) {
+            alert(`View Plan for ${agentId}: In production, this would load and display the execution plan artifact.`);
+        }
+        
+        function checkAutoApprovalStatus() {
+            // Run the check authorization script
+            alert('Checking auto-approval status... In production, this would call cockpit__check_authorizations.py and display results.');
+        }
+        
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeArtifactModal();
+            }
+        });
+    </script>
+</body>
+</html>

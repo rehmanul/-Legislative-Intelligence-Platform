@@ -1,0 +1,29 @@
+{
+  "_meta": {
+    "agent_id": "draft_release_final_evt",
+    "generated_at": "2026-01-21T00:00:00Z",
+    "artifact_type": "FINAL_RELEASE",
+    "artifact_name": "Final Public Release Package",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": "HR_RELEASE",
+    "guidance_status": "SIGNED"
+  },
+  "release_context": {
+    "bill": "H.R. 8821 - NDAA (Enacted)",
+    "provision": "Section 1847 - Cybersecurity Workforce Training Program",
+    "release_date": "2026-10-15",
+    "release_type": "PROGRAM_ANNOUNCEMENT"
+  },
+  "press_release_headline": "NSF Announces $250M Cybersecurity Workforce Training Program for Veterans and Underrepresented Students",
+  "key_highlights": [
+    "$250M over 5 years for cybersecurity education grants",
+    "Priority for veterans and HBCU/HSI partnerships",
+    "Addresses critical national security workforce need",
+    "Program launches in FY2027"
+  ],
+  "quote_attribution": "Secretary of Defense: 'This program strengthens our cybersecurity defense while creating economic opportunity for veterans and expanding access to high-demand careers'",
+  "media_distribution": ["Major news outlets", "Cybersecurity trade press", "Veterans' media", "Higher education press"],
+  "disclaimer": "Final release package requires final approval before public distribution. All quotes and claims must be verified."
+}

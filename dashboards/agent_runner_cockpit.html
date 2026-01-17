@@ -1,0 +1,2371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Runner Cockpit</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+    <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family-sans);
+            background: var(--color-bg-secondary);
+            padding: var(--spacing-xl);
+            color: var(--color-text-primary);
+        }
+
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+        }
+
+        header {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        h1 {
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .subtitle {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        .controls {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+            transition: all var(--transition-base) var(--transition-ease);
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--color-primary-hover);
+        }
+
+        .btn-secondary {
+            background: var(--color-gray-500);
+            color: white;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: var(--color-gray-600);
+        }
+
+        .status {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            margin-left: auto;
+        }
+
+        .status.connected {
+            background: var(--color-success);
+            color: white;
+        }
+
+        .status.disconnected {
+            background: var(--color-error);
+            color: white;
+        }
+
+        .workflow-state {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .workflow-state h2 {
+            margin-bottom: var(--spacing-sm);
+            font-size: var(--font-size-xl);
+        }
+
+        .workflow-state .state-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            font-weight: var(--font-weight-semibold);
+            margin-right: var(--spacing-sm);
+        }
+
+        .workflow-state .state-description {
+            margin-top: var(--spacing-sm);
+            opacity: 0.9;
+            font-size: var(--font-size-sm);
+        }
+
+        .filters {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+            margin-bottom: var(--spacing-xl);
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .state-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .state-header {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            border-bottom: 3px solid;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-2);
+        }
+
+        .state-header h3 {
+            margin: 0;
+            font-size: var(--font-size-lg);
+        }
+
+        .state-count {
+            background: var(--color-gray-100);
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .state-pre-evt { border-color: var(--color-state-pre-evt); }
+        .state-intro-evt { border-color: var(--color-state-intro-evt); }
+        .state-comm-evt { border-color: var(--color-state-comm-evt); }
+        .state-floor-evt { border-color: var(--color-state-floor-evt); }
+        .state-final-evt { border-color: var(--color-state-final-evt); }
+        .state-impl-evt { border-color: var(--color-state-impl-evt); }
+
+        .state-agents {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-md);
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            box-shadow: var(--shadow-2);
+        }
+
+        .current-state-highlight {
+            border-left: 4px solid var(--color-success);
+            background: var(--color-success-light);
+        }
+
+        .naming-guide {
+            background: var(--color-warning-light);
+            border-left: 4px solid var(--color-warning);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--spacing-xl);
+            font-size: var(--font-size-sm);
+        }
+
+        .naming-guide h4 {
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-warning-dark);
+        }
+
+        .naming-example {
+            font-family: var(--font-family-mono);
+            background: var(--color-bg-primary);
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            margin-top: var(--spacing-sm);
+        }
+
+        .filters select, .filters input {
+            padding: var(--spacing-sm);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-sm);
+        }
+
+        .agent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .agent-card {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+            transition: transform var(--transition-base) var(--transition-ease), box-shadow var(--transition-base) var(--transition-ease);
+        }
+
+        .agent-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-3);
+        }
+
+        .agent-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .agent-id {
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-primary);
+            font-size: var(--font-size-base);
+            word-break: break-word;
+        }
+
+        .agent-type {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+            text-transform: uppercase;
+        }
+
+        .type-intelligence {
+            background: var(--color-agent-intelligence-bg);
+            color: var(--color-agent-intelligence);
+        }
+
+        .type-drafting {
+            background: var(--color-agent-drafting-bg);
+            color: var(--color-agent-drafting);
+        }
+
+        .type-execution {
+            background: var(--color-agent-execution-bg);
+            color: var(--color-agent-execution);
+        }
+
+        .type-learning {
+            background: var(--color-agent-learning-bg);
+            color: var(--color-agent-learning);
+        }
+
+        .agent-scope {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--spacing-md);
+            line-height: var(--line-height-normal);
+        }
+
+        .agent-meta {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            font-size: var(--font-size-xs);
+            color: var(--color-text-tertiary);
+        }
+
+        .agent-status {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+        }
+
+        .status-running {
+            background: var(--color-status-running-bg);
+            color: var(--color-status-running);
+        }
+
+        .status-idle {
+            background: var(--color-status-idle-bg);
+            color: var(--color-status-idle);
+        }
+
+        .status-waiting {
+            background: var(--color-status-waiting-bg);
+            color: var(--color-status-waiting);
+        }
+
+        .status-blocked {
+            background: var(--color-status-blocked-bg);
+            color: var(--color-status-blocked);
+        }
+
+        .agent-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-run {
+            flex: 1;
+            background: var(--color-success);
+            color: white;
+            padding: var(--spacing-sm);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+            transition: background var(--transition-base) var(--transition-ease);
+        }
+
+        .btn-run:hover:not(:disabled) {
+            background: var(--color-success-hover);
+        }
+
+        .btn-run:disabled {
+            background: var(--color-gray-400);
+            cursor: not-allowed;
+        }
+
+        .btn-run.running {
+            background: var(--color-primary);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .output-panel {
+            margin-top: var(--spacing-xl);
+            background: var(--color-bg-primary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+            display: none;
+        }
+
+        .output-panel.active {
+            display: block;
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .command-container {
+            background: var(--color-gray-900);
+            color: var(--color-success);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--spacing-md);
+            position: relative;
+        }
+
+        .command-text {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            user-select: all;
+            cursor: text;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: var(--spacing-sm);
+            right: var(--spacing-sm);
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-xs);
+            cursor: pointer;
+        }
+
+        .copy-button:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .copy-button.copied {
+            background: var(--color-success);
+        }
+
+        .instructions {
+            background: var(--color-gray-100);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--spacing-md);
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-relaxed);
+        }
+
+        .instructions h4 {
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-text-primary);
+        }
+
+        .instructions ol {
+            margin-left: var(--spacing-lg);
+            margin-top: var(--spacing-sm);
+        }
+
+        .instructions li {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .batch-download {
+            margin-top: var(--spacing-md);
+            padding: var(--spacing-md);
+            background: var(--color-primary-light);
+            border-left: 4px solid var(--color-primary);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-sm);
+        }
+
+        .batch-download a {
+            color: var(--color-primary-hover);
+            text-decoration: underline;
+            font-weight: var(--font-weight-medium);
+        }
+
+        .output-content {
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            background: var(--color-bg-primary);
+            display: none;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .output-content.active {
+            display: block;
+        }
+
+        /* Running State */
+        .agent-running-state {
+            background: var(--color-info-light);
+            border: 2px solid var(--color-info);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .running-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--color-info-light);
+            border-top-color: var(--color-info);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .running-info {
+            background: white;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .running-info p {
+            margin: var(--spacing-xs) 0;
+        }
+
+        .running-status {
+            color: var(--color-text-secondary);
+            font-style: italic;
+        }
+
+        /* Interaction Diagram */
+        .interaction-diagram {
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .interaction-diagram h4 {
+            margin-bottom: var(--spacing-md);
+            color: var(--color-text-primary);
+        }
+
+        .mermaid-container {
+            background: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+        }
+
+        .mermaid-container .mermaid {
+            margin: 0;
+            background: transparent;
+            padding: 0;
+        }
+
+        /* Inline Agent Results - Show directly below agent card */
+        .agent-result-inline {
+            margin-top: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+            grid-column: 1 / -1;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .agent-result-inline .agent-result-success,
+        .agent-result-inline .agent-result-error {
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+        }
+
+        /* Result Display */
+        .agent-result-success,
+        .agent-result-error,
+        .agent-result-fallback {
+            padding: var(--spacing-lg);
+        }
+
+        .result-header {
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .result-header.success {
+            background: var(--color-success-light);
+            border-left: 4px solid var(--color-success);
+        }
+
+        .result-header.error {
+            background: var(--color-error-light);
+            border-left: 4px solid var(--color-error);
+        }
+
+        .result-header.info {
+            background: var(--color-info-light);
+            border-left: 4px solid var(--color-info);
+        }
+
+        .result-header h3 {
+            margin: 0;
+            color: var(--color-text-primary);
+        }
+
+        .result-output {
+            background: var(--color-bg-secondary);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-md) 0;
+        }
+
+        .result-output h4 {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .output-stdout {
+            background: var(--color-gray-900);
+            color: var(--color-success);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-sm);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .result-actionable {
+            background: var(--color-success-light);
+            border-left: 4px solid var(--color-success);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-md) 0;
+        }
+
+        .result-actionable h4 {
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-success-dark);
+        }
+
+        .actionable-content {
+            color: var(--color-text-primary);
+        }
+
+        .actionable-content ul {
+            margin-left: var(--spacing-lg);
+            margin-top: var(--spacing-sm);
+        }
+
+        .result-next-steps {
+            background: var(--color-info-light);
+            border-left: 4px solid var(--color-info);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-md) 0;
+        }
+
+        .result-next-steps h4 {
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-info-dark);
+        }
+
+        .result-next-steps ul {
+            margin-left: var(--spacing-lg);
+            margin-top: var(--spacing-sm);
+        }
+
+        .error-details {
+            background: var(--color-error-light);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-md) 0;
+        }
+
+        .error-stderr,
+        .error-stdout {
+            background: var(--color-gray-900);
+            color: var(--color-error);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-sm);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: var(--spacing-sm);
+        }
+
+        .error-help {
+            background: var(--color-warning-light);
+            border-left: 4px solid var(--color-warning);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-md) 0;
+        }
+
+        .error-help h4 {
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-warning-dark);
+        }
+
+        .error-help ol {
+            margin-left: var(--spacing-lg);
+            margin-top: var(--spacing-sm);
+        }
+
+        .output-error {
+            color: var(--color-error);
+        }
+
+        .output-success {
+            color: var(--color-success);
+        }
+
+        .loading {
+            text-align: center;
+            padding: var(--spacing-xl);
+            color: var(--color-text-secondary);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: var(--spacing-2xl) var(--spacing-xl);
+            color: var(--color-text-secondary);
+        }
+
+        .empty-state h2 {
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-text-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 Agent Runner Cockpit</h1>
+            <p class="subtitle">Execute Python agents directly - No API required</p>
+            <div class="controls">
+                <button class="btn-primary" onclick="loadAgents()">🔄 Load Agents</button>
+                <input type="file" id="registry-file-input" accept=".json" style="display: none;" onchange="handleFileSelect(event)">
+                <button class="btn-secondary" onclick="document.getElementById('registry-file-input').click()">📂 Load Registry File</button>
+                <button class="btn-secondary" onclick="checkServerStatus()">🔌 Check Server</button>
+                <div class="status disconnected" id="server-status">Server: Checking...</div>
+            </div>
+        </header>
+
+        <!-- AI Review Clarification Disclaimer -->
+        <div class="naming-guide" style="background: #fff3cd; border-color: #ffc107; border-width: 3px; margin-bottom: var(--spacing-xl);">
+            <h4 style="color: #856404; margin-bottom: var(--spacing-sm);">⚠️ AI Review Aid Only — Human Judgment Required</h4>
+            <p style="color: #856404; margin-bottom: var(--spacing-sm);">
+                <strong>This dashboard provides AI-generated information to aid your review process.</strong> All agent outputs are SPECULATIVE until explicitly approved by human reviewers.
+            </p>
+            <p style="color: #856404; margin-bottom: var(--spacing-sm);">
+                <strong>Raw artifact access:</strong> All artifacts are available in <code>artifacts/</code> directory for direct review. This dashboard is a convenience layer, not the source of truth.
+            </p>
+            <p style="color: #856404; font-size: var(--font-size-sm); margin-bottom: 0;">
+                <strong>Your judgment is final.</strong> AI recommendations are suggestions only. Review raw artifacts directly when making critical decisions.
+            </p>
+        </div>
+
+        <div class="workflow-state" id="workflow-state">
+            <h2>📊 Current Workflow State</h2>
+            <div>
+                <span class="state-badge" id="current-state-badge">Loading...</span>
+                <span id="current-state-description">Checking workflow state...</span>
+            </div>
+            <div class="state-description" id="state-description"></div>
+        </div>
+
+        <div class="naming-guide">
+            <h4>📝 Agent Naming Syntax</h4>
+            <p><strong>Pattern:</strong> <code>{type}_{name}_{legislative_state}.py</code></p>
+            <div class="naming-example">
+                <strong>Example:</strong> <code>intel_signal_scan_pre_evt</code><br>
+                • <code>intel_</code> = Intelligence agent (read-only analysis)<br>
+                • <code>signal_scan</code> = What it does (scans for signals)<br>
+                • <code>pre_evt</code> = Legislative state (PRE_EVT = Policy Opportunity Detected)
+            </div>
+            <p style="margin-top: 0.75rem;"><strong>Legislative States:</strong> PRE_EVT → INTRO_EVT → COMM_EVT → FLOOR_EVT → FINAL_EVT → IMPL_EVT</p>
+        </div>
+
+        <div class="naming-guide" style="background: var(--color-primary-light); border-color: var(--color-primary);">
+            <h4>🔄 How Agents Are Additive to Your Process</h4>
+            <p><strong>Each agent contributes to your legislative workflow:</strong></p>
+            <div style="margin-top: 0.75rem; line-height: 1.8;">
+                <strong>🔍 Intelligence Agents</strong> (Read-only): Gather information, scan signals, map stakeholders<br>
+                <strong>🧠 Drafting Agents</strong> (Human-gated): Generate documents that require your review<br>
+                <strong>⚙️ Execution Agents</strong> (Authorized): Take actions like outreach, media, coalition building<br>
+                <strong>📐 Learning Agents</strong> (Post-execution): Analyze what worked, what didn't, and why
+            </div>
+            <p style="margin-top: 0.75rem; font-size: var(--font-size-sm); color: var(--color-primary-dark);">
+                <strong>Switch to "By Lobbying Strategy" view</strong> to see agents organized by Direct Lobbying, Grassroots, and Task Force Support.
+            </p>
+        </div>
+
+        <div class="naming-guide" style="background: var(--color-warning-light); border-color: var(--color-warning);">
+            <h4>💼 Lobbying Strategy Perspectives</h4>
+            <div style="margin-top: 0.75rem; line-height: 1.8;">
+                <strong>🎯 Direct Lobbying:</strong> Committee staff outreach, member office relationships, cosponsor recruitment, legislative language<br>
+                <strong>🌱 Grassroots Bottom-Up:</strong> Signal processing, constituent narratives, field mobilization, local escalation<br>
+                <strong>🤝 Task Force Support:</strong> Coalition coordination, client reporting, strategy synthesis, performance learning
+            </div>
+            <p style="margin-top: 0.75rem; font-size: var(--font-size-sm); color: var(--color-warning-dark);">
+                <strong>For a single client task force:</strong> Focus on Task Force Support agents for coordination, plus Direct Lobbying for relationship management, and Grassroots for signal intelligence.
+            </p>
+        </div>
+
+        <div class="naming-guide" style="background: #fce7f3; border-color: #ec4899;">
+            <h4>🔍 What You Have vs. What You Might Need (Single Client Task Force)</h4>
+            <div style="margin-top: 0.75rem;">
+                <p><strong>✅ You Have:</strong></p>
+                <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                    <li><strong>Direct Lobbying:</strong> Committee staff agents, member outreach, cosponsor targeting</li>
+                    <li><strong>Grassroots:</strong> 18 signal processing agents, mobilization, amplification</li>
+                    <li><strong>Task Force:</strong> Coalition coordination, strategy synthesis, learning agents</li>
+                </ul>
+                <p style="margin-top: 0.75rem;"><strong>❓ Potentially Missing for Single Client:</strong></p>
+                <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                    <li><strong>Client Relationship Management:</strong> Client-specific contact tracking, preference mapping, reporting</li>
+                    <li><strong>Task Force Coordination:</strong> Multi-agent orchestration, resource allocation, priority management</li>
+                    <li><strong>Client Reporting:</strong> Status dashboards, progress tracking, deliverable generation</li>
+                    <li><strong>Budget/Resource Tracking:</strong> Time allocation, cost tracking, ROI analysis</li>
+                    <li><strong>Compliance:</strong> LD-2 reporting, ethics checks, disclosure management</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="naming-guide" style="background: var(--color-success-light); border-color: var(--color-success);">
+            <h4>🚀 Running Agents Directly</h4>
+            <p><strong>Click "Run Agent" to see the command to execute:</strong></p>
+            <pre style="background: var(--color-gray-900); color: var(--color-success); padding: var(--spacing-md); border-radius: var(--radius-sm); margin-top: var(--spacing-sm); font-size: var(--font-size-sm); overflow-x: auto;">python agents\{agent_id}.py</pre>
+            <p style="margin-top: 0.75rem; font-size: var(--font-size-sm); color: var(--color-success-dark);">
+                <strong>Step-by-step:</strong> Copy command → Open terminal → Navigate to agent-orchestrator → Run → Watch output → If error, paste into Cursor to fix automatically.
+            </p>
+        </div>
+
+        <div class="filters">
+            <label>
+                <strong>Legislative State:</strong>
+                <select id="filter-state" onchange="filterAgents()">
+                    <option value="">All States</option>
+                    <option value="PRE_EVT">PRE_EVT - Policy Opportunity</option>
+                    <option value="INTRO_EVT">INTRO_EVT - Bill Identified</option>
+                    <option value="COMM_EVT">COMM_EVT - Committee Referral</option>
+                    <option value="FLOOR_EVT">FLOOR_EVT - Floor Scheduled</option>
+                    <option value="FINAL_EVT">FINAL_EVT - Vote Imminent</option>
+                    <option value="IMPL_EVT">IMPL_EVT - Law Enacted</option>
+                </select>
+            </label>
+            <label>
+                <strong>Type:</strong>
+                <select id="filter-type" onchange="filterAgents()">
+                    <option value="">All Types</option>
+                    <option value="Intelligence">Intelligence (Read-only)</option>
+                    <option value="Drafting">Drafting (Human-gated)</option>
+                    <option value="Execution">Execution (Authorized)</option>
+                    <option value="Learning">Learning (Post-execution)</option>
+                </select>
+            </label>
+            <label>
+                <strong>Status:</strong>
+                <select id="filter-status" onchange="filterAgents()">
+                    <option value="">All Statuses</option>
+                    <option value="RUNNING">Running</option>
+                    <option value="IDLE">Idle</option>
+                    <option value="WAITING_REVIEW">Waiting Review</option>
+                    <option value="BLOCKED">Blocked</option>
+                </select>
+            </label>
+            <label>
+                <strong>Search:</strong>
+                <input type="text" id="search-input" placeholder="Search agents..." oninput="filterAgents()">
+            </label>
+            <label>
+                <input type="checkbox" id="show-current-state-only" onchange="filterAgents()">
+                <strong>Show only current state</strong>
+            </label>
+        </div>
+
+        <div id="agent-grid" class="agent-grid">
+            <div class="loading">Loading agents...</div>
+        </div>
+
+    </div>
+
+    <script>
+        const SERVER_URL = 'http://localhost:9000';
+        let allAgents = [];
+        let filteredAgents = [];
+        let currentWorkflowState = null;
+        let viewMode = 'legislative'; // 'legislative' or 'strategy'
+
+        // Legislative state definitions
+        const LEGISLATIVE_STATES = {
+            'PRE_EVT': {
+                name: 'PRE_EVT',
+                description: 'Policy Opportunity Detected',
+                fullName: 'Pre-Event: Policy Opportunity Detected',
+                purpose: 'Initial policy opportunity identification and concept development',
+                eligibleTypes: ['Intelligence', 'Drafting']
+            },
+            'INTRO_EVT': {
+                name: 'INTRO_EVT',
+                description: 'Bill Vehicle Identified',
+                fullName: 'Introduction Event: Bill Vehicle Identified',
+                purpose: 'Bill introduction, sponsor targeting, and policy framing',
+                eligibleTypes: ['Intelligence', 'Drafting']
+            },
+            'COMM_EVT': {
+                name: 'COMM_EVT',
+                description: 'Committee Referral',
+                fullName: 'Committee Event: Committee Referral',
+                purpose: 'Committee work, language drafting, and amendment strategy',
+                eligibleTypes: ['Intelligence', 'Drafting', 'Execution']
+            },
+            'FLOOR_EVT': {
+                name: 'FLOOR_EVT',
+                description: 'Floor Scheduled',
+                fullName: 'Floor Event: Floor Scheduled',
+                purpose: 'Floor messaging, media narrative, and coalition activation',
+                eligibleTypes: ['Intelligence', 'Drafting', 'Execution']
+            },
+            'FINAL_EVT': {
+                name: 'FINAL_EVT',
+                description: 'Vote Imminent',
+                fullName: 'Final Event: Vote Imminent',
+                purpose: 'Final narrative, coalition activation, and counter-pressure',
+                eligibleTypes: ['Execution']
+            },
+            'IMPL_EVT': {
+                name: 'IMPL_EVT',
+                description: 'Law Enacted',
+                fullName: 'Implementation Event: Law Enacted',
+                purpose: 'Post-enactment analysis, learning, and outcome attribution',
+                eligibleTypes: ['Learning']
+            }
+        };
+
+        // Extract legislative state from agent_id
+        function extractLegislativeState(agentId) {
+            const stateMap = {
+                'pre_evt': 'PRE_EVT',
+                'intro_evt': 'INTRO_EVT',
+                'comm_evt': 'COMM_EVT',
+                'floor_evt': 'FLOOR_EVT',
+                'final_evt': 'FINAL_EVT',
+                'impl_evt': 'IMPL_EVT'
+            };
+            
+            // Check for state suffix in agent_id
+            for (const [key, value] of Object.entries(stateMap)) {
+                if (agentId.includes(key)) {
+                    return value;
+                }
+            }
+            
+            // Check for special patterns
+            if (agentId.includes('originate')) return 'IMPL_EVT';
+            if (agentId.includes('execute')) {
+                if (agentId.includes('pre_evt')) return 'PRE_EVT';
+                if (agentId.includes('comm_evt')) return 'COMM_EVT';
+            }
+            
+            return 'UNKNOWN';
+        }
+
+        // Classify agent by lobbying strategy
+        function classifyLobbyingStrategy(agentId, agentType, scope) {
+            const idLower = agentId.toLowerCase();
+            const scopeLower = (scope || '').toLowerCase();
+            
+            // Direct Lobbying Strategy - Top-down, relationship-based
+            const directKeywords = [
+                'committee', 'staff', 'legislator', 'member', 'cosponsor', 
+                'outreach', 'briefing', 'amendment', 'language', 'legislative',
+                'sponsor', 'office', 'personal', 'liaison'
+            ];
+            
+            // Grassroots Strategy - Bottom-up, signal-driven
+            const grassrootsKeywords = [
+                'grassroots', 'signal', 'constituent', 'field', 'local', 
+                'mobilize', 'amplify', 'coordinate', 'narrative', 'escalation',
+                'foia', 'public', 'social', 'observation'
+            ];
+            
+            // Task Force Support - Coordination, reporting, client service
+            const taskforceKeywords = [
+                'coalition', 'coordinate', 'track', 'monitor', 'report',
+                'strategy', 'unified', 'lessons', 'learning', 'dashboard',
+                'inventory', 'status', 'health', 'alignment'
+            ];
+            
+            // Check keywords
+            const allText = `${idLower} ${scopeLower}`;
+            
+            let directScore = directKeywords.filter(kw => allText.includes(kw)).length;
+            let grassrootsScore = grassrootsKeywords.filter(kw => allText.includes(kw)).length;
+            let taskforceScore = taskforceKeywords.filter(kw => allText.includes(kw)).length;
+            
+            // Special cases
+            if (idLower.includes('execution_grassroots') || idLower.includes('intel_grassroots')) {
+                grassrootsScore += 3;
+            }
+            if (idLower.includes('execution_cosponsor') || idLower.includes('execution_coalition')) {
+                directScore += 2;
+            }
+            if (idLower.includes('execution_coalition') && idLower.includes('coordinate')) {
+                taskforceScore += 2;
+            }
+            if (idLower.includes('learning') || idLower.includes('dashboard') || idLower.includes('inventory')) {
+                taskforceScore += 2;
+            }
+            
+            // Return strategy with highest score
+            if (directScore > grassrootsScore && directScore > taskforceScore) {
+                return 'direct';
+            } else if (grassrootsScore > taskforceScore) {
+                return 'grassroots';
+            } else if (taskforceScore > 0) {
+                return 'taskforce';
+            }
+            
+            // Default classification based on type
+            if (agentType === 'Execution' && (idLower.includes('outreach') || idLower.includes('member'))) {
+                return 'direct';
+            }
+            if (agentType === 'Intelligence' && idLower.includes('signal')) {
+                return 'grassroots';
+            }
+            
+            return 'taskforce'; // Default to task force support
+        }
+
+        // Change view mode
+        function changeViewMode() {
+            viewMode = document.getElementById('view-mode').value;
+            const strategyFilter = document.getElementById('filter-strategy');
+            const stateFilter = document.getElementById('filter-state').parentElement;
+            
+            if (viewMode === 'strategy') {
+                strategyFilter.style.display = 'inline-block';
+                stateFilter.style.display = 'none';
+            } else {
+                strategyFilter.style.display = 'none';
+                stateFilter.style.display = 'inline-block';
+            }
+            
+            filterAgents();
+        }
+
+        // Load workflow state
+        async function loadWorkflowState() {
+            try {
+                const response = await fetch('../state/legislative-state.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    currentWorkflowState = data.current_state;
+                    updateWorkflowStateDisplay();
+                }
+            } catch (error) {
+                // Try to infer from agent registry or use default
+                currentWorkflowState = 'PRE_EVT';
+                updateWorkflowStateDisplay();
+            }
+        }
+
+        // Update workflow state display
+        function updateWorkflowStateDisplay() {
+            const stateInfo = LEGISLATIVE_STATES[currentWorkflowState] || LEGISLATIVE_STATES['PRE_EVT'];
+            const badgeEl = document.getElementById('current-state-badge');
+            const descEl = document.getElementById('current-state-description');
+            const fullDescEl = document.getElementById('state-description');
+
+            if (badgeEl) badgeEl.textContent = stateInfo.name;
+            if (descEl) descEl.textContent = stateInfo.fullName;
+            if (fullDescEl) {
+                fullDescEl.innerHTML = `
+                    <strong>Purpose:</strong> ${stateInfo.purpose}<br>
+                    <strong>Eligible Agent Types:</strong> ${stateInfo.eligibleTypes.join(', ')}
+                `;
+            }
+        }
+
+        // Check server connection (optional - not required for viewing agents)
+        async function checkServer() {
+            // Alias for checkServerStatus
+            return await checkServerStatus();
+            const statusEl = document.getElementById('server-status');
+            try {
+                const response = await fetch(`${SERVER_URL}/health`);
+                if (response.ok) {
+                    statusEl.textContent = 'Server: Connected';
+                    statusEl.className = 'status connected';
+                } else {
+                    throw new Error('Server not responding');
+                }
+            } catch (error) {
+                statusEl.textContent = 'Server: Not Connected (Optional)';
+                statusEl.className = 'status disconnected';
+                // Don't show alert - server is optional for viewing agents
+            }
+        }
+
+        // Load agents from registry file (file picker - works without server)
+        function loadAgentsFromFile(file) {
+            const gridEl = document.getElementById('agent-grid');
+            gridEl.innerHTML = '<div class="loading">Loading agents...</div>';
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    allAgents = data.agents || [];
+                    filteredAgents = [...allAgents];
+                    renderAgents();
+                    
+                    // Show success message
+                    const statusEl = document.getElementById('server-status');
+                    statusEl.textContent = `Loaded ${allAgents.length} agents`;
+                    statusEl.className = 'status connected';
+                } catch (error) {
+                    gridEl.innerHTML = `
+                        <div class="empty-state">
+                            <h2>⚠️ Error Loading File</h2>
+                            <p>${error.message}</p>
+                            <p style="margin-top: 1rem;">Make sure you selected the correct registry file.</p>
+                        </div>
+                    `;
+                }
+            };
+            reader.onerror = function() {
+                gridEl.innerHTML = `
+                    <div class="empty-state">
+                        <h2>⚠️ Error Reading File</h2>
+                        <p>Could not read the selected file.</p>
+                    </div>
+                `;
+            };
+            reader.readAsText(file);
+        }
+
+        // Load agents from registry
+        async function loadAgents() {
+            const gridEl = document.getElementById('agent-grid');
+            gridEl.innerHTML = '<div class="loading">Loading agents...</div>';
+
+            try {
+                // Try to load from registry file (if accessible via HTTP)
+                const response = await fetch('../registry/agent-registry.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    allAgents = data.agents || [];
+                    filteredAgents = [...allAgents];
+                    renderAgents();
+                    return;
+                }
+            } catch (error) {
+                // File:// protocol doesn't allow fetch - show file picker option
+            }
+
+            // If fetch failed (file:// protocol), show file picker option
+            gridEl.innerHTML = `
+                <div class="empty-state">
+                    <h2>📁 Load Agent Registry</h2>
+                    <p style="margin-bottom: 1rem;">Select the agent registry file to view available agents:</p>
+                    <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin-bottom: var(--spacing-md);">
+                        <strong>Expected location:</strong><br>
+                        <code>agent-orchestrator/registry/agent-registry.json</code>
+                    </p>
+                    <input type="file" id="registry-file-input" accept=".json" style="display: none;" onchange="handleFileSelect(event)">
+                    <button class="btn-primary" onclick="document.getElementById('registry-file-input').click()" style="padding: var(--spacing-md) var(--spacing-lg); font-size: var(--font-size-base);">
+                        📂 Select Registry File
+                    </button>
+                    <p style="margin-top: var(--spacing-md); color: var(--color-text-secondary); font-size: var(--font-size-sm);">
+                        Or start the server to load automatically: <code>python server.py</code>
+                    </p>
+                </div>
+            `;
+        }
+
+        // Handle file selection
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                loadAgentsFromFile(file);
+            }
+        }
+
+        // Filter agents
+        function filterAgents() {
+            const stateFilter = document.getElementById('filter-state').value;
+            const strategyFilter = document.getElementById('filter-strategy').value;
+            const typeFilter = document.getElementById('filter-type').value;
+            const statusFilter = document.getElementById('filter-status').value;
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+
+            filteredAgents = allAgents.filter(agent => {
+                // Extract state from agent_id
+                const agentState = extractLegislativeState(agent.agent_id);
+                const agentStrategy = classifyLobbyingStrategy(agent.agent_id, agent.agent_type, agent.scope);
+                
+                // View mode specific filters
+                let matchView = true;
+                if (viewMode === 'legislative') {
+                    matchView = !stateFilter || agentState === stateFilter;
+                } else if (viewMode === 'strategy') {
+                    matchView = !strategyFilter || agentStrategy === strategyFilter;
+                }
+                
+                // Type filter
+                const matchType = !typeFilter || agent.agent_type === typeFilter;
+                
+                // Status filter
+                const matchStatus = !statusFilter || agent.status === statusFilter;
+                
+                // Search filter
+                const matchSearch = !searchTerm || 
+                    agent.agent_id.toLowerCase().includes(searchTerm) ||
+                    (agent.scope || '').toLowerCase().includes(searchTerm);
+                
+                return matchView && matchType && matchStatus && matchSearch;
+            });
+
+            renderAgents();
+        }
+
+        // Render agents organized by view mode
+        function renderAgents() {
+            const gridEl = document.getElementById('agent-grid');
+            
+            if (filteredAgents.length === 0) {
+                gridEl.innerHTML = '<div class="empty-state"><h2>No agents found</h2><p>Try adjusting your filters</p></div>';
+                return;
+            }
+
+            if (viewMode === 'strategy') {
+                renderAgentsByStrategy();
+            } else {
+                renderAgentsByState();
+            }
+        }
+
+        // Render agents organized by legislative state
+        function renderAgentsByState() {
+            const gridEl = document.getElementById('agent-grid');
+            
+            // Group agents by legislative state
+            const agentsByState = {};
+            filteredAgents.forEach(agent => {
+                const state = extractLegislativeState(agent.agent_id);
+                if (!agentsByState[state]) {
+                    agentsByState[state] = [];
+                }
+                agentsByState[state].push(agent);
+            });
+
+            // Render by state sections
+            const stateOrder = ['PRE_EVT', 'INTRO_EVT', 'COMM_EVT', 'FLOOR_EVT', 'FINAL_EVT', 'IMPL_EVT'];
+            let html = '';
+
+            stateOrder.forEach(state => {
+                const agents = agentsByState[state] || [];
+                if (agents.length === 0) return;
+
+                const stateInfo = LEGISLATIVE_STATES[state] || { fullName: state, description: state };
+                const isCurrentState = state === currentWorkflowState;
+                const stateClass = `state-${state.toLowerCase().replace('_', '-')}`;
+                
+                html += `
+                    <div class="state-section ${isCurrentState ? 'current-state-highlight' : ''}">
+                        <div class="state-header ${stateClass}">
+                            <div>
+                                <h3>${stateInfo.fullName}</h3>
+                                <p style="margin: 0.25rem 0 0 0; font-size: var(--font-size-sm); color: var(--color-text-secondary);">${stateInfo.description}</p>
+                            </div>
+                            <div class="state-count">${agents.length} agent${agents.length !== 1 ? 's' : ''}</div>
+                        </div>
+                        <div class="state-agents">
+                            <div class="agent-grid">
+                                ${agents.map(agent => renderAgentCard(agent, isCurrentState)).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Add any agents with unknown state
+            const unknownAgents = agentsByState['UNKNOWN'] || [];
+            if (unknownAgents.length > 0) {
+                html += `
+                    <div class="state-section">
+                        <div class="state-header" style="border-color: #9ca3af;">
+                            <div>
+                                <h3>Other Agents</h3>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #666;">Agents without clear state mapping</p>
+                            </div>
+                            <div class="state-count">${unknownAgents.length} agent${unknownAgents.length !== 1 ? 's' : ''}</div>
+                        </div>
+                        <div class="state-agents">
+                            <div class="agent-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+                                ${unknownAgents.map(agent => renderAgentCard(agent, false)).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            gridEl.innerHTML = html;
+        }
+
+        // Render agents organized by lobbying strategy
+        function renderAgentsByStrategy() {
+            const gridEl = document.getElementById('agent-grid');
+            
+            // Group agents by strategy
+            const agentsByStrategy = {
+                'direct': [],
+                'grassroots': [],
+                'taskforce': []
+            };
+            
+            filteredAgents.forEach(agent => {
+                const strategy = classifyLobbyingStrategy(agent.agent_id, agent.agent_type, agent.scope);
+                agentsByStrategy[strategy].push(agent);
+            });
+
+            const strategyInfo = {
+                'direct': {
+                    title: '🎯 Direct Lobbying Strategy',
+                    description: 'Top-down approach: Committee staff, member offices, cosponsor recruitment, legislative language',
+                    color: '#3b82f6',
+                    examples: ['Committee briefings', 'Member outreach', 'Cosponsor targeting', 'Legislative language drafting']
+                },
+                'grassroots': {
+                    title: '🌱 Grassroots Bottom-Up Strategy',
+                    description: 'Signal-driven approach: Field signals, constituent narratives, mobilization, amplification',
+                    color: '#10b981',
+                    examples: ['Signal processing', 'Grassroots mobilization', 'Constituent narratives', 'Local escalation']
+                },
+                'taskforce': {
+                    title: '🤝 Task Force Support',
+                    description: 'Coordination & client service: Coalition building, reporting, strategy alignment, learning',
+                    color: '#8b5cf6',
+                    examples: ['Coalition coordination', 'Status reporting', 'Strategy synthesis', 'Lessons learned']
+                }
+            };
+
+            let html = '';
+
+            ['direct', 'grassroots', 'taskforce'].forEach(strategy => {
+                const agents = agentsByStrategy[strategy] || [];
+                if (agents.length === 0) return;
+
+                const info = strategyInfo[strategy];
+                
+                html += `
+                    <div class="state-section">
+                        <div class="state-header" style="border-color: ${info.color};">
+                            <div>
+                                <h3>${info.title}</h3>
+                                <p style="margin: 0.25rem 0 0 0; font-size: var(--font-size-sm); color: var(--color-text-secondary);">${info.description}</p>
+                                <p style="margin: 0.5rem 0 0 0; font-size: var(--font-size-xs); color: var(--color-text-tertiary);">
+                                    <strong>Examples:</strong> ${info.examples.join(', ')}
+                                </p>
+                            </div>
+                            <div class="state-count">${agents.length} agent${agents.length !== 1 ? 's' : ''}</div>
+                        </div>
+                        <div class="state-agents">
+                            <div class="agent-grid">
+                                ${agents.map(agent => renderAgentCard(agent, false)).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            gridEl.innerHTML = html;
+        }
+
+        // Render individual agent card
+        function renderAgentCard(agent, isCurrentState) {
+            const typeClass = `type-${agent.agent_type.toLowerCase()}`;
+            const statusClass = `status-${(agent.status || 'IDLE').toLowerCase().replace('_', '-')}`;
+            const agentState = extractLegislativeState(agent.agent_id);
+            const agentStrategy = classifyLobbyingStrategy(agent.agent_id, agent.agent_type, agent.scope);
+            const isEligible = currentWorkflowState && LEGISLATIVE_STATES[currentWorkflowState]?.eligibleTypes?.includes(agent.agent_type);
+            
+            // Strategy badge
+            const strategyLabels = {
+                'direct': '🎯 Direct',
+                'grassroots': '🌱 Grassroots',
+                'taskforce': '🤝 Task Force'
+            };
+            
+            return `
+                <div class="agent-card" ${isCurrentState && isEligible ? 'style="border: 2px solid var(--color-success);"' : ''}>
+                    <div class="agent-header">
+                        <div class="agent-id">${agent.agent_id}</div>
+                        <span class="agent-type ${typeClass}">${agent.agent_type}</span>
+                    </div>
+                    ${viewMode === 'strategy' ? `<div style="background: var(--color-gray-100); color: var(--color-gray-700); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--radius-sm); font-size: var(--font-size-xs); margin-bottom: var(--spacing-sm);">${strategyLabels[agentStrategy] || 'Other'}</div>` : ''}
+                    ${isCurrentState && isEligible ? '<div style="background: var(--color-success-light); color: var(--color-success-dark); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--radius-sm); font-size: var(--font-size-xs); margin-bottom: var(--spacing-sm);">✓ Eligible for current state</div>' : ''}
+                    <div class="agent-scope">${agent.scope || 'No description'}</div>
+                    <div class="agent-meta">
+                        <span class="agent-status ${statusClass}">${agent.status || 'IDLE'}</span>
+                        <span>Risk: ${agent.risk_level || 'UNKNOWN'}</span>
+                        ${viewMode === 'legislative' && agentState !== 'UNKNOWN' ? `<span style="color: var(--color-text-secondary);">State: ${agentState}</span>` : ''}
+                    </div>
+                    <div class="agent-actions">
+                        <button class="btn-run" onclick="runAgent('${agent.agent_id}')" id="btn-${agent.agent_id}">
+                            ▶ Run Agent
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Run agent - show command to execute directly
+        async function runAgent(agentId) {
+            const btn = document.getElementById(`btn-${agentId}`);
+            
+            // Find agent info
+            const agent = allAgents.find(a => a.agent_id === agentId) || {
+                agent_id: agentId,
+                agent_type: inferAgentType(agentId),
+                scope: 'Agent execution',
+                risk_level: inferRiskLevel(agentId)
+            };
+
+            // Find or create inline result container for this agent
+            let resultContainer = document.getElementById(`result-${agentId}`);
+            if (!resultContainer) {
+                // Create inline result container right after the agent card
+                const agentCard = btn.closest('.agent-card');
+                resultContainer = document.createElement('div');
+                resultContainer.id = `result-${agentId}`;
+                resultContainer.className = 'agent-result-inline';
+                agentCard.parentNode.insertBefore(resultContainer, agentCard.nextSibling);
+            }
+
+            // Show running state inline
+            resultContainer.innerHTML = `
+                <div class="agent-running-state">
+                    <div class="running-header">
+                        <div class="spinner"></div>
+                        <h3>🚀 Running: ${agentId}</h3>
+                    </div>
+                    <div class="running-info">
+                        <p><strong>Type:</strong> ${agent.agent_type}</p>
+                        <p><strong>Scope:</strong> ${agent.scope || 'No description'}</p>
+                        <p><strong>Risk Level:</strong> ${agent.risk_level || 'UNKNOWN'}</p>
+                    </div>
+                    <div class="running-status">
+                        <p>⏳ Executing... This may take a few moments.</p>
+                    </div>
+                </div>
+            `;
+
+            // Generate and show interaction diagram immediately
+            const interactionDiagram = generateInteractionDiagram(agentId, agent);
+            resultContainer.innerHTML += `
+                <div class="interaction-diagram">
+                    <h4>📊 Agent Interaction Flow</h4>
+                    <div class="mermaid-container">
+                        <div class="mermaid">${interactionDiagram}</div>
+                    </div>
+                </div>
+            `;
+            
+            // Render Mermaid diagram
+            setTimeout(() => {
+                if (window.mermaid) {
+                    mermaid.init(undefined, resultContainer.querySelectorAll('.mermaid'));
+                }
+            }, 100);
+
+            // Scroll to result
+            resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            // Disable button
+            if (btn) {
+                btn.disabled = true;
+                btn.textContent = '⏳ Running...';
+            }
+
+            // Try server first, but if it fails, create and run batch file directly
+            let serverWorked = false;
+            
+            try {
+                // Try to run via server - this executes immediately
+                const response = await fetch(`${SERVER_URL}/run`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ agent_id: agentId }),
+                    signal: AbortSignal.timeout(3000) // 3 second timeout
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    displayAgentResultInline(agentId, agent, result, resultContainer);
+                    serverWorked = true;
+                } else {
+                    throw new Error('Server returned error');
+                }
+            } catch (error) {
+                // Server not available - create and execute batch file directly
+                if (!serverWorked) {
+                    // Create batch file and execute it
+                    executeAgentDirectly(agentId, agent, resultContainer);
+                }
+            } finally {
+                // Re-enable button
+                if (btn) {
+                    btn.disabled = false;
+                    btn.textContent = '▶ Run Agent';
+                }
+            }
+        }
+
+        function displayAgentResultInline(agentId, agent, result, container) {
+            if (result.success) {
+                // Parse output file if available
+                let outputSummary = '';
+                
+                if (result.output_file) {
+                    outputSummary = `<p><strong>📁 Output File:</strong> <code>${result.output_file}</code></p>`;
+                }
+
+                // Try to extract artifact info from stdout
+                const stdout = result.stdout || '';
+                const artifactMatch = stdout.match(/artifacts[\/\\][^\\s]+\.json/);
+                if (artifactMatch) {
+                    outputSummary += `<p><strong>📄 Artifact Created:</strong> <code>${artifactMatch[0]}</code></p>`;
+                }
+
+                // Display result inline
+                container.innerHTML = `
+                    <div class="agent-result-success">
+                        <div class="result-header success">
+                            <h3>✅ Execution Complete</h3>
+                            <p>Time: ${result.execution_time || 0}ms</p>
+                        </div>
+                        
+                        ${outputSummary}
+                        
+                        <div class="result-output">
+                            <h4>📋 Output</h4>
+                            <div class="output-stdout">
+                                <pre>${escapeHtml(stdout || 'No output')}</pre>
+                            </div>
+                        </div>
+
+                        <div class="result-actionable">
+                            <h4>🎯 What This Solves</h4>
+                            <div class="actionable-content">
+                                ${generateActionableInsights(agentId, agent, result)}
+                            </div>
+                        </div>
+
+                        <div class="result-next-steps">
+                            <h4>🔄 Next Steps</h4>
+                            <ul>
+                                ${generateNextSteps(agentId, agent, result)}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Display error inline
+                container.innerHTML = `
+                    <div class="agent-result-error">
+                        <div class="result-header error">
+                            <h3>❌ Execution Failed</h3>
+                        </div>
+                        <div class="error-details">
+                            <p><strong>Error:</strong> ${escapeHtml(result.error || 'Unknown error')}</p>
+                            ${result.stderr ? `<div class="error-stderr"><h4>Error Output:</h4><pre>${escapeHtml(result.stderr)}</pre></div>` : ''}
+                            ${result.stdout ? `<div class="error-stdout"><h4>Output:</h4><pre>${escapeHtml(result.stdout)}</pre></div>` : ''}
+                        </div>
+                        <div class="error-help">
+                            <h4>🔧 How to Fix</h4>
+                            <ol>
+                                <li>Review the error message above</li>
+                                <li>Check if required input artifacts exist</li>
+                                <li>Verify agent file: <code>agents/${agentId}.py</code></li>
+                                <li>Copy error and ask Cursor: "Fix this agent: [paste error]"</li>
+                            </ol>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function copyToClipboard(text) {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text);
+            }
+        }
+
+        // Execute agent directly by creating and running a batch file (no server needed)
+        function executeAgentDirectly(agentId, agent, resultContainer) {
+            // The agent already exists - just tell user to start the server
+            if (resultContainer) {
+                resultContainer.innerHTML = `
+                    <div class="agent-result-error">
+                        <div class="result-header error">
+                            <h3>⚠️ Server Not Running</h3>
+                        </div>
+                        <div class="error-details">
+                            <p>The agent <code>${agentId}.py</code> already exists in your project.</p>
+                            <p>To run it with one click, start the server:</p>
+                        </div>
+                        <div class="error-help">
+                            <h4>🚀 How to Start the Server:</h4>
+                            <ol style="margin-left: var(--spacing-lg); margin-top: var(--spacing-sm);">
+                                <li>Double-click <code>START_AGENT_COCKPIT.bat</code> in the <code>dashboards</code> folder</li>
+                                <li>The server will start and your browser will open to <code>http://localhost:9000</code></li>
+                                <li>Click "Run Agent" again - it will execute immediately!</li>
+                            </ol>
+                            <div style="background: var(--color-info-light); padding: var(--spacing-md); border-radius: var(--radius-md); margin-top: var(--spacing-md);">
+                                <p style="margin: 0;"><strong>💡 Why a server?</strong> Browsers can't run Python directly. The server runs your existing <code>${agentId}.py</code> agent file for you.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Download a Python runner script (no server needed, avoids Windows security blocking)
+        function downloadRunBatch(agentId) {
+            executeAgentDirectly(agentId, {}, null);
+        }
+
+        // Auto-check server status
+        async function checkServerStatus() {
+            const statusEl = document.getElementById('server-status');
+            
+            // Check if we're running via file:// protocol
+            if (window.location.protocol === 'file:') {
+                if (statusEl) {
+                    statusEl.textContent = '📁 File Mode (No Server)';
+                    statusEl.className = 'status disconnected';
+                    statusEl.title = 'Running as local file. "Run Agent" will create batch files to execute agents.';
+                }
+                return false;
+            }
+            
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 2000);
+                
+                const response = await fetch(`${SERVER_URL}/health`, { 
+                    method: 'GET',
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
+                
+                if (response.ok) {
+                    if (statusEl) {
+                        statusEl.textContent = 'Server: Running ✅';
+                        statusEl.className = 'status connected';
+                        statusEl.title = 'Server is running - agents execute immediately when you click "Run Agent"';
+                    }
+                    return true;
+                } else {
+                    throw new Error('Server returned error');
+                }
+            } catch (error) {
+                if (statusEl) {
+                    statusEl.textContent = 'Server: Not Running';
+                    statusEl.className = 'status disconnected';
+                    statusEl.title = 'No server detected. "Run Agent" will create batch files instead.';
+                }
+                return false;
+            }
+        }
+
+        function generateInteractionDiagram(agentId, agent) {
+            const agentType = agent.agent_type || inferAgentType(agentId);
+            const idLower = agentId.toLowerCase();
+            
+            // Infer inputs based on agent patterns
+            const inputs = [];
+            const outputs = [];
+            
+            if (idLower.includes('concept_memo') || idLower.includes('draft_')) {
+                inputs.push('Signal Scan Artifact');
+                inputs.push('Stakeholder Map');
+                inputs.push('Opposition Assessment');
+                outputs.push('Draft Artifact (JSON)');
+                outputs.push('Review Queue Entry');
+            } else if (idLower.includes('signal_scan') || idLower.includes('intel_')) {
+                inputs.push('External APIs');
+                inputs.push('Public Records');
+                outputs.push('Intelligence Artifact (JSON)');
+            } else if (idLower.includes('execution_') || idLower.includes('outreach')) {
+                inputs.push('Approved Language Artifact');
+                inputs.push('Contact Database');
+                outputs.push('Execution Log');
+                outputs.push('Outreach Confirmation');
+            } else if (idLower.includes('learning_')) {
+                inputs.push('Execution Artifacts');
+                inputs.push('Outcome Events');
+                outputs.push('Analysis Report (JSON)');
+            }
+
+            // Build Mermaid diagram
+            let diagram = `flowchart TD
+    Start([User Clicks Run]) --> Agent[${agentId}<br/>${agentType}]
+    
+    subgraph Inputs["📥 Input Sources"]
+`;
+            inputs.forEach((input, i) => {
+                diagram += `        I${i}[${input}]\n`;
+            });
+            diagram += `    end
+    
+    subgraph Processing["⚙️ Agent Processing"]
+        Agent --> Process[Read Inputs]
+        Process --> Analyze[Analyze/Generate]
+        Analyze --> Validate[Validate Output]
+    end
+    
+    subgraph Outputs["📤 Output Artifacts"]
+`;
+            outputs.forEach((output, i) => {
+                diagram += `        O${i}[${output}]\n`;
+            });
+            diagram += `    end
+    
+    Inputs --> Processing
+    Processing --> Outputs
+    Outputs --> Review{Requires Review?}
+    Review -->|Yes| HR[Human Review Gate]
+    Review -->|No| Complete([✅ Complete])
+    HR --> Complete
+    
+    style Agent fill:#3b82f6,stroke:#1e40af,color:#fff
+    style Process fill:#10b981,stroke:#059669,color:#fff
+    style Complete fill:#10b981,stroke:#059669,color:#fff
+    style HR fill:#f59e0b,stroke:#d97706,color:#fff`;
+
+            return diagram;
+        }
+
+        function displayAgentResultInline(agentId, agent, result, container) {
+            // This replaces displayAgentResult - results show inline
+            if (result.success) {
+                // Parse output file if available
+                let outputSummary = '';
+                
+                if (result.output_file) {
+                    outputSummary = `<p><strong>📁 Output File:</strong> <code>${result.output_file}</code></p>`;
+                }
+
+                // Try to extract artifact info from stdout
+                const stdout = result.stdout || '';
+                const artifactMatch = stdout.match(/artifacts[\/\\][^\\s]+\.json/);
+                if (artifactMatch) {
+                    outputSummary += `<p><strong>📄 Artifact Created:</strong> <code>${artifactMatch[0]}</code></p>`;
+                }
+
+                // Display result inline
+                container.innerHTML = `
+                    <div class="agent-result-success">
+                        <div class="result-header success">
+                            <h3>✅ Execution Complete</h3>
+                            <p>Time: ${result.execution_time || 0}ms</p>
+                        </div>
+                        
+                        ${outputSummary}
+                        
+                        <div class="result-output">
+                            <h4>📋 Output</h4>
+                            <div class="output-stdout">
+                                <pre>${escapeHtml(stdout || 'No output')}</pre>
+                            </div>
+                        </div>
+
+                        <div class="result-actionable">
+                            <h4>🎯 What This Solves</h4>
+                            <div class="actionable-content">
+                                ${generateActionableInsights(agentId, agent, result)}
+                            </div>
+                        </div>
+
+                        <div class="result-next-steps">
+                            <h4>🔄 Next Steps</h4>
+                            <ul>
+                                ${generateNextSteps(agentId, agent, result)}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Display error inline
+                container.innerHTML = `
+                    <div class="agent-result-error">
+                        <div class="result-header error">
+                            <h3>❌ Execution Failed</h3>
+                        </div>
+                        <div class="error-details">
+                            <p><strong>Error:</strong> ${escapeHtml(result.error || 'Unknown error')}</p>
+                            ${result.stderr ? `<div class="error-stderr"><h4>Error Output:</h4><pre>${escapeHtml(result.stderr)}</pre></div>` : ''}
+                            ${result.stdout ? `<div class="error-stdout"><h4>Output:</h4><pre>${escapeHtml(result.stdout)}</pre></div>` : ''}
+                        </div>
+                        <div class="error-help">
+                            <h4>🔧 How to Fix</h4>
+                            <ol>
+                                <li>Review the error message above</li>
+                                <li>Check if required input artifacts exist</li>
+                                <li>Verify agent file: <code>agents/${agentId}.py</code></li>
+                                <li>Copy error and ask Cursor: "Fix this agent: [paste error]"</li>
+                            </ol>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function displayAgentResult(agentId, agent, result) {
+            const outputContent = document.getElementById('output-content');
+            
+            if (result.success) {
+                // Parse output file if available
+                let outputData = null;
+                let outputSummary = '';
+                
+                if (result.output_file) {
+                    outputSummary = `<p><strong>📁 Output File:</strong> <code>${result.output_file}</code></p>`;
+                }
+
+                // Try to extract artifact info from stdout
+                const stdout = result.stdout || '';
+                const artifactMatch = stdout.match(/artifacts[\/\\][^\\s]+\.json/);
+                if (artifactMatch) {
+                    outputSummary += `<p><strong>📄 Artifact Created:</strong> <code>${artifactMatch[0]}</code></p>`;
+                }
+
+                // Display result
+                outputContent.innerHTML = `
+                    <div class="agent-result-success">
+                        <div class="result-header success">
+                            <h3>✅ Agent Execution Complete</h3>
+                            <p>Execution time: ${result.execution_time || 0}ms</p>
+                        </div>
+                        
+                        ${outputSummary}
+                        
+                        <div class="result-output">
+                            <h4>📋 Output Summary</h4>
+                            <div class="output-stdout">
+                                <pre>${escapeHtml(stdout || 'No output')}</pre>
+                            </div>
+                        </div>
+
+                        <div class="result-actionable">
+                            <h4>🎯 What This Output Solves</h4>
+                            <div class="actionable-content">
+                                ${generateActionableInsights(agentId, agent, result)}
+                            </div>
+                        </div>
+
+                        <div class="result-next-steps">
+                            <h4>🔄 Next Steps</h4>
+                            <ul>
+                                ${generateNextSteps(agentId, agent, result)}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Display error
+                outputContent.innerHTML = `
+                    <div class="agent-result-error">
+                        <div class="result-header error">
+                            <h3>❌ Agent Execution Failed</h3>
+                        </div>
+                        <div class="error-details">
+                            <p><strong>Error:</strong> ${escapeHtml(result.error || 'Unknown error')}</p>
+                            ${result.stderr ? `<div class="error-stderr"><h4>Error Output:</h4><pre>${escapeHtml(result.stderr)}</pre></div>` : ''}
+                            ${result.stdout ? `<div class="error-stdout"><h4>Standard Output:</h4><pre>${escapeHtml(result.stdout)}</pre></div>` : ''}
+                        </div>
+                        <div class="error-help">
+                            <h4>🔧 How to Fix</h4>
+                            <ol>
+                                <li>Review the error message above</li>
+                                <li>Check if required input artifacts exist</li>
+                                <li>Verify agent file is correct: <code>agents/${agentId}.py</code></li>
+                                <li>Copy the error and ask Cursor: "Fix this agent: [paste error]"</li>
+                            </ol>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function generateActionableInsights(agentId, agent, result) {
+            const idLower = agentId.toLowerCase();
+            const agentType = agent.agent_type || inferAgentType(agentId);
+            
+            let insights = '';
+            
+            if (idLower.includes('concept_memo') || idLower.includes('draft_')) {
+                insights = `
+                    <p><strong>✅ Problem Solved:</strong> This agent generated a draft document that:</p>
+                    <ul>
+                        <li>Synthesizes intelligence inputs into actionable recommendations</li>
+                        <li>Provides a foundation for human review and approval</li>
+                        <li>Creates a building block for the next stage of your legislative workflow</li>
+                    </ul>
+                    <p><strong>🏗️ Building Block:</strong> Once approved, this artifact can be used by:</p>
+                    <ul>
+                        <li>Execution agents for outreach and communication</li>
+                        <li>Other drafting agents for refinement</li>
+                        <li>State advancement when all requirements are met</li>
+                    </ul>
+                `;
+            } else if (idLower.includes('signal_scan') || idLower.includes('intel_')) {
+                insights = `
+                    <p><strong>✅ Problem Solved:</strong> This agent gathered intelligence that:</p>
+                    <ul>
+                        <li>Identifies opportunities, risks, or stakeholders</li>
+                        <li>Provides data-driven insights for decision-making</li>
+                        <li>Feeds into drafting and execution agents</li>
+                    </ul>
+                    <p><strong>🏗️ Building Block:</strong> This intelligence can be used by:</p>
+                    <ul>
+                        <li>Drafting agents to create informed documents</li>
+                        <li>Execution agents to target outreach</li>
+                        <li>Strategy agents to align tactics</li>
+                    </ul>
+                `;
+            } else if (idLower.includes('execution_') || idLower.includes('outreach')) {
+                insights = `
+                    <p><strong>✅ Problem Solved:</strong> This agent executed actions that:</p>
+                    <ul>
+                        <li>Delivered communications or activated resources</li>
+                        <li>Tracked execution status and responses</li>
+                        <li>Moved your campaign forward through direct action</li>
+                    </ul>
+                    <p><strong>🏗️ Building Block:</strong> This execution creates:</p>
+                    <ul>
+                        <li>Execution logs for learning and analysis</li>
+                        <li>Response data for follow-up actions</li>
+                        <li>Momentum toward your legislative goals</li>
+                    </ul>
+                `;
+            } else if (idLower.includes('learning_')) {
+                insights = `
+                    <p><strong>✅ Problem Solved:</strong> This agent analyzed outcomes to:</p>
+                    <ul>
+                        <li>Identify what worked and what didn't</li>
+                        <li>Extract lessons learned for future campaigns</li>
+                        <li>Provide data-driven insights for improvement</li>
+                    </ul>
+                    <p><strong>🏗️ Building Block:</strong> This analysis informs:</p>
+                    <ul>
+                        <li>Future strategy development</li>
+                        <li>Agent performance optimization</li>
+                        <li>Campaign refinement</li>
+                    </ul>
+                `;
+            } else {
+                insights = `
+                    <p><strong>✅ Agent completed successfully.</strong> Review the output above to understand what was generated.</p>
+                `;
+            }
+            
+            return insights;
+        }
+
+        function generateNextSteps(agentId, agent, result) {
+            const idLower = agentId.toLowerCase();
+            const agentType = agent.agent_type || inferAgentType(agentId);
+            
+            let steps = [];
+            
+            if (idLower.includes('draft_') || idLower.includes('concept_memo')) {
+                steps.push('<li><strong>Review the artifact</strong> in the review queue (HR_PRE, HR_LANG, etc.)</li>');
+                steps.push('<li><strong>Approve or request changes</strong> based on your judgment</li>');
+                steps.push('<li><strong>Once approved</strong>, the artifact becomes ACTIONABLE and can advance state</li>');
+            } else if (idLower.includes('intel_') || idLower.includes('signal_scan')) {
+                steps.push('<li><strong>Review the intelligence</strong> for accuracy and completeness</li>');
+                steps.push('<li><strong>Use this intelligence</strong> to spawn drafting or execution agents</li>');
+                steps.push('<li><strong>Feed into strategy</strong> development and decision-making</li>');
+            } else if (idLower.includes('execution_')) {
+                steps.push('<li><strong>Monitor execution logs</strong> for responses and outcomes</li>');
+                steps.push('<li><strong>Follow up</strong> on any required actions</li>');
+                steps.push('<li><strong>Track results</strong> for learning and optimization</li>');
+            } else {
+                steps.push('<li><strong>Review the output</strong> for accuracy</li>');
+                steps.push('<li><strong>Use the output</strong> as input for next steps</li>');
+            }
+            
+            return steps.join('\n');
+        }
+
+
+        function inferAgentType(agentId) {
+            if (agentId.startsWith('intel_')) return 'Intelligence';
+            if (agentId.startsWith('draft_')) return 'Drafting';
+            if (agentId.startsWith('execution_')) return 'Execution';
+            if (agentId.startsWith('learning_')) return 'Learning';
+            return 'Unknown';
+        }
+
+        function inferRiskLevel(agentId) {
+            if (agentId.startsWith('intel_')) return 'LOW';
+            if (agentId.startsWith('draft_')) return 'MEDIUM';
+            if (agentId.startsWith('execution_')) return 'HIGH';
+            return 'LOW';
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Copy command to clipboard
+        function copyCommand(agentId) {
+            const commandText = document.getElementById(`command-text-${agentId}`).textContent;
+            const copyBtn = document.getElementById(`copy-btn-${agentId}`);
+            
+            // Use modern Clipboard API
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(commandText).then(() => {
+                    copyBtn.textContent = '✅ Copied!';
+                    copyBtn.classList.add('copied');
+                    setTimeout(() => {
+                        copyBtn.textContent = '📋 Copy Command';
+                        copyBtn.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    // Fallback for older browsers
+                    fallbackCopyTextToClipboard(commandText, copyBtn);
+                });
+            } else {
+                // Fallback for older browsers
+                fallbackCopyTextToClipboard(commandText, copyBtn);
+            }
+        }
+
+        // Fallback copy method for older browsers
+        function fallbackCopyTextToClipboard(text, button) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    button.textContent = '✅ Copied!';
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.textContent = '📋 Copy Command';
+                        button.classList.remove('copied');
+                    }, 2000);
+                } else {
+                    alert('Failed to copy. Please select and copy manually.');
+                }
+            } catch (err) {
+                alert('Failed to copy. Please select and copy manually.');
+            } finally {
+                document.body.removeChild(textArea);
+            }
+        }
+
+        // Generate and download batch file
+        function downloadBatchFile(agentId) {
+            // Get the script directory (where this HTML file is located)
+            // Batch file should be saved in agent-orchestrator directory (parent of dashboards)
+            const batchContent = `@echo off
+REM Run Agent: ${agentId}
+REM Generated by Agent Runner Cockpit
+REM Place this file in the agent-orchestrator directory
+
+echo ========================================
+echo Running Agent: ${agentId}
+echo ========================================
+echo.
+
+REM Get the directory where this batch file is located
+cd /d "%~dp0"
+
+REM Check if we're in the right directory
+if not exist "agents\\${agentId}.py" (
+    echo ERROR: Agent file not found!
+    echo.
+    echo Expected location: agents\\${agentId}.py
+    echo Current directory: %CD%
+    echo.
+    echo Please place this .bat file in the agent-orchestrator directory.
+    echo.
+    pause
+    exit /b 1
+)
+
+REM Run the agent
+echo Starting Python agent...
+echo.
+python "agents\\${agentId}.py"
+
+REM Check exit code
+set EXIT_CODE=%errorlevel%
+
+echo.
+echo ========================================
+if %EXIT_CODE% equ 0 (
+    echo Agent completed successfully!
+) else (
+    echo Agent execution failed with error code %EXIT_CODE%
+    echo.
+    echo Copy the error message above and paste it into Cursor
+    echo with: "Fix this agent: [paste error here]"
+)
+echo ========================================
+echo.
+echo Press any key to close this window...
+pause >nul
+`;
+
+            // Create blob and download
+            const blob = new Blob([batchContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `run_${agentId}.bat`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            // Show success message
+            const downloadContainer = document.getElementById(`batch-download-${agentId}`);
+            if (downloadContainer) {
+                const originalHTML = downloadContainer.innerHTML;
+                downloadContainer.innerHTML = '<strong style="color: #10b981;">✅ Downloaded! Save it in agent-orchestrator directory, then double-click to run.</strong>';
+                setTimeout(() => {
+                    downloadContainer.innerHTML = originalHTML;
+                }, 5000);
+            }
+        }
+
+        // Close output panel
+        function closeOutput() {
+            document.getElementById('output-panel').classList.remove('active');
+        }
+
+        // Initialize
+        // Check server status on page load and periodically
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check server status (works for both file:// and http://)
+            checkServerStatus();
+            
+            // If opened via file://, show info message
+            if (window.location.protocol === 'file:') {
+                const header = document.querySelector('header');
+                if (header) {
+                    const info = document.createElement('div');
+                    info.style.cssText = 'background: #dbeafe; border: 2px solid #3b82f6; padding: 1rem; margin: 1rem 0; border-radius: 6px;';
+                    info.innerHTML = `
+                        <strong>ℹ️ Running in File Mode</strong><br>
+                        <strong>"Run Agent" buttons work!</strong> They will create batch files that you can double-click to run agents.<br>
+                        <small>For instant execution (no batch files), start the server: Double-click <code>START_AGENT_COCKPIT.bat</code> and open via <code>http://localhost:9000</code></small>
+                    `;
+                    header.insertAdjacentElement('afterend', info);
+                }
+            } else {
+                // Check server periodically if opened via http://
+                setInterval(checkServerStatus, 5000);
+            }
+            loadWorkflowState();
+            checkServer();
+            loadAgents();
+            
+            // Initialize Mermaid if available
+            if (typeof mermaid !== 'undefined') {
+                mermaid.initialize({ startOnLoad: true, theme: 'default' });
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

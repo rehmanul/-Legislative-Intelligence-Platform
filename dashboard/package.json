@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-service",
+  "version": "1.0.0",
+  "description": "Dashboard service for Agent Orchestrator",
+  "main": "lib/poller.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}

@@ -1,0 +1,97 @@
+%% Agent Resource Allocation System - Development Focus
+%% Shows how to divert coding agent resources to development work
+
+flowchart TB
+    subgraph CurrentState["CURRENT SYSTEM STATE"]
+        STATE[INTRO_EVT<br/>Bill Vehicle Identified]
+        TOTAL[Total Agents: 12]
+        ACTIVE[Active: 2<br/>Utilization: 16.67%]
+        AVAILABLE[Resources Available<br/>for Development]
+    end
+    
+    subgraph ResourceAllocation["RESOURCE ALLOCATION METHODS"]
+        METHOD1[Method 1: Concurrent Limits<br/>MAX_CONCURRENT_AGENTS=4]
+        METHOD2[Method 2: Type Filtering<br/>agent_types=['Intelligence']]
+        METHOD3[Method 3: Priority Queue<br/>priority=10 for dev]
+        METHOD4[Method 4: Selective Spawn<br/>spawn_agent by ID]
+        METHOD5[Method 5: Resource Pooling<br/>Separate executors]
+        METHOD6[Method 6: Agent Limiting<br/>max_agents=2]
+    end
+    
+    subgraph DevelopmentTools["DEVELOPMENT TOOLS CREATED"]
+        TOOL1[dev__spawn_intelligence_agents.py<br/>Spawn dev agents]
+        TOOL2[dev__configure_resource_allocation.py<br/>Configure resources]
+        TOOL3[dev__monitor_resource_usage.py<br/>Monitor usage]
+        CONFIG[development_config.json<br/>Configuration file]
+    end
+    
+    subgraph AgentTypes["AGENT TYPE ALLOCATION"]
+        INTEL[Intelligence Agents<br/>4 workers allocated<br/>Read-only, safe for dev]
+        DRAFT[Drafting Agents<br/>2 workers allocated<br/>Requires review]
+        EXEC[Execution Agents<br/>1 worker allocated<br/>High risk, blocked]
+    end
+    
+    subgraph DevelopmentWorkflow["DEVELOPMENT WORKFLOW"]
+        STEP1[Step 1: Monitor Resources<br/>dev__monitor_resource_usage.py]
+        STEP2[Step 2: Configure Limits<br/>dev__configure_resource_allocation.py]
+        STEP3[Step 3: Spawn Dev Agents<br/>dev__spawn_intelligence_agents.py]
+        STEP4[Step 4: Monitor Progress<br/>Re-run monitor]
+    end
+    
+    subgraph Safety["SAFETY FEATURES"]
+        SAFE1[Intelligence Only<br/>Read-only agents]
+        SAFE2[Limited Concurrency<br/>Prevents exhaustion]
+        SAFE3[High Priority<br/>Dev agents first]
+        SAFE4[Metadata Tagging<br/>Easy identification]
+        SAFE5[No State Changes<br/>Doesn't advance workflow]
+    end
+    
+    %% Current state connections
+    STATE --> TOTAL
+    TOTAL --> ACTIVE
+    ACTIVE --> AVAILABLE
+    
+    %% Resource allocation methods
+    AVAILABLE --> METHOD1
+    AVAILABLE --> METHOD2
+    AVAILABLE --> METHOD3
+    AVAILABLE --> METHOD4
+    AVAILABLE --> METHOD5
+    AVAILABLE --> METHOD6
+    
+    %% Tools
+    METHOD2 --> TOOL1
+    METHOD1 --> TOOL2
+    AVAILABLE --> TOOL3
+    TOOL2 --> CONFIG
+    
+    %% Agent type allocation
+    METHOD2 --> INTEL
+    METHOD2 --> DRAFT
+    METHOD2 --> EXEC
+    
+    %% Development workflow
+    TOOL3 --> STEP1
+    TOOL2 --> STEP2
+    TOOL1 --> STEP3
+    STEP3 --> STEP4
+    
+    %% Safety features
+    TOOL1 --> SAFE1
+    METHOD1 --> SAFE2
+    METHOD3 --> SAFE3
+    TOOL1 --> SAFE4
+    SAFE1 --> SAFE5
+    
+    %% Styling
+    classDef currentState fill:#e1f5ff,stroke:#01579b,stroke-width:2px
+    classDef method fill:#fff4e1,stroke:#e65100,stroke-width:2px
+    classDef tool fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef safe fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px
+    classDef available fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px
+    
+    class STATE,TOTAL,ACTIVE currentState
+    class METHOD1,METHOD2,METHOD3,METHOD4,METHOD5,METHOD6 method
+    class TOOL1,TOOL2,TOOL3,CONFIG,STEP1,STEP2,STEP3,STEP4 tool
+    class SAFE1,SAFE2,SAFE3,SAFE4,SAFE5 safe
+    class AVAILABLE available

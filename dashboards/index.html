@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Orchestrator - Review Viewers</title>
+  <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--color-text-primary);
+      background: var(--color-bg-secondary);
+      padding: var(--spacing-xl);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    header {
+      background: linear-gradient(135deg, #1e40af 0%, var(--color-primary) 100%);
+      color: var(--color-bg-primary);
+      padding: 40px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    header h1 {
+      font-size: 32px;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    header p {
+      opacity: 0.9;
+      font-size: var(--font-size-base);
+    }
+    
+    .viewers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-xl);
+      margin-bottom: 30px;
+    }
+    
+    .viewer-card {
+      background: var(--color-bg-primary);
+      padding: 25px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-2);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .viewer-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-3);
+    }
+    
+    .viewer-card h2 {
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--spacing-md);
+      color: #1e40af;
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+    
+    .viewer-card .icon {
+      font-size: var(--font-size-2xl);
+    }
+    
+    .viewer-card .description {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--spacing-lg);
+      line-height: 1.5;
+    }
+    
+    .viewer-card .features {
+      list-style: none;
+      margin-bottom: var(--spacing-xl);
+      font-size: 13px;
+    }
+    
+    .viewer-card .features li {
+      padding: 5px 0;
+      color: var(--color-text-secondary);
+    }
+    
+    .viewer-card .features li:before {
+      content: "✓ ";
+      color: var(--color-success);
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    
+    .viewer-card .file-types {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .file-type-badge {
+      background: #e7f3ff;
+      color: #1e40af;
+      padding: var(--spacing-xs) 10px;
+      border-radius: var(--radius-xl);
+      font-size: 11px;
+      font-weight: var(--font-weight-semibold);
+    }
+    
+    .viewer-card .btn {
+      display: inline-block;
+      padding: var(--spacing-md) 20px;
+      background: var(--color-primary);
+      color: var(--color-bg-primary);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      transition: background var(--transition-base) var(--transition-ease);
+      width: 100%;
+      text-align: center;
+    }
+    
+    .viewer-card .btn:hover {
+      background: var(--color-primary-hover);
+    }
+    
+    .quick-links {
+      background: var(--color-bg-primary);
+      padding: 25px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-2);
+      margin-bottom: 30px;
+    }
+    
+    .quick-links h2 {
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--spacing-lg);
+      color: var(--color-text-primary);
+    }
+    
+    .quick-links ul {
+      list-style: none;
+      columns: 2;
+      column-gap: var(--spacing-2xl);
+    }
+    
+    .quick-links li {
+      padding: var(--spacing-sm) 0;
+      font-size: var(--font-size-sm);
+    }
+    
+    .quick-links li a {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+    
+    .quick-links li a:hover {
+      text-decoration: underline;
+    }
+    
+    .footer {
+      text-align: center;
+      padding: var(--spacing-xl);
+      color: #999;
+      font-size: 13px;
+    }
+    
+    .info-box {
+      background: #e7f3ff;
+      border-left: 4px solid var(--color-primary);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .info-box h3 {
+      margin-bottom: var(--spacing-md);
+      color: var(--color-primary);
+    }
+    
+    .info-box ul {
+      margin-left: 20px;
+      margin-top: var(--spacing-md);
+    }
+  </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+  
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="container">
+    <header>
+      <h1>Agent Orchestrator Review Viewers</h1>
+      <p>Interactive HTML viewers for reviewing artifacts, markdown files, and diagrams</p>
+    </header>
+    
+    <div class="info-box">
+      <h3>📋 Quick Guide</h3>
+      <p><strong>Review JSON Artifacts:</strong> Use Unified Review Viewer or Cockpit Review</p>
+      <p><strong>Review Markdown TODOs:</strong> Use Markdown Review Viewer or Unified Review Viewer</p>
+      <p><strong>View Mermaid Diagrams:</strong> Use Mermaid Viewer or Unified Review Viewer</p>
+    </div>
+    
+    <div class="viewers-grid">
+      <!-- Unified Review Viewer -->
+      <div class="viewer-card">
+        <h2><span class="icon">🎯</span> Unified Review Viewer</h2>
+        <p class="description">Single interface for reviewing JSON artifacts, markdown files, and mermaid diagrams in one place.</p>
+        
+        <div class="file-types">
+          <span class="file-type-badge">.json</span>
+          <span class="file-type-badge">.md</span>
+          <span class="file-type-badge">.mmd</span>
+        </div>
+        
+        <ul class="features">
+          <li>Review JSON artifacts with approve/reject buttons</li>
+          <li>Interactive markdown checkboxes for TODOs</li>
+          <li>Mermaid diagram rendering</li>
+          <li>Tabbed interface for easy switching</li>
+        </ul>
+        
+        <a href="unified_review_viewer.html" class="btn">Open Unified Viewer →</a>
+      </div>
+      
+      <!-- Cockpit Review -->
+      <div class="viewer-card">
+        <h2><span class="icon">📋</span> Cockpit Review</h2>
+        <p class="description">Specialized viewer for JSON artifact review queues with human-in-the-loop approval workflow.</p>
+        
+        <div class="file-types">
+          <span class="file-type-badge">HR_PRE_queue.json</span>
+          <span class="file-type-badge">HR_LANG_queue.json</span>
+          <span class="file-type-badge">HR_MSG_queue.json</span>
+        </div>
+        
+        <ul class="features">
+          <li>Load review queue files</li>
+          <li>Approve/Reject with rationale</li>
+          <li>High-risk artifact warnings</li>
+          <li>Export approval manifest</li>
+        </ul>
+        
+        <a href="cockpit_review.html" class="btn">Open Cockpit Review →</a>
+      </div>
+      
+      <!-- Markdown Review Viewer -->
+      <div class="viewer-card">
+        <h2><span class="icon">📝</span> Markdown Review Viewer</h2>
+        <p class="description">Dedicated viewer for markdown files with interactive TODO checkboxes that auto-save.</p>
+        
+        <div class="file-types">
+          <span class="file-type-badge">.md</span>
+        </div>
+        
+        <ul class="features">
+          <li>Interactive checkboxes for `- [ ]` TODOs</li>
+          <li>Auto-save checkbox state</li>
+          <li>TODO statistics (total, completed, remaining)</li>
+          <li>Action Required / Draft status detection</li>
+        </ul>
+        
+        <a href="markdown_review_viewer.html" class="btn">Open Markdown Viewer →</a>
+      </div>
+      
+      <!-- Mermaid Viewer -->
+      <div class="viewer-card">
+        <h2><span class="icon">📊</span> Mermaid Diagram Viewer</h2>
+        <p class="description">View and render Mermaid diagram files (.mmd) with source code toggle.</p>
+        
+        <div class="file-types">
+          <span class="file-type-badge">.mmd</span>
+        </div>
+        
+        <ul class="features">
+          <li>Render Mermaid diagrams</li>
+          <li>Toggle source code view</li>
+          <li>List of known diagrams</li>
+          <li>Error handling with source display</li>
+        </ul>
+        
+        <a href="mermaid_viewer.html" class="btn">Open Mermaid Viewer →</a>
+      </div>
+    </div>
+    
+    <div class="quick-links">
+      <h2>📁 Quick Access to Review Files</h2>
+      <ul>
+        <li><strong>JSON Review Queues:</strong></li>
+        <li><code>review/HR_PRE_queue.json</code> - Pre-event review queue</li>
+        <li><code>review/HR_LANG_queue.json</code> - Legislative language review queue</li>
+        <li><code>review/HR_MSG_queue.json</code> - Messaging review queue</li>
+        <li><code>review/HR_RELEASE_queue.json</code> - Release review queue</li>
+        
+        <li style="margin-top: var(--spacing-lg);"><strong>Markdown Review Files:</strong></li>
+        <li><code>artifacts/review/*.md</code> - 21 review documents</li>
+        <li>Includes: <code>business_outcome_acceleration_brief__20260108_023219.md</code> (ACTION_REQUIRED)</li>
+        <li>Includes: <code>critical_blockers_fixed__DRAFT_v1.md</code> (has TODOs)</li>
+        
+        <li style="margin-top: var(--spacing-lg);"><strong>Mermaid Diagrams:</strong></li>
+        <li><code>artifacts/AGENT_DEPENDENCY_GRAPH.mmd</code></li>
+        <li><code>artifacts/policy/diagrams/*.mmd</code> - 9 policy diagrams</li>
+        <li><code>artifacts/intro_evt/FUTURE_STATE_TRANSITIONS.mmd</code></li>
+        
+        <li style="margin-top: var(--spacing-lg);"><strong>JSON Artifacts:</strong></li>
+        <li><code>artifacts/{agent_id}/*.json</code> - 79 JSON artifacts</li>
+        <li>Includes: <code>artifacts/draft_concept_memo_pre_evt/PRE_CONCEPT.json</code></li>
+        <li>Includes: <code>artifacts/draft_var(--color-bg-primary)paper_intro_evt/INTRO_var(--color-bg-primary)PAPER.json</code></li>
+      </ul>
+    </div>
+    
+    <div class="info-box">
+      <h3>📚 Documentation</h3>
+      <p>For detailed usage instructions, see: <a href="REVIEW_VIEWERS_README.md" target="_blank" style="color: var(--color-primary);">REVIEW_VIEWERS_README.md</a></p>
+    </div>
+    
+    <div class="footer">
+      <p>Agent Orchestrator Review Viewers | Last Updated: 2026-01-20</p>
+      <p style="margin-top: 5px; font-size: var(--font-size-xs); color: #999;">
+        All viewers are HTML-only, local-first, and require no backend services.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

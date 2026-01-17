@@ -1,0 +1,43 @@
+{
+  "_meta": {
+    "execution_id": "pre_evt_execution_001",
+    "started_at": "2026-01-07T03:06:00Z",
+    "current_phase": "intelligence",
+    "last_updated": "2026-01-16T18:35:04.823118+00:00"
+  },
+  "legislative_state": "PRE_EVT",
+  "phases": {
+    "intelligence": {
+      "status": "RUNNING",
+      "completed_at": "2026-01-07T03:06:26Z",
+      "agents": [
+        "intel_signal_scan_pre_evt",
+        "intel_stakeholder_map_pre_evt",
+        "intel_opposition_detect_pre_evt"
+      ]
+    },
+    "drafting": {
+      "status": "COMPLETE",
+      "completed_at": "2026-01-07T03:10:00Z",
+      "agents": [
+        "draft_concept_memo_pre_evt"
+      ]
+    },
+    "human_review": {
+      "status": "PENDING",
+      "review_gate": "HR_PRE",
+      "artifact": "PRE_CONCEPT.json",
+      "waiting_since": "2026-01-07T03:10:00Z"
+    }
+  },
+  "artifacts_generated": [
+    "signal_summary.json",
+    "PRE_STAKEHOLDER_MAP.json",
+    "opposition_risk_assessment.json",
+    "PRE_CONCEPT.json"
+  ],
+  "execution_status": "RUNNING",
+  "pause_reason": null,
+  "next_action": "Processing document: artifact_4f97f6f90427",
+  "state_advancement_rule": "If HR_PRE = APPROVED, state may transition to INTRO_EVT (external confirmation required)"
+}

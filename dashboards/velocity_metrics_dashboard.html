@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velocity Metrics Dashboard - Agent Orchestrator</title>
+    <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-family-sans), Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+            background: var(--color-bg-secondary);
+            padding: var(--spacing-xl);
+        }
+        
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--color-bg-primary);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 32px;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .controls {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-2);
+            display: flex;
+            gap: var(--spacing-lg);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .controls input[type="file"] {
+            padding: var(--spacing-md);
+            border: 2px dashed var(--color-border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+        }
+        
+        .controls button {
+            padding: var(--spacing-md) 20px;
+            background: #667eea;
+            color: var(--color-bg-primary);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: var(--font-weight-semibold);
+        }
+        
+        .controls button:hover {
+            background: #5568d3;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-xl);
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: var(--color-bg-primary);
+            padding: 25px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+        }
+        
+        .stat-card h3 {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .stat-card .value {
+            font-size: 36px;
+            font-weight: var(--font-weight-bold);
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card .label {
+            font-size: var(--font-size-sm);
+            color: #999;
+        }
+        
+        .section {
+            background: var(--color-bg-primary);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-2);
+        }
+        
+        .section h2 {
+            font-size: var(--font-size-2xl);
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .progress-bar {
+            background: #f0f0f0;
+            border-radius: 10px;
+            height: 30px;
+            margin: var(--spacing-lg) 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-bg-primary);
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-xs);
+            transition: width 0.3s ease;
+        }
+        
+        .progress-fill.fast {
+            background: linear-gradient(90deg, var(--color-success) 0%, #20c997 100%);
+        }
+        
+        .progress-fill.normal {
+            background: linear-gradient(90deg, #17a2b8 0%, var(--color-primary) 100%);
+        }
+        
+        .progress-fill.slow {
+            background: linear-gradient(90deg, #ffc107 0%, #fd7e14 100%);
+        }
+        
+        .progress-fill.over {
+            background: linear-gradient(90deg, var(--color-error) 0%, var(--color-error-hover) 100%);
+        }
+        
+        .time-display {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+            padding: var(--spacing-lg);
+            background: var(--color-gray-100);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .time-value {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-primary);
+            font-family: var(--font-family-mono);
+        }
+        
+        .time-status {
+            padding: 5px 12px;
+            border-radius: var(--radius-xl);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            text-transform: uppercase;
+        }
+        
+        .time-status.fast {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .time-status.normal {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .time-status.slow {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .bottleneck-item {
+            padding: var(--spacing-xl);
+            background: #fff;
+            border-left: 4px solid var(--color-error);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .bottleneck-item.priority-high {
+            border-left-color: var(--color-error);
+            background: #fff5f5;
+        }
+        
+        .bottleneck-item.priority-medium {
+            border-left-color: #ffc107;
+            background: #fffbf0;
+        }
+        
+        .bottleneck-item.priority-low {
+            border-left-color: #17a2b8;
+            background: #f0f9fa;
+        }
+        
+        .bottleneck-priority {
+            display: inline-block;
+            padding: var(--spacing-xs) 10px;
+            border-radius: var(--radius-xl);
+            font-size: 11px;
+            font-weight: var(--font-weight-semibold);
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .priority-high {
+            background: var(--color-error);
+            color: var(--color-bg-primary);
+        }
+        
+        .priority-medium {
+            background: #ffc107;
+            color: var(--color-text-primary);
+        }
+        
+        .priority-low {
+            background: #17a2b8;
+            color: var(--color-bg-primary);
+        }
+        
+        .review-gate {
+            padding: var(--spacing-xl);
+            background: var(--color-gray-100);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .review-gate h4 {
+            font-size: var(--font-size-lg);
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .review-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        .metric {
+            text-align: center;
+        }
+        
+        .metric-label {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        
+        .metric-value {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: #667eea;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        
+        .empty-state h3 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .empty-state p {
+            font-size: var(--font-size-base);
+        }
+        
+        .error-message {
+            background: #fff5f5;
+            border: 2px solid var(--color-error);
+            color: #721c24;
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--color-primary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--spacing-xl);
+        }
+    </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+    
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="container">
+        <header>
+            <h1>⚡ Velocity Metrics Dashboard</h1>
+            <p>System velocity, bottlenecks, and time metrics visualization</p>
+        </header>
+        
+        <div class="controls">
+            <input type="file" id="fileInput" accept=".json" />
+            <button onclick="loadDefaultFile()">Load Default (velocity_report.json)</button>
+            <button onclick="refreshData()">Refresh Data</button>
+            <span id="lastUpdated" style="margin-left: auto; color: var(--color-text-secondary); font-size: var(--font-size-sm);"></span>
+        </div>
+        
+        <div id="errorContainer"></div>
+        
+        <div id="dashboardContent" style="display: none;">
+            <!-- Time in State Section -->
+            <div class="section">
+                <h2>⏱️ Time in Current State</h2>
+                <div id="timeInState"></div>
+            </div>
+            
+            <!-- Review Cycle Times Section -->
+            <div class="section">
+                <h2>🔄 Review Cycle Health</h2>
+                <div id="reviewCycles"></div>
+            </div>
+            
+            <!-- Agent Execution Times Section -->
+            <div class="section">
+                <h2>🤖 Agent Execution Times</h2>
+                <div id="agentExecution"></div>
+            </div>
+            
+            <!-- Queue Depths Section -->
+            <div class="section">
+                <h2>📊 Queue Depths</h2>
+                <div id="queueDepths"></div>
+            </div>
+            
+            <!-- Bottlenecks Section -->
+            <div class="section">
+                <h2>🚧 Bottlenecks & Actions Needed</h2>
+                <div id="bottlenecks"></div>
+            </div>
+        </div>
+        
+        <div id="emptyState" class="empty-state">
+            <h3>📁 No Data Loaded</h3>
+            <p>Select a velocity_report.json file to view metrics, or click "Load Default" to use the default file.</p>
+        </div>
+    </div>
+    
+    <script>
+        let velocityData = null;
+        const DEFAULT_FILE = '../velocity_report.json';
+        
+        // File input handler
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        velocityData = JSON.parse(event.target.result);
+                        renderDashboard(velocityData);
+                    } catch (error) {
+                        showError('Failed to parse JSON file: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+        
+        // Load default file
+        function loadDefaultFile() {
+            fetch(DEFAULT_FILE)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('File not found. Please run: python scripts/velocity__export__report.py');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    velocityData = data;
+                    renderDashboard(data);
+                })
+                .catch(error => {
+                    showError('Failed to load default file: ' + error.message + '<br><br>Run this command to generate the data:<br><code>python scripts/velocity__export__report.py</code>');
+                });
+        }
+        
+        // Refresh data
+        function refreshData() {
+            if (velocityData) {
+                loadDefaultFile();
+            } else {
+                showError('No data loaded. Please load a file first.');
+            }
+        }
+        
+        // Show error
+        function showError(message) {
+            const container = document.getElementById('errorContainer');
+            container.innerHTML = `<div class="error-message"><strong>Error:</strong> ${message}</div>`;
+            document.getElementById('dashboardContent').style.display = 'none';
+            document.getElementById('emptyState').style.display = 'block';
+        }
+        
+        // Format duration
+        function formatDuration(seconds) {
+            if (!seconds || seconds === 0) return '0s';
+            
+            const days = Math.floor(seconds / 86400);
+            const hours = Math.floor((seconds % 86400) / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = Math.floor(seconds % 60);
+            
+            const parts = [];
+            if (days > 0) parts.push(`${days}d`);
+            if (hours > 0) parts.push(`${hours}h`);
+            if (minutes > 0) parts.push(`${minutes}m`);
+            if (secs > 0 || parts.length === 0) parts.push(`${secs}s`);
+            
+            return parts.join(' ');
+        }
+        
+        // Render dashboard
+        function renderDashboard(data) {
+            document.getElementById('errorContainer').innerHTML = '';
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('dashboardContent').style.display = 'block';
+            
+            // Update last updated time
+            const meta = data._meta || {};
+            const generatedAt = meta.generated_at || new Date().toISOString();
+            document.getElementById('lastUpdated').textContent = `Last updated: ${new Date(generatedAt).toLocaleString()}`;
+            
+            // Render time in state
+            renderTimeInState(data.time_in_state || {});
+            
+            // Render review cycles
+            renderReviewCycles(data.review_cycle_times || {});
+            
+            // Render agent execution
+            renderAgentExecution(data.agent_execution_times || {});
+            
+            // Render queue depths
+            renderQueueDepths(data.queue_depths || {});
+            
+            // Render bottlenecks
+            renderBottlenecks(data.bottlenecks || []);
+        }
+        
+        // Render time in state
+        function renderTimeInState(timeData) {
+            const container = document.getElementById('timeInState');
+            const currentState = timeData.current_state || 'UNKNOWN';
+            const timeSeconds = timeData.time_seconds || 0;
+            const expectedDays = timeData.expected_days;
+            
+            let html = `
+                <div class="time-display">
+                    <div>
+                        <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: 5px;">Current State</div>
+                        <div style="font-size: var(--font-size-xl); font-weight: var(--font-weight-semibold); color: var(--color-text-primary);">${currentState}</div>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: 5px;">Time in State</div>
+                        <div class="time-value">${formatDuration(timeSeconds)}</div>
+                    </div>
+            `;
+            
+            if (expectedDays) {
+                const expectedSeconds = expectedDays * 24 * 3600;
+                const progress = Math.min(timeSeconds / expectedSeconds, 1.0);
+                const progressPercent = Math.min(progress * 100, 100);
+                
+                let statusClass = 'fast';
+                let statusText = 'FAST ✓';
+                if (progress >= 1.2) {
+                    statusClass = 'over';
+                    statusText = 'OVER LIMIT';
+                } else if (progress >= 1.0) {
+                    statusClass = 'slow';
+                    statusText = 'SLOW ⚠';
+                } else if (progress >= 0.5) {
+                    statusClass = 'normal';
+                    statusText = 'NORMAL •';
+                }
+                
+                html += `
+                    <div style="flex: 2;">
+                        <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: 5px;">Expected: ${expectedDays} days</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill ${statusClass}" style="width: ${progressPercent}%">
+                                ${progressPercent.toFixed(0)}%
+                            </div>
+                        </div>
+                        <div class="time-status ${statusClass}" style="margin-top: var(--spacing-md); display: inline-block;">
+                            ${statusText}
+                        </div>
+                    </div>
+                `;
+            } else {
+                html += `
+                    <div style="flex: 2;">
+                        <div style="font-size: var(--font-size-sm); color: #999; font-style: italic;">No expected time defined</div>
+                    </div>
+                `;
+            }
+            
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+        
+        // Render review cycles
+        function renderReviewCycles(reviewTimes) {
+            const container = document.getElementById('reviewCycles');
+            const gates = ['HR_PRE', 'HR_LANG', 'HR_MSG', 'HR_RELEASE'];
+            
+            let html = '';
+            
+            gates.forEach(gateId => {
+                const gate = reviewTimes[gateId] || {};
+                const count = gate.count || 0;
+                const avgMinutes = gate.avg_minutes;
+                const thresholdMinutes = gate.threshold_minutes;
+                const status = gate.status || 'no data';
+                
+                let statusClass = 'normal';
+                let statusText = status;
+                if (status === 'FAST') statusClass = 'fast';
+                else if (status === 'SLOW') statusClass = 'slow';
+                
+                html += `
+                    <div class="review-gate">
+                        <h4>${gateId}</h4>
+                        <div class="review-metrics">
+                            <div class="metric">
+                                <div class="metric-label">Reviews</div>
+                                <div class="metric-value">${count}</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-label">Avg Time</div>
+                                <div class="metric-value">${avgMinutes ? avgMinutes.toFixed(1) + 'm' : 'N/A'}</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-label">Threshold</div>
+                                <div class="metric-value">${thresholdMinutes ? thresholdMinutes + 'm' : 'N/A'}</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-label">Status</div>
+                                <div class="time-status ${statusClass}" style="margin-top: 5px; display: inline-block;">
+                                    ${statusText}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            if (!html) {
+                html = '<p style="color: #999; text-align: center; padding: 40px;">No review cycle data available</p>';
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        // Render agent execution
+        function renderAgentExecution(agentTimes) {
+            const container = document.getElementById('agentExecution');
+            
+            if (!agentTimes || Object.keys(agentTimes).length === 0) {
+                container.innerHTML = '<p style="color: #999; text-align: center; padding: 40px;">No agent execution time data available</p>';
+                return;
+            }
+            
+            let html = '<div class="info-box"><strong>Note:</strong> Agent execution time metrics require detailed agent execution data.</div>';
+            
+            // Could expand this section with agent-specific metrics if available
+            container.innerHTML = html;
+        }
+        
+        // Render queue depths
+        function renderQueueDepths(queueData) {
+            const container = document.getElementById('queueDepths');
+            const gates = ['HR_PRE', 'HR_LANG', 'HR_MSG', 'HR_RELEASE'];
+            
+            let html = '';
+            let hasData = false;
+            
+            gates.forEach(gateId => {
+                const depth = queueData[gateId] || 0;
+                if (depth > 0 || gateId in queueData) {
+                    hasData = true;
+                    const maxDepth = Math.max(10, depth * 1.2); // Scale for visualization
+                    const percent = (depth / maxDepth) * 100;
+                    
+                    html += `
+                        <div class="review-gate">
+                            <h4>${gateId}</h4>
+                            <div style="display: flex; align-items: center; gap: var(--spacing-lg);">
+                                <div style="flex: 1;">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill ${depth > 5 ? 'over' : depth > 3 ? 'slow' : 'normal'}" style="width: ${percent}%">
+                                            ${depth} items
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold); color: #667eea; min-width: 60px; text-align: center;">
+                                    ${depth}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            
+            if (!hasData) {
+                html = '<p style="color: #999; text-align: center; padding: 40px;">No queue depth data available</p>';
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        // Render bottlenecks
+        function renderBottlenecks(bottlenecks) {
+            const container = document.getElementById('bottlenecks');
+            
+            if (!bottlenecks || bottlenecks.length === 0) {
+                container.innerHTML = '<div class="info-box"><strong>✅ No Bottlenecks:</strong> System is operating efficiently!</div>';
+                return;
+            }
+            
+            let html = '';
+            
+            bottlenecks.forEach((bottleneck, index) => {
+                const priority = bottleneck.priority || 'LOW';
+                const description = bottleneck.description || '';
+                const action = bottleneck.action || '';
+                
+                const priorityClass = priority.toLowerCase();
+                
+                html += `
+                    <div class="bottleneck-item priority-${priorityClass}">
+                        <span class="bottleneck-priority priority-${priorityClass}">${priority}</span>
+                        <div style="font-size: var(--font-size-base); font-weight: var(--font-weight-semibold); margin-bottom: var(--spacing-md); color: var(--color-text-primary);">
+                            ${description}
+                        </div>
+                        ${action ? `<div style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin-top: var(--spacing-md);"><strong>Action:</strong> ${action}</div>` : ''}
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        // Try to load default file on page load
+        window.addEventListener('load', function() {
+            loadDefaultFile();
+        });
+    </script>
+</body>
+</html>

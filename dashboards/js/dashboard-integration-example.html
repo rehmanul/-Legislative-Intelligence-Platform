@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Integration Example</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-indicator.connected {
+            background: #28a745;
+        }
+        .status-indicator.disconnected {
+            background: #dc3545;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .pending-reviews {
+            margin-top: 20px;
+        }
+        .review-item {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #fafafa;
+        }
+        .review-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .review-item-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: #333;
+        }
+        .review-item-meta {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .review-item-meta span {
+            margin-right: 15px;
+        }
+        .review-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .btn-info {
+            background: #17a2b8;
+            color: white;
+        }
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow: auto;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: #000;
+        }
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+        .artifact-content {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .copy-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .command-form {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: #fafafa;
+        }
+        .command-form h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+            font-size: 13px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .form-group select {
+            cursor: pointer;
+        }
+        .routing-section {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 4px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+        .routing-section label {
+            font-weight: 600;
+            color: #856404;
+        }
+        .copy-feedback {
+            display: inline-block;
+            margin-left: 10px;
+            color: #28a745;
+            font-size: 12px;
+            font-weight: 500;
+        }
+    </style>
+<link rel="stylesheet" href="../../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+    
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="../../dashboards/unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="../../dashboards/unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="../../dashboards/session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<h1>Dashboard Integration Example</h1>
+    <p>This example shows how to integrate the dashboard API client into your HTML dashboards.</p>
+    
+    <div class="card">
+        <h2>Connection Status</h2>
+        <p>
+            <span class="status-indicator" id="statusIndicator"></span>
+            <span id="statusText">Connecting...</span>
+        </p>
+    </div>
+    
+    <div class="card">
+        <h2>System Statistics</h2>
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-label">Total Agents</div>
+                <div class="stat-value" id="statAgentsTotal">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Running</div>
+                <div class="stat-value" id="statAgentsRunning">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Waiting Review</div>
+                <div class="stat-value" id="statAgentsWaiting">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Pending Reviews</div>
+                <div class="stat-value" id="statReviewsPending">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Current State</div>
+                <div class="stat-value" id="statCurrentState">UNKNOWN</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h2 style="margin: 0;">Pending Reviews</h2>
+            <button class="btn btn-secondary btn-small" onclick="manualRefresh()" id="refreshBtn">🔄 Refresh</button>
+        </div>
+        <div id="pendingReviewsContainer">
+            <p style="color: #999; font-style: italic;">Loading pending reviews...</p>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h2>Commands</h2>
+        
+        <div class="command-form">
+            <h3>Approve Artifact</h3>
+            <div class="form-group">
+                <label>Select Artifact</label>
+                <select id="approveArtifactSelect" onchange="populateArtifactInfo('approve', this.value)">
+                    <option value="">-- Select from pending reviews --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Gate ID</label>
+                <input type="text" id="approveGateId" placeholder="Gate ID (e.g., HR_PRE)" value="HR_PRE">
+            </div>
+            <div class="form-group">
+                <label>Artifact ID</label>
+                <input type="text" id="approveArtifactId" placeholder="Artifact ID or path">
+            </div>
+            <div class="routing-section">
+                <label>Route To:</label>
+                <select id="approveRouting" onchange="updateRationaleFromRouting('approve')">
+                    <option value="">-- Select routing option --</option>
+                    <option value="external_human">Route to External Human</option>
+                    <option value="internal_human">Route to Internal Human</option>
+                    <option value="back_to_agent">Back to Agent</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Rationale</label>
+                <textarea id="approveRationale" placeholder="Enter rationale or paste content from artifact..."></textarea>
+                <div style="margin-top: 5px;">
+                    <button class="btn btn-secondary btn-small" onclick="copyFromArtifact('approve')">📋 Copy from Artifact</button>
+                    <span id="approveCopyFeedback" class="copy-feedback" style="display: none;"></span>
+                </div>
+            </div>
+            <button class="btn btn-success" onclick="handleApprove()">Approve</button>
+        </div>
+        
+        <div class="command-form">
+            <h3>Reject Artifact</h3>
+            <div class="form-group">
+                <label>Select Artifact</label>
+                <select id="rejectArtifactSelect" onchange="populateArtifactInfo('reject', this.value)">
+                    <option value="">-- Select from pending reviews --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Gate ID</label>
+                <input type="text" id="rejectGateId" placeholder="Gate ID" value="HR_PRE">
+            </div>
+            <div class="form-group">
+                <label>Artifact ID</label>
+                <input type="text" id="rejectArtifactId" placeholder="Artifact ID or path">
+            </div>
+            <div class="routing-section">
+                <label>Route To:</label>
+                <select id="rejectRouting" onchange="updateRationaleFromRouting('reject')">
+                    <option value="">-- Select routing option --</option>
+                    <option value="external_human">Route to External Human</option>
+                    <option value="internal_human">Route to Internal Human</option>
+                    <option value="back_to_agent">Back to Agent</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Rationale</label>
+                <textarea id="rejectRationale" placeholder="Enter rationale or paste content from artifact..."></textarea>
+                <div style="margin-top: 5px;">
+                    <button class="btn btn-secondary btn-small" onclick="copyFromArtifact('reject')">📋 Copy from Artifact</button>
+                    <span id="rejectCopyFeedback" class="copy-feedback" style="display: none;"></span>
+                </div>
+            </div>
+            <button class="btn btn-danger" onclick="handleReject()">Reject</button>
+        </div>
+        
+        <div class="command-form">
+            <h3>Trigger Agent</h3>
+            <div class="form-group">
+                <label>Agent ID</label>
+                <input type="text" id="triggerAgentId" placeholder="Agent ID">
+            </div>
+            <button class="btn btn-primary" onclick="handleTriggerAgent()">Trigger Agent</button>
+        </div>
+        
+        <div class="command-form">
+            <h3>Advance State</h3>
+            <div class="form-group">
+                <label>Next State</label>
+                <input type="text" id="advanceState" placeholder="Next State (e.g., INTRO_EVT)">
+            </div>
+            <div class="form-group">
+                <label>External Confirmation</label>
+                <input type="text" id="advanceConfirmation" placeholder="External Confirmation">
+            </div>
+            <button class="btn btn-primary" onclick="handleAdvanceState()">Advance State</button>
+        </div>
+    </div>
+    
+    <!-- Artifact Viewer Modal -->
+    <div id="artifactModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">Artifact Viewer</div>
+                <span class="close" onclick="closeArtifactModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="artifact-content" id="modalArtifactContent"></div>
+                <div class="copy-buttons">
+                    <button class="btn btn-secondary btn-small" onclick="copyArtifactContent()">📋 Copy All</button>
+                    <button class="btn btn-secondary btn-small" onclick="copyArtifactSummary()">📋 Copy Summary</button>
+                    <button class="btn btn-secondary btn-small" onclick="copyArtifactKeyFindings()">📋 Copy Key Findings</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h2>Event Log</h2>
+        <div id="eventLog" style="max-height: 300px; overflow-y: auto; font-family: monospace; font-size: 12px;">
+        </div>
+    </div>
+    
+    <!-- Include dashboard API client -->
+    <script src="js/dashboard-api-client.js"></script>
+    <script src="js/dashboard-state-manager.js"></script>
+    <script src="js/dashboard-realtime.js"></script>
+    
+    <script>
+        // Initialize dashboard components
+        const stateManager = new DashboardStateManager(dashboardAPI);
+        const realtimeUpdater = new DashboardRealtimeUpdater(dashboardAPI);
+        
+        // Store current artifact data
+        let currentArtifactData = null;
+        let pendingReviewsList = [];
+        
+        // Update connection status
+        dashboardAPI.onConnectionChange((connected) => {
+            const indicator = document.getElementById('statusIndicator');
+            const text = document.getElementById('statusText');
+            
+            if (connected) {
+                indicator.className = 'status-indicator connected';
+                text.textContent = 'Connected';
+            } else {
+                indicator.className = 'status-indicator disconnected';
+                text.textContent = 'Disconnected - Backend may not be running';
+            }
+        });
+        
+        // Manual refresh function
+        async function manualRefresh() {
+            const refreshBtn = document.getElementById('refreshBtn');
+            refreshBtn.disabled = true;
+            refreshBtn.textContent = '⏳ Refreshing...';
+            
+            try {
+                const state = await dashboardAPI.getState();
+                stateManager.setState(state);
+                logEvent('Manual refresh', { success: true });
+            } catch (error) {
+                console.error('Refresh failed:', error);
+                logEvent('Manual refresh failed', { error: error.message });
+                alert('Failed to refresh: ' + error.message + '\n\nMake sure the backend is running on port 8000.');
+            } finally {
+                refreshBtn.disabled = false;
+                refreshBtn.textContent = '🔄 Refresh';
+            }
+        }
+        
+        // Update statistics and pending reviews when state changes
+        stateManager.onStateChange((state) => {
+            updateStatistics(state);
+            updatePendingReviews(state);
+            logEvent('State updated', state);
+        });
+        
+        function updateStatistics(state) {
+            const agents = state.agents || [];
+            const reviews = state.reviews || {};
+            const legislativeState = state.legislative_state || {};
+            
+            // Agents is now an array
+            const agentsArray = Array.isArray(agents) ? agents : [];
+            document.getElementById('statAgentsTotal').textContent = agentsArray.length || 0;
+            document.getElementById('statAgentsRunning').textContent = agentsArray.filter(a => (a.status || '').toUpperCase() === 'RUNNING').length || 0;
+            document.getElementById('statAgentsWaiting').textContent = agentsArray.filter(a => (a.status || '').toUpperCase() === 'WAITING_REVIEW').length || 0;
+            
+            // Reviews.pending is now an array
+            const pendingReviews = Array.isArray(reviews.pending) ? reviews.pending : [];
+            document.getElementById('statReviewsPending').textContent = pendingReviews.length || 0;
+            
+            document.getElementById('statCurrentState').textContent = legislativeState.current || 'UNKNOWN';
+        }
+        
+        function updatePendingReviews(state) {
+            const reviews = state.reviews || {};
+            const pending = Array.isArray(reviews.pending) ? reviews.pending : [];
+            pendingReviewsList = pending;
+            
+            const container = document.getElementById('pendingReviewsContainer');
+            const approveSelect = document.getElementById('approveArtifactSelect');
+            const rejectSelect = document.getElementById('rejectArtifactSelect');
+            
+            // Debug logging
+            console.log('Update pending reviews:', {
+                totalPending: pending.length,
+                reviews: pending,
+                stateKeys: Object.keys(state),
+                reviewsKeys: Object.keys(reviews)
+            });
+            
+            // Clear and rebuild selects
+            approveSelect.innerHTML = '<option value="">-- Select from pending reviews --</option>';
+            rejectSelect.innerHTML = '<option value="">-- Select from pending reviews --</option>';
+            
+            if (pending.length === 0) {
+                container.innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <p style="font-style: italic; margin-bottom: 10px;">No pending reviews</p>
+                        <p style="font-size: 12px; color: #999;">
+                            Pending reviews will appear here when artifacts are submitted for review.<br>
+                            Check that the backend is running and review queue files exist in <code>agent-orchestrator/review/</code>
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '<div class="pending-reviews">';
+            pending.forEach((review, index) => {
+                const artifactId = review.artifact_id || review.artifact_path || `review_${index}`;
+                const gateId = review.gate_id || review.review_gate || 'UNKNOWN';
+                const artifactName = review.artifact_name || review.artifact_type || artifactId;
+                const submittedBy = review.submitted_by || review.agent_id || 'Unknown';
+                const submittedAt = review.submitted_at ? new Date(review.submitted_at).toLocaleString() : 'Unknown';
+                
+                // Add to selects
+                const optionText = `${artifactName} (${gateId})`;
+                approveSelect.innerHTML += `<option value="${index}">${optionText}</option>`;
+                rejectSelect.innerHTML += `<option value="${index}">${optionText}</option>`;
+                
+                html += `
+                    <div class="review-item">
+                        <div class="review-item-header">
+                            <div class="review-item-title">${artifactName}</div>
+                            <button class="btn btn-info btn-small" onclick="viewArtifact(${index})">👁️ View Artifact</button>
+                        </div>
+                        <div class="review-item-meta">
+                            <span><strong>Gate:</strong> ${gateId}</span>
+                            <span><strong>ID:</strong> ${artifactId}</span>
+                            <span><strong>Submitted by:</strong> ${submittedBy}</span>
+                            <span><strong>Submitted at:</strong> ${submittedAt}</span>
+                        </div>
+                        <div class="review-actions">
+                            <button class="btn btn-success btn-small" onclick="quickApprove(${index})">✅ Approve</button>
+                            <button class="btn btn-danger btn-small" onclick="quickReject(${index})">❌ Reject</button>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+        
+        function populateArtifactInfo(action, index) {
+            if (!index || index === '') return;
+            
+            const review = pendingReviewsList[parseInt(index)];
+            if (!review) return;
+            
+            const artifactId = review.artifact_id || review.artifact_path || '';
+            const gateId = review.gate_id || review.review_gate || 'HR_PRE';
+            
+            if (action === 'approve') {
+                document.getElementById('approveArtifactId').value = artifactId;
+                document.getElementById('approveGateId').value = gateId;
+            } else if (action === 'reject') {
+                document.getElementById('rejectArtifactId').value = artifactId;
+                document.getElementById('rejectGateId').value = gateId;
+            }
+        }
+        
+        function updateRationaleFromRouting(action) {
+            const routingSelect = document.getElementById(`${action}Routing`);
+            const rationaleTextarea = document.getElementById(`${action}Rationale`);
+            const routing = routingSelect.value;
+            
+            if (!routing) return;
+            
+            let prefix = '';
+            if (routing === 'external_human') {
+                prefix = 'ROUTED TO EXTERNAL HUMAN: ';
+            } else if (routing === 'internal_human') {
+                prefix = 'ROUTED TO INTERNAL HUMAN: ';
+            } else if (routing === 'back_to_agent') {
+                prefix = 'RETURNED TO AGENT FOR REVISION: ';
+            }
+            
+            if (rationaleTextarea.value && !rationaleTextarea.value.startsWith(prefix)) {
+                rationaleTextarea.value = prefix + rationaleTextarea.value;
+            } else if (!rationaleTextarea.value) {
+                rationaleTextarea.value = prefix;
+            }
+        }
+        
+        async function viewArtifact(index) {
+            const review = pendingReviewsList[index];
+            if (!review) {
+                alert('Review not found');
+                return;
+            }
+            
+            const artifactPath = review.artifact_path || review.artifact_id;
+            if (!artifactPath) {
+                alert('Artifact path not found');
+                return;
+            }
+            
+            try {
+                // Try to fetch artifact from API
+                const apiBase = window.location.origin.replace(/:\d+$/, ':8000');
+                const apiPath = artifactPath.startsWith('artifacts/') 
+                    ? artifactPath.substring(10)  // Remove 'artifacts/' prefix
+                    : artifactPath;
+                const response = await fetch(`${apiBase}/api/v1/dashboard/artifacts/${encodeURIComponent(apiPath)}`);
+                
+                if (response.ok) {
+                    currentArtifactData = await response.json();
+                } else {
+                    // Fallback: try to load from relative path
+                    const relativePath = artifactPath.startsWith('artifacts/') ? artifactPath : `artifacts/${artifactPath}`;
+                    const fileResponse = await fetch(`../../${relativePath}`);
+                    if (fileResponse.ok) {
+                        currentArtifactData = await fileResponse.json();
+                    } else {
+                        throw new Error(`Could not load artifact: ${response.status} ${response.statusText}`);
+                    }
+                }
+                
+                // Display in modal
+                document.getElementById('modalTitle').textContent = review.artifact_name || 'Artifact Viewer';
+                document.getElementById('modalArtifactContent').textContent = JSON.stringify(currentArtifactData, null, 2);
+                document.getElementById('artifactModal').style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error loading artifact:', error);
+                alert('Could not load artifact. Error: ' + error.message);
+            }
+        }
+        
+        function closeArtifactModal() {
+            document.getElementById('artifactModal').style.display = 'none';
+            currentArtifactData = null;
+        }
+        
+        function copyArtifactContent() {
+            if (!currentArtifactData) return;
+            const text = JSON.stringify(currentArtifactData, null, 2);
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Artifact content copied to clipboard!');
+            });
+        }
+        
+        function copyArtifactSummary() {
+            if (!currentArtifactData) return;
+            const summary = currentArtifactData.executive_summary || currentArtifactData.summary || {};
+            const text = JSON.stringify(summary, null, 2);
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Artifact summary copied to clipboard!');
+            });
+        }
+        
+        function copyArtifactKeyFindings() {
+            if (!currentArtifactData) return;
+            const findings = currentArtifactData.executive_summary?.key_findings || 
+                           currentArtifactData.key_findings || 
+                           [];
+            const text = Array.isArray(findings) ? findings.join('\n') : JSON.stringify(findings, null, 2);
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Key findings copied to clipboard!');
+            });
+        }
+        
+        function copyFromArtifact(action) {
+            if (!currentArtifactData) {
+                alert('Please view an artifact first');
+                return;
+            }
+            
+            const rationaleTextarea = document.getElementById(`${action}Rationale`);
+            const copyFeedback = document.getElementById(`${action}CopyFeedback`);
+            
+            // Copy executive summary or key findings
+            const summary = currentArtifactData.executive_summary || {};
+            const findings = summary.key_findings || [];
+            const textToCopy = findings.length > 0 
+                ? findings.join('\n- ')
+                : JSON.stringify(summary, null, 2);
+            
+            // Append to rationale
+            if (rationaleTextarea.value) {
+                rationaleTextarea.value += '\n\n' + textToCopy;
+            } else {
+                rationaleTextarea.value = textToCopy;
+            }
+            
+            // Show feedback
+            copyFeedback.textContent = '✓ Copied!';
+            copyFeedback.style.display = 'inline-block';
+            setTimeout(() => {
+                copyFeedback.style.display = 'none';
+            }, 2000);
+        }
+        
+        function quickApprove(index) {
+            const review = pendingReviewsList[index];
+            if (!review) return;
+            
+            const artifactId = review.artifact_id || review.artifact_path || '';
+            const gateId = review.gate_id || review.review_gate || 'HR_PRE';
+            
+            document.getElementById('approveArtifactSelect').value = index;
+            populateArtifactInfo('approve', index);
+            document.getElementById('approveArtifactId').value = artifactId;
+            document.getElementById('approveGateId').value = gateId;
+            
+            // Scroll to approve form
+            document.querySelector('.command-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        function quickReject(index) {
+            const review = pendingReviewsList[index];
+            if (!review) return;
+            
+            const artifactId = review.artifact_id || review.artifact_path || '';
+            const gateId = review.gate_id || review.review_gate || 'HR_PRE';
+            
+            document.getElementById('rejectArtifactSelect').value = index;
+            populateArtifactInfo('reject', index);
+            document.getElementById('rejectArtifactId').value = artifactId;
+            document.getElementById('rejectGateId').value = gateId;
+            
+            // Scroll to reject form
+            const rejectForm = document.querySelectorAll('.command-form')[1];
+            rejectForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('artifactModal');
+            if (event.target === modal) {
+                closeArtifactModal();
+            }
+        }
+        
+        // Command handlers
+        async function handleApprove() {
+            const gateId = document.getElementById('approveGateId').value;
+            const artifactId = document.getElementById('approveArtifactId').value;
+            const rationale = document.getElementById('approveRationale').value;
+            
+            if (!gateId || !artifactId) {
+                alert('Please fill in Gate ID and Artifact ID');
+                return;
+            }
+            
+            try {
+                const result = await dashboardAPI.approveArtifact(gateId, artifactId, rationale);
+                logEvent('Artifact approved', result);
+                alert('Artifact approved successfully!');
+            } catch (error) {
+                logEvent('Approve failed', { error: error.message });
+                alert('Failed to approve artifact: ' + error.message);
+            }
+        }
+        
+        async function handleReject() {
+            const gateId = document.getElementById('rejectGateId').value;
+            const artifactId = document.getElementById('rejectArtifactId').value;
+            const rationale = document.getElementById('rejectRationale').value;
+            
+            if (!gateId || !artifactId) {
+                alert('Please fill in Gate ID and Artifact ID');
+                return;
+            }
+            
+            try {
+                const result = await dashboardAPI.rejectArtifact(gateId, artifactId, rationale);
+                logEvent('Artifact rejected', result);
+                alert('Artifact rejected successfully!');
+            } catch (error) {
+                logEvent('Reject failed', { error: error.message });
+                alert('Failed to reject artifact: ' + error.message);
+            }
+        }
+        
+        async function handleTriggerAgent() {
+            const agentId = document.getElementById('triggerAgentId').value;
+            
+            if (!agentId) {
+                alert('Please fill in Agent ID');
+                return;
+            }
+            
+            try {
+                const result = await dashboardAPI.triggerAgent(agentId);
+                logEvent('Agent triggered', result);
+                alert('Agent triggered successfully!');
+            } catch (error) {
+                logEvent('Trigger failed', { error: error.message });
+                alert('Failed to trigger agent: ' + error.message);
+            }
+        }
+        
+        async function handleAdvanceState() {
+            const nextState = document.getElementById('advanceState').value;
+            const confirmation = document.getElementById('advanceConfirmation').value;
+            
+            if (!nextState || !confirmation) {
+                alert('Please fill in Next State and External Confirmation');
+                return;
+            }
+            
+            try {
+                const result = await dashboardAPI.advanceState(nextState, confirmation);
+                logEvent('State advanced', result);
+                alert('State advanced successfully!');
+            } catch (error) {
+                logEvent('Advance failed', { error: error.message });
+                alert('Failed to advance state: ' + error.message);
+            }
+        }
+        
+        function logEvent(type, data) {
+            const log = document.getElementById('eventLog');
+            const time = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.textContent = `[${time}] ${type}: ${JSON.stringify(data)}`;
+            log.insertBefore(entry, log.firstChild);
+            
+            // Keep only last 50 entries
+            while (log.children.length > 50) {
+                log.removeChild(log.lastChild);
+            }
+        }
+        
+        // Initialize
+        stateManager.initialize();
+        realtimeUpdater.initialize();
+        
+        // Listen for real-time events
+        realtimeUpdater.onArtifactApproved((data) => {
+            logEvent('Real-time: Artifact approved', data);
+        });
+        
+        realtimeUpdater.onArtifactRejected((data) => {
+            logEvent('Real-time: Artifact rejected', data);
+        });
+        
+        realtimeUpdater.onStateAdvanced((data) => {
+            logEvent('Real-time: State advanced', data);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+---
+config:
+  layout: dagre
+  theme: default
+---
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+flowchart TB
+
+subgraph HEADER["Policy Action Plan: Wi-Charge Technology"]
+  direction LR
+  TITLE["NDAA FY2026 S.2296<br/>90-Day Execution Roadmap"]
+  TIMELINE["Timeline: Q1 2026<br/>Days 1-30 | 31-60 | 61-90"]
+end
+
+subgraph PATHS["Three Execution Paths"]
+  direction LR
+  
+  subgraph P1["Path 1: Infrastructure"]
+    P1_SECT["Sections: 2101, 2201, 2301, 2402"]
+    P1_PHASES["Phase 1 → Phase 2 → Phase 3"]
+    P1_STAKE["Stakeholders:<br/>NAVFAC, AFCEC, IMCOM"]
+    P1_ASK["Ask: MILCON integration<br/>ERCIP funding"]
+  end
+  
+  subgraph P2["Path 2: R&D"]
+    P2_SECT["Sections: 220A, 220"]
+    P2_PHASES["Phase 1 → Phase 2 → Phase 3"]
+    P2_STAKE["Stakeholders:<br/>SBIR/STTR, DIU"]
+    P2_ASK["Ask: SBIR/STTR award<br/>DIU CSO contract"]
+  end
+  
+  subgraph P3["Path 3: Energy"]
+    P3_SECT["Sections: 2402, 314"]
+    P3_PHASES["Phase 1 → Phase 2 → Phase 3"]
+    P3_STAKE["Stakeholders:<br/>ERCIP, Energy Offices"]
+    P3_ASK["Ask: ERCIP funding<br/>Energy savings reinvestment"]
+  end
+end
+
+subgraph STAKEHOLDERS["Stakeholder Hierarchy"]
+  direction TB
+  CONG["Congressional<br/>Committees"]
+  DOD["DoD<br/>OSD, Agencies"]
+  SERV["Services<br/>Army, Navy, Air Force"]
+  IMPL["Implementing<br/>Offices"]
+  
+  CONG --> DOD
+  DOD --> SERV
+  SERV --> IMPL
+end
+
+subgraph PRIORITIES["Priority Sections"]
+  direction LR
+  P1_SEC["Priority 1 (Days 1-30)<br/>8 sections ⭐⭐⭐⭐⭐"]
+  P2_SEC["Priority 2 (Days 31-60)<br/>6 sections ⭐⭐⭐⭐"]
+  
+  P1_SEC --> P2_SEC
+end
+
+subgraph OUTCOMES["Success Metrics (6-12 Months)"]
+  direction LR
+  METRIC1["Pilot deployment"]
+  METRIC2["Funding applications"]
+  METRIC3["Engagement established"]
+  METRIC4["Partnerships formed"]
+end
+
+HEADER --> PATHS
+PATHS --> STAKEHOLDERS
+PATHS --> PRIORITIES
+PATHS --> OUTCOMES
+
+P1 --> METRIC1
+P2 --> METRIC2
+P3 --> METRIC3
+
+classDef header fill:#D1FAE5,stroke:#065F46,stroke-width:3px
+classDef path fill:#DBEAFE,stroke:#1E40AF,stroke-width:2px
+classDef stakeholder fill:#F3F4F6,stroke:#6B7280,stroke-width:2px
+classDef priority fill:#E0F2FE,stroke:#0369A1,stroke-width:2px
+classDef outcome fill:#D1FAE5,stroke:#065F46,stroke-width:2px
+
+class TITLE,TIMELINE header
+class P1,P2,P3,P1_SECT,P1_PHASES,P1_STAKE,P1_ASK,P2_SECT,P2_PHASES,P2_STAKE,P2_ASK,P3_SECT,P3_PHASES,P3_STAKE,P3_ASK path
+class CONG,DOD,SERV,IMPL stakeholder
+class P1_SEC,P2_SEC priority
+class METRIC1,METRIC2,METRIC3,METRIC4 outcome

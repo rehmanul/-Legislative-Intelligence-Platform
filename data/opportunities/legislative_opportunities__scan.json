@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "source_files": [
+      "signal_summary.json",
+      "stakeholder_map",
+      "KEY_FINDINGS_REPORT.md",
+      "legislative-state.json"
+    ],
+    "scanned_at": "2026-01-07T11:19:35.399837Z",
+    "script": "scan__legislative_opportunities.py",
+    "schema_version": "1.0.0",
+    "count": 1
+  },
+  "opportunities": [
+    {
+      "opportunity_id": "1ec0100e-7a63-4dbd-aae6-31fa457dfc52",
+      "type": "bill",
+      "item_id": "S.2296",
+      "title": "NDAA FY2026",
+      "status": "Enrolled (ES - Engrossed in Senate)",
+      "source": "wi_charge_scenario/KEY_FINDINGS_REPORT.md",
+      "jurisdiction_check": {
+        "status": "PASS",
+        "reasoning": [
+          "Bill identifier found - committees should be identifiable"
+        ],
+        "gaps": []
+      },
+      "timing_window_check": {
+        "status": "UNCERTAIN",
+        "reasoning": [
+          "Bill appears enrolled - timing may be post-passage"
+        ],
+        "gaps": [
+          "Cannot determine if pre-conference, post-passage, or implementation phase"
+        ]
+      },
+      "power_concentration_check": {
+        "status": "PASS",
+        "reasoning": [
+          "NDAA is must-pass legislation - high leverage",
+          "Multiple choke points: committee chairs, conference, Rules Committee"
+        ],
+        "gaps": [
+          "Committee leadership data not available"
+        ]
+      },
+      "companion_bill_check": {
+        "status": "PARTIAL",
+        "reasoning": [
+          "Senate bill - House companion may exist but not identified"
+        ],
+        "gaps": [
+          "House companion bill not found in artifacts"
+        ]
+      },
+      "must_pass_check": {
+        "status": "PASS",
+        "reasoning": [
+          "Identified as must-pass: NDAA FY2026"
+        ],
+        "gaps": []
+      },
+      "overall_score": 0.75,
+      "recommendation": "PROCEED",
+      "gaps": [
+        "Cannot determine if pre-conference, post-passage, or implementation phase",
+        "Committee leadership data not available",
+        "House companion bill not found in artifacts"
+      ],
+      "reasoning": "jurisdiction: PASS | Bill identifier found - committees should be identifiable | timing: UNCERTAIN | Bill appears enrolled - timing may be post-passage | power: PASS | NDAA is must-pass legislation - high leverage | Multiple choke points: committee chairs, conference, Rules Committee | companion: PARTIAL | Senate bill - House companion may exist but not identified | must_pass: PASS | Identified as must-pass: NDAA FY2026"
+    }
+  ]
+}

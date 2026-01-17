@@ -1,0 +1,126 @@
+flowchart TB
+    subgraph PolicyOpportunity["Policy Opportunity:<br/>Risk Mitigation Technology<br/>Certification Framework"]
+        direction TB
+        
+        PO1["Primary Opportunity:<br/>Risk Mitigation Technology<br/>Certification Framework"]
+        PO2["Secondary Opportunity:<br/>Insurance Premium Credit<br/>Regulatory Pathway"]
+        PO3["Tertiary Opportunity:<br/>Federal Procurement<br/>Preference"]
+        PO4["Quaternary Opportunity:<br/>Compliance Benefit<br/>Framework"]
+    end
+    
+    subgraph Technology["Wireless Power Technology<br/>Wi-Charge"]
+        direction TB
+        
+        Tech1["Eliminates Battery<br/>Failure Modes"]
+        Tech2["Improves Monitoring<br/>Uptime 95%+"]
+        Tech3["Reduces Maintenance<br/>Requirements"]
+        Tech4["Reduces Insurable<br/>Risks 15-30%"]
+    end
+    
+    subgraph InsurableRisks["Insurable Risk Categories"]
+        direction LR
+        
+        IR1["Power Delivery<br/>Failure Risk"]
+        IR2["Coverage Gap<br/>Risk"]
+        IR3["Maintenance<br/>Failure Risk"]
+        IR4["Environmental<br/>Risk"]
+    end
+    
+    subgraph RiskMitigation["Risk Mitigation Outcomes"]
+        direction TB
+        
+        RM1["Reduced Failure<br/>Frequency 95%+"]
+        RM2["Reduced Expected<br/>Annual Loss 15-30%"]
+        RM3["Improved Uptime<br/>Assurance"]
+        RM4["Lower Tail Risk<br/>for Reinsurance"]
+    end
+    
+    subgraph PolicyFramework["Policy Framework Components"]
+        direction TB
+        
+        PF1["Technology<br/>Certification<br/>Standards"]
+        PF2["Actuarial<br/>Validation<br/>Requirements"]
+        PF3["Engineering<br/>Site Survey<br/>Requirements"]
+        PF4["Premium Credit<br/>Calculation<br/>Methodology"]
+    end
+    
+    subgraph NDAAHooks["NDAA FY2026 Legislative Hooks"]
+        direction TB
+        
+        NDAA1["Sec. 7401:<br/>Lithium Ion Fire<br/>Awareness"]
+        NDAA2["Sec. 2829/2830:<br/>Mold Remediation<br/>Pilot Program"]
+        NDAA3["Sec. 229/341/345/2832:<br/>Predictive Maintenance<br/>37 Pilot Programs"]
+        NDAA4["Sec. 244:<br/>Biomanufacturing<br/>Supply Chain"]
+    end
+    
+    subgraph Outcomes["Policy Outcomes"]
+        direction TB
+        
+        O1["Insurance Premium<br/>Credits 5-15%"]
+        O2["Federal Procurement<br/>Preference"]
+        O3["Compliance Benefit<br/>Recognition"]
+        O4["Market Differentiation<br/>for Certified Tech"]
+    end
+    
+    subgraph Stakeholders["Stakeholder Ecosystem"]
+        direction LR
+        
+        S1["Insurance Industry<br/>NAIC, FM Global, Chubb"]
+        S2["Federal Agencies<br/>DHS, FEMA, GSA"]
+        S3["Technology Companies<br/>Wi-Charge, IoT Vendors"]
+        S4["Regulatory Agencies<br/>OSHA, EPA, DHS"]
+    end
+    
+    Tech1 -->|Eliminates| IR1
+    Tech2 -->|Eliminates| IR2
+    Tech3 -->|Eliminates| IR3
+    Tech4 -->|Reduces| IR4
+    
+    IR1 -->|Reduces| RM1
+    IR2 -->|Reduces| RM2
+    IR3 -->|Reduces| RM3
+    IR4 -->|Reduces| RM4
+    
+    RM1 -->|Quantifies| PF1
+    RM2 -->|Validates| PF2
+    RM3 -->|Documents| PF3
+    RM4 -->|Calculates| PF4
+    
+    PF1 -->|Enables| PO1
+    PF2 -->|Enables| PO2
+    PF3 -->|Enables| PO3
+    PF4 -->|Enables| PO4
+    
+    NDAA1 -->|Requires Risk<br/>Monitoring| PO1
+    NDAA2 -->|Requires Continuous<br/>Monitoring| PO1
+    NDAA3 -->|Requires Predictive<br/>Maintenance| PO1
+    NDAA4 -->|Requires Supply Chain<br/>Resilience| PO1
+    
+    PO1 -->|Creates| O1
+    PO2 -->|Creates| O1
+    PO3 -->|Creates| O2
+    PO4 -->|Creates| O3
+    PO1 -->|Creates| O4
+    
+    S1 -->|Supports Premium<br/>Credits| PO2
+    S2 -->|Implements<br/>Framework| PO1
+    S3 -->|Benefits from<br/>Certification| PO1
+    S4 -->|Recognizes<br/>Compliance| PO4
+    
+    style PO1 fill:#fff9c4,stroke:#f39c12,stroke-width:3px
+    style Tech1 fill:#e3f2fd,stroke:#2196f3
+    style Tech2 fill:#e3f2fd,stroke:#2196f3
+    style Tech3 fill:#e3f2fd,stroke:#2196f3
+    style Tech4 fill:#e3f2fd,stroke:#2196f3
+    style IR1 fill:#ffebee,stroke:#f44336
+    style IR2 fill:#ffebee,stroke:#f44336
+    style IR3 fill:#ffebee,stroke:#f44336
+    style IR4 fill:#ffebee,stroke:#f44336
+    style RM1 fill:#e8f5e9,stroke:#4caf50
+    style RM2 fill:#e8f5e9,stroke:#4caf50
+    style RM3 fill:#e8f5e9,stroke:#4caf50
+    style RM4 fill:#e8f5e9,stroke:#4caf50
+    style O1 fill:#f3e5f5,stroke:#9c27b0
+    style O2 fill:#f3e5f5,stroke:#9c27b0
+    style O3 fill:#f3e5f5,stroke:#9c27b0
+    style O4 fill:#f3e5f5,stroke:#9c27b0

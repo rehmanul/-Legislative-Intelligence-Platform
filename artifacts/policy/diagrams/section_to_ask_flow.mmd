@@ -1,0 +1,93 @@
+---
+config:
+  layout: dagre
+  theme: default
+---
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+flowchart LR
+
+subgraph SECTIONS["Bill Sections (Priority 1)"]
+  direction TB
+  S2101["Sec. 2101<br/>Army Construction<br/>⭐⭐⭐⭐⭐"]
+  S2201["Sec. 2201<br/>Navy Construction<br/>⭐⭐⭐⭐⭐"]
+  S2301["Sec. 2301<br/>Air Force Construction<br/>⭐⭐⭐⭐⭐"]
+  S2402["Sec. 2402<br/>ERCIP<br/>⭐⭐⭐⭐⭐"]
+  S314["Sec. 314<br/>Energy Savings<br/>⭐⭐⭐⭐⭐"]
+  S220A["Sec. 220A<br/>Advanced Manufacturing<br/>⭐⭐⭐⭐⭐"]
+  S220["Sec. 220<br/>Innovation Hubs<br/>⭐⭐⭐⭐⭐"]
+end
+
+subgraph PATHS["Execution Paths"]
+  direction TB
+  INFRA["Path 1:<br/>Infrastructure"]
+  RD["Path 2:<br/>R&D"]
+  ENERGY["Path 3:<br/>Energy"]
+end
+
+subgraph ENGAGEMENT["Engagement Types"]
+  direction TB
+  MILCON["MILCON Alignment"]
+  ERCIP["ERCIP Application"]
+  SBIR["SBIR/STTR"]
+  DIU["DIU CSO"]
+  ENERGY_SAV["Energy Savings<br/>Reinvestment"]
+end
+
+subgraph ASKS["Clear Asks"]
+  direction TB
+  ASK1["Include wireless power<br/>in MILCON specs"]
+  ASK2["Approve ERCIP funding"]
+  ASK3["Award SBIR/STTR Phase I"]
+  ASK4["Execute DIU CSO contract"]
+  ASK5["Approve energy savings<br/>reinvestment"]
+end
+
+subgraph TARGETS["Target Offices"]
+  direction TB
+  T1["NAVFAC, AFCEC, IMCOM"]
+  T2["ERCIP Program Office"]
+  T3["SBIR/STTR Offices"]
+  T4["DIU"]
+  T5["Service Energy Offices"]
+end
+
+S2101 --> INFRA
+S2201 --> INFRA
+S2301 --> INFRA
+S2402 --> INFRA
+S2402 --> ENERGY
+S314 --> ENERGY
+S220A --> RD
+S220 --> RD
+
+INFRA --> MILCON
+INFRA --> ERCIP
+RD --> SBIR
+RD --> DIU
+ENERGY --> ERCIP
+ENERGY --> ENERGY_SAV
+
+MILCON --> ASK1
+ERCIP --> ASK2
+SBIR --> ASK3
+DIU --> ASK4
+ENERGY_SAV --> ASK5
+
+ASK1 --> T1
+ASK2 --> T2
+ASK3 --> T3
+ASK4 --> T4
+ASK5 --> T5
+
+classDef section fill:#E0F2FE,stroke:#0369A1,stroke-width:2px
+classDef path fill:#DBEAFE,stroke:#1E40AF,stroke-width:2px
+classDef engagement fill:#FEF3C7,stroke:#92400E,stroke-width:2px
+classDef ask fill:#D1FAE5,stroke:#065F46,stroke-width:2px
+classDef target fill:#F3F4F6,stroke:#6B7280,stroke-width:2px
+
+class S2101,S2201,S2301,S2402,S314,S220A,S220 section
+class INFRA,RD,ENERGY path
+class MILCON,ERCIP,SBIR,DIU,ENERGY_SAV engagement
+class ASK1,ASK2,ASK3,ASK4,ASK5 ask
+class T1,T2,T3,T4,T5 target

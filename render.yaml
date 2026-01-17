@@ -1,0 +1,37 @@
+# Render Blueprint - Legislative Intelligence Platform
+# Deploy with: https://render.com/deploy?repo=YOUR_GITHUB_REPO
+
+services:
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Backend API (FastAPI + Python)
+  # ═══════════════════════════════════════════════════════════════════════════
+  - type: web
+    name: orchestrator-api
+    runtime: python
+    plan: free
+    region: oregon
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: ENVIRONMENT
+        value: "production"
+    healthCheckPath: /health
+    autoDeploy: true
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Frontend Dashboard (Node.js for dev/preview, builds static assets)
+  # ═══════════════════════════════════════════════════════════════════════════
+  - type: web
+    name: orchestrator-dashboard
+    runtime: node
+    plan: free
+    region: oregon
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npx serve dist -l $PORT
+    envVars:
+      - key: VITE_API_URL
+        value: https://orchestrator-api.onrender.com
+    autoDeploy: true

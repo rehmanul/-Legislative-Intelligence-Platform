@@ -1,0 +1,83 @@
+%% Congressional Influence Graph & Power Modeling — System Context
+%% Planning Agent Output — Shows where graph model fits in existing system
+
+graph TB
+    subgraph EXISTING["🟦 Existing System (Production-Adjacent MVP)"]
+        LEG_STATE["📍 Legislative State Machine<br/>PRE_EVT → INTRO_EVT → COMM_EVT<br/>→ FLOOR_EVT → FINAL_EVT → IMPL_EVT"]
+        ARTIFACT["📄 Artifact System<br/>_meta headers, review gates<br/>HR_PRE, HR_LANG, HR_MSG, HR_RELEASE"]
+        SCHEMA["📋 Existing Schemas<br/>artifact.schema.json<br/>phase_state.schema.json<br/>decision_log.schema.json"]
+        COMM_DATA["🏛️ Committee Data<br/>Members, Committees, Staff<br/>CommitteeMembership"]
+        STAFF_SCHEMA["👥 Staff Schema<br/>First-class nodes<br/>continuity_score, network_span"]
+    end
+
+    subgraph GRAPH_PLAN["🟨 Graph Model Design (This Planning Work)"]
+        NODES["🔵 Node Taxonomy<br/>• Members (existing)<br/>• Staff (existing)<br/>• Industry Orgs (NEW)<br/>• Nonprofits (NEW)<br/>• Trade Associations (NEW)<br/>• Coalitions (NEW)<br/>• Narratives (NEW)<br/>• Boundary Actors (NEW)"]
+        
+        EDGES["🔗 Edge Taxonomy<br/>• Authority edges (formal power)<br/>• Influence edges (informal power)<br/>• Blocking/delay edges<br/>• Routing/translation edges<br/>• Legitimacy/reputation edges<br/>• Memory transfer edges<br/>• Pre-negotiation edges"]
+        
+        POWER["⚡ Power Classification<br/>PRIMARY / SECONDARY / SHADOW<br/>Contextual by legislative state<br/>Conflict resolution rules"]
+        
+        EXISTING_EDGES["✅ Existing Edge Schemas<br/>influence_edge.schema.json<br/>control_classification.schema.json<br/>process_leverage.schema.json"]
+    end
+
+    subgraph INTEGRATION["⬜ Integration Points (Must Preserve)"]
+        ARTIFACT_COMPAT["🔗 Artifact Compatibility<br/>Graph entities/edges include _meta<br/>Review gates apply to graph updates<br/>Confidence levels track uncertainty"]
+        
+        STATE_AWARE["🔗 State Awareness<br/>Edges have legislative_state field<br/>Power classifications are state-dependent<br/>State transitions trigger edge activation/decay"]
+        
+        AUDIT["🔗 Audit Logging<br/>All graph modifications logged<br/>Power transfers tracked<br/>Override decisions recorded"]
+        
+        DASHBOARD["🔗 Dashboard Compatibility<br/>Queryable, visualizable, filterable<br/>Temporal queries supported"]
+    end
+
+    subgraph FUTURE_IMPL["⬜ Future Implementation (Out of Scope)"]
+        BUILDER["🤖 Graph Builder Agent<br/>Creates/updates graph entities/edges<br/>Integrates with artifact system"]
+        
+        CLASSIFIER["🤖 Power Classification Engine<br/>Automated defaults (rules-based)<br/>Conflict resolution logic"]
+        
+        QUERY["🔍 Graph Query Interface<br/>Who influences X?<br/>What is Y's power?<br/>Filter by state/policy area"]
+        
+        VISUAL["📊 Dashboard Visualization<br/>Graph rendering<br/>Power heatmaps<br/>Influence pathways"]
+    end
+
+    %% Existing system connections
+    LEG_STATE --> COMM_DATA
+    ARTIFACT --> SCHEMA
+    COMM_DATA --> STAFF_SCHEMA
+
+    %% Planning work extends existing
+    COMM_DATA -.->|extends| NODES
+    STAFF_SCHEMA -.->|extends| NODES
+    EXISTING_EDGES -.->|extends| EDGES
+    SCHEMA -.->|compatible with| ARTIFACT_COMPAT
+
+    %% Graph model components
+    NODES --> EDGES
+    EDGES --> POWER
+    POWER --> ARTIFACT_COMPAT
+
+    %% Integration requirements
+    ARTIFACT_COMPAT --> STATE_AWARE
+    STATE_AWARE --> AUDIT
+    AUDIT --> DASHBOARD
+    LEG_STATE --> STATE_AWARE
+    ARTIFACT --> ARTIFACT_COMPAT
+
+    %% Future implementation depends on planning
+    GRAPH_PLAN -.->|authorizes| FUTURE_IMPL
+    NODES -.->|defines| BUILDER
+    EDGES -.->|defines| BUILDER
+    POWER -.->|defines| CLASSIFIER
+    DASHBOARD -.->|enables| QUERY
+    QUERY -.->|enables| VISUAL
+
+    %% Styling
+    classDef existing fill:#4a90e2,stroke:#2e5c8a,stroke-width:2px,color:#fff
+    classDef planning fill:#f5a623,stroke:#d68910,stroke-width:2px,color:#fff
+    classDef integration fill:#7f8c8d,stroke:#5d6d7e,stroke-width:2px,color:#fff
+    classDef future fill:#95a5a6,stroke:#7f8c8d,stroke-width:2px,color:#fff
+
+    class LEG_STATE,ARTIFACT,SCHEMA,COMM_DATA,STAFF_SCHEMA existing
+    class NODES,EDGES,POWER,EXISTING_EDGES planning
+    class ARTIFACT_COMPAT,STATE_AWARE,AUDIT,DASHBOARD integration
+    class BUILDER,CLASSIFIER,QUERY,VISUAL future

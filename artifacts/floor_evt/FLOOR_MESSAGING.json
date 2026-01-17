@@ -1,0 +1,67 @@
+{
+  "_meta": {
+    "agent_id": "draft_messaging_floor_evt",
+    "generated_at": "2026-01-07T20:14:27.412150+00:00",
+    "artifact_type": "FLOOR_MESSAGING",
+    "artifact_name": "Floor Messaging & Talking Points",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": "HR_MSG",
+    "guidance_status": "SIGNED",
+    "schema_version": "1.0.0",
+    "phase": "FLOOR_EVT"
+  },
+  "title": "Floor Messaging - Wireless Power Technology Amendment",
+  "summary": "Talking points and messaging framework for floor consideration of wireless power technology provisions.",
+  "key_messages": [
+    {
+      "audience": "Floor Members",
+      "message": "This amendment advances American leadership in wireless power technology while strengthening defense infrastructure.",
+      "supporting_points": [
+        "Bipartisan support for defense modernization",
+        "Cost-effective energy efficiency improvements",
+        "American technology leadership"
+      ]
+    },
+    {
+      "audience": "Defense Hawks",
+      "message": "Wireless power technology enhances operational readiness and reduces infrastructure vulnerabilities.",
+      "supporting_points": [
+        "Reduces wiring vulnerabilities in facilities",
+        "Improves equipment mobility and flexibility",
+        "Supports force readiness objectives"
+      ]
+    },
+    {
+      "audience": "Fiscal Conservatives",
+      "message": "This demonstration program delivers measurable ROI through energy savings and reduced maintenance costs.",
+      "supporting_points": [
+        "Modest $10M authorization with clear metrics",
+        "Projected energy savings exceed investment",
+        "Scalable based on demonstrated results"
+      ]
+    }
+  ],
+  "talking_points": [
+    "The wireless power demonstration program builds on existing NDAA provisions for advanced manufacturing and energy efficiency.",
+    "This technology has been successfully deployed in commercial applications and is ready for defense evaluation.",
+    "The amendment requires reporting to Congress, ensuring accountability and oversight.",
+    "Bipartisan cosponsors demonstrate broad support for this common-sense modernization initiative."
+  ],
+  "anticipated_objections": [
+    {
+      "objection": "Technology is unproven",
+      "response": "Commercial deployments demonstrate proven technology. This program evaluates defense-specific applications."
+    },
+    {
+      "objection": "Budget concerns",
+      "response": "The $10M authorization is modest and includes clear performance metrics. Projected energy savings provide positive ROI."
+    },
+    {
+      "objection": "Not a defense priority",
+      "response": "Infrastructure modernization is a stated DoD priority. This amendment directly supports that objective."
+    }
+  ],
+  "disclaimer": "This messaging is SPECULATIVE and requires human review via HR_MSG before any external use."
+}

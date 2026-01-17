@@ -1,0 +1,68 @@
+---
+config:
+  layout: dagre
+  theme: default
+---
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+flowchart LR
+
+subgraph P1["Priority 1: Immediate Action (Days 1-30)"]
+  direction TB
+  
+  subgraph INFRA_P1["Infrastructure P1"]
+    S2101["Sec. 2101<br/>Army Construction<br/>⭐⭐⭐⭐⭐"]
+    S2201["Sec. 2201<br/>Navy Construction<br/>⭐⭐⭐⭐⭐"]
+    S2301["Sec. 2301<br/>Air Force Construction<br/>⭐⭐⭐⭐⭐"]
+    S2402_INFRA["Sec. 2402<br/>ERCIP (Infrastructure)<br/>⭐⭐⭐⭐⭐"]
+  end
+  
+  subgraph RD_P1["R&D P1"]
+    S220A["Sec. 220A<br/>Advanced Manufacturing<br/>⭐⭐⭐⭐⭐"]
+    S220["Sec. 220<br/>Innovation Hubs<br/>⭐⭐⭐⭐⭐"]
+  end
+  
+  subgraph ENERGY_P1["Energy P1"]
+    S2402_ENERGY["Sec. 2402<br/>ERCIP (Energy)<br/>⭐⭐⭐⭐⭐"]
+    S314["Sec. 314<br/>Energy Savings<br/>⭐⭐⭐⭐⭐"]
+  end
+end
+
+subgraph P2["Priority 2: Secondary Action (Days 31-60)"]
+  direction TB
+  
+  subgraph INFRA_P2["Infrastructure P2"]
+    S1060_INFRA["Sec. 1060<br/>Priority Energy<br/>⭐⭐⭐⭐"]
+  end
+  
+  subgraph RD_P2["R&D P2"]
+    S227["Sec. 227<br/>International Coord<br/>⭐⭐⭐⭐"]
+    S212["Sec. 212<br/>R&D Center Enhancement<br/>⭐⭐⭐⭐"]
+    S322["Sec. 322<br/>Technology Enhancement<br/>⭐⭐⭐⭐"]
+  end
+  
+  subgraph ENERGY_P2["Energy P2"]
+    S1060_ENERGY["Sec. 1060<br/>Priority Energy<br/>⭐⭐⭐⭐"]
+    DIVC["Division C<br/>DOE NNSA<br/>⭐⭐⭐⭐"]
+  end
+end
+
+P1 --> P2
+
+S2101 --> ENGAGE1["MILCON Alignment<br/>Service Construction"]
+S2201 --> ENGAGE1
+S2301 --> ENGAGE1
+S2402_INFRA --> ENGAGE2["ERCIP Application<br/>ASD EI&E"]
+S220A --> ENGAGE3["SBIR/STTR<br/>Advanced Manufacturing"]
+S220 --> ENGAGE4["DIU CSO<br/>Innovation Hubs"]
+S2402_ENERGY --> ENGAGE2
+S314 --> ENGAGE5["Energy Savings<br/>Reinvestment"]
+
+classDef p1 fill:#D1FAE5,stroke:#065F46,stroke-width:3px
+classDef p2 fill:#FEF3C7,stroke:#92400E,stroke-width:2px
+classDef section fill:#DBEAFE,stroke:#1E40AF,stroke-width:2px
+classDef engage fill:#E0F2FE,stroke:#0369A1,stroke-width:2px
+
+class S2101,S2201,S2301,S2402_INFRA,S220A,S220,S2402_ENERGY,S314 section
+class S1060_INFRA,S227,S212,S322,S1060_ENERGY,DIVC section
+class ENGAGE1,ENGAGE2,ENGAGE3,ENGAGE4,ENGAGE5 engage

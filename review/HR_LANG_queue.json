@@ -1,0 +1,77 @@
+{
+  "_meta": {
+    "review_gate": "HR_LANG",
+    "review_gate_name": "Legislative Language Review",
+    "display_name": "Legislative Language Review",
+    "description": "Human approval of drafted legislative text before committee activity",
+    "created_at": "2026-01-20T12:00:00Z",
+    "status": "APPROVED",
+    "note": "API-MANAGED PLACEHOLDER - This file is maintained by API. Created as placeholder for future COMM_EVT workflows."
+  },
+  "pending_reviews": [],
+  "review_history": [
+    {
+      "review_id": "72da50d0-d15e-4b75-b9f6-e3c72f0e1c62_Committee_Briefing_Packet",
+      "artifact_path": "artifacts\\draft_committee_briefing_comm_evt\\committee_briefing_packet.json",
+      "artifact_type": "COMM_COMMITTEE_BRIEFING",
+      "artifact_name": "Committee Briefing Packet",
+      "submitted_by": "process_comm_evt_artifacts",
+      "submitted_at": "2026-01-07T20:11:57.034660+00:00",
+      "review_effort_estimate": "15-30 minutes",
+      "risk_level": "Medium-High",
+      "review_requirements": [
+        "Review legislative language for accuracy",
+        "Assess alignment with policy goals",
+        "Evaluate strategic approach",
+        "Approve or reject for committee use"
+      ],
+      "status": "APPROVED",
+      "decision": "APPROVED",
+      "decision_at": "2026-01-07T20:11:57.107216+00:00",
+      "decision_by": "user",
+      "decision_rationale": "Approved for COMM_EVT workflow progression"
+    },
+    {
+      "review_id": "672c5035-7d2f-4ec0-b37d-3c91b8aa9f2f_Draft_Legislative_Language",
+      "artifact_path": "artifacts\\draft_legislative_language_comm_evt\\COMM_LEGISLATIVE_LANGUAGE.json",
+      "artifact_type": "COMM_LEGISLATIVE_LANGUAGE",
+      "artifact_name": "Draft Legislative Language",
+      "submitted_by": "process_comm_evt_artifacts",
+      "submitted_at": "2026-01-07T20:11:57.058711+00:00",
+      "review_effort_estimate": "15-30 minutes",
+      "risk_level": "Medium-High",
+      "review_requirements": [
+        "Review legislative language for accuracy",
+        "Assess alignment with policy goals",
+        "Evaluate strategic approach",
+        "Approve or reject for committee use"
+      ],
+      "status": "APPROVED",
+      "decision": "APPROVED",
+      "decision_at": "2026-01-07T20:11:57.109252+00:00",
+      "decision_by": "user",
+      "decision_rationale": "Approved for COMM_EVT workflow progression"
+    },
+    {
+      "review_id": "9b27ee6f-7e76-4609-8296-c96ea9762188_Amendment_Strategy",
+      "artifact_path": "artifacts\\draft_amendment_strategy_comm_evt\\COMM_AMENDMENT_STRATEGY.json",
+      "artifact_type": "COMM_AMENDMENT_STRATEGY",
+      "artifact_name": "Amendment Strategy",
+      "submitted_by": "process_comm_evt_artifacts",
+      "submitted_at": "2026-01-07T20:11:57.082173+00:00",
+      "review_effort_estimate": "15-30 minutes",
+      "risk_level": "Medium-High",
+      "review_requirements": [
+        "Review legislative language for accuracy",
+        "Assess alignment with policy goals",
+        "Evaluate strategic approach",
+        "Approve or reject for committee use"
+      ],
+      "status": "APPROVED",
+      "decision": "APPROVED",
+      "decision_at": "2026-01-07T20:11:57.110256+00:00",
+      "decision_by": "user",
+      "decision_rationale": "Approved for COMM_EVT workflow progression"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "_meta": {
+    "agent_id": "draft_authorization_comm_evt",
+    "generated_at": "2026-01-20T20:00:00Z",
+    "artifact_type": "AUTHORIZATION_BILL",
+    "artifact_name": "Authorization Bill Vehicle",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": "HR_LANG",
+    "guidance_status": "SIGNED"
+  },
+  "vehicle_metadata": {
+    "bill_number": "H.R. 9256",
+    "title": "National Science Foundation Reauthorization Act of 2026",
+    "sponsor": "Rep. Chen (D-MA)",
+    "primary_committee": "House Science, Space, and Technology Committee",
+    "vehicle_type": "AUTHORIZATION",
+    "reauthorization_target": "NSF authorization expires 2026 - must-pass vehicle opportunity"
+  },
+  "authorization_structure": {
+    "primary_purpose": "Reauthorize National Science Foundation programs and establish new research priorities",
+    "authorization_period": "Fiscal years 2027-2031 (5-year authorization)",
+    "funding_levels": "Authorizes $12.5B in FY2027, increasing to $15.2B in FY2031",
+    "new_programs": [
+      "Artificial Intelligence Safety Research Initiative",
+      "Climate Adaptation Technology Research",
+      "Rural STEM Education Partnerships"
+    ]
+  },
+  "rider_opportunities": {
+    "rider_1": {
+      "title": "Research Security and Foreign Influence Provisions",
+      "language_location": "Title III, Section 301",
+      "content": "Establishes requirements for disclosure of foreign funding and relationships in NSF grant applications",
+      "rationale": "Addresses bipartisan concern about foreign influence in research, fits naturally in NSF reauthorization",
+      "controversy_level": "LOW - bipartisan support for research security"
+    },
+    "rider_2": {
+      "title": "STEM Workforce Diversity Programs",
+      "language_location": "Title IV, Section 401",
+      "content": "Authorizes $200M over 5 years for programs to increase participation of underrepresented groups in STEM fields",
+      "rationale": "Aligns with NSF mission, addresses equity priorities, relatively non-controversial",
+      "controversy_level": "LOW-MEDIUM - some conservative members may object to diversity programs"
+    },
+    "rider_3": {
+      "title": "Technology Transfer and Commercialization Acceleration",
+      "language_location": "Title V, Section 501",
+      "content": "Establishes streamlined processes for universities to commercialize NSF-funded research",
+      "rationale": "Economic development angle appeals to both parties, supports innovation economy",
+      "controversy_level": "LOW - broad support for technology transfer"
+    }
+  },
+  "authorization_advantages": {
+    "must_pass_nature": "NSF requires periodic reauthorization - vehicle will move",
+    "broad_support": "NSF has strong bipartisan support, making riders less controversial",
+    "appropriate_venue": "Science and research provisions fit naturally in NSF bill",
+    "multi_year_authority": "5-year authorization provides stability and planning certainty"
+  },
+  "committee_dynamics": {
+    "primary_committee": "Science, Space, and Technology - Chair supports NSF reauthorization",
+    "secondary_committees": [
+      "Education and Labor - may claim jurisdiction over education provisions",
+      "Energy and Commerce - may claim jurisdiction over technology transfer"
+    ],
+    "jurisdictional_navigation": "Coordinate with other committees, offer to include their members' priorities in exchange for non-objection"
+  },
+  "funding_considerations": {
+    "authorization_vs_appropriation": "Authorization sets policy and funding levels; actual funding requires separate appropriations bills",
+    "budget_impact": "Authorization levels signal priorities but do not guarantee appropriations",
+    "offset_requirements": "May need to identify offsets for new spending, depending on PAYGO rules"
+  },
+  "timeline": {
+    "introduction": "January 2026",
+    "committee_markup": "March-April 2026",
+    "floor_consideration": "May-June 2026",
+    "senate_companion": "Parallel process in Senate Commerce, Science, and Transportation Committee",
+    "conference": "July-August 2026",
+    "enactment_target": "Before NSF authorization expires (September 30, 2026)"
+  },
+  "stakeholder_coalition": {
+    "research_universities": "Strong support - reauthorization critical for research funding stability",
+    "scientific_associations": "American Association for the Advancement of Science, disciplinary societies - full endorsement",
+    "industry": "Technology companies support research funding and technology transfer provisions",
+    "education_associations": "Support STEM education and diversity programs"
+  },
+  "opposition_risks": {
+    "fiscal_concerns": "Some conservative members may object to funding increases",
+    "diversity_program_resistance": "Portion of Republican caucus may oppose diversity-focused programs",
+    "foreign_influence_provisions": "Some research universities may object to disclosure requirements as burdensome"
+  },
+  "messaging": {
+    "primary": "Investing in scientific research and innovation keeps America competitive globally",
+    "secondary": "NSF reauthorization ensures continued support for groundbreaking research that drives economic growth",
+    "rider_frame": "These provisions strengthen research security, expand opportunity, and accelerate innovation - all core to NSF mission"
+  },
+  "disclaimer": "Authorization vehicle strategy depends on committee relationships and broader legislative calendar. Rider inclusion requires negotiation and may face points of order on germaneness."
+}

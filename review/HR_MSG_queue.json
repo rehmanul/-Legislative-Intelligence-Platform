@@ -1,0 +1,77 @@
+{
+  "_meta": {
+    "review_gate": "HR_MSG",
+    "review_gate_name": "Messaging & Narrative Review",
+    "display_name": "Messaging Review",
+    "description": "Human approval of policy messaging, framing, and talking points",
+    "created_at": "2026-01-20T12:00:00Z",
+    "status": "APPROVED",
+    "note": "API-MANAGED PLACEHOLDER - This file is maintained by API. Created as placeholder for future FLOOR_EVT workflows."
+  },
+  "pending_reviews": [],
+  "review_history": [
+    {
+      "review_id": "a3fab6f5-43ed-4d31-b5b0-96d95231e4a8_Floor_Messaging_&_Talking_Points",
+      "artifact_path": "artifacts\\floor_evt\\FLOOR_MESSAGING.json",
+      "artifact_type": "FLOOR_MESSAGING",
+      "artifact_name": "Floor Messaging & Talking Points",
+      "submitted_by": "process_floor_evt_artifacts",
+      "submitted_at": "2026-01-07T20:14:27.426027+00:00",
+      "review_effort_estimate": "10-20 minutes",
+      "risk_level": "High",
+      "review_requirements": [
+        "Review messaging for accuracy and tone",
+        "Assess alignment with policy goals",
+        "Evaluate public communication strategy",
+        "Approve or reject for external use"
+      ],
+      "status": "APPROVED",
+      "decision": "APPROVED",
+      "decision_at": "2026-01-07T20:14:27.494819+00:00",
+      "decision_by": "user",
+      "decision_rationale": "Approved for FLOOR_EVT workflow progression"
+    },
+    {
+      "review_id": "19799486-0beb-4b8e-9932-459d69d640cf_Press_&_Media_Narrative",
+      "artifact_path": "artifacts\\floor_evt\\FLOOR_MEDIA_NARRATIVE.json",
+      "artifact_type": "FLOOR_MEDIA_NARRATIVE",
+      "artifact_name": "Press & Media Narrative",
+      "submitted_by": "process_floor_evt_artifacts",
+      "submitted_at": "2026-01-07T20:14:27.450027+00:00",
+      "review_effort_estimate": "10-20 minutes",
+      "risk_level": "High",
+      "review_requirements": [
+        "Review messaging for accuracy and tone",
+        "Assess alignment with policy goals",
+        "Evaluate public communication strategy",
+        "Approve or reject for external use"
+      ],
+      "status": "APPROVED",
+      "decision": "APPROVED",
+      "decision_at": "2026-01-07T20:14:27.495832+00:00",
+      "decision_by": "user",
+      "decision_rationale": "Approved for FLOOR_EVT workflow progression"
+    },
+    {
+      "review_id": "02a21b74-2ed8-4b31-ac48-5eb759fcd496_Timing_&_Vote_Whip_Strategy",
+      "artifact_path": "artifacts\\floor_evt\\FLOOR_VOTE_WHIP_STRATEGY.json",
+      "artifact_type": "FLOOR_VOTE_WHIP_STRATEGY",
+      "artifact_name": "Timing & Vote Whip Strategy",
+      "submitted_by": "process_floor_evt_artifacts",
+      "submitted_at": "2026-01-07T20:14:27.471712+00:00",
+      "review_effort_estimate": "10-20 minutes",
+      "risk_level": "High",
+      "review_requirements": [
+        "Review messaging for accuracy and tone",
+        "Assess alignment with policy goals",
+        "Evaluate public communication strategy",
+        "Approve or reject for external use"
+      ],
+      "status": "APPROVED",
+      "decision": "APPROVED",
+      "decision_at": "2026-01-07T20:14:27.496843+00:00",
+      "decision_by": "user",
+      "decision_rationale": "Approved for FLOOR_EVT workflow progression"
+    }
+  ]
+}

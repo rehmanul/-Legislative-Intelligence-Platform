@@ -1,0 +1,24 @@
+{
+  "_meta": {
+    "agent_id": "draft_messaging_floor_evt",
+    "generated_at": "2026-01-20T23:00:00Z",
+    "artifact_type": "FLOOR_MESSAGING",
+    "artifact_name": "Floor Messaging and Talking Points",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": "HR_MSG",
+    "guidance_status": "SIGNED"
+  },
+  "bill_context": "H.R. 8821 - NDAA Floor Consideration, Amendment #47 - Cybersecurity Workforce Training",
+  "primary_message": "Supporting our cybersecurity workforce strengthens national defense and creates economic opportunity for veterans",
+  "talking_points": [
+    "Cybersecurity threats are growing - we need trained professionals to defend critical infrastructure",
+    "This amendment helps veterans transition to high-demand cybersecurity careers",
+    "Program prioritizes partnerships with HBCUs and community colleges to expand opportunity",
+    "$50M annually is modest investment compared to cybersecurity threat costs"
+  ],
+  "opposition_response": "If questioned on cost: 'The cost of a single successful cyberattack far exceeds this program's annual budget'",
+  "vote_recommendation": "YES",
+  "disclaimer": "Floor messaging requires member approval and may need adjustment based on debate dynamics."
+}

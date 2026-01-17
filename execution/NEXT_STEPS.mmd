@@ -1,0 +1,83 @@
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+flowchart TB
+    subgraph CurrentState["Current State: Phase 2 Complete"]
+        Current[Phase 2 Execution Complete<br/>✅ Agent executed successfully<br/>✅ 4 targets identified<br/>✅ 4 contacts created<br/>✅ 4 emails generated<br/>✅ 4 execution requests created]
+        
+        Current --> PendingApprovals[4 Pending Approvals<br/>Status: PENDING<br/>Review Gate: HR_LANG<br/>Workflow: orchestrator_core_planner]
+        
+        PendingApprovals --> Approval1[Request 1: Senator Johnson's Office<br/>legislative.director@senatorjohnson.senate.gov]
+        PendingApprovals --> Approval2[Request 2: Rep Martinez's Office<br/>policy.analyst@rep.martinez.house.gov]
+        PendingApprovals --> Approval3[Request 3: Energy Innovation Alliance<br/>info@energyinnovation.org]
+        PendingApprovals --> Approval4[Request 4: Clean Energy Coalition<br/>advocacy@cleanenergycoalition.org]
+    end
+    
+    subgraph ImmediateNext["IMMEDIATE NEXT STEP: Approval Workflow"]
+        Approval1 --> HumanReview[Human Reviewer<br/>Reviews Pending Requests<br/>via HR_LANG Gate]
+        Approval2 --> HumanReview
+        Approval3 --> HumanReview
+        Approval4 --> HumanReview
+        
+        HumanReview --> ReviewDecision{Review Decision}
+        
+        ReviewDecision -->|Approve| ApproveRequest[Approve Request<br/>via Approval Manager<br/>approve execution_id]
+        ReviewDecision -->|Reject| RejectRequest[Reject Request<br/>via Approval Manager<br/>reject execution_id]
+        ReviewDecision -->|Modify| ModifyRequest[Modify Content<br/>Resubmit for Approval]
+        
+        ApproveRequest --> ApprovedQueue[(Approved Requests<br/>Status: APPROVED)]
+        RejectRequest --> RejectedQueue[(Rejected Requests<br/>Status: REJECTED)]
+        ModifyRequest --> PendingApprovals
+    end
+    
+    subgraph AfterApproval["After Approval: Execution Flow"]
+        ApprovedQueue --> CheckApproved{Check for<br/>Approved Requests}
+        
+        CheckApproved --> ExecuteApproved[Execute Approved Requests<br/>via Email Provider]
+        
+        ExecuteApproved --> ValidateEmail[Validate Email Content<br/>Email Provider]
+        ValidateEmail --> DryRunCheck{DRY_RUN_MODE?<br/>Currently: TRUE}
+        
+        DryRunCheck -->|True| LogDryRun[Log to dry-run-log.jsonl<br/>✅ No actual email sent<br/>✅ Dry-run entry created]
+        DryRunCheck -->|False| SendEmail[Send via SMTP<br/>⚠️ Phase 2: Blocked]
+        
+        LogDryRun --> LogExecuted[Monitor: Log execution_executed<br/>Status: EXECUTED]
+        SendEmail --> LogExecuted
+        
+        LogExecuted --> UpdateContacts[Contact Manager:<br/>Mark as Contacted<br/>Update last_contacted]
+        UpdateContacts --> UpdatePlan[Update Execution Plan<br/>outreach_execution_plan.json]
+        
+        UpdatePlan --> ExecutionComplete[✅ Execution Complete<br/>4 emails executed in dry-run]
+    end
+    
+    subgraph Phase3Roadmap["PHASE 3 ROADMAP: Scale & Refine"]
+        ExecutionComplete --> Phase3Start[Phase 3: Scale and Refine]
+        
+        Phase3Start --> PhoneSMS[1. Add Phone/SMS Capability<br/>- Implement PhoneProvider<br/>- Implement SMSProvider<br/>- Add to ChannelRegistry<br/>- Create call scripts]
+        
+        Phase3Start --> CoalitionAgent[2. Coalition Activation Agent<br/>- execution_coalition_comm_evt.py<br/>- Multi-contact coordination<br/>- Batch approval workflow]
+        
+        Phase3Start --> MediaAgent[3. Media Seeding Agent<br/>- execution_media_floor_evt.py<br/>- Press release distribution<br/>- Social media posting]
+        
+        Phase3Start --> FeedbackLoops[4. Feedback Loops<br/>- Track email opens<br/>- Track responses<br/>- Update contact engagement<br/>- Learning system]
+        
+        Phase3Start --> Dashboard[5. Execution Dashboard<br/>- Real-time status view<br/>- Approval queue UI<br/>- Execution history<br/>- Contact management UI]
+        
+        Phase3Start --> APIRoutes[6. API Routes<br/>- GET /execution/status<br/>- POST /execution/approve<br/>- POST /execution/reject<br/>- GET /execution/history]
+    end
+    
+    subgraph DecisionPoints["Key Decision Points"]
+        Phase3Start --> Decision1{Which Phase 3<br/>component first?}
+        
+        Decision1 -->|Quick Win| Dashboard[Execution Dashboard<br/>Visualize current state]
+        Decision1 -->|Core Feature| PhoneSMS[Phone/SMS Capability<br/>Expand channels]
+        Decision1 -->|Strategic| CoalitionAgent[Coalition Activation<br/>Multi-contact coordination]
+    end
+    
+    style Current fill:#d4edda
+    style PendingApprovals fill:#fff3cd
+    style HumanReview fill:#e1f5ff
+    style ApprovedQueue fill:#d4edda
+    style RejectedQueue fill:#f8d7da
+    style ExecutionComplete fill:#d4edda
+    style Phase3Start fill:#cfe2ff
+    style Decision1 fill:#fff3cd

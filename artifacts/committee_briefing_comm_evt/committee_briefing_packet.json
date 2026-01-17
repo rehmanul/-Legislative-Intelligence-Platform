@@ -1,0 +1,46 @@
+{
+  "_meta": {
+    "agent_id": "draft_committee_briefing_comm_evt",
+    "phase": "COMM_EVT",
+    "generated_at": "2026-01-13T07:36:07.156323+00:00",
+    "artifact_type": "COMM_BRIEFING",
+    "artifact_name": "Committee Briefing Packet",
+    "status": "SPECULATIVE",
+    "confidence": "PLACEHOLDER",
+    "system_mode": "DEVELOPMENT",
+    "is_placeholder": true,
+    "missing_dependencies": [
+      "Bill structure (BILL_STRUCTURE.json)",
+      "Authority citations (AUTHORITY_CITATIONS.json)",
+      "Member database (MEMBER_DATABASE.json)"
+    ],
+    "human_review_required": true,
+    "requires_review": "HR_LANG",
+    "review_gate_status": "PENDING",
+    "guidance_status": "TEST_MODE",
+    "authoritative": false,
+    "note": "INTERNAL, NON-AUTHORITATIVE \u2014 pending HR_LANG approval."
+  },
+  "executive_summary": {
+    "policy_proposal": "Policy proposal aligned with bill provisions",
+    "key_sections": [],
+    "authority_foundation": []
+  },
+  "committee_name": "Senate Energy and Natural Resources Committee",
+  "summary": "The committee is considering provisions related to advanced energy technologies and infrastructure modernization.",
+  "key_points": [
+    "Placeholder committee briefing packet content."
+  ],
+  "agenda": [],
+  "member_specific_talking_points": [],
+  "asks": [
+    "Support inclusion of policy provisions in relevant sections",
+    "Consider policy alignment with committee jurisdiction",
+    "Advocate for policy implementation"
+  ],
+  "risks": [
+    "Competing priorities may limit focus on specific provisions",
+    "Budget constraints may affect implementation timeline"
+  ],
+  "members": []
+}

@@ -1,0 +1,81 @@
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+---
+config:
+  layout: dagre
+  theme: default
+---
+flowchart TB
+
+subgraph SYSTEM["Agent Orchestrator System"]
+  direction TB
+  
+  subgraph WORKFLOWS["Workflows"]
+    direction LR
+    WF1["orchestrator_core_planner"]
+    WF2["Other Workflows"]
+  end
+  
+  subgraph ARTIFACTS["Artifacts Directory"]
+    direction TB
+    
+    subgraph POLICY["🟦 Policy Artifacts\n(READ-ONLY CONTEXT)"]
+      direction TB
+      POLICY_DOCS["Policy Documents\n7 core files\n64.6 KB"]
+      POLICY_DIAGRAMS["Mermaid Diagrams\n8 visualizations"]
+      POLICY_NAV["Navigation Guides\nQUICK_REFERENCE\nINDEX"]
+    end
+    
+    subgraph SCENARIO["🟨 wi_charge_scenario\n(Source Files)"]
+      direction TB
+      SCENARIO_FILES["Original Analysis\nSource Documents"]
+    end
+    
+    subgraph OTHER["⬜ Other Artifacts\n(Out of Scope)"]
+      direction TB
+      OTHER_ARTIFACTS["Other Workflow\nArtifacts"]
+    end
+  end
+  
+  subgraph SCRIPTS["Scripts"]
+    direction TB
+    VALIDATE["validate_policy_contract.py\n🟦 Policy Validation"]
+    ANALYZE["analyze_wi_charge_scenario.py\n🟨 Scenario Analysis"]
+    OTHER_SCRIPTS["⬜ Other Scripts"]
+  end
+  
+  subgraph AGENTS["Agents"]
+    direction TB
+    INTEL_AGENTS["Intelligence Agents\n🟨 Can Read Policy"]
+    DRAFT_AGENTS["Drafting Agents\n🟨 Can Reference Policy"]
+    EXEC_AGENTS["Execution Agents\n⬜ Cannot Execute Policy"]
+  end
+end
+
+subgraph CONTRACT["System Contract"]
+  direction TB
+  READ_ONLY["READ-ONLY POLICY CONTEXT\n🟦 Enforced"]
+  NO_EXEC["No Execution\n🟦 Protected"]
+  VALIDATION["Validation Script\n🟦 Automated"]
+end
+
+WF1 --> ARTIFACTS
+WF2 --> ARTIFACTS
+SCENARIO_FILES -.->|"Source"| POLICY_DOCS
+POLICY_DOCS --> POLICY_DIAGRAMS
+POLICY_DOCS --> POLICY_NAV
+VALIDATE --> POLICY
+INTEL_AGENTS -.->|"Read Only"| POLICY
+DRAFT_AGENTS -.->|"Reference Only"| POLICY
+EXEC_AGENTS -.->|"Blocked"| POLICY
+CONTRACT --> POLICY
+
+classDef policy fill:#DBEAFE,stroke:#1E40AF,stroke-width:3px
+classDef scenario fill:#FEF3C7,stroke:#92400E,stroke-width:2px
+classDef outofscope fill:#E5E7EB,stroke:#6B7280,stroke-width:1px
+classDef contract fill:#D1FAE5,stroke:#065F46,stroke-width:2px
+
+class POLICY,POLICY_DOCS,POLICY_DIAGRAMS,POLICY_NAV,VALIDATE policy
+class SCENARIO,SCENARIO_FILES,ANALYZE,INTEL_AGENTS,DRAFT_AGENTS scenario
+class OTHER,OTHER_ARTIFACTS,OTHER_SCRIPTS,EXEC_AGENTS outofscope
+class CONTRACT,READ_ONLY,NO_EXEC,VALIDATION contract

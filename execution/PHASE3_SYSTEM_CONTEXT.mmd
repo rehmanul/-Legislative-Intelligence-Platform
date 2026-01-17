@@ -1,0 +1,128 @@
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+flowchart TB
+    subgraph OrchestratorCore["🎯 Agent Orchestrator Core System"]
+        FastAPI[FastAPI State Machine<br/>Workflow Management]
+        StateMachine[Legislative State Machine<br/>PRE_EVT → INTRO_EVT → COMM_EVT<br/>→ FLOOR_EVT → FINAL_EVT → IMPL_EVT]
+        ReviewGates[Review Gates<br/>HR_PRE, HR_LANG, HR_MSG, HR_RELEASE]
+    end
+    
+    subgraph IntelligenceLayer["📊 Intelligence Layer"]
+        SignalScan[Signal Scanning Agents<br/>PRE_EVT, INTRO_EVT]
+        StakeholderMap[Stakeholder Mapping<br/>PRE_EVT, INTRO_EVT, COMM_EVT]
+        OppositionDetect[Opposition Detection<br/>PRE_EVT, INTRO_EVT]
+    end
+    
+    subgraph DraftingLayer["✍️ Drafting Layer"]
+        ConceptMemo[Concept Memos<br/>PRE_EVT]
+        Framing[Framing & Whitepapers<br/>INTRO_EVT]
+        CommitteeBriefing[Committee Briefings<br/>COMM_EVT]
+        LegislativeLang[Legislative Language<br/>COMM_EVT]
+    end
+    
+    subgraph ExecutionLayer["🚀 Execution Layer - PHASE 3 COMPLETE"]
+        ExecutionAgent[execution_outreach_comm_evt.py<br/>✅ IMPLEMENTED & EXECUTED]
+        
+        ChannelRegistry[Channel Registry<br/>EMAIL ✅<br/>PHONE ✅<br/>SMS ✅]
+        
+        EmailProvider[Email Provider<br/>✅ Dry-Run Mode]
+        PhoneProvider[Phone Provider<br/>✅ Dry-Run Mode]
+        SMSProvider[SMS Provider<br/>✅ Dry-Run Mode]
+        
+        ApprovalManager[Approval Manager<br/>✅ HR_LANG Integration]
+        ExecutionMonitor[Execution Monitor<br/>✅ Activity Logging]
+        ContactManager[Contact Manager<br/>✅ JSON Storage]
+        
+        Dashboard[Execution Dashboard<br/>✅ Real-time Status View]
+        APIRoutes[API Routes<br/>✅ REST Endpoints]
+    end
+    
+    subgraph DataFlow["📥 Data Flow"]
+        Artifacts[Artifacts Directory<br/>Stakeholder Maps<br/>Briefing Packets]
+        ExecutionOutputs[Execution Outputs<br/>approval-queue.json<br/>activity-log.jsonl<br/>dry-run-log.jsonl<br/>contacts.json]
+    end
+    
+    subgraph APIAccess["🌐 API Access"]
+        StatusEndpoint[GET /execution/status]
+        ApproveEndpoint[POST /execution/approve]
+        RejectEndpoint[POST /execution/reject]
+        HistoryEndpoint[GET /execution/history]
+        PendingEndpoint[GET /execution/pending]
+    end
+    
+    subgraph FutureComponents["🔮 Future Components"]
+        CoalitionAgent[Coalition Activation<br/>⏳ Not Yet Implemented]
+        MediaAgent[Media Seeding<br/>⏳ Not Yet Implemented]
+        FeedbackLoops[Feedback Loops<br/>⏳ Not Yet Implemented]
+        SocialMedia[Social Media Provider<br/>⏳ Not Yet Implemented]
+    end
+    
+    %% Core System Flow
+    FastAPI --> StateMachine
+    StateMachine --> ReviewGates
+    
+    %% Intelligence to Drafting
+    SignalScan --> StakeholderMap
+    StakeholderMap --> ConceptMemo
+    OppositionDetect --> Framing
+    
+    %% Drafting to Execution
+    CommitteeBriefing --> ExecutionAgent
+    StakeholderMap --> ExecutionAgent
+    
+    %% Execution Layer Internal
+    ExecutionAgent --> ChannelRegistry
+    ExecutionAgent --> ApprovalManager
+    ExecutionAgent --> ExecutionMonitor
+    ExecutionAgent --> ContactManager
+    
+    ChannelRegistry --> EmailProvider
+    ChannelRegistry --> PhoneProvider
+    ChannelRegistry --> SMSProvider
+    
+    ApprovalManager --> ReviewGates
+    
+    %% Dashboard and API
+    Dashboard --> ApprovalManager
+    Dashboard --> ExecutionMonitor
+    Dashboard --> ContactManager
+    Dashboard --> ChannelRegistry
+    
+    FastAPI --> APIRoutes
+    APIRoutes --> ApprovalManager
+    APIRoutes --> ExecutionMonitor
+    APIRoutes --> ContactManager
+    
+    APIRoutes --> StatusEndpoint
+    APIRoutes --> ApproveEndpoint
+    APIRoutes --> RejectEndpoint
+    APIRoutes --> HistoryEndpoint
+    APIRoutes --> PendingEndpoint
+    
+    %% Data Flow
+    Artifacts --> ExecutionAgent
+    ExecutionAgent --> ExecutionOutputs
+    
+    %% Future Connections
+    ExecutionAgent -.->|Future| CoalitionAgent
+    ExecutionAgent -.->|Future| MediaAgent
+    ExecutionOutputs -.->|Future| FeedbackLoops
+    ChannelRegistry -.->|Future| SocialMedia
+    
+    %% Styling
+    style ExecutionLayer fill:#d4edda,stroke:#28a745,stroke-width:3px
+    style ExecutionAgent fill:#90ee90,stroke:#006400,stroke-width:2px
+    style EmailProvider fill:#90ee90,stroke:#006400,stroke-width:2px
+    style PhoneProvider fill:#90ee90,stroke:#006400,stroke-width:2px
+    style SMSProvider fill:#90ee90,stroke:#006400,stroke-width:2px
+    style ApprovalManager fill:#90ee90,stroke:#006400,stroke-width:2px
+    style ExecutionMonitor fill:#90ee90,stroke:#006400,stroke-width:2px
+    style ContactManager fill:#90ee90,stroke:#006400,stroke-width:2px
+    style Dashboard fill:#90ee90,stroke:#006400,stroke-width:2px
+    style APIRoutes fill:#90ee90,stroke:#006400,stroke-width:2px
+    style ChannelRegistry fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style FutureComponents fill:#fff3cd,stroke:#ffc107,stroke-width:2px,stroke-dasharray: 5 5
+    style OrchestratorCore fill:#e1f5ff,stroke:#0066cc,stroke-width:2px
+    style IntelligenceLayer fill:#f0f8ff,stroke:#4682b4,stroke-width:2px
+    style DraftingLayer fill:#fff5ee,stroke:#cd853f,stroke-width:2px
+    style APIAccess fill:#e7f3ff,stroke:#0052cc,stroke-width:2px

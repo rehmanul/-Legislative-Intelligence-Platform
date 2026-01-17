@@ -1,0 +1,58 @@
+---
+config:
+  layout: dagre
+  padding: 32
+---
+flowchart TB
+    START["📊 Interactive Diagram Viewer<br/>diagram_viewer.html"]:::PRIMARY
+    
+    subgraph LOCAL["💻 Local Development"]
+        FILE["Direct File Open<br/>file:///path/to/viewer.html"]:::SYSTEM_FLOW
+        PYTHON["Python HTTP Server<br/>python -m http.server 8000"]:::SYSTEM_FLOW
+        VSCODE["VS Code Live Server<br/>Extension"]:::SYSTEM_FLOW
+        NODE["Node.js http-server<br/>npx http-server"]:::SYSTEM_FLOW
+    end
+    
+    subgraph HOSTING["🌐 Hosting Options"]
+        GITHUB["GitHub Pages<br/>Free · Public"]:::HUMAN_ACTION
+        NETLIFY["Netlify<br/>Free · CDN · Auto-deploy"]:::HUMAN_ACTION
+        VERCEL["Vercel<br/>Free · Fast CDN"]:::HUMAN_ACTION
+        SELF["Self-Hosted<br/>Full Control"]:::HUMAN_ACTION
+    end
+    
+    subgraph FEATURES["✨ Viewer Features"]
+        TABS["Tab Navigation<br/>6 Diagrams"]:::artifact
+        ZOOM["Zoom Controls<br/>+ / - / Reset"]:::artifact
+        FULL["Fullscreen Mode<br/>F11 or Button"]:::artifact
+        EXPORT["Export PNG<br/>Download Diagram"]:::artifact
+        RESP["Responsive Design<br/>Mobile-Friendly"]:::artifact
+    end
+    
+    subgraph CODEX["🤖 Codex Enhancements"]
+        CLICK["Click Handlers<br/>Node Interactions"]:::CONTEXT_REF
+        SEARCH["Search/Filter<br/>Find Nodes"]:::CONTEXT_REF
+        COMPARE["Side-by-Side<br/>Compare Views"]:::CONTEXT_REF
+        API["API Integration<br/>Live Updates"]:::CONTEXT_REF
+        DARK["Dark Mode<br/>Theme Toggle"]:::CONTEXT_REF
+    end
+    
+    START --> LOCAL
+    START --> HOSTING
+    START --> FEATURES
+    START --> CODEX
+    
+    LOCAL -->|"Quick Test"| PYTHON
+    LOCAL -->|"VS Code Users"| VSCODE
+    
+    HOSTING -->|"Public · Free"| GITHUB
+    HOSTING -->|"Best Balance"| NETLIFY
+    HOSTING -->|"Fast CDN"| VERCEL
+    HOSTING -->|"Private · Control"| SELF
+    
+    CODEX -.->|"Can Add"| FEATURES
+    
+    classDef PRIMARY fill:#1E40AF,stroke:#1E3A8A,stroke-width:3px,color:#FFFFFF,font-weight:bold
+    classDef HUMAN_ACTION fill:#FEE2E2,stroke:#DC2626,stroke-width:2px,color:#000000,font-weight:bold
+    classDef SYSTEM_FLOW fill:#DBEAFE,stroke:#2563EB,stroke-width:2px,color:#000000
+    classDef CONTEXT_REF fill:#F3F4F6,stroke:#6B7280,stroke-width:1.5px,stroke-dasharray:5 5,color:#4B5563,font-style:italic
+    classDef artifact fill:#E0E7FF,stroke:#6366F1,stroke-width:2px,color:#000000

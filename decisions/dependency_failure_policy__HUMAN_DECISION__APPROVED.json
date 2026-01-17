@@ -1,0 +1,48 @@
+{
+  "_meta": {
+    "artifact_type": "HUMAN_DECISION",
+    "decision_name": "Dependency Failure Policy",
+    "decides_artifact": "Dependency Failure Policy Decision",
+    "decided_at": "2026-01-20T12:34:00Z",
+    "decided_by": "Human Operator",
+    "status": "APPROVED",
+    "binding": true,
+    "version": "1.0"
+  },
+  "selected_option": "C",
+  "option_description": "HYBRID: Fail-fast for production dependencies, graceful degradation for development/testing",
+  "decision_scope": "Applies to all Phase 1 and Phase 2 agents",
+  "binding": true,
+  "notes": "Hybrid mode approved: strict fail-fast behavior in PRODUCTION, explicit graceful degradation allowed in DEVELOPMENT with mandatory placeholder marking and mode validation.",
+  "implementation_requirements": [
+    "System must support MODE configuration (PRODUCTION vs DEVELOPMENT)",
+    "PRODUCTION mode: fail-fast for all missing dependencies",
+    "DEVELOPMENT mode: graceful degradation with explicit placeholder marking",
+    "All placeholder outputs must be marked with explicit 'PLACEHOLDER' status in _meta",
+    "Mode validation required at agent startup",
+    "Mode must be explicitly set (no default assumption)"
+  ],
+  "policy_rules": {
+    "production_mode": {
+      "bill_parser": "Must raise exception if PDF not found",
+      "member_database_builder": "Must raise exception if API unavailable and no cached data",
+      "briefing_agent": "Must validate all inputs exist and are non-empty",
+      "one_pager": "Must validate policy context exists before generation"
+    },
+    "development_mode": {
+      "bill_parser": "May generate placeholder structure with explicit 'PLACEHOLDER' markers",
+      "member_database_builder": "May generate placeholder member with explicit 'PLACEHOLDER' status",
+      "briefing_agent": "May process placeholders but must mark entire artifact as 'SPECULATIVE'",
+      "one_pager": "May use generic content but must mark as 'INCOMPLETE' with missing dependency list"
+    }
+  },
+  "unblocks": [
+    "Phase 1 end-to-end testing",
+    "Phase 2 implementation planning",
+    "Agent code updates to enforce mode behavior",
+    "Artifact validation logic implementation"
+  ],
+  "related_artifacts": [
+    "agent-orchestrator/artifacts/review/dependency_failure_policy__HUMAN_REVIEW_GATE__DRAFT_v1.json"
+  ]
+}

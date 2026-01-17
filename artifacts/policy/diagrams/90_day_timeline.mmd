@@ -1,0 +1,22 @@
+---
+config:
+  layout: dagre
+  theme: default
+---
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+gantt
+    title 90-Day Policy Action Plan Timeline
+    dateFormat  YYYY-MM-DD
+    section Path 1: Infrastructure
+    Foundation (Days 1-30)     :a1, 2026-01-07, 30d
+    Engagement (Days 31-60)     :a2, after a1, 30d
+    Implementation (Days 61-90) :a3, after a2, 30d
+    section Path 2: R&D
+    Program Identification      :b1, 2026-01-07, 30d
+    Proposal Development        :b2, after b1, 30d
+    Engagement & Submission    :b3, after b2, 30d
+    section Path 3: Energy
+    Program Analysis            :c1, 2026-01-07, 30d
+    Proposal Development        :c2, after c1, 30d
+    Engagement & Submission     :c3, after c2, 30d

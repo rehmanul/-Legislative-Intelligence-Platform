@@ -1,0 +1,45 @@
+{
+  "_meta": {
+    "agent_id": "draft_committee_briefing_comm_evt",
+    "generated_at": "2026-01-07T12:00:00Z",
+    "artifact_type": "committee_briefing_packet",
+    "phase": "COMM_EVT",
+    "authoritative": false,
+    "note": "Test briefing packet for Phase 2 execution"
+  },
+  "committee_name": "Senate Energy and Natural Resources Committee",
+  "summary": "The committee is considering provisions related to advanced energy technologies and infrastructure modernization in the NDAA FY2026. This presents opportunities for wireless power technology integration and air quality monitoring systems in defense facilities.",
+  "key_points": [
+    "Section 227 addresses advanced manufacturing technologies coordination",
+    "Division B authorizes military construction projects with infrastructure modernization",
+    "Title II R&D programs include technology enhancement initiatives",
+    "Energy efficiency modifications (Section 314) align with wireless power benefits"
+  ],
+  "agenda": [
+    {
+      "title": "Advanced Manufacturing Technologies",
+      "section": "Sec. 227",
+      "relevance": "High - Direct alignment with wireless power manufacturing"
+    },
+    {
+      "title": "Military Construction Authorizations",
+      "section": "Division B",
+      "relevance": "High - Infrastructure modernization opportunities"
+    },
+    {
+      "title": "Energy Efficiency Initiatives",
+      "section": "Sec. 314",
+      "relevance": "Medium - Energy savings potential"
+    }
+  ],
+  "asks": [
+    "Support inclusion of wireless power technology in infrastructure modernization",
+    "Consider air quality monitoring systems for health and safety compliance",
+    "Advocate for R&D funding for advanced energy technologies"
+  ],
+  "risks": [
+    "Competing priorities may limit focus on specific technologies",
+    "Budget constraints may affect implementation timeline"
+  ],
+  "members": []
+}

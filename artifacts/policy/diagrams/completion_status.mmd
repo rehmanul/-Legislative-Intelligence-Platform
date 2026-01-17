@@ -1,0 +1,69 @@
+---
+config:
+  layout: dagre
+  theme: default
+---
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+flowchart TB
+
+subgraph COMPLETED["✅ Completed Components"]
+  direction TB
+  
+  subgraph DOCS["📄 Documentation"]
+    README["README.md\nContract Docs"]
+    QUICK["QUICK_REFERENCE.md\nNavigation"]
+    INDEX["INDEX.md\nComplete Index"]
+    AGENT_GUIDE["AGENT_INTEGRATION_GUIDE.md\nAgent Patterns"]
+  end
+  
+  subgraph POLICY["📋 Policy Documents"]
+    CORE["7 Core Documents\n64.6 KB"]
+    HEADERS["Contract Headers\nAll Files"]
+  end
+  
+  subgraph DIAGRAMS["📊 Visualizations"]
+    MERGED["3 Merged Diagrams\nComprehensive Views"]
+    DETAILED["5 Detailed Diagrams\nFocused Views"]
+    SYSTEM["System Context\nIntegration Flow"]
+  end
+  
+  subgraph VALIDATION["✅ Validation"]
+    SCRIPT["validate_policy_contract.py\nAutomated"]
+    TESTED["Sample Agent\nExecuted Successfully"]
+  end
+end
+
+subgraph NEXT["🎯 Next Steps Available"]
+  direction TB
+  
+  OPTION1["Option 1: Main README\nAdd Policy Section\n🟨 Recommended"]
+  OPTION2["Option 2: Dashboard\nShow Policy Artifacts\n⬜ Optional"]
+  OPTION3["Option 3: HTML Viewer\nBrowse Artifacts\n⬜ Optional"]
+  OPTION4["Option 4: API Endpoints\nProgrammatic Access\n⬜ Optional"]
+end
+
+subgraph STATUS["📊 System Status"]
+  direction TB
+  COMPLETE["✅ Complete & Operational"]
+  VALIDATED["✅ Validated & Tested"]
+  READY["✅ Ready for Use"]
+end
+
+DOCS --> COMPLETE
+POLICY --> COMPLETE
+DIAGRAMS --> COMPLETE
+VALIDATION --> VALIDATED
+COMPLETE --> READY
+VALIDATED --> READY
+READY --> NEXT
+
+classDef completed fill:#D1FAE5,stroke:#065F46,stroke-width:3px
+classDef next fill:#FEF3C7,stroke:#92400E,stroke-width:2px
+classDef status fill:#DBEAFE,stroke:#1E40AF,stroke-width:3px
+classDef recommended fill:#D1FAE5,stroke:#065F46,stroke-width:2px
+
+class README,QUICK,INDEX,AGENT_GUIDE,CORE,HEADERS,MERGED,DETAILED,SYSTEM,SCRIPT,TESTED completed
+class OPTION1,OPTION2,OPTION3,OPTION4 next
+class COMPLETE,VALIDATED,READY status
+class OPTION1 recommended

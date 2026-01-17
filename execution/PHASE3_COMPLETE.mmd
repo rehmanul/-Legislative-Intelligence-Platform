@@ -1,0 +1,56 @@
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+flowchart TB
+    subgraph Phase3Components["Phase 3 Components - COMPLETE"]
+        direction TB
+        
+        Dashboard[Execution Dashboard<br/>dashboard.py<br/>✅ Real-time status view<br/>✅ Approval queue display<br/>✅ Execution history<br/>✅ Contact management]
+        
+        APIRoutes[API Routes<br/>app/execution_routes.py<br/>✅ GET /execution/status<br/>✅ POST /execution/approve<br/>✅ POST /execution/reject<br/>✅ GET /execution/history<br/>✅ GET /execution/pending]
+        
+        PhoneProvider[Phone Provider<br/>execution/phone_provider.py<br/>✅ Phone channel implementation<br/>✅ Call script support<br/>✅ Dry-run logging]
+        
+        SMSProvider[SMS Provider<br/>execution/sms_provider.py<br/>✅ SMS channel implementation<br/>✅ Message validation<br/>✅ Dry-run logging]
+    end
+    
+    subgraph Integration["Integration Points"]
+        ChannelRegistry[Channel Registry<br/>✅ EMAIL registered<br/>✅ PHONE registered<br/>✅ SMS registered]
+        
+        FastAPIApp[FastAPI Application<br/>app/main.py<br/>✅ Execution routes included]
+        
+        ExecutionInit[execution/__init__.py<br/>✅ Auto-registration on import]
+    end
+    
+    subgraph DataFlow["Data Flow"]
+        Dashboard --> ApprovalManager[Approval Manager<br/>Get pending approvals]
+        Dashboard --> Monitor[Execution Monitor<br/>Get activity history]
+        Dashboard --> ContactManager[Contact Manager<br/>Get contact list]
+        Dashboard --> ChannelRegistry
+        
+        APIRoutes --> ApprovalManager
+        APIRoutes --> Monitor
+        APIRoutes --> ContactManager
+        
+        PhoneProvider --> ChannelRegistry
+        SMSProvider --> ChannelRegistry
+    end
+    
+    subgraph Usage["Usage Examples"]
+        DashboardCLI[CLI: python execution/dashboard.py<br/>--workflow-id orchestrator_core_planner]
+        
+        APICalls[API: GET /api/v1/execution/pending<br/>POST /api/v1/execution/approve]
+        
+        ChannelUsage[Channel: PhoneProvider.execute<br/>SMSProvider.execute]
+    end
+    
+    Dashboard --> DashboardCLI
+    APIRoutes --> APICalls
+    PhoneProvider --> ChannelUsage
+    SMSProvider --> ChannelUsage
+    
+    style Dashboard fill:#d4edda,stroke:#28a745,stroke-width:2px
+    style APIRoutes fill:#d4edda,stroke:#28a745,stroke-width:2px
+    style PhoneProvider fill:#d4edda,stroke:#28a745,stroke-width:2px
+    style SMSProvider fill:#d4edda,stroke:#28a745,stroke-width:2px
+    style ChannelRegistry fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style FastAPIApp fill:#e1f5ff,stroke:#0066cc,stroke-width:2px

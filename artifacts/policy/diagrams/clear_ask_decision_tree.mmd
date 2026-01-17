@@ -1,0 +1,62 @@
+---
+config:
+  layout: dagre
+  theme: default
+---
+%% Master Diagram Reference: .userInput/agent orchestrator 1.6.mmd
+%% This diagram is a specialized view derived from the master diagram
+flowchart TB
+
+START["Clear Ask Decision Tree<br/>P1 Sections"]:::start
+
+START --> PATH{Execution Path?}
+
+PATH -->|Infrastructure| INFRA["Defense Facility<br/>Infrastructure"]
+PATH -->|R&D| RD["R&D Programs"]
+PATH -->|Energy| ENERGY["Energy Efficiency"]
+
+subgraph INFRA_ASKS["Infrastructure Asks"]
+  direction TB
+  INFRA1["Ask: Include wireless power<br/>in MILCON specifications<br/>Target: NAVFAC, AFCEC, IMCOM<br/>Proof: Cost-benefit analysis"]
+  INFRA2["Ask: Approve ERCIP funding<br/>Target: ERCIP Program Office<br/>Proof: Energy savings analysis"]
+  INFRA3["Ask: Approve pilot deployment<br/>Target: Installation Management<br/>Proof: Pilot proposal"]
+end
+
+subgraph RD_ASKS["R&D Asks"]
+  direction TB
+  RD1["Ask: Award SBIR/STTR Phase I<br/>Target: SBIR/STTR Offices<br/>Proof: Technical proposal"]
+  RD2["Ask: Execute DIU CSO contract<br/>Target: DIU<br/>Proof: Commercial solution proposal"]
+  RD3["Ask: Accept innovation hub participation<br/>Target: Innovation Hubs<br/>Proof: Partnership proposal"]
+end
+
+subgraph ENERGY_ASKS["Energy Asks"]
+  direction TB
+  ENERGY1["Ask: Approve ERCIP funding<br/>Target: ERCIP Program Office<br/>Proof: Energy savings calculation"]
+  ENERGY2["Ask: Approve energy savings reinvestment<br/>Target: Service Energy Offices<br/>Proof: Energy savings documentation"]
+  ENERGY3["Ask: Implement deployment<br/>Target: Installation Energy Managers<br/>Proof: Deployment readiness"]
+end
+
+INFRA --> INFRA_ASKS
+RD --> RD_ASKS
+ENERGY --> ENERGY_ASKS
+
+INFRA1 --> OUTCOME["Outcome:<br/>Technology Deployment"]
+INFRA2 --> OUTCOME
+INFRA3 --> OUTCOME
+RD1 --> OUTCOME
+RD2 --> OUTCOME
+RD3 --> OUTCOME
+ENERGY1 --> OUTCOME
+ENERGY2 --> OUTCOME
+ENERGY3 --> OUTCOME
+
+classDef start fill:#D1FAE5,stroke:#065F46,stroke-width:3px
+classDef path fill:#DBEAFE,stroke:#1E40AF,stroke-width:2px
+classDef ask fill:#FEF3C7,stroke:#92400E,stroke-width:2px
+classDef outcome fill:#D1FAE5,stroke:#065F46,stroke-width:3px
+classDef decide fill:#F3F4F6,stroke:#6B7280,stroke-width:2px
+
+class START,OUTCOME start
+class INFRA,RD,ENERGY path
+class INFRA1,INFRA2,INFRA3,RD1,RD2,RD3,ENERGY1,ENERGY2,ENERGY3 ask
+class PATH decide

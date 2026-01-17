@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actionable Next Steps - Checklist</title>
+  <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family-sans), Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: var(--color-bg-secondary);
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      padding: var(--spacing-xl);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: var(--color-bg-primary);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 30px;
+    }
+
+    h1 {
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-md);
+      font-size: 2em;
+    }
+
+    .subtitle {
+      color: #7f8c8d;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+    }
+
+    .progress-bar {
+      background: #ecf0f1;
+      border-radius: 10px;
+      height: 30px;
+      margin-bottom: 30px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, var(--color-primary), #2ecc71);
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-bg-primary);
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+
+    .step {
+      background: var(--color-gray-100);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+      overflow: hidden;
+      transition: all var(--transition-slow) var(--transition-ease) ease;
+    }
+
+    .step.expanded {
+      border-color: var(--color-primary);
+      box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+    }
+
+    .step-header {
+      padding: var(--spacing-xl);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--color-bg-primary);
+      user-select: none;
+    }
+
+    .step-header:hover {
+      background: var(--color-gray-100);
+    }
+
+    .step-title {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-lg);
+      flex: 1;
+    }
+
+    .step-checkbox {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      accent-color: var(--color-primary);
+    }
+
+    .step-info {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-lg);
+      color: #7f8c8d;
+      font-size: 0.9em;
+    }
+
+    .priority-badge {
+      padding: var(--spacing-xs) 12px;
+      border-radius: var(--radius-xl);
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+
+    .priority-high {
+      background: var(--color-error);
+      color: var(--color-bg-primary);
+    }
+
+    .priority-medium {
+      background: var(--color-warning);
+      color: var(--color-bg-primary);
+    }
+
+    .priority-low {
+      background: #95a5a6;
+      color: var(--color-bg-primary);
+    }
+
+    .expand-icon {
+      font-size: 1.5em;
+      color: #7f8c8d;
+      transition: transform 0.3s ease;
+    }
+
+    .step.expanded .expand-icon {
+      transform: rotate(180deg);
+    }
+
+    .step-content {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      background: var(--color-gray-100);
+    }
+
+    .step.expanded .step-content {
+      max-height: 5000px;
+      padding: var(--spacing-xl);
+    }
+
+    .question-group {
+      background: var(--color-bg-primary);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-xl);
+      margin-bottom: var(--spacing-xl);
+      border-left: 4px solid var(--color-primary);
+    }
+
+    .question-group h3 {
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-lg);
+      font-size: 1.1em;
+    }
+
+    .question {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .question label {
+      display: block;
+      font-weight: var(--font-weight-medium);
+      margin-bottom: 8px;
+      color: var(--color-text-primary);
+    }
+
+    .question input[type="text"],
+    .question input[type="number"],
+    .question textarea,
+    .question select {
+      width: 100%;
+      padding: var(--spacing-md);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 1em;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
+    }
+
+    .question input:focus,
+    .question textarea:focus,
+    .question select:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+
+    .question textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .question small {
+      display: block;
+      margin-top: 5px;
+      color: #7f8c8d;
+      font-size: 0.9em;
+    }
+
+    .current-data {
+      background: #e8f4f8;
+      border-left: 4px solid var(--color-primary);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+      border-radius: var(--radius-sm);
+      font-size: 0.9em;
+    }
+
+    .current-data strong {
+      color: var(--color-text-primary);
+    }
+
+    .action-buttons {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 2px solid var(--color-border);
+      display: flex;
+      gap: var(--spacing-lg);
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 1em;
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: all var(--transition-slow) var(--transition-ease) ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-bg-primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+    }
+
+    .btn-secondary {
+      background: #95a5a6;
+      color: var(--color-bg-primary);
+    }
+
+    .btn-secondary:hover {
+      background: #7f8c8d;
+    }
+
+    .btn-success {
+      background: #2ecc71;
+      color: var(--color-bg-primary);
+    }
+
+    .btn-success:hover {
+      background: var(--color-success);
+    }
+
+    .file-preview {
+      background: var(--color-text-primary);
+      color: #ecf0f1;
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-md);
+      margin-top: var(--spacing-xl);
+      font-family: var(--font-family-mono);
+      font-size: 0.9em;
+      max-height: 400px;
+      overflow-y: auto;
+      var(--color-bg-primary)-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .file-preview h4 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .generate-section {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      margin-top: 30px;
+    }
+
+    .generate-section h2 {
+      color: #856404;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .file-list {
+      list-style: none;
+      margin: var(--spacing-lg) 0;
+    }
+
+    .file-list li {
+      padding: var(--spacing-sm);
+      background: var(--color-bg-primary);
+      margin-bottom: 5px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-family-mono);
+      font-size: 0.9em;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: var(--spacing-xs) 10px;
+      border-radius: var(--radius-xl);
+      font-size: 0.8em;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+
+    .status-complete {
+      background: #2ecc71;
+      color: var(--color-bg-primary);
+    }
+
+    .status-pending {
+      background: var(--color-warning);
+      color: var(--color-bg-primary);
+    }
+
+    .status-not-started {
+      background: #95a5a6;
+      color: var(--color-bg-primary);
+    }
+  </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+  
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="container">
+    <h1>🎯 Actionable Next Steps Checklist</h1>
+    <p class="subtitle">Fill in the answers, check off steps, and generate your files</p>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill">0% Complete</div>
+    </div>
+
+    <!-- Step 1: DECISIONS.md -->
+    <div class="step" id="step1">
+      <div class="step-header" onclick="toggleStep(1)">
+        <div class="step-title">
+          <input type="checkbox" class="step-checkbox" id="check1" onchange="updateProgress()">
+          <span><strong>Step 1: DECISIONS.md</strong> - Decision Inventory for HR_PRE</span>
+        </div>
+        <div class="step-info">
+          <span class="priority-badge priority-high">HIGH PRIORITY</span>
+          <span class="status-badge status-not-started" id="status1">Not Started</span>
+          <span class="expand-icon">▼</span>
+        </div>
+      </div>
+      <div class="step-content">
+        <div class="current-data">
+          <strong>Current PRE_CONCEPT.json Status:</strong><br>
+          - Requires Review: HR_PRE<br>
+          - Status: TEST_MODE<br>
+          - Allies: 2 | Opponents: 1<br>
+          - Opposition Risk: MEDIUM<br>
+          - Industry Opportunities: 2
+        </div>
+
+        <div class="question-group">
+          <h3>1. Policy Opportunity - What Makes You Say "Yes"?</h3>
+          <div class="question">
+            <label>🧭 What helps you decide if a policy opportunity is worth pursuing?</label>
+            <textarea id="q1_decision_factors" placeholder="Think about: What signals or evidence do you look for? What makes you confident? What makes you hesitant? What questions do you ask yourself?"></textarea>
+            <small>💡 Example: "I need to see at least 2 independent signals from different sources, regulatory alignment, and stakeholder interest"</small>
+          </div>
+          <div class="question">
+            <label>❌ When would you reject a concept memo? What are your deal-breakers?</label>
+            <textarea id="q1_rejection_reasons" placeholder="Think about: What would make you say 'no' immediately? What red flags stop you?"></textarea>
+            <small>💡 Example: "If there's no regulatory pathway, if opposition is already mobilized, if there's no stakeholder support"</small>
+          </div>
+          <div class="question">
+            <label>⚠️ If you're uncertain about an opportunity, what would help you decide?</label>
+            <textarea id="q1_uncertainty_resolution" placeholder="Think about: What additional information would clarify things? Who would you ask?"></textarea>
+            <small>💡 Example: "I'd want more intelligence on opposition plans, clearer regulatory signals, or validation from subject matter experts"</small>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <h3>2. Stakeholders - What Balance Feels Right?</h3>
+          <div class="question">
+            <label>🤝 How important is having allies before you proceed?</label>
+            <textarea id="q2_ally_importance" placeholder="Think about: Can you proceed with zero allies? Do you need at least one? Does it depend on their influence level?"></textarea>
+            <small>💡 Example: "I need at least one ally with high influence, or 2+ allies with medium influence. Zero allies means I won't proceed."</small>
+          </div>
+          <div class="question">
+            <label>🛑 How do you handle opponents? When is opposition too risky?</label>
+            <textarea id="q2_opponent_handling" placeholder="Think about: Can you proceed if there's opposition? Does it matter how influential they are? What's your risk tolerance?"></textarea>
+            <small>💡 Example: "One high-influence opponent is OK if I have 2+ high-influence allies. Multiple opponents or organized opposition blocks approval."</small>
+          </div>
+          <div class="question">
+            <label>⚖️ What stakeholder balance feels right to you? (Describe in your own words)</label>
+            <textarea id="q2_balance_thoughts" placeholder="Think about: What ratio of allies to opponents works? Does influence level matter? Does it depend on the issue?"></textarea>
+            <small>💡 Example: "I want at least 2 allies for every opponent, and the allies should have at least equal influence to the opponents"</small>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <h3>3. Opposition Risk - How Do You Handle It?</h3>
+          <div class="question">
+            <label>🚨 What does "high opposition risk" mean to you? What are the signs?</label>
+            <textarea id="q3_high_risk_definition" placeholder="Think about: What signals tell you opposition is serious? Media coverage? Public campaigns? Organized groups?"></textarea>
+            <small>💡 Example: "High risk means organized opposition with public campaigns, media coverage, and coordination with other stakeholders"</small>
+          </div>
+          <div class="question">
+            <label>⏸️ When does opposition risk make you pause or stop?</label>
+            <textarea id="q3_risk_stopping_points" placeholder="Think about: Does MEDIUM risk make you pause? Does it depend on other factors? When do you say 'stop'?"></textarea>
+            <small>💡 Example: "HIGH risk always stops me. MEDIUM risk makes me pause and gather more intelligence. LOW risk is acceptable."</small>
+          </div>
+          <div class="question">
+            <label>📢 What early warning signs would make you escalate immediately?</label>
+            <textarea id="q3_early_warnings" placeholder="Think about: Media coverage? Public statements? Coalition formation? Legal challenges?"></textarea>
+            <small>💡 Example: "Media coverage suggesting coordinated opposition, public statements from influential opponents, or legal challenges"</small>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <h3>4. Signals & Evidence - What Counts?</h3>
+          <div class="question">
+            <label>📡 What signals or evidence do you need to see before approving a concept memo?</label>
+            <textarea id="q4_signal_requirements" placeholder="Think about: Industry trends? Regulatory announcements? Market signals? Legal precedents? How many sources?"></textarea>
+            <small>💡 Example: "I need at least 2 independent industry signals, 1 regulatory signal, or 1 legal precedent. More is better."</small>
+          </div>
+          <div class="question">
+            <label>📋 Is regulatory context/alignment important to you? Why or why not?</label>
+            <textarea id="q4_regulatory_importance" placeholder="Think about: Do you need regulatory buy-in? Is it required? Nice-to-have? Not important?"></textarea>
+            <small>💡 Example: "Regulatory context is essential - without it, we can't implement the policy. It's a requirement, not optional."</small>
+          </div>
+          <div class="question">
+            <label>🎯 In your own words, what makes a concept memo "ready" for the next step?</label>
+            <textarea id="q4_readiness_criteria" placeholder="Think about: What's your checklist? What questions should be answered? What boxes need to be checked?"></textarea>
+            <small>💡 Example: "A memo is ready when: (1) clear opportunity identified, (2) stakeholder landscape mapped, (3) opposition assessed, (4) regulatory pathway exists"</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: HUMAN_REVIEW_RULES.md -->
+    <div class="step" id="step2">
+      <div class="step-header" onclick="toggleStep(2)">
+        <div class="step-title">
+          <input type="checkbox" class="step-checkbox" id="check2" onchange="updateProgress()">
+          <span><strong>Step 2: HUMAN_REVIEW_RULES.md</strong> - Approval Authority & Escalation</span>
+        </div>
+        <div class="step-info">
+          <span class="priority-badge priority-high">HIGH PRIORITY</span>
+          <span class="status-badge status-not-started" id="status2">Not Started</span>
+          <span class="expand-icon">▼</span>
+        </div>
+      </div>
+      <div class="step-content">
+        <div class="question-group">
+          <h3>1. Approval Authority - Who Decides?</h3>
+          <div class="question">
+            <label>👤 Who in your organization should approve concept memos (HR_PRE)? Why them?</label>
+            <textarea id="q5_hr_pre_authority" placeholder="Think about: What role/person has the expertise? Who makes these decisions now? Who should make them?"></textarea>
+            <small>💡 Example: "Policy Director - they have the expertise and context to judge policy opportunities and stakeholder landscapes"</small>
+          </div>
+          <div class="question">
+            <label>👥 Can that person delegate approval? Who would they delegate to?</label>
+            <textarea id="q5_hr_pre_delegate" placeholder="Think about: Can someone else approve when the primary person is unavailable? Who has similar expertise?"></textarea>
+            <small>💡 Example: "Yes, to Deputy Director when Policy Director is unavailable. They have similar expertise and decision-making authority."</small>
+          </div>
+          <div class="question">
+            <label>⚖️ Who should approve legislative language (HR_LANG)? Why?</label>
+            <textarea id="q5_hr_lang_authority" placeholder="Think about: Who has legal expertise? Who understands statutory language? Who needs to sign off on legal risks?"></textarea>
+            <small>💡 Example: "Legal Counsel - they understand statutory language, legal precedents, and can assess legal risks"</small>
+          </div>
+          <div class="question">
+            <label>📢 Who should approve messaging (HR_MSG)? Why?</label>
+            <textarea id="q5_hr_msg_authority" placeholder="Think about: Who handles communications? Who understands public messaging? Who manages reputation?"></textarea>
+            <small>💡 Example: "Communications Director - they understand public messaging, manage reputation, and know what resonates with audiences"</small>
+          </div>
+          <div class="question">
+            <label>🚀 Who should approve final public release (HR_RELEASE)? Why?</label>
+            <textarea id="q5_hr_release_authority" placeholder="Think about: Who has final authority? Who bears ultimate responsibility? Who makes go/no-go decisions?"></textarea>
+            <small>💡 Example: "Executive Director - they have final authority and bear ultimate responsibility for public-facing decisions"</small>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <h3>2. Time Limits - How Urgent Is Each Step?</h3>
+          <div class="question">
+            <label>⏰ For concept memos (HR_PRE), how quickly do they need review? Why?</label>
+            <textarea id="q6_hr_pre_time" placeholder="Think about: Is this urgent? Can it wait days? Weeks? What happens if it's delayed?"></textarea>
+            <small>💡 Example: "48 hours - policy opportunities have windows. Too slow and we miss the window. Too fast and we rush decisions."</small>
+          </div>
+          <div class="question">
+            <label>⏰ For legislative language (HR_LANG), how quickly do they need review? Why?</label>
+            <textarea id="q6_hr_lang_time" placeholder="Think about: Legal review takes time. How much time is reasonable? What's the urgency?"></textarea>
+            <small>💡 Example: "72 hours - legal review requires careful analysis. Rushing legal review creates risk. But deadlines matter too."</small>
+          </div>
+          <div class="question">
+            <label>⏰ For messaging (HR_MSG), how quickly do they need review? Why?</label>
+            <textarea id="q6_hr_msg_time" placeholder="Think about: Is messaging time-sensitive? Can messaging wait? What's the cost of delay?"></textarea>
+            <small>💡 Example: "24 hours - messaging is often time-sensitive for floor votes. But needs careful review to avoid reputation risk."</small>
+          </div>
+          <div class="question">
+            <label>⏰ For public release (HR_RELEASE), how quickly do they need review? Why?</label>
+            <textarea id="q6_hr_release_time" placeholder="Think about: This is final approval. How careful should you be? What's the urgency?"></textarea>
+            <small>💡 Example: "12 hours - this is the final go/no-go. Can't rush final approval, but delays can miss opportunities."</small>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <h3>3. Escalation Rules - When Do You Need Help?</h3>
+          <div class="question">
+            <label>🚨 When you see HIGH opposition risk, who should you escalate to? Why them?</label>
+            <textarea id="q7_escalate_high_risk" placeholder="Think about: Who has the authority to make go/no-go decisions on risky items? Who needs to know?"></textarea>
+            <small>💡 Example: "Executive Director - high risk items need executive-level judgment and authority to proceed or stop"</small>
+          </div>
+          <div class="question">
+            <label>🤝 When you have zero allies, who should you escalate to? Why?</label>
+            <textarea id="q7_escalate_zero_allies" placeholder="Think about: Is this a strategic decision? An intelligence gathering need? Who handles this?"></textarea>
+            <small>💡 Example: "Intelligence team lead - zero allies might mean we haven't mapped stakeholders well enough. Need more intelligence."</small>
+          </div>
+          <div class="question">
+            <label>⚖️ When you find legal precedent conflicts, who should you escalate to? Why?</label>
+            <textarea id="q7_escalate_legal" placeholder="Think about: Who has legal expertise? Who can assess legal risks? Who makes legal go/no-go decisions?"></textarea>
+            <small>💡 Example: "Legal review board - precedent conflicts require legal analysis and judgment. Can't proceed without legal clearance."</small>
+          </div>
+          <div class="question">
+            <label>❓ What other situations would trigger escalation? To whom? Why?</label>
+            <textarea id="q7_other_escalation" placeholder="Think about: What else makes you pause? What other risks or situations need higher authority?"></textarea>
+            <small>💡 Example: "Budget implications → CFO, Political sensitivity → Executive Director, Reputation risk → Communications Director"</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: CANONICAL_ENTITIES.md -->
+    <div class="step" id="step3">
+      <div class="step-header" onclick="toggleStep(3)">
+        <div class="step-title">
+          <input type="checkbox" class="step-checkbox" id="check3" onchange="updateProgress()">
+          <span><strong>Step 3: CANONICAL_ENTITIES.md</strong> - Entity Schemas</span>
+        </div>
+        <div class="step-info">
+          <span class="priority-badge priority-medium">MEDIUM PRIORITY</span>
+          <span class="status-badge status-not-started" id="status3">Not Started</span>
+          <span class="expand-icon">▼</span>
+        </div>
+      </div>
+      <div class="step-content">
+        <div class="question-group">
+          <h3>1. Stakeholders - How Do You Classify Them?</h3>
+          <div class="question">
+            <label>📊 When you think about stakeholder influence, what levels make sense to you?</label>
+            <textarea id="q8_influence_values" placeholder="Think about: Do you use high/medium/low? Something else? What do these mean to you?"></textarea>
+            <small>💡 Example: "I use high/medium/low. HIGH = can make or break the policy, MEDIUM = has influence but not decisive, LOW = minor player"</small>
+          </div>
+          <div class="question">
+            <label>🤝 When you think about stakeholder positions, what categories make sense?</label>
+            <textarea id="q8_position_values" placeholder="Think about: Do you use allied/opponent/neutral? Do you need more categories? What do these mean?"></textarea>
+            <small>💡 Example: "I use allied/opponent/neutral/unknown. ALLIED = supports us, OPPONENT = opposes us, NEUTRAL = no position, UNKNOWN = not mapped yet"</small>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <h3>2. Policy Opportunities - How Do You Track Them?</h3>
+          <div class="question">
+            <label>🎯 When you think about policy opportunity confidence, what levels make sense?</label>
+            <textarea id="q9_confidence_values" placeholder="Think about: Do you use high/medium/low? What about speculative? How do you describe certainty?"></textarea>
+            <small>💡 Example: "I use high/medium/low/speculative. HIGH = confident, MEDIUM = some confidence, LOW = uncertain, SPECULATIVE = initial hunch"</small>
+          </div>
+          <div class="question">
+            <label>📈 As a policy opportunity develops, what states does it go through?</label>
+            <textarea id="q9_states" placeholder="Think about: Does it start as speculative? Become validated? Can it decline? Close? What's the lifecycle?"></textarea>
+            <small>💡 Example: "Starts as SPECULATIVE (initial signal), becomes VALIDATED (confirmed), can DECLINE (window closing), or CLOSE (no longer viable)"</small>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <h3>3. Opposition Risk - How Do You Assess It?</h3>
+          <div class="question">
+            <label>⚠️ When you think about opposition risk, what levels make sense?</label>
+            <textarea id="q10_risk_values" placeholder="Think about: Do you use high/medium/low? What does each mean? How do you distinguish them?"></textarea>
+            <small>💡 Example: "I use high/medium/low. HIGH = serious organized opposition, MEDIUM = some opposition concerns, LOW = minimal opposition"</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: DYNAMICS.md -->
+    <div class="step" id="step4">
+      <div class="step-header" onclick="toggleStep(4)">
+        <div class="step-title">
+          <input type="checkbox" class="step-checkbox" id="check4" onchange="updateProgress()">
+          <span><strong>Step 4: DYNAMICS.md</strong> - Dynamics Mapping</span>
+        </div>
+        <div class="step-info">
+          <span class="priority-badge priority-low">LOW PRIORITY</span>
+          <span class="status-badge status-not-started" id="status4">Not Started</span>
+          <span class="expand-icon">▼</span>
+        </div>
+      </div>
+      <div class="step-content">
+        <div class="question-group">
+          <h3>1. What Never Changes?</h3>
+          <div class="question">
+            <label>🔒 What in your system is fixed and never changes? What are the constants?</label>
+            <textarea id="q11_static" placeholder="Think about: System structure? Process definitions? Core rules? What's set in stone?"></textarea>
+            <small>💡 Example: "The legislative state machine (PRE_EVT → IMPL_EVT), review gate definitions (HR_PRE, HR_LANG, etc.), agent type classifications, core entity definitions"</small>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <h3>2. What Changes Slowly?</h3>
+          <div class="question">
+            <label>🐌 What in your system changes over days or weeks? What's relatively stable?</label>
+            <textarea id="q12_slow" placeholder="Think about: Bill status? Committee assignments? Staff? Stakeholder positions? What doesn't change daily?"></textarea>
+            <small>💡 Example: "Bill status in legislative database (updates weekly), committee assignments (rarely change), staff rosters (monthly updates), policy opportunity confidence (after initial validation, stable for weeks)"</small>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <h3>3. What Changes Quickly?</h3>
+          <div class="question">
+            <label>⚡ What in your system changes hourly or by the minute? What's constantly moving?</label>
+            <textarea id="q13_fast" placeholder="Think about: Agent status? Review queues? Signals? What changes in real-time?"></textarea>
+            <small>💡 Example: "Agent execution state (RUNNING/WAITING_REVIEW/TERMINATED - changes hourly), review queue depth (changes as artifacts submitted), signal scan results (new signals detected constantly), opposition risk level (can spike quickly with media coverage)"</small>
+          </div>
+          <div class="question">
+            <label>📊 For your HTML dashboards, which items need fresh data vs. which can be cached?</label>
+            <textarea id="q13_refresh_needs" placeholder="Think about: What needs constant updates? What can be shown once and stay?"></textarea>
+            <small>💡 Example: "Static items: no refresh needed. Slow-changing: refresh daily. Fast-changing: refresh on-demand or with polling"</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5: HTML_DONE_CRITERIA.md -->
+    <div class="step" id="step5">
+      <div class="step-header" onclick="toggleStep(5)">
+        <div class="step-title">
+          <input type="checkbox" class="step-checkbox" id="check5" onchange="updateProgress()">
+          <span><strong>Step 5: HTML_DONE_CRITERIA.md</strong> - Completion Criteria</span>
+        </div>
+        <div class="step-info">
+          <span class="priority-badge priority-low">LOW PRIORITY</span>
+          <span class="status-badge status-not-started" id="status5">Not Started</span>
+          <span class="expand-icon">▼</span>
+        </div>
+      </div>
+      <div class="step-content">
+        <div class="question-group">
+          <h3>1. What Must Your HTML Dashboard Do?</h3>
+          <div class="question">
+            <label>✅ What features are absolutely essential for your HTML dashboard to be useful?</label>
+            <textarea id="q14_required" placeholder="Think about: What do you need to see? What actions do you need to take? What information is critical?"></textarea>
+            <small>💡 Example: "I need to see: all review gates (HR_PRE, HR_LANG, etc.), current legislative state, agent status, artifact viewer, and approve/reject buttons"</small>
+          </div>
+          <div class="question">
+            <label>🎯 What's the minimum viable dashboard? What could you live without (for now)?</label>
+            <textarea id="q14_minimum_viable" placeholder="Think about: What's the bare minimum? What's nice-to-have vs. must-have?"></textarea>
+            <small>💡 Example: "Minimum: review gate queues, artifact viewer, approve/reject buttons. Nice-to-have: historical analytics, advanced filtering"</small>
+          </div>
+        </div>
+
+        <div class="question-group">
+          <h3>2. What's Out of Scope (For Now)?</h3>
+          <div class="question">
+            <label>🚫 What features are explicitly NOT needed in v1.0? What can wait?</label>
+            <textarea id="q15_out_of_scope" placeholder="Think about: What's future work? What's overkill? What's not your priority now?"></textarea>
+            <small>💡 Example: "Real-time updates (can use refresh), multi-user collaboration (I'm solo), historical analytics (not needed yet), advanced filtering (basic is fine)"</small>
+          </div>
+          <div class="question">
+            <label>🎨 What's your "done" definition? How will you know the dashboard is complete enough?</label>
+            <textarea id="q15_done_criteria" placeholder="Think about: What's your acceptance criteria? What signals "good enough"? When can you move on?"></textarea>
+            <small>💡 Example: "Done when: (1) all essential features work, (2) no broken renders, (3) approve/reject buttons work, (4) I can actually use it to review artifacts"</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Generate Section -->
+    <div class="generate-section">
+      <h2>📁 Generate Output Files</h2>
+      <p>Click the button below to generate all files based on your answers above.</p>
+      
+      <ul class="file-list">
+        <li>agent-orchestrator/docs/DECISIONS.md</li>
+        <li>agent-orchestrator/docs/HUMAN_REVIEW_RULES.md</li>
+        <li>agent-orchestrator/docs/CANONICAL_ENTITIES.md</li>
+        <li>agent-orchestrator/docs/DYNAMICS.md</li>
+        <li>agent-orchestrator/docs/HTML_DONE_CRITERIA.md</li>
+      </ul>
+
+      <div class="action-buttons">
+        <button class="btn-primary" onclick="generateAllFiles()">
+          🚀 Generate All Files
+        </button>
+        <button class="btn-secondary" onclick="clearAll()">
+          🗑️ Clear All Answers
+        </button>
+        <button class="btn-secondary" onclick="loadFromFile()">
+          📂 Load PRE_CONCEPT.json
+        </button>
+        <input type="file" id="fileInput" accept=".json" style="display: none;" onchange="handleFileLoad(event)">
+      </div>
+
+      <div id="filePreview" class="file-preview" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script>
+    // Toggle step expansion
+    function toggleStep(stepNum) {
+      const step = document.getElementById(`step${stepNum}`);
+      step.classList.toggle('expanded');
+      updateStepStatus(stepNum);
+    }
+
+    // Update step status badge
+    function updateStepStatus(stepNum) {
+      const checkbox = document.getElementById(`check${stepNum}`);
+      const statusBadge = document.getElementById(`status${stepNum}`);
+      
+      if (checkbox.checked) {
+        statusBadge.textContent = 'Complete';
+        statusBadge.className = 'status-badge status-complete';
+      } else {
+        // Check if any fields are filled
+        const step = document.getElementById(`step${stepNum}`);
+        const inputs = step.querySelectorAll('input, textarea, select');
+        let hasContent = false;
+        
+        inputs.forEach(input => {
+          if (input.value && input.value.trim() !== '') {
+            hasContent = true;
+          }
+        });
+        
+        if (hasContent) {
+          statusBadge.textContent = 'In Progress';
+          statusBadge.className = 'status-badge status-pending';
+        } else {
+          statusBadge.textContent = 'Not Started';
+          statusBadge.className = 'status-badge status-not-started';
+        }
+      }
+      
+      updateProgress();
+    }
+
+    // Update progress bar
+    function updateProgress() {
+      const checkboxes = document.querySelectorAll('.step-checkbox');
+      let checked = 0;
+      checkboxes.forEach(cb => {
+        if (cb.checked) checked++;
+        // Also check if step has content
+        const stepNum = cb.id.replace('check', '');
+        updateStepStatus(stepNum);
+      });
+      
+      const total = checkboxes.length;
+      const percentage = Math.round((checked / total) * 100);
+      
+      const progressFill = document.getElementById('progressFill');
+      progressFill.style.width = percentage + '%';
+      progressFill.textContent = `${percentage}% Complete (${checked}/${total} steps)`;
+    }
+
+    // Helper: Extract structured info from free-form text
+    function extractInfo(text) {
+      if (!text || !text.trim()) return null;
+      return text.trim();
+    }
+
+    // Helper: Extract numbers from text (for min/max values)
+    function extractNumbers(text) {
+      if (!text) return null;
+      const numbers = text.match(/\d+/g);
+      return numbers ? numbers.map(n => parseInt(n)) : null;
+    }
+
+    // Helper: Detect confidence level mentions
+    function detectConfidence(text) {
+      if (!text) return null;
+      const lower = text.toLowerCase();
+      if (lower.includes('high') || lower.includes('confident')) return 'HIGH';
+      if (lower.includes('medium')) return 'MEDIUM';
+      if (lower.includes('low') || lower.includes('uncertain') || lower.includes('speculative')) return 'LOW';
+      return null;
+    }
+
+    // Generate DECISIONS.md
+    function generateDecisions() {
+      const decisionFactors = extractInfo(document.getElementById('q1_decision_factors').value);
+      const rejectionReasons = extractInfo(document.getElementById('q1_rejection_reasons').value);
+      const uncertaintyResolution = extractInfo(document.getElementById('q1_uncertainty_resolution').value);
+      
+      const allyImportance = extractInfo(document.getElementById('q2_ally_importance').value);
+      const opponentHandling = extractInfo(document.getElementById('q2_opponent_handling').value);
+      const balanceThoughts = extractInfo(document.getElementById('q2_balance_thoughts').value);
+      
+      const highRiskDefinition = extractInfo(document.getElementById('q3_high_risk_definition').value);
+      const riskStoppingPoints = extractInfo(document.getElementById('q3_risk_stopping_points').value);
+      const earlyWarnings = extractInfo(document.getElementById('q3_early_warnings').value);
+      
+      const signalRequirements = extractInfo(document.getElementById('q4_signal_requirements').value);
+      const regulatoryImportance = extractInfo(document.getElementById('q4_regulatory_importance').value);
+      const readinessCriteria = extractInfo(document.getElementById('q4_readiness_criteria').value);
+
+      // Try to extract structured values from text
+      const detectedConfidence = detectConfidence(decisionFactors || '');
+      const allyNumbers = extractNumbers(allyImportance || '');
+      const signalNumbers = extractNumbers(signalRequirements || '');
+      const regulatoryRequired = regulatoryImportance ? (regulatoryImportance.toLowerCase().includes('required') || regulatoryImportance.toLowerCase().includes('essential')) : null;
+
+      return `# Decision Inventory
+
+**Generated:** ${new Date().toISOString()}
+**Status:** ACTIONABLE (Based on User Discovery)
+
+> **Note:** This file was generated from discovery-oriented questions. The user's actual answers are preserved below to guide future agent decision-making.
+
+## HR_PRE Decisions (PRE_EVT → INTRO_EVT)
+
+### Decision 1: Policy Opportunity - What Makes You Say "Yes"?
+
+**User's Answer - What Helps You Decide:**
+
+${decisionFactors || '*[Not yet answered - user needs to fill this in]*'}
+
+**Detected Confidence Threshold:** ${detectedConfidence || 'NOT DETECTED - Review manually'}
+
+**When Would You Reject:**
+
+${rejectionReasons || '*[Not yet answered - user needs to fill this in]*'}
+
+**If Uncertain, What Helps:**
+
+${uncertaintyResolution || '*[Not yet answered - user needs to fill this in]*'}
+
+**Decision Guidelines (Based on User Input):**
+
+Based on the user's answers above, here are the decision guidelines:
+
+- **Approval Factors:** ${decisionFactors ? 'See user answer above' : 'TO BE DETERMINED'}
+- **Rejection Triggers:** ${rejectionReasons ? 'See user answer above' : 'TO BE DETERMINED'}
+- **Uncertainty Resolution:** ${uncertaintyResolution ? 'See user answer above' : 'TO BE DETERMINED'}
+
+### Decision 2: Stakeholders - What Balance Feels Right?
+
+**User's Answer - How Important Are Allies:**
+
+${allyImportance || '*[Not yet answered - user needs to fill this in]*'}
+
+**Minimum Allies (Detected):** ${allyNumbers && allyNumbers.length > 0 ? Math.min(...allyNumbers) : 'TO BE DETERMINED'}
+
+**User's Answer - How Do You Handle Opponents:**
+
+${opponentHandling || '*[Not yet answered - user needs to fill this in]*'}
+
+**User's Answer - What Balance Feels Right:**
+
+${balanceThoughts || '*[Not yet answered - user needs to fill this in]*'}
+
+**Decision Guidelines (Based on User Input):**
+
+- **Ally Requirements:** ${allyImportance ? 'See user answer above' : 'TO BE DETERMINED'}
+- **Opponent Tolerance:** ${opponentHandling ? 'See user answer above' : 'TO BE DETERMINED'}
+- **Balance Preferences:** ${balanceThoughts ? 'See user answer above' : 'TO BE DETERMINED'}
+
+### Decision 3: Opposition Risk - How Do You Handle It?
+
+**User's Answer - What Does "High Opposition Risk" Mean:**
+
+${highRiskDefinition || '*[Not yet answered - user needs to fill this in]*'}
+
+**User's Answer - When Does Risk Make You Pause:**
+
+${riskStoppingPoints || '*[Not yet answered - user needs to fill this in]*'}
+
+**User's Answer - Early Warning Signs:**
+
+${earlyWarnings || '*[Not yet answered - user needs to fill this in]*'}
+
+**Decision Guidelines (Based on User Input):**
+
+- **High Risk Definition:** ${highRiskDefinition ? 'See user answer above' : 'TO BE DETERMINED'}
+- **Stopping Points:** ${riskStoppingPoints ? 'See user answer above' : 'TO BE DETERMINED'}
+- **Escalation Triggers:** ${earlyWarnings ? 'See user answer above' : 'TO BE DETERMINED'}
+
+### Decision 4: Signals & Evidence - What Counts?
+
+**User's Answer - What Signals Do You Need:**
+
+${signalRequirements || '*[Not yet answered - user needs to fill this in]*'}
+
+**Minimum Signals (Detected):** ${signalNumbers && signalNumbers.length > 0 ? Math.min(...signalNumbers) : 'TO BE DETERMINED'}
+
+**User's Answer - Regulatory Context Importance:**
+
+${regulatoryImportance || '*[Not yet answered - user needs to fill this in]*'}
+
+**Regulatory Required:** ${regulatoryRequired === true ? 'YES (based on user input)' : regulatoryRequired === false ? 'NO (based on user input)' : 'TO BE DETERMINED'}
+
+**User's Answer - What Makes a Memo "Ready":**
+
+${readinessCriteria || '*[Not yet answered - user needs to fill this in]*'}
+
+**Decision Guidelines (Based on User Input):**
+
+- **Signal Requirements:** ${signalRequirements ? 'See user answer above' : 'TO BE DETERMINED'}
+- **Regulatory Requirement:** ${regulatoryImportance ? 'See user answer above' : 'TO BE DETERMINED'}
+- **Readiness Criteria:** ${readinessCriteria ? 'See user answer above' : 'TO BE DETERMINED'}
+
+---
+
+## Next Steps
+
+1. **Review the user's answers above** - These are their actual thoughts and preferences
+2. **Extract structured rules** - Convert their answers into specific decision rules
+3. **Test rules** - Apply rules to existing PRE_CONCEPT.json to see if they work
+4. **Iterate** - Refine rules based on what makes sense
+
+## HR_LANG Decisions (COMM_EVT → FLOOR_EVT)
+
+[To be filled in later - focus on HR_PRE first]
+
+## HR_MSG Decisions (FLOOR_EVT → FINAL_EVT)
+
+[To be filled in later]
+
+## HR_RELEASE Decisions (FINAL_EVT → IMPL_EVT)
+
+[To be filled in later]
+`;
+    }
+
+    // Helper: Extract time from text
+    function extractTime(text) {
+      if (!text) return null;
+      const hours = text.match(/(\d+)\s*hours?/i);
+      if (hours) return hours[1];
+      const days = text.match(/(\d+)\s*days?/i);
+      if (days) return days[1] * 24;
+      return null;
+    }
+
+    // Helper: Extract person/role from text
+    function extractPerson(text) {
+      if (!text) return null;
+      // Try to extract role or name
+      const lines = text.split(/[.,\n]/);
+      for (let line of lines) {
+        const trimmed = line.trim();
+        if (trimmed.length > 3 && trimmed.length < 50) {
+          return trimmed;
+        }
+      }
+      return text.substring(0, 100).trim();
+    }
+
+    // Generate HUMAN_REVIEW_RULES.md
+    function generateReviewRules() {
+      const hrPreAuth = extractPerson(document.getElementById('q5_hr_pre_authority').value);
+      const hrPreDelegate = extractPerson(document.getElementById('q5_hr_pre_delegate').value);
+      const hrLangAuth = extractPerson(document.getElementById('q5_hr_lang_authority').value);
+      const hrMsgAuth = extractPerson(document.getElementById('q5_hr_msg_authority').value);
+      const hrReleaseAuth = extractPerson(document.getElementById('q5_hr_release_authority').value);
+      
+      const hrPreTimeRaw = extractInfo(document.getElementById('q6_hr_pre_time').value);
+      const hrLangTimeRaw = extractInfo(document.getElementById('q6_hr_lang_time').value);
+      const hrMsgTimeRaw = extractInfo(document.getElementById('q6_hr_msg_time').value);
+      const hrReleaseTimeRaw = extractInfo(document.getElementById('q6_hr_release_time').value);
+      
+      const hrPreTime = extractTime(hrPreTimeRaw) || '48';
+      const hrLangTime = extractTime(hrLangTimeRaw) || '72';
+      const hrMsgTime = extractTime(hrMsgTimeRaw) || '24';
+      const hrReleaseTime = extractTime(hrReleaseTimeRaw) || '12';
+      
+      const escalateHighRisk = extractPerson(document.getElementById('q7_escalate_high_risk').value);
+      const escalateZeroAllies = extractPerson(document.getElementById('q7_escalate_zero_allies').value);
+      const escalateLegal = extractPerson(document.getElementById('q7_escalate_legal').value);
+      const otherEscalation = extractInfo(document.getElementById('q7_other_escalation').value);
+
+      return `# Human Review Rules
+
+**Generated:** ${new Date().toISOString()}
+**Status:** ACTIONABLE (Based on User Discovery)
+
+> **Note:** This file was generated from discovery-oriented questions. The user's actual answers are preserved below.
+
+## Approval Authority by Gate
+
+| Gate | Approval Authority | Can Delegate To | Escalation To |
+|------|-------------------|-----------------|---------------|
+| HR_PRE | ${hrPreAuth || 'TO BE DETERMINED'} | ${hrPreDelegate || 'TO BE DETERMINED'} | Executive Director |
+| HR_LANG | ${hrLangAuth || 'TO BE DETERMINED'} | Senior Counsel | ${escalateLegal || 'Legal review board'} |
+| HR_MSG | ${hrMsgAuth || 'TO BE DETERMINED'} | Deputy Comms Director | Communications Director |
+| HR_RELEASE | ${hrReleaseAuth || 'TO BE DETERMINED'} | Cannot delegate | Executive Director |
+
+**User's Full Answers (For Context):**
+
+**HR_PRE Authority:** ${document.getElementById('q5_hr_pre_authority').value || '*[Not answered]*'}
+**HR_PRE Delegate:** ${document.getElementById('q5_hr_pre_delegate').value || '*[Not answered]*'}
+**HR_LANG Authority:** ${document.getElementById('q5_hr_lang_authority').value || '*[Not answered]*'}
+**HR_MSG Authority:** ${document.getElementById('q5_hr_msg_authority').value || '*[Not answered]*'}
+**HR_RELEASE Authority:** ${document.getElementById('q5_hr_release_authority').value || '*[Not answered]*'}
+
+## Time Limits
+
+| Gate | Time Limit | User's Rationale |
+|------|-----------|------------------|
+| HR_PRE | ${hrPreTime} hours | ${hrPreTimeRaw || '*[Not answered]*'} |
+| HR_LANG | ${hrLangTime} hours | ${hrLangTimeRaw || '*[Not answered]*'} |
+| HR_MSG | ${hrMsgTime} hours | ${hrMsgTimeRaw || '*[Not answered]*'} |
+| HR_RELEASE | ${hrReleaseTime} hours | ${hrReleaseTimeRaw || '*[Not answered]*'} |
+
+**Action If Time Limit Exceeded:** Escalate to next authority level
+
+## Automatic Escalation Triggers
+
+### Hard Blocks (Do Not Proceed)
+
+1. **Opposition Risk: HIGH**
+   - Source: Decision rules from DECISIONS.md
+   - Action: Block HR_PRE approval
+   - Escalate to: ${escalateHighRisk || 'Executive Director'}
+   - **User's Answer:** ${document.getElementById('q7_escalate_high_risk').value || '*[Not answered]*'}
+   - Required response time: 24 hours
+
+2. **Allies Count: 0**
+   - Source: Decision rules from DECISIONS.md
+   - Action: Block HR_PRE approval
+   - Escalate to: ${escalateZeroAllies || 'Intelligence team lead'}
+   - **User's Answer:** ${document.getElementById('q7_escalate_zero_allies').value || '*[Not answered]*'}
+   - Required response time: 48 hours
+
+3. **Legal Precedent Conflict**
+   - Source: HR_LANG review
+   - Action: Block HR_LANG approval
+   - Escalate to: ${escalateLegal || 'Legal review board'}
+   - **User's Answer:** ${document.getElementById('q7_escalate_legal').value || '*[Not answered]*'}
+   - Required response time: 72 hours
+
+${otherEscalation ? `### Other Escalation Triggers
+
+**User's Additional Escalation Situations:**
+
+${otherEscalation}
+
+` : ''}
+
+### Soft Blocks (Proceed with Caution)
+
+1. **Opposition Risk: MEDIUM**
+   - Action: Flag for HR_PRE review
+   - Warning: Monitor opposition signals
+   - Can proceed if: Human approves with rationale
+
+2. **Confidence: LOW**
+   - Action: Flag for HR_PRE review
+   - Warning: Speculative content
+   - Can proceed if: Human approves with "proceed despite low confidence"
+
+## Review Gate Workflow
+
+### HR_PRE Workflow
+
+1. Artifact submitted → Status: \`PENDING\`
+2. Check decision rules (from DECISIONS.md)
+3. If hard block → Status: \`BLOCKED\`, Escalate
+4. If soft block → Status: \`FLAGGED\`, Require rationale
+5. If pass → Status: \`READY_FOR_REVIEW\`
+6. Human reviews → Status: \`APPROVED\` or \`REJECTED\`
+7. If approved → Workflow advances to INTRO_EVT
+8. If rejected → Artifact discarded, agent notified
+
+### HR_LANG Workflow
+
+1. Legislative language submitted → Status: \`PENDING\`
+2. Check for legal precedent conflicts
+3. If conflict → Status: \`BLOCKED\`, Escalate to legal review
+4. If pass → Status: \`READY_FOR_REVIEW\`
+5. Human reviews → Status: \`APPROVED\` or \`REJECTED\`
+6. If approved → Workflow advances to FLOOR_EVT
+7. If rejected → Artifact discarded, agent notified
+
+[Similar workflows for HR_MSG and HR_RELEASE]
+`;
+    }
+
+    // Generate CANONICAL_ENTITIES.md
+    function generateCanonicalEntities() {
+      const influenceValues = extractInfo(document.getElementById('q8_influence_values').value) || 'high, medium, low';
+      const positionValues = extractInfo(document.getElementById('q8_position_values').value) || 'allied, opponent, neutral, unknown';
+      const confidenceValues = extractInfo(document.getElementById('q9_confidence_values').value) || 'high, medium, low, speculative';
+      const states = extractInfo(document.getElementById('q9_states').value) || 'speculative, validated, declining, closed';
+      const riskValues = extractInfo(document.getElementById('q10_risk_values').value) || 'high, medium, low';
+
+      // Try to extract comma-separated values if user provided them
+      const influenceList = influenceValues.includes(',') ? influenceValues.split(',').map(v => v.trim()) : [influenceValues.trim()];
+      const positionList = positionValues.includes(',') ? positionValues.split(',').map(v => v.trim()) : [positionValues.trim()];
+      const confidenceList = confidenceValues.includes(',') ? confidenceValues.split(',').map(v => v.trim()) : [confidenceValues.trim()];
+      const statesList = states.includes(',') ? states.split(',').map(v => v.trim()) : [states.trim()];
+      const riskList = riskValues.includes(',') ? riskValues.split(',').map(v => v.trim()) : [riskValues.trim()];
+
+      return `# Canonical Entities
+
+**Generated:** ${new Date().toISOString()}
+**Status:** ACTIONABLE (Based on User Discovery)
+
+> **Note:** This file was generated from discovery-oriented questions. The user's actual answers are preserved below.
+
+**Generated:** ${new Date().toISOString()}
+**Status:** ACTIONABLE
+
+## Stakeholder
+
+**Definition:** A person, organization, or group that influences policy outcomes.
+
+**User's Answer - Influence Levels:**
+
+${document.getElementById('q8_influence_values').value || '*[Not answered]*'}
+
+**User's Answer - Position Categories:**
+
+${document.getElementById('q8_position_values').value || '*[Not answered]*'}
+
+**Attributes (Based on User Input):**
+- \`name\` (string, required) - Name of stakeholder
+- \`influence\` (enum: "${influenceList.join('" | "')}", required) - Level of influence
+- \`position\` (enum: "${positionList.join('" | "')}", required) - Policy position
+- \`rationale\` (string, optional) - Why this classification
+
+**States:**
+${positionList.map(v => `- \`${v}\` - ${v === 'allied' ? 'Supports the policy' : v === 'opponent' ? 'Opposes the policy' : v === 'neutral' ? 'No known position' : 'Not yet mapped'}`).join('\n')}
+
+**Validation Rules:**
+- If influence == "high" and position == "opponent" → Flag for HR_PRE escalation (from DECISIONS.md)
+- If allies.count == 0 → Block HR_PRE approval (from DECISIONS.md)
+
+**Example:**
+\`\`\`json
+{
+  "name": "Renewable Energy Coalition",
+  "influence": "high",
+  "position": "allied"
+}
+\`\`\`
+
+## Policy Opportunity
+
+**Definition:** A detected opportunity to advance policy objectives.
+
+**User's Answer - Confidence Levels:**
+
+${document.getElementById('q9_confidence_values').value || '*[Not answered]*'}
+
+**User's Answer - States:**
+
+${document.getElementById('q9_states').value || '*[Not answered]*'}
+
+**Attributes (Based on User Input):**
+- \`description\` (string, required) - Description of opportunity
+- \`confidence\` (enum: "${confidenceList.join('" | "')}", required) - Confidence level
+- \`signals\` (array of Signal, required) - Supporting signals
+- \`regulatory_context\` (array of string, optional) - Regulatory environment
+
+**States:**
+${statesList.map(v => {
+  let desc = '';
+  if (v === 'speculative') desc = 'Initial signal, needs validation';
+  else if (v === 'validated') desc = 'Confirmed through multiple signals';
+  else if (v === 'declining') desc = 'Opportunity window closing';
+  else if (v === 'closed') desc = 'Opportunity no longer viable';
+  else desc = 'User-defined state';
+  return `- \`${v}\` - ${desc}`;
+}).join('\n')}
+
+**State Transitions:**
+- speculative → validated (requires 2+ independent signals, from DECISIONS.md)
+- validated → declining (after 30 days with no action)
+- declining → closed (after 90 days with no action)
+
+**Validation Rules:**
+- If confidence < [THRESHOLD FROM DECISIONS.md] → REJECT or REQUEST_MORE_INTELLIGENCE
+- If industry_opportunities.count < [MINIMUM FROM DECISIONS.md] → REQUEST_MORE_INTELLIGENCE
+
+## Opposition Risk
+
+**Definition:** Risk assessment of opposition to the policy.
+
+**User's Answer - Risk Levels:**
+
+${document.getElementById('q10_risk_values').value || '*[Not answered]*'}
+
+**Attributes (Based on User Input):**
+- \`level\` (enum: "${riskList.join('" | "')}", required) - Risk level
+- \`early_warnings\` (array of string, optional) - Warning signs detected
+
+**Validation Rules:**
+- If level == "HIGH" → Block HR_PRE approval (from DECISIONS.md)
+- If level == "MEDIUM" → Flag for HR_PRE review (from DECISIONS.md)
+
+**Example:**
+\`\`\`json
+{
+  "level": "medium",
+  "early_warnings": [
+    "Media coverage suggests opposition framing emerging"
+  ]
+}
+\`\`\`
+
+## Signal
+
+**Definition:** An external event or indicator relevant to the policy opportunity.
+
+**Attributes:**
+- \`source\` (string, required) - Source of signal
+- \`type\` (enum: "industry" | "regulatory" | "legal" | "media", required) - Signal type
+- \`description\` (string, required) - Signal description
+- \`timestamp\` (ISO-8601 UTC, required) - When signal was detected
+
+## Artifact
+
+**Definition:** A document or output produced by an agent.
+
+**Attributes:**
+- \`_meta\` (object, required) - Metadata block
+  - \`agent_id\` (string, required)
+  - \`generated_at\` (ISO-8601 UTC, required)
+  - \`artifact_type\` (string, required)
+  - \`status\` (enum: "SPECULATIVE" | "ACTIONABLE", required)
+  - \`requires_review\` (string | null, required) - Review gate ID or null
+- \`[content]\` (varies by artifact type) - Artifact-specific content
+
+## Review Gate
+
+**Definition:** A human approval checkpoint for artifacts.
+
+**Attributes:**
+- \`gate_id\` (enum: "HR_PRE" | "HR_LANG" | "HR_MSG" | "HR_RELEASE", required) - Gate identifier
+- \`status\` (enum: "PENDING" | "APPROVED" | "REJECTED" | "BLOCKED" | "FLAGGED", required) - Gate status
+- \`pending_reviews\` (array of Artifact, required) - Artifacts awaiting review
+- \`approved_count\` (number, required) - Number of approved artifacts
+- \`rejected_count\` (number, required) - Number of rejected artifacts
+
+[Add more entities as needed]
+`;
+    }
+
+    // Generate DYNAMICS.md
+    function generateDynamics() {
+      const staticText = extractInfo(document.getElementById('q11_static').value);
+      const slowText = extractInfo(document.getElementById('q12_slow').value);
+      const fastText = extractInfo(document.getElementById('q13_fast').value);
+      const refreshNeeds = extractInfo(document.getElementById('q13_refresh_needs').value);
+
+      const staticItems = staticText ? staticText.split('\n').filter(l => l.trim()) : [];
+      const slowItems = slowText ? slowText.split('\n').filter(l => l.trim()) : [];
+      const fastItems = fastText ? fastText.split('\n').filter(l => l.trim()) : [];
+
+      return `# System Dynamics
+
+**Generated:** ${new Date().toISOString()}
+**Status:** ACTIONABLE (Based on User Discovery)
+
+> **Note:** This file was generated from discovery-oriented questions. The user's actual answers are preserved below.
+
+## Static (Never Changes)
+
+**User's Answer:**
+
+${staticText || '*[Not answered]*'}
+
+**Items (Parsed):**
+
+${staticItems.length > 0 ? staticItems.map(item => `- ${item.trim()}`).join('\n') : '- *No items listed - user needs to fill this in*'}
+
+**Render Rule:** No timestamp needed, render as-is
+
+## Slow-Changing (Days/Weeks)
+
+**User's Answer:**
+
+${slowText || '*[Not answered]*'}
+
+**Items (Parsed):**
+
+${slowItems.length > 0 ? slowItems.map(item => `- ${item.trim()}`).join('\n') : '- *No items listed - user needs to fill this in*'}
+
+**Render Rule:** Include "Last updated: YYYY-MM-DD" timestamp
+
+## Fast-Changing (Hours/Minutes)
+
+**User's Answer:**
+
+${fastText || '*[Not answered]*'}
+
+**Items (Parsed):**
+
+${fastItems.length > 0 ? fastItems.map(item => `- ${item.trim()}`).join('\n') : '- *No items listed - user needs to fill this in*'}
+
+**User's Answer - Refresh Needs for HTML Dashboards:**
+
+${refreshNeeds || '*[Not answered]*'}
+
+**Render Rule:** Include "Current as of: YYYY-MM-DD HH:MM" timestamp + refresh indicator
+
+## HTML Dashboard Implications
+
+### Static Content
+- No refresh needed
+- Can be cached indefinitely
+- Example: Review gate definitions
+
+### Slow-Changing Content
+- Refresh on page load
+- Update daily
+- Example: Bill status, committee assignments
+
+### Fast-Changing Content
+- Show refresh button
+- Update on user action
+- Consider polling (if bidirectional system active)
+- Example: Agent state, review queue depth
+
+## Agent State Lifecycle
+
+**Fast-Changing States:**
+- \`RUNNING\` - Agent actively executing
+- \`WAITING_REVIEW\` - Agent output pending human approval
+- \`MONITORING\` - Agent in observation mode
+- \`TERMINATED\` - Agent completed
+
+**Slow-Changing States:**
+- \`SPAWN\` - Agent instantiated (rare)
+- \`BLOCKED\` - Agent cannot proceed (may last days)
+- \`FAILED\` - Agent error state (requires intervention)
+
+## Review Queue Lifecycle
+
+**Fast-Changing:**
+- \`pending_reviews\` count - Changes as artifacts submitted/approved
+- Individual artifact status - Changes on approval/rejection
+
+**Slow-Changing:**
+- Review gate definitions - Never changes
+- Approval authority assignments - Changes rarely
+`;
+    }
+
+    // Generate HTML_DONE_CRITERIA.md
+    function generateHtmlDoneCriteria() {
+      const requiredText = extractInfo(document.getElementById('q14_required').value);
+      const minimumViableText = extractInfo(document.getElementById('q14_minimum_viable').value);
+      const outOfScopeText = extractInfo(document.getElementById('q15_out_of_scope').value);
+      const doneCriteriaText = extractInfo(document.getElementById('q15_done_criteria').value);
+
+      const required = requiredText ? requiredText.split('\n').filter(l => l.trim()) : [];
+      const outOfScope = outOfScopeText ? outOfScopeText.split('\n').filter(l => l.trim()) : [];
+
+      return `# HTML Dashboard Completion Criteria
+
+**Generated:** ${new Date().toISOString()}
+**Status:** ACTIONABLE (Based on User Discovery)
+
+> **Note:** This file was generated from discovery-oriented questions. The user's actual answers are preserved below.
+
+## Required Functionality (v1.0)
+
+**User's Answer - Essential Features:**
+
+${requiredText || '*[Not answered]*'}
+
+**Checklist (Parsed):**
+
+${required.length > 0 ? required.map(item => `- [ ] ${item.trim()}`).join('\n') : '- *No items listed - user needs to fill this in*'}
+
+**User's Answer - Minimum Viable Dashboard:**
+
+${minimumViableText || '*[Not answered]*'}
+
+## Out of Scope (v1.0)
+
+**User's Answer - What Can Wait:**
+
+${outOfScopeText || '*[Not answered]*'}
+
+**Items (Parsed):**
+
+${outOfScope.length > 0 ? outOfScope.map(item => `- ❌ ${item.trim()}`).join('\n') : '- *No items listed - user needs to fill this in*'}
+
+**User's Answer - "Done" Definition:**
+
+${doneCriteriaText || '*[Not answered]*'}
+
+## Acceptance Criteria
+
+HTML dashboard is "done" when:
+
+1. ✅ All required functionality works (file picker → load JSON → render OR API → render)
+2. ✅ All review gates are visible and actionable (approve/reject buttons work)
+3. ✅ No broken renders (missing data handled gracefully)
+4. ✅ Zero dynamic dependencies (file-based OR API-based, but not mixed assumptions)
+
+## Testing Checklist
+
+- [ ] Open dashboard in browser
+- [ ] Load state JSON (or connect to API)
+- [ ] Verify all review gates display
+- [ ] Verify agent status displays
+- [ ] Verify artifact viewer works
+- [ ] Test approve button (updates JSON or calls API)
+- [ ] Test reject button (updates JSON or calls API)
+- [ ] Verify no JavaScript errors in console
+- [ ] Verify missing data handled gracefully
+
+## Once Complete
+
+✅ HTML work is DONE → Switch to Layer 3 (Review & Judgment) work
+❌ Do NOT add more features → Move on to next layer
+`;
+    }
+
+    // Generate all files
+    function generateAllFiles() {
+      const files = [
+        {
+          name: 'DECISIONS.md',
+          content: generateDecisions(),
+          path: 'agent-orchestrator/docs/DECISIONS.md'
+        },
+        {
+          name: 'HUMAN_REVIEW_RULES.md',
+          content: generateReviewRules(),
+          path: 'agent-orchestrator/docs/HUMAN_REVIEW_RULES.md'
+        },
+        {
+          name: 'CANONICAL_ENTITIES.md',
+          content: generateCanonicalEntities(),
+          path: 'agent-orchestrator/docs/CANONICAL_ENTITIES.md'
+        },
+        {
+          name: 'DYNAMICS.md',
+          content: generateDynamics(),
+          path: 'agent-orchestrator/docs/DYNAMICS.md'
+        },
+        {
+          name: 'HTML_DONE_CRITERIA.md',
+          content: generateHtmlDoneCriteria(),
+          path: 'agent-orchestrator/docs/HTML_DONE_CRITERIA.md'
+        }
+      ];
+
+      // Create a zip-like download for all files
+      files.forEach(file => {
+        downloadFile(file.name, file.content, 'text/markdown');
+      });
+
+      // Show preview
+      const preview = document.getElementById('filePreview');
+      preview.style.display = 'block';
+      preview.innerHTML = '<h4>Generated Files:</h4>' + files.map(f => 
+        `<strong>${f.path}</strong>\n${f.content.substring(0, 200)}...\n\n`
+      ).join('\n---\n\n');
+      
+      alert(`✅ Generated ${files.length} files! Check your downloads folder.`);
+    }
+
+    // Download file
+    function downloadFile(filename, content, mimeType) {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // Clear all answers
+    function clearAll() {
+      if (confirm('Are you sure you want to clear all answers? This will reset all discovery questions.')) {
+        const inputs = document.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+          if (input.type === 'checkbox') {
+            input.checked = false;
+          } else {
+            input.value = '';
+          }
+        });
+        
+        // Reset example defaults for textareas (helpful prompts)
+        const q11Static = document.getElementById('q11_static');
+        if (q11Static) q11Static.value = 'Legislative state machine (PRE_EVT → IMPL_EVT)\nReview gate definitions (HR_PRE, HR_LANG, HR_MSG, HR_RELEASE)\nAgent type classifications (Intelligence, Drafting, Execution, Learning)\nCanonical entity definitions';
+        
+        const q12Slow = document.getElementById('q12_slow');
+        if (q12Slow) q12Slow.value = 'Bill status (legislative database)\nCommittee assignments\nStaff rosters\nPolicy opportunity confidence (after initial validation)';
+        
+        const q13Fast = document.getElementById('q13_fast');
+        if (q13Fast) q13Fast.value = 'Agent execution state (RUNNING, WAITING_REVIEW, TERMINATED)\nReview queue depth (pending_reviews count)\nSignal scan results (new signals detected)\nOpposition risk level (can spike quickly)';
+        
+        const q14Required = document.getElementById('q14_required');
+        if (q14Required) q14Required.value = 'All review gates visible (HR_PRE, HR_LANG, HR_MSG, HR_RELEASE)\nCurrent legislative state visible (PRE_EVT, INTRO_EVT, etc.)\nCurrent orchestrator state visible (ORCH_IDLE, ORCH_ACTIVE, etc.)\nAgent status visible (agent_id, status, last_heartbeat)\nArtifact viewer works (list, preview, metadata)\nApprove/Reject buttons functional';
+        
+        const q15OutOfScope = document.getElementById('q15_out_of_scope');
+        if (q15OutOfScope) q15OutOfScope.value = 'Real-time updates (refresh button only - unless bidirectional system active)\nMulti-user collaboration\nHistorical analytics\nAdvanced filtering/search\nExport functionality';
+        
+        updateProgress();
+        alert('All answers cleared! The example prompts are still there to guide you.');
+      }
+    }
+
+    // Load from PRE_CONCEPT.json
+    function loadFromFile() {
+      document.getElementById('fileInput').click();
+    }
+
+    // Handle file load
+    function handleFileLoad(event) {
+      const file = event.target.files[0];
+      if (file && file.name.endsWith('.json')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          try {
+            const data = JSON.parse(e.target.result);
+            
+            // Provide context in discovery questions based on PRE_CONCEPT.json
+            let contextAdded = false;
+            
+            if (data.stakeholder_landscape) {
+              const allies = data.stakeholder_landscape.allies || [];
+              const opponents = data.stakeholder_landscape.opponents || [];
+              const allyCount = allies.length;
+              const opponentCount = opponents.length;
+              const hasHighInfluenceOpponent = opponents.some(o => o.influence === 'high');
+              
+              // Add context to ally importance question
+              const currentAllyAnswer = document.getElementById('q2_ally_importance').value;
+              if (!currentAllyAnswer.trim()) {
+                document.getElementById('q2_ally_importance').value = `Current PRE_CONCEPT.json shows:\n- ${allyCount} allies: ${allies.map(a => a.name).join(', ')}\n- ${opponentCount} opponents: ${opponents.map(o => o.name).join(', ')}\n- High-influence opponent: ${hasHighInfluenceOpponent ? 'YES' : 'NO'}\n\nBased on this, what ally balance feels right to you?`;
+                contextAdded = true;
+              }
+            }
+            
+            if (data.opposition_risk) {
+              const riskLevel = data.opposition_risk.level || 'unknown';
+              const earlyWarnings = data.opposition_risk.early_warnings || [];
+              
+              // Add context to risk questions
+              if (!document.getElementById('q3_high_risk_definition').value.trim()) {
+                document.getElementById('q3_high_risk_definition').value = `Current PRE_CONCEPT.json shows:\n- Risk level: ${riskLevel.toUpperCase()}\n- Early warnings: ${earlyWarnings.length > 0 ? earlyWarnings.join(', ') : 'None'}\n\nBased on this, what does "high opposition risk" mean to you?`;
+                contextAdded = true;
+              }
+              
+              if (earlyWarnings.length > 0 && !document.getElementById('q3_early_warnings').value.trim()) {
+                document.getElementById('q3_early_warnings').value = `Current early warnings from PRE_CONCEPT.json:\n${earlyWarnings.map(w => `- ${w}`).join('\n')}\n\nWhat other early warnings would trigger escalation?`;
+                contextAdded = true;
+              }
+            }
+            
+            if (data.signal_analysis) {
+              const opportunities = data.signal_analysis.industry_opportunities || [];
+              const regulatoryContext = data.signal_analysis.regulatory_context || [];
+              
+              // Add context to signal questions
+              if (!document.getElementById('q4_signal_requirements').value.trim()) {
+                document.getElementById('q4_signal_requirements').value = `Current PRE_CONCEPT.json shows:\n- Industry opportunities: ${opportunities.length}\n${opportunities.map(o => `  - ${o}`).join('\n')}\n- Regulatory context: ${regulatoryContext.length}\n${regulatoryContext.map(r => `  - ${r}`).join('\n')}\n\nBased on this, what signals do you need to see before approving?`;
+                contextAdded = true;
+              }
+            }
+            
+            // Expand step 1
+            toggleStep(1);
+            
+            updateProgress();
+            if (contextAdded) {
+              alert('✅ Loaded context from PRE_CONCEPT.json! The discovery questions now have context from your actual data. Fill in your preferences based on what you see.');
+            } else {
+              alert('✅ Loaded PRE_CONCEPT.json! Use it as reference while answering the discovery questions.');
+            }
+          } catch (err) {
+            alert('❌ Error loading file: ' + err.message);
+          }
+        };
+        reader.readAsText(file);
+      }
+    }
+
+    // Initialize - expand first step
+    window.onload = function() {
+      toggleStep(1);
+      updateProgress();
+    };
+  </script>
+</body>
+</html>

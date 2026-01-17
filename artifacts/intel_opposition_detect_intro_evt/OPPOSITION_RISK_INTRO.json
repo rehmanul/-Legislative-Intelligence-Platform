@@ -1,0 +1,20 @@
+{
+  "_meta": {
+    "agent_id": "intel_opposition_detect_intro_evt",
+    "generated_at": "2026-01-21T01:30:00Z",
+    "artifact_type": "OPPOSITION_RISK",
+    "artifact_name": "Opposition Risk Assessment",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": false,
+    "requires_review": null,
+    "guidance_status": "SIGNED"
+  },
+  "bill_reference": "H.R. 9102 - Agricultural Data Transparency Act",
+  "opposition_intensity": "MODERATE",
+  "primary_opponents": ["Large Agribusiness Processors", "Some commodity associations"],
+  "opposition_arguments": ["Cost concerns", "Proprietary information disclosure"],
+  "risk_level": "MEDIUM",
+  "mitigation_strategy": "Emphasize aggregated data requirements, no individual company disclosure",
+  "disclaimer": "Opposition assessment based on available signals and may evolve."
+}

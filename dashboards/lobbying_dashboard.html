@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobbying System Dashboard - Artifacts & Services</title>
+    <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-family-sans), Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+            background: var(--color-bg-secondary);
+            padding: var(--spacing-xl);
+        }
+        
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+            color: var(--color-bg-primary);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 36px;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        header .subtitle {
+            font-size: var(--font-size-lg);
+            opacity: 0.95;
+        }
+        
+        .file-loader {
+            background: #e7f3ff;
+            border: 2px dashed var(--color-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin-bottom: 30px;
+        }
+        
+        .file-loader h3 {
+            margin-top: 0;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .file-loader .instructions {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-lg);
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+        
+        .file-loader .instructions code {
+            background: var(--color-bg-secondary);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-xs);
+        }
+        
+        .file-input-group {
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .file-input-group label {
+            display: block;
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .file-input-wrapper {
+            display: flex;
+            gap: var(--spacing-md);
+            align-items: center;
+        }
+        
+        input[type="file"] {
+            flex: 1;
+            padding: var(--spacing-sm);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-sm);
+        }
+        
+        .btn {
+            padding: var(--spacing-md) 20px;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            transition: opacity 0.2s;
+        }
+        
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--color-bg-primary);
+        }
+        
+        .btn-success {
+            background: var(--color-success);
+            color: var(--color-bg-primary);
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+        }
+        
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+            text-align: center;
+        }
+        
+        .stat-card .number {
+            font-size: 32px;
+            font-weight: var(--font-weight-bold);
+            color: #8b5cf6;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card .label {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .activity-summary {
+            background: var(--color-bg-primary);
+            padding: 25px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-2);
+        }
+        
+        .activity-summary h2 {
+            font-size: var(--font-size-2xl);
+            color: #8b5cf6;
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--color-border);
+        }
+        
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .activity-card {
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            background: var(--color-bg-tertiary);
+        }
+        
+        .activity-card h3 {
+            font-size: var(--font-size-base);
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .activity-card .count {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: #8b5cf6;
+            margin-bottom: 5px;
+        }
+        
+        .activity-card .description {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+        
+        .section {
+            background: var(--color-bg-primary);
+            padding: 25px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-2);
+        }
+        
+        .section h2 {
+            font-size: var(--font-size-2xl);
+            color: #8b5cf6;
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--color-border);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .section-header .filter-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+        
+        .filter-btn {
+            padding: var(--spacing-sm) 12px;
+            border: 1px solid var(--color-border);
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: var(--font-size-xs);
+            transition: all var(--transition-base) var(--transition-ease);
+        }
+        
+        .filter-btn.active {
+            background: #8b5cf6;
+            color: var(--color-bg-primary);
+            border-color: #8b5cf6;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .service-card {
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            background: var(--color-bg-tertiary);
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-3);
+        }
+        
+        .service-card.highlight-coalition {
+            border: 2px solid #ec4899;
+            background: #fdf2f8;
+        }
+        
+        .service-card h3 {
+            font-size: var(--font-size-lg);
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .service-card .service-id {
+            display: inline-block;
+            background: #8b5cf6;
+            color: var(--color-bg-primary);
+            padding: var(--spacing-xs) 10px;
+            border-radius: var(--radius-xl);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .service-card .service-id.avoq {
+            background: #ec4899;
+        }
+        
+        .service-card .description {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .service-card .meta {
+            font-size: var(--font-size-xs);
+            color: #999;
+            margin-top: var(--spacing-md);
+        }
+        
+        .service-card .meta span {
+            margin-right: 15px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: var(--spacing-xs) 10px;
+            border-radius: var(--radius-xl);
+            font-size: 11px;
+            font-weight: var(--font-weight-semibold);
+            text-transform: uppercase;
+        }
+        
+        .badge-paid {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .badge-safe {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .badge-review {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .artifact-list, .workflow-list {
+            list-style: none;
+            margin-top: var(--spacing-xl);
+        }
+        
+        .artifact-item, .workflow-item {
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            background: var(--color-bg-tertiary);
+            transition: transform 0.2s;
+        }
+        
+        .artifact-item:hover, .workflow-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-2);
+        }
+        
+        .artifact-item.coalition-related {
+            border-left: 4px solid #ec4899;
+        }
+        
+        .artifact-item-header, .workflow-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .artifact-item-title, .workflow-item-title {
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-base);
+            color: var(--color-text-primary);
+        }
+        
+        .artifact-item-meta, .workflow-item-meta {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .artifact-item-meta span, .workflow-item-meta span {
+            margin-right: 15px;
+        }
+        
+        .status-badge {
+            padding: var(--spacing-xs) 10px;
+            border-radius: var(--radius-xl);
+            font-size: 11px;
+            font-weight: var(--font-weight-semibold);
+            text-transform: uppercase;
+        }
+        
+        .status-completed {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .status-failed {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .status-running {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .workflow-type {
+            display: inline-block;
+            padding: var(--spacing-xs) 10px;
+            border-radius: var(--radius-xl);
+            font-size: 11px;
+            font-weight: var(--font-weight-semibold);
+            margin-right: 10px;
+        }
+        
+        .workflow-legislative {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .workflow-grassroots {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .workflow-avoq {
+            background: #fce7f3;
+            color: #9f1239;
+        }
+        
+        .workflow-services {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .json-viewer {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-xs);
+            overflow-x: auto;
+            margin-top: var(--spacing-md);
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .json-viewer pre {
+            margin: 0;
+            var(--color-bg-primary)-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .toggle-btn {
+            background: var(--color-gray-500);
+            color: var(--color-bg-primary);
+            padding: var(--spacing-sm) 12px;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: var(--font-size-xs);
+            margin-top: var(--spacing-md);
+        }
+        
+        .toggle-btn:hover {
+            background: var(--color-gray-600);
+        }
+        
+        .recent-activity {
+            background: #fef3c7;
+            border-left: 4px solid var(--color-warning);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .recent-activity h4 {
+            color: #92400e;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .recent-activity-item {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-bottom: 5px;
+        }
+        
+        .highlight-box {
+            background: #fdf2f8;
+            border: 2px solid #ec4899;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .highlight-box h3 {
+            color: #9f1239;
+            margin-bottom: var(--spacing-md);
+        }
+    </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+    
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="container">
+        <header>
+            <h1>🏛️ Lobbying System Dashboard</h1>
+            <p class="subtitle">Artifacts, Services, Coalition Building & Workflow Activity</p>
+        </header>
+        
+        <!-- API Connection & Campaign Selector -->
+        <div class="file-loader" style="background: #e7f3ff; border-color: var(--color-primary);">
+            <h3>🔌 Connect to Orchestrator API</h3>
+            <div class="instructions">
+                <strong>API Mode:</strong> Connect to live orchestrator API for real-time data
+            </div>
+            <div class="file-input-group">
+                <label>API URL</label>
+                <div class="file-input-wrapper">
+                    <input type="text" id="apiUrl" placeholder="http://localhost:8000" value="http://localhost:8000" style="flex: 1; padding: var(--spacing-sm); border: 1px solid var(--color-border); border-radius: var(--radius-sm);">
+                    <button class="btn btn-primary" onclick="connectToAPI()">Connect</button>
+                </div>
+            </div>
+            <div class="file-input-group" id="campaignSelectorGroup" style="display: none;">
+                <label>Select Campaign/Workflow</label>
+                <div class="file-input-wrapper">
+                    <select id="campaignSelect" style="flex: 1; padding: var(--spacing-sm); border: 1px solid var(--color-border); border-radius: var(--radius-sm);">
+                        <option value="">Loading campaigns...</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="loadCampaignData()">Load Campaign</button>
+                </div>
+            </div>
+            <div id="apiStatus" style="margin-top: var(--spacing-md); padding: var(--spacing-md); border-radius: var(--radius-sm); display: none;"></div>
+        </div>
+        
+        <div class="file-loader">
+            <h3>📁 Load Lobbying System Data (File Mode)</h3>
+            <div class="instructions">
+                <strong>File Mode:</strong> Load data from local files (works offline)
+                <ul style="margin-top: var(--spacing-md); margin-left: 20px;">
+                    <li><strong>Artifacts:</strong> <code>lobbying-workflow-agent/data/artifacts/</code> (select all JSON files)</li>
+                    <li><strong>Workflows:</strong> <code>lobbying-workflow-agent/data/workflows/</code> (select all JSON files)</li>
+                </ul>
+                <p style="margin-top: var(--spacing-md); font-size: var(--font-size-xs); color: #999;">💡 Tip: You can select multiple files at once using Ctrl+Click (Windows) or Cmd+Click (Mac)</p>
+            </div>
+            <div class="file-input-group">
+                <label>📄 Artifacts (from lobbying-workflow-agent/data/artifacts/)</label>
+                <div class="file-input-wrapper">
+                    <input type="file" id="artifactsFile" accept=".json" multiple>
+                    <button class="btn btn-primary" onclick="loadArtifacts()">Load Artifacts</button>
+                </div>
+            </div>
+            <div class="file-input-group">
+                <label>🔄 Workflows (from lobbying-workflow-agent/data/workflows/)</label>
+                <div class="file-input-wrapper">
+                    <input type="file" id="workflowsFile" accept=".json" multiple>
+                    <button class="btn btn-primary" onclick="loadWorkflows()">Load Workflows</button>
+                </div>
+            </div>
+            <div style="margin-top: var(--spacing-lg);">
+                <button class="btn btn-success" onclick="loadAllData()">🚀 Load All Data at Once</button>
+            </div>
+        </div>
+        
+        <!-- Activity Summary -->
+        <div class="activity-summary" id="activitySummary" style="display: none;">
+            <h2>📊 What's Happening</h2>
+            <div class="activity-grid">
+                <div class="activity-card">
+                    <h3>Total Artifacts</h3>
+                    <div class="count" id="activityArtifacts">0</div>
+                    <div class="description">Generated artifacts from services</div>
+                </div>
+                <div class="activity-card">
+                    <h3>Active Workflows</h3>
+                    <div class="count" id="activityWorkflows">0</div>
+                    <div class="description">Workflow executions in progress</div>
+                </div>
+                <div class="activity-card">
+                    <h3>Coalition Activities</h3>
+                    <div class="count" id="activityCoalition">0</div>
+                    <div class="description">Coalition building & alignment</div>
+                </div>
+                <div class="activity-card">
+                    <h3>AVOQ Workflows</h3>
+                    <div class="count" id="activityAVOQ">0</div>
+                    <div class="description">Paid influence activities</div>
+                </div>
+                <div class="activity-card">
+                    <h3>Legislative Tracking</h3>
+                    <div class="count" id="activityLegislative">0</div>
+                    <div class="description">Bill & committee tracking</div>
+                </div>
+                <div class="activity-card">
+                    <h3>Recent Activity</h3>
+                    <div class="count" id="activityRecent">0</div>
+                    <div class="description">Last 24 hours</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats-bar" id="statsBar" style="display: none;">
+            <div class="stat-card">
+                <div class="number" id="totalArtifacts">0</div>
+                <div class="label">Total Artifacts</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="totalWorkflows">0</div>
+                <div class="label">Workflow Executions</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="coalitionServices">0</div>
+                <div class="label">Coalition Services</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="avoqWorkflows">0</div>
+                <div class="label">AVOQ Workflows</div>
+            </div>
+        </div>
+        
+        <!-- Coalition Building Highlight -->
+        <div class="highlight-box" id="coalitionHighlight" style="display: none;">
+            <h3>🤝 Coalition Building Activities</h3>
+            <div id="coalitionContent"></div>
+        </div>
+        
+        <!-- Services Section -->
+        <div class="section">
+            <div class="section-header">
+                <h2>🎯 Lobbying Services</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterServices('all')">All</button>
+                    <button class="filter-btn" onclick="filterServices('coalition')">Coalition</button>
+                    <button class="filter-btn" onclick="filterServices('avoq')">AVOQ</button>
+                </div>
+            </div>
+            <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-xl);">Services available in the lobbying system, including coalition building, policy analysis, and legislative tracking</p>
+            <div class="service-grid" id="servicesGrid">
+                <!-- Services will be populated here -->
+            </div>
+        </div>
+        
+        <!-- Artifacts Section -->
+        <div class="section">
+            <div class="section-header">
+                <h2>📄 Artifacts</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterArtifacts('all')">All</button>
+                    <button class="filter-btn" onclick="filterArtifacts('coalition')">Coalition</button>
+                    <button class="filter-btn" onclick="filterArtifacts('recent')">Recent</button>
+                </div>
+            </div>
+            <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-xl);">Generated artifacts from lobbying workflows</p>
+            <ul class="artifact-list" id="artifactsList">
+                <li class="empty-state">
+                    <div class="empty-state-icon">📭</div>
+                    <p>No artifacts loaded. Use the file loader above to load artifacts.</p>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Workflows Section -->
+        <div class="section">
+            <div class="section-header">
+                <h2>🔄 Workflow Executions</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterWorkflows('all')">All</button>
+                    <button class="filter-btn" onclick="filterWorkflows('legislative')">Legislative</button>
+                    <button class="filter-btn" onclick="filterWorkflows('grassroots')">Grassroots</button>
+                    <button class="filter-btn" onclick="filterWorkflows('avoq')">AVOQ</button>
+                    <button class="filter-btn" onclick="filterWorkflows('services')">Services</button>
+                </div>
+            </div>
+            <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-xl);">Legislative, grassroots, AVOQ, and client service workflows</p>
+            <ul class="workflow-list" id="workflowsList">
+                <li class="empty-state">
+                    <div class="empty-state-icon">📭</div>
+                    <p>No workflows loaded. Use the file loader above to load workflow data.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        let artifacts = [];
+        let workflows = [];
+        let currentServiceFilter = 'all';
+        let currentArtifactFilter = 'all';
+        let currentWorkflowFilter = 'all';
+        
+        // Service registry (from lobbying system)
+        const services = {
+            'A0': { name: 'Narrative & Positioning', description: 'Develop narrative and positioning strategy', stage: 'S0', category: 'strategy', zone: 'paid' },
+            'A1': { name: 'Policy Analysis & Strategy', description: 'Analyze policy and develop strategy', stage: 'S0', category: 'analysis', zone: 'paid' },
+            'A2': { name: 'Relationship & Influence Mapping', description: 'Map relationships and influence networks', stage: 'S0', category: 'mapping', zone: 'paid' },
+            'A3': { name: 'Research & Monitoring', description: 'Research and monitor legislative activity', stage: 'S0', category: 'research', zone: 'safe' },
+            'A4': { name: 'Early Coalition Alignment', description: 'Build early coalition alignment', stage: 'S0', category: 'coalition', zone: 'paid', isCoalition: true },
+            'B0': { name: 'Bill Drafting', description: 'Draft legislative language', stage: 'S1', category: 'drafting', zone: 'paid' },
+            'B1': { name: 'Sponsor Identification', description: 'Identify potential bill sponsors', stage: 'S1', category: 'strategy', zone: 'paid' },
+            'C0': { name: 'Committee Outreach', description: 'Coordinate committee access', stage: 'S2', category: 'outreach', zone: 'paid' },
+            'D0': { name: 'Hearing Preparation', description: 'Prepare for committee hearings', stage: 'S3', category: 'preparation', zone: 'paid' },
+            'D1': { name: 'Witness Coordination', description: 'Coordinate witness testimony', stage: 'S3', category: 'coordination', zone: 'paid' }
+        };
+        
+        // AVOQ Workflow Services (Coalition Building)
+        const avoqServices = {
+            'coalitions': { name: 'Coalition Building', description: 'Build and manage coalitions', workflow: 'AVOQ', isCoalition: true },
+            'media': { name: 'Media Strategy', description: 'Develop media and communications strategy', workflow: 'AVOQ' },
+            'meetings': { name: 'Meeting Coordination', description: 'Coordinate stakeholder meetings', workflow: 'AVOQ' },
+            'strategy': { name: 'Strategy Development', description: 'Develop comprehensive strategy', workflow: 'AVOQ' }
+        };
+        
+        function loadAllData() {
+            alert('Please select files from both directories:\n\n1. Select all JSON files from lobbying-workflow-agent/data/artifacts/\n2. Select all JSON files from lobbying-workflow-agent/data/workflows/\n\nYou can select multiple files at once!');
+        }
+        
+        function renderServices() {
+            const grid = document.getElementById('servicesGrid');
+            grid.innerHTML = '';
+            
+            // Render standard services
+            Object.entries(services).forEach(([id, service]) => {
+                if (currentServiceFilter === 'coalition' && !service.isCoalition) return;
+                if (currentServiceFilter === 'avoq') return; // Skip standard services for AVOQ filter
+                
+                const card = document.createElement('div');
+                card.className = 'service-card' + (service.isCoalition ? ' highlight-coalition' : '');
+                card.innerHTML = `
+                    <span class="service-id">${id}</span>
+                    <h3>${service.name}</h3>
+                    <p class="description">${service.description}</p>
+                    <div class="meta">
+                        <span>Stage: ${service.stage}</span>
+                        <span>Category: ${service.category}</span>
+                        <span class="badge badge-${service.zone}">${service.zone}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            
+            // Render AVOQ services (Coalition Building)
+            if (currentServiceFilter === 'all' || currentServiceFilter === 'avoq' || currentServiceFilter === 'coalition') {
+                Object.entries(avoqServices).forEach(([key, service]) => {
+                    if (currentServiceFilter === 'coalition' && !service.isCoalition) return;
+                    if (currentServiceFilter === 'avoq' && service.isCoalition) return; // Show coalition in coalition filter
+                    
+                    const card = document.createElement('div');
+                    card.className = 'service-card' + (service.isCoalition ? ' highlight-coalition' : '');
+                    card.innerHTML = `
+                        <span class="service-id avoq">AVOQ</span>
+                        <h3>${service.name}</h3>
+                        <p class="description">${service.description}</p>
+                        <div class="meta">
+                            <span>Workflow: ${service.workflow}</span>
+                            <span class="workflow-type workflow-avoq">Coalition Building</span>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+        }
+        
+        function filterServices(filter) {
+            currentServiceFilter = filter;
+            document.querySelectorAll('.filter-buttons .filter-btn').forEach(btn => {
+                if (btn.textContent.toLowerCase().includes(filter) || (filter === 'all' && btn.textContent === 'All')) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            renderServices();
+        }
+        
+        function loadArtifacts() {
+            const input = document.getElementById('artifactsFile');
+            const files = input.files;
+            
+            if (files.length === 0) {
+                alert('Please select at least one artifact file');
+                return;
+            }
+            
+            artifacts = [];
+            const promises = [];
+            
+            for (let file of files) {
+                const promise = file.text().then(text => {
+                    try {
+                        const data = JSON.parse(text);
+                        artifacts.push({
+                            file: file.name,
+                            data: data,
+                            meta: data._meta || {},
+                            loadedAt: new Date()
+                        });
+                    } catch (e) {
+                        console.error('Error parsing artifact:', file.name, e);
+                    }
+                });
+                promises.push(promise);
+            }
+            
+            Promise.all(promises).then(() => {
+                renderArtifacts();
+                updateStats();
+                updateActivity();
+            });
+        }
+        
+        function loadWorkflows() {
+            const input = document.getElementById('workflowsFile');
+            const files = input.files;
+            
+            if (files.length === 0) {
+                alert('Please select at least one workflow file');
+                return;
+            }
+            
+            workflows = [];
+            const promises = [];
+            
+            for (let file of files) {
+                const promise = file.text().then(text => {
+                    try {
+                        const data = JSON.parse(text);
+                        workflows.push({
+                            file: file.name,
+                            data: data,
+                            loadedAt: new Date()
+                        });
+                    } catch (e) {
+                        console.error('Error parsing workflow:', file.name, e);
+                    }
+                });
+                promises.push(promise);
+            }
+            
+            Promise.all(promises).then(() => {
+                renderWorkflows();
+                updateStats();
+                updateActivity();
+            });
+        }
+        
+        function renderArtifacts() {
+            const list = document.getElementById('artifactsList');
+            list.innerHTML = '';
+            
+            if (artifacts.length === 0) {
+                list.innerHTML = '<li class="empty-state"><div class="empty-state-icon">📭</div><p>No artifacts loaded.</p></li>';
+                return;
+            }
+            
+            let filtered = artifacts;
+            
+            // Apply filters
+            if (currentArtifactFilter === 'coalition') {
+                filtered = artifacts.filter(a => 
+                    a.meta.source_service === 'A4' || 
+                    a.meta.category === 'coalition' ||
+                    (a.data.workflow && a.data.workflow.includes('coalition'))
+                );
+            } else if (currentArtifactFilter === 'recent') {
+                const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+                filtered = artifacts.filter(a => {
+                    const genDate = a.meta.generated_at ? new Date(a.meta.generated_at) : a.loadedAt;
+                    return genDate > oneDayAgo;
+                });
+            }
+            
+            if (filtered.length === 0) {
+                list.innerHTML = '<li class="empty-state"><div class="empty-state-icon">🔍</div><p>No artifacts match the current filter.</p></li>';
+                return;
+            }
+            
+            filtered.forEach((artifact, index) => {
+                const item = document.createElement('li');
+                item.className = 'artifact-item';
+                
+                const meta = artifact.meta;
+                const sourceService = meta.source_service || 'Unknown';
+                const serviceName = services[sourceService]?.name || sourceService;
+                const isCoalition = sourceService === 'A4' || meta.category === 'coalition';
+                
+                if (isCoalition) {
+                    item.classList.add('coalition-related');
+                }
+                
+                item.innerHTML = `
+                    <div class="artifact-item-header">
+                        <div class="artifact-item-title">${artifact.file}</div>
+                        <span class="badge badge-${meta.zone || 'safe'}">${meta.zone || 'safe'}</span>
+                    </div>
+                    <div class="artifact-item-meta">
+                        <span><strong>Service:</strong> ${serviceName} (${sourceService})</span>
+                        <span><strong>Type:</strong> ${meta.artifact_type || 'N/A'}</span>
+                        <span><strong>Stage:</strong> ${meta.lifecycle_stage || 'N/A'}</span>
+                        <span><strong>Generated:</strong> ${meta.generated_at ? new Date(meta.generated_at).toLocaleString() : 'N/A'}</span>
+                    </div>
+                    <button class="toggle-btn" onclick="toggleArtifactJson(${artifacts.indexOf(artifact)})">View JSON</button>
+                    <div class="json-viewer" id="artifactJson${artifacts.indexOf(artifact)}" style="display: none;">
+                        <pre>${JSON.stringify(artifact.data, null, 2)}</pre>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+        
+        function filterArtifacts(filter) {
+            currentArtifactFilter = filter;
+            document.querySelectorAll('.section-header .filter-buttons .filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            renderArtifacts();
+        }
+        
+        function renderWorkflows() {
+            const list = document.getElementById('workflowsList');
+            list.innerHTML = '';
+            
+            if (workflows.length === 0) {
+                list.innerHTML = '<li class="empty-state"><div class="empty-state-icon">📭</div><p>No workflows loaded.</p></li>';
+                return;
+            }
+            
+            let filtered = workflows;
+            
+            // Apply filters
+            if (currentWorkflowFilter !== 'all') {
+                filtered = workflows.filter(w => {
+                    const routes = w.data.routes || {};
+                    const active = routes.active || [];
+                    const inactive = routes.inactive || [];
+                    const allRoutes = [...active, ...inactive];
+                    
+                    return allRoutes.some(r => {
+                        const routeTo = (r.to || '').toLowerCase();
+                        return routeTo.includes(currentWorkflowFilter);
+                    });
+                });
+            }
+            
+            if (filtered.length === 0) {
+                list.innerHTML = '<li class="empty-state"><div class="empty-state-icon">🔍</div><p>No workflows match the current filter.</p></li>';
+                return;
+            }
+            
+            filtered.forEach((workflow, index) => {
+                const item = document.createElement('li');
+                item.className = 'workflow-item';
+                
+                const data = workflow.data;
+                const status = data.status || 'unknown';
+                const routes = data.routes || {};
+                const activeRoutes = routes.active || [];
+                const inactiveRoutes = routes.inactive || [];
+                
+                // Determine workflow type from routes
+                let workflowType = 'Unknown';
+                let workflowClass = '';
+                const allRoutes = [...activeRoutes, ...inactiveRoutes];
+                if (allRoutes.length > 0) {
+                    const route = allRoutes[0];
+                    if (route.to) {
+                        if (route.to.includes('legislative')) {
+                            workflowType = 'Legislative';
+                            workflowClass = 'workflow-legislative';
+                        } else if (route.to.includes('grassroots')) {
+                            workflowType = 'Grassroots';
+                            workflowClass = 'workflow-grassroots';
+                        } else if (route.to.includes('avoq')) {
+                            workflowType = 'AVOQ';
+                            workflowClass = 'workflow-avoq';
+                        } else if (route.to.includes('services')) {
+                            workflowType = 'Client Services';
+                            workflowClass = 'workflow-services';
+                        }
+                    }
+                }
+                
+                item.innerHTML = `
+                    <div class="workflow-item-header">
+                        <div class="workflow-item-title">${data.taskId || workflow.file}</div>
+                        <span class="status-badge status-${status}">${status}</span>
+                    </div>
+                    <div class="workflow-item-meta">
+                        <span><strong>Agent:</strong> ${data.agentName || data.agentId || 'N/A'}</span>
+                        <span><strong>Type:</strong> <span class="workflow-type ${workflowClass}">${workflowType}</span></span>
+                        <span><strong>Executed:</strong> ${data.executedAt ? new Date(data.executedAt).toLocaleString() : 'N/A'}</span>
+                        ${activeRoutes.length > 0 ? `<span><strong>Active Routes:</strong> ${activeRoutes.map(r => r.to).join(', ')}</span>` : ''}
+                        ${inactiveRoutes.length > 0 ? `<span><strong>Inactive Routes:</strong> ${inactiveRoutes.length}</span>` : ''}
+                    </div>
+                    <button class="toggle-btn" onclick="toggleWorkflowJson(${workflows.indexOf(workflow)})">View JSON</button>
+                    <div class="json-viewer" id="workflowJson${workflows.indexOf(workflow)}" style="display: none;">
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+        
+        function filterWorkflows(filter) {
+            currentWorkflowFilter = filter;
+            document.querySelectorAll('.section-header .filter-buttons .filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            renderWorkflows();
+        }
+        
+        function toggleArtifactJson(index) {
+            const viewer = document.getElementById(`artifactJson${index}`);
+            viewer.style.display = viewer.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        function toggleWorkflowJson(index) {
+            const viewer = document.getElementById(`workflowJson${index}`);
+            viewer.style.display = viewer.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        function updateStats() {
+            const statsBar = document.getElementById('statsBar');
+            if (artifacts.length > 0 || workflows.length > 0) {
+                statsBar.style.display = 'grid';
+            }
+            
+            document.getElementById('totalArtifacts').textContent = artifacts.length;
+            document.getElementById('totalWorkflows').textContent = workflows.length;
+            
+            // Count coalition services
+            const coalitionCount = artifacts.filter(a => 
+                a.meta.source_service === 'A4' || 
+                a.meta.category === 'coalition' ||
+                (a.data.workflow && a.data.workflow.includes('coalition'))
+            ).length;
+            document.getElementById('coalitionServices').textContent = coalitionCount;
+            
+            // Count AVOQ workflows
+            const avoqCount = workflows.filter(w => {
+                const routes = w.data.routes || {};
+                const active = routes.active || [];
+                const inactive = routes.inactive || [];
+                const allRoutes = [...active, ...inactive];
+                return allRoutes.some(r => r.to && r.to.includes('avoq'));
+            }).length;
+            document.getElementById('avoqWorkflows').textContent = avoqCount;
+        }
+        
+        function updateActivity() {
+            const activitySummary = document.getElementById('activitySummary');
+            if (artifacts.length > 0 || workflows.length > 0) {
+                activitySummary.style.display = 'block';
+            }
+            
+            document.getElementById('activityArtifacts').textContent = artifacts.length;
+            
+            const activeWorkflows = workflows.filter(w => 
+                w.data.status === 'running' || w.data.status === 'pending'
+            ).length;
+            document.getElementById('activityWorkflows').textContent = activeWorkflows;
+            
+            const coalitionArtifacts = artifacts.filter(a => 
+                a.meta.source_service === 'A4' || 
+                a.meta.category === 'coalition'
+            ).length;
+            document.getElementById('activityCoalition').textContent = coalitionArtifacts;
+            
+            const avoqWorkflows = workflows.filter(w => {
+                const routes = w.data.routes || {};
+                const allRoutes = [...(routes.active || []), ...(routes.inactive || [])];
+                return allRoutes.some(r => r.to && r.to.includes('avoq'));
+            }).length;
+            document.getElementById('activityAVOQ').textContent = avoqWorkflows;
+            
+            const legislativeWorkflows = workflows.filter(w => {
+                const routes = w.data.routes || {};
+                const allRoutes = [...(routes.active || []), ...(routes.inactive || [])];
+                return allRoutes.some(r => r.to && r.to.includes('legislative'));
+            }).length;
+            document.getElementById('activityLegislative').textContent = legislativeWorkflows;
+            
+            // Recent activity (last 24 hours)
+            const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+            const recent = [...artifacts, ...workflows].filter(item => {
+                const date = item.meta?.generated_at || item.data?.executedAt || item.loadedAt;
+                return new Date(date) > oneDayAgo;
+            }).length;
+            document.getElementById('activityRecent').textContent = recent;
+            
+            // Update coalition highlight
+            updateCoalitionHighlight();
+        }
+        
+        function updateCoalitionHighlight() {
+            const highlight = document.getElementById('coalitionHighlight');
+            const coalitionArtifacts = artifacts.filter(a => 
+                a.meta.source_service === 'A4' || 
+                a.meta.category === 'coalition'
+            );
+            const coalitionWorkflows = workflows.filter(w => {
+                const routes = w.data.routes || {};
+                const allRoutes = [...(routes.active || []), ...(routes.inactive || [])];
+                return allRoutes.some(r => r.to && r.to.includes('avoq') || r.to && r.to.includes('coalition'));
+            });
+            
+            if (coalitionArtifacts.length > 0 || coalitionWorkflows.length > 0) {
+                highlight.style.display = 'block';
+                const content = document.getElementById('coalitionContent');
+                content.innerHTML = `
+                    <p><strong>${coalitionArtifacts.length} coalition-related artifacts</strong> and <strong>${coalitionWorkflows.length} coalition workflows</strong> found.</p>
+                    <ul style="margin-top: var(--spacing-md); margin-left: 20px;">
+                        ${coalitionArtifacts.map(a => `<li>${a.file} - ${services[a.meta.source_service]?.name || 'Coalition Activity'}</li>`).join('')}
+                        ${coalitionWorkflows.map(w => `<li>${w.file} - ${w.data.agentName || 'Coalition Workflow'}</li>`).join('')}
+                    </ul>
+                `;
+            } else {
+                highlight.style.display = 'none';
+            }
+        }
+        
+        // API Connection Functions
+        async function connectToAPI() {
+            apiBaseUrl = document.getElementById('apiUrl').value || 'http://localhost:8000';
+            const statusEl = document.getElementById('apiStatus');
+            
+            try {
+                statusEl.style.display = 'block';
+                statusEl.style.background = '#d1ecf1';
+                statusEl.style.color = '#0c5460';
+                statusEl.textContent = 'Connecting to API...';
+                
+                const response = await fetch(`${apiBaseUrl}/api/v1/health`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                
+                const health = await response.json();
+                if (health.status === 'healthy') {
+                    apiConnected = true;
+                    statusEl.style.background = '#d4edda';
+                    statusEl.style.color = '#155724';
+                    statusEl.textContent = '✅ Connected to orchestrator API';
+                    
+                    // Load available workflows
+                    await loadAvailableWorkflows();
+                } else {
+                    throw new Error('API returned unhealthy status');
+                }
+            } catch (error) {
+                apiConnected = false;
+                statusEl.style.background = '#f8d7da';
+                statusEl.style.color = '#721c24';
+                statusEl.textContent = `❌ Failed to connect: ${error.message}. Make sure the orchestrator API is running.`;
+            }
+        }
+        
+        async function loadAvailableWorkflows() {
+            try {
+                // Note: This endpoint may need to be implemented in the API
+                // For now, we'll try to get workflow list or use a workaround
+                const response = await fetch(`${apiBaseUrl}/api/v1/workflows`, {
+                    method: 'GET'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    availableWorkflows = Array.isArray(data) ? data : (data.workflows || []);
+                } else {
+                    // If GET /workflows doesn't exist, we'll show a manual input
+                    availableWorkflows = [];
+                }
+                
+                const selectorGroup = document.getElementById('campaignSelectorGroup');
+                const select = document.getElementById('campaignSelect');
+                
+                if (availableWorkflows.length > 0) {
+                    selectorGroup.style.display = 'block';
+                    select.innerHTML = '<option value="">Select a campaign...</option>';
+                    availableWorkflows.forEach(wf => {
+                        const option = document.createElement('option');
+                        option.value = wf.workflow_id || wf.id;
+                        option.textContent = wf.metadata?.campaign_name || wf.workflow_id || wf.id;
+                        select.appendChild(option);
+                    });
+                } else {
+                    selectorGroup.style.display = 'block';
+                    select.innerHTML = '<option value="">Enter workflow ID manually</option>';
+                    const manualInput = document.createElement('input');
+                    manualInput.type = 'text';
+                    manualInput.id = 'manualWorkflowId';
+                    manualInput.placeholder = 'Enter workflow ID';
+                    manualInput.style.cssText = 'flex: 1; padding: var(--spacing-sm); border: 1px solid var(--color-border); border-radius: var(--radius-sm); margin-top: var(--spacing-md);';
+                    select.parentElement.appendChild(manualInput);
+                }
+            } catch (error) {
+                console.error('Error loading workflows:', error);
+                const selectorGroup = document.getElementById('campaignSelectorGroup');
+                selectorGroup.style.display = 'block';
+                const select = document.getElementById('campaignSelect');
+                select.innerHTML = '<option value="">Error loading workflows</option>';
+            }
+        }
+        
+        async function loadCampaignData() {
+            if (!apiConnected) {
+                alert('Please connect to API first');
+                return;
+            }
+            
+            const select = document.getElementById('campaignSelect');
+            const manualInput = document.getElementById('manualWorkflowId');
+            const workflowId = manualInput ? manualInput.value : select.value;
+            
+            if (!workflowId) {
+                alert('Please select or enter a workflow ID');
+                return;
+            }
+            
+            try {
+                // Load workflow status
+                const statusResponse = await fetch(`${apiBaseUrl}/api/v1/workflows/${workflowId}/status`);
+                if (!statusResponse.ok) throw new Error('Failed to load workflow status');
+                
+                const workflowStatus = await statusResponse.json();
+                
+                // Load artifacts for this workflow
+                // Note: This endpoint may need to be implemented
+                try {
+                    const artifactsResponse = await fetch(`${apiBaseUrl}/api/v1/workflows/${workflowId}/artifacts`);
+                    if (artifactsResponse.ok) {
+                        const artifactsData = await artifactsResponse.json();
+                        artifacts = Array.isArray(artifactsData) ? artifactsData.map(a => ({
+                            file: a.artifact_name || a.artifact_type,
+                            data: a,
+                            meta: a._meta || {}
+                        })) : [];
+                    }
+                } catch (e) {
+                    console.warn('Could not load artifacts:', e);
+                    artifacts = [];
+                }
+                
+                // Create workflow entry
+                workflows = [{
+                    file: workflowId,
+                    data: {
+                        workflow_id: workflowId,
+                        status: workflowStatus.legislative_state || 'active',
+                        agentName: 'Orchestrator',
+                        executedAt: workflowStatus.created_at,
+                        routes: {
+                            active: []
+                        }
+                    }
+                }];
+                
+                renderArtifacts();
+                renderWorkflows();
+                updateStats();
+                updateActivitySummary();
+                
+                showStatus(`✅ Loaded campaign: ${workflowId}`, 'success');
+            } catch (error) {
+                console.error('Error loading campaign:', error);
+                alert(`Failed to load campaign: ${error.message}`);
+            }
+        }
+        
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('apiStatus');
+            if (statusEl) {
+                statusEl.style.display = 'block';
+                statusEl.className = `status-message ${type}`;
+                statusEl.textContent = message;
+            }
+        }
+        
+        // Initialize services on load
+        renderServices();
+        
+        // Try to connect to API on load
+        window.addEventListener('load', () => {
+            // Auto-connect if API URL is set
+            const apiUrl = document.getElementById('apiUrl');
+            if (apiUrl && apiUrl.value) {
+                connectToAPI();
+            }
+        });
+    </script>
+</body>
+</html>

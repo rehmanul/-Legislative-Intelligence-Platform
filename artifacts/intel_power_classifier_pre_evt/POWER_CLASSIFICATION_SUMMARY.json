@@ -1,0 +1,21 @@
+{
+  "_meta": {
+    "agent_id": "intel_power_classifier_pre_evt",
+    "generated_at": "2026-01-08T01:18:30.089304Z",
+    "artifact_type": "power_classification_summary",
+    "artifact_name": "Power Classification Summary",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": "HR_PRE",
+    "guidance_status": "TEST_MODE"
+  },
+  "total_classifications": 0,
+  "by_control_type": {
+    "PRIMARY": 0,
+    "SECONDARY": 0,
+    "SHADOW": 0
+  },
+  "classifications_location": "C:\\Users\\phi3t\\12.20 dash\\1.5.2026\\agent-orchestrator\\data\\power_classifications",
+  "classifications": []
+}

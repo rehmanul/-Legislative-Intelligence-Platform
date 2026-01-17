@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Process Leverage Schema",
+  "description": "Schema for encoding process-as-weapon leverage points",
+  "type": "object",
+  "required": [
+    "leverage_id",
+    "bill_id",
+    "leverage_type",
+    "deployed_by_entity_id",
+    "deployed_at",
+    "effect",
+    "_meta"
+  ],
+  "properties": {
+    "_meta": {
+      "type": "object",
+      "required": ["schema_version", "doctrine_version", "last_updated"],
+      "properties": {
+        "schema_version": {"type": "string", "default": "1.0.0"},
+        "doctrine_version": {"type": "string"},
+        "last_updated": {"type": "string", "format": "date-time"}
+      }
+    },
+    "leverage_id": {"type": "string", "format": "uuid"},
+    "bill_id": {"type": "string"},
+    "leverage_type": {
+      "type": "string",
+      "enum": ["referral_timing", "hearing_absence", "markup_sequencing", "report_language_capture", "floor_constraint"]
+    },
+    "deployed_by_entity_id": {"type": "string"},
+    "deployed_at": {"type": "string", "format": "date-time"},
+    "effect": {
+      "type": "object",
+      "properties": {
+        "delayed_by_days": {"type": "integer", "minimum": 0},
+        "modified_content": {"type": "string"},
+        "blocked_advancement": {"type": "boolean"},
+        "forced_compromise": {"type": "boolean"}
+      }
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "legislative_state": {"type": ["string", "null"], "enum": ["PRE_EVT", "INTRO_EVT", "COMM_EVT", "FLOOR_EVT", "FINAL_EVT", "IMPL_EVT", null]},
+        "committee_id": {"type": ["string", "null"]}
+      }
+    }
+  },
+  "additionalProperties": false
+}

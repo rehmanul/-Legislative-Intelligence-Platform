@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "agent_id": "draft_legislative_language_comm_evt",
+    "generated_at": "2026-01-20T14:30:00Z",
+    "artifact_type": "COMM_LEGISLATIVE_LANGUAGE",
+    "artifact_name": "Draft Legislative Language",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": "HR_LANG",
+    "guidance_status": "SIGNED",
+    "schema_version": "1.0.0"
+  },
+  "bill_section": {
+    "title": "Modernization of Healthcare Data Interoperability Standards",
+    "section_number": "SEC. 203",
+    "statutory_location": "Title II, Part B of the Public Health Service Act"
+  },
+  "statutory_language": {
+    "primary_text": "Not later than 180 days after the date of enactment of this Act, the Secretary of Health and Human Services shall promulgate regulations establishing technical standards for healthcare data interoperability that—\n(1) utilize application programming interfaces (APIs) that meet or exceed standards established under section 3024 of the Public Health Service Act;\n(2) require covered entities to provide real-time access to electronic health information through standardized APIs; and\n(3) prohibit information blocking practices as defined in section 4004 of the 21st Century Cures Act.",
+    "definitions_section": [
+      {
+        "term": "Covered entity",
+        "definition": "Any healthcare provider, health information exchange, or health information network that receives Federal financial assistance"
+      },
+      {
+        "term": "Information blocking",
+        "definition": "Any practice that is likely to interfere with, prevent, or materially discourage access, exchange, or use of electronic health information"
+      }
+    ]
+  },
+  "legal_rationale": {
+    "constitutional_basis": "Commerce Clause authority - interstate commerce in healthcare data",
+    "statutory_precedents": [
+      "21st Century Cures Act (P.L. 114-255) - Information blocking provisions",
+      "HIPAA Privacy Rule (45 CFR Parts 160, 164) - Health information access rights",
+      "ONC Interoperability Rule (45 CFR Part 170) - API requirements"
+    ],
+    "regulatory_alignment": "Aligns with CMS Interoperability and Patient Access Final Rule (85 FR 25510)"
+  },
+  "implementation_notes": {
+    "regulatory_timeline": "180-day rulemaking period with 60-day comment period",
+    "enforcement_mechanism": "Civil monetary penalties administered by HHS Office of Inspector General",
+    "effective_date": "Phased implementation: 12 months for large entities, 24 months for small entities"
+  },
+  "stakeholder_considerations": {
+    "provider_concerns": "Potential burden of API implementation costs",
+    "patient_benefits": "Increased access to personal health data via mobile applications",
+    "industry_alignment": "Voluntary standards already adopted by major EHR vendors"
+  },
+  "amendment_readiness": {
+    "flexibility_points": [
+      "Implementation timeline may be adjusted based on stakeholder feedback",
+      "Small entity definition may require clarification",
+      "Enforcement mechanism details subject to negotiation"
+    ]
+  },
+  "disclaimer": "This legislative language is generated for HR_LANG review. All statutory text requires legal review and validation."
+}

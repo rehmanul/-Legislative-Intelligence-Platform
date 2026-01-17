@@ -1,0 +1,55 @@
+{
+  "_meta": {
+    "generated_at": "2026-01-13T14:15:33.498345Z",
+    "script": "generate_policy_opportunity_artifacts.py",
+    "artifact_count": 4,
+    "version": "1.0.0"
+  },
+  "artifacts": [
+    {
+      "file_path": "artifacts\\policy\\WIRELESS_CHARGING_INSURABLE_RISK_POLICY_OPPORTUNITY.json",
+      "file_name": "WIRELESS_CHARGING_INSURABLE_RISK_POLICY_OPPORTUNITY.json",
+      "artifact_type": "POLICY_OPPORTUNITY",
+      "status": "ACTIONABLE",
+      "review_gate_status": "APPROVED",
+      "generated_at": "2026-01-20T12:00:00Z",
+      "description": "Risk Mitigation Technology Certification Framework"
+    },
+    {
+      "file_path": "artifacts\\policy\\WIRELESS_CHARGING_INSURABLE_RISK_POLICY_OPPORTUNITY.md",
+      "file_name": "WIRELESS_CHARGING_INSURABLE_RISK_POLICY_OPPORTUNITY.md",
+      "artifact_type": "MARKDOWN",
+      "status": "SPECULATIVE",
+      "description": "Policy Opportunity: Wireless Charging Risk Mitigation & Insurable Risk Framework"
+    },
+    {
+      "file_path": "artifacts\\policy\\WIRELESS_CHARGING_INSURABLE_RISK_POLICY_OPPORTUNITY.mmd",
+      "file_name": "WIRELESS_CHARGING_INSURABLE_RISK_POLICY_OPPORTUNITY.mmd",
+      "artifact_type": "UNKNOWN",
+      "status": "UNKNOWN",
+      "description": "Unknown file type: .mmd"
+    },
+    {
+      "file_path": "artifacts\\policy\\WIRELESS_CHARGING_INSURABLE_RISK_STRATEGIC_PLAN.md",
+      "file_name": "WIRELESS_CHARGING_INSURABLE_RISK_STRATEGIC_PLAN.md",
+      "artifact_type": "MARKDOWN",
+      "status": "ACTIONABLE",
+      "description": "Strategic Plan: Risk Mitigation Technology Certification Framework"
+    }
+  ],
+  "workflow_status": {
+    "opportunity_identified": true,
+    "analysis_complete": true,
+    "strategic_plan_ready": true,
+    "agents_available": true
+  },
+  "agents_available": {
+    "intel_policy_opportunity_analyzer": true,
+    "draft_policy_opportunity_document": true
+  },
+  "next_steps": [
+    "Run intel_policy_opportunity_analyzer_pre_evt.py to generate summary",
+    "Run draft_policy_opportunity_document_pre_evt.py to generate document",
+    "Review artifacts in artifacts/policy/ directory"
+  ]
+}

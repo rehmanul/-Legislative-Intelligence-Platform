@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workflow Cockpit - Agent Contract System</title>
+    <style>
+        :root {
+          /* ============================================
+             COLOR TOKENS - Primary & Status
+             ============================================ */
+          
+          /* Primary Colors */
+          --color-primary: #3b82f6;
+          --color-primary-hover: #2563eb;
+          --color-primary-light: #dbeafe;
+          --color-primary-dark: #1e40af;
+          
+          /* Status Colors */
+          --color-success: #10b981;
+          --color-success-hover: #059669;
+          --color-success-light: #d1fae5;
+          --color-success-dark: #065f46;
+          
+          --color-warning: #f59e0b;
+          --color-warning-hover: #d97706;
+          --color-warning-light: #fef3c7;
+          --color-warning-dark: #92400e;
+          
+          --color-error: #ef4444;
+          --color-error-hover: #dc2626;
+          --color-error-light: #fee2e2;
+          --color-error-dark: #991b1b;
+          
+          --color-info: #3b82f6;
+          --color-info-hover: #2563eb;
+          --color-info-light: #dbeafe;
+          --color-info-dark: #1e40af;
+          
+          /* ============================================
+             COLOR TOKENS - Legislative States
+             ============================================ */
+          
+          --color-state-pre-evt: #3b82f6;
+          --color-state-pre-evt-light: #dbeafe;
+          --color-state-intro-evt: #10b981;
+          --color-state-intro-evt-light: #d1fae5;
+          --color-state-comm-evt: #f59e0b;
+          --color-state-comm-evt-light: #fef3c7;
+          --color-state-floor-evt: #ef4444;
+          --color-state-floor-evt-light: #fee2e2;
+          --color-state-final-evt: #8b5cf6;
+          --color-state-final-evt-light: #ede9fe;
+          --color-state-impl-evt: #6b7280;
+          --color-state-impl-evt-light: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Types
+             ============================================ */
+          
+          --color-agent-intelligence: #3b82f6;
+          --color-agent-intelligence-bg: #dbeafe;
+          --color-agent-drafting: #f59e0b;
+          --color-agent-drafting-bg: #fef3c7;
+          --color-agent-execution: #ef4444;
+          --color-agent-execution-bg: #fee2e2;
+          --color-agent-learning: #10b981;
+          --color-agent-learning-bg: #d1fae5;
+          
+          /* ============================================
+             COLOR TOKENS - Agent Status
+             ============================================ */
+          
+          --color-status-running: #3b82f6;
+          --color-status-running-bg: #dbeafe;
+          --color-status-idle: #6b7280;
+          --color-status-idle-bg: #e5e7eb;
+          --color-status-waiting: #f59e0b;
+          --color-status-waiting-bg: #fef3c7;
+          --color-status-blocked: #ef4444;
+          --color-status-blocked-bg: #fee2e2;
+          --color-status-terminated: #6b7280;
+          --color-status-terminated-bg: #f3f4f6;
+          
+          /* ============================================
+             COLOR TOKENS - Neutral Colors
+             ============================================ */
+          
+          --color-gray-50: #f9fafb;
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-300: #d1d5db;
+          --color-gray-400: #9ca3af;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+          --color-gray-900: #111827;
+          
+          /* Semantic Neutral Colors */
+          --color-bg-primary: #ffffff;
+          --color-bg-secondary: #f5f5f5;
+          --color-bg-tertiary: #f9fafb;
+          --color-text-primary: #1a1a1a;
+          --color-text-secondary: #6b7280;
+          --color-text-tertiary: #9ca3af;
+          --color-border: #e5e7eb;
+          --color-border-light: #f3f4f6;
+          --color-border-dark: #d1d5db;
+          
+          /* ============================================
+             TYPOGRAPHY TOKENS
+             ============================================ */
+          
+          /* Font Families */
+          --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          --font-family-mono: 'Courier New', monospace;
+          
+          /* Font Sizes */
+          --font-size-xs: 0.75rem;    /* 12px */
+          --font-size-sm: 0.875rem;   /* 14px */
+          --font-size-base: 1rem;     /* 16px */
+          --font-size-lg: 1.125rem;   /* 18px */
+          --font-size-xl: 1.25rem;   /* 20px */
+          --font-size-2xl: 1.5rem;   /* 24px */
+          --font-size-3xl: 1.875rem; /* 30px */
+          --font-size-4xl: 2.25rem;  /* 36px */
+          
+          /* Font Weights */
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 600;
+          --font-weight-bold: 700;
+          
+          /* Line Heights */
+          --line-height-tight: 1.25;
+          --line-height-normal: 1.5;
+          --line-height-relaxed: 1.75;
+          
+          /* ============================================
+             SPACING TOKENS
+             ============================================ */
+          
+          /* Base Unit: 0.25rem (4px) */
+          --spacing-xs: 0.25rem;   /* 4px */
+          --spacing-sm: 0.5rem;    /* 8px */
+          --spacing-md: 1rem;      /* 16px */
+          --spacing-lg: 1.5rem;    /* 24px */
+          --spacing-xl: 2rem;      /* 32px */
+          --spacing-2xl: 3rem;     /* 48px */
+          --spacing-3xl: 4rem;     /* 64px */
+          
+          /* ============================================
+             BORDER RADIUS TOKENS
+             ============================================ */
+          
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --radius-lg: 8px;
+          --radius-xl: 12px;
+          --radius-2xl: 16px;
+          --radius-full: 9999px;   /* For pills/badges */
+          
+          /* ============================================
+             SHADOW TOKENS (Elevation)
+             ============================================ */
+          
+          --shadow-0: none;
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.15);
+          --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.2);
+          --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.25);
+          
+          /* ============================================
+             LAYOUT TOKENS
+             ============================================ */
+          
+          --container-max-width: 1400px;
+          --container-max-width-wide: 1600px;
+          --container-padding: 2rem;
+          
+          /* ============================================
+             TRANSITION TOKENS
+             ============================================ */
+          
+          --transition-fast: 0.15s;
+          --transition-base: 0.2s;
+          --transition-slow: 0.3s;
+          --transition-ease: ease;
+        }
+
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-family-sans), Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--color-bg-secondary);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            padding: var(--spacing-xl);
+        }
+        
+        .header {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .header h1 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--spacing-md);
+            color: var(--color-text-primary);
+        }
+        
+        .controls {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+            flex-wrap: wrap;
+        }
+        
+        input[type="text"], input[type="file"] {
+            padding: var(--spacing-sm) 12px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-sm);
+        }
+        
+        button {
+            padding: var(--spacing-sm) 16px;
+            background: var(--color-primary);
+            color: var(--color-bg-primary);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+            transition: background var(--transition-base) var(--transition-ease);
+        }
+        
+        button:hover {
+            background: var(--color-primary-hover);
+        }
+        
+        button:disabled {
+            background: var(--color-gray-400);
+            cursor: not-allowed;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+        }
+        
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .panel {
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow-2);
+        }
+        
+        .panel h2 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-lg);
+            color: var(--color-text-primary);
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 8px;
+        }
+        
+        .panel h3 {
+            font-size: var(--font-size-base);
+            margin: var(--spacing-lg) 0 10px 0;
+            color: var(--color-text-primary);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: var(--spacing-xs) 12px;
+            border-radius: var(--radius-xl);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            margin-left: 10px;
+        }
+        
+        .status-ask { background: #ecfeff; color: #155e75; }
+        .status-plan { background: #e0e7ff; color: #3730a3; }
+        .status-agent { background: #dcfce7; color: #166534; }
+        .status-ready { background: #fef3c7; color: #92400e; }
+        
+        .agent-list {
+            list-style: none;
+            margin: var(--spacing-md) 0;
+        }
+        
+        .agent-item {
+            padding: var(--spacing-sm) 12px;
+            margin: 5px 0;
+            background: var(--color-gray-100);
+            border-left: 3px solid var(--color-primary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .agent-item.executed {
+            border-left-color: var(--color-success);
+            background: #d5f4e6;
+        }
+        
+        .agent-item.failed {
+            border-left-color: var(--color-error);
+            background: #fadbd8;
+        }
+        
+        .agent-item.pending {
+            border-left-color: var(--color-warning);
+            background: #fef5e7;
+        }
+        
+        .data-section {
+            margin: var(--spacing-md) 0;
+            padding: var(--spacing-md);
+            background: var(--color-gray-100);
+            border-radius: var(--radius-sm);
+        }
+        
+        .data-item {
+            padding: 5px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .data-label {
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-secondary);
+        }
+        
+        .data-value {
+            color: var(--color-text-primary);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 24px;
+            background: #ecf0f1;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            margin: var(--spacing-md) 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-primary), #2ecc71);
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-bg-primary);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+        }
+        
+        .gate-list {
+            list-style: none;
+        }
+        
+        .gate-item {
+            padding: var(--spacing-md);
+            margin: 8px 0;
+            border-radius: var(--radius-sm);
+            border-left: 4px solid;
+        }
+        
+        .gate-pending {
+            background: #fef5e7;
+            border-left-color: var(--color-warning);
+        }
+        
+        .gate-approved {
+            background: #d5f4e6;
+            border-left-color: var(--color-success);
+        }
+        
+        .gate-rejected {
+            background: #fadbd8;
+            border-left-color: var(--color-error);
+        }
+        
+        .json-viewer {
+            background: var(--color-text-primary);
+            color: #ecf0f1;
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-xs);
+            overflow-x: auto;
+            max-height: 400px;
+            overflow-y: auto;
+            var(--color-bg-primary)-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .error {
+            background: #fadbd8;
+            color: #c0392b;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-sm);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .success {
+            background: #d5f4e6;
+            color: var(--color-success);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-sm);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .info {
+            background: #ebf5fb;
+            color: #2874a6;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-sm);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .context-dropdown-wrapper {
+            display: flex;
+            gap: var(--spacing-md);
+            align-items: center;
+            margin-top: var(--spacing-lg);
+            flex-wrap: wrap;
+        }
+        
+        .context-dropdown-wrapper label {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text-primary);
+        }
+        
+        .context-dropdown-wrapper select {
+            padding: var(--spacing-sm) 12px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-sm);
+            background: var(--color-bg-primary);
+            min-width: 250px;
+            cursor: pointer;
+        }
+        
+        .status-message {
+            padding: var(--spacing-md) 15px;
+            border-radius: var(--radius-sm);
+            margin-top: var(--spacing-md);
+            font-size: 13px;
+            display: none;
+        }
+        
+        .status-message.success {
+            background: #d1e7dd;
+            color: #0f5132;
+            border: 1px solid #badbcc;
+            display: block;
+        }
+        
+        .status-message.error {
+            background: #f8d7da;
+            color: #842029;
+            border: 1px solid #f5c2c7;
+            display: block;
+        }
+        
+        .status-message.info {
+            background: #cfe2ff;
+            color: #084298;
+            border: 1px solid #b6d4fe;
+            display: block;
+        }
+        
+        .loading-skeleton {
+            background: var(--color-bg-primary);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .skeleton-item {
+            height: 80px;
+            background: linear-gradient(90deg, #f0f0f0 25%, var(--color-border) 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+<link rel="stylesheet" href="../../dashboards/shared/dashboard-design-system.css">
+
+</head>
+<body>
+    
+    <!-- Navigation Component -->
+    <nav class="dashboard-nav">
+        <a href="unified_dashboard.html" class="dashboard-nav__logo">Dashboard Index</a>
+        <ul class="dashboard-nav__links">
+            <li><a href="unified_dashboard.html" class="dashboard-nav__link--unified ">All Dashboards</a></li>
+            <li><a href="../agent-orchestrator/dashboards/dashboard_index.html" class="dashboard-nav__link">Agent Orchestrator</a></li>
+            <li><a href="../agent-orchestrator/dashboards/operator_modes_viewer.html" class="dashboard-nav__link">Operator Modes</a></li>
+            <li><a href="session_artifact_review.html" class="dashboard-nav__link">Artifact Review</a></li>
+        </ul>
+    </nav>
+
+<div class="header">
+        <h1>🎛️ Workflow Cockpit - Agent Contract System</h1>
+        <p>View and monitor workflow execution state</p>
+        <div class="context-dropdown-wrapper">
+            <label for="workflowDropdown">📋 Quick Load:</label>
+            <select id="workflowDropdown" onchange="loadWorkflowFromDropdown(this.value)">
+                <option value="">Select workflow...</option>
+                <optgroup label="Recent Workflows" id="recentWorkflowsGroup">
+                    <!-- Populated from localStorage -->
+                </optgroup>
+            </select>
+            <button onclick="refreshWorkflowDropdown()">🔄 Refresh</button>
+        </div>
+        <div class="controls">
+            <input type="text" id="workflowIdInput" placeholder="Enter workflow ID or load from file" style="flex: 1; min-width: 200px;">
+            <button onclick="loadWorkflowById()">Load Workflow</button>
+            <input type="file" id="fileInput" accept=".json" onchange="loadWorkflowFromFile(event)" style="display: none;">
+            <button onclick="document.getElementById('fileInput').click()">Load from File</button>
+            <button onclick="refreshWorkflow()">Refresh</button>
+        </div>
+        <div id="statusMessage" class="status-message"></div>
+        <div id="errorMessage" style="display: none;"></div>
+    </div>
+    
+    <div class="container">
+        <div class="panel">
+            <h2>📊 Workflow Status</h2>
+            <div id="statusContent">
+                <p class="info">Load a workflow to view status</p>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <h2>📋 Agent Execution</h2>
+            <div id="agentsContent">
+                <p class="info">Load a workflow to view agents</p>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <h2>🚦 Human Gates</h2>
+            <div id="gatesContent">
+                <p class="info">Load a workflow to view gates</p>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <h2>📈 Progress</h2>
+            <div id="progressContent">
+                <p class="info">Load a workflow to view progress</p>
+            </div>
+        </div>
+        
+        <div class="panel" style="grid-column: 1 / -1;">
+            <h2>📄 Workflow Data</h2>
+            <div id="dataContent">
+                <p class="info">Load a workflow to view data</p>
+            </div>
+        </div>
+        
+        <div class="panel" style="grid-column: 1 / -1;">
+            <h2>📋 Full Workflow JSON</h2>
+            <div id="jsonContent">
+                <p class="info">Load a workflow to view JSON</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentWorkflowId = null;
+        let workflowData = null;
+        
+        // Populate recent workflows dropdown
+        populateRecentWorkflows();
+        
+        // Check for workflow_id in URL params
+        const urlParams = new URLSearchParams(window.location.search);
+        const workflowIdParam = urlParams.get('workflow_id');
+        if (workflowIdParam) {
+            document.getElementById('workflowIdInput').value = workflowIdParam;
+            loadWorkflowById();
+        } else {
+            // Try auto-loading last successful workflow
+            autoLoadWorkflow();
+        }
+        
+        // Auto-load workflow
+        async function autoLoadWorkflow() {
+            const lastWorkflowId = localStorage.getItem('lastSuccessfulWorkflowId');
+            if (lastWorkflowId) {
+                document.getElementById('workflowIdInput').value = lastWorkflowId;
+                const result = await tryLoadWorkflowById(lastWorkflowId);
+                if (result.success) {
+                    showStatus('Auto-loaded workflow: ' + lastWorkflowId, 'success');
+                    return;
+                }
+            }
+            
+            showStatus('Enter workflow ID or use file picker to load workflow', 'info');
+        }
+        
+        // Try loading workflow by ID
+        async function tryLoadWorkflowById(workflowId) {
+            const paths = [
+                `data/workflows/${workflowId}/workflow.json`,
+                `../data/workflows/${workflowId}/workflow.json`,
+                `../../data/workflows/${workflowId}/workflow.json`,
+                `agent-orchestrator/data/workflows/${workflowId}/workflow.json`
+            ];
+            
+            for (const workflowPath of paths) {
+                try {
+                    const response = await fetch(workflowPath);
+                    if (response.ok) {
+                        const data = await response.json();
+                        workflowData = data;
+                        currentWorkflowId = workflowId;
+                        
+                        localStorage.setItem('lastSuccessfulWorkflowId', workflowId);
+                        localStorage.setItem('lastSuccessfulWorkflowPath', workflowPath);
+                        
+                        addToRecentWorkflows(workflowId, workflowPath);
+                        
+                        const dropdown = document.getElementById('workflowDropdown');
+                        if (dropdown) {
+                            dropdown.value = workflowId;
+                        }
+                        
+                        renderWorkflow(data);
+                        hideError();
+                        return { success: true, data, path: workflowPath };
+                    }
+                } catch (e) {
+                    continue;
+                }
+            }
+            
+            return { success: false };
+        }
+        
+        function loadWorkflowById() {
+            const workflowId = document.getElementById('workflowIdInput').value.trim();
+            if (!workflowId) {
+                showError('Please enter a workflow ID');
+                return;
+            }
+            
+            showStatus('Loading workflow: ' + workflowId + '...', 'info');
+            
+            tryLoadWorkflowById(workflowId).then(result => {
+                if (result.success) {
+                    showStatus('Loaded workflow: ' + workflowId, 'success');
+                } else {
+                    showError(`Failed to load workflow: ${workflowId}. Make sure you're running from a local server or load from file instead.`);
+                }
+            });
+        }
+        
+        // Load from dropdown
+        async function loadWorkflowFromDropdown(workflowId) {
+            if (!workflowId) return;
+            
+            document.getElementById('workflowIdInput').value = workflowId;
+            showStatus('Loading workflow: ' + workflowId + '...', 'info');
+            
+            const result = await tryLoadWorkflowById(workflowId);
+            
+            if (result.success) {
+                showStatus('Loaded workflow: ' + workflowId, 'success');
+            } else {
+                showError('Could not load workflow: ' + workflowId);
+            }
+        }
+        
+        // Refresh workflow dropdown
+        function refreshWorkflowDropdown() {
+            populateRecentWorkflows();
+            showStatus('Dropdown refreshed', 'info');
+            setTimeout(() => {
+                const msg = document.getElementById('statusMessage');
+                if (msg) msg.className = 'status-message';
+            }, 2000);
+        }
+        
+        // Populate recent workflows
+        function populateRecentWorkflows() {
+            const group = document.getElementById('recentWorkflowsGroup');
+            if (!group) return;
+            
+            try {
+                const recent = JSON.parse(localStorage.getItem('recentWorkflows') || '[]');
+                group.innerHTML = '';
+                
+                recent.slice(0, 10).forEach(workflow => {
+                    const option = document.createElement('option');
+                    option.value = workflow.id;
+                    option.textContent = workflow.id + ' (Recent)';
+                    group.appendChild(option);
+                });
+            } catch (e) {
+                console.warn('Could not load recent workflows:', e);
+            }
+        }
+        
+        // Add to recent workflows
+        function addToRecentWorkflows(workflowId, path) {
+            try {
+                const recent = JSON.parse(localStorage.getItem('recentWorkflows') || '[]');
+                const filtered = recent.filter(w => w.id !== workflowId);
+                filtered.unshift({ id: workflowId, path, timestamp: new Date().toISOString() });
+                localStorage.setItem('recentWorkflows', JSON.stringify(filtered.slice(0, 10)));
+                populateRecentWorkflows();
+            } catch (e) {
+                console.warn('Could not save recent workflows:', e);
+            }
+        }
+        
+        // Show status message
+        function showStatus(message, type) {
+            const msg = document.getElementById('statusMessage');
+            if (!msg) return;
+            
+            msg.textContent = message;
+            msg.className = 'status-message ' + type;
+            
+            if (type === 'success' || type === 'info') {
+                setTimeout(() => {
+                    msg.className = 'status-message';
+                }, 5000);
+            }
+        }
+        
+        function loadWorkflowFromFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            showStatus('Loading workflow from file...', 'info');
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    workflowData = JSON.parse(e.target.result);
+                    currentWorkflowId = workflowData.workflow_id || 'loaded_from_file';
+                    document.getElementById('workflowIdInput').value = currentWorkflowId;
+                    
+                    addToRecentWorkflows(currentWorkflowId, file.name);
+                    
+                    const dropdown = document.getElementById('workflowDropdown');
+                    if (dropdown) {
+                        dropdown.value = currentWorkflowId;
+                    }
+                    
+                    renderWorkflow(workflowData);
+                    hideError();
+                    showStatus('Loaded workflow from file: ' + file.name, 'success');
+                } catch (error) {
+                    showError(`Failed to parse JSON: ${error.message}`);
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        function refreshWorkflow() {
+            if (currentWorkflowId) {
+                loadWorkflowById();
+            } else {
+                showError('No workflow loaded');
+            }
+        }
+        
+        function renderWorkflow(workflow) {
+            // Anti-flash rendering - hide containers during update
+            const containers = ['statusContent', 'agentsContent', 'gatesContent', 'progressContent', 'dataContent', 'jsonContent'];
+            containers.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.style.visibility = 'hidden';
+                    el.style.opacity = '0';
+                    el.style.transition = 'opacity 0.2s';
+                }
+            });
+            
+            // Render all sections
+            renderStatus(workflow);
+            renderAgents(workflow);
+            renderGates(workflow);
+            renderProgress(workflow);
+            renderData(workflow);
+            renderJSON(workflow);
+            
+            // Show all containers smoothly
+            requestAnimationFrame(() => {
+                containers.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.style.visibility = 'visible';
+                        el.style.opacity = '1';
+                    }
+                });
+            });
+        }
+        
+        function renderStatus(workflow) {
+            const status = workflow.status || {};
+            const mode = status.current_mode || 'ASK';
+            const ready = status.execution_ready || false;
+            
+            const modeClasses = {
+                'ASK': 'status-ask',
+                'PLAN': 'status-plan',
+                'AGENT': 'status-agent'
+            };
+            
+            const html = `
+                <div class="data-section">
+                    <div class="data-item">
+                        <span class="data-label">Workflow ID:</span>
+                        <span class="data-value">${workflow.workflow_id || 'N/A'}</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Current Mode:</span>
+                        <span class="data-value">
+                            ${mode}
+                            <span class="status-badge ${modeClasses[mode] || 'status-ask'}">${mode}</span>
+                        </span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Execution Ready:</span>
+                        <span class="data-value">${ready ? '✅ Yes' : '❌ No'}</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Created:</span>
+                        <span class="data-value">${status.created_at || 'N/A'}</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Updated:</span>
+                        <span class="data-value">${status.updated_at || 'N/A'}</span>
+                    </div>
+                </div>
+                <div class="data-section">
+                    <h3>Plan Status</h3>
+                    <div class="data-item">
+                        <span class="data-label">Plan Locked:</span>
+                        <span class="data-value">${workflow.plan?.locked ? '✅ Yes' : '❌ No'}</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Sequence Length:</span>
+                        <span class="data-value">${workflow.plan?.sequence?.length || 0} agents</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Dependencies:</span>
+                        <span class="data-value">${Object.keys(workflow.plan?.dependencies || {}).length} defined</span>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('statusContent').innerHTML = html;
+        }
+        
+        function renderAgents(workflow) {
+            const plan = workflow.plan || {};
+            const sequence = plan.sequence || [];
+            const registry = plan.agent_registry || {};
+            
+            let html = '<ul class="agent-list">';
+            
+            sequence.forEach(agentId => {
+                const agentInfo = registry[agentId] || {};
+                const executed = agentInfo.executed || false;
+                const error = agentInfo.error;
+                
+                let statusClass = 'pending';
+                let statusText = 'Pending';
+                if (executed) {
+                    statusClass = error ? 'failed' : 'executed';
+                    statusText = error ? 'Failed' : 'Completed';
+                }
+                
+                html += `
+                    <li class="agent-item ${statusClass}">
+                        <span>
+                            <strong>${agentId}</strong><br>
+                            <small>${agentInfo.agent_type || 'Unknown'} | Mode: ${agentInfo.mode || 'Unknown'}</small>
+                        </span>
+                        <span>
+                            ${statusText}
+                            ${error ? `<br><small style="color: var(--color-error);">${error}</small>` : ''}
+                        </span>
+                    </li>
+                `;
+            });
+            
+            html += '</ul>';
+            
+            const executedCount = Object.values(registry).filter(a => a.executed).length;
+            html = `<div class="info">${executedCount}/${sequence.length} agents executed</div>` + html;
+            
+            document.getElementById('agentsContent').innerHTML = html;
+        }
+        
+        function renderGates(workflow) {
+            const gates = workflow.plan?.human_gates || [];
+            
+            if (gates.length === 0) {
+                document.getElementById('gatesContent').innerHTML = '<p class="info">No human gates defined</p>';
+                return;
+            }
+            
+            let html = '<ul class="gate-list">';
+            
+            gates.forEach(gate => {
+                const status = gate.status || 'pending';
+                const statusClass = status === 'approved' ? 'gate-approved' : 
+                                   status === 'rejected' ? 'gate-rejected' : 'gate-pending';
+                
+                html += `
+                    <li class="gate-item ${statusClass}">
+                        <strong>${gate.gate_name || gate.gate_id}</strong> (${gate.gate_id})
+                        <br>
+                        <small>Status: ${status.toUpperCase()}</small>
+                        ${gate.approved_at ? `<br><small>Approved: ${gate.approved_at}</small>` : ''}
+                        ${gate.notes ? `<br><small>${gate.notes}</small>` : ''}
+                    </li>
+                `;
+            });
+            
+            html += '</ul>';
+            document.getElementById('gatesContent').innerHTML = html;
+        }
+        
+        function renderProgress(workflow) {
+            const plan = workflow.plan || {};
+            const sequence = plan.sequence || [];
+            const registry = plan.agent_registry || {};
+            
+            const executedCount = Object.values(registry).filter(a => a.executed).length;
+            const totalCount = sequence.length;
+            const percentage = totalCount > 0 ? Math.round((executedCount / totalCount) * 100) : 0;
+            
+            const html = `
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${percentage}%">
+                        ${percentage}%
+                    </div>
+                </div>
+                <div class="data-section">
+                    <div class="data-item">
+                        <span class="data-label">Executed:</span>
+                        <span class="data-value">${executedCount}</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Total:</span>
+                        <span class="data-value">${totalCount}</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Remaining:</span>
+                        <span class="data-value">${totalCount - executedCount}</span>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('progressContent').innerHTML = html;
+        }
+        
+        function renderData(workflow) {
+            const context = workflow.context || {};
+            const data = workflow.data || {};
+            const strategy = workflow.strategy || {};
+            const members = workflow.members || {};
+            const tactics = workflow.tactics || {};
+            const verification = workflow.verification || {};
+            
+            let html = `
+                <div class="data-section">
+                    <h3>Context</h3>
+                    <div class="data-item"><span class="data-label">Issue Frame:</span> <span class="data-value">${context.issue_frame ? '✅' : '❌'}</span></div>
+                    <div class="data-item"><span class="data-label">Bill Scope:</span> <span class="data-value">${context.bill_scope?.length || 0} bills</span></div>
+                    <div class="data-item"><span class="data-label">Committees:</span> <span class="data-value">${context.committees?.length || 0}</span></div>
+                    <div class="data-item"><span class="data-label">Target Members:</span> <span class="data-value">${context.target_members?.length || 0}</span></div>
+                </div>
+                <div class="data-section">
+                    <h3>Signals</h3>
+                    ${Object.entries(data.signals || {}).map(([type, signals]) => 
+                        `<div class="data-item"><span class="data-label">${type}:</span> <span class="data-value">${Array.isArray(signals) ? signals.length : 0} signals</span></div>`
+                    ).join('')}
+                </div>
+                <div class="data-section">
+                    <h3>Strategy</h3>
+                    <div class="data-item"><span class="data-label">Narrative:</span> <span class="data-value">${strategy.narrative ? '✅' : '❌'}</span></div>
+                    <div class="data-item"><span class="data-label">Vote Math:</span> <span class="data-value">${strategy.vote_math ? '✅' : '❌'}</span></div>
+                    <div class="data-item"><span class="data-label">Timing:</span> <span class="data-value">${strategy.timing ? '✅' : '❌'}</span></div>
+                    <div class="data-item"><span class="data-label">Coalition:</span> <span class="data-value">${strategy.coalition ? '✅' : '❌'}</span></div>
+                    <div class="data-item"><span class="data-label">Risks:</span> <span class="data-value">${strategy.risks?.length || 0}</span></div>
+                </div>
+                <div class="data-section">
+                    <h3>Members</h3>
+                    <div class="data-item"><span class="data-label">Profiles:</span> <span class="data-value">${Object.keys(members).length} members</span></div>
+                </div>
+                <div class="data-section">
+                    <h3>Tactics</h3>
+                    <div class="data-item"><span class="data-label">Calls:</span> <span class="data-value">${tactics.calls?.length || 0}</span></div>
+                    <div class="data-item"><span class="data-label">Meetings:</span> <span class="data-value">${tactics.meetings?.length || 0}</span></div>
+                    <div class="data-item"><span class="data-label">Amendments:</span> <span class="data-value">${tactics.amendments?.length || 0}</span></div>
+                    <div class="data-item"><span class="data-label">Briefings:</span> <span class="data-value">${tactics.briefings?.length || 0}</span></div>
+                    <div class="data-item"><span class="data-label">Grassroots:</span> <span class="data-value">${tactics.grassroots ? '✅' : '❌'}</span></div>
+                </div>
+                <div class="data-section">
+                    <h3>Verification</h3>
+                    <div class="data-item"><span class="data-label">Assumptions:</span> <span class="data-value">${verification.assumptions?.length || 0}</span></div>
+                    <div class="data-item"><span class="data-label">Ethics:</span> <span class="data-value">${verification.ethics ? '✅' : '❌'}</span></div>
+                    <div class="data-item"><span class="data-label">Counter Moves:</span> <span class="data-value">${verification.counter_moves?.length || 0}</span></div>
+                    <div class="data-item"><span class="data-label">Legal:</span> <span class="data-value">${verification.legal ? '✅' : '❌'}</span></div>
+                    <div class="data-item"><span class="data-label">Execution Ready:</span> <span class="data-value">${verification.execution_ready ? '✅ Yes' : '❌ No'}</span></div>
+                </div>
+            `;
+            
+            document.getElementById('dataContent').innerHTML = html;
+        }
+        
+        function renderJSON(workflow) {
+            const jsonStr = JSON.stringify(workflow, null, 2);
+            document.getElementById('jsonContent').innerHTML = `<div class="json-viewer">${escapeHtml(jsonStr)}</div>`;
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.className = 'error';
+            errorDiv.style.display = 'block';
+        }
+        
+        function hideError() {
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

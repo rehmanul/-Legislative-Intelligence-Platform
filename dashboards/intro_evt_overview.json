@@ -1,0 +1,61 @@
+{
+  "_meta": {
+    "phase": "INTRO_EVT",
+    "review_gate": "HR_PRE",
+    "status": "PENDING",
+    "note": "INTERNAL, NON-AUTHORITATIVE — pending HR_PRE approval"
+  },
+  "artifacts": [
+    {
+      "review_id": "hr_pre_001",
+      "artifact_type": "PRE_CONCEPT",
+      "path": "artifacts/draft_concept_memo_pre_evt/PRE_CONCEPT.json",
+      "status": "ACTIVE"
+    },
+    {
+      "review_id": "hr_pre_006",
+      "artifact_type": "INTRO_FRAME",
+      "path": "artifacts/draft_framing_intro_evt/INTRO_FRAME.json",
+      "status": "ACTIVE"
+    },
+    {
+      "review_id": "hr_pre_007",
+      "artifact_type": "INTRO_WHITEPAPER",
+      "path": "artifacts/draft_whitepaper_intro_evt/INTRO_WHITEPAPER.json",
+      "status": "ACTIVE"
+    }
+  ],
+  "superseded": [
+    {
+      "review_id": "hr_pre_002",
+      "artifact_type": "INTRO_FRAME"
+    },
+    {
+      "review_id": "hr_pre_003",
+      "artifact_type": "INTRO_WHITEPAPER"
+    },
+    {
+      "review_id": "hr_pre_004",
+      "artifact_type": "INTRO_FRAME"
+    },
+    {
+      "review_id": "hr_pre_005",
+      "artifact_type": "INTRO_WHITEPAPER"
+    }
+  ],
+  "diagrams": [
+    {
+      "name": "INTRO_FRAME",
+      "path": "diagrams/INTRO_FRAME.mmd"
+    },
+    {
+      "name": "INTRO_WHITEPAPER",
+      "path": "diagrams/INTRO_WHITEPAPER.mmd"
+    }
+  ],
+  "review_summary": {
+    "pending_decisions": 3,
+    "active_artifacts": 3,
+    "superseded_artifacts": 4
+  }
+}

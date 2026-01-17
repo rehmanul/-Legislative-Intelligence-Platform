@@ -1,0 +1,119 @@
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#e8f5e9', 'primaryTextColor':'#2e7d32', 'primaryBorderColor':'#4caf50', 'lineColor':'#81c784', 'secondaryColor':'#fff3e0', 'tertiaryColor':'#e3f2fd'}}}%%
+graph TB
+    subgraph "OPERATOR MODES SYSTEM ARCHITECTURE"
+        direction TB
+        
+        subgraph "Entry Point"
+            MS[operator__mode_selector.py<br/>📋 Interactive Menu<br/>Routes to all modes]
+        end
+        
+        subgraph "🔥 Heat Map Mode - System Health"
+            direction LR
+            HM1[snapshot__generate__heat_map.py<br/>📊 Text Output]
+            HM2[snapshot__generate__heat_map_json.py<br/>📄 JSON Output]
+            HMO["dashboards/heat_map_snapshot.txt<br/>🟡 Status: YELLOW<br/>📝 2 pending reviews<br/>🚫 1 agent blocked"]
+        end
+        
+        subgraph "✈️ Cockpit Mode - Approvals & Actions"
+            direction TB
+            CP1[cockpit__list__pending_approvals.py<br/>📋 List View]
+            CP2[cockpit__approve_artifact.py<br/>✅ APPROVE/❌ REJECT<br/>Reversible]
+            CP3[cockpit__advance_state.py<br/>🚀 State Advancement<br/>⚠️ IRREVERSIBLE]
+            CP4[cockpit__authorize_execution.py<br/>🔓 Execution Auth<br/>⚠️ HIGH RISK]
+            CPO["dashboards/cockpit_pending.txt<br/>📝 2 pending HR_PRE<br/>🔒 1 execution blocked"]
+        end
+        
+        subgraph "⚡ Velocity Mode - Performance Metrics"
+            direction LR
+            VM1[velocity__calculate__metrics.py<br/>📊 Metrics Calculation]
+            VM2[velocity__export__report.py<br/>📄 JSON Export]
+            VMO["dashboards/velocity_metrics.txt<br/>✅ Status: FAST<br/>📈 Performance data<br/>⚠️ 1 bottleneck"]
+        end
+    end
+    
+    subgraph "📂 Canonical Data Sources"
+        direction TB
+        CD1["registry/agent-registry.json<br/>🤖 12 agents total<br/>🟢 1 RUNNING<br/>🟡 1 WAITING_REVIEW<br/>🔴 1 BLOCKED<br/>⚪ 1 IDLE<br/>⚫ 8 RETIRED"]
+        CD2["state/legislative-state.json<br/>📍 Current: INTRO_EVT<br/>➡️ Next: COMM_EVT<br/>⏱️ Time: 8h 58m"]
+        CD3["review/HR_*_queue.json<br/>🔍 HR_PRE: 2 pending<br/>✅ HR_LANG: 0 pending<br/>✅ HR_MSG: 0 pending<br/>✅ HR_RELEASE: 0 pending"]
+        CD4["audit/audit-log.jsonl<br/>📝 All actions logged<br/>🔍 Event tracking<br/>⏰ Timestamped"]
+    end
+    
+    subgraph "📊 Current System Status"
+        direction TB
+        CSS1["🟡 YELLOW Status<br/>⚠️ 1 agent waiting review<br/>📝 2 pending approvals<br/>🚫 State advancement blocked"]
+        CSS2["🚫 Blocking Conditions:<br/>• draft_concept_memo_pre_evt: WAITING_REVIEW<br/>• execution_outreach_comm_evt: BLOCKED"]
+        CSS3["📋 Pending Reviews:<br/>1. Legitimacy & Policy Framing<br/>2. Policy Whitepaper<br/>⏱️ Both submitted 9m 38s ago"]
+    end
+    
+    subgraph "🔄 Data Flow"
+        direction LR
+        DF1[Canonical Sources] --> DF2[Mode Scripts]
+        DF2 --> DF3[Operational Outputs]
+        DF3 --> DF4[Operator Actions]
+        DF4 --> DF1
+    end
+    
+    MS --> HM1
+    MS --> CP1
+    MS --> VM1
+    
+    CD1 --> HM1
+    CD2 --> HM1
+    CD3 --> HM1
+    CD4 --> HM1
+    
+    CD3 --> CP1
+    CD2 --> CP1
+    CD1 --> CP1
+    
+    CD2 --> VM1
+    CD3 --> VM1
+    CD1 --> VM1
+    CD4 --> VM1
+    
+    HM1 --> HMO
+    HM2 --> HMO
+    CP1 --> CPO
+    VM1 --> VMO
+    
+    CP2 --> CD3
+    CP2 --> CD4
+    CP3 --> CD2
+    CP3 --> CD4
+    CP4 --> CD1
+    CP4 --> CD4
+    
+    HMO --> CSS1
+    CPO --> CSS2
+    CPO --> CSS3
+    VMO --> CSS1
+    
+    DF1 -.-> DF2
+    DF2 -.-> DF3
+    DF3 -.-> DF4
+    DF4 -.-> DF1
+    
+    style MS fill:#e8f5e9,stroke:#2e7d32,stroke-width:4px
+    style HM1 fill:#e8f5e9,stroke:#4caf50,stroke-width:3px
+    style HM2 fill:#e8f5e9,stroke:#4caf50,stroke-width:3px
+    style HMO fill:#fff9c4,stroke:#f57f17,stroke-width:3px
+    style CP1 fill:#fff3e0,stroke:#f57c00,stroke-width:3px
+    style CP2 fill:#ffebee,stroke:#c62828,stroke-width:3px
+    style CP3 fill:#ffebee,stroke:#c62828,stroke-width:4px
+    style CP4 fill:#ffebee,stroke:#c62828,stroke-width:3px
+    style CPO fill:#fff9c4,stroke:#f57f17,stroke-width:3px
+    style VM1 fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
+    style VM2 fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
+    style VMO fill:#e8f5e9,stroke:#4caf50,stroke-width:3px
+    style CSS1 fill:#fff9c4,stroke:#f57f17,stroke-width:4px
+    style CSS2 fill:#ffebee,stroke:#c62828,stroke-width:3px
+    style CSS3 fill:#fff3e0,stroke:#f57c00,stroke-width:3px
+    style CD1 fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
+    style CD2 fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
+    style CD3 fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
+    style CD4 fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
+    style DF1 fill:#e0f2f1,stroke:#00695c,stroke-width:2px,stroke-dasharray: 5 5
+    style DF2 fill:#e0f2f1,stroke:#00695c,stroke-width:2px,stroke-dasharray: 5 5
+    style DF3 fill:#e0f2f1,stroke:#00695c,stroke-width:2px,stroke-dasharray: 5 5
+    style DF4 fill:#e0f2f1,stroke:#00695c,stroke-width:2px,stroke-dasharray: 5 5

@@ -1,0 +1,79 @@
+{
+  "_meta": {
+    "variant_type": "internal_drafts",
+    "status": "NON_AUTHORITATIVE",
+    "generated_at": "2026-01-07T03:20:00Z",
+    "purpose": "Alternative framings for internal consideration only",
+    "note": "These variants are INTERNAL DRAFTS only. They do not represent approved direction and require HR_PRE approval before any use."
+  },
+  "base_artifact": "PRE_CONCEPT.json",
+  "variants": [
+    {
+      "variant_id": "variant_1",
+      "name": "Regulatory Gap Focus",
+      "framing": "Emphasizes regulatory gap as primary opportunity driver",
+      "executive_summary": "A significant regulatory gap in renewable energy policy has been identified, creating an opportunity for proactive policy development. Industry signals strongly indicate market readiness, and agency rulemaking announcements suggest a window for influence.",
+      "key_emphasis": [
+        "Regulatory gap as primary driver",
+        "Market readiness signals",
+        "Agency rulemaking window"
+      ],
+      "stakeholder_strategy": "Position as filling regulatory void rather than disrupting existing framework",
+      "opposition_mitigation": "Frame as regulatory modernization, not industry disruption",
+      "use_case": "If regulatory gap is the strongest signal"
+    },
+    {
+      "variant_id": "variant_2",
+      "name": "Coalition Building Focus",
+      "framing": "Emphasizes early coalition building with high-influence allies",
+      "executive_summary": "High-influence stakeholders on both sides require early coalition building. The Renewable Energy Coalition's high influence and support position provides a strong foundation, while early engagement can preempt opposition mobilization.",
+      "key_emphasis": [
+        "Early coalition building",
+        "Leverage high-influence ally",
+        "Preempt opposition mobilization"
+      ],
+      "stakeholder_strategy": "Engage Renewable Energy Coalition immediately, build momentum before opposition organizes",
+      "opposition_mitigation": "Build sufficient coalition strength to counter high-influence opponent",
+      "use_case": "If stakeholder dynamics are the primary consideration"
+    },
+    {
+      "variant_id": "variant_3",
+      "name": "Risk Mitigation Focus",
+      "framing": "Emphasizes opposition risk and mitigation strategies",
+      "executive_summary": "Medium opposition risk with early warning indicators requires proactive risk mitigation. High-influence opponent (Traditional Energy Association) demands careful framing and counter-narrative preparation before policy development proceeds.",
+      "key_emphasis": [
+        "Opposition risk management",
+        "Counter-narrative preparation",
+        "Strategic framing to minimize opposition"
+      ],
+      "stakeholder_strategy": "Prepare opposition response strategy before engaging allies",
+      "opposition_mitigation": "Develop comprehensive counter-narrative and framing strategy",
+      "use_case": "If opposition risk is the primary concern"
+    },
+    {
+      "variant_id": "variant_4",
+      "name": "Balanced Multi-Signal Approach",
+      "framing": "Balances all signals equally - regulatory gap, coalition building, and risk mitigation",
+      "executive_summary": "Multiple converging signals create a policy opportunity: regulatory gaps, industry readiness, agency rulemaking windows, and stakeholder dynamics. A balanced approach that addresses all factors simultaneously provides the strongest foundation.",
+      "key_emphasis": [
+        "Multi-signal convergence",
+        "Balanced strategy across all factors",
+        "Comprehensive approach"
+      ],
+      "stakeholder_strategy": "Engage allies while preparing opposition response, leverage regulatory window",
+      "opposition_mitigation": "Multi-pronged approach: coalition strength + counter-narrative + strategic framing",
+      "use_case": "If all signals are equally important"
+    }
+  ],
+  "selection_guidance": {
+    "note": "Variant selection should be based on strategic priorities and risk tolerance",
+    "factors": [
+      "Which signal is strongest (regulatory gap vs stakeholder dynamics vs opposition risk)",
+      "Risk tolerance (aggressive vs conservative approach)",
+      "Timeline constraints (urgency of action)",
+      "Resource availability (coalition building capacity)"
+    ],
+    "recommendation": "Variant selection requires human strategic judgment and cannot be automated"
+  },
+  "disclaimer": "These variants are INTERNAL DRAFTS for consideration only. They do not represent approved policy direction. HR_PRE approval is required before any variant can be used. No variant may be treated as authoritative."
+}

@@ -1,0 +1,27 @@
+{
+  "_meta": {
+    "agent_id": "draft_legislator_comms_comm_evt",
+    "generated_at": "2026-01-20T22:30:00Z",
+    "artifact_type": "LEGISLATOR_COMMS",
+    "artifact_name": "Legislator Communications Packet",
+    "status": "SPECULATIVE",
+    "confidence": "SPECULATIVE",
+    "human_review_required": true,
+    "requires_review": null,
+    "guidance_status": "SIGNED"
+  },
+  "target_member": "Rep. Rodriguez (D-TX)",
+  "communication_type": "COSPONSORSHIP_REQUEST",
+  "bill_reference": "H.R. 8956 - Rural Broadband Access Act",
+  "key_message": "Request for cosponsorship of bill addressing broadband access gap in rural Texas communities",
+  "talking_points": [
+    "Your district includes 12 rural counties with broadband access below 60%",
+    "This bill provides $2B in grants specifically for rural deployment",
+    "Texas Agriculture Commissioner has expressed support for rural broadband investment",
+    "Bill includes provisions to prevent overbuilding in areas with existing service"
+  ],
+  "constituent_connection": "Three school districts in your district have reported students unable to complete homework due to lack of home internet",
+  "political_considerations": "Bipartisan bill with 8 Republican cosponsors, aligns with rural development priorities",
+  "next_steps": "Request 15-minute call with member or LD to discuss bill details and answer questions",
+  "disclaimer": "Legislator communications require review for accuracy and appropriateness before delivery."
+}

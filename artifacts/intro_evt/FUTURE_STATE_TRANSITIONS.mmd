@@ -1,0 +1,79 @@
+%% INTRO_EVT Future State Transitions - Additive Mermaid Snippet
+%% This diagram shows what will happen once committee_referral is confirmed
+%% DO NOT modify the master diagram - this is an additive conceptual extension
+
+flowchart TB
+    subgraph CurrentState["CURRENT STATE: INTRO_EVT"]
+        INTRO[INTRO_EVT<br/>Bill Vehicle Identified<br/>Status: ACTIVE]
+        
+        HR_PRE_APPROVED[HR_PRE Gate<br/>Status: APPROVED<br/>PRE_CONCEPT: Approved]
+        
+        INTRO_FRAME_PENDING[INTRO_FRAME<br/>Status: PENDING<br/>Review: HR_PRE]
+        
+        INTRO_WHITEPAPER_PENDING[INTRO_WHITEPAPER<br/>Status: PENDING<br/>Review: HR_PRE]
+        
+        COMM_REFERRAL_BLOCKED[Committee Referral<br/>Status: PENDING<br/>External Event Required]
+    end
+    
+    subgraph FutureState["FUTURE STATE: COMM_EVT (After Confirmation)"]
+        COMM[COMM_EVT<br/>Committee Referral<br/>Status: BLOCKED UNTIL CONFIRMED]
+        
+        HR_LANG_GATE[HR_LANG Gate<br/>Status: NOT_STARTED<br/>Required for: COMM_EVT → FLOOR_EVT]
+        
+        COMM_BRIEFING[Committee Briefing Packets<br/>Status: NOT_GENERATED<br/>Review: HR_LANG]
+        
+        COMM_LANGUAGE[Draft Legislative Language<br/>Status: NOT_GENERATED<br/>Review: HR_LANG]
+        
+        COMM_AMENDMENT[Amendment Strategy<br/>Status: NOT_GENERATED<br/>Review: HR_LANG]
+        
+        FLOOR_SCHEDULE_BLOCKED[Floor Scheduling<br/>Status: PENDING<br/>External Event Required]
+    end
+    
+    subgraph TransitionConditions["TRANSITION CONDITIONS"]
+        COND1{All INTRO_EVT<br/>Artifacts Approved?}
+        COND2{Committee Referral<br/>Confirmed?}
+        COND3{All COMM_EVT<br/>Artifacts Approved?}
+        COND4{Floor Scheduling<br/>Confirmed?}
+    end
+    
+    %% Current state connections
+    INTRO --> HR_PRE_APPROVED
+    INTRO --> INTRO_FRAME_PENDING
+    INTRO --> INTRO_WHITEPAPER_PENDING
+    INTRO --> COMM_REFERRAL_BLOCKED
+    
+    %% Transition logic
+    INTRO_FRAME_PENDING --> COND1
+    INTRO_WHITEPAPER_PENDING --> COND1
+    HR_PRE_APPROVED --> COND1
+    
+    COND1 -->|Yes| COND2
+    COND2 -->|Yes| COMM
+    
+    %% Future state connections
+    COMM --> HR_LANG_GATE
+    COMM --> COMM_BRIEFING
+    COMM --> COMM_LANGUAGE
+    COMM --> COMM_AMENDMENT
+    COMM --> FLOOR_SCHEDULE_BLOCKED
+    
+    COMM_BRIEFING --> HR_LANG_GATE
+    COMM_LANGUAGE --> HR_LANG_GATE
+    COMM_AMENDMENT --> HR_LANG_GATE
+    
+    HR_LANG_GATE --> COND3
+    COND3 -->|Yes| COND4
+    COND4 -->|Yes| FLOOR_EVT[FLOOR_EVT<br/>Floor Scheduled]
+    
+    %% Styling
+    classDef currentState fill:#e1f5ff,stroke:#01579b,stroke-width:2px
+    classDef futureState fill:#fff4e1,stroke:#e65100,stroke-width:2px
+    classDef blocked fill:#ffebee,stroke:#c62828,stroke-width:2px
+    classDef approved fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef pending fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+    
+    class INTRO,HR_PRE_APPROVED currentState
+    class COMM,HR_LANG_GATE futureState
+    class COMM_REFERRAL_BLOCKED,FLOOR_SCHEDULE_BLOCKED blocked
+    class HR_PRE_APPROVED approved
+    class INTRO_FRAME_PENDING,INTRO_WHITEPAPER_PENDING,COMM_BRIEFING,COMM_LANGUAGE,COMM_AMENDMENT pending

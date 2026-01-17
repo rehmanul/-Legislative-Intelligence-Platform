@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Power Transfer Schema",
+  "description": "Schema for tracking power shifts between entities",
+  "type": "object",
+  "required": [
+    "transfer_id",
+    "from_entity_id",
+    "to_entity_id",
+    "transfer_mechanism",
+    "transfer_at",
+    "power_metric_transferred",
+    "_meta"
+  ],
+  "properties": {
+    "_meta": {
+      "type": "object",
+      "required": ["schema_version", "doctrine_version", "last_updated"],
+      "properties": {
+        "schema_version": {"type": "string", "default": "1.0.0"},
+        "doctrine_version": {"type": "string"},
+        "last_updated": {"type": "string", "format": "date-time"}
+      }
+    },
+    "transfer_id": {"type": "string", "format": "uuid"},
+    "from_entity_id": {"type": "string"},
+    "to_entity_id": {"type": "string"},
+    "transfer_mechanism": {
+      "type": "string",
+      "enum": ["election", "appointment", "staff_movement", "committee_reorganization", "leadership_change", "other"]
+    },
+    "transfer_at": {"type": "string", "format": "date-time"},
+    "power_metric_transferred": {
+      "type": "object",
+      "properties": {
+        "procedural_power": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+        "temporal_leverage": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+        "informational_advantage": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+        "institutional_memory": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+        "retaliation_capacity": {"type": "number", "minimum": 0.0, "maximum": 1.0}
+      }
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "bill_id": {"type": ["string", "null"]},
+        "committee_id": {"type": ["string", "null"]},
+        "legislative_state": {"type": ["string", "null"], "enum": ["PRE_EVT", "INTRO_EVT", "COMM_EVT", "FLOOR_EVT", "FINAL_EVT", "IMPL_EVT", null]}
+      }
+    },
+    "description": {"type": "string"}
+  },
+  "additionalProperties": false
+}

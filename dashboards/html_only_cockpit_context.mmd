@@ -1,0 +1,81 @@
+graph TB
+    subgraph AGENT_LAYER["🤖 Agent Layer (Write-Only)"]
+        direction TB
+        
+        AGENT1["Agent 1<br/>(Intelligence)"]
+        AGENT2["Agent 2<br/>(Drafting)"]
+        AGENT3["Agent N<br/>(Execution)"]
+        
+        AGENT1 -->|"Writes"| STATE_FILE
+        AGENT2 -->|"Writes"| STATE_FILE
+        AGENT3 -->|"Writes"| STATE_FILE
+    end
+    
+    subgraph FILE_LAYER["📁 File Layer (Read-Only for HTML)"]
+        direction TB
+        
+        STATE_FILE["state/legislative-state.json<br/>(StateManager writes)"]
+        REGISTRY_FILE["registry/agent-registry.json<br/>(Agents write)"]
+        REVIEW_FILE["review/gate-status.json<br/>(Workflow writes)"]
+    end
+    
+    subgraph HTML_LAYER["🎯 HTML Cockpit (Read-Only)"]
+        direction TB
+        
+        HTML["index.html<br/>(Single File)"]
+        CSS["styles.css<br/>(Optional, embedded)"]
+        
+        HTML -->|"Embeds"| CSS
+        HTML -->|"File Picker<br/>Loads"| STATE_FILE
+        HTML -->|"File Picker<br/>Loads"| REGISTRY_FILE
+        HTML -->|"File Picker<br/>Loads"| REVIEW_FILE
+    end
+    
+    subgraph IN_SCOPE["✅ In Scope"]
+        direction LR
+        
+        DISPLAY["Display System State"]
+        REVIEW["Human Review"]
+        DECIDE["Decision Point"]
+        
+        DISPLAY --> REVIEW --> DECIDE
+    end
+    
+    subgraph OUT_OF_SCOPE["❌ Explicitly Out of Scope"]
+        direction TB
+        
+        BACKEND["Backend Services"]
+        FRAMEWORK["JS Frameworks"]
+        DATABASE["Databases"]
+        WEBSOCKET["WebSockets / Push"]
+        API["API Calls"]
+        
+        BACKEND -.->|"FORBIDDEN"| HTML
+        FRAMEWORK -.->|"FORBIDDEN"| HTML
+        DATABASE -.->|"FORBIDDEN"| HTML
+        WEBSOCKET -.->|"FORBIDDEN"| HTML
+        API -.->|"FORBIDDEN"| HTML
+    end
+    
+    subgraph USER_FLOW["👤 User Flow"]
+        direction LR
+        
+        OPEN["1. Open index.html<br/>(file:// protocol)"]
+        LOAD["2. Load State File<br/>(File Picker)"]
+        VIEW["3. View State"]
+        ACT["4. Take Action<br/>(Outside Cockpit)"]
+        
+        OPEN --> LOAD --> VIEW --> ACT
+    end
+    
+    AGENT_LAYER --> FILE_LAYER
+    FILE_LAYER --> HTML_LAYER
+    HTML_LAYER --> IN_SCOPE
+    HTML_LAYER --> USER_FLOW
+    
+    style AGENT_LAYER fill:#fff3cd
+    style FILE_LAYER fill:#d1ecf1
+    style HTML_LAYER fill:#e1f5e1
+    style IN_SCOPE fill:#d4edda
+    style OUT_OF_SCOPE fill:#f8d7da
+    style USER_FLOW fill:#e7f3ff

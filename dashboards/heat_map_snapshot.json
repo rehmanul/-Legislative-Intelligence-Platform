@@ -1,0 +1,57 @@
+{
+  "_meta": {
+    "generated_at": "2026-01-07T15:36:43.857652+00:00Z",
+    "script": "snapshot__generate__heat_map_json.py",
+    "schema_version": "1.0.0"
+  },
+  "state": {
+    "current_state": "INTRO_EVT",
+    "state_definition": "Bill Vehicle Identified",
+    "time_in_state_seconds": 29519.42085,
+    "next_allowed_states": [
+      "COMM_EVT"
+    ],
+    "advancement_ready": true,
+    "blocking_reasons": [
+      "External confirmation: committee_referral"
+    ]
+  },
+  "agents": {
+    "RUNNING": 1,
+    "WAITING_REVIEW": 1,
+    "BLOCKED": 1,
+    "IDLE": 1,
+    "RETIRED": 8,
+    "FAILED": 0
+  },
+  "review_gates": {
+    "HR_PRE": {
+      "pending_count": 0,
+      "last_review": {
+        "decision": "APPROVED",
+        "decision_at": "2026-01-07T07:24:44.406342Z",
+        "age_seconds": 29519.45131
+      }
+    },
+    "HR_LANG": {
+      "pending_count": 0,
+      "last_review": null
+    },
+    "HR_MSG": {
+      "pending_count": 0,
+      "last_review": null
+    },
+    "HR_RELEASE": {
+      "pending_count": 0,
+      "last_review": null
+    }
+  },
+  "blocking_conditions": [
+    "draft_concept_memo_pre_evt: WAITING_REVIEW (HR_PRE)",
+    "execution_outreach_comm_evt: BLOCKED (Blocked until authorized)"
+  ],
+  "overall_status": {
+    "color": "YELLOW",
+    "reason": "1 agents waiting for review"
+  }
+}

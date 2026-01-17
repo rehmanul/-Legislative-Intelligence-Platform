@@ -1,0 +1,59 @@
+flowchart TB
+    subgraph Inputs["Input Artifacts<br/>READ-ONLY"]
+        direction TB
+        
+        I1["Policy Opportunity<br/>WIRELESS_CHARGING_INSURABLE_RISK<br/>_POLICY_OPPORTUNITY.json"]
+        I2["Strategic Plan<br/>WIRELESS_CHARGING_INSURABLE_RISK<br/>_STRATEGIC_PLAN.md"]
+        I3["NDAA Analysis<br/>BILL_RISK_ANALYSIS_S_1071.json"]
+    end
+    
+    subgraph Workflow["Policy Opportunity Workflow"]
+        direction TB
+        
+        W1["Workflow Automation<br/>workflow_policy_opportunity<br/>_automation.py"]
+        W2["Prerequisites Check"]
+        W3["Intelligence Agent<br/>intel_policy_opportunity<br/>_analyzer_pre_evt"]
+        W4["Drafting Agent<br/>draft_policy_opportunity<br/>_document_pre_evt"]
+        W5["Artifacts Index<br/>generate_policy_opportunity<br/>_artifacts.py"]
+    end
+    
+    subgraph Outputs["Generated Artifacts"]
+        direction TB
+        
+        O1["Policy Opportunity Summary<br/>POLICY_OPPORTUNITY_SUMMARY.json<br/>Status: SPECULATIVE"]
+        O2["Policy Opportunity Document<br/>POLICY_OPPORTUNITY_DOCUMENT.json<br/>Status: WAITING_REVIEW<br/>HR_PRE"]
+        O3["Artifacts Index<br/>POLICY_OPPORTUNITY_ARTIFACTS_INDEX.json"]
+    end
+    
+    subgraph Review["Human Review Gate"]
+        direction TB
+        
+        R1["HR_PRE Review"]
+        R2["Approve/Edit/Reject"]
+        R3["Status: ACTIONABLE<br/>or SPECULATIVE"]
+    end
+    
+    I1 -->|Reads| W3
+    I1 -->|Reads| W4
+    I2 -->|Reads| W5
+    I3 -->|Reads| W3
+    
+    W1 -->|Executes| W2
+    W2 -->|If Valid| W3
+    W2 -->|If Valid| W4
+    W2 -->|If Valid| W5
+    
+    W3 -->|Generates| O1
+    W4 -->|Generates| O2
+    W5 -->|Generates| O3
+    
+    O1 -->|Input For| W4
+    O2 -->|Requires| R1
+    R1 -->|Human Decision| R2
+    R2 -->|Updates| R3
+    
+    style W1 fill:#e1f5ff,stroke:#2196f3,stroke-width:2px
+    style W3 fill:#e8f5e9,stroke:#4caf50
+    style W4 fill:#fff9c4,stroke:#f39c12,stroke-width:2px
+    style O2 fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
+    style R1 fill:#ffebee,stroke:#f44336,stroke-width:2px
