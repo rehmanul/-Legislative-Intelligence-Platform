@@ -33,7 +33,10 @@ services:
     buildCommand: npm install && npm run build
     startCommand: npx serve dist -l $PORT
     envVars:
-      # IMPORTANT: This must be set at BUILD TIME for Vite to inject it
+      # Use dynamic linking to get the actual assigned URL
       - key: VITE_API_URL
-        value: https://orchestrator-api.onrender.com
+        fromService:
+          name: orchestrator-api
+          type: web
+          property: url
     autoDeploy: true
