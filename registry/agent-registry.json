@@ -1,8 +1,8 @@
 {
   "_meta": {
     "registry_version": "1.0",
-    "last_updated": "2026-01-16T18:35:04.791433+00:00",
-    "total_agents": 12,
+    "last_updated": "2026-01-17T11:49:26.461589+00:00",
+    "total_agents": 14,
     "active_agents": 0,
     "idle_agents": 0,
     "waiting_review_agents": 1,
@@ -158,6 +158,36 @@
       ],
       "spawned_at": "2026-01-16T18:35:04.791095+00:00",
       "input_artifact": "C:\\Users\\Rehman_Mihan\\Desktop\\The-Ultimate-Orchestation Specialist\\cursor\\1.5.2026\\agent-orchestrator\\artifacts\\uploads\\artifact_4f97f6f90427_test_minutes.md",
+      "termination_condition": "Analysis complete OR error OR 1-hour timeout"
+    },
+    {
+      "agent_id": "intel_doc_analysis_artifact_9a04e56db8ec",
+      "agent_type": "Intelligence",
+      "status": "IDLE",
+      "scope": "Document analysis for .PDF",
+      "current_task": "Analysis complete",
+      "last_heartbeat": "2026-01-17T11:49:09.314063+00:00",
+      "risk_level": "LOW",
+      "outputs": [
+        "C:\\Users\\Rehman_Mihan\\Desktop\\The-Ultimate-Orchestation Specialist\\cursor\\1.5.2026\\agent-orchestrator\\artifacts\\intel_doc_analysis_artifact_9a04e56db8ec\\output_20260117_114910.json"
+      ],
+      "spawned_at": "2026-01-17T11:49:09.314083+00:00",
+      "input_artifact": "C:\\Users\\Rehman_Mihan\\Desktop\\The-Ultimate-Orchestation Specialist\\cursor\\1.5.2026\\agent-orchestrator\\artifacts\\uploads\\artifact_9a04e56db8ec_BILLS-119s2296es.pdf",
+      "termination_condition": "Analysis complete OR error OR 1-hour timeout"
+    },
+    {
+      "agent_id": "intel_doc_analysis_artifact_e58d183accf1",
+      "agent_type": "Intelligence",
+      "status": "IDLE",
+      "scope": "Document analysis for .CSV",
+      "current_task": "Analysis complete",
+      "last_heartbeat": "2026-01-17T11:49:26.428053+00:00",
+      "risk_level": "LOW",
+      "outputs": [
+        "C:\\Users\\Rehman_Mihan\\Desktop\\The-Ultimate-Orchestation Specialist\\cursor\\1.5.2026\\agent-orchestrator\\artifacts\\intel_doc_analysis_artifact_e58d183accf1\\output_20260117_114926.json"
+      ],
+      "spawned_at": "2026-01-17T11:49:26.428073+00:00",
+      "input_artifact": "C:\\Users\\Rehman_Mihan\\Desktop\\The-Ultimate-Orchestation Specialist\\cursor\\1.5.2026\\agent-orchestrator\\artifacts\\uploads\\artifact_e58d183accf1_directives_(2).csv",
       "termination_condition": "Analysis complete OR error OR 1-hour timeout"
     }
   ]

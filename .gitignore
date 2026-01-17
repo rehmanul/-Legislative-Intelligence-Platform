@@ -39,3 +39,12 @@ artifacts/uploads/*
 # Test files
 *.test.json
 verify_upload.py
+
+# Local State Files (DO NOT COMMIT)
+# These contain runtime data. Production starts fresh from templates.
+execution/execution-status.json
+review/*_queue.json
+registry/agent-registry.json
+
+# Exception: Track templates
+!*.template.json

@@ -1,5 +1,12 @@
 {
-  "": {
+  "_meta": {
+    "agent_id": "intel_doc_analysis_artifact_e58d183accf1",
+    "workflow_id": "artifact_e58d183accf1",
+    "output_path": "",
+    "generated_at": "2026-01-17T11:49:26.528971Z",
+    "responsibility": "Analyze uploaded documents for key insights"
+  },
+  "data": {
     "document_type": "Policy Document",
     "key_entities": [
       "Security,submit,congressional",

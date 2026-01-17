@@ -1,0 +1,36 @@
+{
+    "swarms": {
+        "Intelligence": {
+            "agents": [],
+            "total": 0,
+            "running": 0,
+            "waiting_review": 0,
+            "blocked": 0,
+            "retired": 0
+        },
+        "Drafting": {
+            "agents": [],
+            "total": 0,
+            "running": 0,
+            "waiting_review": 0,
+            "blocked": 0,
+            "retired": 0
+        },
+        "Execution": {
+            "agents": [],
+            "total": 0,
+            "running": 0,
+            "waiting_review": 0,
+            "blocked": 0,
+            "retired": 0
+        },
+        "Learning": {
+            "agents": [],
+            "total": 0,
+            "running": 0,
+            "waiting_review": 0,
+            "blocked": 0,
+            "retired": 0
+        }
+    }
+}

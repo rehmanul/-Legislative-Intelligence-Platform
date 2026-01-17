@@ -1,0 +1,31 @@
+{
+  "_meta": {
+    "agent_id": "intel_doc_analysis_artifact_9a04e56db8ec",
+    "workflow_id": "artifact_9a04e56db8ec",
+    "output_path": "",
+    "generated_at": "2026-01-17T11:49:10.525248Z",
+    "responsibility": "Analyze uploaded documents for key insights"
+  },
+  "data": {
+    "document_type": "General Artifact",
+    "key_entities": [
+      "XT$3\u000fg42RV\u001b\"M\u04ebQ\u007f\u0017IX\u0016<8\u0014:'\u0004TU\"",
+      "W$%Q-\u037aA\u0016MR8\u000e\u9066h[Yr))\u0733.WovH",
+      "J\b?\\`FM\u00161EEmz\u0004y",
+      "Tzm\u0772{\u0017$^B\u0010m\u001b\u007fmD5\u0011rk\u0005",
+      "Ju$\u0011VM.\\~#<\u00079MXP]\u012eW\u000e2],M%",
+      "SP7M",
+      "Rt",
+      "OjJ=\u0012\u0004\u0001,V>\u0018\u02856F:\u0002",
+      "T9|b7",
+      "OZ3\u000fLp"
+    ],
+    "risk_assessment": "LOW",
+    "summary": "%PDF-1.6\n%\n9684 0 obj\n<</Filter/FlateDecode/Length 493>>stream\nhtMs0\u0010\u0015{L; uL\u0003Li[\u0007\bP\u0006lW2_\u07d5\u0010h:\u001eY3}v\u027cDXyb{\u0004jPB\t\u0017B\tX\u046a{f7\u017b\u0015<\u0005\u0017\ns@4O\u0018R(Sj.\u001e\u001ffe\t!y\\'B\u0098\u03a6\u0017&\\\u0006RVW^\nJ1zKO\\)U\\f\u0012\u0427\u01c7+LL\u0015W{r/\u000fsT\u0007m$\"/R/cNq%\u0007)4*g*|\u0002{\u0017\u0002\u000b...",
+    "analysis_metadata": {
+      "analyzer": "GenericIntelligenceAgent v1.0",
+      "timestamp": "2026-01-17T11:49:10.522276Z",
+      "content_length": 4081146
+    }
+  }
+}

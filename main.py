@@ -120,16 +120,33 @@ def get_legislative_state() -> Dict:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Initialize state files if they don't exist"""
-    # Initialize registry if missing
+    """Initialize state files from templates if they don't exist"""
+    import shutil
+    
+    # 1. Initialize Registry
     registry_path = REGISTRY_DIR / "agent-registry.json"
-    if not registry_path.exists():
-        # Copy from backup if available
+    registry_template = REGISTRY_DIR / "agent-registry.template.json"
+    if not registry_path.exists() and registry_template.exists():
+        shutil.copy(registry_template, registry_path)
+    # Fallback backup check (legacy)
+    elif not registry_path.exists():
         backup_path = BASE_DIR.parent.parent / "agent-orchestrator" / "registry" / "agent-registry.json.backup"
         if backup_path.exists():
-            import shutil
             registry_path.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy(backup_path, registry_path)
+
+    # 2. Initialize Execution Status
+    execution_path = EXECUTION_DIR / "execution-status.json"
+    execution_template = EXECUTION_DIR / "execution-status.template.json"
+    if not execution_path.exists() and execution_template.exists():
+        shutil.copy(execution_template, execution_path)
+
+    # 3. Initialize Review Queues
+    # Only initializing HR_PRE which is critical, others are auto-created by logic if missing
+    hr_pre_path = REVIEW_DIR / "HR_PRE_queue.json"
+    hr_pre_template = REVIEW_DIR / "HR_PRE_queue.template.json"
+    if not hr_pre_path.exists() and hr_pre_template.exists():
+        shutil.copy(hr_pre_template, hr_pre_path)
     
     yield
 
